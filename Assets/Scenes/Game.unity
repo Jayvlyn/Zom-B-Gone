@@ -767,8 +767,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1100707734}
     - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: _runAction.m_Id
+      value: aaaa9b36-02bb-47fe-ab1f-fb8675551bee
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: _runAction.m_Name
+      value: Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: InteractionLm.m_Bits
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: _runAction.m_SingletonActionBindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: _runAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 9fc165c8-c6ed-4a0c-9107-29d93694034b
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: _runAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Run
       objectReference: {fileID: 0}
     - target: {fileID: 8105131813210140981, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: m_RootOrder
