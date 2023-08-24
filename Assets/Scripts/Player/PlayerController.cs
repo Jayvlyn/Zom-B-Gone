@@ -1,36 +1,44 @@
 using System;
 using System.Collections;
 using System.Resources;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     private enum State
     {
-        IDLE, WALKING, RUNNING, SNEAKING, RELOADING
+        IDLE, WALKING, RUNNING, SNEAKING
     }
     private State _currentState;
 
+    [Header("References")]
+    private Rigidbody2D _rigidBody;
+    private Camera _gameCamera;
+    private Interactor _interactor;
+    [SerializeField] private Slider _staminaSlider;
+
+    [Header("Properties")]
     [SerializeField] private float _walkSpeed = 5;
     [SerializeField] private float _runSpeed = 9;
     [SerializeField] private float _sneakSpeed = 3;
     [SerializeField] private float _maxStamina = 15;
+    [SerializeField] private float _staminaRecoverySpeed = 2;
+    [SerializeField] private float _staminaRecoveryDelay = 2.5f;
     [SerializeField] private float _velocityChangeSpeed = 0.17f;
     [SerializeField] private float _reloadSpeedReduction = 0.7f;
     
     private float _currentStamina;
     private float _currentMoveSpeed;
-    private Rigidbody2D _rigidBody;
     private Vector2 _movementInput;
     private Vector2 _smoothedMovementInput;
     private Vector2 _movementInputSmoothVelocity;
+    private bool _recoverStamina;
+    private bool _holdingRun;
 
-    private Camera _gameCamera;
-    private Interactor _interactor;
 
     private void Awake()
     {
@@ -46,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        UpdateStaminaBar();
 
         if (_currentState == State.RUNNING) 
         {
@@ -54,6 +63,14 @@ public class PlayerController : MonoBehaviour
             {
                 _currentStamina = 0;
                 ChangeState(State.WALKING);
+                StartCoroutine(RecoverStamina());
+            }
+        }
+        else
+        {
+            if(_recoverStamina && _currentStamina < _maxStamina)
+            {
+                _currentStamina += Time.deltaTime * _staminaRecoverySpeed;
             }
         }
     }
@@ -62,6 +79,17 @@ public class PlayerController : MonoBehaviour
     {
         SetPlayerVelocity();
         RotateToMouse();
+    }
+
+    private void UpdateStaminaBar()
+    {
+        _staminaSlider.value = _currentStamina / _maxStamina;
+    }
+
+    private IEnumerator RecoverStamina()
+    {
+        yield return new WaitForSeconds(_staminaRecoveryDelay);
+        _recoverStamina = true;
     }
 
     private void SetPlayerVelocity()
@@ -76,11 +104,20 @@ public class PlayerController : MonoBehaviour
         transform.up = mousePosition - new Vector2(transform.position.x, transform.position.y);
     }
 
+    #region Input Actions
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
-        if(_movementInput != Vector2.zero && _currentState == State.IDLE) { ChangeState(State.WALKING); }
-        else { ChangeState(State.IDLE); }
+        if(_currentState != State.SNEAKING)
+        {
+            if(_movementInput != Vector2.zero && _currentState == State.IDLE) 
+            {
+                if (_holdingRun) ChangeState(State.RUNNING);
+                else ChangeState(State.WALKING);
+            }
+            else if(_movementInput == Vector2.zero) { ChangeState(State.IDLE); }
+
+        }
     }
 
     // Player will be able to be empty handed, or pickup ONE item from the world
@@ -109,6 +146,8 @@ public class PlayerController : MonoBehaviour
 
         if (runPressed) // Run Key Pressed
         {
+            _holdingRun = true;
+
             if(_rigidBody.velocity.magnitude > 0 && _movementInput != Vector2.zero && _currentStamina > 0)
             {
                 ChangeState(State.RUNNING);
@@ -117,10 +156,13 @@ public class PlayerController : MonoBehaviour
 
         else // Run Key Released
         {
+            _holdingRun = false;
+
             if(_currentState == State.RUNNING) // Letting go of run key only matters if running
             {
                 if (_movementInput != Vector2.zero) { ChangeState(State.WALKING); }
                 else { ChangeState(State.IDLE); }
+                StartCoroutine(RecoverStamina());
             }
         }
     }
@@ -139,10 +181,14 @@ public class PlayerController : MonoBehaviour
         {
             if(_currentState == State.SNEAKING) // Letting go of sneak key only matters if sneaking
             {
-                ChangeState(State.WALKING);
+                if (_holdingRun) { ChangeState(State.RUNNING);}
+                else if (_smoothedMovementInput != Vector2.zero) { ChangeState(State.WALKING); }
+                else { ChangeState(State.IDLE); }
             }
         }
     }
+
+    #endregion
 
 
     private void ChangeState(State newState)
@@ -157,12 +203,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case State.RUNNING:
                 _currentMoveSpeed = _runSpeed;
+                _recoverStamina = false;
                 break;
             case State.SNEAKING:
                 _currentMoveSpeed = _sneakSpeed;
-                break;
-            case State.RELOADING:
-                _currentMoveSpeed = _walkSpeed * _reloadSpeedReduction;
                 break;
             default:
                 _currentMoveSpeed = _walkSpeed; 
