@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Resources;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,15 +11,16 @@ public class PlayerController : MonoBehaviour
 {
     private enum State
     {
-        IDLE, WALKING, RUNNING, SNEAKING
+        IDLE, WALKING, RUNNING, SNEAKING, RELOADING
     }
     private State _currentState;
 
     [SerializeField] private float _walkSpeed = 5;
     [SerializeField] private float _runSpeed = 9;
     [SerializeField] private float _sneakSpeed = 3;
-    [SerializeField] private float _maxStamina = 100;
+    [SerializeField] private float _maxStamina = 15;
     [SerializeField] private float _velocityChangeSpeed = 0.17f;
+    [SerializeField] private float _reloadSpeedReduction = 0.7f;
     
     private float _currentStamina;
     private float _currentMoveSpeed;
@@ -31,11 +34,28 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        // Find references
         _gameCamera = FindObjectOfType<Camera>();
         _interactor = GetComponent<Interactor>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+
+        // Set currents
         _currentStamina = _maxStamina;
         _currentMoveSpeed = _walkSpeed;
-        _rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+
+        if (_currentState == State.RUNNING) 
+        {
+            _currentStamina -= Time.deltaTime;
+            if (_currentStamina <= 0)
+            {
+                _currentStamina = 0;
+                ChangeState(State.WALKING);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -59,6 +79,8 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
+        if(_movementInput != Vector2.zero && _currentState == State.IDLE) { ChangeState(State.WALKING); }
+        else { ChangeState(State.IDLE); }
     }
 
     // Player will be able to be empty handed, or pickup ONE item from the world
@@ -69,11 +91,13 @@ public class PlayerController : MonoBehaviour
         // if has item, item.use
     }
 
+    
     private void OnInteract(InputValue inputValue)
     {
         _interactor.Interact();
     }
 
+    // Input for reloading, wont do anything without firearm
     private void OnReload(InputValue inputValue)
     {
         // if has firearm:weapon:item and ammo not full, reload
@@ -83,32 +107,50 @@ public class PlayerController : MonoBehaviour
     {
         bool runPressed = Convert.ToBoolean(inputValue.Get<float>());
 
-        if (runPressed)
+        if (runPressed) // Run Key Pressed
         {
-            if (_rigidBody.velocity.magnitude > 0 && _currentStamina > 0)
+            if(_rigidBody.velocity.magnitude > 0 && _movementInput != Vector2.zero && _currentStamina > 0)
             {
                 ChangeState(State.RUNNING);
             }
         }
-        else ChangeState(State.WALKING);
-        
+
+        else // Run Key Released
+        {
+            if(_currentState == State.RUNNING) // Letting go of run key only matters if running
+            {
+                if (_movementInput != Vector2.zero) { ChangeState(State.WALKING); }
+                else { ChangeState(State.IDLE); }
+            }
+        }
     }
+
+    // Called when sneak button changes input value
     private void OnSneak(InputValue inputValue)
     {
         bool sneakPressed = Convert.ToBoolean(inputValue.Get<float>());
 
-        if (sneakPressed)
+        if (sneakPressed) // Sneak Key Pressed
         {
             ChangeState(State.SNEAKING);
         }
-        else ChangeState(State.WALKING);
+
+        else // Sneak Key Released
+        {
+            if(_currentState == State.SNEAKING) // Letting go of sneak key only matters if sneaking
+            {
+                ChangeState(State.WALKING);
+            }
+        }
     }
+
 
     private void ChangeState(State newState)
     {
+        Debug.Log(newState);
         _currentState = newState;
 
-        switch (_currentState)
+        switch (newState)
         {
             case State.WALKING:
                 _currentMoveSpeed = _walkSpeed;
@@ -118,6 +160,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case State.SNEAKING:
                 _currentMoveSpeed = _sneakSpeed;
+                break;
+            case State.RELOADING:
+                _currentMoveSpeed = _walkSpeed * _reloadSpeedReduction;
                 break;
             default:
                 _currentMoveSpeed = _walkSpeed; 

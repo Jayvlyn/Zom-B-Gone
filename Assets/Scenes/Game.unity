@@ -307,6 +307,10 @@ PrefabInstance:
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: _maxStamina
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: _slipAmount
       value: 0.14
       objectReference: {fileID: 0}
