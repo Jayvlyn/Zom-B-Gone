@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Firearm : Weapon
 {
+    [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected int _maxAmmo;
     [SerializeField] protected int _currentAmmo;
     [SerializeField] protected float _reloadTime; // Seconds

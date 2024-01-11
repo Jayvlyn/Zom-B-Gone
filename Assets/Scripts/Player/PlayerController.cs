@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Resources;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -20,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Camera _gameCamera;
     private Interactor _interactor;
     [SerializeField] private Slider _staminaSlider;
+    [SerializeField] private Hands _hands;
 
     [Header("Properties")]
     [SerializeField] private float _walkSpeed = 5;
@@ -120,19 +118,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Player will be able to be empty handed, or pickup ONE item from the world
-    // There will be no inventory, so the player must throw away/use up their current item to get a new one
-    // Items include but are not limited to weapons
-    private void OnUseItem(InputValue inputValue)
+    private void OnLeftHand(InputValue inputValue)
     {
-        // if has item, item.use
+        Debug.Log("Left");
+        if(!_hands._usingLeft) _interactor.Interact(false);
     }
 
-    
-    private void OnInteract(InputValue inputValue)
+    private void OnRightHand(InputValue inputValue)
     {
-        _interactor.Interact();
+        Debug.Log("Right");
+        if (!_hands._usingRight) _interactor.Interact(true);
     }
+
+    private void OnDropLeft(InputValue inputValue)
+    {
+        
+    }
+
+    private void OnDropRight(InputValue inputValue)
+    {
+        
+    }
+
+
 
     // Input for reloading, wont do anything without firearm
     private void OnReload(InputValue inputValue)
@@ -193,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeState(State newState)
     {
-        Debug.Log(newState);
+        //Debug.Log(newState);
         _currentState = newState;
 
         switch (newState)

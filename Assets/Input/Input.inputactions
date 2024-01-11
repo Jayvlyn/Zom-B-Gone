@@ -24,15 +24,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "1f0eba3c-5c09-4aac-86dc-e6191585c447",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Run",
                     "type": "Button",
                     "id": "d4716cfb-ee89-4b4d-939e-e61173bfbeab",
@@ -60,27 +51,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drop",
+                    "name": "LeftHand",
                     "type": "Button",
-                    "id": "5a8ac8d6-1151-461a-8d72-af2af7f836a3",
+                    "id": "bdfea9af-271f-481d-828a-4c2d0523da53",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Throw",
+                    "name": "RightHand",
                     "type": "Button",
-                    "id": "2facb429-b546-4409-8d4c-0ec33d6cd5aa",
+                    "id": "4058edbe-f952-4320-b956-3e15fbf57ced",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "DropLeft",
                     "type": "Button",
-                    "id": "3f56c114-4088-4030-a6b3-14e45f8cc13f",
+                    "id": "e15cddb0-2dda-4804-a0a1-6cb688cab984",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DropRight",
+                    "type": "Button",
+                    "id": "a6e1f616-e9c2-4ecb-b0b7-da7fb342c005",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -255,61 +255,6 @@
                 },
                 {
                     "name": "",
-                    "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
-                    "path": "<Touchscreen>/primaryTouch/tap",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Touch",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ee3d0cd2-254e-47a7-a8cb-bc94d9658c54",
-                    "path": "<Joystick>/trigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8255d333-5683-4943-a58a-ccb207ff1dce",
-                    "path": "<XRController>/{PrimaryAction}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b4c0fd76-11e6-4e52-b735-a64be7f5455b",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -376,67 +321,45 @@
                 },
                 {
                     "name": "",
-                    "id": "63422725-fe79-4ce1-a274-b16e29c5cf5a",
-                    "path": "<Keyboard>/x",
+                    "id": "a6fc1232-9e60-43bf-b50a-85a67fdffff9",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drop",
+                    "action": "LeftHand",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "4acfc610-42a8-43c6-9ca3-f9c4c489a4a2",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "b6dda624-8074-498e-80d8-6d9d3a41c66b",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drop",
+                    "action": "RightHand",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "de88c5d1-83ef-4811-a083-2b806a6f877e",
+                    "id": "a8498e24-1986-474a-8172-a7d36704bcda",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throw",
+                    "action": "DropLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "bf25d7a1-bd79-40c4-94c6-5443b329f4d3",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "566f3219-e775-4e46-90d3-0e2000a1b0f0",
+                    "id": "38912fa8-5fd3-4592-b409-c4c03be81b96",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f3f726e4-a52c-4a14-b6fb-8dd214a4bba4",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
+                    "action": "DropRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

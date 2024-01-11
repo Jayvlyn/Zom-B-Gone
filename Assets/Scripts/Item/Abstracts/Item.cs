@@ -43,15 +43,29 @@ public abstract class Item : MonoBehaviour, IInteractable
     public void Throw()
     {
         // Eject item in direction aiming, do damage based on weight
+        // Should happen when player presses drop button and moving forward
     }
 
-    public void PickUp(Transform parent)
+    public void PickUp(Transform parent, bool rightHand)
     {
-        transform.position = parent.position;
+        if(rightHand)
+        {
+            transform.SetParent(parent);
+            transform.position = parent.position + (parent.right + parent.up) * 0.5f;
+            transform.rotation = parent.rotation;
+        }
+        else
+        {
+            transform.SetParent(parent);
+            transform.position = parent.position + (-parent.right + parent.up) * 0.5f;
+            transform.rotation = parent.rotation;
+        }
     }
 
-    public void Interact()
+    public void Interact(bool rightHand)
     {
-        PickUp(_playerController.transform);
+        this.gameObject.layer = LayerMask.NameToLayer("Default");
+        PickUp(_playerController.transform, rightHand);
     }
+
 }

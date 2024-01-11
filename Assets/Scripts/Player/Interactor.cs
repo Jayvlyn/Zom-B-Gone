@@ -2,10 +2,11 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public interface IInteractable
 {
-    public void Interact();
+    public void Interact(bool rightHand);
 }
 
 public class Interactor : MonoBehaviour
@@ -23,13 +24,13 @@ public class Interactor : MonoBehaviour
         _gameCamera = FindObjectOfType<Camera>();
     }
 
-    public void Interact()
+    public void Interact(bool rightHand)
     {
         _hit = Physics2D.CircleCast(transform.position, _interactRange, Vector2.zero, 0, InteractionLm);
+
         if (_hit.collider != null && _hit.collider.TryGetComponent(out IInteractable interactedObject))
         {
-            if(interactedObject != null) interactedObject.Interact();
+            if(interactedObject != null) interactedObject.Interact(rightHand);
         }
-        Debug.Log(_hit.distance);
     }
 }
