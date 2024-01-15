@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
     private void SetPlayerVelocity()
     {
         _smoothedMovementInput = Vector2.SmoothDamp(_smoothedMovementInput, _movementInput, ref _movementInputSmoothVelocity, _velocityChangeSpeed);
-        _rigidBody.velocity = _smoothedMovementInput * _currentMoveSpeed;
+        _rigidBody.velocity = (_smoothedMovementInput) * _currentMoveSpeed;
     }
 
     private void RotateToMouse()
@@ -152,7 +152,6 @@ public class PlayerController : MonoBehaviour
             _hands._usingRight = false;
         }
     }
-
 
     // Input for reloading, wont do anything without firearm
     private void OnReload(InputValue inputValue)

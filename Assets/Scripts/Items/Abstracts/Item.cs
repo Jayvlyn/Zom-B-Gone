@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class Item : MonoBehaviour, IInteractable
 {
     [SerializeField] protected string _name;
@@ -12,11 +13,16 @@ public abstract class Item : MonoBehaviour, IInteractable
     // Value that determines the effect it has on the players movement when held, also determines throw damage and speed
     [SerializeField] protected float _weight; // kg
 
+    protected Rigidbody2D _rb;
+    protected Collider2D _collider;
+
     protected PlayerController _playerController;
 
     private void Awake()
     {
         _playerController = FindObjectOfType<PlayerController>();
+        _rb = GetComponent<Rigidbody2D>(); 
+        _collider = GetComponent<Collider2D>();
     }
 
     protected Item()
@@ -39,7 +45,10 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         // Remove item from player and place it at their feet
         transform.SetParent(null);
-        this.gameObject.layer = LayerMask.NameToLayer("Interactable");
+        gameObject.layer = LayerMask.NameToLayer("Interactable");
+        _rb.bodyType = RigidbodyType2D.Dynamic;
+        _collider.isTrigger = false;
+        _rb.AddForce(transform.up * 100);
     }
 
     public void Throw()
@@ -52,7 +61,10 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public void PickUp(Transform parent, bool rightHand)
     {
-        if(rightHand)
+        _rb.bodyType = RigidbodyType2D.Kinematic;
+        _collider.isTrigger = true;
+        
+        if (rightHand)
         {
             transform.SetParent(parent);
             transform.position = parent.position + (parent.right + parent.up) * 0.5f;
