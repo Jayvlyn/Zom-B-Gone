@@ -120,26 +120,38 @@ public class PlayerController : MonoBehaviour
 
     private void OnLeftHand(InputValue inputValue)
     {
-        Debug.Log("Left");
         if(!_hands._usingLeft) _interactor.Interact(false);
     }
 
     private void OnRightHand(InputValue inputValue)
     {
-        Debug.Log("Right");
         if (!_hands._usingRight) _interactor.Interact(true);
     }
 
     private void OnDropLeft(InputValue inputValue)
     {
-        
+        if (_hands._usingLeft)
+        {
+            _hands._leftObject.TryGetComponent<Item>(out Item leftObject);
+            leftObject.Drop();
+
+            //_hands._leftObject.transform.SetParent(null);
+            _hands._leftObject = null;
+            _hands._usingLeft = false;
+        }
     }
 
     private void OnDropRight(InputValue inputValue)
     {
-        
+        if (_hands._usingRight)
+        {
+            _hands._rightObject.TryGetComponent<Item>(out Item rightObject);
+            rightObject.Drop();
+            //_hands._rightObject.transform.SetParent(null);
+            _hands._rightObject = null;
+            _hands._usingRight = false;
+        }
     }
-
 
 
     // Input for reloading, wont do anything without firearm

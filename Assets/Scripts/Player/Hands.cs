@@ -7,6 +7,9 @@ public class Hands : MonoBehaviour
     public bool _usingRight;
     public bool _usingLeft;
 
+    public GameObject _leftObject;
+    public GameObject _rightObject;
+
     void Start()
     {
         

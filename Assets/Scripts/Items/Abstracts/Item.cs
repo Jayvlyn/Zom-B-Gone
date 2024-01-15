@@ -38,12 +38,16 @@ public abstract class Item : MonoBehaviour, IInteractable
     public void Drop()
     {
         // Remove item from player and place it at their feet
+        transform.SetParent(null);
+        this.gameObject.layer = LayerMask.NameToLayer("Interactable");
     }
 
     public void Throw()
     {
         // Eject item in direction aiming, do damage based on weight
         // Should happen when player presses drop button and moving forward
+
+        // make items have a rigidbody that is kinematic when held, and dynamic when dropped/thrown
     }
 
     public void PickUp(Transform parent, bool rightHand)
