@@ -13,6 +13,10 @@ public abstract class Item : MonoBehaviour, IInteractable
     // Value that determines the effect it has on the players movement when held, also determines throw damage and speed
     [SerializeField] protected float _weight; // kg
 
+    // Values that will be multiplied with velocity and angularVelocity to create friction
+    [SerializeField,Range(0.9f,1.0f)] protected float _rotationalFriction = 0.9f;
+    [SerializeField, Range(0.9f, 1.0f)] protected float _friction = 0.99f;
+
     protected Rigidbody2D _rb;
     protected Collider2D _collider;
 
@@ -23,6 +27,14 @@ public abstract class Item : MonoBehaviour, IInteractable
         _playerController = FindObjectOfType<PlayerController>();
         _rb = GetComponent<Rigidbody2D>(); 
         _collider = GetComponent<Collider2D>();
+    }
+
+    protected void Update()
+    {
+        if(_rb.bodyType == RigidbodyType2D.Dynamic)
+        {
+            Friction();
+        }
     }
 
     protected Item()
@@ -47,8 +59,8 @@ public abstract class Item : MonoBehaviour, IInteractable
         transform.SetParent(null);
         gameObject.layer = LayerMask.NameToLayer("Interactable");
         _rb.bodyType = RigidbodyType2D.Dynamic;
-        _collider.isTrigger = false;
         _rb.AddForce(transform.up * 100);
+        _collider.isTrigger = false;
     }
 
     public void Throw()
@@ -82,6 +94,13 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         this.gameObject.layer = LayerMask.NameToLayer("Default");
         PickUp(_playerController.transform, rightHand);
+    }
+
+    private void Friction()
+    {
+        _rb.velocity *= _friction;
+        _rb.angularVelocity *= _rotationalFriction;
+        
     }
 
 }

@@ -27,6 +27,6 @@ public class Pistol : Firearm
 
     void Update()
     {
-        
+        base.Update();
     }
 }
