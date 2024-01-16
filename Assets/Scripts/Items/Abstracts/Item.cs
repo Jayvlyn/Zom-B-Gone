@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
@@ -60,7 +61,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         gameObject.layer = LayerMask.NameToLayer("Interactable");
         _rb.bodyType = RigidbodyType2D.Dynamic;
         _rb.AddForce(transform.up * 100);
-        _collider.isTrigger = false;
+        StartCoroutine(TriggerToSolid());
     }
 
     public void Throw()
@@ -101,6 +102,12 @@ public abstract class Item : MonoBehaviour, IInteractable
         _rb.velocity *= _friction;
         _rb.angularVelocity *= _rotationalFriction;
         
+    }
+
+    private IEnumerator TriggerToSolid()
+    {
+        yield return new WaitForSeconds(0.1f);
+        _collider.isTrigger = false;
     }
 
 }
