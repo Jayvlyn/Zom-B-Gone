@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Consumeable : MonoBehaviour
+public abstract class Consumeable : Item
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField, Tooltip("Amount of time the consumable effect lasts")] float _effectTime;
 
-    // Update is called once per frame
-    void Update()
+    public override void Use()
     {
-        
+        // call base.Use() in consumables after their functionality
+        Destroy(gameObject);
     }
 }

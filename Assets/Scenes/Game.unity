@@ -624,12 +624,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0d2a639a920ac41ba7ab6f3d6fd958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 200
   _name: Pistol
   _quality: 100
   _weight: 800
   _rotationalFriction: 0
-  _friction: 0.92
+  _friction: 0.9915
   spinThrow: 1
   _damage: 10
   _range: 3
@@ -766,7 +765,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: c5faaa70a28474443897a057b18575f1, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -902,14 +901,14 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: c5faaa70a28474443897a057b18575f1, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -970,10 +969,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0d2a639a920ac41ba7ab6f3d6fd958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 200
   _name: Pistol
   _quality: 100
-  _weight: 20000
+  _weight: 800
   _rotationalFriction: 0
   _friction: 0.92
   spinThrow: 1
@@ -1300,6 +1298,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 369753046641428115, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 65aed2585b8fdc748a9ffe30401c3a91, type: 2}
     - target: {fileID: 4277460431732484000, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: _interactRange
       value: 1

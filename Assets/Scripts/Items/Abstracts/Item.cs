@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Item : MonoBehaviour, IInteractable
 {
-    [SerializeField] float force = 1000;
     private enum State
     {
         GROUNDED, AIRBORNE, HELD
@@ -20,11 +19,11 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected int _quality;
 
     // Value that determines the effect it has on the players movement when held, also determines throw damage and speed
-    [SerializeField, Range(1, 20000)] protected float _weight; // grams
+    [SerializeField, Range(1, 20000), Tooltip("In grams")] protected float _weight; // grams
 
     // Values that will be multiplied with velocity and angularVelocity to create friction
     [SerializeField, Range(0.9f, 1.0f)] protected float _rotationalFriction = 0.9f;
-    [SerializeField, Range(0.9f, 1.0f)] protected float _friction = 0.99f;
+    [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float _friction = 0.99f;
 
     [SerializeField] protected bool spinThrow = true;
 
@@ -94,25 +93,24 @@ public abstract class Item : MonoBehaviour, IInteractable
     public void Drop()
     {
         transform.SetParent(null);
-        _rb.AddForce(transform.up * force, ForceMode2D.Impulse);
-
         ChangeState(State.GROUNDED);
+        _rb.AddForce(transform.up * Utils.MapScalarToRange(_friction, 3, 500, true), ForceMode2D.Impulse);
+
     }
 
     public void Throw()
     {
         transform.SetParent(null);
         ChangeState(State.AIRBORNE);
-        // addforce should be transform.up * [5 - 25]
-        float throwForce = Utils.MapScalarToRange(_weight, 5, 25, true);
+
+        float throwForce = Utils.MapWeightToRange(_weight, 5, 20, true);
         _rb.AddForce(transform.up * throwForce, ForceMode2D.Impulse);
+
         if(spinThrow)
         {
-            // should be between [200 - 2000]
-            float spinForce = Utils.MapScalarToRange(_weight, 200, 2000, true);
+            float spinForce = Utils.MapWeightToRange(_weight, 200, 2000, true);
             _rb.angularVelocity = spinForce;
         }
-        
 
         StartCoroutine(Fall());
     }
@@ -154,7 +152,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private IEnumerator Fall()
     {
-        float result = Utils.MapScalarToRange(_weight, 1, 3, true);
+        float result = Utils.MapWeightToRange(_weight, 1, 3, true);
 
         yield return new WaitForSeconds(result);
         ChangeState(State.GROUNDED);
