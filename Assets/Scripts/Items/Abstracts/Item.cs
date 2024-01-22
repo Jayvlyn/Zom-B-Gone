@@ -1,10 +1,18 @@
 using System.Collections;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Item : MonoBehaviour, IInteractable
 {
+    [SerializeField] float force = 1000;
+    private enum State
+    {
+        GROUNDED, AIRBORNE, HELD
+    }
+    private State _currentState;
+
     [SerializeField] protected string _name;
 
     // Items will be found with different levels of "quality" affecting the effectiveness of the item 
@@ -12,16 +20,18 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected int _quality;
 
     // Value that determines the effect it has on the players movement when held, also determines throw damage and speed
-    [SerializeField] protected float _weight; // kg
+    [SerializeField, Range(1, 20000)] protected float _weight; // grams
 
     // Values that will be multiplied with velocity and angularVelocity to create friction
-    [SerializeField,Range(0.9f,1.0f)] protected float _rotationalFriction = 0.9f;
+    [SerializeField, Range(0.9f, 1.0f)] protected float _rotationalFriction = 0.9f;
     [SerializeField, Range(0.9f, 1.0f)] protected float _friction = 0.99f;
+
+    [SerializeField] protected bool spinThrow = true;
 
     protected Rigidbody2D _rb;
     protected Collider2D _collider;
-
     protected PlayerController _playerController;
+
 
     private void Awake()
     {
@@ -32,7 +42,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     protected void Update()
     {
-        if(_rb.bodyType == RigidbodyType2D.Dynamic)
+        if(_currentState == State.GROUNDED)
         {
             Friction();
         }
@@ -52,30 +62,64 @@ public abstract class Item : MonoBehaviour, IInteractable
         _weight = weight;
     }
 
+    private void ChangeState(State newState)
+    {
+        switch (newState)
+        {
+            case State.GROUNDED:
+                gameObject.layer = LayerMask.NameToLayer("Interactable");
+                if(_currentState == State.HELD)_rb.bodyType = RigidbodyType2D.Dynamic;
+                StartCoroutine(TriggerToSolid());
+                break;
+            case State.AIRBORNE:
+                gameObject.layer = LayerMask.NameToLayer("Default");
+                if (_currentState == State.HELD) _rb.bodyType = RigidbodyType2D.Dynamic;
+                StartCoroutine(TriggerToSolid());
+                break;
+            case State.HELD:
+                gameObject.layer = LayerMask.NameToLayer("Default");
+                _rb.bodyType = RigidbodyType2D.Kinematic;
+                _collider.isTrigger = true;
+                break;
+            default:
+                break;
+
+        }
+
+        _currentState = newState;
+    }
+
     public abstract void Use();
 
     public void Drop()
     {
-        // Remove item from player and place it at their feet
         transform.SetParent(null);
-        gameObject.layer = LayerMask.NameToLayer("Interactable");
-        _rb.bodyType = RigidbodyType2D.Dynamic;
-        _rb.AddForce(transform.up * 100);
-        StartCoroutine(TriggerToSolid());
+        _rb.AddForce(transform.up * force, ForceMode2D.Impulse);
+
+        ChangeState(State.GROUNDED);
     }
 
     public void Throw()
     {
-        // Eject item in direction aiming, do damage based on weight
-        // Should happen when player presses drop button and moving forward
+        transform.SetParent(null);
+        ChangeState(State.AIRBORNE);
+        // addforce should be transform.up * [5 - 25]
+        float throwForce = Utils.MapScalarToRange(_weight, 5, 25, true);
+        _rb.AddForce(transform.up * throwForce, ForceMode2D.Impulse);
+        if(spinThrow)
+        {
+            // should be between [200 - 2000]
+            float spinForce = Utils.MapScalarToRange(_weight, 200, 2000, true);
+            _rb.angularVelocity = spinForce;
+        }
+        
 
-        // make items have a rigidbody that is kinematic when held, and dynamic when dropped/thrown
+        StartCoroutine(Fall());
     }
 
     public void PickUp(Transform parent, bool rightHand)
     {
-        _rb.bodyType = RigidbodyType2D.Kinematic;
-        _collider.isTrigger = true;
+        ChangeState(State.HELD);
         
         if (rightHand)
         {
@@ -93,7 +137,6 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public void Interact(bool rightHand)
     {
-        this.gameObject.layer = LayerMask.NameToLayer("Default");
         PickUp(_playerController.transform, rightHand);
     }
 
@@ -101,13 +144,20 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         _rb.velocity *= _friction;
         _rb.angularVelocity *= _rotationalFriction;
-        
     }
 
     private IEnumerator TriggerToSolid()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         _collider.isTrigger = false;
+    }
+
+    private IEnumerator Fall()
+    {
+        float result = Utils.MapScalarToRange(_weight, 1, 3, true);
+
+        yield return new WaitForSeconds(result);
+        ChangeState(State.GROUNDED);
     }
 
 }

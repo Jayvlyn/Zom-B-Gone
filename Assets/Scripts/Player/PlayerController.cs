@@ -133,11 +133,17 @@ public class PlayerController : MonoBehaviour
         if (_hands._usingLeft)
         {
             _hands._leftObject.TryGetComponent<Item>(out Item leftObject);
-            leftObject.Drop();
-
-            //_hands._leftObject.transform.SetParent(null);
             _hands._leftObject = null;
             _hands._usingLeft = false;
+            if (_movementInput.magnitude > 0)
+            {
+                leftObject.Throw();
+            }
+            else
+            {
+                leftObject.Drop();
+            }
+
         }
     }
 
@@ -146,10 +152,16 @@ public class PlayerController : MonoBehaviour
         if (_hands._usingRight)
         {
             _hands._rightObject.TryGetComponent<Item>(out Item rightObject);
-            rightObject.Drop();
-            //_hands._rightObject.transform.SetParent(null);
             _hands._rightObject = null;
             _hands._usingRight = false;
+            if (_movementInput.magnitude > 0)
+            {
+                rightObject.Throw();
+            }
+            else
+            {
+                rightObject.Drop();
+            }
         }
     }
 
@@ -212,9 +224,6 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeState(State newState)
     {
-        //Debug.Log(newState);
-        _currentState = newState;
-
         switch (newState)
         {
             case State.WALKING:
@@ -230,8 +239,9 @@ public class PlayerController : MonoBehaviour
             default:
                 _currentMoveSpeed = _walkSpeed; 
                 break;
-                
         }
+
+        _currentState = newState;
     }
 }
 
