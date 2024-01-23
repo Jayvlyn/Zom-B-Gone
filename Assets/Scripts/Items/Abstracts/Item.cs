@@ -6,11 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Item : MonoBehaviour, IInteractable
 {
-    private enum State
+    protected enum State
     {
         GROUNDED, AIRBORNE, HELD
     }
-    private State _currentState;
+    protected State _currentState;
 
     [SerializeField] protected string _name;
 
@@ -165,7 +165,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         float fallTime = Utils.MapWeightToRange(_weight, 1, 3, true);
 
         yield return new WaitForSeconds(fallTime);
-        ChangeState(State.GROUNDED);
+        if(_currentState != State.HELD)ChangeState(State.GROUNDED);
     }
 
 }
