@@ -30,17 +30,25 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected Rigidbody2D _rb;
     protected Collider2D _collider;
     protected PlayerController _playerController;
+    protected Hands _playerHands;
+    protected bool inRightHand;
 
 
     private void Awake()
     {
         _playerController = FindObjectOfType<PlayerController>();
-        _rb = GetComponent<Rigidbody2D>(); 
+        _playerHands = _playerController.GetComponentInParent<Hands>();
+        _rb = GetComponent<Rigidbody2D>();
+        _rb.gravityScale = 0;
         _collider = GetComponent<Collider2D>();
     }
 
     protected void Update()
     {
+        if(_currentState == State.AIRBORNE && _rb.velocity.magnitude < 3)
+        {
+            ChangeState(State.GROUNDED);
+        }
         if(_currentState == State.GROUNDED)
         {
             Friction();
@@ -103,7 +111,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         transform.SetParent(null);
         ChangeState(State.AIRBORNE);
 
-        float throwForce = Utils.MapWeightToRange(_weight, 5, 20, true);
+        float throwForce = Utils.MapWeightToRange(_weight, 5, 25, true);
         _rb.AddForce(transform.up * throwForce, ForceMode2D.Impulse);
 
         if(spinThrow)
@@ -121,12 +129,14 @@ public abstract class Item : MonoBehaviour, IInteractable
         
         if (rightHand)
         {
+            inRightHand = true;
             transform.SetParent(parent);
             transform.position = parent.position + (parent.right + parent.up) * 0.5f;
             transform.rotation = parent.rotation;
         }
         else
         {
+            inRightHand = false;
             transform.SetParent(parent);
             transform.position = parent.position + (-parent.right + parent.up) * 0.5f;
             transform.rotation = parent.rotation;
@@ -146,15 +156,15 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private IEnumerator TriggerToSolid()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
         _collider.isTrigger = false;
     }
 
     private IEnumerator Fall()
     {
-        float result = Utils.MapWeightToRange(_weight, 1, 3, true);
+        float fallTime = Utils.MapWeightToRange(_weight, 1, 3, true);
 
-        yield return new WaitForSeconds(result);
+        yield return new WaitForSeconds(fallTime);
         ChangeState(State.GROUNDED);
     }
 

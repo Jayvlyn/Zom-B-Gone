@@ -23,13 +23,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _walkSpeed = 5;
     [SerializeField] private float _runSpeed = 9;
     [SerializeField] private float _sneakSpeed = 3;
-    [SerializeField] private float _maxStamina = 15;
-    [SerializeField] private float _staminaRecoverySpeed = 2;
+    public float _speedModifier = 1;
+    [SerializeField] public float _maxStamina = 15;
+    [SerializeField] public float _staminaRecoverySpeed = 2;
     [SerializeField] private float _staminaRecoveryDelay = 2.5f;
     [SerializeField] private float _velocityChangeSpeed = 0.17f;
     [SerializeField] private float _reloadSpeedReduction = 0.7f;
     
-    private float _currentStamina;
+    public float _currentStamina;
     private float _currentMoveSpeed;
     private Vector2 _movementInput;
     private Vector2 _smoothedMovementInput;
@@ -40,10 +41,12 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        //Cursor.visible = false;
         // Find references
         _gameCamera = FindObjectOfType<Camera>();
         _interactor = GetComponent<Interactor>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody.freezeRotation = true;
 
         // Set currents
         _currentStamina = _maxStamina;
@@ -66,11 +69,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if(_recoverStamina && _currentStamina < _maxStamina)
+            if(_recoverStamina)
             {
-                _currentStamina += Time.deltaTime * _staminaRecoverySpeed;
+                if (_currentStamina < _maxStamina) _currentStamina += Time.deltaTime * _staminaRecoverySpeed;
+                else _recoverStamina = false;
             }
         }
+
+
     }
 
     private void FixedUpdate()
@@ -87,19 +93,25 @@ public class PlayerController : MonoBehaviour
     private IEnumerator RecoverStamina()
     {
         yield return new WaitForSeconds(_staminaRecoveryDelay);
-        _recoverStamina = true;
+        if(!_holdingRun) _recoverStamina = true;
     }
 
     private void SetPlayerVelocity()
     {
         _smoothedMovementInput = Vector2.SmoothDamp(_smoothedMovementInput, _movementInput, ref _movementInputSmoothVelocity, _velocityChangeSpeed);
-        _rigidBody.velocity = (_smoothedMovementInput) * _currentMoveSpeed;
+        _rigidBody.velocity = (_smoothedMovementInput) * _currentMoveSpeed * _speedModifier;
     }
 
     private void RotateToMouse()
     {
         Vector2 mousePosition = _gameCamera.ScreenToWorldPoint(Input.mousePosition);
-        transform.up = mousePosition - new Vector2(transform.position.x, transform.position.y);
+
+        Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10);
     }
 
     #region Input Actions
@@ -121,11 +133,25 @@ public class PlayerController : MonoBehaviour
     private void OnLeftHand(InputValue inputValue)
     {
         if(!_hands._usingLeft) _interactor.Interact(false);
+        else
+        {
+            if(_hands._leftObject.TryGetComponent(out Item item))
+            {
+                item.Use();
+            }
+        }
     }
 
     private void OnRightHand(InputValue inputValue)
     {
         if (!_hands._usingRight) _interactor.Interact(true);
+        else
+        {
+            if (_hands._rightObject.TryGetComponent(out Item item))
+            {
+                item.Use();
+            }
+        }
     }
 
     private void OnDropLeft(InputValue inputValue)
@@ -187,13 +213,14 @@ public class PlayerController : MonoBehaviour
 
         else // Run Key Released
         {
+            
             _holdingRun = false;
 
             if(_currentState == State.RUNNING) // Letting go of run key only matters if running
             {
                 if (_movementInput != Vector2.zero) { ChangeState(State.WALKING); }
                 else { ChangeState(State.IDLE); }
-                StartCoroutine(RecoverStamina());
+                if(!_recoverStamina)StartCoroutine(RecoverStamina());
             }
         }
     }
