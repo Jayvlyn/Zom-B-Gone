@@ -162,7 +162,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private IEnumerator Fall()
     {
-        float fallTime = Utils.MapWeightToRange(_weight, 1, 3, true);
+        float fallTime = Utils.MapWeightToRange(_weight, 1, 2, true);
 
         yield return new WaitForSeconds(fallTime);
         if(_currentState != State.HELD)ChangeState(State.GROUNDED);

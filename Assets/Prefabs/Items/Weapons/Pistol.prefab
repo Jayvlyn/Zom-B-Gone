@@ -105,7 +105,7 @@ MonoBehaviour:
   _rotationalFriction: 0
   _friction: 0.93
   spinThrow: 1
-  _damage: 10
+  _damage: 35
   _range: 3
   bulletPrefab: {fileID: 0}
   _maxAmmo: 10
@@ -173,7 +173,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: eba390983176d75479e18a3f7480651f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
