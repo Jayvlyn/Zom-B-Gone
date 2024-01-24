@@ -7,6 +7,7 @@ public class Pistol : Firearm
     public override void Use()
     {
         // Shoot gun!
+        _playerController.gameObject.GetComponent<Health>().CurrentHealth = _playerController.gameObject.GetComponent<Health>().CurrentHealth - 1;
     }
 
     void Start()
@@ -16,7 +17,6 @@ public class Pistol : Firearm
 
     void Update()
     {
-        Debug.Log(_currentState.ToString());
         base.Update();
     }
 }

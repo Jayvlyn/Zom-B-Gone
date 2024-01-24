@@ -54,9 +54,9 @@ MonoBehaviour:
   _friction: 0.99
   spinThrow: 1
   _effectTime: 10
-  _instantStaminaRecovery: 5
-  _staminaRecoverySpeed: 10
-  _moveSpeedMod: 2
+  _instantStaminaRecovery: 4
+  _staminaRecoverySpeed: 5
+  _moveSpeedMod: 1.3
 --- !u!212 &9185509544805037402
 SpriteRenderer:
   m_ObjectHideFlags: 0

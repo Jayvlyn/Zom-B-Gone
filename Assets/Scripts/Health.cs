@@ -9,6 +9,14 @@ public class Health : MonoBehaviour
     [SerializeField,Range(1,1000)] int _maxHealth = 100;
     [SerializeField,Range(0,1000)] int _currentHealth = 100;
 
+    private void Start()
+    {
+        if(gameObject.tag == "Player")
+        {
+            healthBar = GameObject.FindWithTag("Health").GetComponent<Slider>();
+        }
+    }
+
     public int MaxHealth {  
         get { return _maxHealth; } 
         set {  _maxHealth = value; } 
@@ -17,11 +25,14 @@ public class Health : MonoBehaviour
     public int CurrentHealth
     {
         get { return _currentHealth; }
-        set { 
-            _currentHealth = value; 
+        set {
+            if (value > _maxHealth) _currentHealth = _maxHealth;
+            else if (value < 0) _currentHealth = 0;
+            else _currentHealth = value;
+            
             if(healthBar != null)
             {
-                healthBar.value = _currentHealth / _maxHealth;
+                healthBar.value = _currentHealth / (float)_maxHealth;
             }
         }
     }
