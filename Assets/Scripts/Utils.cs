@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public static class Utils
 {
     public static float MapScalarToRange(float scalarValue, float minValue, float maxValue, bool invert)

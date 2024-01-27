@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Stamina
   - Health
+  - Zombie
   layers:
   - Default
   - TransparentFX
