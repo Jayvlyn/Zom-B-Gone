@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,4 +34,28 @@ public static class Utils
 
         return result;
     }
+
+    public static Vector2[] GetDirectionsInCircle2D(int num, float angle)
+    {
+        List<Vector2> result = new List<Vector2>();
+
+        // if odd number, set first direction as up (0, 1)
+        if (num % 2 == 1) result.Add(Vector2.up);
+
+        // compute the angle between rays
+        float angleOffset = (angle * 2) / num;
+
+        // add the +/- directions around the circle
+        for (int i = 1; i <= num / 2; i++)
+        {
+            float modifier = (i == 1 && num % 2 == 0) ? 0.65f : 1;
+
+            result.Add(Quaternion.AngleAxis(+angleOffset * i * modifier, Vector3.forward) * Vector2.up);
+
+            result.Add(Quaternion.AngleAxis(-angleOffset * i * modifier, Vector3.forward) * Vector2.up);
+        }
+
+        return result.ToArray();
+    }
+
 }
