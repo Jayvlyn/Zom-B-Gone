@@ -82,6 +82,7 @@ public class Firearm : Weapon
     private IEnumerator Reload()
     {
         _reloading = true;
+        CurrentAmmo = 0;
         yield return new WaitForSeconds(_reloadTime);
         CurrentAmmo = _maxAmmo;
         _reloading = false;
