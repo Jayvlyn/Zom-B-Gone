@@ -44,7 +44,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         _collider = GetComponent<Collider2D>();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         if(_currentState == State.AIRBORNE && _rb.velocity.magnitude < 3)
         {
@@ -118,8 +118,9 @@ public abstract class Item : MonoBehaviour, IInteractable
         StartCoroutine(Fall());
     }
 
-    public void PickUp(Transform parent, bool rightHand)
+    public virtual void PickUp(Transform parent, bool rightHand)
     {
+        
         ChangeState(State.HELD);
         
         if (rightHand)

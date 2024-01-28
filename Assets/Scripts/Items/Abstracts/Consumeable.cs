@@ -15,13 +15,13 @@ public abstract class Consumeable : Item
         if (inRightHand)
         {
             _playerHands._rightObject = null; 
-            _playerHands._usingRight = false;
+            _playerHands.UsingRight = false;
             inRightHand = false;
         }
         else
         {
             _playerHands._leftObject = null; 
-            _playerHands._usingLeft = false;
+            _playerHands.UsingLeft = false;
 
         }
 

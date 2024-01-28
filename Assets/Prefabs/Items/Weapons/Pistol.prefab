@@ -144,7 +144,8 @@ MonoBehaviour:
   - {fileID: 2353463699975327284}
   _maxAmmo: 10
   _currentAmmo: 10
-  _reloadTime: 0
+  _ammoConsumption: 1
+  _reloadTime: 3
   _isAutomatic: 0
   _fireForce: 10
 --- !u!61 &4164492863800837428

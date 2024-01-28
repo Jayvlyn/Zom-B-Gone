@@ -8,6 +8,9 @@ TagManager:
   - Health
   - Zombie
   - Bullet
+  - LeftAmmoCount
+  - RightAmmoCount
+  - ReloadingIndicator
   layers:
   - Default
   - TransparentFX

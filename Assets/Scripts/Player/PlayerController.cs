@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnLeftHand(InputValue inputValue)
     {
-        if(!_hands._usingLeft) _interactor.Interact(false);
+        if(!_hands.UsingLeft) _interactor.Interact(false);
         else
         {
             if(_hands._leftObject.TryGetComponent(out Item item))
@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnRightHand(InputValue inputValue)
     {
-        if (!_hands._usingRight) _interactor.Interact(true);
+        if (!_hands.UsingRight) _interactor.Interact(true);
         else
         {
             if (_hands._rightObject.TryGetComponent(out Item item))
@@ -156,11 +156,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnDropLeft(InputValue inputValue)
     {
-        if (_hands._usingLeft)
+        if (_hands.UsingLeft)
         {
             _hands._leftObject.TryGetComponent<Item>(out Item leftObject);
             _hands._leftObject = null;
-            _hands._usingLeft = false;
+            _hands.UsingLeft = false;
             if (_movementInput.magnitude > 0)
             {
                 leftObject.Throw();
@@ -175,11 +175,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnDropRight(InputValue inputValue)
     {
-        if (_hands._usingRight)
+        if (_hands.UsingRight)
         {
             _hands._rightObject.TryGetComponent<Item>(out Item rightObject);
             _hands._rightObject = null;
-            _hands._usingRight = false;
+            _hands.UsingRight = false;
             if (_movementInput.magnitude > 0)
             {
                 rightObject.Throw();
@@ -194,7 +194,14 @@ public class PlayerController : MonoBehaviour
     // Input for reloading, wont do anything without firearm
     private void OnReload(InputValue inputValue)
     {
-        // if has firearm:weapon:item and ammo not full, reload
+        if(_hands.UsingLeft && _hands._leftObject.TryGetComponent(out Firearm leftFirearm))
+        {
+            leftFirearm.StartReload();
+        }
+        if (_hands.UsingRight && _hands._rightObject.TryGetComponent(out Firearm rightFirearm))
+        {
+            rightFirearm.StartReload();
+        }
     }
 
     private void OnRun(InputValue inputValue)

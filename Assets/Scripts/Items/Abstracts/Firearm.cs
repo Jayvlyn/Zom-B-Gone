@@ -1,50 +1,91 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Firearm : Weapon
 {
+    private TMP_Text _ammoCount;
+    private TMP_Text _reloadingIndicator;
+
     [Header("Firearm attributes")]
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected List<Transform> firePoints;
     [SerializeField] protected int _maxAmmo = 10;
     [SerializeField] protected int _currentAmmo = 10;
+    [SerializeField] protected int _ammoConsumption = 1;
     [SerializeField] protected float _reloadTime = 2; // Seconds
     [SerializeField] protected bool _isAutomatic; // Semi-Automatic or Automatic Gun?
     [SerializeField] protected float _fireForce;
+    protected bool _reloading = false;
+
+    public int CurrentAmmo
+    {
+        get { return _currentAmmo; }
+        set { 
+            _currentAmmo = value;
+            _ammoCount.text = _currentAmmo + " / " + _maxAmmo;
+        }
+    }
+
+    protected override void Update()
+    {
+        // stop second firearm from shutting off reloading indicator too early
+        if(_reloading && !_reloadingIndicator.enabled) _reloadingIndicator.enabled = true;
+        base.Update();
+    }
 
     public override void Use()
     {
         Fire();
     }
 
+    public override void PickUp(Transform parent, bool rightHand)
+    {
+        if(rightHand) _ammoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
+        else _ammoCount = GameObject.FindWithTag("LeftAmmoCount").GetComponent<TMP_Text>();
+        base.PickUp(parent, rightHand);
+        CurrentAmmo = CurrentAmmo; // update count text
+        _reloadingIndicator = GameObject.FindWithTag("ReloadingIndicator").GetComponent<TMP_Text>();
+    }
+
     public void Fire()
     {
-        foreach (Transform firepoint in firePoints) 
-        { 
-            var bullet = Instantiate(bulletPrefab, firepoint.transform.position, firepoint.transform.rotation);
-            _currentAmmo -= 1;
-            if(bullet.TryGetComponent(out Rigidbody2D bulletRb))
-            {
-                bulletRb.AddForce(transform.up * _fireForce, ForceMode2D.Impulse);
+        if(CurrentAmmo > 0 && !_reloading)
+        {
+            CurrentAmmo -= _ammoConsumption;
+            foreach (Transform firepoint in firePoints) 
+            { 
+                var bullet = Instantiate(bulletPrefab, firepoint.transform.position, firepoint.transform.rotation);
+                if(bullet.TryGetComponent(out Rigidbody2D bulletRb))
+                {
+                    bulletRb.AddForce(transform.up * _fireForce, ForceMode2D.Impulse);
+                }
+                if(bullet.TryGetComponent(out Bullet bulletScript))
+                {
+                    bulletScript.FirearmDamage = _damage;
+                    bulletScript.LifeSpan = _range;
+                }
             }
-            if(bullet.TryGetComponent(out Bullet bulletScript))
-            {
-                bulletScript.FirearmDamage = _damage;
-                bulletScript.LifeSpan = _range;
-            }
-
         }
     }
 
     public void StartReload()
     {
-        StartCoroutine(Reload());
+        if(CurrentAmmo != _maxAmmo && !_reloading)
+        {
+            StartCoroutine(Reload());
+        }
     }
 
     private IEnumerator Reload()
     {
+        _reloading = true;
         yield return new WaitForSeconds(_reloadTime);
-        _currentAmmo = _maxAmmo;
+        CurrentAmmo = _maxAmmo;
+        _reloading = false;
+        _reloadingIndicator.enabled = false;
     }
+
 }

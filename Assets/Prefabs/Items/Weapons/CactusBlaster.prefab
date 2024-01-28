@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: CactusBlaster
   _quality: 100
-  _weight: 3897
+  _weight: 15000
   _rotationalFriction: 0.9
   _friction: 0.99
   spinThrow: 1
@@ -156,8 +156,9 @@ MonoBehaviour:
   - {fileID: 571813201470892697}
   - {fileID: 7653741256578842127}
   - {fileID: 5950425499944704752}
-  _maxAmmo: 10
-  _currentAmmo: 10
+  _maxAmmo: 12
+  _currentAmmo: 12
+  _ammoConsumption: 3
   _reloadTime: 2
   _isAutomatic: 0
   _fireForce: 30
