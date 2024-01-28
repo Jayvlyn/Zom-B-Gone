@@ -36,4 +36,14 @@ public class Health : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(int damage)
+    {
+        CurrentHealth = CurrentHealth - damage;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        CurrentHealth = CurrentHealth - Mathf.RoundToInt(damage);
+    }
 }

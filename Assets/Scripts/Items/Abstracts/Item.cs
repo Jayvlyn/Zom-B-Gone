@@ -12,6 +12,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     }
     protected State _currentState;
 
+    [Header("Item attributes")]
     [SerializeField] protected string _name;
 
     // Items will be found with different levels of "quality" affecting the effectiveness of the item 
@@ -55,18 +56,12 @@ public abstract class Item : MonoBehaviour, IInteractable
         }
     }
 
-    protected Item()
+    private void FixedUpdate()
     {
-        _name = "Item";
-        _quality = 100;
-        _weight = 1f;
-    }
-
-    protected Item(string name, int quality, float weight)
-    {
-        _name = name;
-        _quality = quality;
-        _weight = weight;
+        if(_currentState == State.HELD)
+        {
+            RotateToMouse();
+        }
     }
 
     private void ChangeState(State newState)
@@ -79,7 +74,7 @@ public abstract class Item : MonoBehaviour, IInteractable
                 StartCoroutine(TriggerToSolid());
                 break;
             case State.AIRBORNE:
-                gameObject.layer = LayerMask.NameToLayer("Default");
+                gameObject.layer = LayerMask.NameToLayer("Interactable");
                 if (_currentState == State.HELD) _rb.bodyType = RigidbodyType2D.Dynamic;
                 StartCoroutine(TriggerToSolid());
                 break;
@@ -132,15 +127,21 @@ public abstract class Item : MonoBehaviour, IInteractable
             inRightHand = true;
             transform.SetParent(parent);
             transform.position = parent.position + (parent.right + parent.up) * 0.5f;
-            transform.rotation = parent.rotation;
         }
         else
         {
             inRightHand = false;
             transform.SetParent(parent);
             transform.position = parent.position + (-parent.right + parent.up) * 0.5f;
-            transform.rotation = parent.rotation;
         }
+    }
+
+    private void RotateToMouse()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     public void Interact(bool rightHand)

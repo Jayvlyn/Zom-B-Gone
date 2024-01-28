@@ -7,11 +7,12 @@ TagManager:
   - Stamina
   - Health
   - Zombie
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
   - Interactable
