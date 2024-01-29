@@ -33,6 +33,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected PlayerController _playerController;
     protected Hands _playerHands;
     protected bool inRightHand;
+    protected bool isHeld;
 
 
     private void Awake()
@@ -93,15 +94,14 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public abstract void Use();
 
-    public void Drop()
+    public virtual void Drop()
     {
         transform.SetParent(null);
         ChangeState(State.GROUNDED);
         _rb.AddForce(transform.up * Utils.MapScalarToRange(_friction, 3, 500, true), ForceMode2D.Impulse);
-
     }
 
-    public void Throw()
+    public virtual void Throw()
     {
         transform.SetParent(null);
         ChangeState(State.AIRBORNE);
@@ -120,7 +120,9 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public virtual void PickUp(Transform parent, bool rightHand)
     {
-        
+        _rb.velocity = Vector2.zero;
+        _rb.angularVelocity = 0;
+
         ChangeState(State.HELD);
         
         if (rightHand)
@@ -159,7 +161,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     private IEnumerator TriggerToSolid()
     {
         yield return new WaitForSeconds(0.05f);
-        _collider.isTrigger = false;
+        if(_collider.isTrigger)_collider.isTrigger = false;
     }
 
     private IEnumerator Fall()

@@ -10,7 +10,8 @@ TagManager:
   - Bullet
   - LeftAmmoCount
   - RightAmmoCount
-  - ReloadingIndicator
+  - RightReloadingIndicator
+  - LeftReloadingIndicator
   layers:
   - Default
   - TransparentFX

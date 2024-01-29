@@ -12,13 +12,13 @@ public class Firearm : Weapon
     [Header("Firearm attributes")]
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected List<Transform> firePoints;
-    [SerializeField] protected int _maxAmmo = 10;
+    [SerializeField] public int _maxAmmo = 10;
     [SerializeField] protected int _currentAmmo = 10;
     [SerializeField] protected int _ammoConsumption = 1;
     [SerializeField] protected float _reloadTime = 2; // Seconds
     [SerializeField] protected bool _isAutomatic; // Semi-Automatic or Automatic Gun?
     [SerializeField] protected float _fireForce;
-    protected bool _reloading = false;
+    public bool _reloading = false;
 
     public int CurrentAmmo
     {
@@ -32,7 +32,7 @@ public class Firearm : Weapon
     protected override void Update()
     {
         // stop second firearm from shutting off reloading indicator too early
-        if(_reloading && !_reloadingIndicator.enabled) _reloadingIndicator.enabled = true;
+        //if(_reloading && !_reloadingIndicator.enabled) _reloadingIndicator.enabled = true;
         base.Update();
     }
 
@@ -41,13 +41,32 @@ public class Firearm : Weapon
         Fire();
     }
 
+    public override void Drop()
+    {
+        _reloadingIndicator.enabled = false;
+        base.Drop();
+    }
+
+    public override void Throw()
+    {
+        _reloadingIndicator.enabled = false;
+        base.Throw();
+    }
+
     public override void PickUp(Transform parent, bool rightHand)
     {
-        if(rightHand) _ammoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
-        else _ammoCount = GameObject.FindWithTag("LeftAmmoCount").GetComponent<TMP_Text>();
+        if(rightHand)
+        {
+            _ammoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
+            _reloadingIndicator = GameObject.FindWithTag("RightReloadingIndicator").GetComponent<TMP_Text>();
+        }
+        else
+        {
+            _ammoCount = GameObject.FindWithTag("LeftAmmoCount").GetComponent<TMP_Text>();
+            _reloadingIndicator = GameObject.FindWithTag("LeftReloadingIndicator").GetComponent<TMP_Text>();
+        }
         base.PickUp(parent, rightHand);
         CurrentAmmo = CurrentAmmo; // update count text
-        _reloadingIndicator = GameObject.FindWithTag("ReloadingIndicator").GetComponent<TMP_Text>();
     }
 
     public void Fire()
@@ -82,6 +101,7 @@ public class Firearm : Weapon
     private IEnumerator Reload()
     {
         _reloading = true;
+        _reloadingIndicator.enabled = true;
         CurrentAmmo = 0;
         yield return new WaitForSeconds(_reloadTime);
         CurrentAmmo = _maxAmmo;

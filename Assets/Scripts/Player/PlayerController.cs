@@ -194,11 +194,34 @@ public class PlayerController : MonoBehaviour
     // Input for reloading, wont do anything without firearm
     private void OnReload(InputValue inputValue)
     {
-        if(_hands.UsingLeft && _hands._leftObject.TryGetComponent(out Firearm leftFirearm))
+        if(_hands.UsingLeft && _hands.UsingRight)
+        {
+            if(_hands._leftObject.TryGetComponent(out Firearm leftFirearm) && _hands._rightObject.TryGetComponent(out Firearm rightFirearm))
+            { // Both hands have gun, handle double reload
+                if (!leftFirearm._reloading && !rightFirearm._reloading)
+                { // Neither gun reloading yet
+                    float leftRatio = leftFirearm.CurrentAmmo / (float)leftFirearm._maxAmmo;
+                    float rightRatio = rightFirearm.CurrentAmmo / (float)rightFirearm._maxAmmo;
+                    if(leftRatio <= rightRatio)
+                    {
+                        leftFirearm.StartReload();
+                    }
+                    else
+                    {
+                        rightFirearm.StartReload();
+                    }
+                }
+                else if (leftFirearm._reloading && !rightFirearm._reloading) rightFirearm.StartReload();
+                else if (!leftFirearm._reloading && rightFirearm._reloading) leftFirearm.StartReload();
+            }
+        }
+
+        else if (_hands.UsingLeft && _hands._leftObject.TryGetComponent(out Firearm leftFirearm))
         {
             leftFirearm.StartReload();
         }
-        if (_hands.UsingRight && _hands._rightObject.TryGetComponent(out Firearm rightFirearm))
+
+        else if (_hands.UsingRight && _hands._rightObject.TryGetComponent(out Firearm rightFirearm))
         {
             rightFirearm.StartReload();
         }
@@ -227,7 +250,6 @@ public class PlayerController : MonoBehaviour
             {
                 if (_movementInput != Vector2.zero) { ChangeState(State.WALKING); }
                 else { ChangeState(State.IDLE); }
-                if(!_recoverStamina)StartCoroutine(RecoverStamina());
             }
         }
     }
@@ -261,6 +283,7 @@ public class PlayerController : MonoBehaviour
         switch (newState)
         {
             case State.WALKING:
+                if (!_recoverStamina) StartCoroutine(RecoverStamina());
                 _currentMoveSpeed = _walkSpeed;
                 break;
             case State.RUNNING:
@@ -268,9 +291,11 @@ public class PlayerController : MonoBehaviour
                 _recoverStamina = false;
                 break;
             case State.SNEAKING:
+                if (!_recoverStamina) StartCoroutine(RecoverStamina());
                 _currentMoveSpeed = _sneakSpeed;
                 break;
-            default:
+            default: // IDLE:
+                if (!_recoverStamina) StartCoroutine(RecoverStamina());
                 _currentMoveSpeed = _walkSpeed; 
                 break;
         }
