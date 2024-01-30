@@ -31,10 +31,10 @@ public class Interactor : MonoBehaviour
             {
                 interactedObject.Interact(rightHand);
                 if (rightHand) {
-                    _hands._rightObject = ((Component)interactedObject).gameObject; _hands.UsingRight = true;
+                    _hands.RightObject = ((Component)interactedObject).gameObject; _hands.UsingRight = true;
                 }
                 else {
-                    _hands._leftObject = ((Component)interactedObject).gameObject; _hands.UsingLeft = true;
+                    _hands.LeftObject = ((Component)interactedObject).gameObject; _hands.UsingLeft = true;
                 }
             }
         }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -37,6 +39,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 _movementInputSmoothVelocity;
     private bool _recoverStamina;
     private bool _holdingRun;
+
+    [SerializeField] private bool _holdingLeft;
+	[SerializeField] private bool _holdingRight;
 
 
     private void Awake()
@@ -77,6 +82,15 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        if(_holdingLeft && _hands._leftItem != null)
+        {
+            _hands._leftItem.Use();
+        }
+
+        if(_holdingRight && _hands._rightItem != null)
+        {
+			_hands._rightItem.Use();
+		}
     }
 
     private void FixedUpdate()
@@ -126,50 +140,66 @@ public class PlayerController : MonoBehaviour
                 else ChangeState(State.WALKING);
             }
             else if(_movementInput == Vector2.zero) { ChangeState(State.IDLE); }
-
         }
     }
 
     private void OnLeftHand(InputValue inputValue)
     {
-        if(!_hands.UsingLeft) _interactor.Interact(false);
+        if(inputValue.isPressed)
+        {
+		    if (!_hands.UsingLeft) _interactor.Interact(false);
+			else if (_hands._leftItem != null)
+			{
+				_hands._leftItem.Use();
+			}
+
+		}
         else
         {
-            if(_hands._leftObject.TryGetComponent(out Item item))
-            {
-                item.Use();
-            }
+            _holdingLeft = false;
         }
     }
 
     private void OnRightHand(InputValue inputValue)
     {
-        if (!_hands.UsingRight) _interactor.Interact(true);
-        else
-        {
-            if (_hands._rightObject.TryGetComponent(out Item item))
-            {
-                item.Use();
-            }
-        }
-    }
+		if (inputValue.isPressed)
+		{
+			if (!_hands.UsingRight) _interactor.Interact(true);
+			else if (_hands._rightItem != null)
+			{
+				_hands._rightItem.Use();
+			}
+		}
+		else
+		{
+			_holdingRight = false;
+		}
+	}
+
+    private void OnLeftHold(InputValue inputValue)
+    {
+		_holdingLeft = true;
+	}
+
+    private void OnRightHold(InputValue inputValue)
+    {
+		_holdingRight = true;
+	}
 
     private void OnDropLeft(InputValue inputValue)
     {
         if (_hands.UsingLeft)
         {
-            _hands._leftObject.TryGetComponent<Item>(out Item leftObject);
-            _hands._leftObject = null;
-            _hands.UsingLeft = false;
             if (_movementInput.magnitude > 0)
             {
-                leftObject.Throw();
+				_hands._leftItem.Throw();
             }
             else
             {
-                leftObject.Drop();
+				_hands._leftItem.Drop();
             }
-
+            _hands.LeftObject = null;
+            _hands.UsingLeft = false;
         }
     }
 
@@ -177,17 +207,16 @@ public class PlayerController : MonoBehaviour
     {
         if (_hands.UsingRight)
         {
-            _hands._rightObject.TryGetComponent<Item>(out Item rightObject);
-            _hands._rightObject = null;
-            _hands.UsingRight = false;
             if (_movementInput.magnitude > 0)
             {
-                rightObject.Throw();
+				_hands._rightItem.Throw();
             }
             else
             {
-                rightObject.Drop();
+				_hands._rightItem.Drop();
             }
+            _hands.RightObject = null;
+            _hands.UsingRight = false;
         }
     }
 
@@ -196,7 +225,7 @@ public class PlayerController : MonoBehaviour
     {
         if(_hands.UsingLeft && _hands.UsingRight)
         {
-            if(_hands._leftObject.TryGetComponent(out Firearm leftFirearm) && _hands._rightObject.TryGetComponent(out Firearm rightFirearm))
+            if(_hands.LeftObject.TryGetComponent(out Firearm leftFirearm) && _hands.RightObject.TryGetComponent(out Firearm rightFirearm))
             { // Both hands have gun, handle double reload
                 if (!leftFirearm._reloading && !rightFirearm._reloading)
                 { // Neither gun reloading yet
@@ -216,12 +245,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        else if (_hands.UsingLeft && _hands._leftObject.TryGetComponent(out Firearm leftFirearm))
+        else if (_hands.UsingLeft && _hands.LeftObject.TryGetComponent(out Firearm leftFirearm))
         {
             leftFirearm.StartReload();
         }
 
-        else if (_hands.UsingRight && _hands._rightObject.TryGetComponent(out Firearm rightFirearm))
+        else if (_hands.UsingRight && _hands.RightObject.TryGetComponent(out Firearm rightFirearm))
         {
             rightFirearm.StartReload();
         }
@@ -229,9 +258,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnRun(InputValue inputValue)
     {
-        bool runPressed = Convert.ToBoolean(inputValue.Get<float>());
-
-        if (runPressed) // Run Key Pressed
+        if (inputValue.isPressed) // Run Key Pressed
         {
             _holdingRun = true;
 

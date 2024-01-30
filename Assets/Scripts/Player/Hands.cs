@@ -8,9 +8,7 @@ public class Hands : MonoBehaviour
     private TMP_Text _leftAmmoCount;
     private TMP_Text _rightAmmoCount;
 
-    private bool _usingRight;
-    private bool _usingLeft;
-
+	private bool _usingRight;
     public bool UsingRight { get { return _usingRight;  } 
         set 
         {
@@ -29,6 +27,7 @@ public class Hands : MonoBehaviour
         } 
     }
 
+    private bool _usingLeft;
     public bool UsingLeft
     {
         get { return _usingLeft; }
@@ -49,8 +48,40 @@ public class Hands : MonoBehaviour
         }
     }
 
-    public GameObject _leftObject;
-    public GameObject _rightObject;
+	private GameObject _leftObject;
+    public GameObject LeftObject
+    {
+        get { return _leftObject; }
+        set { _leftObject = value;
+            if(_leftObject != null)
+            {
+			    if (value.TryGetComponent(out Item leftItem)) _leftItem = leftItem;
+            }
+            else
+            {
+                _leftItem = null;
+            }
+		}
+    }
+
+	private GameObject _rightObject;
+    public GameObject RightObject
+    {
+        get { return _rightObject; }
+        set { _rightObject = value; 
+            if(_rightObject != null)
+            {
+                if(value.TryGetComponent(out Item rightItem)) _rightItem = rightItem;
+            }
+            else
+            {
+                _rightItem = null;
+            }
+        }
+    }
+
+    public Item _leftItem;
+    public Item _rightItem;
 
     void Awake()
     {
@@ -58,10 +89,5 @@ public class Hands : MonoBehaviour
         _rightAmmoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
         _leftAmmoCount.enabled = false;
         _rightAmmoCount.enabled = false;
-    }
-
-    void Update()
-    {
-        
     }
 }

@@ -20,6 +20,8 @@ public class Firearm : Weapon
     [SerializeField] protected float _fireForce;
     public bool _reloading = false;
 
+    private float _shotTimer = 0;
+
     public int CurrentAmmo
     {
         get { return _currentAmmo; }
@@ -31,14 +33,21 @@ public class Firearm : Weapon
 
     protected override void Update()
     {
-        // stop second firearm from shutting off reloading indicator too early
-        //if(_reloading && !_reloadingIndicator.enabled) _reloadingIndicator.enabled = true;
+        if(_shotTimer > 0)
+        {
+            _shotTimer -= Time.deltaTime;
+            if(_shotTimer < 0)_shotTimer = 0;
+        }
+
         base.Update();
     }
 
     public override void Use()
     {
-        Fire();
+        if(_shotTimer <= 0)
+        {
+            Fire();
+        }
     }
 
     public override void Drop()
@@ -71,6 +80,7 @@ public class Firearm : Weapon
 
     public void Fire()
     {
+        _shotTimer = _attackSpeed;
         if(CurrentAmmo > 0 && !_reloading)
         {
             CurrentAmmo -= _ammoConsumption;
@@ -108,5 +118,4 @@ public class Firearm : Weapon
         _reloading = false;
         _reloadingIndicator.enabled = false;
     }
-
 }

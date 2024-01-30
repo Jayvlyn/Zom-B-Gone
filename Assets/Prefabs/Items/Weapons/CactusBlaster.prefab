@@ -151,6 +151,7 @@ MonoBehaviour:
   spinThrow: 1
   _damage: 20
   _range: 5
+  _attackSpeed: 0
   bulletPrefab: {fileID: 2198095510141801857, guid: 5430daafacada5744ac457d5f55a7d24, type: 3}
   firePoints:
   - {fileID: 571813201470892697}
@@ -162,6 +163,7 @@ MonoBehaviour:
   _reloadTime: 2
   _isAutomatic: 0
   _fireForce: 30
+  _reloading: 0
 --- !u!212 &3890775405625495789
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -237,7 +239,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0

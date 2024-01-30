@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public abstract class Consumeable : Item
@@ -14,13 +12,13 @@ public abstract class Consumeable : Item
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         if (inRightHand)
         {
-            _playerHands._rightObject = null; 
+            _playerHands.RightObject = null; 
             _playerHands.UsingRight = false;
             inRightHand = false;
         }
         else
         {
-            _playerHands._leftObject = null; 
+            _playerHands.LeftObject = null; 
             _playerHands.UsingLeft = false;
 
         }
