@@ -195,14 +195,14 @@ MonoBehaviour:
   wanderRadius: 2
   wanderDistance: 3
   wanderPriority: 10
-  cohesionRadius: 20
-  cohesionPriority: 60
+  cohesionRadius: 53
+  cohesionPriority: 127.8
   alignmentRadius: 10
-  alighnmentPriority: 90
+  alighnmentPriority: 110.3
   separationRadius: 10
-  separationPriority: 90
+  separationPriority: 69
   avoidanceRadius: 40
-  avoidancePriority: 700
+  avoidancePriority: 0
 --- !u!1 &1347751645
 GameObject:
   m_ObjectHideFlags: 0
