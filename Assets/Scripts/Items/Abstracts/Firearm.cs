@@ -16,11 +16,13 @@ public class Firearm : Weapon
     [SerializeField] protected int _currentAmmo = 10;
     [SerializeField] protected int _ammoConsumption = 1;
     [SerializeField] protected float _reloadTime = 2; // Seconds
-    [SerializeField] protected bool _isAutomatic; // Semi-Automatic or Automatic Gun?
     [SerializeField] protected float _fireForce;
     public bool _reloading = false;
 
     private float _shotTimer = 0;
+
+    [SerializeField] protected bool _isAutomatic; // Semi-Automatic or Automatic Gun?
+    public bool IsAutomatic { get {  return _isAutomatic; } }
 
     public int CurrentAmmo
     {

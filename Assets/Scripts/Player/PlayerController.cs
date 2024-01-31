@@ -40,9 +40,11 @@ public class PlayerController : MonoBehaviour
     private bool _recoverStamina;
     private bool _holdingRun;
 
-    [SerializeField] private bool _holdingLeft;
-	[SerializeField] private bool _holdingRight;
+    private bool _holdingLeft;
+	private bool _holdingRight;
 
+    private Firearm? _leftFirearm;
+    private Firearm? _rightFirearm;
 
     private void Awake()
     {
@@ -56,6 +58,8 @@ public class PlayerController : MonoBehaviour
         // Set currents
         _currentStamina = _maxStamina;
         _currentMoveSpeed = _walkSpeed;
+        
+        
     }
 
     private void Update()
@@ -84,13 +88,19 @@ public class PlayerController : MonoBehaviour
 
         if(_holdingLeft && _hands._leftItem != null)
         {
-            _hands._leftItem.Use();
+            if(_leftFirearm != null && _leftFirearm.IsAutomatic)
+            {
+                _hands._leftItem.Use();
+            }
         }
 
         if(_holdingRight && _hands._rightItem != null)
         {
-			_hands._rightItem.Use();
-		}
+            if (_rightFirearm != null && _rightFirearm.IsAutomatic)
+            {
+                _hands._rightItem.Use();
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -107,7 +117,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator RecoverStamina()
     {
         yield return new WaitForSeconds(_staminaRecoveryDelay);
-        if(!_holdingRun) _recoverStamina = true;
+        _recoverStamina = true;
     }
 
     private void SetPlayerVelocity()
@@ -147,7 +157,11 @@ public class PlayerController : MonoBehaviour
     {
         if(inputValue.isPressed)
         {
-		    if (!_hands.UsingLeft) _interactor.Interact(false);
+		    if (!_hands.UsingLeft)
+            {
+                _interactor.Interact(false);
+                if (_hands.LeftObject != null) _hands.LeftObject.TryGetComponent(out _leftFirearm);
+            } 
 			else if (_hands._leftItem != null)
 			{
 				_hands._leftItem.Use();
@@ -164,7 +178,11 @@ public class PlayerController : MonoBehaviour
     {
 		if (inputValue.isPressed)
 		{
-			if (!_hands.UsingRight) _interactor.Interact(true);
+			if (!_hands.UsingRight)
+            {
+                _interactor.Interact(true);
+                if(_hands.RightObject != null)_hands.RightObject.TryGetComponent(out _rightFirearm);
+            }
 			else if (_hands._rightItem != null)
 			{
 				_hands._rightItem.Use();

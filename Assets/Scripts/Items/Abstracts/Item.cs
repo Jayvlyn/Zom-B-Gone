@@ -72,12 +72,12 @@ public abstract class Item : MonoBehaviour, IInteractable
             case State.GROUNDED:
                 gameObject.layer = LayerMask.NameToLayer("Interactable");
                 if(_currentState == State.HELD)_rb.bodyType = RigidbodyType2D.Dynamic;
-				_collider.isTrigger = false;
+                StartCoroutine(TriggerToSolid());
 				break;
             case State.AIRBORNE:
                 gameObject.layer = LayerMask.NameToLayer("Interactable");
                 if (_currentState == State.HELD) _rb.bodyType = RigidbodyType2D.Dynamic;
-                _collider.isTrigger = false;
+                StartCoroutine(TriggerToSolid());
                 break;
             case State.HELD:
                 gameObject.layer = LayerMask.NameToLayer("Default");

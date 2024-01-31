@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class Hands : MonoBehaviour
 {
     private TMP_Text _leftAmmoCount;
     private TMP_Text _rightAmmoCount;
 
-	private bool _usingRight;
-    public bool UsingRight { get { return _usingRight;  } 
-        set 
+    private bool _usingRight;
+    public bool UsingRight { get { return _usingRight; }
+        set
         {
             _usingRight = value;
-            if(_usingRight)
+            if (_usingRight)
             {
-                if(_rightObject.TryGetComponent(out Firearm firearm))
+                if (_rightObject.TryGetComponent(out Firearm firearm))
                 {
                     _rightAmmoCount.enabled = true;
                 }
@@ -24,7 +25,7 @@ public class Hands : MonoBehaviour
             {
                 _rightAmmoCount.enabled = false;
             }
-        } 
+        }
     }
 
     private bool _usingLeft;
@@ -48,8 +49,9 @@ public class Hands : MonoBehaviour
         }
     }
 
-	private GameObject _leftObject;
-    public GameObject LeftObject
+
+    private GameObject? _leftObject;
+    public GameObject? LeftObject
     {
         get { return _leftObject; }
         set { _leftObject = value;
@@ -64,8 +66,8 @@ public class Hands : MonoBehaviour
 		}
     }
 
-	private GameObject _rightObject;
-    public GameObject RightObject
+	private GameObject? _rightObject;
+    public GameObject? RightObject
     {
         get { return _rightObject; }
         set { _rightObject = value; 
@@ -80,8 +82,8 @@ public class Hands : MonoBehaviour
         }
     }
 
-    public Item _leftItem;
-    public Item _rightItem;
+    public Item? _leftItem;
+    public Item? _rightItem;
 
     void Awake()
     {
