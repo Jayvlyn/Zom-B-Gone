@@ -52,8 +52,13 @@ MonoBehaviour:
   _crawlSpeed: 1
   _attackDamage: 10
   _attacksPerSecond: 1
-  _turnSmoothing: 5
-  _perceptionDistance: 3
+  _turnSmoothing: 1
+  _changeDirectionCooldown: 5
+  _wanderTarget: {x: 1, y: 1, z: 1}
+  _obstacleAvoidDistance: 5
+  _perceptionDistance: 10
+  _perceptionRayCount: 5
+  _fov: 90
 --- !u!212 &190890871166965350
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -7,8 +7,6 @@ public class HoardingConfig : MonoBehaviour
 	public float maxFOV = 180;
 
 	// Wander
-	public float wanderJitter;
-	public float wanderRadius;
 	public float wanderDistance;
 	[Range(0, 100)] public float wanderPriority;
 
@@ -18,13 +16,12 @@ public class HoardingConfig : MonoBehaviour
 
 	// Alignment
 	public float alignmentRadius;
-	[Range(0, 100)] public float alighnmentPriority;
+	[Range(0, 100)] public float alignmentPriority;
 
 	// Separation
 	public float separationRadius;
 	[Range(0, 100)] public float separationPriority;
 
 	// Avoidance
-	public float avoidanceRadius;
 	[Range(0, 100)] public float avoidancePriority;
 }

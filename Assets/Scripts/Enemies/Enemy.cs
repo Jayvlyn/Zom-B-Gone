@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Enemy : MonoBehaviour
@@ -25,9 +23,16 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float _attackDamage = 10;
     [SerializeField] private float _attacksPerSecond = 1;
 	[SerializeField] private float _turnSmoothing = 5;
+	[SerializeField] private float _changeDirectionCooldown = 5;
+	[SerializeField] private Vector3 _wanderTarget = new Vector3(1,1,1);
+	[Header("Enemy Perception")]
+	[SerializeField] private float _obstacleAvoidDistance = 10;
 	[SerializeField] private float _perceptionDistance = 10;
+    [SerializeField] int _perceptionRayCount = 5;
+    [SerializeField] float _fov = 90;
 
-	private void ChangeState(State newState)
+
+    private void ChangeState(State newState)
 	{
 		switch (newState)
 		{
@@ -66,14 +71,25 @@ public abstract class Enemy : MonoBehaviour
 
 	protected Vector3 Wander()
 	{
-		float jitter = _config.wanderJitter * Time.deltaTime;
-		wanderTarget += new Vector3(Utils.RandomBinomial() * jitter, Utils.RandomBinomial() * jitter, 0);
-		wanderTarget = wanderTarget.normalized;
-		wanderTarget *= _config.wanderRadius;
-		Vector3 targetInLocalSpace = wanderTarget + new Vector3(_config.wanderDistance, _config.wanderDistance, 0);
-		Vector3 targetInWorldSpace = transform.TransformPoint(targetInLocalSpace);
-		targetInWorldSpace -= transform.position;
-		return targetInWorldSpace.normalized;
+		_changeDirectionCooldown -= Time.deltaTime;
+		if(_changeDirectionCooldown <= 0)
+		{
+            float minAngle = -90f;
+            float maxAngle = 90f;
+
+            float randomAngle = Random.Range(minAngle, maxAngle);
+
+            Quaternion rotation = Quaternion.AngleAxis(randomAngle, Vector3.forward);
+
+            _wanderTarget = rotation * _wanderTarget;
+			_wanderTarget *= _config.wanderDistance;
+			_wanderTarget = _wanderTarget.normalized;
+
+
+            _changeDirectionCooldown = Random.Range(1.0f, 5.0f);
+		}
+
+		return _wanderTarget;
 	}
 
 	Vector3 Cohesion()
@@ -109,7 +125,6 @@ public abstract class Enemy : MonoBehaviour
 			if (isInFOV(enemy.transform.position) && enemy._rigidBody != null)
 			{
 				alignVector += new Vector3(enemy._rigidBody.velocity.x, enemy._rigidBody.velocity.y, 0);
-				//alignVector += new Vector3(1, 1, 0);
 			}
 		}
 
@@ -137,18 +152,43 @@ public abstract class Enemy : MonoBehaviour
 		return separateVector.normalized;
 	}
 
-	Vector3 Avoidance()
-	{
-		Vector3 avoidVector = new Vector3();
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, _perceptionDistance, LayerMask.GetMask("World"));
-		if(hit)
-		{
-			avoidVector = Flee(hit.point);
-		}
-		return avoidVector.normalized;
-	}
+    Vector3 Avoidance()
+    {
+        float angleBetweenRays = _fov / (_perceptionRayCount - 1);
 
-	Vector3 Flee(Vector3 target)
+        int openDirectionsCount = 0;
+        float minObstruction = float.MaxValue;
+        float selectedAngle = 0f;
+
+        for (int i = 0; i < _perceptionRayCount; i++)
+        {
+            float angle = (transform.eulerAngles.z - (_fov * 0.5f) + (angleBetweenRays * i)) * Mathf.Deg2Rad;
+            Vector3 rayDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, _obstacleAvoidDistance, LayerMask.GetMask("World"));
+            if (!hit)
+            {
+                openDirectionsCount++;
+
+                float obstruction = Vector3.Distance(transform.position, transform.position + rayDir * _obstacleAvoidDistance);
+                if (obstruction < minObstruction)
+                {
+                    minObstruction = obstruction;
+                    selectedAngle = angle;
+                }
+            }
+        }
+
+        if (openDirectionsCount > 0)
+        {
+            _wanderTarget = new Vector3(Mathf.Cos(selectedAngle), Mathf.Sin(selectedAngle), 0);
+            return _wanderTarget.normalized;
+        }
+
+		return Vector3.zero;
+    }
+
+    Vector3 Flee(Vector3 target)
 	{
 		Vector3 neededVelocity = (transform.position - target).normalized * _walkSpeed;
 		return neededVelocity - new Vector3(_rigidBody.velocity.x, _rigidBody.velocity.y, 0);
@@ -159,7 +199,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		return (_config.cohesionPriority * Cohesion() + 
 				_config.wanderPriority * Wander() + 
-				_config.alighnmentPriority * Alignment() + 
+				_config.alignmentPriority * Alignment() + 
 				_config.separationPriority * Separation() +
 				_config.avoidancePriority * Avoidance());
 	}

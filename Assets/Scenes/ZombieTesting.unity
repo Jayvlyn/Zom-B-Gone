@@ -744,18 +744,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxFOV: 120
-  wanderJitter: 10
-  wanderRadius: 2
   wanderDistance: 3
-  wanderPriority: 40
+  wanderPriority: 9
   cohesionRadius: 50
-  cohesionPriority: 80
+  cohesionPriority: 27.7
   alignmentRadius: 10
-  alighnmentPriority: 50
+  alignmentPriority: 0
   separationRadius: 10
-  separationPriority: 80
-  avoidanceRadius: 40
-  avoidancePriority: 98
+  separationPriority: 9.4
+  avoidancePriority: 90
 --- !u!114 &235199599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,8 +766,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3844372379676118279, guid: 719ddd710ded235419ffe559e42c855d, type: 3}
-  numberOfEnemies: 1
-  spawnRadius: 5
+  numberOfEnemies: 10
+  spawnRadius: 10
 --- !u!1 &251493660
 GameObject:
   m_ObjectHideFlags: 0
@@ -3255,7 +3252,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1940268241}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 20
+    OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
