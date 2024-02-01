@@ -24,4 +24,5 @@ public class HoardingConfig : MonoBehaviour
 
 	// Avoidance
 	[Range(0, 100)] public float avoidancePriority;
+
 }

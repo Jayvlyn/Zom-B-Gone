@@ -64,7 +64,7 @@ public abstract class Enemy : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		_rigidBody.AddForce(Combine() * _walkSpeed * Time.deltaTime, ForceMode2D.Force);
+		_rigidBody.AddForce(Combine() * _walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
 		_rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, _walkSpeed);
 		Rotate();
 	}
@@ -83,13 +83,10 @@ public abstract class Enemy : MonoBehaviour
 
             _wanderTarget = rotation * _wanderTarget;
 			_wanderTarget *= _config.wanderDistance;
-			_wanderTarget = _wanderTarget.normalized;
-
-
             _changeDirectionCooldown = Random.Range(1.0f, 5.0f);
 		}
 
-		return _wanderTarget;
+		return _wanderTarget.normalized;
 	}
 
 	Vector3 Cohesion()
@@ -111,8 +108,7 @@ public abstract class Enemy : MonoBehaviour
 		cohesionVector /= countEnemies;
 
 		cohesionVector = cohesionVector - transform.position;
-		cohesionVector = Vector3.Normalize(cohesionVector);
-		return cohesionVector;
+		return cohesionVector.normalized;
 	}
 
 	Vector3 Alignment()
@@ -157,15 +153,17 @@ public abstract class Enemy : MonoBehaviour
         float angleBetweenRays = _fov / (_perceptionRayCount - 1);
 
         int openDirectionsCount = 0;
+		int hitCount = 0;
         float minObstruction = float.MaxValue;
         float selectedAngle = 0f;
 
         for (int i = 0; i < _perceptionRayCount; i++)
         {
-            float angle = (transform.eulerAngles.z - (_fov * 0.5f) + (angleBetweenRays * i)) * Mathf.Deg2Rad;
+            float angle = (transform.eulerAngles.z - (_fov * 0.5f) + (angleBetweenRays * i) + 90) * Mathf.Deg2Rad;
             Vector3 rayDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, _obstacleAvoidDistance, LayerMask.GetMask("World"));
+			if (hit) hitCount++;
             if (!hit)
             {
                 openDirectionsCount++;
@@ -175,17 +173,43 @@ public abstract class Enemy : MonoBehaviour
                 {
                     minObstruction = obstruction;
                     selectedAngle = angle;
+					Debug.Log(selectedAngle);
                 }
             }
         }
 
-        if (openDirectionsCount > 0)
+        if (openDirectionsCount > 0 && hitCount > 0)
         {
-            _wanderTarget = new Vector3(Mathf.Cos(selectedAngle), Mathf.Sin(selectedAngle), 0);
-            return _wanderTarget.normalized;
+            return (new Vector3(Mathf.Cos(selectedAngle), Mathf.Sin(selectedAngle), 0)).normalized;
         }
 
 		return Vector3.zero;
+    }
+
+    Vector3 Seek()
+    {
+		Vector3 seekTarget = Vector3.zero;
+        float angleBetweenRays = _fov / (_perceptionRayCount - 1);
+
+        for (int i = 0; i < _perceptionRayCount; i++)
+        {
+            float angle = (transform.eulerAngles.z - (_fov * 0.5f) + (angleBetweenRays * i) + 90) * Mathf.Deg2Rad;
+            Vector3 rayDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, _perceptionDistance, LayerMask.GetMask("Player"));
+			if (hit)
+			{
+                RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, _perceptionDistance, LayerMask.GetMask("World"));
+				if(worldHit && worldHit.distance < hit.distance)
+				{
+					return Vector3.zero;
+				}
+				seekTarget += rayDir.normalized * 1000;
+				return seekTarget;
+			}
+        }
+
+        return Vector3.zero;
     }
 
     Vector3 Flee(Vector3 target)
@@ -201,7 +225,7 @@ public abstract class Enemy : MonoBehaviour
 				_config.wanderPriority * Wander() + 
 				_config.alignmentPriority * Alignment() + 
 				_config.separationPriority * Separation() +
-				_config.avoidancePriority * Avoidance());
+				_config.avoidancePriority * Avoidance() + Seek());
 	}
 
 	bool isInFOV(Vector3 vec)
