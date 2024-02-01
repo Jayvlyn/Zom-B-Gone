@@ -261,6 +261,15 @@ public class PlayerController : MonoBehaviour
                 else if (leftFirearm._reloading && !rightFirearm._reloading) rightFirearm.StartReload();
                 else if (!leftFirearm._reloading && rightFirearm._reloading) leftFirearm.StartReload();
             }
+            else if (_hands.UsingLeft && _hands.LeftObject.TryGetComponent(out Firearm LFirearm))
+            {
+                LFirearm.StartReload();
+            }
+
+            else if (_hands.UsingRight && _hands.RightObject.TryGetComponent(out Firearm RFirearm))
+            {
+                RFirearm.StartReload();
+            }
         }
 
         else if (_hands.UsingLeft && _hands.LeftObject.TryGetComponent(out Firearm leftFirearm))

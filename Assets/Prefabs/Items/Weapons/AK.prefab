@@ -87,7 +87,7 @@ MonoBehaviour:
   spinThrow: 1
   _damage: 30
   _range: 5
-  _attackSpeed: 0
+  _attackSpeed: 0.15
   bulletPrefab: {fileID: 2198095510141801857, guid: 6890ec1dcfc67304a94e9a3783021af0, type: 3}
   firePoints:
   - {fileID: 2668361800411480287}

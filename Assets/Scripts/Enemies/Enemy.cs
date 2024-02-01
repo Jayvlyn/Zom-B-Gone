@@ -15,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
 	private Rigidbody2D _rigidBody;
     private HoardingConfig _config;
 	private GameManager _gm;
+	private GameObject playerTarget;
 
     [Header("Enemy Properties")]
     [SerializeField] private float _walkSpeed = 5;
@@ -25,6 +26,7 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] private float _turnSmoothing = 5;
 	[SerializeField] private float _changeDirectionCooldown = 5;
 	[SerializeField] private Vector3 _wanderTarget = new Vector3(1,1,1);
+	private float _moveSpeed = 5;
 	[Header("Enemy Perception")]
 	[SerializeField] private float _obstacleAvoidDistance = 10;
 	[SerializeField] private float _perceptionDistance = 10;
@@ -37,15 +39,19 @@ public abstract class Enemy : MonoBehaviour
 		switch (newState)
 		{
 			case State.WALKING:
+				_moveSpeed = _walkSpeed;
 				
 				break;
 			case State.RUNNING:
+				_moveSpeed = _runSpeed;
 				
 				break;
 			case State.CRAWLING:
+				_moveSpeed = _crawlSpeed;
 				
 				break;
 			default: // IDLE:
+				
 				
 				break;
 		}
@@ -64,8 +70,8 @@ public abstract class Enemy : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		_rigidBody.AddForce(Combine() * _walkSpeed * Time.deltaTime, ForceMode2D.Impulse);
-		_rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, _walkSpeed);
+		_rigidBody.AddForce(Combine() * _moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
+		_rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, _moveSpeed);
 		Rotate();
 	}
 
@@ -173,7 +179,6 @@ public abstract class Enemy : MonoBehaviour
                 {
                     minObstruction = obstruction;
                     selectedAngle = angle;
-					Debug.Log(selectedAngle);
                 }
             }
         }
@@ -199,12 +204,13 @@ public abstract class Enemy : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, _perceptionDistance, LayerMask.GetMask("Player"));
 			if (hit)
 			{
+				playerTarget = hit.collider.gameObject;
                 RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, _perceptionDistance, LayerMask.GetMask("World"));
 				if(worldHit && worldHit.distance < hit.distance)
 				{
 					return Vector3.zero;
 				}
-				seekTarget += rayDir.normalized * 1000;
+				seekTarget += rayDir.normalized * 100;
 				return seekTarget;
 			}
         }
@@ -214,7 +220,7 @@ public abstract class Enemy : MonoBehaviour
 
     Vector3 Flee(Vector3 target)
 	{
-		Vector3 neededVelocity = (transform.position - target).normalized * _walkSpeed;
+		Vector3 neededVelocity = (transform.position - target).normalized * _moveSpeed;
 		return neededVelocity - new Vector3(_rigidBody.velocity.x, _rigidBody.velocity.y, 0);
 	}
 
