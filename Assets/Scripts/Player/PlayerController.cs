@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float _staminaRecoverySpeed = 2;
     [SerializeField] private float _staminaRecoveryDelay = 2.5f;
     [SerializeField] private float _velocityChangeSpeed = 0.17f;
-    [SerializeField] private float _reloadSpeedReduction = 0.7f;
+    [SerializeField] public float _reloadSpeedReduction = 0.7f;
     
     public float _currentStamina;
     private float _currentMoveSpeed;
@@ -247,22 +247,22 @@ public class PlayerController : MonoBehaviour
                     float rightRatio = rightFirearm.CurrentAmmo / (float)rightFirearm._maxAmmo;
                     if (leftRatio <= rightRatio)
                     {
-                        leftFirearm.StartReload();
+                        leftFirearm.StartReload(_reloadSpeedReduction);
                     }
                     else
                     {
-                        rightFirearm.StartReload();
+                        rightFirearm.StartReload(_reloadSpeedReduction);
                     }
                 }
-                else if (leftFirearm._reloading && !rightFirearm._reloading) rightFirearm.StartReload();
-                else if (!leftFirearm._reloading && rightFirearm._reloading) leftFirearm.StartReload();
+                else if (leftFirearm._reloading && !rightFirearm._reloading) rightFirearm.StartReload(_reloadSpeedReduction);
+                else if (!leftFirearm._reloading && rightFirearm._reloading) leftFirearm.StartReload(_reloadSpeedReduction);
             }
-            else if(!leftFirearm._reloading) leftFirearm.StartReload();
+            else if(!leftFirearm._reloading) leftFirearm.StartReload(_reloadSpeedReduction);
             
 		}
         else if(_hands.UsingRight && _hands.RightObject.TryGetComponent(out Firearm rightFirearm) && !rightFirearm._reloading)
         {
-            rightFirearm.StartReload();
+            rightFirearm.StartReload(_reloadSpeedReduction);
         }
 	}
 

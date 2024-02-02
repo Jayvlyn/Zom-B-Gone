@@ -61,7 +61,7 @@ MonoBehaviour:
   _staminaRecoverySpeed: 2
   _staminaRecoveryDelay: 2.5
   _velocityChangeSpeed: 0.17
-  _reloadSpeedReduction: 0.7
+  _reloadSpeedReduction: 1
   _currentStamina: 0
 --- !u!114 &1034459641233780573
 MonoBehaviour:
@@ -75,10 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41019db7d071f5944bb2b1b5faa0002f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _usingRight: 0
-  _usingLeft: 0
-  _leftObject: {fileID: 0}
-  _rightObject: {fileID: 0}
+  _leftItem: {fileID: 0}
+  _rightItem: {fileID: 0}
 --- !u!114 &998744478070939707
 MonoBehaviour:
   m_ObjectHideFlags: 0

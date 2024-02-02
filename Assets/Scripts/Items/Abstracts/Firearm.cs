@@ -24,6 +24,8 @@ public class Firearm : Weapon
     [SerializeField] protected bool _isAutomatic; // Semi-Automatic or Automatic Gun?
     public bool IsAutomatic { get {  return _isAutomatic; } }
 
+    private PlayerController _pc;
+
     public int CurrentAmmo
     {
         get { return _currentAmmo; }
@@ -66,6 +68,7 @@ public class Firearm : Weapon
 
     public override void PickUp(Transform parent, bool rightHand)
     {
+        if(parent.gameObject.TryGetComponent(out PlayerController pc)) _pc = pc;
         if(rightHand)
         {
             _ammoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
@@ -82,9 +85,9 @@ public class Firearm : Weapon
 
     public void Fire()
     {
-        _shotTimer = _attackSpeed;
         if(CurrentAmmo > 0 && !_reloading)
         {
+            _shotTimer = _attackSpeed;
             CurrentAmmo -= _ammoConsumption;
             foreach (Transform firepoint in firePoints) 
             { 
@@ -100,22 +103,26 @@ public class Firearm : Weapon
                 }
             }
         }
-    }
-
-    public void StartReload()
-    {
-        if(CurrentAmmo != _maxAmmo && !_reloading)
+        else if(CurrentAmmo <= 0)
         {
-            StartCoroutine(Reload());
+            StartReload(_pc._reloadSpeedReduction);
         }
     }
 
-    private IEnumerator Reload()
+    public void StartReload(float mod = 1)
+    {
+        if(CurrentAmmo != _maxAmmo && !_reloading)
+        {
+            StartCoroutine(Reload(mod));
+        }
+    }
+
+    private IEnumerator Reload(float mod = 1)
     {
         _reloading = true;
         _reloadingIndicator.enabled = true;
         CurrentAmmo = 0;
-        yield return new WaitForSeconds(_reloadTime);
+        yield return new WaitForSeconds(_reloadTime * mod);
         CurrentAmmo = _maxAmmo;
         _reloading = false;
         _reloadingIndicator.enabled = false;

@@ -146,7 +146,7 @@ MonoBehaviour:
   _maxAmmo: 10
   _currentAmmo: 10
   _ammoConsumption: 1
-  _reloadTime: 3
+  _reloadTime: 1.5
   _fireForce: 10
   _reloading: 0
   _isAutomatic: 0

@@ -106,12 +106,12 @@ public abstract class Item : MonoBehaviour, IInteractable
         transform.SetParent(null);
         ChangeState(State.AIRBORNE);
 
-        float throwForce = Utils.MapWeightToRange(_weight, 5, 25, true);
+        float throwForce = Utils.MapWeightToRange(_weight, 2, 15, true);
         _rb.AddForce(transform.up * throwForce, ForceMode2D.Impulse);
 
         if(spinThrow)
         {
-            float spinForce = Utils.MapWeightToRange(_weight, 200, 2000, true);
+            float spinForce = Utils.MapWeightToRange(_weight, 100, 700, true);
             _rb.angularVelocity = spinForce;
         }
 
@@ -170,6 +170,14 @@ public abstract class Item : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(fallTime);
         if(_currentState != State.HELD)ChangeState(State.GROUNDED);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(_currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
+        {
+            collisionHealth.TakeDamage(Utils.MapWeightToRange(_weight, 5, 100, false));
+        }
     }
 
 }

@@ -441,17 +441,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881615510bb0eb146abaa82229789f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 1
-  _runSpeed: 2
-  _crawlSpeed: 0.5
+  _droneSpeed: 1
+  _investigateSpeed: 1.2
+  _aggroSpeed: 4
   _attackDamage: 10
   _attacksPerSecond: 1
-  _turnSmoothing: 5
+  _turnSmoothing: 10
   _changeDirectionCooldown: 5
   _wanderTarget: {x: 1, y: 1, z: 1}
-  _moveSpeed: 5
+  _moveSpeed: 1.05
   _obstacleAvoidDistance: 3
-  _perceptionDistance: 10
+  _perceptionDistance: 30
   _perceptionRayCount: 7
   _fov: 120
 --- !u!114 &-8031090298879193519

@@ -62,6 +62,10 @@ public class Health : MonoBehaviour
 
     public void OnDeath()
     {
-        Destroy(gameObject);
+        if(gameObject.TryGetComponent(out Enemy enemy)) 
+        {
+            enemy.OnDeath();
+            Destroy(gameObject);
+        }
     }
 }

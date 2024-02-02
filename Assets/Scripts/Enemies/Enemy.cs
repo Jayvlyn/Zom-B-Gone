@@ -8,7 +8,7 @@ public abstract class Enemy : MonoBehaviour
 {
 	private enum State
 	{
-		IDLE, WALKING, RUNNING, CRAWLING
+		DRONING, INVESTIGATING, AGGRO
 	}
 	private State _currentState;
 
@@ -18,9 +18,9 @@ public abstract class Enemy : MonoBehaviour
 	private GameObject playerTarget;
 
     [Header("Enemy Properties")]
-    [SerializeField] private float _walkSpeed = 5;
-    [SerializeField] private float _runSpeed = 7;
-    [SerializeField] private float _crawlSpeed = 2;
+    [SerializeField] private float _droneSpeed = 5;
+    [SerializeField] private float _investigateSpeed = 7;
+    [SerializeField] private float _aggroSpeed = 2;
     [SerializeField] private float _attackDamage = 10;
     [SerializeField] private float _attacksPerSecond = 1;
 	[SerializeField] private float _turnSmoothing = 5;
@@ -39,20 +39,19 @@ public abstract class Enemy : MonoBehaviour
 		if(_currentState == newState) return;
 		switch (newState)
 		{
-			case State.WALKING:
-				_moveSpeed = _walkSpeed;
+			case State.DRONING:
+				_moveSpeed = _droneSpeed;
 				
 				break;
-			case State.RUNNING:
-				_moveSpeed = _runSpeed;
+			case State.INVESTIGATING:
+				_moveSpeed = _investigateSpeed;
 				
 				break;
-			case State.CRAWLING:
-				_moveSpeed = _crawlSpeed;
+			case State.AGGRO:
+				_moveSpeed = _aggroSpeed;
 				
 				break;
-			default: // IDLE:
-				
+			default:
 				
 				break;
 		}
@@ -67,14 +66,29 @@ public abstract class Enemy : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _config = FindObjectOfType<HoardingConfig>();
 		_gm = FindObjectOfType<GameManager>();
-		ChangeState(State.WALKING);
+		ChangeState(State.DRONING);
     }
 
 	private void FixedUpdate()
 	{
-		_rigidBody.AddForce(Combine() * _moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
+		Vector3 target = Vector3.zero;
+
+		switch(_currentState)
+		{
+			case State.DRONING:
+				target = Drone();
+				break;
+			case State.INVESTIGATING:
+				target = Investigate();
+                break;
+			case State.AGGRO:
+				target = Aggro();
+                break;
+		}
+
+        _rigidBody.AddForce(target * _moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
 		_rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, _moveSpeed);
-		Rotate();
+		Rotate(target);
 	}
 
 	protected Vector3 Wander()
@@ -114,8 +128,8 @@ public abstract class Enemy : MonoBehaviour
 		if (countEnemies == 0) return cohesionVector;
 
 		cohesionVector /= countEnemies;
-
 		cohesionVector = cohesionVector - transform.position;
+
 		return cohesionVector.normalized;
 	}
 
@@ -206,14 +220,18 @@ public abstract class Enemy : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, _perceptionDistance, LayerMask.GetMask("Player"));
 			if (hit)
 			{
-				playerTarget = hit.collider.gameObject;
                 RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, _perceptionDistance, LayerMask.GetMask("World"));
 				if(worldHit && worldHit.distance < hit.distance)
 				{
 					return Vector3.zero;
 				}
-				seekTarget += rayDir.normalized * 100;
-				return seekTarget;
+				else
+				{
+					playerTarget = hit.collider.gameObject;
+					ChangeState(State.AGGRO);
+					seekTarget += rayDir.normalized * 100;
+					return seekTarget;
+				}
 			}
         }
 
@@ -227,7 +245,7 @@ public abstract class Enemy : MonoBehaviour
 	}
 
 
-	virtual protected Vector3 Combine()
+	virtual protected Vector3 Drone()
 	{
 		return (_config.cohesionPriority * Cohesion() + 
 				_config.wanderPriority * Wander() + 
@@ -236,18 +254,42 @@ public abstract class Enemy : MonoBehaviour
 				_config.avoidancePriority * Avoidance() + Seek());
 	}
 
-	bool isInFOV(Vector3 vec)
+    virtual protected Vector3 Investigate()
+    {
+        return (_config.cohesionPriority * Cohesion() +
+                _config.wanderPriority * Wander() +
+                _config.alignmentPriority * Alignment() +
+                _config.separationPriority * Separation() +
+                _config.avoidancePriority * Avoidance() + Seek());
+    }
+
+    virtual protected Vector3 Aggro()
+    {
+		if(Vector3.Distance(playerTarget.transform.position, transform.position) > _perceptionDistance)
+		{
+			playerTarget = null;
+			ChangeState(State.DRONING);
+			return Vector3.zero;
+		}
+		return ((playerTarget.transform.position - transform.position) * 50) + _config.avoidancePriority * 2 * Avoidance();
+    }
+
+    bool isInFOV(Vector3 vec)
 	{
 		return Vector3.Angle(_rigidBody.velocity, vec - transform.position) <= _config.maxFOV;
 	}
 
-	void Rotate()
+	void Rotate(Vector2 direction)
 	{
-		Vector2 direction = _rigidBody.velocity.normalized;
 		float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) - 90;
 		Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _turnSmoothing);
+	}
+
+	public void OnDeath()
+	{
+		_gm.enemies.Remove(this);
 	}
 
 }

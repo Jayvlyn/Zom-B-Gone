@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 	public Transform enemyPrefab;
 	public int numberOfEnemies;
 	public float spawnRadius;
-	private List<Enemy> enemies;
+	public List<Enemy> enemies;
 	private PlayerController player;
 
 	private void Start()
