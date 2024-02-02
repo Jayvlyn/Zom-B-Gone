@@ -11,9 +11,13 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        if(gameObject.tag == "Player")
+        if(gameObject.CompareTag("Player"))
         {
             healthBar = GameObject.FindWithTag("Health").GetComponent<Slider>();
+        }
+        else
+        {
+            if (healthBar != null) healthBar.gameObject.SetActive(false);
         }
     }
 
@@ -26,8 +30,12 @@ public class Health : MonoBehaviour
     {
         get { return _currentHealth; }
         set {
-            if (value > _maxHealth) _currentHealth = _maxHealth;
-            else if (value < 0)
+            if (value >= _maxHealth)
+            {
+                _currentHealth = _maxHealth;
+                if (!gameObject.CompareTag("Player") && healthBar.gameObject.activeSelf) healthBar.gameObject.SetActive(false);
+			}
+            else if (value <= 0)
             {
                 _currentHealth = 0;
                 OnDeath();
@@ -37,7 +45,8 @@ public class Health : MonoBehaviour
             if(healthBar != null)
             {
                 healthBar.value = _currentHealth / (float)_maxHealth;
-            }
+				if (!gameObject.CompareTag("Player") && !healthBar.gameObject.activeSelf && _currentHealth < _maxHealth) healthBar.gameObject.SetActive(true);
+			}
         }
     }
 
