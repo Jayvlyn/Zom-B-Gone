@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3844372379676118279}
   - component: {fileID: -7628486375137169298}
+  - component: {fileID: -8031090298879193519}
   - component: {fileID: 190890871166965350}
   - component: {fileID: 7881680831849007001}
   - component: {fileID: 7283379812343767483}
@@ -47,18 +48,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881615510bb0eb146abaa82229789f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 2
-  _runSpeed: 4
-  _crawlSpeed: 1
+  _walkSpeed: 1
+  _runSpeed: 2
+  _crawlSpeed: 0.5
   _attackDamage: 10
   _attacksPerSecond: 1
   _turnSmoothing: 5
   _changeDirectionCooldown: 5
   _wanderTarget: {x: 1, y: 1, z: 1}
+  _moveSpeed: 5
   _obstacleAvoidDistance: 3
   _perceptionDistance: 10
   _perceptionRayCount: 7
   _fov: 120
+--- !u!114 &-8031090298879193519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339959537163183905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7ee753bdcc5fc4f9db0001cf00a6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  _maxHealth: 100
+  _currentHealth: 100
 --- !u!212 &190890871166965350
 SpriteRenderer:
   m_ObjectHideFlags: 0

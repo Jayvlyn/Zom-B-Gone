@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -58,8 +56,6 @@ public class PlayerController : MonoBehaviour
         // Set currents
         _currentStamina = _maxStamina;
         _currentMoveSpeed = _walkSpeed;
-        
-        
     }
 
     private void Update()
@@ -321,7 +317,9 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeState(State newState)
     {
-        switch (newState)
+		if (_currentState == newState) return;
+
+		switch (newState)
         {
             case State.WALKING:
                 if (!_recoverStamina) StartCoroutine(RecoverStamina());

@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] private float _turnSmoothing = 5;
 	[SerializeField] private float _changeDirectionCooldown = 5;
 	[SerializeField] private Vector3 _wanderTarget = new Vector3(1,1,1);
-	private float _moveSpeed = 5;
+	[SerializeField] private float _moveSpeed = 5;
 	[Header("Enemy Perception")]
 	[SerializeField] private float _obstacleAvoidDistance = 10;
 	[SerializeField] private float _perceptionDistance = 10;
@@ -36,6 +36,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void ChangeState(State newState)
 	{
+		if(_currentState == newState) return;
 		switch (newState)
 		{
 			case State.WALKING:
@@ -66,6 +67,7 @@ public abstract class Enemy : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _config = FindObjectOfType<HoardingConfig>();
 		_gm = FindObjectOfType<GameManager>();
+		ChangeState(State.WALKING);
     }
 
 	private void FixedUpdate()

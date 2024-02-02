@@ -27,7 +27,11 @@ public class Health : MonoBehaviour
         get { return _currentHealth; }
         set {
             if (value > _maxHealth) _currentHealth = _maxHealth;
-            else if (value < 0) _currentHealth = 0;
+            else if (value < 0)
+            {
+                _currentHealth = 0;
+                OnDeath();
+            }
             else _currentHealth = value;
             
             if(healthBar != null)
@@ -44,6 +48,11 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        CurrentHealth = CurrentHealth - Mathf.RoundToInt(damage);
+        TakeDamage(Mathf.RoundToInt(damage));
+    }
+
+    public void OnDeath()
+    {
+        Destroy(gameObject);
     }
 }
