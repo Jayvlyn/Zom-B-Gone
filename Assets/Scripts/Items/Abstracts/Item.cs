@@ -96,6 +96,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public virtual void Drop()
     {
+        RemoveFromHand();
         transform.SetParent(null);
         ChangeState(State.GROUNDED);
         _rb.AddForce(transform.up * Utils.MapScalarToRange(_friction, 3, 500, true), ForceMode2D.Impulse);
@@ -103,6 +104,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public virtual void Throw()
     {
+        RemoveFromHand();
         transform.SetParent(null);
         ChangeState(State.AIRBORNE);
 
@@ -172,7 +174,21 @@ public abstract class Item : MonoBehaviour, IInteractable
         if(_currentState != State.HELD)ChangeState(State.GROUNDED);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void RemoveFromHand()
+    {
+        if (inRightHand)
+        {
+            _playerHands.RightObject = null; 
+            _playerHands.UsingRight = false;
+        }
+        else
+        {
+            _playerHands.LeftObject = null; 
+            _playerHands.UsingLeft = false;
+        }
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if(_currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {

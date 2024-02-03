@@ -212,8 +212,6 @@ public class PlayerController : MonoBehaviour
             {
 				_hands._leftItem.Drop();
             }
-            _hands.LeftObject = null;
-            _hands.UsingLeft = false;
         }
     }
 
@@ -229,8 +227,6 @@ public class PlayerController : MonoBehaviour
             {
 				_hands._rightItem.Drop();
             }
-            _hands.RightObject = null;
-            _hands.UsingRight = false;
         }
     }
 
