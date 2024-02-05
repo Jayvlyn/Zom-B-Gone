@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
     private bool _recoverStamina;
     private bool _holdingRun;
 
-    private bool _holdingLeft;
-	private bool _holdingRight;
+    public bool _holdingLeft;
+	public bool _holdingRight;
 
     private Firearm? _leftFirearm;
     private Firearm? _rightFirearm;

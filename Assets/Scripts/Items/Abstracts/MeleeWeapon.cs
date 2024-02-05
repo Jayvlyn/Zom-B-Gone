@@ -5,46 +5,50 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
     [Header("Melee Properties")]
-    [SerializeField] private float swingRadius = 90f;
-    public float swingSpeed = 5f;
+    [SerializeField] private float swingArc = 90.0f;
+    [SerializeField] private float swingSpeed = 1.0f; // seconds to complete swing
+
+    private bool isSwinging = false;
+    private Vector2 initialOffset;
 
     public override void Use()
     {
-        StartCoroutine(Swing());
+        if (!isSwinging)
+        {
+            StartCoroutine(PrepareSwing());
+        }
     }
 
-
-    private bool isSwinging = false;
-    private Transform playerTransform;
-    private Quaternion initialRotation;
-
-    void Start()
+    private IEnumerator Swing()
     {
-        playerTransform = transform.parent;
-        initialRotation = transform.rotation;
-    }
-
-    IEnumerator Swing()
-    {
-        isSwinging = true;
-
         float elapsedTime = 0f;
 
-        while (elapsedTime < 1f)
+        while (elapsedTime < swingSpeed)
         {
-            elapsedTime += Time.deltaTime * swingSpeed;
 
-            // Calculate the rotation based on the swing radius
-            Quaternion targetRotation = initialRotation * Quaternion.Euler(0, 0, swingRadius * Mathf.Sin(elapsedTime * Mathf.PI));
-
-            // Apply the rotation
-            transform.rotation = targetRotation;
-
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // Reset rotation when the swing is complete
-        transform.rotation = initialRotation;
         isSwinging = false;
     }
+
+    private IEnumerator PrepareSwing()
+    {
+        isSwinging = true;
+
+        float preparationTime = 0.2f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < preparationTime)
+        {
+            float t = elapsedTime / preparationTime;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        StartCoroutine(Swing());
+    }
+
 }

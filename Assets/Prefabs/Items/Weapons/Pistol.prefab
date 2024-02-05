@@ -136,6 +136,7 @@ MonoBehaviour:
   _weight: 800
   _rotationalFriction: 0
   _friction: 0.93
+  _holdOffset: {x: 0.5, y: 0.5}
   spinThrow: 1
   _damage: 35
   _range: 3

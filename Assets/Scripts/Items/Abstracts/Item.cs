@@ -26,7 +26,11 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField, Range(0.9f, 1.0f)] protected float _rotationalFriction = 0.9f;
     [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float _friction = 0.99f;
 
-    [SerializeField] protected bool spinThrow = true;
+    [SerializeField] Vector2 _holdOffset = new Vector2(0.5f, 0.5f);
+
+    [SerializeField] protected bool _spinThrow = true;
+
+    [SerializeField] protected bool _aimAtMouse = true;
 
     protected Rigidbody2D _rb;
     protected Collider2D _collider;
@@ -59,7 +63,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private void FixedUpdate()
     {
-        if(_currentState == State.HELD)
+        if(_currentState == State.HELD && _aimAtMouse)
         {
             RotateToMouse();
         }
@@ -111,7 +115,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         float throwForce = Utils.MapWeightToRange(_weight, 2, 15, true);
         _rb.AddForce(transform.up * throwForce, ForceMode2D.Impulse);
 
-        if(spinThrow)
+        if(_spinThrow)
         {
             float spinForce = Utils.MapWeightToRange(_weight, 100, 700, true);
             _rb.angularVelocity = spinForce;
@@ -130,15 +134,16 @@ public abstract class Item : MonoBehaviour, IInteractable
         if (rightHand)
         {
             inRightHand = true;
-            transform.SetParent(parent);
-            transform.position = parent.position + (parent.right + parent.up) * 0.5f;
+            transform.position = parent.position + (parent.right * _holdOffset.x + parent.up * _holdOffset.y);
         }
         else
         {
             inRightHand = false;
-            transform.SetParent(parent);
-            transform.position = parent.position + (-parent.right + parent.up) * 0.5f;
+            transform.position = parent.position + (-parent.right * _holdOffset.x + parent.up * _holdOffset.y);
         }
+
+        transform.SetParent(parent);
+        if (!_aimAtMouse) { transform.localRotation = Quaternion.identity; }
     }
 
     private void RotateToMouse()
