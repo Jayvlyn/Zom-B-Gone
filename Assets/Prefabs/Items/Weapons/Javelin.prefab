@@ -55,7 +55,8 @@ MonoBehaviour:
   _rotationalFriction: 0.9
   _friction: 0.99
   _holdOffset: {x: 0.5, y: 0.2}
-  spinThrow: 0
+  _spinThrow: 0
+  _aimAtMouse: 1
   _damage: 40
   _range: 10
   _attackSpeed: 1
