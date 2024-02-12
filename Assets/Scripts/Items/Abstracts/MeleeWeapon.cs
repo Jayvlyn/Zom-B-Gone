@@ -8,6 +8,8 @@ public class MeleeWeapon : Weapon
     [SerializeField] private float swingArc = 90.0f;
     [SerializeField] private float swingSpeed = 1.0f; // seconds to complete swing
 
+    [SerializeField] private Transform pivotPoint;
+
     private bool isSwinging = false;
     private Vector2 initialOffset;
 
@@ -19,7 +21,13 @@ public class MeleeWeapon : Weapon
         }
     }
 
-    private IEnumerator Swing()
+	public override void PickUp(Transform parent, bool rightHand)
+	{
+		base.PickUp(parent, rightHand);
+        transform.RotateAround(pivotPoint.position, Vector3.forward, 180);
+	}
+
+	private IEnumerator Swing()
     {
         float elapsedTime = 0f;
 

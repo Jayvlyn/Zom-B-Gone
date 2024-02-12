@@ -143,7 +143,9 @@ public abstract class Item : MonoBehaviour, IInteractable
         }
 
         transform.SetParent(parent);
-        if (!_aimAtMouse) { transform.localRotation = Quaternion.identity; }
+        if (!_aimAtMouse) { 
+            transform.localRotation = Quaternion.identity; 
+        }
     }
 
     private void RotateToMouse()
@@ -167,7 +169,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private IEnumerator TriggerToSolid()
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
         if(_collider.isTrigger)_collider.isTrigger = false;
     }
 
