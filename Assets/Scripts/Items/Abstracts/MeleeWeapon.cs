@@ -75,8 +75,8 @@ public class MeleeWeapon : Weapon
             yield return null;
         }
 
-        //if (isHeld) StartCoroutine(Swing());
-        //else StartCoroutine(FinishSwings());
+        if (_useHeld) StartCoroutine(Swing());
+        else StartCoroutine(FinishSwings());
     }
 
     private IEnumerator FinishSwings()
