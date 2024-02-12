@@ -44,6 +44,8 @@ public class MeleeWeapon : Weapon
         {
             float t = elapsedTime / preparationTime;
 
+            transform.RotateAround(transform.parent.position, Vector3.forward, -t);
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
