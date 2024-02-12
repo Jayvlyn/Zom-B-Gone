@@ -11,21 +11,18 @@ public class MeleeWeapon : Weapon
     [SerializeField] private Transform pivotPoint;
 
     private bool isSwinging = false;
-    private Vector2 initialOffset;
 
     public override void Use()
     {
-        if (!isSwinging)
-        {
-            StartCoroutine(PrepareSwing());
-        }
+        if (!isSwinging) StartCoroutine(PrepareSwing());
     }
 
 	public override void PickUp(Transform parent, bool rightHand)
 	{
 		base.PickUp(parent, rightHand);
-        transform.RotateAround(pivotPoint.position, Vector3.forward, 180);
-	}
+        if (inRightHand) transform.RotateAround(pivotPoint.position, Vector3.forward, -130);
+        else             transform.RotateAround(pivotPoint.position, Vector3.forward, 130);
+    }
 
 	private IEnumerator Swing()
     {
@@ -33,26 +30,30 @@ public class MeleeWeapon : Weapon
 
         while (elapsedTime < swingSpeed)
         {
+            float t = elapsedTime / swingArc;
+
+            transform.RotateAround(transform.parent.position, Vector3.forward, 1);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        isSwinging = false;
+        if (isHeld) StartCoroutine(Swing());
+        else isSwinging = false;
     }
 
     private IEnumerator PrepareSwing()
     {
         isSwinging = true;
 
-        float preparationTime = 0.2f;
+        float preparationTime = 0.1f;
         float elapsedTime = 0f;
 
         while (elapsedTime < preparationTime)
         {
             float t = elapsedTime / preparationTime;
 
-            transform.RotateAround(transform.parent.position, Vector3.forward, -t);
+            transform.RotateAround(transform.parent.position, Vector3.forward, 1);
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -60,5 +61,4 @@ public class MeleeWeapon : Weapon
 
         StartCoroutine(Swing());
     }
-
 }

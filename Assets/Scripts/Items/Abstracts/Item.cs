@@ -100,20 +100,20 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public virtual void Drop()
     {
+        Transform playerT = transform.parent;
         RemoveFromHand();
-        transform.SetParent(null);
         ChangeState(State.GROUNDED);
-        _rb.AddForce(transform.up * Utils.MapScalarToRange(_friction, 3, 500, true), ForceMode2D.Impulse);
+        _rb.AddForce(playerT.up * Utils.MapScalarToRange(_friction, 3, 500, true), ForceMode2D.Impulse);
     }
 
     public virtual void Throw()
     {
+        Transform playerT = transform.parent;
         RemoveFromHand();
-        transform.SetParent(null);
         ChangeState(State.AIRBORNE);
 
         float throwForce = Utils.MapWeightToRange(_weight, 2, 15, true);
-        _rb.AddForce(transform.up * throwForce, ForceMode2D.Impulse);
+        _rb.AddForce(playerT.up * throwForce, ForceMode2D.Impulse);
 
         if(_spinThrow)
         {
@@ -193,6 +193,8 @@ public abstract class Item : MonoBehaviour, IInteractable
             _playerHands.LeftObject = null; 
             _playerHands.UsingLeft = false;
         }
+
+        transform.SetParent(null);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
