@@ -43,6 +43,12 @@ public class Firearm : Weapon
             if(_shotTimer < 0)_shotTimer = 0;
         }
 
+        if(_isAutomatic && _useHeld)
+        {
+            Use();
+        }
+
+
         base.Update();
     }
 

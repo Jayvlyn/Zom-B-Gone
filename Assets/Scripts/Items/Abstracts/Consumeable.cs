@@ -10,11 +10,11 @@ public abstract class Consumeable : Item
     {
         // call base.Use() in consumables after their functionality
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        if (inRightHand)
+        if (_inRightHand)
         {
             _playerHands.RightObject = null; 
             _playerHands.UsingRight = false;
-            inRightHand = false;
+            _inRightHand = false;
         }
         else
         {

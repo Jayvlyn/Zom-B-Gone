@@ -36,8 +36,8 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected Collider2D _collider;
     protected PlayerController _playerController;
     protected Hands _playerHands;
-    protected bool inRightHand;
-    protected bool isHeld;
+    protected bool _inRightHand;
+    public bool _useHeld;
 
 
     private void Awake()
@@ -133,12 +133,12 @@ public abstract class Item : MonoBehaviour, IInteractable
         
         if (rightHand)
         {
-            inRightHand = true;
+            _inRightHand = true;
             transform.position = parent.position + (parent.right * _holdOffset.x + parent.up * _holdOffset.y);
         }
         else
         {
-            inRightHand = false;
+            _inRightHand = false;
             transform.position = parent.position + (-parent.right * _holdOffset.x + parent.up * _holdOffset.y);
         }
 
@@ -183,7 +183,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private void RemoveFromHand()
     {
-        if (inRightHand)
+        if (_inRightHand)
         {
             _playerHands.RightObject = null; 
             _playerHands.UsingRight = false;

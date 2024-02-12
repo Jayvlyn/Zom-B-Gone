@@ -41,9 +41,6 @@ public class PlayerController : MonoBehaviour
     public bool _holdingLeft;
 	public bool _holdingRight;
 
-    private Firearm? _leftFirearm;
-    private Firearm? _rightFirearm;
-
     private void Awake()
     {
         //Cursor.visible = false;
@@ -78,23 +75,6 @@ public class PlayerController : MonoBehaviour
             {
                 if (_currentStamina < _maxStamina) _currentStamina += Time.deltaTime * _staminaRecoverySpeed;
                 else _recoverStamina = false;
-            }
-        }
-
-
-        if(_holdingLeft && _hands._leftItem != null)
-        {
-            if(_leftFirearm != null && _leftFirearm.IsAutomatic)
-            {
-                _hands._leftItem.Use();
-            }
-        }
-
-        if(_holdingRight && _hands._rightItem != null)
-        {
-            if (_rightFirearm != null && _rightFirearm.IsAutomatic)
-            {
-                _hands._rightItem.Use();
             }
         }
     }
@@ -153,20 +133,14 @@ public class PlayerController : MonoBehaviour
     {
         if(inputValue.isPressed)
         {
-		    if (!_hands.UsingLeft)
-            {
-                _interactor.Interact(false);
-                if (_hands.LeftObject != null) _hands.LeftObject.TryGetComponent(out _leftFirearm);
-            } 
-			else if (_hands._leftItem != null)
-			{
-				_hands._leftItem.Use();
-			}
-
+		    if (!_hands.UsingLeft) _interactor.Interact(false);
+            
+			else if (_hands._leftItem != null) _hands._leftItem.Use();
 		}
         else
         {
             _holdingLeft = false;
+            if (_hands._leftItem != null) _hands._leftItem._useHeld = false;
         }
     }
 
@@ -174,44 +148,37 @@ public class PlayerController : MonoBehaviour
     {
 		if (inputValue.isPressed)
 		{
-			if (!_hands.UsingRight)
-            {
-                _interactor.Interact(true);
-                if(_hands.RightObject != null)_hands.RightObject.TryGetComponent(out _rightFirearm);
-            }
-			else if (_hands._rightItem != null)
-			{
-				_hands._rightItem.Use();
-			}
+			if (!_hands.UsingRight) _interactor.Interact(true);
+            
+			else if (_hands._rightItem != null) _hands._rightItem.Use();
 		}
 		else
 		{
 			_holdingRight = false;
-		}
+            if (_hands._rightItem != null) _hands._rightItem._useHeld = false;
+        }
 	}
 
     private void OnLeftHold(InputValue inputValue)
     {
 		_holdingLeft = true;
-	}
+        if (_hands._leftItem != null) _hands._leftItem._useHeld = true;
+
+    }
 
     private void OnRightHold(InputValue inputValue)
     {
 		_holdingRight = true;
-	}
+        if (_hands._rightItem != null) _hands._rightItem._useHeld = true;
+    }
 
     private void OnDropLeft(InputValue inputValue)
     {
         if (_hands.UsingLeft)
         {
-            if (_movementInput.magnitude > 0)
-            {
-				_hands._leftItem.Throw();
-            }
-            else
-            {
-				_hands._leftItem.Drop();
-            }
+            if (_movementInput.magnitude > 0) _hands._leftItem.Throw();
+            
+            else _hands._leftItem.Drop();
         }
     }
 
@@ -219,14 +186,9 @@ public class PlayerController : MonoBehaviour
     {
         if (_hands.UsingRight)
         {
-            if (_movementInput.magnitude > 0)
-            {
-				_hands._rightItem.Throw();
-            }
-            else
-            {
-				_hands._rightItem.Drop();
-            }
+            if (_movementInput.magnitude > 0) _hands._rightItem.Throw();
+            
+            else _hands._rightItem.Drop();
         }
     }
 

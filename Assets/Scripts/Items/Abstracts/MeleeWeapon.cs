@@ -20,26 +20,20 @@ public class MeleeWeapon : Weapon
 	public override void PickUp(Transform parent, bool rightHand)
 	{
 		base.PickUp(parent, rightHand);
-        if (inRightHand) transform.RotateAround(pivotPoint.position, Vector3.forward, -130);
+        if (_inRightHand) transform.RotateAround(pivotPoint.position, Vector3.forward, -130);
         else             transform.RotateAround(pivotPoint.position, Vector3.forward, 130);
     }
 
-	private IEnumerator Swing()
+    public override void Drop()
     {
-        float elapsedTime = 0f;
+        StopAllCoroutines();
+        base.Drop();
+    }
 
-        while (elapsedTime < swingSpeed)
-        {
-            float t = elapsedTime / swingArc;
-
-            transform.RotateAround(transform.parent.position, Vector3.forward, 1);
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        if (isHeld) StartCoroutine(Swing());
-        else isSwinging = false;
+    public override void Throw()
+    {
+        StopAllCoroutines();
+        base.Throw();
     }
 
     private IEnumerator PrepareSwing()
@@ -53,12 +47,56 @@ public class MeleeWeapon : Weapon
         {
             float t = elapsedTime / preparationTime;
 
-            transform.RotateAround(transform.parent.position, Vector3.forward, 1);
+            //transform.RotateAround(transform.parent.position, Vector3.forward, 1);
+
+
+
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         StartCoroutine(Swing());
+    }
+
+	private IEnumerator Swing()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < swingSpeed)
+        {
+            float t = elapsedTime / swingArc;
+
+            transform.RotateAround(transform.parent.position, Vector3.forward, 1);
+
+
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        //if (isHeld) StartCoroutine(Swing());
+        //else StartCoroutine(FinishSwings());
+    }
+
+    private IEnumerator FinishSwings()
+    {
+        float returnTime = 0.1f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < returnTime)
+        {
+            float t = elapsedTime / returnTime;
+
+
+
+
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+
+        isSwinging = false;
     }
 }
