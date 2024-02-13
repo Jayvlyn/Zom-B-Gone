@@ -47,10 +47,7 @@ public class MeleeWeapon : Weapon
         {
             float t = elapsedTime / preparationTime;
 
-            //transform.RotateAround(transform.parent.position, Vector3.forward, 1);
-
-
-
+            MoveSword(t, 1);
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -67,11 +64,9 @@ public class MeleeWeapon : Weapon
         {
             float t = elapsedTime / swingArc;
 
-            transform.RotateAround(transform.parent.position, Vector3.forward, 1);
+            MoveSword(-t * swingArc, -0.5f);
 
-
-
-            elapsedTime += Time.deltaTime;
+			elapsedTime += Time.deltaTime;
             yield return null;
         }
 
@@ -81,7 +76,7 @@ public class MeleeWeapon : Weapon
 
     private IEnumerator FinishSwings()
     {
-        float returnTime = 0.1f;
+        float returnTime = 0.2f;
         float elapsedTime = 0f;
 
         while (elapsedTime < returnTime)
@@ -89,14 +84,25 @@ public class MeleeWeapon : Weapon
             float t = elapsedTime / returnTime;
 
 
-
-
-
-            elapsedTime += Time.deltaTime;
+			elapsedTime += Time.deltaTime;
             yield return null;
         }
 
 
         isSwinging = false;
     }
+
+    private void MoveSword(float t, float rotationIncrement)
+    {
+		if (_inRightHand)
+		{
+			transform.RotateAround(transform.parent.position, Vector3.forward, -t);
+			transform.Rotate(0, 0, -rotationIncrement);
+		}
+		else
+		{
+			transform.RotateAround(transform.parent.position, Vector3.forward, t);
+			transform.Rotate(0, 0, rotationIncrement);
+		}
+	}
 }
