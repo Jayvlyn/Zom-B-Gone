@@ -8,9 +8,8 @@ public class MeleeWeapon : Weapon
     [SerializeField] private float swingArc = 90.0f;
     [SerializeField] private float swingSpeed = 1.0f; // seconds to complete swing
 
-    [SerializeField] private Transform pivotPoint;
-
     private bool isSwinging = false;
+    private bool returnSwing = false;
 
     public override void Use()
     {
@@ -20,8 +19,6 @@ public class MeleeWeapon : Weapon
 	public override void PickUp(Transform parent, bool rightHand)
 	{
 		base.PickUp(parent, rightHand);
-        if (_inRightHand) transform.RotateAround(pivotPoint.position, Vector3.forward, -130);
-        else             transform.RotateAround(pivotPoint.position, Vector3.forward, 130);
     }
 
     public override void Drop()
@@ -47,7 +44,7 @@ public class MeleeWeapon : Weapon
         {
             float t = elapsedTime / preparationTime;
 
-            MoveSword(t, 1);
+            MoveSword(t * swingSpeed, 1);
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -62,13 +59,23 @@ public class MeleeWeapon : Weapon
 
         while (elapsedTime < swingSpeed)
         {
-            float t = elapsedTime / swingArc;
+            float t = elapsedTime / swingSpeed;
 
-            MoveSword(-t * swingArc, -0.5f);
-
-			elapsedTime += Time.deltaTime;
+            if(returnSwing)
+            {
+                MoveSword(t * swingSpeed, 0.4f);
+            }
+            else
+            {
+                MoveSword(-t * swingSpeed, -0.4f);
+            }
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        if (returnSwing) returnSwing = false;
+        else returnSwing = true;
+
 
         if (_useHeld) StartCoroutine(Swing());
         else StartCoroutine(FinishSwings());
@@ -83,12 +90,16 @@ public class MeleeWeapon : Weapon
         {
             float t = elapsedTime / returnTime;
 
+            // bring sword back to default holding position
+            
 
-			elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
 
+        PositionInHand();
 
+        returnSwing = false;
         isSwinging = false;
     }
 

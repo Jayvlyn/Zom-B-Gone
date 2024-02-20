@@ -916,6 +916,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: swingArc
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: swingSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.007
@@ -955,6 +963,14 @@ PrefabInstance:
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543392673147886635, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6432323
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543392673147886635, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.9640837
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4227,6 +4243,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: swingArc
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: swingSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.01599
@@ -4266,6 +4290,14 @@ PrefabInstance:
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543392673147886635, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6319447
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543392673147886635, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.9584398
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

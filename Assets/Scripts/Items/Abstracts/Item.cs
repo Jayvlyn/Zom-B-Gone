@@ -31,6 +31,8 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected bool _spinThrow = true;
 
     [SerializeField] protected bool _aimAtMouse = true;
+    [SerializeField] protected float gripRotation = 130;
+    [SerializeField] private Transform? pivotPoint;
 
     protected Rigidbody2D _rb;
     protected Collider2D _collider;
@@ -134,18 +136,13 @@ public abstract class Item : MonoBehaviour, IInteractable
         if (rightHand)
         {
             _inRightHand = true;
-            transform.position = parent.position + (parent.right * _holdOffset.x + parent.up * _holdOffset.y);
         }
         else
         {
             _inRightHand = false;
-            transform.position = parent.position + (-parent.right * _holdOffset.x + parent.up * _holdOffset.y);
         }
-
         transform.SetParent(parent);
-        if (!_aimAtMouse) { 
-            transform.localRotation = Quaternion.identity; 
-        }
+        PositionInHand();
     }
 
     private void RotateToMouse()
@@ -179,6 +176,34 @@ public abstract class Item : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(fallTime);
         if(_currentState != State.HELD)ChangeState(State.GROUNDED);
+    }
+
+    protected void PositionInHand()
+    {
+        if(_inRightHand)
+        {
+            transform.position = transform.parent.position + (transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
+        }
+        else
+        {
+            transform.position = transform.parent.position + (-transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
+        }
+
+
+        if (!_aimAtMouse)
+        {
+            transform.localRotation = Quaternion.identity;
+        }
+        ReturnToGrip();
+    }
+
+    protected void ReturnToGrip()
+    {
+        if(pivotPoint != null)
+        {
+            if (_inRightHand) transform.RotateAround(pivotPoint.position, Vector3.forward, -gripRotation);
+            else transform.RotateAround(pivotPoint.position, Vector3.forward, gripRotation);
+        }
     }
 
     private void RemoveFromHand()
