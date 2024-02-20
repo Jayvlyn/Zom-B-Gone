@@ -44,7 +44,7 @@ public class MeleeWeapon : Weapon
         {
             float t = elapsedTime / preparationTime;
 
-            MoveSword(t * swingSpeed, 1);
+            MoveSword(t, 1);
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -57,17 +57,17 @@ public class MeleeWeapon : Weapon
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < swingSpeed)
+        while (elapsedTime < 1)
         {
-            float t = elapsedTime / swingSpeed;
+            float t = elapsedTime / 1;
 
             if(returnSwing)
             {
-                MoveSword(t * swingSpeed, 0.4f);
+                MoveSword(t, swingSpeed);
             }
             else
             {
-                MoveSword(-t * swingSpeed, -0.4f);
+                MoveSword(-t, -swingSpeed);
             }
             elapsedTime += Time.deltaTime;
             yield return null;
