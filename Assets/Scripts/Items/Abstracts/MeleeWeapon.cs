@@ -5,8 +5,12 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
     [Header("Melee Properties")]
-    [SerializeField] private float swingArc = 90.0f;
-    [SerializeField] private float swingSpeed = 1.0f; // seconds to complete swing
+    [SerializeField] private AnimationCurve swingCurve;
+    [SerializeField] private AnimationCurve rotationCurve;
+    [SerializeField] private AnimationCurve prepSwingCurve;
+    [SerializeField] private AnimationCurve prepRotationCurve;
+    [SerializeField,Tooltip("Time in seconds to complete a swing")] private float swingSpeed;
+    [SerializeField,Tooltip("Time in seconds to prepare swing")] private float prepSpeed;
 
     private bool isSwinging = false;
     private bool returnSwing = false;
@@ -23,28 +27,41 @@ public class MeleeWeapon : Weapon
 
     public override void Drop()
     {
-        StopAllCoroutines();
         base.Drop();
+        RemoveFromHand();
     }
 
     public override void Throw()
     {
-        StopAllCoroutines();
         base.Throw();
+        RemoveFromHand();
+    }
+
+    protected override void RemoveFromHand()
+    {
+        returnSwing = false;
+        isSwinging = false;
+        //StopAllCoroutines();
+        StopCoroutine(Swing());
+        StopCoroutine(PrepareSwing());
+        StopCoroutine(FinishSwings());
+        base.RemoveFromHand();
     }
 
     private IEnumerator PrepareSwing()
     {
         isSwinging = true;
 
-        float preparationTime = 0.1f;
         float elapsedTime = 0f;
 
-        while (elapsedTime < preparationTime)
+        while (elapsedTime < prepSpeed)
         {
-            float t = elapsedTime / preparationTime;
+            float t = elapsedTime / prepSpeed;
 
-            MoveSword(t, 1);
+            float swingValue = prepSwingCurve.Evaluate(t);
+            float rotationValue = prepRotationCurve.Evaluate(t);
+
+            MoveSword(swingValue, rotationValue);
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -57,17 +74,20 @@ public class MeleeWeapon : Weapon
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < 1)
+        while (elapsedTime < swingSpeed)
         {
-            float t = elapsedTime / 1;
+            float t = elapsedTime / swingSpeed;
+
+            float swingValue = swingCurve.Evaluate(t);
+            float rotationValue = rotationCurve.Evaluate(t);
 
             if(returnSwing)
             {
-                MoveSword(t, swingSpeed);
+                MoveSword(swingValue, rotationValue);
             }
             else
             {
-                MoveSword(-t, -swingSpeed);
+                MoveSword(-swingValue, -rotationValue);
             }
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -75,7 +95,6 @@ public class MeleeWeapon : Weapon
 
         if (returnSwing) returnSwing = false;
         else returnSwing = true;
-
 
         if (_useHeld) StartCoroutine(Swing());
         else StartCoroutine(FinishSwings());

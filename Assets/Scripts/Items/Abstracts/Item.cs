@@ -206,7 +206,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         }
     }
 
-    private void RemoveFromHand()
+    protected virtual void RemoveFromHand()
     {
         if (_inRightHand)
         {

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2774193381391502917}
-  - component: {fileID: 8298971315238355472}
   - component: {fileID: 2596300008556408185}
+  - component: {fileID: 8298971315238355472}
   - component: {fileID: 3543392673147886635}
   m_Layer: 6
   m_Name: Sword
@@ -36,6 +36,184 @@ Transform:
   - {fileID: 7922860649099438781}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2596300008556408185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490104715815667538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc7634af11e0d94a8df8dc1126f77eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: Sword
+  _quality: 100
+  _weight: 1945
+  _rotationalFriction: 0.9042
+  _friction: 0.99
+  _holdOffset: {x: 0.4, y: 0.6}
+  _spinThrow: 1
+  _aimAtMouse: 0
+  gripRotation: 130
+  pivotPoint: {fileID: 7922860649099438781}
+  _useHeld: 0
+  _damage: 50
+  _range: 2
+  _attackSpeed: 1
+  swingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.7249804
+      outSlope: 2.7249804
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11358933
+    - serializedVersion: 3
+      time: 0.087773986
+      value: 3.4567819
+      inSlope: 0.7747501
+      outSlope: 0.7747501
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17538986
+    - serializedVersion: 3
+      time: 0.2618516
+      value: 3.463212
+      inSlope: -0.7773687
+      outSlope: -0.7773687
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18754987
+      outWeight: 0.31685624
+    - serializedVersion: 3
+      time: 0.32677943
+      value: 0.18527257
+      inSlope: -0.60702884
+      outSlope: -0.60702884
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.082993306
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.41661876
+      outSlope: -0.41661876
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07847315
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.11992371
+      value: 1.3072366
+      inSlope: 0.75825983
+      outSlope: 0.75825983
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.053311493
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.320619
+      value: 1.308808
+      inSlope: -0.8589183
+      outSlope: -0.8589183
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.51555645
+      value: 0.15368032
+      inSlope: 1.0238874
+      outSlope: 1.0238874
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.69565445
+      value: 1.7852789
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  prepSwingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.051947273
+      outSlope: 0.051947273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08837211
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  prepRotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.051947273
+      outSlope: 0.051947273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08837211
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  swingSpeed: 0.5
+  prepSpeed: 0.2
 --- !u!50 &8298971315238355472
 Rigidbody2D:
   serializedVersion: 4
@@ -61,34 +239,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &2596300008556408185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490104715815667538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfc7634af11e0d94a8df8dc1126f77eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _name: Sword
-  _quality: 100
-  _weight: 1945
-  _rotationalFriction: 0.9042
-  _friction: 0.99
-  _holdOffset: {x: 0.4, y: 0.6}
-  _spinThrow: 1
-  _aimAtMouse: 0
-  _damage: 50
-  _range: 2
-  _attackSpeed: 1
-  swingArc: 90
-  swingSpeed: 1
-  pivotPoint: {fileID: 7922860649099438781}
 --- !u!61 &3543392673147886635
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -121,7 +273,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0000009536743, y: 0.7402053}
+  m_Offset: {x: -0.0000009536743, y: 0.80490255}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.28866667}
@@ -132,7 +284,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08177376, y: 1.1954756}
+  m_Size: {x: 0.08177376, y: 1.9184675}
   m_EdgeRadius: 0
 --- !u!1 &1093850455457573653
 GameObject:
