@@ -120,6 +120,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         if(_spinThrow)
         {
             float spinForce = Utils.MapWeightToRange(_weight, 100, 700, true);
+            if (!_inRightHand) spinForce *= -1;
             _rb.angularVelocity = spinForce;
         }
 

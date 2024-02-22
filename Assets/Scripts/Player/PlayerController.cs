@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetPlayerVelocity()
     {
-        _smoothedMovementInput = Vector2.SmoothDamp(_smoothedMovementInput, _movementInput, ref _movementInputSmoothVelocity, _velocityChangeSpeed);
+        _smoothedMovementInput = Vector2.SmoothDamp(_smoothedMovementInput, _movementInput, ref _movementInputSmoothVelocity, _velocityChangeSpeed * Time.deltaTime * 100);
         _rigidBody.velocity = (_smoothedMovementInput) * _currentMoveSpeed * _speedModifier;
     }
 
@@ -271,7 +271,6 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
-
 
     private void ChangeState(State newState)
     {

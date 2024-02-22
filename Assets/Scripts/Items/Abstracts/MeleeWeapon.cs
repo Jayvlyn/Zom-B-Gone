@@ -39,12 +39,10 @@ public class MeleeWeapon : Weapon
 
     protected override void RemoveFromHand()
     {
+        _collider.isTrigger = false;
         returnSwing = false;
         isSwinging = false;
-        //StopAllCoroutines();
-        StopCoroutine(Swing());
-        StopCoroutine(PrepareSwing());
-        StopCoroutine(FinishSwings());
+        StopAllCoroutines();
         base.RemoveFromHand();
     }
 
@@ -126,13 +124,22 @@ public class MeleeWeapon : Weapon
     {
 		if (_inRightHand)
 		{
-			transform.RotateAround(transform.parent.position, Vector3.forward, -t);
-			transform.Rotate(0, 0, -rotationIncrement);
+			transform.RotateAround(transform.parent.position, Vector3.forward, -t * Time.deltaTime * 100);
+			transform.Rotate(0, 0, -rotationIncrement * Time.deltaTime * 100);
 		}
 		else
 		{
-			transform.RotateAround(transform.parent.position, Vector3.forward, t);
-			transform.Rotate(0, 0, rotationIncrement);
+			transform.RotateAround(transform.parent.position, Vector3.forward, t * Time.deltaTime * 100);
+			transform.Rotate(0, 0, rotationIncrement * Time.deltaTime * 100);
 		}
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == transform.parent) return;
+        if (isSwinging && collision.gameObject.TryGetComponent(out Health targetHealth))
+        {
+            targetHealth.TakeDamage(_damage);
+        }
+    }
 }

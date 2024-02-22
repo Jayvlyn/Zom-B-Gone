@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -11,9 +12,17 @@ public class Bullet : MonoBehaviour
     public int FirearmDamage { get; set; }
     public float LifeSpan { get; set; }
 
+    public Rigidbody2D _rb;
+
+    void Update()
+    {
+        
+    }
+
     void Start()
     {
         StartCoroutine(lifeStart());
+        TryGetComponent(out Rigidbody2D _rb);
     }
 
     private IEnumerator lifeStart()
