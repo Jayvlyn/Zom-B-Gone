@@ -14,6 +14,7 @@ public class MeleeWeapon : Weapon
 
     private bool isSwinging = false;
     private bool returnSwing = false;
+    private bool doDamage = false;
 
     public override void Use()
     {
@@ -79,6 +80,9 @@ public class MeleeWeapon : Weapon
             float swingValue = swingCurve.Evaluate(t);
             float rotationValue = rotationCurve.Evaluate(t);
 
+            if (swingValue > 1) doDamage = true;
+            else doDamage = false;
+
             if(returnSwing)
             {
                 MoveSword(swingValue, rotationValue);
@@ -136,8 +140,8 @@ public class MeleeWeapon : Weapon
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == transform.parent) return;
-        if (isSwinging && collision.gameObject.TryGetComponent(out Health targetHealth))
+        if (collision.gameObject.transform == transform.parent) return;
+        else if (doDamage && collision.gameObject.TryGetComponent(out Health targetHealth))
         {
             targetHealth.TakeDamage(_damage);
         }
