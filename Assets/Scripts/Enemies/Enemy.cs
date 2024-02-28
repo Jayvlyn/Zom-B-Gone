@@ -18,25 +18,38 @@ public abstract class Enemy : MonoBehaviour
 	private GameObject playerTarget;
 
     [Header("Enemy Properties")]
-    [SerializeField] private float _droneSpeed = 5;
-    [SerializeField] private float _investigateSpeed = 7;
-    [SerializeField] private float _aggroSpeed = 2;
+    [SerializeField] private float _droneSpeed = 1;
+    [SerializeField] private float _investigateSpeed = 1.2f;
+    [SerializeField] private float _aggroSpeed = 4;
     [SerializeField] private float _attackDamage = 10;
     [SerializeField] private float _attacksPerSecond = 1;
 	[SerializeField] private float _turnSmoothing = 5;
 	[SerializeField] private float _changeDirectionCooldown = 5;
 	[SerializeField] private Vector3 _wanderTarget = new Vector3(1,1,1);
-	[SerializeField] private float _moveSpeed = 5;
+	[SerializeField] private float _moveSpeed = 1.05f;
 	[Header("Enemy Perception")]
-	[SerializeField] private float _obstacleAvoidDistance = 10;
-	[SerializeField] private float _perceptionDistance = 10;
-    [SerializeField] int _perceptionRayCount = 5;
-    [SerializeField] float _fov = 90;
+	[SerializeField] private float _obstacleAvoidDistance = 3;
+	[SerializeField] private float _perceptionDistance = 30;
+    [SerializeField] int _perceptionRayCount = 7;
+    [SerializeField] float _fov = 120;
 
 
     private void ChangeState(State newState)
 	{
 		if(_currentState == newState) return;
+
+		//switch (_currentState) // ON EXITS
+  //      {
+  //          case State.DRONING:
+  //              break;
+  //          case State.INVESTIGATING:
+  //              break;
+  //          case State.AGGRO:
+  //              break;
+  //          default:
+  //              break;
+  //      }
+
 		switch (newState)
 		{
 			case State.DRONING:

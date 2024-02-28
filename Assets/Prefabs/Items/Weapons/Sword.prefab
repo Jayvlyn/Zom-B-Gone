@@ -52,13 +52,14 @@ MonoBehaviour:
   _quality: 100
   _weight: 1945
   _rotationalFriction: 0.9042
-  _friction: 0.99
+  friction: 0.99
   _holdOffset: {x: 0.4, y: 0.6}
   _spinThrow: 1
   _aimAtMouse: 0
   gripRotation: 130
   pivotPoint: {fileID: 7922860649099438781}
   _useHeld: 0
+  pickupSpeed: 1
   _damage: 50
   _range: 2
   _attackSpeed: 1

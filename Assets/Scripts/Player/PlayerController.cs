@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float _staminaRecoverySpeed = 2;
     [SerializeField] private float _staminaRecoveryDelay = 2.5f;
     [SerializeField] private float _velocityChangeSpeed = 0.17f;
-    [SerializeField] public float _reloadSpeedReduction = 0.7f;
+    [SerializeField] public float _reloadSpeedReduction = 1f;
     
     public float _currentStamina;
     private float _currentMoveSpeed;

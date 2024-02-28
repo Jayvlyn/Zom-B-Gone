@@ -24,7 +24,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     // Values that will be multiplied with velocity and angularVelocity to create friction
     [SerializeField, Range(0.9f, 1.0f)] protected float _rotationalFriction = 0.9f;
-    [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float _friction = 0.99f;
+    [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float friction = 0.99f;
 
     [SerializeField] Vector2 _holdOffset = new Vector2(0.5f, 0.5f);
 
@@ -40,6 +40,10 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected Hands _playerHands;
     protected bool _inRightHand;
     public bool _useHeld;
+
+    private bool moveToHand;
+    private Vector3 pickupTarget;
+    private float pickupSpeed = 10;
 
 
     private void Awake()
@@ -60,6 +64,25 @@ public abstract class Item : MonoBehaviour, IInteractable
         if(_currentState == State.GROUNDED)
         {
             Friction();
+        }
+
+        if(moveToHand)
+        {
+            if (_inRightHand)
+            {
+                pickupTarget = transform.parent.position + (transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
+            }
+            else
+            {
+                pickupTarget = transform.parent.position + (-transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
+            }
+            if (Vector3.Distance(transform.position,pickupTarget) < 0.2f)
+            {
+                transform.position = pickupTarget;
+                moveToHand = false; 
+                return;
+            }
+            transform.position = Vector2.Lerp(transform.position, pickupTarget, Time.deltaTime * pickupSpeed);
         }
     }
 
@@ -105,7 +128,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         Transform playerT = transform.parent;
         RemoveFromHand();
         ChangeState(State.GROUNDED);
-        _rb.AddForce(playerT.up * Utils.MapScalarToRange(_friction, 3, 500, true), ForceMode2D.Impulse);
+        _rb.AddForce(playerT.up * Utils.MapScalarToRange(friction, 3, 500, true), ForceMode2D.Impulse);
     }
 
     public virtual void Throw()
@@ -161,7 +184,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private void Friction()
     {
-        _rb.velocity *= _friction;
+        _rb.velocity *= friction;
         _rb.angularVelocity *= _rotationalFriction;
     }
 
@@ -181,20 +204,14 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     protected void PositionInHand()
     {
-        if(_inRightHand)
-        {
-            transform.position = transform.parent.position + (transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
-        }
-        else
-        {
-            transform.position = transform.parent.position + (-transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
-        }
+        moveToHand = true; // see update()
 
 
         if (!_aimAtMouse)
         {
             transform.localRotation = Quaternion.identity;
         }
+
         ReturnToGrip();
     }
 
