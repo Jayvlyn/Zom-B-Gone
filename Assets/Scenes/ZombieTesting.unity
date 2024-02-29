@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3844372379676118279, guid: 719ddd710ded235419ffe559e42c855d, type: 3}
-  numberOfEnemies: 30
+  numberOfEnemies: 0
   spawnRadius: 10
   enemies: []
 --- !u!1 &251493660
