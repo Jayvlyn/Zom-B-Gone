@@ -48,7 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageMod: 1
-  _destroyOnHit: 1
+  wallPiercing: 0
+  piercingPower: 2
+  _rb: {fileID: 0}
+  collider: {fileID: 0}
 --- !u!212 &4631466901030604047
 SpriteRenderer:
   m_ObjectHideFlags: 0
