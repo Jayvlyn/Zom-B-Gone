@@ -43,6 +43,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private bool moveToHand;
     private Vector3 pickupTarget;
+    private Quaternion rotationTarget;
     private float pickupSpeed = 10;
 
 
@@ -68,22 +69,8 @@ public abstract class Item : MonoBehaviour, IInteractable
 
         if(moveToHand)
         {
-            if (_inRightHand)
-            {
-                pickupTarget = transform.parent.position + (transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
-            }
-            else
-            {
-                pickupTarget = transform.parent.position + (-transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
-            }
-            if (Vector3.Distance(transform.position,pickupTarget) < 0.2f)
-            {
-                transform.position = pickupTarget;
-                moveToHand = false; 
-                return;
-            }
-            transform.position = Vector2.Lerp(transform.position, pickupTarget, Time.deltaTime * pickupSpeed);
-        }
+            ReturnToGrip();
+		}
     }
 
     private void FixedUpdate()
@@ -204,28 +191,41 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     protected void PositionInHand()
     {
-        moveToHand = true; // see update()
-
-
-        if (!_aimAtMouse)
+        if (_inRightHand)
         {
-            transform.localRotation = Quaternion.identity;
+            rotationTarget = Quaternion.Euler(0, 0, -gripRotation);
         }
-
-        ReturnToGrip();
+        else
+        {
+			rotationTarget = Quaternion.Euler(0, 0, gripRotation);
+		}
+        moveToHand = true; // see update()
     }
 
     protected void ReturnToGrip()
     {
-        if(pivotPoint != null)
-        {
-            if (_inRightHand) transform.RotateAround(pivotPoint.position, Vector3.forward, -gripRotation);
-            else transform.RotateAround(pivotPoint.position, Vector3.forward, gripRotation);
-        }
-    }
+		if (_inRightHand)
+		{
+			pickupTarget = transform.parent.position + (transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
+		}
+		else
+		{
+			pickupTarget = transform.parent.position + (-transform.parent.right * _holdOffset.x + transform.parent.up * _holdOffset.y);
+		}
+		if (Vector3.Distance(transform.position, pickupTarget) < 0.02f)
+		{
+			transform.position = pickupTarget;
+			moveToHand = false;
+			return;
+		}
+		transform.position = Vector2.Lerp(transform.position, pickupTarget, Time.deltaTime * pickupSpeed);
+		if (!_aimAtMouse) transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationTarget, pickupSpeed * Time.deltaTime);
+	}
 
     protected virtual void RemoveFromHand()
     {
+        moveToHand = false;
+
         if (_inRightHand)
         {
             _playerHands.RightObject = null; 

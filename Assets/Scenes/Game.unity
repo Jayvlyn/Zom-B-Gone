@@ -960,7 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3844372379676118279, guid: 719ddd710ded235419ffe559e42c855d, type: 3}
-  numberOfEnemies: 40
+  numberOfEnemies: 0
   spawnRadius: 10
   enemies: []
 --- !u!114 &235199600
@@ -4124,6 +4124,22 @@ PrefabInstance:
     - target: {fileID: 4234026458012012083, guid: fb8d6a7fadc329044921501b71f6f739, type: 3}
       propertyPath: m_Name
       value: SettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173544628145580811, guid: fb8d6a7fadc329044921501b71f6f739, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -61.170044
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173544628145580811, guid: fb8d6a7fadc329044921501b71f6f739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -58.900024
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492388932021664245, guid: fb8d6a7fadc329044921501b71f6f739, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -61.170044
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492388932021664245, guid: fb8d6a7fadc329044921501b71f6f739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -58.900024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

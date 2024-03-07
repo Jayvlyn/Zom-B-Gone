@@ -330,8 +330,8 @@ MonoBehaviour:
   _quality: 100
   _weight: 4535
   _rotationalFriction: 0.9
-  _friction: 0.99
-  _holdOffset: {x: 0.6, y: 0.8}
+  friction: 0.99
+  _holdOffset: {x: 0.6, y: 0.45}
   _spinThrow: 1
   _aimAtMouse: 0
   gripRotation: 150
