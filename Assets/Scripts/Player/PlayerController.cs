@@ -41,6 +41,10 @@ public class PlayerController : MonoBehaviour
     public bool _holdingLeft;
 	public bool _holdingRight;
 
+    public float leftLumbering = 1;
+    public float rightLumbering = 1;
+    [SerializeField] private float lumberingLowerBound = 0.8f;
+
     private void Awake()
     {
         //Cursor.visible = false;
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log(_rigidBody.velocity.magnitude);
         SetPlayerVelocity();
         RotateToMouse();
     }
@@ -99,7 +104,7 @@ public class PlayerController : MonoBehaviour
     private void SetPlayerVelocity()
     {
         _smoothedMovementInput = Vector2.SmoothDamp(_smoothedMovementInput, _movementInput, ref _movementInputSmoothVelocity, _velocityChangeSpeed * Time.deltaTime * 100);
-        _rigidBody.velocity = (_smoothedMovementInput) * _currentMoveSpeed * _speedModifier;
+        _rigidBody.velocity = (_smoothedMovementInput) * _currentMoveSpeed * _speedModifier * leftLumbering * rightLumbering;
     }
 
     private void RotateToMouse()
@@ -133,7 +138,15 @@ public class PlayerController : MonoBehaviour
     {
         if(inputValue.isPressed)
         {
-		    if (!_hands.UsingLeft) _interactor.Interact(false);
+		    if (!_hands.UsingLeft)
+            {
+                _interactor.Interact(false);
+                if(_hands.UsingLeft)
+                {
+                    leftLumbering = Utils.MapWeightToRange(_hands._leftItem._weight, lumberingLowerBound, 1.0f, true);
+                    Debug.Log(leftLumbering);
+                }
+            }
             
 			else if (_hands._leftItem != null) _hands._leftItem.Use();
 		}
@@ -148,7 +161,15 @@ public class PlayerController : MonoBehaviour
     {
 		if (inputValue.isPressed)
 		{
-			if (!_hands.UsingRight) _interactor.Interact(true);
+			if (!_hands.UsingRight)
+            {
+                _interactor.Interact(true);
+				if (_hands.UsingRight)
+				{
+					rightLumbering = Utils.MapWeightToRange(_hands._rightItem._weight, lumberingLowerBound, 1.0f, true);
+                    Debug.Log(rightLumbering);
+				}
+			}
             
 			else if (_hands._rightItem != null) _hands._rightItem.Use();
 		}
@@ -179,6 +200,8 @@ public class PlayerController : MonoBehaviour
             if (_movementInput.magnitude > 0) _hands._leftItem.Throw();
             
             else _hands._leftItem.Drop();
+
+            leftLumbering = 1;
         }
     }
 
@@ -189,6 +212,8 @@ public class PlayerController : MonoBehaviour
             if (_movementInput.magnitude > 0) _hands._rightItem.Throw();
             
             else _hands._rightItem.Drop();
+
+            rightLumbering = 1;
         }
     }
 

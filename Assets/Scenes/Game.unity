@@ -3896,6 +3896,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: _weight
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 6814726737358907374, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.75
@@ -5889,6 +5893,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: _weight
+      value: 20000
+      objectReference: {fileID: 0}
     - target: {fileID: 6814726737358907374, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.487735
@@ -5965,6 +5973,10 @@ PrefabInstance:
     - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: _runAction.m_Name
       value: Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: lumberingLowerBound
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: InteractionLm.m_Bits

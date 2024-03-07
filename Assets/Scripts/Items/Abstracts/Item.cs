@@ -20,7 +20,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected int _quality;
 
     // Value that determines the effect it has on the players movement when held, also determines throw damage and speed
-    [SerializeField, Range(1, 20000), Tooltip("In grams")] protected float _weight; // grams
+    [SerializeField, Range(1, 20000), Tooltip("In grams")] public float _weight; // grams
 
     // Values that will be multiplied with velocity and angularVelocity to create friction
     [SerializeField, Range(0.9f, 1.0f)] protected float _rotationalFriction = 0.9f;
@@ -124,7 +124,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         RemoveFromHand();
         ChangeState(State.AIRBORNE);
 
-        float throwForce = Utils.MapWeightToRange(_weight, 2, 15, true);
+        float throwForce = Utils.MapWeightToRange(_weight, 10, 20, true);
         _rb.AddForce(playerT.up * throwForce, ForceMode2D.Impulse);
 
         if(_spinThrow)
@@ -191,14 +191,9 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     protected void PositionInHand()
     {
-        if (_inRightHand)
-        {
-            rotationTarget = Quaternion.Euler(0, 0, -gripRotation);
-        }
-        else
-        {
-			rotationTarget = Quaternion.Euler(0, 0, gripRotation);
-		}
+        if (_inRightHand) rotationTarget = Quaternion.Euler(0, 0, -gripRotation);
+        else rotationTarget = Quaternion.Euler(0, 0, gripRotation);
+		
         moveToHand = true; // see update()
     }
 

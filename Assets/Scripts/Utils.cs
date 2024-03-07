@@ -22,7 +22,7 @@ public static class Utils
     public static float MapWeightToRange(float scalarValue, float minValue, float maxValue, bool invert)
     {
         // Normalize the weight value between 0 and 1
-        float maxWeight = 200000.0f;
+        float maxWeight = 20000.0f;
         float normalizedValue = (scalarValue / maxWeight); 
         if (invert) normalizedValue = 1 - normalizedValue;
 
