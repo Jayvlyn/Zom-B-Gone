@@ -82,23 +82,26 @@ public abstract class Enemy : MonoBehaviour
 		ChangeState(State.DRONING);
     }
 
-	private void FixedUpdate()
+    private void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
 	{
 		Vector3 target = Vector3.zero;
-
-		switch(_currentState)
-		{
-			case State.DRONING:
-				target = Drone();
-				break;
-			case State.INVESTIGATING:
-				target = Investigate();
+        switch (_currentState)
+        {
+            case State.DRONING:
+                target = Drone();
                 break;
-			case State.AGGRO:
-				target = Aggro();
+            case State.INVESTIGATING:
+                target = Investigate();
                 break;
-		}
-
+            case State.AGGRO:
+                target = Aggro();
+                break;
+        }
         _rigidBody.AddForce(target * _moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
 		_rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, _moveSpeed);
 		Rotate(target);

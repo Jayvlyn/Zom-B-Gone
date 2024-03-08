@@ -85,7 +85,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(_rigidBody.velocity.magnitude);
         SetPlayerVelocity();
         RotateToMouse();
     }
@@ -144,7 +143,6 @@ public class PlayerController : MonoBehaviour
                 if(_hands.UsingLeft)
                 {
                     leftLumbering = Utils.MapWeightToRange(_hands._leftItem._weight, lumberingLowerBound, 1.0f, true);
-                    Debug.Log(leftLumbering);
                 }
             }
             
@@ -167,7 +165,6 @@ public class PlayerController : MonoBehaviour
 				if (_hands.UsingRight)
 				{
 					rightLumbering = Utils.MapWeightToRange(_hands._rightItem._weight, lumberingLowerBound, 1.0f, true);
-                    Debug.Log(rightLumbering);
 				}
 			}
             
