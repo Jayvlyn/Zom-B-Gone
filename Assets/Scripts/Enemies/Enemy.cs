@@ -22,7 +22,11 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float _investigateSpeed = 1.2f;
     [SerializeField] private float _aggroSpeed = 4;
     [SerializeField] private float _attackDamage = 10;
-    [SerializeField] private float _attacksPerSecond = 1;
+    [SerializeField] private float attackRange = 1;
+    [SerializeField] private float attackCooldown = 1;
+    private float attackTimer;
+	[SerializeField] private float attackSpawnDistance = 2;
+	[SerializeField] private List<GameObject> attacks;
 	[SerializeField] private float _turnSmoothing = 5;
 	[SerializeField] private float _changeDirectionCooldown = 5;
 	[SerializeField] private Vector3 _wanderTarget = new Vector3(1,1,1);
@@ -80,11 +84,6 @@ public abstract class Enemy : MonoBehaviour
         _config = FindObjectOfType<HoardingConfig>();
 		_gm = FindObjectOfType<GameManager>();
 		ChangeState(State.DRONING);
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -281,12 +280,25 @@ public abstract class Enemy : MonoBehaviour
 
     virtual protected Vector3 Aggro()
     {
-		if(Vector3.Distance(playerTarget.transform.position, transform.position) > _perceptionDistance)
+		float playerDistance = Vector3.Distance(playerTarget.transform.position, transform.position);
+
+        if (playerDistance > _perceptionDistance)
 		{
 			playerTarget = null;
 			ChangeState(State.DRONING);
 			return Vector3.zero;
 		}
+		else if(playerDistance <= attackRange && attackTimer <= 0)
+		{ // DO ATTACK
+			attackTimer = attackCooldown;
+			Instantiate(attacks[Random.Range(0, attacks.Count)], transform.position + (transform.up * attackSpawnDistance), Quaternion.identity);
+		}
+
+		if(attackTimer > 0)
+		{
+			attackTimer -= Time.deltaTime;
+		}
+
 		return ((playerTarget.transform.position - transform.position) * 50) + _config.avoidancePriority * 2 * Avoidance();
     }
 
