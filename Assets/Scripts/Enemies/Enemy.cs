@@ -21,7 +21,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float _droneSpeed = 1;
     [SerializeField] private float _investigateSpeed = 1.2f;
     [SerializeField] private float _aggroSpeed = 4;
-    [SerializeField] private float _attackDamage = 10;
+    [SerializeField] private float attackDamageMultiplier = 1;
     [SerializeField] private float attackRange = 1;
     [SerializeField] private float attackCooldown = 1;
     private float attackTimer;
@@ -290,8 +290,13 @@ public abstract class Enemy : MonoBehaviour
 		}
 		else if(playerDistance <= attackRange && attackTimer <= 0)
 		{ // DO ATTACK
-			attackTimer = attackCooldown;
-			Instantiate(attacks[Random.Range(0, attacks.Count)], transform.position + (transform.up * attackSpawnDistance), Quaternion.identity);
+			if(attacks.Count > 0)
+			{
+				attackTimer = attackCooldown;
+				GameObject attackObject = Instantiate(attacks[Random.Range(0, attacks.Count)], transform.position + (transform.up * attackSpawnDistance), Quaternion.identity);
+				Attack attack = attackObject.GetComponent<Attack>();
+				attack.damageMultiplier = attackDamageMultiplier;
+			}
 		}
 
 		if(attackTimer > 0)

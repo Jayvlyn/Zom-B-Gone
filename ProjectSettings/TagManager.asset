@@ -22,8 +22,8 @@ TagManager:
   - Interactable
   - World
   - Player
-  - 
-  - 
+  - Attack
+  - Enemy
   - 
   - 
   - 
