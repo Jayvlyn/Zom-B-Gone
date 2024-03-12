@@ -12,6 +12,8 @@ public class MeleeWeapon : Weapon
     [SerializeField,Tooltip("Time in seconds to complete a swing")] private float swingSpeed;
     [SerializeField,Tooltip("Time in seconds to prepare swing")] private float prepSpeed;
 
+
+
     private bool isSwinging = false;
     private bool returnSwing = false;
     private bool doDamage = false;
@@ -144,6 +146,7 @@ public class MeleeWeapon : Weapon
         else if (doDamage && collision.gameObject.TryGetComponent(out Health targetHealth))
         {
             targetHealth.TakeDamage(_damage);
+            if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * knockbackPower, ForceMode2D.Impulse);
         }
     }
 }

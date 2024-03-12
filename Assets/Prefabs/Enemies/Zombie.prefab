@@ -454,6 +454,7 @@ MonoBehaviour:
   _changeDirectionCooldown: 5
   _wanderTarget: {x: 1, y: 1, z: 1}
   _moveSpeed: 1.05
+  friction: 0.95
   _obstacleAvoidDistance: 3
   _perceptionDistance: 30
   _perceptionRayCount: 7

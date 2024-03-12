@@ -2191,6 +2191,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: _damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: knockbackPower
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.020441
@@ -2997,6 +3005,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: _damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: knockbackPower
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.815512
@@ -3050,6 +3066,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: _damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: _useHeld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: knockbackPower
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6814726737358907374, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.78
@@ -5611,6 +5639,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: _damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: _useHeld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: knockbackPower
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6814726737358907374, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.429929

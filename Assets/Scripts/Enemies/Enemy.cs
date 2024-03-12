@@ -31,6 +31,7 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] private float _changeDirectionCooldown = 5;
 	[SerializeField] private Vector3 _wanderTarget = new Vector3(1,1,1);
 	[SerializeField] private float _moveSpeed = 1.05f;
+	[SerializeField] private float friction = 0.92f;
 	[Header("Enemy Perception")]
 	[SerializeField] private float _obstacleAvoidDistance = 3;
 	[SerializeField] private float _perceptionDistance = 30;
@@ -101,8 +102,9 @@ public abstract class Enemy : MonoBehaviour
                 target = Aggro();
                 break;
         }
-        _rigidBody.AddForce(target * _moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
-		_rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, _moveSpeed);
+        _rigidBody.AddForce(target * _moveSpeed * Time.deltaTime, ForceMode2D.Force);
+		_rigidBody.velocity = _rigidBody.velocity * friction;
+		//_rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, _moveSpeed);
 		Rotate(target);
 	}
 

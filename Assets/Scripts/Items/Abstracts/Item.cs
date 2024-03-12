@@ -34,6 +34,8 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected float gripRotation = 130;
     [SerializeField] private Transform? pivotPoint;
 
+    [SerializeField] protected float knockbackPower;
+
     protected Rigidbody2D _rb;
     protected Collider2D _collider;
     protected PlayerController _playerController;
@@ -41,7 +43,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected bool _inRightHand;
     public bool _useHeld;
 
-    private bool moveToHand;
+    protected bool moveToHand;
     private Vector3 pickupTarget;
     private Quaternion rotationTarget;
     private float pickupSpeed = 10;
@@ -235,11 +237,16 @@ public abstract class Item : MonoBehaviour, IInteractable
         transform.SetParent(null);
     }
 
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if(_currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
             collisionHealth.TakeDamage(Utils.MapWeightToRange(_weight, 5, 100, false));
+            if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))
+            {
+                hitRb.AddForce(_rb.velocity.normalized * knockbackPower * 0.5f, ForceMode2D.Impulse);
+            }
         }
     }
 
