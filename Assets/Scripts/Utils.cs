@@ -64,4 +64,16 @@ public static class Utils
         return Random.Range(0f, 1f) - Random.Range(0f, 1f); 
 	}
 
+    public static Vector2 RandomUnitVector2()
+    {
+        float random = Random.Range(0f, 260f);
+        return new Vector2(Mathf.Cos(random), Mathf.Sin(random));
+    }
+
+    public static Vector3 RandomUnitVector3()
+    {
+        float random = Random.Range(0f, 260f);
+        return new Vector3(Mathf.Cos(random), Mathf.Sin(random), 0);
+    }
+
 }

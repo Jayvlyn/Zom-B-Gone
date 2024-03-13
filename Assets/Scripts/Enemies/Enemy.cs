@@ -295,7 +295,7 @@ public abstract class Enemy : MonoBehaviour
 			if(attacks.Count > 0)
 			{
 				attackTimer = attackCooldown;
-				GameObject attackObject = Instantiate(attacks[Random.Range(0, attacks.Count)], transform.position + (transform.up * attackSpawnDistance), Quaternion.identity);
+				GameObject attackObject = Instantiate(attacks[Random.Range(0, attacks.Count)], transform.position + (transform.up * attackSpawnDistance) + (Utils.RandomUnitVector3() * 0.2f), Quaternion.identity);
 				Attack attack = attackObject.GetComponent<Attack>();
 				attack.damageMultiplier = attackDamageMultiplier;
 			}
