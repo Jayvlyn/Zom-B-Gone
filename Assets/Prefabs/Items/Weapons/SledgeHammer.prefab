@@ -336,8 +336,9 @@ MonoBehaviour:
   _aimAtMouse: 0
   gripRotation: 150
   pivotPoint: {fileID: 2340822962328068186}
+  knockbackPower: 100
   _useHeld: 0
-  _damage: 100
+  _damage: 90
   _range: 2
   _attackSpeed: 1
   swingCurve:
