@@ -450,6 +450,7 @@ MonoBehaviour:
   attackSpawnDistance: 1
   attacks:
   - {fileID: 8674619653201391516, guid: db53c379a43b2e14f89f758faa1b9f78, type: 3}
+  - {fileID: 8674619653201391516, guid: 29acada643e8c3946a888d829cd78737, type: 3}
   _turnSmoothing: 10
   _changeDirectionCooldown: 5
   _wanderTarget: {x: 1, y: 1, z: 1}

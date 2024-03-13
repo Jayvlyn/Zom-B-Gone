@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1651721148713990947}
   - component: {fileID: 1334034442242618308}
   m_Layer: 9
-  m_Name: ScratchAttack
+  m_Name: BiteAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f5c849498e2a34b976e25889c93ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 30
 --- !u!212 &2949712214512584487
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: -1340572102, guid: 7331b25538a3b5946b4a3215031ad164, type: 3}
+  m_Sprite: {fileID: 931685500, guid: c8d6c49ad047ee248b33b7e802ce3e4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -155,7 +155,7 @@ Animator:
   m_GameObject: {fileID: 8674619653201391516}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0ec16f394c5cee241afeafc7c44c8f74, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5e8570f5dab79854a882e78549ee1ffa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

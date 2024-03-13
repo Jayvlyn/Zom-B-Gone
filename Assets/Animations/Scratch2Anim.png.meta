@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c9acc569f0416448a53eb0181e49a42
+guid: 7331b25538a3b5946b4a3215031ad164
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ScratchAnim_0
+      name: Scratch2Anim_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85efdd9dd3ca0f449bd7b74c541ef335
-      internalID: -390786019
+      spriteID: 08d8bd2abd495a64a89c649063c42948
+      internalID: -1273175001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_1
+      name: Scratch2Anim_1
       rect:
         serializedVersion: 2
         x: 128
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db798ebdfdda7f3488497b190c46d6ff
-      internalID: 176513806
+      spriteID: 94873b1c8cde38942b9fcf90fdf52fa7
+      internalID: -186494288
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_2
+      name: Scratch2Anim_2
       rect:
         serializedVersion: 2
         x: 256
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0583940cd40aa14438a8439e83b4ed9d
-      internalID: -1763783350
+      spriteID: 93ccb658d1dafa244a60e61e4c91f4e4
+      internalID: -1843211960
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_3
+      name: Scratch2Anim_3
       rect:
         serializedVersion: 2
         x: 0
@@ -213,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08d15044c5179334f9c69a693e3f3b20
-      internalID: -156376204
+      spriteID: bed52f1dd66b8d740b395dfd8922fdf1
+      internalID: -1340572102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_4
+      name: Scratch2Anim_4
       rect:
         serializedVersion: 2
         x: 128
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bda96aa91e327e24589de7a43d7db0c9
-      internalID: -65052716
+      spriteID: 8b89cc1ddb28d2843a65e4a6572eae85
+      internalID: 1879827439
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_5
+      name: Scratch2Anim_5
       rect:
         serializedVersion: 2
         x: 256
@@ -255,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d35fb52d856662479770913cf098fd2
-      internalID: 653479506
+      spriteID: 62b38da823d93c64db23f61622c0b592
+      internalID: -92032001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_6
+      name: Scratch2Anim_6
       rect:
         serializedVersion: 2
         x: 0
@@ -276,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b67034faf8d35444d8837680d26259ae
-      internalID: -1752720348
+      spriteID: e79cfc4833ba6fa4b9254a78b4bdebd5
+      internalID: -1621958263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_7
+      name: Scratch2Anim_7
       rect:
         serializedVersion: 2
         x: 128
@@ -297,8 +297,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34eacdb955d4ed342af8d394de5e504c
-      internalID: 510506597
+      spriteID: 54691cde02c48db46a452968ee9c4d3a
+      internalID: -1730642335
       vertices: []
       indices: 
       edges: []
@@ -314,14 +314,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ScratchAnim_0: -390786019
-      ScratchAnim_1: 176513806
-      ScratchAnim_2: -1763783350
-      ScratchAnim_3: -156376204
-      ScratchAnim_4: -65052716
-      ScratchAnim_5: 653479506
-      ScratchAnim_6: -1752720348
-      ScratchAnim_7: 510506597
+      Scratch2Anim_0: -1273175001
+      Scratch2Anim_1: -186494288
+      Scratch2Anim_2: -1843211960
+      Scratch2Anim_3: -1340572102
+      Scratch2Anim_4: 1879827439
+      Scratch2Anim_5: -92032001
+      Scratch2Anim_6: -1621958263
+      Scratch2Anim_7: -1730642335
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

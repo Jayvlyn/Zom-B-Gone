@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c9acc569f0416448a53eb0181e49a42
+guid: c8d6c49ad047ee248b33b7e802ce3e4a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,7 +136,112 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ScratchAnim_0
+      name: Bite2Anim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cbd818af0e865e4883978668aa08c13
+      internalID: 1961855271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71df9cf72d0409e4ebb175211e2e3b2b
+      internalID: -912148674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ed3a258e87fb84398e866f4b7c3898
+      internalID: -1139952960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a8b9b6ad3c661a499c581cef819b4b6
+      internalID: 1244504740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beab06a4d719a6a4ba066ff513970736
+      internalID: -1737673732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_5
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85efdd9dd3ca0f449bd7b74c541ef335
-      internalID: -390786019
+      spriteID: 978d78f6477fe3b4bb9ba965e50d691a
+      internalID: -848273872
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_1
+      name: Bite2Anim_6
       rect:
         serializedVersion: 2
         x: 128
@@ -171,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db798ebdfdda7f3488497b190c46d6ff
-      internalID: 176513806
+      spriteID: cb16d571f1409ea4891859d9c2bcd33e
+      internalID: -1953066737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_2
+      name: Bite2Anim_7
       rect:
         serializedVersion: 2
         x: 256
@@ -192,14 +297,56 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0583940cd40aa14438a8439e83b4ed9d
-      internalID: -1763783350
+      spriteID: c1e4602908ab5c845be9c9e294ff2240
+      internalID: 931685500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_3
+      name: Bite2Anim_8
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e562af7925b470d46bf361c76ae1d883
+      internalID: -923364052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_9
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6e9adf86db2a404f80a790c2c36f3bd
+      internalID: -416489184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_10
       rect:
         serializedVersion: 2
         x: 0
@@ -213,14 +360,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08d15044c5179334f9c69a693e3f3b20
-      internalID: -156376204
+      spriteID: 0090f6ac88a6a124d99dabf04a332db4
+      internalID: -247893291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_4
+      name: Bite2Anim_11
       rect:
         serializedVersion: 2
         x: 128
@@ -234,14 +381,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bda96aa91e327e24589de7a43d7db0c9
-      internalID: -65052716
+      spriteID: 23141b807a57ab04bb0993667fbc75ab
+      internalID: -1657961667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_5
+      name: Bite2Anim_12
       rect:
         serializedVersion: 2
         x: 256
@@ -255,14 +402,56 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d35fb52d856662479770913cf098fd2
-      internalID: 653479506
+      spriteID: 2888ef49ba18f2e4197404ef07ae8fd5
+      internalID: -1174955764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_6
+      name: Bite2Anim_13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a06807e668149d4bb9306c548969db5
+      internalID: -2009518983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_14
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e41dc08a912f30c4ba944e358cdf40ac
+      internalID: -462168672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bite2Anim_15
       rect:
         serializedVersion: 2
         x: 0
@@ -276,14 +465,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b67034faf8d35444d8837680d26259ae
-      internalID: -1752720348
+      spriteID: 13efd88614060684da8c90977b4bc3ad
+      internalID: -886820966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ScratchAnim_7
+      name: Bite2Anim_16
       rect:
         serializedVersion: 2
         x: 128
@@ -297,8 +486,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34eacdb955d4ed342af8d394de5e504c
-      internalID: 510506597
+      spriteID: 622d946ddc0b07049b6f3bcc16031e18
+      internalID: -649816697
       vertices: []
       indices: 
       edges: []
@@ -314,14 +503,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ScratchAnim_0: -390786019
-      ScratchAnim_1: 176513806
-      ScratchAnim_2: -1763783350
-      ScratchAnim_3: -156376204
-      ScratchAnim_4: -65052716
-      ScratchAnim_5: 653479506
-      ScratchAnim_6: -1752720348
-      ScratchAnim_7: 510506597
+      Bite2Anim_0: 1961855271
+      Bite2Anim_1: -912148674
+      Bite2Anim_10: -247893291
+      Bite2Anim_11: -1657961667
+      Bite2Anim_12: -1174955764
+      Bite2Anim_13: -2009518983
+      Bite2Anim_14: -462168672
+      Bite2Anim_15: -886820966
+      Bite2Anim_16: -649816697
+      Bite2Anim_2: -1139952960
+      Bite2Anim_3: 1244504740
+      Bite2Anim_4: -1737673732
+      Bite2Anim_5: -848273872
+      Bite2Anim_6: -1953066737
+      Bite2Anim_7: 931685500
+      Bite2Anim_8: -923364052
+      Bite2Anim_9: -416489184
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
