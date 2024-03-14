@@ -391,6 +391,7 @@ public abstract class Enemy : MonoBehaviour
 	}
 
 	[SerializeField] private float limbLaunchMod = 0.1f;
+	[SerializeField] private float limbSpinForce = 100f;
     public void OnHit(int damage, int maxHealth)
     {
         if(limbs.Count > 0 && damage >= (maxHealth / (maxLimbs+1))) // without +1, no enemy could be alive with no limbs
@@ -399,7 +400,7 @@ public abstract class Enemy : MonoBehaviour
 			victimLimb.DetachFromOwner();
 			victimLimb.rb.bodyType = RigidbodyType2D.Dynamic;
 			victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
-			victimLimb.rb.angularVelocity = 200 * damage * Random.Range(0.7f, 1);
+			victimLimb.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
         }
     }
 

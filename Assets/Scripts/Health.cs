@@ -40,8 +40,7 @@ public class Health : MonoBehaviour
             else if (value <= 0)
             {
                 _currentHealth = 0;
-                //healthBar.gameObject.transform.parent.gameObject.SetActive(false);
-                if (healthBar != null) 
+                if (!gameObject.CompareTag("Player") && healthBar != null) 
                     healthBar.gameObject.SetActive(false);
                 OnDeath();
             }

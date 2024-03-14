@@ -278,7 +278,7 @@ MonoBehaviour:
   detachPoint: {fileID: 3072358557432829836}
   attachPoint: {fileID: 2943871043870995285}
   bleedParticles: {fileID: 7654700310716529146, guid: 90171f8a9712e264c9cc835bc1cab96a, type: 3}
-  fallOutSpeed: 2
+  fallOutSpeed: 1
 --- !u!50 &3362905060171268311
 Rigidbody2D:
   serializedVersion: 4
@@ -455,7 +455,7 @@ MonoBehaviour:
   detachPoint: {fileID: 8494637308942483538}
   attachPoint: {fileID: 7768140972022506243}
   bleedParticles: {fileID: 7654700310716529146, guid: 90171f8a9712e264c9cc835bc1cab96a, type: 3}
-  fallOutSpeed: 2
+  fallOutSpeed: 1
 --- !u!50 &4397759781912065639
 Rigidbody2D:
   serializedVersion: 4
@@ -902,6 +902,7 @@ MonoBehaviour:
   _fov: 120
   fadeSpeed: 5
   limbLaunchMod: 0.1
+  limbSpinForce: 40
 --- !u!114 &-8031090298879193519
 MonoBehaviour:
   m_ObjectHideFlags: 0
