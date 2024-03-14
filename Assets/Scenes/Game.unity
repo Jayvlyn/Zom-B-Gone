@@ -960,7 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3844372379676118279, guid: 59be50700a2a7f54f9d77bba2b3d0a5c, type: 3}
-  numberOfEnemies: 10
+  numberOfEnemies: 1
   spawnRadius: 10
   enemies: []
 --- !u!114 &235199600
@@ -1498,6 +1498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: _damage
+      value: 110
+      objectReference: {fileID: 0}
     - target: {fileID: 2146581947728771595, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
       propertyPath: _weight
       value: 20000
@@ -2190,6 +2194,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_Name
       value: Sword (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: _damage
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2996,6 +3004,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596300008556408185, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: _damage
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalPosition.x

@@ -6,12 +6,12 @@ TagManager:
   tags:
   - Stamina
   - Health
-  - Zombie
   - Bullet
   - LeftAmmoCount
   - RightAmmoCount
   - RightReloadingIndicator
   - LeftReloadingIndicator
+  - Enemy
   layers:
   - Default
   - TransparentFX

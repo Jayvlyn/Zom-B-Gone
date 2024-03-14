@@ -8,13 +8,14 @@ public abstract class Enemy : MonoBehaviour
 {
 	private enum State
 	{
-		DRONING, INVESTIGATING, AGGRO
+		DRONING, INVESTIGATING, AGGRO, DEAD
 	}
 	private State _currentState;
 
 	private Rigidbody2D _rigidBody;
     private HoardingConfig _config;
 	private GameManager _gm;
+	private Health health;
 	private GameObject playerTarget;
 
     [Header("Enemy Properties")]
@@ -25,13 +26,17 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float attackRange = 1;
     [SerializeField] private float attackCooldown = 1;
     private float attackTimer;
-	[SerializeField] private float attackSpawnDistance = 2;
-	[SerializeField] private List<GameObject> attacks;
+	[SerializeField] private float attackSpawnDistance = 0.6f;
+	[SerializeField] public List<GameObject> attacks;
+	public List<Limb> limbs;
+	[SerializeField] private int maxLimbs = 2;
 	[SerializeField] private float _turnSmoothing = 5;
 	[SerializeField] private float _changeDirectionCooldown = 5;
 	[SerializeField] private Vector3 _wanderTarget = new Vector3(1,1,1);
 	[SerializeField] private float _moveSpeed = 1.05f;
 	[SerializeField] private float friction = 0.92f;
+	[SerializeField] private float decayTime = 60.0f; // how long it takes for corpse to disappear
+	private float decayTimer;
 	[Header("Enemy Perception")]
 	[SerializeField] private float _obstacleAvoidDistance = 3;
 	[SerializeField] private float _perceptionDistance = 30;
@@ -69,6 +74,23 @@ public abstract class Enemy : MonoBehaviour
 				_moveSpeed = _aggroSpeed;
 				
 				break;
+			case State.DEAD:
+				_moveSpeed = 0;
+				_rigidBody.Sleep();
+				GetComponent<Collider2D>().enabled = false;
+				decayTimer = decayTime;
+				transform.localScale = new Vector3(transform.localScale.x * 0.9f, transform.localScale.y * 0.9f, transform.localScale.z);
+				SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+				renderer.sortingOrder = -10;
+				renderer.color = new Color(renderer.color.r * 0.5f, renderer.color.r * 0.5f, renderer.color.r * 0.5f, renderer.color.a);
+				Limb[] attachedLimbs = GetComponentsInChildren<Limb>();
+				foreach(var limb in attachedLimbs)
+				{
+					var limbRenderer = limb.gameObject.GetComponent<SpriteRenderer>();
+					limbRenderer.sortingOrder = -9;
+                    limbRenderer.color = new Color(limbRenderer.color.r * 0.5f, limbRenderer.color.r * 0.5f, limbRenderer.color.r * 0.5f, limbRenderer.color.a);
+                }
+				break;
 			default:
 				
 				break;
@@ -82,9 +104,16 @@ public abstract class Enemy : MonoBehaviour
 	void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+		health = GetComponent<Health>();	
         _config = FindObjectOfType<HoardingConfig>();
 		_gm = FindObjectOfType<GameManager>();
 		ChangeState(State.DRONING);
+
+		limbs = new List<Limb>(GetComponentsInChildren<Limb>());
+		foreach(var limb in limbs)
+		{
+			limb.AddAttacksToOwner();
+		}
     }
 
     private void FixedUpdate()
@@ -100,15 +129,40 @@ public abstract class Enemy : MonoBehaviour
                 break;
             case State.AGGRO:
                 target = Aggro();
+				break;
+			case State.DEAD:
+				decayTimer -= Time.deltaTime;
+				if(decayTimer <= 0)
+				{
+					StartCoroutine(FadeOut());
+					decayTimer = 1000;
+				}
                 break;
+			default:
+				break;
         }
-        _rigidBody.AddForce(target * _moveSpeed * Time.deltaTime, ForceMode2D.Force);
+		if(_currentState != State.DEAD)
+		{
+			_rigidBody.AddForce(target * _moveSpeed * Time.deltaTime, ForceMode2D.Force);
+			Rotate(target);
+		}
 		_rigidBody.velocity = _rigidBody.velocity * friction;
-		//_rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, _moveSpeed);
-		Rotate(target);
 	}
 
-	protected Vector3 Wander()
+	[SerializeField] private float fadeSpeed = 5;
+	private IEnumerator FadeOut()
+	{
+		while(transform.localScale.x > 0.1)
+		{
+			transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime * fadeSpeed);
+			yield return null;
+		}
+		Destroy(gameObject);
+	}
+
+    #region FLOCKING
+
+    protected Vector3 Wander()
 	{
 		_changeDirectionCooldown -= Time.deltaTime;
 		if(_changeDirectionCooldown <= 0)
@@ -224,6 +278,8 @@ public abstract class Enemy : MonoBehaviour
 		return Vector3.zero;
     }
 
+    #endregion
+
     Vector3 Seek()
     {
 		Vector3 seekTarget = Vector3.zero;
@@ -291,14 +347,8 @@ public abstract class Enemy : MonoBehaviour
 			return Vector3.zero;
 		}
 		else if(playerDistance <= attackRange && attackTimer <= 0)
-		{ // DO ATTACK
-			if(attacks.Count > 0)
-			{
-				attackTimer = attackCooldown;
-				GameObject attackObject = Instantiate(attacks[Random.Range(0, attacks.Count)], transform.position + (transform.up * attackSpawnDistance) + (Utils.RandomUnitVector3() * 0.2f), Quaternion.identity);
-				Attack attack = attackObject.GetComponent<Attack>();
-				attack.damageMultiplier = attackDamageMultiplier;
-			}
+		{
+			TryAttack();
 		}
 
 		if(attackTimer > 0)
@@ -307,6 +357,18 @@ public abstract class Enemy : MonoBehaviour
 		}
 
 		return ((playerTarget.transform.position - transform.position) * 50) + _config.avoidancePriority * 2 * Avoidance();
+    }
+
+	private void TryAttack()
+	{
+        if (attacks.Count > 0)
+        {
+            attackTimer = attackCooldown;
+			Vector3 randomVariation = Utils.RandomUnitVector3() * 0.2f;
+            GameObject attackObject = Instantiate(attacks[Random.Range(0, attacks.Count)], transform.position + (transform.up * attackSpawnDistance) + randomVariation, Quaternion.identity);
+            Attack attack = attackObject.GetComponent<Attack>();
+            attack.damageMultiplier = attackDamageMultiplier;
+        }
     }
 
     bool isInFOV(Vector3 vec)
@@ -325,6 +387,20 @@ public abstract class Enemy : MonoBehaviour
 	public void OnDeath()
 	{
 		_gm.enemies.Remove(this);
+		ChangeState(State.DEAD);
 	}
+
+	[SerializeField] private float limbLaunchMod = 0.1f;
+    public void OnHit(int damage, int maxHealth)
+    {
+        if(limbs.Count > 0 && damage >= (maxHealth / (maxLimbs+1))) // without +1, no enemy could be alive with no limbs
+		{
+			Limb victimLimb = limbs[Random.Range(0, limbs.Count)];
+			victimLimb.DetachFromOwner();
+			victimLimb.rb.bodyType = RigidbodyType2D.Dynamic;
+			victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
+			victimLimb.rb.angularVelocity = 200 * damage * Random.Range(0.7f, 1);
+        }
+    }
 
 }

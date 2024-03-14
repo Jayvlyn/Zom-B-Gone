@@ -50,8 +50,8 @@ public class Hands : MonoBehaviour
     }
 
 
-    private GameObject? _leftObject;
-    public GameObject? LeftObject
+    private GameObject _leftObject;
+    public GameObject LeftObject
     {
         get { return _leftObject; }
         set { _leftObject = value;
@@ -66,8 +66,8 @@ public class Hands : MonoBehaviour
 		}
     }
 
-	private GameObject? _rightObject;
-    public GameObject? RightObject
+	private GameObject _rightObject;
+    public GameObject RightObject
     {
         get { return _rightObject; }
         set { _rightObject = value; 
@@ -82,8 +82,8 @@ public class Hands : MonoBehaviour
         }
     }
 
-    public Item? _leftItem;
-    public Item? _rightItem;
+    public Item _leftItem;
+    public Item _rightItem;
 
     void Awake()
     {

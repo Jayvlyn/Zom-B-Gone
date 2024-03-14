@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,8 @@ public class Health : MonoBehaviour
         }
         else
         {
-            if (healthBar != null) healthBar.gameObject.SetActive(false);
+            if (healthBar != null)
+                healthBar.gameObject.SetActive(false);
         }
     }
 
@@ -33,11 +35,14 @@ public class Health : MonoBehaviour
             if (value >= _maxHealth)
             {
                 _currentHealth = _maxHealth;
-                if (!gameObject.CompareTag("Player") && healthBar.gameObject.activeSelf) healthBar.gameObject.SetActive(false);
+                
 			}
             else if (value <= 0)
             {
                 _currentHealth = 0;
+                //healthBar.gameObject.transform.parent.gameObject.SetActive(false);
+                if (healthBar != null) 
+                    healthBar.gameObject.SetActive(false);
                 OnDeath();
             }
             else _currentHealth = value;
@@ -45,14 +50,26 @@ public class Health : MonoBehaviour
             if(healthBar != null)
             {
                 healthBar.value = _currentHealth / (float)_maxHealth;
-				if (!gameObject.CompareTag("Player") && !healthBar.gameObject.activeSelf && _currentHealth < _maxHealth) healthBar.gameObject.SetActive(true);
+				if (!gameObject.CompareTag("Player") && !healthBar.gameObject.activeSelf && _currentHealth < _maxHealth && _currentHealth > 0) 
+                    healthBar.gameObject.SetActive(true);
 			}
         }
     }
 
+    private Enemy enemyOwner;
     public void TakeDamage(int damage)
     {
         CurrentHealth = CurrentHealth - damage;
+        if(gameObject.CompareTag("Enemy"))
+        {
+            if(enemyOwner != null) enemyOwner.OnHit(damage, MaxHealth);
+            else if(gameObject.TryGetComponent(out Enemy enemy))
+            {
+                enemyOwner = enemy;
+                enemyOwner.OnHit(damage, MaxHealth);
+            }
+            
+        }
     }
 
     public void TakeDamage(float damage)
@@ -65,7 +82,7 @@ public class Health : MonoBehaviour
         if(gameObject.TryGetComponent(out Enemy enemy)) 
         {
             enemy.OnDeath();
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
