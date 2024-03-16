@@ -50,7 +50,6 @@ public class Firearm : Weapon
             Use();
         }
 
-
         base.Update();
     }
 
@@ -95,8 +94,7 @@ public class Firearm : Weapon
     {
         if(CurrentAmmo > 0 && !_reloading)
         {
-            foreach (var muzzleFlash in muzzleFlashes) muzzleFlash.enabled = true;
-            //flashAnimator.Play("Base Layer.Entry");
+            flashAnimator.SetTrigger("Fire");
 
             _shotTimer = _attackSpeed;
             CurrentAmmo -= _ammoConsumption;
@@ -113,6 +111,7 @@ public class Firearm : Weapon
                     bulletScript.LifeSpan = _range;
                 }
             }
+            
         }
         else if(CurrentAmmo <= 0)
         {
@@ -120,11 +119,6 @@ public class Firearm : Weapon
         }
     }
 
-    private IEnumerator MuzzleFlashTimer()
-    {
-        yield return new WaitForSeconds(0.17f);
-        foreach (var muzzleFlash in muzzleFlashes) muzzleFlash.enabled = false;
-    }
 
     public void StartReload(float mod = 1)
     {

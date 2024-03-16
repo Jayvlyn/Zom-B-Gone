@@ -146,7 +146,7 @@ MonoBehaviour:
   knockbackPower: 30
   fullCollider: {fileID: 1504697998909740283}
   _useHeld: 0
-  _damage: 45
+  _damage: 50
   _range: 2
   _attackSpeed: 1
   damageCollider: {fileID: 4896569074839128829}
