@@ -26,31 +26,31 @@ public class AdrenalineShot : Consumeable
     }
     public override void RestorePlayer()
     {
-        _playerController._staminaRecoverySpeed = playerRecoverySpeed;
-        _playerController._speedModifier = playerSpeedMod;
+        playerController._staminaRecoverySpeed = playerRecoverySpeed;
+        playerController._speedModifier = playerSpeedMod;
     }
 
     public void CachePlayerData()
     {
-        playerRecoverySpeed = _playerController._staminaRecoverySpeed;
-        playerSpeedMod = _playerController._speedModifier;
+        playerRecoverySpeed = playerController._staminaRecoverySpeed;
+        playerSpeedMod = playerController._speedModifier;
     }
 
     public void InstantStaminaRecovery()
     {
-        if (_playerController._currentStamina + _instantStaminaRecovery <= _playerController._maxStamina)
-            _playerController._currentStamina += _instantStaminaRecovery;
+        if (playerController._currentStamina + _instantStaminaRecovery <= playerController._maxStamina)
+            playerController._currentStamina += _instantStaminaRecovery;
         else
-            _playerController._currentStamina = _playerController._maxStamina;
+            playerController._currentStamina = playerController._maxStamina;
     }
 
     public void StaminaRecoveryChange()
     {
-        _playerController._staminaRecoverySpeed = _staminaRecoverySpeed;
+        playerController._staminaRecoverySpeed = _staminaRecoverySpeed;
     }
 
     public void MoveSpeedIncrease()
     {
-        _playerController._speedModifier = _moveSpeedMod;
+        playerController._speedModifier = _moveSpeedMod;
     }
 }

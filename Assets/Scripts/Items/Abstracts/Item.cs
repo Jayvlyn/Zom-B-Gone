@@ -24,7 +24,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     // Values that will be multiplied with velocity and angularVelocity to create friction
     [SerializeField, Range(0.9f, 1.0f)] protected float _rotationalFriction = 0.9f;
-    [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float friction = 0.99f;
+    [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float friction = 0.98f;
 
     [SerializeField] Vector2 _holdOffset = new Vector2(0.5f, 0.5f);
 
@@ -32,14 +32,16 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     [SerializeField] protected bool _aimAtMouse = true;
     [SerializeField] protected float gripRotation = 130;
-    [SerializeField] private Transform? pivotPoint;
+    [SerializeField] protected Transform pivotPoint;
 
     [SerializeField] protected float knockbackPower;
 
+    [SerializeField] protected Collider2D fullCollider;
+
     protected Rigidbody2D _rb;
-    protected Collider2D _collider;
-    protected PlayerController _playerController;
-    protected Hands _playerHands;
+    protected PlayerController playerController;
+    protected Hands playerHands;
+    protected Head playerHead;
     protected bool _inRightHand;
     public bool _useHeld;
 
@@ -51,11 +53,11 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        _playerController = FindObjectOfType<PlayerController>();
-        _playerHands = _playerController.GetComponentInParent<Hands>();
+        playerController = FindObjectOfType<PlayerController>();
+        playerHands = playerController.GetComponentInParent<Hands>();
+        playerHead = playerController.GetComponentInParent<Head>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.gravityScale = 0;
-        _collider = GetComponent<Collider2D>();
     }
 
     protected virtual void Update()
@@ -88,19 +90,20 @@ public abstract class Item : MonoBehaviour, IInteractable
         switch (newState)
         {
             case State.GROUNDED:
-                gameObject.layer = LayerMask.NameToLayer("Interactable");
+                gameObject.layer = LayerMask.NameToLayer("InteractableItem");
                 if(_currentState == State.HELD)_rb.bodyType = RigidbodyType2D.Dynamic;
-                StartCoroutine(TriggerToSolid());
+                StartCoroutine(EnableFullCollider());
 				break;
             case State.AIRBORNE:
-                gameObject.layer = LayerMask.NameToLayer("Interactable");
+                gameObject.layer = LayerMask.NameToLayer("AirborneItem");
                 if (_currentState == State.HELD) _rb.bodyType = RigidbodyType2D.Dynamic;
-                StartCoroutine(TriggerToSolid());
+                StartCoroutine(EnableFullCollider());
                 break;
             case State.HELD:
-                gameObject.layer = LayerMask.NameToLayer("Default");
+                gameObject.layer = LayerMask.NameToLayer("AirborneItem");
                 _rb.bodyType = RigidbodyType2D.Kinematic;
-                _collider.isTrigger = true;
+                fullCollider.enabled = false;
+                //fullCollider.isTrigger = true;
                 break;
             default:
                 break;
@@ -126,8 +129,11 @@ public abstract class Item : MonoBehaviour, IInteractable
         RemoveFromHand();
         ChangeState(State.AIRBORNE);
 
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+
         float throwForce = Utils.MapWeightToRange(_weight, 10, 20, true);
-        _rb.AddForce(playerT.up * throwForce, ForceMode2D.Impulse);
+        _rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
 
         if(_spinThrow)
         {
@@ -146,16 +152,26 @@ public abstract class Item : MonoBehaviour, IInteractable
 
         ChangeState(State.HELD);
         
-        if (rightHand)
-        {
-            _inRightHand = true;
-        }
-        else
-        {
-            _inRightHand = false;
-        }
+        if (rightHand) _inRightHand = true;
+        else _inRightHand = false;
+        CheckFlip();
+        
+        
         transform.SetParent(parent);
         PositionInHand();
+    }
+
+    protected void CheckFlip()
+    {
+        if((_inRightHand && transform.localScale.x < 0) || (!_inRightHand && transform.localScale.x > 0))
+        {
+            FlipX();
+        }
+    }
+
+    protected void FlipX()
+    {
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private void RotateToMouse()
@@ -168,7 +184,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public void Interact(bool rightHand)
     {
-        PickUp(_playerController.transform, rightHand);
+        PickUp(playerController.transform, rightHand);
     }
 
     private void Friction()
@@ -177,10 +193,10 @@ public abstract class Item : MonoBehaviour, IInteractable
         _rb.angularVelocity *= _rotationalFriction;
     }
 
-    private IEnumerator TriggerToSolid()
+    protected IEnumerator EnableFullCollider()
     {
         yield return new WaitForSeconds(0.1f);
-        if(_collider.isTrigger)_collider.isTrigger = false;
+        if(!fullCollider.enabled) fullCollider.enabled = true;
     }
 
     private IEnumerator Fall()
@@ -195,6 +211,8 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         if (_inRightHand) rotationTarget = Quaternion.Euler(0, 0, -gripRotation);
         else rotationTarget = Quaternion.Euler(0, 0, gripRotation);
+
+        CheckFlip();
 		
         moveToHand = true; // see update()
     }
@@ -221,17 +239,18 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     protected virtual void RemoveFromHand()
     {
+        StartCoroutine(EnableFullCollider());
         moveToHand = false;
 
         if (_inRightHand)
         {
-            _playerHands.RightObject = null; 
-            _playerHands.UsingRight = false;
+            playerHands.RightObject = null; 
+            playerHands.UsingRight = false;
         }
         else
         {
-            _playerHands.LeftObject = null; 
-            _playerHands.UsingLeft = false;
+            playerHands.LeftObject = null; 
+            playerHands.UsingLeft = false;
         }
 
         transform.SetParent(null);
@@ -250,4 +269,8 @@ public abstract class Item : MonoBehaviour, IInteractable
         }
     }
 
+    public void Interact(Head head)
+    {
+        throw new System.NotImplementedException();
+    }
 }

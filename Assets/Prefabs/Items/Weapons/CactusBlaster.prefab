@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7653741256578842127}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Firepoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5950425499944704752}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Firepoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 571813201470892697}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 3890775405625495789}
   - component: {fileID: 8608465535031704304}
   - component: {fileID: 6318442689965624312}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: CactusBlaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,8 +147,15 @@ MonoBehaviour:
   _quality: 100
   _weight: 15000
   _rotationalFriction: 0.9
-  _friction: 0.99
-  spinThrow: 1
+  friction: 0.98
+  _holdOffset: {x: 0.5, y: 0.5}
+  _spinThrow: 1
+  _aimAtMouse: 1
+  gripRotation: 130
+  pivotPoint: {fileID: 0}
+  knockbackPower: 0
+  fullCollider: {fileID: 0}
+  _useHeld: 0
   _damage: 20
   _range: 5
   _attackSpeed: 0
@@ -161,9 +168,9 @@ MonoBehaviour:
   _currentAmmo: 12
   _ammoConsumption: 3
   _reloadTime: 2
-  _isAutomatic: 0
   _fireForce: 30
   _reloading: 0
+  _isAutomatic: 0
 --- !u!212 &3890775405625495789
 SpriteRenderer:
   m_ObjectHideFlags: 0

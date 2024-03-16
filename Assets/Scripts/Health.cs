@@ -73,7 +73,14 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        TakeDamage(Mathf.RoundToInt(damage));
+        float incomingDamage = damage;
+        #region hat buff
+        if (gameObject.CompareTag("Player") && gameObject.TryGetComponent(out Head head) && head.wornHat != null)
+        {
+            incomingDamage -= head.wornHat.defense;
+        }
+        #endregion
+        TakeDamage(Mathf.RoundToInt(incomingDamage));
     }
 
     public void OnDeath()

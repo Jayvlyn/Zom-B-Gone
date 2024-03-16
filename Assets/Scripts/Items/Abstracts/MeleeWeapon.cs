@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
     [Header("Melee Properties")]
+    [SerializeField] protected Collider2D damageCollider;
     [SerializeField] private AnimationCurve swingCurve;
     [SerializeField] private AnimationCurve rotationCurve;
     [SerializeField] private AnimationCurve prepSwingCurve;
@@ -12,15 +13,13 @@ public class MeleeWeapon : Weapon
     [SerializeField,Tooltip("Time in seconds to complete a swing")] private float swingSpeed;
     [SerializeField,Tooltip("Time in seconds to prepare swing")] private float prepSpeed;
 
-
-
     private bool isSwinging = false;
     private bool returnSwing = false;
     private bool doDamage = false;
 
     public override void Use()
     {
-        if (!isSwinging) StartCoroutine(PrepareSwing());
+        if (!isSwinging && !moveToHand) StartCoroutine(PrepareSwing());
     }
 
 	public override void PickUp(Transform parent, bool rightHand)
@@ -42,7 +41,6 @@ public class MeleeWeapon : Weapon
 
     protected override void RemoveFromHand()
     {
-        _collider.isTrigger = false;
         returnSwing = false;
         isSwinging = false;
         StopAllCoroutines();
@@ -75,12 +73,26 @@ public class MeleeWeapon : Weapon
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < swingSpeed)
+        float swingTime = swingSpeed;
+        if(playerHead.wornHat != null)
         {
-            float t = elapsedTime / swingSpeed;
+            swingTime *= playerHead.wornHat.swingTimeMultiplier;
+        }
+
+        while (elapsedTime < swingTime)
+        {
+            float t = elapsedTime / swingTime;
 
             float swingValue = swingCurve.Evaluate(t);
             float rotationValue = rotationCurve.Evaluate(t);
+
+            #region hat buff
+            if (playerHead.wornHat != null)
+            {
+                swingValue *= 2 - playerHead.wornHat.swingTimeMultiplier;
+                rotationValue *= 2 - playerHead.wornHat.swingTimeMultiplier;
+            }
+            #endregion
 
             if (swingValue > 1) doDamage = true;
             else doDamage = false;
@@ -98,7 +110,7 @@ public class MeleeWeapon : Weapon
         }
 
         if (returnSwing) returnSwing = false;
-        else returnSwing = true;
+        else returnSwing = true; FlipX();
 
         if (_useHeld) StartCoroutine(Swing());
         else StartCoroutine(FinishSwings());
@@ -112,10 +124,6 @@ public class MeleeWeapon : Weapon
         while (elapsedTime < returnTime)
         {
             float t = elapsedTime / returnTime;
-
-            // bring sword back to default holding position
-            
-
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -131,21 +139,26 @@ public class MeleeWeapon : Weapon
 		if (_inRightHand)
 		{
 			transform.RotateAround(transform.parent.position, Vector3.forward, -t * Time.deltaTime * 100);
-			transform.Rotate(0, 0, -rotationIncrement * Time.deltaTime * 100);
+			//transform.Rotate(0, 0, -rotationIncrement * Time.deltaTime * 100);
+            transform.RotateAround(pivotPoint.position, Vector3.forward, -rotationIncrement * Time.deltaTime * 100);
 		}
 		else
 		{
 			transform.RotateAround(transform.parent.position, Vector3.forward, t * Time.deltaTime * 100);
-			transform.Rotate(0, 0, rotationIncrement * Time.deltaTime * 100);
-		}
+            //transform.Rotate(0, 0, rotationIncrement * Time.deltaTime * 100);
+            transform.RotateAround(pivotPoint.position, Vector3.forward, rotationIncrement * Time.deltaTime * 100);
+        }
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.transform == transform.parent) return;
-        else if (doDamage && collision.gameObject.TryGetComponent(out Health targetHealth))
+        else if (doDamage && !collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Health targetHealth))
         {
-            targetHealth.TakeDamage(_damage);
+            // Damage
+            DealDamage(targetHealth);
+
+            // Knockback
             if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * knockbackPower, ForceMode2D.Impulse);
         }
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9185509544805037402}
   - component: {fileID: 2715985614024779500}
   - component: {fileID: 2245973136623882417}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Adrenaline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.1, y: -1.7, z: 0}
-  m_LocalScale: {x: 0.13, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,8 +51,15 @@ MonoBehaviour:
   _quality: 100
   _weight: 3
   _rotationalFriction: 0.9
-  _friction: 0.99
-  spinThrow: 1
+  friction: 0.99
+  _holdOffset: {x: 0.5, y: 0.5}
+  _spinThrow: 1
+  _aimAtMouse: 1
+  gripRotation: 130
+  pivotPoint: {fileID: 0}
+  knockbackPower: 0
+  fullCollider: {fileID: 0}
+  _useHeld: 0
   _effectTime: 10
   _instantStaminaRecovery: 4
   _staminaRecoverySpeed: 5
@@ -98,8 +105,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0.9601612, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5c19d5eb246afb44dbd88acf37d2f4f3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -171,8 +178,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.12, y: 0.4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -180,7 +187,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: -0.0031969547, y: 0.20172}
+      - {x: -0.038044214, y: -0.2039482}
+      - {x: 0.038044214, y: -0.20394808}
   m_UseDelaunayMesh: 0

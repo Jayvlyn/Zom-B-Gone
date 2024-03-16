@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Interactor _interactor;
     [SerializeField] private Slider _staminaSlider;
     [SerializeField] private Hands _hands;
+    [SerializeField] private Head head;
 
     [Header("Properties")]
     [SerializeField] private float _walkSpeed = 5;
@@ -103,7 +104,14 @@ public class PlayerController : MonoBehaviour
     private void SetPlayerVelocity()
     {
         _smoothedMovementInput = Vector2.SmoothDamp(_smoothedMovementInput, _movementInput, ref _movementInputSmoothVelocity, _velocityChangeSpeed * Time.deltaTime * 100);
-        _rigidBody.velocity = (_smoothedMovementInput) * _currentMoveSpeed * _speedModifier * leftLumbering * rightLumbering;
+        Vector3 newVelocity = (_smoothedMovementInput) * _currentMoveSpeed * _speedModifier * leftLumbering * rightLumbering;
+        #region hat buff
+        if(head.wornHat != null)
+        {
+            newVelocity *= head.wornHat.moveSpeedMod;
+        }
+        #endregion
+        _rigidBody.velocity = newVelocity;
     }
 
     private void RotateToMouse()

@@ -396,11 +396,14 @@ public abstract class Enemy : MonoBehaviour
     {
         if(limbs.Count > 0 && damage >= (maxHealth / (maxLimbs+1))) // without +1, no enemy could be alive with no limbs
 		{
-			Limb victimLimb = limbs[Random.Range(0, limbs.Count)];
-			victimLimb.DetachFromOwner();
-			victimLimb.rb.bodyType = RigidbodyType2D.Dynamic;
-			victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
-			victimLimb.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+			if(Random.Range(0,3) == 2)
+			{
+				Limb victimLimb = limbs[Random.Range(0, limbs.Count)];
+				victimLimb.DetachFromOwner();
+				victimLimb.rb.bodyType = RigidbodyType2D.Dynamic;
+				victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
+				victimLimb.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+			}
         }
     }
 

@@ -12,14 +12,14 @@ public abstract class Consumeable : Item
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         if (_inRightHand)
         {
-            _playerHands.RightObject = null; 
-            _playerHands.UsingRight = false;
+            playerHands.RightObject = null; 
+            playerHands.UsingRight = false;
             _inRightHand = false;
         }
         else
         {
-            _playerHands.LeftObject = null; 
-            _playerHands.UsingLeft = false;
+            playerHands.LeftObject = null; 
+            playerHands.UsingLeft = false;
 
         }
 

@@ -15,14 +15,21 @@ public class Bullet : MonoBehaviour
     public float LifeSpan { get; set; }
 
     public Rigidbody2D _rb;
-    public Collider2D collider;
+    public Collider2D bulletCollider;
+
+    private PlayerController playerController;
+    private Head playerHead;
 
     void Start()
     {
         StartCoroutine(lifeStart());
         TryGetComponent(out Rigidbody2D _rb);
         TryGetComponent(out Collider2D collider);
-        if(piercingPower > 0)
+
+        playerController = FindObjectOfType<PlayerController>();
+        playerHead = playerController.GetComponentInParent<Head>();
+
+        if (piercingPower > 0)
         {
             collider.isTrigger = true;
         }
@@ -50,7 +57,7 @@ public class Bullet : MonoBehaviour
 		if (collision.gameObject.TryGetComponent(out Health targetHealth))
 		{
 			currentPiercingPower--;
-			targetHealth.TakeDamage(FirearmDamage * _damageMod);
+			DealDamage(targetHealth);
 		}
 		else if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
 		{
@@ -59,4 +66,17 @@ public class Bullet : MonoBehaviour
 		}
 		if (currentPiercingPower < 0) Destroy(gameObject);
 	}
+
+    protected void DealDamage(Health targetHealth)
+    {
+        float damage = FirearmDamage * _damageMod;
+        #region hat buff
+        if (playerHead.wornHat != null)
+        {
+            damage += playerHead.wornHat.damageIncrease;
+            damage *= playerHead.wornHat.damageMultiplier;
+        }
+        #endregion
+        targetHealth.TakeDamage(damage);
+    }
 }

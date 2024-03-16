@@ -3,6 +3,7 @@ using UnityEngine;
 public interface IInteractable
 {
     public void Interact(bool rightHand);
+    public void Interact(Head head);
 }
 
 public class Interactor : MonoBehaviour
@@ -11,14 +12,16 @@ public class Interactor : MonoBehaviour
 
     [SerializeField] private LayerMask InteractionLm;
 
-    private Hands _hands;
+    private Hands hands;
+    private Head head;
     private RaycastHit2D _hit;
     private Camera _gameCamera;
 
     private void Awake()
     {
         _gameCamera = FindObjectOfType<Camera>();
-        _hands = GetComponent<Hands>();
+        hands = GetComponent<Hands>();
+        head = GetComponent<Head>();
     }
 
     public void Interact(bool rightHand)
@@ -29,12 +32,33 @@ public class Interactor : MonoBehaviour
         {
             if(interactedObject != null)
             {
-                interactedObject.Interact(rightHand);
-                if (rightHand) {
-                    _hands.RightObject = ((Component)interactedObject).gameObject; _hands.UsingRight = true;
+                if(interactedObject is Item)
+                {
+                    interactedObject.Interact(rightHand);
+                    if (rightHand) {
+                        hands.RightObject = ((Component)interactedObject).gameObject; hands.UsingRight = true;
+                    }
+                    else {
+                        hands.LeftObject = ((Component)interactedObject).gameObject; hands.UsingLeft = true;
+                    }
                 }
-                else {
-                    _hands.LeftObject = ((Component)interactedObject).gameObject; _hands.UsingLeft = true;
+                if(interactedObject is Hat)
+                {
+                    GameObject newHat = ((Component)interactedObject).gameObject;
+
+                    if(head.HatObject != null)
+                    { // Remove current hat
+                        head.HatObject.transform.parent = null;
+                        head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -20;
+                        head.HatObject.gameObject.layer = LayerMask.NameToLayer("Interactable");
+                        head.HatObject.GetComponent<Hat>().StartTransferPosition(newHat.transform.position, newHat.transform.localRotation);
+                        //head.hatObject.transform.position = newHat.transform.position;
+                    }
+                    // Wear new hat
+                    head.HatObject = newHat;
+                    head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    head.HatObject.transform.parent = transform;
+                    interactedObject.Interact(head);
                 }
             }
         }

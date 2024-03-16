@@ -12,6 +12,8 @@ public class Firearm : Weapon
     [Header("Firearm attributes")]
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected List<Transform> firePoints;
+    [SerializeField] protected List<SpriteRenderer> muzzleFlashes;
+    [SerializeField] protected Animator flashAnimator;
     [SerializeField] public int _maxAmmo = 10;
     [SerializeField] protected int _currentAmmo = 10;
     [SerializeField] protected int _ammoConsumption = 1;
@@ -93,6 +95,9 @@ public class Firearm : Weapon
     {
         if(CurrentAmmo > 0 && !_reloading)
         {
+            foreach (var muzzleFlash in muzzleFlashes) muzzleFlash.enabled = true;
+            //flashAnimator.Play("Base Layer.Entry");
+
             _shotTimer = _attackSpeed;
             CurrentAmmo -= _ammoConsumption;
             foreach (Transform firepoint in firePoints) 
@@ -113,6 +118,12 @@ public class Firearm : Weapon
         {
             StartReload(_pc._reloadSpeedReduction);
         }
+    }
+
+    private IEnumerator MuzzleFlashTimer()
+    {
+        yield return new WaitForSeconds(0.17f);
+        foreach (var muzzleFlash in muzzleFlashes) muzzleFlash.enabled = false;
     }
 
     public void StartReload(float mod = 1)

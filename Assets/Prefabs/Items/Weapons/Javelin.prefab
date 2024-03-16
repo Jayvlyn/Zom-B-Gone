@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2656671740393021855}
   - component: {fileID: 1481152091677389883}
   - component: {fileID: 1003892739874909723}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Javelin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,10 +53,15 @@ MonoBehaviour:
   _quality: 100
   _weight: 500
   _rotationalFriction: 0.9
-  _friction: 0.99
+  friction: 0.98
   _holdOffset: {x: 0.5, y: 0.2}
   _spinThrow: 0
   _aimAtMouse: 1
+  gripRotation: 130
+  pivotPoint: {fileID: 0}
+  knockbackPower: 0
+  fullCollider: {fileID: 0}
+  _useHeld: 0
   _damage: 40
   _range: 10
   _attackSpeed: 1
@@ -194,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6904086842935188}
   - component: {fileID: 5259359602755234297}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4045988989489977168}
   - component: {fileID: 6276665846358830092}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Tipbase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
