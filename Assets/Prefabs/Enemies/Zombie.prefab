@@ -605,7 +605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1862626897388486104
 RectTransform:
   m_ObjectHideFlags: 0
@@ -753,7 +753,7 @@ RectTransform:
   m_Father: {fileID: 8704600148126898689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -879,9 +879,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881615510bb0eb146abaa82229789f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _droneSpeed: 4
-  _investigateSpeed: 3
-  _aggroSpeed: 8
+  _droneSpeed: 40
+  _investigateSpeed: 30
+  _aggroSpeed: 75.3
   attackDamageMultiplier: 1
   attackRange: 1
   attackCooldown: 1
@@ -890,16 +890,16 @@ MonoBehaviour:
   - {fileID: 8674619653201391516, guid: 29acada643e8c3946a888d829cd78737, type: 3}
   limbs: []
   maxLimbs: 2
-  _turnSmoothing: 10
+  _turnSmoothing: 3.09
   _changeDirectionCooldown: 5
   _wanderTarget: {x: 1, y: 1, z: 1}
-  _moveSpeed: 1.05
   friction: 0.95
   decayTime: 60
   _obstacleAvoidDistance: 3
   _perceptionDistance: 30
   _perceptionRayCount: 7
   _fov: 120
+  targetChangeSpeed: 5.04
   fadeSpeed: 5
   limbLaunchMod: 0.1
   limbSpinForce: 40

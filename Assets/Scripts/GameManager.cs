@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
 	public List<Enemy> enemies;
 	private PlayerController player;
 
+	[Header("Interval Spawning")]
+	[SerializeField] private bool intervalSpawning = false;
+	[SerializeField,Min(0.1f)] private float intervalTime = 5.00f;
+	[SerializeField] private int intervalSpawnAmount = 2;
+	private float intervalTimer;
+
 	private void Start()
 	{
 		enemies = new List<Enemy>();
@@ -20,7 +26,25 @@ public class GameManager : MonoBehaviour
 		enemies.AddRange(FindObjectsOfType<Enemy>());
 	}
 
-	void Spawn(Transform prefab, int count)
+    private void Update()
+    {
+		IntervalSpawning();
+    }
+
+	void IntervalSpawning()
+	{
+        if (intervalTimer > 0)
+        {
+            intervalTimer -= Time.deltaTime;
+        }
+        else
+        {
+            Spawn(enemyPrefab, intervalSpawnAmount);
+			intervalTimer = intervalTime;
+        }
+    }
+
+    void Spawn(Transform prefab, int count)
 	{
 		for (int i = 0; i < count; i++)
 		{

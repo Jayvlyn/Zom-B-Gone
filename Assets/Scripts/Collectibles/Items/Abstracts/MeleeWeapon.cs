@@ -6,6 +6,7 @@ public class MeleeWeapon : Weapon
 {
     [Header("Melee Properties")]
     [SerializeField] protected Collider2D damageCollider;
+    [SerializeField] private float staminaCost = 1;
     [SerializeField] private AnimationCurve swingCurve;
     [SerializeField] private AnimationCurve rotationCurve;
     [SerializeField] private AnimationCurve prepSwingCurve;
@@ -19,7 +20,11 @@ public class MeleeWeapon : Weapon
 
     public override void Use()
     {
-        if (!isSwinging && !moveToHand) StartCoroutine(PrepareSwing());
+        if (!isSwinging && !moveToHand && playerController.currentStamina >= staminaCost)
+        {
+            StartCoroutine(PrepareSwing());
+            playerController.currentStamina -= staminaCost;
+        }
     }
 
 	public override void PickUp(Transform parent, bool rightHand)

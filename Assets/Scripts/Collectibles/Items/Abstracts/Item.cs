@@ -13,8 +13,6 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected State _currentState;
 
     [Header("Item attributes")]
-    [SerializeField] protected string _name;
-
     // Items will be found with different levels of "quality" affecting the effectiveness of the item 
     // Items will break after the quality reaches 0
     [SerializeField] protected int _quality;
@@ -120,7 +118,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         Transform playerT = transform.parent;
         RemoveFromHand();
         ChangeState(State.GROUNDED);
-        _rb.AddForce(playerT.up * Utils.MapScalarToRange(friction, 3, 500, true), ForceMode2D.Impulse);
+        _rb.AddForce(playerT.up * Utils.MapScalarToRange(friction, 0.999f, 3, 300, true), ForceMode2D.Impulse);
     }
 
     public virtual void Throw()

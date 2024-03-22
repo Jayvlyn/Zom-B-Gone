@@ -8,40 +8,41 @@ public abstract class Enemy : MonoBehaviour
 {
 	private enum State
 	{
-		DRONING, INVESTIGATING, AGGRO, DEAD
+		IDLE, DRONING, INVESTIGATING, AGGRO, DEAD
 	}
-	private State _currentState;
+	private State _currentState = State.IDLE;
 
 	private Rigidbody2D _rigidBody;
-    private HoardingConfig _config;
+	private HoardingConfig _config;
 	private GameManager _gm;
 	private Health health;
 	private GameObject playerTarget;
 
-    [Header("Enemy Properties")]
-    [SerializeField] private float _droneSpeed = 1;
-    [SerializeField] private float _investigateSpeed = 1.2f;
-    [SerializeField] private float _aggroSpeed = 4;
-    [SerializeField] private float attackDamageMultiplier = 1;
-    [SerializeField] private float attackRange = 1;
-    [SerializeField] private float attackCooldown = 1;
-    private float attackTimer;
+	[Header("Enemy Properties")]
+	[SerializeField] private float _droneSpeed = 1;
+	[SerializeField] private float _investigateSpeed = 1.2f;
+	[SerializeField] private float _aggroSpeed = 4;
+	[SerializeField] private float attackDamageMultiplier = 1;
+	[SerializeField] private float attackRange = 1;
+	[SerializeField] private float attackCooldown = 1;
+	private float attackTimer;
 	[SerializeField] private float attackSpawnDistance = 0.6f;
 	[SerializeField] public List<GameObject> attacks;
 	public List<Limb> limbs;
 	[SerializeField] private int maxLimbs = 2;
 	[SerializeField] private float _turnSmoothing = 5;
 	[SerializeField] private float _changeDirectionCooldown = 5;
-	[SerializeField] private Vector3 _wanderTarget = new Vector3(1,1,1);
-	[SerializeField] private float _moveSpeed = 1.05f;
+	[SerializeField] private Vector3 _wanderTarget = new Vector3(1, 1, 1);
+	private float _moveSpeed = 0;
 	[SerializeField] private float friction = 0.92f;
 	[SerializeField] private float decayTime = 60.0f; // how long it takes for corpse to disappear
 	private float decayTimer;
 	[Header("Enemy Perception")]
 	[SerializeField] private float _obstacleAvoidDistance = 3;
 	[SerializeField] private float _perceptionDistance = 30;
-    [SerializeField] int _perceptionRayCount = 7;
-    [SerializeField] float _fov = 120;
+	[SerializeField] int _perceptionRayCount = 7;
+	[SerializeField] float _fov = 120;
+
 
 
     private void ChangeState(State newState)
@@ -98,8 +99,8 @@ public abstract class Enemy : MonoBehaviour
 
 		_currentState = newState;
 	}
-
-	private Vector3 wanderTarget;
+    [Header("Other")]
+    private Vector3 wanderTarget;
 
 	void Start()
     {
@@ -116,20 +117,21 @@ public abstract class Enemy : MonoBehaviour
 		}
     }
 
+	private Vector3 target = Vector3.zero;
     private void FixedUpdate()
 	{
-		Vector3 target = Vector3.zero;
         switch (_currentState)
         {
             case State.DRONING:
-                target = Drone();
+				LerpTarget(Drone());
+                //target = Drone();
                 break;
             case State.INVESTIGATING:
-                target = Investigate();
+                LerpTarget(Investigate());
                 break;
             case State.AGGRO:
-                target = Aggro();
-				break;
+                LerpTarget(Aggro());
+                break;
 			case State.DEAD:
 				decayTimer -= Time.deltaTime;
 				if(decayTimer <= 0)
@@ -141,12 +143,21 @@ public abstract class Enemy : MonoBehaviour
 			default:
 				break;
         }
+
+
 		if(_currentState != State.DEAD)
 		{
-			_rigidBody.AddForce(target * _moveSpeed * Time.deltaTime, ForceMode2D.Force);
+			target.Normalize();
+			_rigidBody.AddForce(target * _moveSpeed, ForceMode2D.Force);
 			Rotate(target);
 		}
 		_rigidBody.velocity = _rigidBody.velocity * friction;
+	}
+
+	[SerializeField] private float targetChangeSpeed = 40;
+	private void LerpTarget(Vector3 newTarget)
+	{
+		target = Vector3.Lerp(target, newTarget, targetChangeSpeed * Time.deltaTime);
 	}
 
 	[SerializeField] private float fadeSpeed = 5;

@@ -38,10 +38,10 @@ public class AdrenalineShot : Consumeable
 
     public void InstantStaminaRecovery()
     {
-        if (playerController._currentStamina + _instantStaminaRecovery <= playerController._maxStamina)
-            playerController._currentStamina += _instantStaminaRecovery;
+        if (playerController.currentStamina + _instantStaminaRecovery <= playerController._maxStamina)
+            playerController.currentStamina += _instantStaminaRecovery;
         else
-            playerController._currentStamina = playerController._maxStamina;
+            playerController.currentStamina = playerController._maxStamina;
     }
 
     public void StaminaRecoveryChange()

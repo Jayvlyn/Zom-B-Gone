@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0d2a639a920ac41ba7ab6f3d6fd958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Pistol
   _quality: 100
   _weight: 800
   _rotationalFriction: 0

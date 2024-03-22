@@ -5,9 +5,9 @@ using UnityEngine;
 
 public static class Utils
 {
-    public static float MapScalarToRange(float scalarValue, float minValue, float maxValue, bool invert)
+    public static float MapScalarToRange(float scalarValue, float scalarMax, float minValue, float maxValue, bool invert)
     {
-        float normalizedValue = scalarValue;
+        float normalizedValue = scalarValue / scalarMax;
         if (invert) normalizedValue = 1 - normalizedValue;
 
         // Map the normalized value to the specified range
