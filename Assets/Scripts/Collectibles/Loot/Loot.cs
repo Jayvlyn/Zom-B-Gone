@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Loot", menuName = "Loot/NewLoot")]

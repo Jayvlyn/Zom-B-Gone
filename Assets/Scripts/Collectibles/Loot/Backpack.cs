@@ -2,7 +2,6 @@ using GameEvents;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Backpack", menuName = "Loot/Backpack")]
