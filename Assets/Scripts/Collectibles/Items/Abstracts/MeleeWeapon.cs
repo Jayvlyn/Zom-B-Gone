@@ -23,7 +23,6 @@ public class MeleeWeapon : Weapon
         if (!isSwinging && !moveToHand && playerController.currentStamina >= staminaCost)
         {
             StartCoroutine(PrepareSwing());
-            playerController.currentStamina -= staminaCost;
         }
     }
 
@@ -76,15 +75,19 @@ public class MeleeWeapon : Weapon
 
 	private IEnumerator Swing()
     {
+        DrainStamina();
+
         float elapsedTime = 0f;
 
         float swingTime = swingSpeed;
-        if(playerHead.wornHat != null)
+		#region hat buff
+		if (playerHead.wornHat != null)
         {
             swingTime *= playerHead.wornHat.swingTimeMultiplier;
         }
+		#endregion
 
-        while (elapsedTime < swingTime)
+		while (elapsedTime < swingTime)
         {
             float t = elapsedTime / swingTime;
 
@@ -117,12 +120,21 @@ public class MeleeWeapon : Weapon
         if (returnSwing) returnSwing = false;
         else returnSwing = true; FlipX();
 
-        if (_useHeld) StartCoroutine(Swing());
-        else StartCoroutine(FinishSwings());
+        if (_useHeld)
+        {
+            StartCoroutine(Swing());
+        }
+        else
+        {
+            StartCoroutine(FinishSwings());
+
+        }
     }
 
     private IEnumerator FinishSwings()
     {
+        playerController.RecoverStamina();
+
         float returnTime = 0.2f;
         float elapsedTime = 0f;
 
@@ -153,6 +165,12 @@ public class MeleeWeapon : Weapon
             //transform.Rotate(0, 0, rotationIncrement * Time.deltaTime * 100);
             transform.RotateAround(pivotPoint.position, Vector3.forward, rotationIncrement * Time.deltaTime * 100);
         }
+	}
+
+    private void DrainStamina()
+    {
+        playerController.recoverStamina = false;
+		playerController.currentStamina -= staminaCost;
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)

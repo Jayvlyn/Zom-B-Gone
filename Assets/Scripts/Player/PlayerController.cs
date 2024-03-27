@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float _speedModifier = 1;
     [SerializeField] public float _maxStamina = 15;
     [SerializeField] public float _staminaRecoverySpeed = 2;
-    [SerializeField] private float _staminaRecoveryDelay = 2.5f;
+    [SerializeField] private float staminaRecoveryDelay = 2f;
     [SerializeField] private float _velocityChangeSpeed = 0.17f;
     [SerializeField] public float _reloadSpeedReduction = 1f;
     
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput;
     private Vector2 smoothedMovementInput;
     private Vector2 movementInputSmoothVelocity;
-    private bool recoverStamina;
+    public bool recoverStamina;
     private bool holdingRun;
 
     public bool holdingLeft;
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         currentMoveSpeed = _walkSpeed;
     }
 
+    private float recoverTimer;
     private void Update()
     {
         UpdateStaminaBar();
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentStamina = 0;
                 ChangeState(State.WALKING);
-                StartCoroutine(RecoverStamina());
+                RecoverStamina();
             }
         }
         else
@@ -80,6 +81,14 @@ public class PlayerController : MonoBehaviour
             {
                 if (currentStamina < _maxStamina) currentStamina += Time.deltaTime * _staminaRecoverySpeed;
                 else recoverStamina = false;
+            }
+            else if(recoverTimer > 0)
+            {
+                recoverTimer -= Time.deltaTime;
+                if (recoverTimer <= 0)
+                {
+                    recoverStamina = true;
+                }
             }
         }
     }
@@ -95,10 +104,9 @@ public class PlayerController : MonoBehaviour
         _staminaSlider.value = currentStamina / _maxStamina;
     }
 
-    private IEnumerator RecoverStamina()
+    public void RecoverStamina()
     {
-        yield return new WaitForSeconds(_staminaRecoveryDelay);
-        recoverStamina = true;
+        recoverTimer = staminaRecoveryDelay;
     }
 
     private void SetPlayerVelocity()
@@ -309,7 +317,7 @@ public class PlayerController : MonoBehaviour
 		switch (newState)
         {
             case State.WALKING:
-                if (!recoverStamina) StartCoroutine(RecoverStamina());
+                if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = _walkSpeed;
                 break;
             case State.RUNNING:
@@ -317,11 +325,11 @@ public class PlayerController : MonoBehaviour
                 recoverStamina = false;
                 break;
             case State.SNEAKING:
-                if (!recoverStamina) StartCoroutine(RecoverStamina());
+                if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = _sneakSpeed;
                 break;
             default: // IDLE:
-                if (!recoverStamina) StartCoroutine(RecoverStamina());
+                if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = _walkSpeed; 
                 break;
         }

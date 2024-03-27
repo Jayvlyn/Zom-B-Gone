@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7634af11e0d94a8df8dc1126f77eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: LongSword
   _quality: 100
   _weight: 1945
   _rotationalFriction: 0.9042
@@ -66,6 +65,7 @@ MonoBehaviour:
   _range: 2
   _attackSpeed: 1
   damageCollider: {fileID: 8589298506778409595}
+  staminaCost: 0.7
   swingCurve:
     serializedVersion: 2
     m_Curve:
