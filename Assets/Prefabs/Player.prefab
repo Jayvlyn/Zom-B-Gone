@@ -93,12 +93,13 @@ MonoBehaviour:
   _speedModifier: 1
   _maxStamina: 15
   _staminaRecoverySpeed: 2
-  _staminaRecoveryDelay: 2.5
+  staminaRecoveryDelay: 1
   _velocityChangeSpeed: 0.17
   _reloadSpeedReduction: 1
-  _currentStamina: 0
-  _holdingLeft: 0
-  _holdingRight: 0
+  currentStamina: 0
+  recoverStamina: 0
+  holdingLeft: 0
+  holdingRight: 0
   leftLumbering: 1
   rightLumbering: 1
   lumberingLowerBound: 0.8

@@ -13,7 +13,7 @@ public class ThrowingWeapon : Weapon
     {
         if (_currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
-            collisionHealth.TakeDamage(Utils.MapWeightToRange(_weight, 5, 100, false) + _damage);
+            collisionHealth.TakeDamage(Utils.MapWeightToRange(_weight, 5, 100, false) + _damage, dismembering);
         }
     }
 

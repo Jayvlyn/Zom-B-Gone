@@ -101,12 +101,14 @@ public class Firearm : Weapon
             foreach (Transform firepoint in firePoints) 
             { 
                 var bullet = Instantiate(bulletPrefab, firepoint.transform.position, firepoint.transform.rotation);
+                
                 if(bullet.TryGetComponent(out Rigidbody2D bulletRb))
                 {
                     bulletRb.AddForce(transform.up * _fireForce, ForceMode2D.Impulse);
                 }
                 if(bullet.TryGetComponent(out Bullet bulletScript))
                 {
+                    bulletScript.shooter = this;
                     bulletScript.FirearmDamage = _damage;
                     bulletScript.LifeSpan = _range;
                 }

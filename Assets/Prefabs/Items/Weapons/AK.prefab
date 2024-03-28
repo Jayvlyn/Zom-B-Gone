@@ -186,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c42a995e62abb4aa6b0f0f1f138e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: AK
   _quality: 100
   _weight: 3244
   _rotationalFriction: 0.9
@@ -202,6 +201,7 @@ MonoBehaviour:
   _damage: 30
   _range: 5
   _attackSpeed: 0.15
+  dismembering: 0
   bulletPrefab: {fileID: 2198095510141801857, guid: 4036533af4b0aea459e98ed5dd94543e, type: 3}
   firePoints:
   - {fileID: 2668361800411480287}

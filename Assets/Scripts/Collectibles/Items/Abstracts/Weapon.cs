@@ -7,7 +7,7 @@ public abstract class Weapon : Item
     [SerializeField] protected int _damage;
     [SerializeField] protected float _range; // m / km
     [SerializeField] protected float _attackSpeed; // time between attacks
-    [SerializeField] protected bool dismembering = false;
+    public bool dismembering = false;
 
     protected void DealDamage(Health targetHealth)
     {
@@ -19,6 +19,6 @@ public abstract class Weapon : Item
             damage *= playerHead.wornHat.damageMultiplier;
         }
         #endregion
-        targetHealth.TakeDamage(damage);
+        targetHealth.TakeDamage(damage, dismembering);
     }
 }

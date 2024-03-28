@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
 
     public Rigidbody2D _rb;
     public Collider2D bulletCollider;
+    public Weapon shooter;
 
     private PlayerController playerController;
     private Head playerHead;
@@ -77,6 +78,6 @@ public class Bullet : MonoBehaviour
             damage *= playerHead.wornHat.damageMultiplier;
         }
         #endregion
-        targetHealth.TakeDamage(damage);
+        targetHealth.TakeDamage(damage, shooter.dismembering);
     }
 }
