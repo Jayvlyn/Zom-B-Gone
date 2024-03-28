@@ -64,6 +64,7 @@ MonoBehaviour:
   _damage: 45
   _range: 2
   _attackSpeed: 1
+  dismembering: 1
   damageCollider: {fileID: 8589298506778409595}
   staminaCost: 0.7
   swingCurve:

@@ -403,19 +403,22 @@ public abstract class Enemy : MonoBehaviour
 
 	[SerializeField] private float limbLaunchMod = 0.1f;
 	[SerializeField] private float limbSpinForce = 100f;
-    public void OnHit(int damage, int maxHealth)
+    public void OnHit(int damage, int maxHealth, bool canDismemeber = false)
     {
-        if(limbs.Count > 0 && damage >= (maxHealth / (maxLimbs+1))) // without +1, no enemy could be alive with no limbs
+		if(canDismemeber) // DISMEMBERING
 		{
-			if(Random.Range(0,3) == 2)
+			if(limbs.Count > 0 && damage >= (maxHealth / (maxLimbs+1))) // without +1, no enemy could be alive with no limbs
 			{
-				Limb victimLimb = limbs[Random.Range(0, limbs.Count)];
-				victimLimb.DetachFromOwner();
-				victimLimb.rb.bodyType = RigidbodyType2D.Dynamic;
-				victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
-				victimLimb.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+				if(Random.Range(0,3) == 2)
+				{
+					Limb victimLimb = limbs[Random.Range(0, limbs.Count)];
+					victimLimb.DetachFromOwner();
+					victimLimb.rb.bodyType = RigidbodyType2D.Dynamic;
+					victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
+					victimLimb.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+				}
 			}
-        }
+		}
     }
 
 }

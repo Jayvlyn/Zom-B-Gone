@@ -7,6 +7,7 @@ public abstract class Weapon : Item
     [SerializeField] protected int _damage;
     [SerializeField] protected float _range; // m / km
     [SerializeField] protected float _attackSpeed; // time between attacks
+    [SerializeField] protected bool dismembering = false;
 
     protected void DealDamage(Health targetHealth)
     {

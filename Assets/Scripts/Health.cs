@@ -56,7 +56,7 @@ public class Health : MonoBehaviour
     }
 
     private Enemy enemyOwner;
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool canDismember = false)
     {
         CurrentHealth = CurrentHealth - damage;
         if(gameObject.CompareTag("Enemy"))
@@ -65,13 +65,13 @@ public class Health : MonoBehaviour
             else if(gameObject.TryGetComponent(out Enemy enemy))
             {
                 enemyOwner = enemy;
-                enemyOwner.OnHit(damage, MaxHealth);
+                enemyOwner.OnHit(damage, MaxHealth, canDismember);
             }
             
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool canDismember = false)
     {
         float incomingDamage = damage;
         #region hat buff
@@ -80,7 +80,7 @@ public class Health : MonoBehaviour
             incomingDamage -= head.wornHat.defense;
         }
         #endregion
-        TakeDamage(Mathf.RoundToInt(incomingDamage));
+        TakeDamage(Mathf.RoundToInt(incomingDamage), canDismember);
     }
 
     public void OnDeath()
