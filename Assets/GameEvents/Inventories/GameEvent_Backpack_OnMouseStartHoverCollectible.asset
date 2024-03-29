@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
-  m_Name: Test_Loot
+  m_Script: {fileID: 11500000, guid: 45c300f104ef0654d94518b2b18248ac, type: 3}
+  m_Name: GameEvent_Backpack_OnMouseStartHoverCollectible
   m_EditorClassIdentifier: 
-  name: Keychain
-  description: Dangles from a slightly rusted keyloop
-  icon: {fileID: 21300000, guid: 54eccf2bf3d1bac48846ca5a140a4b5b, type: 3}
-  baseValue: 10
-  maxStack: 5
-  rarity: 1

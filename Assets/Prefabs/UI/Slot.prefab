@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3372549, g: 0.23137257, b: 0.13725491, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -124,6 +124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotUI: {fileID: 7138825994445509175}
+  onMouseStartHoverCollectible: {fileID: 11400000, guid: ddd6b45f714b235488a7c22cda3f8e75, type: 2}
+  onMouseEndHoverCollectible: {fileID: 11400000, guid: a482dfbeab1e7994ba73be6cfe42b0a0, type: 2}
+  lootDestroyer: {fileID: 0}
 --- !u!1 &7708131793567312717
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25490198, g: 0.16470589, b: 0.098039225, a: 1}
+  m_Color: {r: 0.23018861, g: 0.16242786, b: 0.09685293, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

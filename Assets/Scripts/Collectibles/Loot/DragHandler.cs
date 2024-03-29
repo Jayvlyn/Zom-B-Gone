@@ -1,3 +1,4 @@
+using GameEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.EventSystems;
 public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] protected SlotUI slotUI = null;
+    [SerializeField] protected CollectibleEvent onMouseStartHoverCollectible = null;
+    [SerializeField] protected VoidEvent onMouseEndHoverCollectible = null;
 
     private CanvasGroup canvasGroup = null;
     private Transform originalParent = null;
@@ -23,7 +26,7 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         if(isHovering)
         {
-            // raise event
+            onMouseEndHoverCollectible.Raise();
             isHovering = false;
         }
     }
@@ -32,7 +35,8 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         if(eventData.button == PointerEventData.InputButton.Left)
         {
-            // raise event
+            onMouseEndHoverCollectible.Raise();
+
             originalParent = transform.parent;
 
             transform.SetParent(transform.parent.parent);
@@ -61,13 +65,13 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // raise event
+        onMouseStartHoverCollectible.Raise(GetSlotUI.SlotCollectible);
         isHovering = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // raise event
+        onMouseEndHoverCollectible.Raise();
         isHovering = false;
     }
 }
