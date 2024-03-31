@@ -2624,6 +2624,8 @@ GameObject:
   - component: {fileID: 1912164996699627575}
   - component: {fileID: 6346331123052576540}
   - component: {fileID: 4758011441534471479}
+  - component: {fileID: 670117827808184370}
+  - component: {fileID: 7163075426505938310}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2738,6 +2740,47 @@ MonoBehaviour:
   backpack: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
   destroyPanel: {fileID: 2043660363324963792}
   confirmText: {fileID: 2274122995942536971}
+--- !u!114 &670117827808184370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6473367371489572441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244970a420c111d438dba13c39e40ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backpackUI: {fileID: 6613976882897596276}
+--- !u!114 &7163075426505938310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6473367371489572441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b663e92038a8fc847b65ab6d544e0e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 670117827808184370}
+        m_TargetAssemblyTypeName: BackpackOpener, Assembly-CSharp
+        m_MethodName: OnBackpackToggled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6613976882897596276
 GameObject:
   m_ObjectHideFlags: 0

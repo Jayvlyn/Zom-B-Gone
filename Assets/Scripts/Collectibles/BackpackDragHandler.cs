@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ContainerDragHandler : DragHandler
+public class BackpackDragHandler : DragHandler
 {
     [SerializeField] private LootDestroyer lootDestroyer = null;
 

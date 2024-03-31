@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "Hold(duration=0.15)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleBackpack",
+                    "type": "Button",
+                    "id": "fd100ef6-84ba-49c4-bb6a-d1bb9d561ca3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -398,8 +407,19 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "RightHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b9e645b-cce8-4ac0-9dee-491dd5b499db",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleBackpack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

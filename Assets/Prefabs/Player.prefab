@@ -103,6 +103,7 @@ MonoBehaviour:
   leftLumbering: 1
   rightLumbering: 1
   lumberingLowerBound: 0.8
+  onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
 --- !u!114 &1034459641233780573
 MonoBehaviour:
   m_ObjectHideFlags: 0

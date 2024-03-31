@@ -1,3 +1,4 @@
+using GameEvents;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -306,6 +307,12 @@ public class PlayerController : MonoBehaviour
                 else { ChangeState(State.IDLE); }
             }
         }
+    }
+
+    [SerializeField] protected VoidEvent onBackpackToggle = null;
+    private void OnToggleBackpack(InputValue inputValue)
+    {
+        onBackpackToggle.Raise();
     }
 
     #endregion
