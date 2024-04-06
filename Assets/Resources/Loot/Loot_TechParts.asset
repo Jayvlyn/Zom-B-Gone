@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
-  m_Name: Test_Loot
+  m_Name: Loot_TechParts
   m_EditorClassIdentifier: 
-  name: Keychain
-  description: Dangles from a slightly rusted keyloop
+  name: Tech Parts
+  description: A jumble of scrapped tech parts
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 21300000, guid: 54eccf2bf3d1bac48846ca5a140a4b5b, type: 3}
-  baseValue: 10
-  maxStack: 5
+  baseValue: 100
+  maxStack: 30

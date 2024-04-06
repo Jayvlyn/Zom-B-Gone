@@ -20,7 +20,7 @@ public class MeleeWeapon : Weapon
 
     public override void Use()
     {
-        if (!isSwinging && !moveToHand && playerController.currentStamina >= staminaCost)
+        if (!isSwinging && !moveToHand && StaminaCheck())
         {
             StartCoroutine(PrepareSwing());
         }
@@ -49,6 +49,11 @@ public class MeleeWeapon : Weapon
         isSwinging = false;
         StopAllCoroutines();
         base.RemoveFromHand();
+    }
+
+    private bool StaminaCheck()
+    {
+        return playerController.currentStamina >= staminaCost;
     }
 
     private IEnumerator PrepareSwing()
@@ -120,7 +125,7 @@ public class MeleeWeapon : Weapon
         if (returnSwing) returnSwing = false;
         else returnSwing = true; FlipX();
 
-        if (_useHeld)
+        if (_useHeld && StaminaCheck())
         {
             StartCoroutine(Swing());
         }
