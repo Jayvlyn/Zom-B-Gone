@@ -11,8 +11,8 @@ public class SimpleVisualizer : MonoBehaviour
     public GameObject prefab;
     public Material lineMaterial;
 
-    private int length = 8;
-    private float angle = 90;
+    [SerializeField] private int length = 8;
+    [SerializeField] private float angle = 80;
 
 	public int Length 
     { 
@@ -26,9 +26,18 @@ public class SimpleVisualizer : MonoBehaviour
 
 	private void Start()
 	{
-		var sequence = lSystem.GenerateSentence();
+        var sequence = lSystem.GenerateSentence();
         VisualizeSequence(sequence);
-	}
+    }
+
+	//private void Update()
+	//{
+	//	if(Input.GetKeyDown(KeyCode.Space))
+ //       {
+	//		var sequence = lSystem.GenerateSentence();
+	//		VisualizeSequence(sequence);
+	//	}
+	//}
 
 	private void VisualizeSequence(string sequence)
     {
@@ -70,7 +79,7 @@ public class SimpleVisualizer : MonoBehaviour
                     tempPosition = currentPosition;
                     currentPosition += direction * length;
                     DrawLine(tempPosition, currentPosition, Color.red);
-                    Length -= 2; // cause next line to be shorter
+                    //Length -= 2; // cause next line to be shorter
                     positions.Add(currentPosition);
 					break;
 				case EncodingLetters.turnRight:

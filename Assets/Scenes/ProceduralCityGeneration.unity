@@ -155,6 +155,8 @@ MonoBehaviour:
   lSystem: {fileID: 1635324886}
   prefab: {fileID: 8648040216603117991, guid: c9b5109c0ecefe748adf88d81bac6dca, type: 3}
   lineMaterial: {fileID: 2100000, guid: 905492cd2551d0e48abec8aba2d970f6, type: 2}
+  length: 8
+  angle: 90
 --- !u!4 &282341542
 Transform:
   m_ObjectHideFlags: 0
@@ -339,7 +341,7 @@ MonoBehaviour:
   rules:
   - {fileID: 11400000, guid: e34ef2189dd6e8d45bc39b2444e933fb, type: 2}
   rootSentence: '[F]--F'
-  iterationLimit: 2
+  iterationLimit: 3
   randomIgnoreRuleModifier: 1
   chanceToIgnoreRule: 0.3
 --- !u!4 &1635324887
