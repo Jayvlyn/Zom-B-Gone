@@ -13,6 +13,7 @@ public class SimpleVisualizer : MonoBehaviour
 
     [SerializeField] private int length = 8;
     [SerializeField] private float angle = 80;
+    [SerializeField] private bool decrementLength = true;
 
 	public int Length 
     { 
@@ -79,7 +80,7 @@ public class SimpleVisualizer : MonoBehaviour
                     tempPosition = currentPosition;
                     currentPosition += direction * length;
                     DrawLine(tempPosition, currentPosition, Color.red);
-                    //Length -= 2; // cause next line to be shorter
+                    if(decrementLength) Length -= 2; // cause next line to be shorter
                     positions.Add(currentPosition);
 					break;
 				case EncodingLetters.turnRight:

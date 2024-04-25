@@ -51,7 +51,7 @@ public class LSystemGenerator : MonoBehaviour
         {
             if(rule.letter == character.ToString())
             {
-                if(randomIgnoreRuleModifier && iterationIndex > 1)
+                if(randomIgnoreRuleModifier && iterationIndex > 0)
                 {
                     if(UnityEngine.Random.value < chanceToIgnoreRule)
                     {
