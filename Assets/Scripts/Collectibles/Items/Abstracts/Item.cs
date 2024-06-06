@@ -91,11 +91,13 @@ public abstract class Item : MonoBehaviour, IInteractable
                 gameObject.layer = LayerMask.NameToLayer("InteractableItem");
                 if(_currentState == State.HELD)_rb.bodyType = RigidbodyType2D.Dynamic;
                 StartCoroutine(EnableFullCollider());
+                fullCollider.isTrigger = true;
 				break;
             case State.AIRBORNE:
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
                 if (_currentState == State.HELD) _rb.bodyType = RigidbodyType2D.Dynamic;
                 StartCoroutine(EnableFullCollider());
+                fullCollider.isTrigger = false;
                 break;
             case State.HELD:
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
@@ -202,7 +204,9 @@ public abstract class Item : MonoBehaviour, IInteractable
         float fallTime = Utils.MapWeightToRange(_weight, 1, 2, true);
 
         yield return new WaitForSeconds(fallTime);
-        if(_currentState != State.HELD)ChangeState(State.GROUNDED);
+        
+        if(_currentState == State.AIRBORNE) 
+            ChangeState(State.GROUNDED);
     }
 
     protected void PositionInHand()
