@@ -1,0 +1,20 @@
+{
+  "Firearms": [
+    {
+      "name": "Pistol",
+      "rarity": 1,
+      "weight": 800,
+
+      "damage": 35,
+      "attackSpeed": 0.1,
+      "knockbackPower": 1,
+      "dismembering": false,
+
+      "range": 3,
+      "maxAmmo": 12,
+      "ammoConsumption": 1,
+      "fireForce": 10,
+      "reloadTime": 1.5
+    }
+  ]
+}

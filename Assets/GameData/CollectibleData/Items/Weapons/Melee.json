@@ -1,0 +1,12 @@
+{
+  "name": "Katana",
+  "rarity": 2,
+  "weight": 800,
+
+  "damage": 90,
+  "attackSpeed": 1,
+  "dismembering": true,
+
+  "staminaCost": 0.5,
+  "prepSpeed":  0.2
+}

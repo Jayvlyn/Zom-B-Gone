@@ -13,9 +13,6 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected State _currentState;
 
     [Header("Item attributes")]
-    // Items will be found with different levels of "quality" affecting the effectiveness of the item 
-    // Items will break after the quality reaches 0
-    [SerializeField] protected int _quality;
 
     // Value that determines the effect it has on the players movement when held, also determines throw damage and speed
     [SerializeField, Range(1, 20000), Tooltip("In grams")] public float _weight; // grams

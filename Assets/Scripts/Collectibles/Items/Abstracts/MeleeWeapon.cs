@@ -11,7 +11,6 @@ public class MeleeWeapon : Weapon
     [SerializeField] private AnimationCurve rotationCurve;
     [SerializeField] private AnimationCurve prepSwingCurve;
     [SerializeField] private AnimationCurve prepRotationCurve;
-    [SerializeField,Tooltip("Time in seconds to complete a swing")] private float swingSpeed;
     [SerializeField,Tooltip("Time in seconds to prepare swing")] private float prepSpeed;
 
     private bool isSwinging = false;
@@ -84,7 +83,7 @@ public class MeleeWeapon : Weapon
 
         float elapsedTime = 0f;
 
-        float swingTime = swingSpeed;
+        float swingTime = _attackSpeed;
 		#region hat buff
 		if (playerHead.wornHat != null)
         {
