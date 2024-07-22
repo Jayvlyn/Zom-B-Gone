@@ -77,7 +77,7 @@ public class Health : MonoBehaviour
         #region hat buff
         if (gameObject.CompareTag("Player") && gameObject.TryGetComponent(out Head head) && head.wornHat != null)
         {
-            incomingDamage -= head.wornHat.defense;
+            incomingDamage -= head.wornHat.hatData.defense;
         }
         #endregion
         TakeDamage(Mathf.RoundToInt(incomingDamage), canDismember);

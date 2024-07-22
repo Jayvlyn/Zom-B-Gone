@@ -1,0 +1,268 @@
+using System;
+using System.Collections;
+using TMPro;
+using UnityEditor;
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+public abstract class Item : MonoBehaviour, IInteractable
+{
+    protected enum State
+    {
+        GROUNDED, AIRBORNE, HELD
+    }
+    protected State _currentState;
+
+    [SerializeField] public ItemData itemData;
+
+	[Header("Item attributes")]
+    // Values that will be multiplied with velocity and angularVelocity to create friction
+    [SerializeField, Range(0.9f, 1.0f)] protected float rotationalFriction = 0.9f;
+    [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float friction = 0.98f;
+    [SerializeField] Vector2 holdOffset = new Vector2(0.5f, 0.5f);
+    [SerializeField] protected bool spinThrow = true;
+    [SerializeField] protected bool aimAtMouse = true;
+    [SerializeField] protected float gripRotation = 130;
+    [SerializeField] protected Transform pivotPoint;
+    [SerializeField] protected Collider2D fullCollider;
+
+    protected Rigidbody2D rb;
+    protected PlayerController playerController;
+    protected Hands playerHands;
+    protected Head playerHead;
+    protected bool inRightHand;
+    [NonSerialized] public bool useHeld;
+
+    protected bool moveToHand;
+    private Vector3 pickupTarget;
+    private Quaternion rotationTarget;
+    private float pickupSpeed = 10;
+
+
+    private void Awake()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+        playerHands = playerController.GetComponentInParent<Hands>();
+        playerHead = playerController.GetComponentInParent<Head>();
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+    }
+
+    protected virtual void Update()
+    {
+        if(_currentState == State.AIRBORNE && rb.velocity.magnitude < 3)
+        {
+            ChangeState(State.GROUNDED);
+        }
+        if(_currentState == State.GROUNDED)
+        {
+            Friction();
+        }
+
+        if(moveToHand)
+        {
+            ReturnToGrip();
+		}
+    }
+
+    private void FixedUpdate()
+    {
+        if(_currentState == State.HELD && aimAtMouse)
+        {
+            RotateToMouse();
+        }
+    }
+
+    private void ChangeState(State newState)
+    {
+        switch (newState)
+        {
+            case State.GROUNDED:
+                gameObject.layer = LayerMask.NameToLayer("InteractableItem");
+                if(_currentState == State.HELD)rb.bodyType = RigidbodyType2D.Dynamic;
+                StartCoroutine(EnableFullCollider());
+                fullCollider.isTrigger = true;
+				break;
+            case State.AIRBORNE:
+                gameObject.layer = LayerMask.NameToLayer("AirborneItem");
+                if (_currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
+                StartCoroutine(EnableFullCollider());
+                fullCollider.isTrigger = false;
+                break;
+            case State.HELD:
+                gameObject.layer = LayerMask.NameToLayer("AirborneItem");
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                fullCollider.enabled = false;
+                //fullCollider.isTrigger = true;
+                break;
+            default:
+                break;
+
+        }
+
+        _currentState = newState;
+    }
+
+    public abstract void Use();
+
+    public virtual void Drop()
+    {
+        Transform playerT = transform.parent;
+        RemoveFromHand();
+        ChangeState(State.GROUNDED);
+        rb.AddForce(playerT.up * Utils.MapScalarToRange(friction, 0.999f, 3, 300, true), ForceMode2D.Impulse);
+    }
+
+    public virtual void Throw()
+    {
+        Transform playerT = transform.parent;
+        RemoveFromHand();
+        ChangeState(State.AIRBORNE);
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+
+        float throwForce = Utils.MapWeightToRange(itemData.weight, 10, 20, true);
+        rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
+
+        if(spinThrow)
+        {
+            float spinForce = Utils.MapWeightToRange(itemData.weight, 100, 700, true);
+            if (!inRightHand) spinForce *= -1;
+            rb.angularVelocity = spinForce;
+        }
+
+        StartCoroutine(Fall());
+    }
+
+    public virtual void PickUp(Transform parent, bool rightHand)
+    {
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0;
+
+        ChangeState(State.HELD);
+        
+        if (rightHand) inRightHand = true;
+        else inRightHand = false;
+        CheckFlip();
+        
+        
+        transform.SetParent(parent);
+        PositionInHand();
+    }
+
+    protected void CheckFlip()
+    {
+        if((inRightHand && transform.localScale.x < 0) || (!inRightHand && transform.localScale.x > 0))
+        {
+            FlipX();
+        }
+    }
+
+    protected void FlipX()
+    {
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
+
+    private void RotateToMouse()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    public void Interact(bool rightHand)
+    {
+        PickUp(playerController.transform, rightHand);
+    }
+
+    private void Friction()
+    {
+        rb.velocity *= friction;
+        rb.angularVelocity *= rotationalFriction;
+    }
+
+    protected IEnumerator EnableFullCollider()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if(!fullCollider.enabled) fullCollider.enabled = true;
+    }
+
+    private IEnumerator Fall()
+    {
+        float fallTime = Utils.MapWeightToRange(itemData.weight, 1, 2, true);
+
+        yield return new WaitForSeconds(fallTime);
+        
+        if(_currentState == State.AIRBORNE) 
+            ChangeState(State.GROUNDED);
+    }
+
+    protected void PositionInHand()
+    {
+        if (inRightHand) rotationTarget = Quaternion.Euler(0, 0, -gripRotation);
+        else rotationTarget = Quaternion.Euler(0, 0, gripRotation);
+
+        CheckFlip();
+		
+        moveToHand = true; // see update()
+    }
+
+    protected void ReturnToGrip()
+    {
+		if (inRightHand)
+		{
+			pickupTarget = transform.parent.position + (transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
+		}
+		else
+		{
+			pickupTarget = transform.parent.position + (-transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
+		}
+		if (Vector3.Distance(transform.position, pickupTarget) < 0.02f)
+		{
+			transform.position = pickupTarget;
+			moveToHand = false;
+			return;
+		}
+		transform.position = Vector2.Lerp(transform.position, pickupTarget, Time.deltaTime * pickupSpeed);
+		if (!aimAtMouse) transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationTarget, pickupSpeed * Time.deltaTime);
+	}
+
+    protected virtual void RemoveFromHand()
+    {
+        StartCoroutine(EnableFullCollider());
+        moveToHand = false;
+
+        if (inRightHand)
+        {
+            playerHands.RightObject = null; 
+            playerHands.UsingRight = false;
+        }
+        else
+        {
+            playerHands.LeftObject = null; 
+            playerHands.UsingLeft = false;
+        }
+
+        transform.SetParent(null);
+    }
+
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(_currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
+        {
+            collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false));
+            if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))
+            {
+                hitRb.AddForce(rb.velocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 10, 70, true)), ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    public void Interact(Head head)
+    {
+        throw new System.NotImplementedException();
+    }
+}
