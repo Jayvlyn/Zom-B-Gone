@@ -18,11 +18,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c15a0fe5c1cd5e144b1ebf8174567a3f, type: 3}
   weight: 2000
   damage: 10
-  attackSpeed: 0.15
-  knockbackPower: 800
+  attackSpeed: 0.6
+  knockbackPower: 20
   dismembering: 1
   staminaCost: 0.5
-  prepSpeed: 0.2
+  prepSpeed: 0.4
   swingCurve:
     serializedVersion: 2
     m_Curve:
@@ -45,7 +45,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.57657367
     - serializedVersion: 3
-      time: 0.26138872
+      time: 0.22435167
       value: 11.566282
       inSlope: -0.7773687
       outSlope: -0.7773687
@@ -54,7 +54,7 @@ MonoBehaviour:
       inWeight: 0.18754987
       outWeight: 0.31685624
     - serializedVersion: 3
-      time: 0.3199108
+      time: 0.28287375
       value: 0.64951575
       inSlope: -0.60702884
       outSlope: -0.60702884

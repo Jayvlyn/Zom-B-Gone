@@ -52,6 +52,7 @@ MonoBehaviour:
   piercingPower: 1
   _rb: {fileID: 0}
   bulletCollider: {fileID: 7744378673628910957}
+  shooter: {fileID: 0}
 --- !u!212 &4631466901030604047
 SpriteRenderer:
   m_ObjectHideFlags: 0

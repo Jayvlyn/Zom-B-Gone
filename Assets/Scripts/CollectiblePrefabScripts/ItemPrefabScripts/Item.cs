@@ -117,7 +117,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private IEnumerator DropTimer()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         ChangeState(State.GROUNDED);
     }
 

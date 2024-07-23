@@ -16,7 +16,7 @@ public class Hands : MonoBehaviour
             usingRight = value;
             if (usingRight)
             {
-                if (rightObject.TryGetComponent(out Firearm firearm))
+                if (rightObject.TryGetComponent(out ProjectileWeapon projectileWeapon))
                 {
                     rightAmmoCount.enabled = true;
                 }
@@ -37,7 +37,7 @@ public class Hands : MonoBehaviour
             usingLeft = value;
             if (usingLeft)
             {
-                if (leftObject.TryGetComponent(out Firearm firearm))
+                if (leftObject.TryGetComponent(out ProjectileWeapon projectileWeapon))
                 {
                     leftAmmoCount.enabled = true;
                 }

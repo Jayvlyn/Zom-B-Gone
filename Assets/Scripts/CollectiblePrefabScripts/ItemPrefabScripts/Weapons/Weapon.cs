@@ -16,12 +16,11 @@ public abstract class Weapon : Item
         else Debug.Log("Invalid Data & Class Matchup");
 	}
 
-	protected void DealDamage(Health targetHealth)
+	public void DealDamage(Health targetHealth)
     {
         float damage = weaponData.damage;
 
-        // Knockback
-        if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * weaponData.knockbackPower, ForceMode2D.Impulse);
+        TryDealKnockback(targetHealth);
 
         #region hat buff
         if (playerHead.wornHat != null)
@@ -32,5 +31,10 @@ public abstract class Weapon : Item
         #endregion
 
         targetHealth.TakeDamage(damage, weaponData.dismembering);
+    }
+
+    public void TryDealKnockback(Health targetHealth)
+    {
+        if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * weaponData.knockbackPower, ForceMode2D.Impulse);
     }
 }

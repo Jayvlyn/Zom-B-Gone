@@ -202,7 +202,7 @@ MonoBehaviour:
   muzzleFlashes:
   - {fileID: 541316285361104590}
   flashAnimator: {fileID: 4653570806904545219}
-  firearmData: {fileID: 0}
+  projectileWeaponData: {fileID: 0}
   reloading: 0
   _isAutomatic: 1
 --- !u!212 &1488720925848193886

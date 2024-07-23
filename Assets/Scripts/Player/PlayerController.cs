@@ -231,35 +231,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Input for reloading, wont do anything without firearm
+    // Input for reloading, wont do anything without projectileWeapon
     private void OnReload(InputValue inputValue)
     {
-		if (hands.UsingLeft && hands.LeftObject.TryGetComponent(out Firearm leftFirearm))
+		if (hands.UsingLeft && hands.LeftObject.TryGetComponent(out ProjectileWeapon leftProjectileWeapon))
         {
-			if (hands.UsingRight && hands.RightObject.TryGetComponent(out Firearm rightFirearm))
+			if (hands.UsingRight && hands.RightObject.TryGetComponent(out ProjectileWeapon rightProjectileWeapon))
             {
-				if (!leftFirearm.reloading && !rightFirearm.reloading)
+				if (!leftProjectileWeapon.reloading && !rightProjectileWeapon.reloading)
                 { // Neither gun reloading yet
-                    float leftRatio = leftFirearm.CurrentAmmo / (float)leftFirearm.firearmData.maxAmmo;
-                    float rightRatio = rightFirearm.CurrentAmmo / (float)rightFirearm.firearmData.maxAmmo;
+                    float leftRatio = leftProjectileWeapon.CurrentAmmo / (float)leftProjectileWeapon.projectileWeaponData.maxAmmo;
+                    float rightRatio = rightProjectileWeapon.CurrentAmmo / (float)rightProjectileWeapon.projectileWeaponData.maxAmmo;
                     if (leftRatio <= rightRatio)
                     {
-                        leftFirearm.StartReload(reloadSpeedReduction);
+                        leftProjectileWeapon.StartReload(reloadSpeedReduction);
                     }
                     else
                     {
-                        rightFirearm.StartReload(reloadSpeedReduction);
+                        rightProjectileWeapon.StartReload(reloadSpeedReduction);
                     }
                 }
-                else if (leftFirearm.reloading && !rightFirearm.reloading) rightFirearm.StartReload(reloadSpeedReduction);
-                else if (!leftFirearm.reloading && rightFirearm.reloading) leftFirearm.StartReload(reloadSpeedReduction);
+                else if (leftProjectileWeapon.reloading && !rightProjectileWeapon.reloading) rightProjectileWeapon.StartReload(reloadSpeedReduction);
+                else if (!leftProjectileWeapon.reloading && rightProjectileWeapon.reloading) leftProjectileWeapon.StartReload(reloadSpeedReduction);
             }
-            else if(!leftFirearm.reloading) leftFirearm.StartReload(reloadSpeedReduction);
+            else if(!leftProjectileWeapon.reloading) leftProjectileWeapon.StartReload(reloadSpeedReduction);
             
 		}
-        else if(hands.UsingRight && hands.RightObject.TryGetComponent(out Firearm rightFirearm) && !rightFirearm.reloading)
+        else if(hands.UsingRight && hands.RightObject.TryGetComponent(out ProjectileWeapon rightprojectileWeapon) && !rightprojectileWeapon.reloading)
         {
-            rightFirearm.StartReload(reloadSpeedReduction);
+            rightprojectileWeapon.StartReload(reloadSpeedReduction);
         }
 	}
 

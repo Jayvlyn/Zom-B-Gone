@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] int piercingPower = 0; // How many enemies the bullet can pierce through
     int currentPiercingPower;
 
-    public int FirearmDamage { get; set; }
+    public int ProjectileWeaponDamage { get; set; }
     public float LifeSpan { get; set; }
 
     public Rigidbody2D _rb;
@@ -70,7 +70,7 @@ public class Bullet : MonoBehaviour
 
     protected void DealDamage(Health targetHealth)
     {
-        float damage = FirearmDamage * _damageMod;
+        float damage = ProjectileWeaponDamage * _damageMod;
         #region hat buff
         if (playerHead.wornHat != null)
         {
@@ -79,5 +79,6 @@ public class Bullet : MonoBehaviour
         }
         #endregion
         targetHealth.TakeDamage(damage, shooter.weaponData.dismembering);
+        shooter.TryDealKnockback(targetHealth);
     }
 }

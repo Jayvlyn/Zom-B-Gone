@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Firearm : Weapon
+public class ProjectileWeapon : Weapon
 {
     private TMP_Text ammoCount;
     private TMP_Text reloadingIndicator;
 
 
-    [Header("Firearm attributes")]
-    [SerializeField] protected GameObject bulletPrefab;
+    [Header("Projectile Weapon attributes")]
     [SerializeField] protected List<Transform> firePoints;
     [SerializeField] protected List<SpriteRenderer> muzzleFlashes;
     [SerializeField] protected Animator flashAnimator;
 
-    [HideInInspector] public FirearmData firearmData;
+    [HideInInspector] public ProjectileWeaponData projectileWeaponData;
     [HideInInspector] public bool reloading = false;
     private float shotTimer = 0;
     protected int currentAmmo;
 
-    [SerializeField] protected bool _isAutomatic; // Semi-Automatic or Automatic Gun?
-    public bool IsAutomatic { get {  return _isAutomatic; } }
+
+    public bool IsAutomatic { get {  return projectileWeaponData.isAutomatic; } }
 
     private PlayerController _pc;
 
@@ -30,17 +29,17 @@ public class Firearm : Weapon
         get { return currentAmmo; }
         set { 
             currentAmmo = value;
-            ammoCount.text = currentAmmo + " / " + firearmData.maxAmmo;
+            ammoCount.text = currentAmmo + " / " + projectileWeaponData.maxAmmo;
         }
     }
 
 	private void Awake()
 	{
         base.Awake();
-		if (itemData as FirearmData != null)
+		if (itemData as ProjectileWeaponData != null)
 		{
-			firearmData = (FirearmData)itemData;
-            currentAmmo = firearmData.maxAmmo;
+			projectileWeaponData = (ProjectileWeaponData)itemData;
+            currentAmmo = projectileWeaponData.maxAmmo;
 		}
 		else Debug.Log("Invalid Data & Class Matchup");
 	}
@@ -53,7 +52,7 @@ public class Firearm : Weapon
             if(shotTimer < 0)shotTimer = 0;
         }
 
-        if(_isAutomatic && useHeld)
+        if(projectileWeaponData.isAutomatic && useHeld)
         {
             Use();
         }
@@ -111,20 +110,20 @@ public class Firearm : Weapon
             flashAnimator.SetTrigger("Fire");
 
             shotTimer = weaponData.attackSpeed;
-            CurrentAmmo -= firearmData.ammoConsumption;
+            CurrentAmmo -= projectileWeaponData.ammoConsumption;
             foreach (Transform firepoint in firePoints) 
             { 
-                var bullet = Instantiate(bulletPrefab, firepoint.transform.position, firepoint.transform.rotation);
+                var bullet = Instantiate(projectileWeaponData.bulletPrefab, firepoint.transform.position, firepoint.transform.rotation);
                 
                 if(bullet.TryGetComponent(out Rigidbody2D bulletRb))
                 {
-                    bulletRb.AddForce(transform.up * firearmData.fireForce, ForceMode2D.Impulse);
+                    bulletRb.AddForce(transform.up * projectileWeaponData.fireForce, ForceMode2D.Impulse);
                 }
                 if(bullet.TryGetComponent(out Bullet bulletScript))
                 {
                     bulletScript.shooter = this;
-                    bulletScript.FirearmDamage = weaponData.damage;
-                    bulletScript.LifeSpan = firearmData.range;
+                    bulletScript.ProjectileWeaponDamage = weaponData.damage;
+                    bulletScript.LifeSpan = projectileWeaponData.range;
                 }
             }
             
@@ -138,7 +137,7 @@ public class Firearm : Weapon
 
     public void StartReload(float mod = 1)
     {
-        if(CurrentAmmo != firearmData.maxAmmo && !reloading)
+        if(CurrentAmmo != projectileWeaponData.maxAmmo && !reloading)
         {
             StartCoroutine(Reload(mod));
         }
@@ -149,8 +148,8 @@ public class Firearm : Weapon
         reloading = true;
         reloadingIndicator.enabled = true;
         CurrentAmmo = 0;
-        yield return new WaitForSeconds(firearmData.reloadTime * mod);
-        CurrentAmmo = firearmData.maxAmmo;
+        yield return new WaitForSeconds(projectileWeaponData.reloadTime * mod);
+        CurrentAmmo = projectileWeaponData.maxAmmo;
         reloading = false;
         reloadingIndicator.enabled = false;
     }
