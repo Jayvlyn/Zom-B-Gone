@@ -5,15 +5,13 @@ using UnityEngine;
 public abstract class CollectibleData : ScriptableObject
 {
     [Header("Collectible Attributes")]
-    [SerializeField] private new string name = "Unnamed";
-    [SerializeField] private string description = "";
-	[SerializeField, Min(0)] private int baseValue;
-	[SerializeField] private Rarity rarity = null;
-    [SerializeField] private Sprite icon = null;
+    public new string name = "Unnamed";
+    public string description = "";
+	public Rarity rarity = null;
+    public Sprite icon = null;
 
 	public string Name => name;
     public string Description => description;
-	public int BaseValue => baseValue;
     public Rarity Rarity => rarity;
 
     public string ColoredName

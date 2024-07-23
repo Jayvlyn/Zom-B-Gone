@@ -19,7 +19,6 @@ public class FirearmData : WeaponData
 		StringBuilder sb = new StringBuilder();
 
 		sb.Append("<color=grey>").Append(Description).Append("</color>").AppendLine();
-		sb.Append("<color=green> Gold Value: ").Append(BaseValue).Append("</color>").AppendLine();
 
 		return sb.ToString();
 	}
