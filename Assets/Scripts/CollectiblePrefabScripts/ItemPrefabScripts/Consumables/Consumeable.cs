@@ -3,9 +3,22 @@ using UnityEngine;
 
 public abstract class Consumeable : Item
 {
-    public ConsumableData consumableData;
+    //[Header("Consumable Attributes")]
 
-    public override void Use()
+
+    [HideInInspector] public ConsumableData consumableData;
+
+	private void Awake()
+	{
+		base.Awake();
+		if (itemData as ConsumableData != null)
+		{
+			consumableData = (ConsumableData)itemData;
+		}
+		else Debug.Log("Invalid Data & Class Matchup");
+	}
+
+	public override void Use()
     {
         // call base.Use() in consumables after their functionality
         gameObject.GetComponent<SpriteRenderer>().enabled = false;

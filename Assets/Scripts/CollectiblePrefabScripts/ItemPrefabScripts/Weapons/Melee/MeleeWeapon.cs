@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
-    [SerializeField] public MeleeWeaponData meleeWeaponData;
     [Header("Melee Properties")]
     [SerializeField] protected Collider2D damageCollider;
+
+    [HideInInspector] public MeleeWeaponData meleeWeaponData;
 
     private bool isSwinging = false;
     private bool returnSwing = false;
     private bool doDamage = false;
 
-    public override void Use()
+	private void Awake()
+	{
+        base.Awake();
+		if (itemData as MeleeWeaponData != null)
+		{
+			meleeWeaponData = (MeleeWeaponData)itemData;
+		}
+		else Debug.Log("Invalid Data & Class Matchup");
+	}
+
+	public override void Use()
     {
         if (!isSwinging && !moveToHand && StaminaCheck())
         {

@@ -3,9 +3,20 @@ using UnityEngine;
 
 public abstract class Weapon : Item
 {
-    [SerializeField] public WeaponData weaponData;
+    //[Header("Weapon Attributes")]
+    [HideInInspector] public WeaponData weaponData;
 
-    protected void DealDamage(Health targetHealth)
+	protected void Awake()
+	{
+        base.Awake();
+        if(itemData as WeaponData != null) 
+        { 
+            weaponData = (WeaponData)itemData;
+        }
+        else Debug.Log("Invalid Data & Class Matchup");
+	}
+
+	protected void DealDamage(Health targetHealth)
     {
         float damage = weaponData.damage;
         #region hat buff

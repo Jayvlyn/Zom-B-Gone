@@ -8,7 +8,6 @@ public class Firearm : Weapon
     private TMP_Text ammoCount;
     private TMP_Text reloadingIndicator;
 
-    public FirearmData firearmData;
 
     [Header("Firearm attributes")]
     [SerializeField] protected GameObject bulletPrefab;
@@ -16,6 +15,7 @@ public class Firearm : Weapon
     [SerializeField] protected List<SpriteRenderer> muzzleFlashes;
     [SerializeField] protected Animator flashAnimator;
 
+    [HideInInspector] public FirearmData firearmData;
     [HideInInspector] public bool reloading = false;
     private float shotTimer = 0;
     protected int currentAmmo = 10;
@@ -34,7 +34,17 @@ public class Firearm : Weapon
         }
     }
 
-    protected override void Update()
+	private void Awake()
+	{
+        base.Awake();
+		if (itemData as FirearmData != null)
+		{
+			firearmData = (FirearmData)itemData;
+		}
+		else Debug.Log("Invalid Data & Class Matchup");
+	}
+
+	protected override void Update()
     {
         if(shotTimer > 0)
         {

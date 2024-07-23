@@ -4,7 +4,21 @@ using UnityEngine;
 
 public class ThrowingWeapon : Weapon
 {
-    public override void Use()
+    //[Header("Throwing Weapon Attributes")]
+    
+    [HideInInspector] public ThrowingWeaponData throwingWeaponData;
+
+	private void Awake()
+	{
+		base.Awake();
+		if (itemData as ThrowingWeaponData != null)
+		{
+			throwingWeaponData = (ThrowingWeaponData)itemData;
+		}
+		else Debug.Log("Invalid Data & Class Matchup");
+	}
+
+	public override void Use()
     {
         Throw();
     }

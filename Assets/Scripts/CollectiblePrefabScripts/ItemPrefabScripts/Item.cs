@@ -13,9 +13,9 @@ public abstract class Item : MonoBehaviour, IInteractable
     }
     protected State _currentState;
 
-    [SerializeField] public ItemData itemData;
 
 	[Header("Item attributes")]
+    [SerializeField] public ItemData itemData;
     // Values that will be multiplied with velocity and angularVelocity to create friction
     [SerializeField, Range(0.9f, 1.0f)] protected float rotationalFriction = 0.9f;
     [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float friction = 0.98f;
@@ -39,9 +39,9 @@ public abstract class Item : MonoBehaviour, IInteractable
     private float pickupSpeed = 10;
 
 
-    private void Awake()
+    protected void Awake()
     {
-        playerController = FindObjectOfType<PlayerController>();
+		playerController = FindObjectOfType<PlayerController>();
         playerHands = playerController.GetComponentInParent<Hands>();
         playerHead = playerController.GetComponentInParent<Head>();
         rb = GetComponent<Rigidbody2D>();

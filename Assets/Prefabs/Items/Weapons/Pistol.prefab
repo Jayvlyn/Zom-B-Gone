@@ -238,33 +238,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0d2a639a920ac41ba7ab6f3d6fd958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _quality: 100
-  _weight: 800
-  _rotationalFriction: 0
+  itemData: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+  rotationalFriction: 0.9
   friction: 0.98
-  _holdOffset: {x: 0.3, y: 0.4}
-  _spinThrow: 1
-  _aimAtMouse: 1
+  holdOffset: {x: 0.5, y: 0.5}
+  spinThrow: 1
+  aimAtMouse: 1
   gripRotation: 130
   pivotPoint: {fileID: 0}
-  knockbackPower: 0
   fullCollider: {fileID: 4164492863800837428}
-  _useHeld: 0
-  _damage: 35
-  _range: 3
-  _attackSpeed: 0.1
-  dismembering: 0
+  weaponData: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+  firearmData: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
   bulletPrefab: {fileID: 2198095510141801857, guid: 6890ec1dcfc67304a94e9a3783021af0, type: 3}
   firePoints:
   - {fileID: 2353463699975327284}
   muzzleFlashes: []
   flashAnimator: {fileID: 6206506394282089501}
-  _maxAmmo: 10
-  _currentAmmo: 10
-  _ammoConsumption: 1
-  _reloadTime: 1.5
-  _fireForce: 10
-  _reloading: 0
+  reloading: 0
   _isAutomatic: 0
 --- !u!61 &4164492863800837428
 BoxCollider2D:
