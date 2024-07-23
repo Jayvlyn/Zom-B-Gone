@@ -6,90 +6,90 @@ using UnityEngine;
 
 public class Hands : MonoBehaviour
 {
-    private TMP_Text _leftAmmoCount;
-    private TMP_Text _rightAmmoCount;
+    private TMP_Text leftAmmoCount;
+    private TMP_Text rightAmmoCount;
 
-    private bool _usingRight;
-    public bool UsingRight { get { return _usingRight; }
+    private bool usingRight;
+    public bool UsingRight { get { return usingRight; }
         set
         {
-            _usingRight = value;
-            if (_usingRight)
+            usingRight = value;
+            if (usingRight)
             {
-                if (_rightObject.TryGetComponent(out Firearm firearm))
+                if (rightObject.TryGetComponent(out Firearm firearm))
                 {
-                    _rightAmmoCount.enabled = true;
+                    rightAmmoCount.enabled = true;
                 }
             }
             else
             {
-                _rightAmmoCount.enabled = false;
+                rightAmmoCount.enabled = false;
             }
         }
     }
 
-    private bool _usingLeft;
+    private bool usingLeft;
     public bool UsingLeft
     {
-        get { return _usingLeft; }
+        get { return usingLeft; }
         set
         {
-            _usingLeft = value;
-            if (_usingLeft)
+            usingLeft = value;
+            if (usingLeft)
             {
-                if (_leftObject.TryGetComponent(out Firearm firearm))
+                if (leftObject.TryGetComponent(out Firearm firearm))
                 {
-                    _leftAmmoCount.enabled = true;
+                    leftAmmoCount.enabled = true;
                 }
             }
             else
             {
-                _leftAmmoCount.enabled = false;
+                leftAmmoCount.enabled = false;
             }
         }
     }
 
 
-    private GameObject _leftObject;
+    private GameObject leftObject;
     public GameObject LeftObject
     {
-        get { return _leftObject; }
-        set { _leftObject = value;
-            if(_leftObject != null)
+        get { return leftObject; }
+        set { leftObject = value;
+            if(leftObject != null)
             {
-			    if (value.TryGetComponent(out Item leftItem)) _leftItem = leftItem;
+			    if (value.TryGetComponent(out Item leftItem)) this.leftItem = leftItem;
             }
             else
             {
-                _leftItem = null;
+                leftItem = null;
             }
 		}
     }
 
-	private GameObject _rightObject;
+	private GameObject rightObject;
     public GameObject RightObject
     {
-        get { return _rightObject; }
-        set { _rightObject = value; 
-            if(_rightObject != null)
+        get { return rightObject; }
+        set { rightObject = value; 
+            if(rightObject != null)
             {
-                if(value.TryGetComponent(out Item rightItem)) _rightItem = rightItem;
+                if(value.TryGetComponent(out Item rightItem)) this.rightItem = rightItem;
             }
             else
             {
-                _rightItem = null;
+                rightItem = null;
             }
         }
     }
 
-    public Item _leftItem;
-    public Item _rightItem;
+    public Item leftItem;
+    public Item rightItem;
 
     void Awake()
     {
-        _leftAmmoCount = GameObject.FindWithTag("LeftAmmoCount").GetComponent<TMP_Text>();
-        _rightAmmoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
-        _leftAmmoCount.enabled = false;
-        _rightAmmoCount.enabled = false;
+        leftAmmoCount = GameObject.FindWithTag("LeftAmmoCount").GetComponent<TMP_Text>();
+        rightAmmoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
+        leftAmmoCount.enabled = false;
+        rightAmmoCount.enabled = false;
     }
 }

@@ -74,10 +74,10 @@ public class Bullet : MonoBehaviour
         #region hat buff
         if (playerHead.wornHat != null)
         {
-            damage += playerHead.wornHat.damageIncrease;
-            damage *= playerHead.wornHat.damageMultiplier;
+            damage += playerHead.wornHat.hatData.damageIncrease;
+            damage *= playerHead.wornHat.hatData.damageMultiplier;
         }
         #endregion
-        targetHealth.TakeDamage(damage, shooter.dismembering);
+        targetHealth.TakeDamage(damage, shooter.weaponData.dismembering);
     }
 }

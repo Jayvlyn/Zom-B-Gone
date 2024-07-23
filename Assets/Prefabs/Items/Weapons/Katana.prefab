@@ -147,7 +147,7 @@ MonoBehaviour:
   _useHeld: 0
   _damage: 50
   _range: 2
-  _attackSpeed: 1
+  _attackSpeed: 0.5
   dismembering: 1
   damageCollider: {fileID: 4896569074839128829}
   staminaCost: 0.5

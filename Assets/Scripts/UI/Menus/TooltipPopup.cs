@@ -46,7 +46,7 @@ public class TooltipPopup : MonoBehaviour
         popupObject.transform.position = newPos;
     }
 
-    public void DisplayInfo(Collectible collectible)
+    public void DisplayInfo(CollectibleData collectible)
     {
         StringBuilder builder = new StringBuilder();
         builder.Append("<size=35>").Append(collectible.ColoredName).Append("</size>").AppendLine();

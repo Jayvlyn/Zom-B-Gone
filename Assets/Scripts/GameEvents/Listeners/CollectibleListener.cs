@@ -1,4 +1,4 @@
 namespace GameEvents
 {
-    public class CollectibleListener : BaseGameEventListener<Collectible, CollectibleEvent, UnityCollectibleEvent> { }
+    public class CollectibleListener : BaseGameEventListener<CollectibleData, CollectibleEvent, UnityCollectibleEvent> { }
 }

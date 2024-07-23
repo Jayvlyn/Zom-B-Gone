@@ -14,23 +14,23 @@ public class PlayerController : MonoBehaviour
     private State currentState;
 
     [Header("References")]
-    private Rigidbody2D _rigidBody;
-    private Camera _gameCamera;
-    private Interactor _interactor;
-    [SerializeField] private Slider _staminaSlider;
-    [SerializeField] private Hands _hands;
+    private Rigidbody2D rb;
+    private Camera gameCamera;
+    private Interactor interactor;
+    [SerializeField] private Slider staminaSlider;
+    [SerializeField] private Hands hands;
     [SerializeField] private Head head;
 
     [Header("Properties")]
-    [SerializeField] private float _walkSpeed = 5;
-    [SerializeField] private float _runSpeed = 9;
-    [SerializeField] private float _sneakSpeed = 3;
-    public float _speedModifier = 1;
-    [SerializeField] public float _maxStamina = 15;
-    [SerializeField] public float _staminaRecoverySpeed = 2;
+    [SerializeField] private float walkSpeed = 5;
+    [SerializeField] private float runSpeed = 9;
+    [SerializeField] private float sneakSpeed = 3;
+    public float speedModifier = 1;
+    [SerializeField] public float maxStamina = 15;
+    [SerializeField] public float staminaRecoverySpeed = 2;
     [SerializeField] private float staminaRecoveryDelay = 2f;
-    [SerializeField] private float _velocityChangeSpeed = 0.17f;
-    [SerializeField] public float _reloadSpeedReduction = 1f;
+    [SerializeField] private float velocityChangeSpeed = 0.17f;
+    [SerializeField] public float reloadSpeedReduction = 1f;
     
     public float currentStamina;
     private float currentMoveSpeed;
@@ -51,14 +51,14 @@ public class PlayerController : MonoBehaviour
     {
         //Cursor.visible = false;
         // Find references
-        _gameCamera = FindObjectOfType<Camera>();
-        _interactor = GetComponent<Interactor>();
-        _rigidBody = GetComponent<Rigidbody2D>();
-        _rigidBody.freezeRotation = true;
+        gameCamera = FindObjectOfType<Camera>();
+        interactor = GetComponent<Interactor>();
+        rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
 
         // Set currents
-        currentStamina = _maxStamina;
-        currentMoveSpeed = _walkSpeed;
+        currentStamina = maxStamina;
+        currentMoveSpeed = walkSpeed;
     }
 
     private float recoverTimer;
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             if(recoverStamina)
             {
-                if (currentStamina < _maxStamina) currentStamina += Time.deltaTime * _staminaRecoverySpeed;
+                if (currentStamina < maxStamina) currentStamina += Time.deltaTime * staminaRecoverySpeed;
                 else recoverStamina = false;
             }
             else if(recoverTimer > 0)
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateStaminaBar()
     {
-        _staminaSlider.value = currentStamina / _maxStamina;
+        staminaSlider.value = currentStamina / maxStamina;
     }
 
     public void RecoverStamina()
@@ -112,20 +112,20 @@ public class PlayerController : MonoBehaviour
 
     private void SetPlayerVelocity()
     {
-        smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, _velocityChangeSpeed * Time.deltaTime * 100);
-        Vector3 newVelocity = (smoothedMovementInput) * currentMoveSpeed * _speedModifier * leftLumbering * rightLumbering;
+        smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, velocityChangeSpeed * Time.deltaTime * 100);
+        Vector3 newVelocity = (smoothedMovementInput) * currentMoveSpeed * speedModifier * leftLumbering * rightLumbering;
         #region hat buff
         if(head.wornHat != null)
         {
-            newVelocity *= head.wornHat.moveSpeedMod;
+            newVelocity *= head.wornHat.hatData.moveSpeedMod;
         }
         #endregion
-        _rigidBody.velocity = newVelocity;
+        rb.velocity = newVelocity;
     }
 
     private void RotateToMouse()
     {
-        Vector2 mousePosition = _gameCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition = gameCamera.ScreenToWorldPoint(Input.mousePosition);
 
         Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
 
@@ -154,21 +154,21 @@ public class PlayerController : MonoBehaviour
     {
         if(inputValue.isPressed)
         {
-		    if (!_hands.UsingLeft)
+		    if (!hands.UsingLeft)
             {
-                _interactor.Interact(false);
-                if(_hands.UsingLeft)
+                interactor.Interact(false);
+                if(hands.UsingLeft)
                 {
-                    leftLumbering = Utils.MapWeightToRange(_hands._leftItem._weight, lumberingLowerBound, 1.0f, true);
+                    leftLumbering = Utils.MapWeightToRange(hands.leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
                 }
             }
             
-			else if (_hands._leftItem != null) _hands._leftItem.Use();
+			else if (hands.leftItem != null) hands.leftItem.Use();
 		}
         else
         {
             holdingLeft = false;
-            if (_hands._leftItem != null) _hands._leftItem._useHeld = false;
+            if (hands.leftItem != null) hands.leftItem.useHeld = false;
         }
     }
 
@@ -176,44 +176,44 @@ public class PlayerController : MonoBehaviour
     {
 		if (inputValue.isPressed)
 		{
-			if (!_hands.UsingRight)
+			if (!hands.UsingRight)
             {
-                _interactor.Interact(true);
-				if (_hands.UsingRight)
+                interactor.Interact(true);
+				if (hands.UsingRight)
 				{
-					rightLumbering = Utils.MapWeightToRange(_hands._rightItem._weight, lumberingLowerBound, 1.0f, true);
+					rightLumbering = Utils.MapWeightToRange(hands.rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
 				}
 			}
             
-			else if (_hands._rightItem != null) _hands._rightItem.Use();
+			else if (hands.rightItem != null) hands.rightItem.Use();
 		}
 		else
 		{
 			holdingRight = false;
-            if (_hands._rightItem != null) _hands._rightItem._useHeld = false;
+            if (hands.rightItem != null) hands.rightItem.useHeld = false;
         }
 	}
 
     private void OnLeftHold(InputValue inputValue)
     {
 		holdingLeft = true;
-        if (_hands._leftItem != null) _hands._leftItem._useHeld = true;
+        if (hands.leftItem != null) hands.leftItem.useHeld = true;
 
     }
 
     private void OnRightHold(InputValue inputValue)
     {
 		holdingRight = true;
-        if (_hands._rightItem != null) _hands._rightItem._useHeld = true;
+        if (hands.rightItem != null) hands.rightItem.useHeld = true;
     }
 
     private void OnDropLeft(InputValue inputValue)
     {
-        if (_hands.UsingLeft)
+        if (hands.UsingLeft)
         {
-            if (movementInput.magnitude > 0) _hands._leftItem.Throw();
+            if (movementInput.magnitude > 0) hands.leftItem.Throw();
             
-            else _hands._leftItem.Drop();
+            else hands.leftItem.Drop();
 
             leftLumbering = 1;
         }
@@ -221,11 +221,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnDropRight(InputValue inputValue)
     {
-        if (_hands.UsingRight)
+        if (hands.UsingRight)
         {
-            if (movementInput.magnitude > 0) _hands._rightItem.Throw();
+            if (movementInput.magnitude > 0) hands.rightItem.Throw();
             
-            else _hands._rightItem.Drop();
+            else hands.rightItem.Drop();
 
             rightLumbering = 1;
         }
@@ -234,32 +234,32 @@ public class PlayerController : MonoBehaviour
     // Input for reloading, wont do anything without firearm
     private void OnReload(InputValue inputValue)
     {
-		if (_hands.UsingLeft && _hands.LeftObject.TryGetComponent(out Firearm leftFirearm))
+		if (hands.UsingLeft && hands.LeftObject.TryGetComponent(out Firearm leftFirearm))
         {
-			if (_hands.UsingRight && _hands.RightObject.TryGetComponent(out Firearm rightFirearm))
+			if (hands.UsingRight && hands.RightObject.TryGetComponent(out Firearm rightFirearm))
             {
-				if (!leftFirearm._reloading && !rightFirearm._reloading)
+				if (!leftFirearm.reloading && !rightFirearm.reloading)
                 { // Neither gun reloading yet
-                    float leftRatio = leftFirearm.CurrentAmmo / (float)leftFirearm._maxAmmo;
-                    float rightRatio = rightFirearm.CurrentAmmo / (float)rightFirearm._maxAmmo;
+                    float leftRatio = leftFirearm.CurrentAmmo / (float)leftFirearm.firearmData.maxAmmo;
+                    float rightRatio = rightFirearm.CurrentAmmo / (float)rightFirearm.firearmData.maxAmmo;
                     if (leftRatio <= rightRatio)
                     {
-                        leftFirearm.StartReload(_reloadSpeedReduction);
+                        leftFirearm.StartReload(reloadSpeedReduction);
                     }
                     else
                     {
-                        rightFirearm.StartReload(_reloadSpeedReduction);
+                        rightFirearm.StartReload(reloadSpeedReduction);
                     }
                 }
-                else if (leftFirearm._reloading && !rightFirearm._reloading) rightFirearm.StartReload(_reloadSpeedReduction);
-                else if (!leftFirearm._reloading && rightFirearm._reloading) leftFirearm.StartReload(_reloadSpeedReduction);
+                else if (leftFirearm.reloading && !rightFirearm.reloading) rightFirearm.StartReload(reloadSpeedReduction);
+                else if (!leftFirearm.reloading && rightFirearm.reloading) leftFirearm.StartReload(reloadSpeedReduction);
             }
-            else if(!leftFirearm._reloading) leftFirearm.StartReload(_reloadSpeedReduction);
+            else if(!leftFirearm.reloading) leftFirearm.StartReload(reloadSpeedReduction);
             
 		}
-        else if(_hands.UsingRight && _hands.RightObject.TryGetComponent(out Firearm rightFirearm) && !rightFirearm._reloading)
+        else if(hands.UsingRight && hands.RightObject.TryGetComponent(out Firearm rightFirearm) && !rightFirearm.reloading)
         {
-            rightFirearm.StartReload(_reloadSpeedReduction);
+            rightFirearm.StartReload(reloadSpeedReduction);
         }
 	}
 
@@ -269,7 +269,7 @@ public class PlayerController : MonoBehaviour
         {
             holdingRun = true;
 
-            if(_rigidBody.velocity.magnitude > 0 && movementInput != Vector2.zero && currentStamina > 0)
+            if(rb.velocity.magnitude > 0 && movementInput != Vector2.zero && currentStamina > 0)
             {
                 ChangeState(State.RUNNING);
             }
@@ -325,19 +325,19 @@ public class PlayerController : MonoBehaviour
         {
             case State.WALKING:
                 if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = _walkSpeed;
+                currentMoveSpeed = walkSpeed;
                 break;
             case State.RUNNING:
-                currentMoveSpeed = _runSpeed;
+                currentMoveSpeed = runSpeed;
                 recoverStamina = false;
                 break;
             case State.SNEAKING:
                 if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = _sneakSpeed;
+                currentMoveSpeed = sneakSpeed;
                 break;
             default: // IDLE:
                 if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = _walkSpeed; 
+                currentMoveSpeed = walkSpeed; 
                 break;
         }
 
