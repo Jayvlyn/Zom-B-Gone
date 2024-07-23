@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3f1ff768cef6e42b111a3830f6ad74, type: 3}
+  m_Name: Hat_BaseballCap
+  m_EditorClassIdentifier: 
+  name: Baseball Cap
+  description: Batter up!
+  rarity: {fileID: 11400000, guid: 705c066aaed3d914fa8be279498b3421, type: 2}
+  icon: {fileID: 0}
+  swingTimeMultiplier: 0.7
+  damageMultiplier: 1
+  damageIncrease: 0
+  moveSpeedMod: 1
+  defense: 0

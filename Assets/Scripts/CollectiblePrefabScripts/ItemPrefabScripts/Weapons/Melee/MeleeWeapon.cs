@@ -190,9 +190,6 @@ public class MeleeWeapon : Weapon
         {
             // Damage
             DealDamage(targetHealth);
-
-            // Knockback
-            if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * meleeWeaponData.knockbackPower, ForceMode2D.Impulse);
         }
     }
 }

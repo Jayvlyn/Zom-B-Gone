@@ -18,8 +18,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 03e84ed322d99314f80ac2d7b9410bfc, type: 3}
   weight: 14000
   damage: 50
-  attackSpeed: 0
-  knockbackPower: 0
+  attackSpeed: 0.8
+  knockbackPower: 190.6
   dismembering: 0
   staminaCost: 1
   prepSpeed: 0.5

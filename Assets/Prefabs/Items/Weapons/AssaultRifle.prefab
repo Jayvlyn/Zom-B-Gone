@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 9007136600030232037}
   - component: {fileID: 4881143944469047324}
   m_Layer: 12
-  m_Name: AK
+  m_Name: AssaultRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,34 +186,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c42a995e62abb4aa6b0f0f1f138e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _quality: 100
-  _weight: 3244
-  _rotationalFriction: 0.9
+  itemData: {fileID: 11400000, guid: 37a8308119c0b2b43932ad7f60cecddf, type: 2}
+  rotationalFriction: 0.9
   friction: 0.98
-  _holdOffset: {x: 0.5, y: 0.3}
-  _spinThrow: 1
-  _aimAtMouse: 1
+  holdOffset: {x: 0.5, y: 0.5}
+  spinThrow: 1
+  aimAtMouse: 1
   gripRotation: 130
   pivotPoint: {fileID: 0}
-  knockbackPower: 0
   fullCollider: {fileID: 9007136600030232037}
-  _useHeld: 0
-  _damage: 30
-  _range: 5
-  _attackSpeed: 0.15
-  dismembering: 0
+  weaponData: {fileID: 0}
   bulletPrefab: {fileID: 2198095510141801857, guid: 4036533af4b0aea459e98ed5dd94543e, type: 3}
   firePoints:
   - {fileID: 2668361800411480287}
   muzzleFlashes:
   - {fileID: 541316285361104590}
   flashAnimator: {fileID: 4653570806904545219}
-  _maxAmmo: 30
-  _currentAmmo: 30
-  _ammoConsumption: 1
-  _reloadTime: 2
-  _fireForce: 15
-  _reloading: 0
+  firearmData: {fileID: 0}
+  reloading: 0
   _isAutomatic: 1
 --- !u!212 &1488720925848193886
 SpriteRenderer:

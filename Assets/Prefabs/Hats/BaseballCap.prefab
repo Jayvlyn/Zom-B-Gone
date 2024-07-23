@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8510947219786376494}
   - component: {fileID: 6146197807928741351}
   m_Layer: 6
-  m_Name: BaseballHat
+  m_Name: BaseballCap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,12 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8fb66e1502676645a5cdca59ec7809e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hatData: {fileID: 11400000, guid: 87abeb40489f2894a88d2f42a31cc413, type: 2}
   transferSpeed: 8
-  swingTimeMultiplier: 0.8
-  damageMultiplier: 1
-  damageIncrease: 0
-  moveSpeedMod: 1
-  defense: 0
 --- !u!212 &8510947219786376494
 SpriteRenderer:
   m_ObjectHideFlags: 0

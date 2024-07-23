@@ -18,7 +18,7 @@ public class Firearm : Weapon
     [HideInInspector] public FirearmData firearmData;
     [HideInInspector] public bool reloading = false;
     private float shotTimer = 0;
-    protected int currentAmmo = 10;
+    protected int currentAmmo;
 
     [SerializeField] protected bool _isAutomatic; // Semi-Automatic or Automatic Gun?
     public bool IsAutomatic { get {  return _isAutomatic; } }
@@ -40,6 +40,7 @@ public class Firearm : Weapon
 		if (itemData as FirearmData != null)
 		{
 			firearmData = (FirearmData)itemData;
+            currentAmmo = firearmData.maxAmmo;
 		}
 		else Debug.Log("Invalid Data & Class Matchup");
 	}
@@ -68,17 +69,23 @@ public class Firearm : Weapon
         }
     }
 
-    public override void Drop()
+    private void PreRemoveFromHand()
     {
         reloadingIndicator.enabled = false;
+    }
+
+    public override void Drop()
+    {
+        PreRemoveFromHand();
         base.Drop();
     }
 
     public override void Throw()
     {
-        reloadingIndicator.enabled = false;
+        PreRemoveFromHand();
         base.Throw();
     }
+
 
     public override void PickUp(Transform parent, bool rightHand)
     {

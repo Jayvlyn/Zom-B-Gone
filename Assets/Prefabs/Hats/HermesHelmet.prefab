@@ -46,12 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8fb66e1502676645a5cdca59ec7809e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hatData: {fileID: 11400000, guid: 0241abb5df8b2334c9f0fbfbb395572c, type: 2}
   transferSpeed: 8
-  swingTimeMultiplier: 1
-  damageMultiplier: 1
-  damageIncrease: 0
-  moveSpeedMod: 1.5
-  defense: 4
 --- !u!212 &8510947219786376494
 SpriteRenderer:
   m_ObjectHideFlags: 0

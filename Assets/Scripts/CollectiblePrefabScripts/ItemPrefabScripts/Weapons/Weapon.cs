@@ -19,6 +19,10 @@ public abstract class Weapon : Item
 	protected void DealDamage(Health targetHealth)
     {
         float damage = weaponData.damage;
+
+        // Knockback
+        if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * weaponData.knockbackPower, ForceMode2D.Impulse);
+
         #region hat buff
         if (playerHead.wornHat != null)
         {
@@ -26,6 +30,7 @@ public abstract class Weapon : Item
             damage *= playerHead.wornHat.hatData.damageMultiplier;
         }
         #endregion
+
         targetHealth.TakeDamage(damage, weaponData.dismembering);
     }
 }

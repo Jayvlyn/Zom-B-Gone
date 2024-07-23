@@ -8,11 +8,11 @@ using UnityEngine;
 public class FirearmData : WeaponData
 {
 	[Header("Firearm attributes")]
-	public float range; // m / km
+	public float range = 10; // m / km
 	public int maxAmmo = 10;
 	public int ammoConsumption = 1;
-	public float reloadTime = 2; // Seconds
-	public float fireForce;
+	public float reloadTime = 1; // Seconds
+	public float fireForce = 25;
 
 	public override string GetInfoDisplayText()
 	{

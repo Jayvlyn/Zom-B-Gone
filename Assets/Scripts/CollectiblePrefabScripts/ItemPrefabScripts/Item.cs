@@ -92,7 +92,7 @@ public abstract class Item : MonoBehaviour, IInteractable
             case State.HELD:
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
                 rb.bodyType = RigidbodyType2D.Kinematic;
-                fullCollider.enabled = false;
+                //fullCollider.enabled = false;
                 //fullCollider.isTrigger = true;
                 break;
             default:
@@ -109,8 +109,16 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         Transform playerT = transform.parent;
         RemoveFromHand();
+        ChangeState(State.AIRBORNE);
+        float dropForwardForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
+        rb.AddForce(playerT.up * dropForwardForce, ForceMode2D.Impulse);
+        StartCoroutine(DropTimer());
+    }
+
+    private IEnumerator DropTimer()
+    {
+        yield return new WaitForSeconds(0.1f);
         ChangeState(State.GROUNDED);
-        rb.AddForce(playerT.up * Utils.MapScalarToRange(friction, 0.999f, 3, 300, true), ForceMode2D.Impulse);
     }
 
     public virtual void Throw()
@@ -232,6 +240,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected virtual void RemoveFromHand()
     {
         StartCoroutine(EnableFullCollider());
+        useHeld = false;
         moveToHand = false;
 
         if (inRightHand)

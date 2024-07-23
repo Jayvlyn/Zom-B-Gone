@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Loot_TechParts
   m_EditorClassIdentifier: 
   name: Tech Parts
-  description: A jumble of scrapped tech parts
-  rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
+  description: A jumble of scrapped tech parts, technilogical weapon advancements
+    rely on this stuff.
+  rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 21300000, guid: 54eccf2bf3d1bac48846ca5a140a4b5b, type: 3}
-  baseValue: 100
   maxStack: 30
