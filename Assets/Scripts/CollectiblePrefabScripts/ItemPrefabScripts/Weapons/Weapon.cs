@@ -30,7 +30,7 @@ public abstract class Weapon : Item
         }
         #endregion
 
-        targetHealth.TakeDamage(damage, weaponData.dismembering);
+        targetHealth.TakeDamage(damage, weaponData.dismemberChance);
     }
 
     public void TryDealKnockback(Health targetHealth)

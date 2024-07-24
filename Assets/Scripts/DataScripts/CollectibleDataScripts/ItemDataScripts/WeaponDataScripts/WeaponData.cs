@@ -9,7 +9,7 @@ public class WeaponData : ItemData
 	[SerializeField] public int damage = 10;
 	[SerializeField] public float attackSpeed = 0.15f; // time between attacks
 	[SerializeField] public float knockbackPower = 50;
-	[SerializeField] public bool dismembering = false;
+	[SerializeField,Range(0,100)] public float dismemberChance = 0;
 
 	public override string GetInfoDisplayText()
 	{

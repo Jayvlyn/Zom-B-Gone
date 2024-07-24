@@ -78,7 +78,7 @@ public class Bullet : MonoBehaviour
             damage *= playerHead.wornHat.hatData.damageMultiplier;
         }
         #endregion
-        targetHealth.TakeDamage(damage, shooter.weaponData.dismembering);
+        targetHealth.TakeDamage(damage, shooter.weaponData.dismemberChance);
         shooter.TryDealKnockback(targetHealth);
     }
 }
