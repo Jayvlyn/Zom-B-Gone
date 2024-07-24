@@ -14,34 +14,23 @@ public class PlayerController : MonoBehaviour
     private State currentState;
 
     [Header("References")]
+    [SerializeField] public PlayerData playerData;
+    [SerializeField] private Hands hands;
+    [SerializeField] private Head head;
+    [SerializeField] private Slider staminaSlider;
     private Rigidbody2D rb;
     private Camera gameCamera;
     private Interactor interactor;
-    [SerializeField] private Slider staminaSlider;
-    [SerializeField] private Hands hands;
-    [SerializeField] private Head head;
 
-    [Header("Properties")]
-    [SerializeField] private float walkSpeed = 5;
-    [SerializeField] private float runSpeed = 9;
-    [SerializeField] private float sneakSpeed = 3;
-    public float speedModifier = 1;
-    [SerializeField] public float maxStamina = 15;
-    [SerializeField] public float staminaRecoverySpeed = 2;
-    [SerializeField] private float staminaRecoveryDelay = 2f;
-    [SerializeField] private float velocityChangeSpeed = 0.17f;
-    [SerializeField] public float reloadSpeedReduction = 1f;
-    
-    public float currentStamina;
+    [HideInInspector] public bool holdingLeft;
+    [HideInInspector] public bool holdingRight;
+    [HideInInspector] public float currentStamina;
+    [HideInInspector] public bool recoverStamina;
     private float currentMoveSpeed;
     private Vector2 movementInput;
     private Vector2 smoothedMovementInput;
     private Vector2 movementInputSmoothVelocity;
-    public bool recoverStamina;
     private bool holdingRun;
-
-    public bool holdingLeft;
-	public bool holdingRight;
 
     public float leftLumbering = 1;
     public float rightLumbering = 1;
@@ -57,8 +46,8 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
 
         // Set currents
-        currentStamina = maxStamina;
-        currentMoveSpeed = walkSpeed;
+        currentStamina = playerData.maxStamina;
+        currentMoveSpeed = playerData.walkSpeed;
     }
 
     private float recoverTimer;
@@ -80,7 +69,7 @@ public class PlayerController : MonoBehaviour
         {
             if(recoverStamina)
             {
-                if (currentStamina < maxStamina) currentStamina += Time.deltaTime * staminaRecoverySpeed;
+                if (currentStamina < playerData.maxStamina) currentStamina += Time.deltaTime * playerData.staminaRecoverySpeed;
                 else recoverStamina = false;
             }
             else if(recoverTimer > 0)
@@ -102,18 +91,18 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateStaminaBar()
     {
-        staminaSlider.value = currentStamina / maxStamina;
+        staminaSlider.value = currentStamina / playerData.maxStamina;
     }
 
     public void RecoverStamina()
     {
-        recoverTimer = staminaRecoveryDelay;
+        recoverTimer = playerData.staminaRecoveryDelay;
     }
 
     private void SetPlayerVelocity()
     {
-        smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, velocityChangeSpeed * Time.deltaTime * 100);
-        Vector3 newVelocity = (smoothedMovementInput) * currentMoveSpeed * speedModifier * leftLumbering * rightLumbering;
+        smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, playerData.velocityChangeSpeed * Time.deltaTime * 100);
+        Vector3 newVelocity = (smoothedMovementInput) * currentMoveSpeed * playerData.speedModifier * leftLumbering * rightLumbering;
         #region hat buff
         if(head.wornHat != null)
         {
@@ -244,22 +233,22 @@ public class PlayerController : MonoBehaviour
                     float rightRatio = rightProjectileWeapon.CurrentAmmo / (float)rightProjectileWeapon.projectileWeaponData.maxAmmo;
                     if (leftRatio <= rightRatio)
                     {
-                        leftProjectileWeapon.StartReload(reloadSpeedReduction);
+                        leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
                     }
                     else
                     {
-                        rightProjectileWeapon.StartReload(reloadSpeedReduction);
+                        rightProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
                     }
                 }
-                else if (leftProjectileWeapon.reloading && !rightProjectileWeapon.reloading) rightProjectileWeapon.StartReload(reloadSpeedReduction);
-                else if (!leftProjectileWeapon.reloading && rightProjectileWeapon.reloading) leftProjectileWeapon.StartReload(reloadSpeedReduction);
+                else if (leftProjectileWeapon.reloading && !rightProjectileWeapon.reloading) rightProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
+                else if (!leftProjectileWeapon.reloading && rightProjectileWeapon.reloading) leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
             }
-            else if(!leftProjectileWeapon.reloading) leftProjectileWeapon.StartReload(reloadSpeedReduction);
+            else if(!leftProjectileWeapon.reloading) leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
             
 		}
         else if(hands.UsingRight && hands.RightObject.TryGetComponent(out ProjectileWeapon rightprojectileWeapon) && !rightprojectileWeapon.reloading)
         {
-            rightprojectileWeapon.StartReload(reloadSpeedReduction);
+            rightprojectileWeapon.StartReload(playerData.reloadSpeedReduction);
         }
 	}
 
@@ -325,19 +314,19 @@ public class PlayerController : MonoBehaviour
         {
             case State.WALKING:
                 if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = walkSpeed;
+                currentMoveSpeed = playerData.walkSpeed;
                 break;
             case State.RUNNING:
-                currentMoveSpeed = runSpeed;
+                currentMoveSpeed = playerData.runSpeed;
                 recoverStamina = false;
                 break;
             case State.SNEAKING:
                 if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = sneakSpeed;
+                currentMoveSpeed = playerData.sneakSpeed;
                 break;
             default: // IDLE:
                 if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = walkSpeed; 
+                currentMoveSpeed = playerData.walkSpeed; 
                 break;
         }
 

@@ -22,8 +22,6 @@ public class ProjectileWeapon : Weapon
 
     public bool IsAutomatic { get {  return projectileWeaponData.isAutomatic; } }
 
-    private PlayerController _pc;
-
     public int CurrentAmmo
     {
         get { return currentAmmo; }
@@ -88,7 +86,7 @@ public class ProjectileWeapon : Weapon
 
     public override void PickUp(Transform parent, bool rightHand)
     {
-        if(parent.gameObject.TryGetComponent(out PlayerController pc)) _pc = pc;
+        if(parent.gameObject.TryGetComponent(out PlayerController pc)) playerController = pc;
         if(rightHand)
         {
             ammoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
@@ -130,7 +128,7 @@ public class ProjectileWeapon : Weapon
         }
         else if(CurrentAmmo <= 0)
         {
-            StartReload(_pc.reloadSpeedReduction);
+            StartReload(playerData.reloadSpeedReduction);
         }
     }
 

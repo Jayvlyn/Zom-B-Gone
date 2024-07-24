@@ -17,4 +17,4 @@ MonoBehaviour:
     rely on this stuff.
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 21300000, guid: 54eccf2bf3d1bac48846ca5a140a4b5b, type: 3}
-  maxStack: 30
+  maxStack: 16

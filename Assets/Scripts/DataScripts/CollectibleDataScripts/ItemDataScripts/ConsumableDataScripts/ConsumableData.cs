@@ -7,10 +7,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Consumable", menuName = "Collectibles/New Consumable")]
 public class ConsumableData : ItemData
 {
-	[SerializeField, Tooltip("Amount of time the consumable effect lasts (0/negative for perminance)")]
+	[Tooltip("Amount of time the consumable effect lasts (0 or negative for permanence)")] 
 	public float effectTime;
+    public float instantStaminaRecovery = 0;
+    public float staminaRecoverySpeed = 0;
+    public float moveSpeedMod = 0;
 
-	public override string GetInfoDisplayText()
+    public override string GetInfoDisplayText()
 	{
 		StringBuilder sb = new StringBuilder();
 

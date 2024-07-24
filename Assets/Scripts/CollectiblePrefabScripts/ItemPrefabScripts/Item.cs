@@ -30,6 +30,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected PlayerController playerController;
     protected Hands playerHands;
     protected Head playerHead;
+    protected PlayerData playerData;
     protected bool inRightHand;
     [NonSerialized] public bool useHeld;
 
@@ -44,8 +45,10 @@ public abstract class Item : MonoBehaviour, IInteractable
 		playerController = FindObjectOfType<PlayerController>();
         playerHands = playerController.GetComponentInParent<Hands>();
         playerHead = playerController.GetComponentInParent<Head>();
+        playerData = playerController.playerData;
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
+        if(fullCollider == null) fullCollider = GetComponent<Collider2D>();
     }
 
     protected virtual void Update()

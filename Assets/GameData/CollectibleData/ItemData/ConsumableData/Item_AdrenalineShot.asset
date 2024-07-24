@@ -9,11 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
-  m_Name: Loot_ScrapMetal
+  m_Script: {fileID: 11500000, guid: 86ed2a5bf12584a4b8ee5fbb9245b848, type: 3}
+  m_Name: Item_AdrenalineShot
   m_EditorClassIdentifier: 
-  name: Scrap Metal
-  description: Used for all sorts of weapon crafting
+  name: Adrenaline Shot
+  description: A liquified fight or flight response
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
-  icon: {fileID: 21300000, guid: 54eccf2bf3d1bac48846ca5a140a4b5b, type: 3}
-  maxStack: 8
+  icon: {fileID: 21300000, guid: 5c19d5eb246afb44dbd88acf37d2f4f3, type: 3}
+  weight: 50
+  effectTime: 10
+  instantStaminaRecovery: 4
+  staminaRecoverySpeed: 5
+  moveSpeedMod: 1.3

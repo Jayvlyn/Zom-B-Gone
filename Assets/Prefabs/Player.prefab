@@ -84,22 +84,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66f9a82b5a4c7b47a82be946e7d00cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _staminaSlider: {fileID: 0}
-  _hands: {fileID: 1034459641233780573}
+  playerData: {fileID: 11400000, guid: f55ec50488d6a194d8af1bb5a1a21097, type: 2}
+  hands: {fileID: 0}
   head: {fileID: 2538085723734079734}
-  _walkSpeed: 5
-  _runSpeed: 9
-  _sneakSpeed: 3
-  _speedModifier: 1
-  _maxStamina: 15
-  _staminaRecoverySpeed: 2
-  staminaRecoveryDelay: 1
-  _velocityChangeSpeed: 0.17
-  _reloadSpeedReduction: 1
-  currentStamina: 0
-  recoverStamina: 0
+  staminaSlider: {fileID: 0}
   holdingLeft: 0
   holdingRight: 0
+  currentStamina: 0
+  recoverStamina: 0
   leftLumbering: 1
   rightLumbering: 1
   lumberingLowerBound: 0.8
@@ -116,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41019db7d071f5944bb2b1b5faa0002f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftItem: {fileID: 0}
-  _rightItem: {fileID: 0}
+  leftItem: {fileID: 0}
+  rightItem: {fileID: 0}
 --- !u!114 &2538085723734079734
 MonoBehaviour:
   m_ObjectHideFlags: 0

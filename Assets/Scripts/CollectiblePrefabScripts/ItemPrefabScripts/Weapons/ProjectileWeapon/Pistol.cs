@@ -4,13 +4,4 @@ using UnityEngine;
 
 public class Pistol : ProjectileWeapon
 {
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        base.Update();
-    }
 }
