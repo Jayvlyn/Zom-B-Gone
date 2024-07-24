@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Collectibles/Items/New Melee Weapon")]
+[CreateAssetMenu(fileName = "New Melee Weapon", menuName = "Collectibles/New Melee Weapon")]
 public class MeleeWeaponData : WeaponData
 {
 	[Header("Melee Properties")]

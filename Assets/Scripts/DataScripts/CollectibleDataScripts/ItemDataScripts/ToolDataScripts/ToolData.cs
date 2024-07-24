@@ -4,7 +4,7 @@ using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Throwing Weapon", menuName = "Collectibles/Items/New Throwing Weapon")]
+[CreateAssetMenu(fileName = "New Tool", menuName = "Collectibles/New Tool")]
 public class ToolData : ItemData
 {
 

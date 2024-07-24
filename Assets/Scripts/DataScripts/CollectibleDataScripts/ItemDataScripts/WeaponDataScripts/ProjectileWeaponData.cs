@@ -4,7 +4,7 @@ using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Projectile Weapon", menuName = "Collectibles/Items/New Projectile Weapon")]
+[CreateAssetMenu(fileName = "New Projectile Weapon", menuName = "Collectibles/New Projectile Weapon")]
 public class ProjectileWeaponData : WeaponData
 {
 	[Header("Projectile Weapon attributes")]

@@ -4,7 +4,7 @@ using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Consumable", menuName = "Collectibles/Items/New Consumable")]
+[CreateAssetMenu(fileName = "New Consumable", menuName = "Collectibles/New Consumable")]
 public class ConsumableData : ItemData
 {
 	[SerializeField, Tooltip("Amount of time the consumable effect lasts (0/negative for perminance)")]

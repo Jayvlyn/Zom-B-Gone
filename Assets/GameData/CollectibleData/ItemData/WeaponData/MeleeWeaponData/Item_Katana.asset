@@ -20,7 +20,7 @@ MonoBehaviour:
   damage: 25
   attackSpeed: 0.6
   knockbackPower: 20
-  dismemberChance: 0
+  dismemberChance: 37.6
   staminaCost: 0.5
   prepSpeed: 0.4
   swingCurve:
