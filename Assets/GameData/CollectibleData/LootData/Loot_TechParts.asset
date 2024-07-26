@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Loot_TechParts
   m_EditorClassIdentifier: 
   name: Tech Parts
-  description: A jumble of scrapped tech parts, technilogical weapon advancements
-    rely on this stuff.
+  description: Technological weapon advancements rely on this stuff.
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 21300000, guid: 54eccf2bf3d1bac48846ca5a140a4b5b, type: 3}
   maxStack: 16

@@ -9,8 +9,10 @@ public abstract class CollectibleData : ScriptableObject
     public string description = "";
 	public Rarity rarity = null;
     public Sprite icon = null;
+    [SerializeField, Min(1)] private int maxStack = 64;
 
-	public string Name => name;
+    public int MaxStack => maxStack;
+    public string Name => name;
     public string Description => description;
     public Rarity Rarity => rarity;
 

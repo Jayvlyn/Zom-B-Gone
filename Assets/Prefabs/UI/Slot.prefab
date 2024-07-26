@@ -126,7 +126,7 @@ MonoBehaviour:
   slotUI: {fileID: 7138825994445509175}
   onMouseStartHoverCollectible: {fileID: 11400000, guid: ddd6b45f714b235488a7c22cda3f8e75, type: 2}
   onMouseEndHoverCollectible: {fileID: 11400000, guid: a482dfbeab1e7994ba73be6cfe42b0a0, type: 2}
-  lootDestroyer: {fileID: 0}
+  collectibleDestroyer: {fileID: 0}
 --- !u!1 &7708131793567312717
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,8 +322,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icomImage: {fileID: 6998675399385336187}
-  backpack: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
-  lootQuantityText: {fileID: 7907024424289654383}
+  containerData: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
+  collectibleQuantityText: {fileID: 7907024424289654383}
 --- !u!114 &3705534198587483533
 MonoBehaviour:
   m_ObjectHideFlags: 0

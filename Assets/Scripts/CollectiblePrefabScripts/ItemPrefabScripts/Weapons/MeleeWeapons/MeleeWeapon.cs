@@ -10,10 +10,14 @@ public class MeleeWeapon : Weapon
     [HideInInspector] public MeleeWeaponData meleeWeaponData;
 
     private bool isSwinging = false;
+    public bool IsSwinging { get => isSwinging; set => isSwinging = value; }
+
     private bool returnSwing = false;
+
     private bool doDamage = false;
 
-	private void Awake()
+
+    private void Awake()
 	{
         base.Awake();
 		if (itemData as MeleeWeaponData != null)

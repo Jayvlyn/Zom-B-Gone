@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BackpackDragHandler : DragHandler
+public class ContainerDragHandler : DragHandler
 {
-    [SerializeField] private LootDestroyer lootDestroyer = null;
+    [SerializeField] private CollectibleDestroyer collectibleDestroyer = null;
 
     public override void OnPointerUp(PointerEventData eventData)
     {
@@ -17,8 +17,8 @@ public class BackpackDragHandler : DragHandler
             {
                 if (eventData.hovered[i].layer != LayerMask.NameToLayer("UI"))
                 {
-                    BackpackSlot thisSlot = GetSlotUI as BackpackSlot;
-                    lootDestroyer.Activate(thisSlot.LootSlot, thisSlot.SlotIndex);
+                    CollectibleContainerSlot thisSlot = GetSlotUI as CollectibleContainerSlot;
+                    collectibleDestroyer.Activate(thisSlot.CollectibleSlot, thisSlot.SlotIndex);
                 }
             }
 

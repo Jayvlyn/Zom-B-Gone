@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Item_Bat
   m_EditorClassIdentifier: 
   name: Bat
-  description: 
+  description: Batter up!
   rarity: {fileID: 11400000, guid: 705c066aaed3d914fa8be279498b3421, type: 2}
   icon: {fileID: 0}
   weight: 900
   damage: 15
   attackSpeed: 0.13
   knockbackPower: 300
-  dismembering: 0
+  dismemberChance: 0
   staminaCost: 1
   prepSpeed: 0.1
   swingCurve:

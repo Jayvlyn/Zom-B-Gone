@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
-  m_Name: Loot_Screws
+  m_Script: {fileID: 11500000, guid: bd01475d9d446784a95df057a5342826, type: 3}
+  m_Name: Item_JollyChimp
   m_EditorClassIdentifier: 
-  name: Screws
-  description: These are great for jank weapon fusions.
+  name: Jolly Chimp
+  description: Cymbal-Banging monkey toy, this thing is kinda creepy...
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
   icon: {fileID: 0}
-  maxStack: 64
+  weight: 1000
