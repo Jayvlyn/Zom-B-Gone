@@ -15,12 +15,13 @@ MonoBehaviour:
   name: Assault Rifle
   description: 
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
-  icon: {fileID: 21300000, guid: 86e20fc946f88dd409f8d22e8e8aa1b8, type: 3}
+  icon: {fileID: 21300000, guid: 970eaa911f8829147ab89b2828c92c15, type: 3}
+  maxStack: 64
   weight: 800
   damage: 35
   attackSpeed: 0.15
   knockbackPower: 37
-  dismembering: 0
+  dismemberChance: 0
   range: 20
   maxAmmo: 30
   ammoConsumption: 1

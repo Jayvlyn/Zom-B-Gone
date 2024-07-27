@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd6978c264dd05418033ad901ef5d2c, type: 3}
+  m_Name: Container_Backpack
+  m_EditorClassIdentifier: 
+  onContainerCollectibleUpdated: {fileID: 11400000, guid: 983335ffb38ed02479e5d514423e8996, type: 2}
+  testCollectibleSlot:
+    collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+    quantity: 40
+  size: 42
+  Container:
+    collectibleSlots:
+    - collectible: {fileID: 11400000, guid: c615ffb9921c717449e87b20cd2b23c0, type: 2}
+      quantity: 2
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 16
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 64
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0

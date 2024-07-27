@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41019db7d071f5944bb2b1b5faa0002f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handContainerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
   leftItem: {fileID: 0}
   rightItem: {fileID: 0}
 --- !u!114 &2538085723734079734

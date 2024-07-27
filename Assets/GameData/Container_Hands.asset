@@ -10,9 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdd6978c264dd05418033ad901ef5d2c, type: 3}
-  m_Name: Backpack_Player
+  m_Name: Container_Hands
   m_EditorClassIdentifier: 
-  onContainerCollectibleUpdated: {fileID: 11400000, guid: 983335ffb38ed02479e5d514423e8996, type: 2}
+  onContainerCollectibleUpdated: {fileID: 11400000, guid: 6ff344c054c12a840ba9ed1c5a087660, type: 2}
   testCollectibleSlot:
-    collectible: {fileID: 11400000, guid: c615ffb9921c717449e87b20cd2b23c0, type: 2}
-    quantity: 2
+    collectible: {fileID: 11400000, guid: 6ddf5a9b7f0f1564287e32f82510541d, type: 2}
+    quantity: 1
+  size: 2
+  Container:
+    collectibleSlots:
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0

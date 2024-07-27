@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Hands : MonoBehaviour
 {
+    public CollectibleContainerData handContainerData;
+
     private TMP_Text leftAmmoCount;
     private TMP_Text rightAmmoCount;
 
@@ -57,10 +59,17 @@ public class Hands : MonoBehaviour
         set { leftObject = value;
             if(leftObject != null)
             {
-			    if (value.TryGetComponent(out Item leftItem)) this.leftItem = leftItem;
+			    if (value.TryGetComponent(out Item leftItem))
+                {
+                    this.leftItem = leftItem;
+                    handContainerData.Container.collectibleSlots[0].collectible = leftItem.itemData;
+                    handContainerData.onContainerCollectibleUpdated.Raise();
+                }
             }
             else
             {
+                handContainerData.Container.collectibleSlots[0].collectible = null;
+                handContainerData.onContainerCollectibleUpdated.Raise();
                 leftItem = null;
             }
 		}
@@ -73,10 +82,17 @@ public class Hands : MonoBehaviour
         set { rightObject = value; 
             if(rightObject != null)
             {
-                if(value.TryGetComponent(out Item rightItem)) this.rightItem = rightItem;
+                if(value.TryGetComponent(out Item rightItem))
+                {
+                    this.rightItem = rightItem;
+                    handContainerData.Container.collectibleSlots[1].collectible = rightItem.itemData;
+                    handContainerData.onContainerCollectibleUpdated.Raise();
+                }
             }
             else
             {
+                handContainerData.Container.collectibleSlots[1].collectible = null;
+                handContainerData.onContainerCollectibleUpdated.Raise();
                 rightItem = null;
             }
         }

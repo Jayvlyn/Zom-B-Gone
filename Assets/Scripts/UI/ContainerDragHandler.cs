@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ContainerDragHandler : DragHandler
 {
-    [SerializeField] private CollectibleDestroyer collectibleDestroyer = null;
+    [SerializeField] private CollectibleDropper collectibleDropper = null;
 
     public override void OnPointerUp(PointerEventData eventData)
     {
@@ -13,13 +13,20 @@ public class ContainerDragHandler : DragHandler
         {
             base.OnPointerUp(eventData);
 
-            for (int i = 0; i < eventData.hovered.Count; i++)
+            //for (int i = 0; i < eventData.hovered.Count; i++)
+            //{
+            //    if (eventData.hovered[i].layer != LayerMask.NameToLayer("UI"))
+            //    {
+            //        CollectibleContainerSlot thisSlot = GetSlotUI as CollectibleContainerSlot;
+            //        collectibleDestroyer.Activate(thisSlot.CollectibleSlot, thisSlot.SlotIndex);
+            //    }
+            //}
+
+            if(eventData.hovered.Count == 0)
             {
-                if (eventData.hovered[i].layer != LayerMask.NameToLayer("UI"))
-                {
-                    CollectibleContainerSlot thisSlot = GetSlotUI as CollectibleContainerSlot;
-                    collectibleDestroyer.Activate(thisSlot.CollectibleSlot, thisSlot.SlotIndex);
-                }
+                CollectibleContainerSlot thisSlot = GetSlotUI as CollectibleContainerSlot;
+                collectibleDropper.Activate(thisSlot.SlotIndex);
+
             }
 
             //if(eventData.hovered.Count == 0)

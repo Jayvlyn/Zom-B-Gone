@@ -11,7 +11,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         GROUNDED, AIRBORNE, HELD
     }
-    protected State _currentState;
+    protected State currentState;
 
 
 	[Header("Item attributes")]
@@ -25,6 +25,11 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected float gripRotation = 130;
     [SerializeField] protected Transform pivotPoint;
     [SerializeField] protected Collider2D fullCollider;
+    [Header("Sort Ordering")]
+    [SerializeField] protected SpriteRenderer itemRenderer;
+    [SerializeField] protected int groundSortOrder = -30;
+    [SerializeField] protected int heldSortOrder = 10;
+    [SerializeField] protected int airborneSortOrder = 20;
 
     protected Rigidbody2D rb;
     protected PlayerController playerController;
@@ -32,7 +37,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected Head playerHead;
     protected PlayerData playerData;
     protected bool inRightHand;
-    [NonSerialized] public bool useHeld;
+    [HideInInspector] public bool useHeld;
 
     protected bool moveToHand;
     private Vector3 pickupTarget;
@@ -49,15 +54,23 @@ public abstract class Item : MonoBehaviour, IInteractable
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
         if(fullCollider == null) fullCollider = GetComponent<Collider2D>();
+        if(itemRenderer == null) itemRenderer = GetComponent<SpriteRenderer>();
+        
+        switch(currentState)
+        {
+            case State.GROUNDED: itemRenderer.sortingOrder = groundSortOrder; break;
+            case State.AIRBORNE: itemRenderer.sortingOrder = airborneSortOrder; break;
+            case State.HELD:     itemRenderer.sortingOrder = heldSortOrder; break;
+        }
     }
 
     protected virtual void Update()
     {
-        if(_currentState == State.AIRBORNE && rb.velocity.magnitude < 3)
+        if(currentState == State.AIRBORNE && rb.velocity.magnitude < 3)
         {
             ChangeState(State.GROUNDED);
         }
-        if(_currentState == State.GROUNDED)
+        if(currentState == State.GROUNDED)
         {
             Friction();
         }
@@ -70,7 +83,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private void FixedUpdate()
     {
-        if(_currentState == State.HELD && aimAtMouse)
+        if(currentState == State.HELD && aimAtMouse)
         {
             RotateToMouse();
         }
@@ -82,28 +95,31 @@ public abstract class Item : MonoBehaviour, IInteractable
         {
             case State.GROUNDED:
                 gameObject.layer = LayerMask.NameToLayer("InteractableItem");
-                if(_currentState == State.HELD)rb.bodyType = RigidbodyType2D.Dynamic;
+                itemRenderer.sortingOrder = groundSortOrder;
+                if (currentState == State.HELD)rb.bodyType = RigidbodyType2D.Dynamic;
                 StartCoroutine(EnableFullCollider());
                 fullCollider.isTrigger = true;
 				break;
             case State.AIRBORNE:
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
-                if (_currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
+                itemRenderer.sortingOrder = airborneSortOrder;
+                if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
                 StartCoroutine(EnableFullCollider());
                 fullCollider.isTrigger = false;
                 break;
             case State.HELD:
+                itemRenderer.sortingOrder = heldSortOrder;
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 //fullCollider.enabled = false;
-                //fullCollider.isTrigger = true;
+                fullCollider.isTrigger = true;
                 break;
             default:
                 break;
 
         }
 
-        _currentState = newState;
+        currentState = newState;
     }
 
     public abstract void Use();
@@ -206,7 +222,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(fallTime);
         
-        if(_currentState == State.AIRBORNE) 
+        if(currentState == State.AIRBORNE) 
             ChangeState(State.GROUNDED);
     }
 
@@ -263,7 +279,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if(_currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
+        if(currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
             collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false));
             if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))

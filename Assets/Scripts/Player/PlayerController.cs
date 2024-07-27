@@ -1,6 +1,5 @@
 using GameEvents;
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -147,7 +146,7 @@ public class PlayerController : MonoBehaviour
             {
                 interactor.Interact(false);
                 if(hands.UsingLeft)
-                {
+                { // Set lumbering after pickup
                     leftLumbering = Utils.MapWeightToRange(hands.leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
                 }
             }
@@ -169,7 +168,7 @@ public class PlayerController : MonoBehaviour
             {
                 interactor.Interact(true);
 				if (hands.UsingRight)
-				{
+				{ // Set lumbering after pickup
 					rightLumbering = Utils.MapWeightToRange(hands.rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
 				}
 			}
@@ -196,28 +195,38 @@ public class PlayerController : MonoBehaviour
         if (hands.rightItem != null) hands.rightItem.useHeld = true;
     }
 
-    private void OnDropLeft(InputValue inputValue)
+    public void DropLeft()
     {
         if (hands.UsingLeft)
         {
             if (movementInput.magnitude > 0) hands.leftItem.Throw();
-            
+
             else hands.leftItem.Drop();
 
             leftLumbering = 1;
         }
     }
 
-    private void OnDropRight(InputValue inputValue)
+    public void DropRight()
     {
         if (hands.UsingRight)
         {
             if (movementInput.magnitude > 0) hands.rightItem.Throw();
-            
+
             else hands.rightItem.Drop();
 
             rightLumbering = 1;
         }
+    }
+
+    private void OnDropLeft(InputValue inputValue)
+    {
+        DropLeft();
+    }
+
+    private void OnDropRight(InputValue inputValue)
+    {
+        DropRight();
     }
 
     // Input for reloading, wont do anything without projectileWeapon

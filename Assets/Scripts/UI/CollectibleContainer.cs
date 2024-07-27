@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class CollectibleContainer : ICollectibleContainer
 {
-    private CollectibleSlot[] collectibleSlots = new CollectibleSlot[0];
+    public CollectibleSlot[] collectibleSlots = new CollectibleSlot[0];
 
     public Action OnCollectibleUpdated = delegate { };
 
