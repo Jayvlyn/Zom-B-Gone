@@ -11,6 +11,7 @@ public class Hands : MonoBehaviour
     private TMP_Text leftAmmoCount;
     private TMP_Text rightAmmoCount;
 
+
     private bool usingRight;
     public bool UsingRight { get { return usingRight; }
         set
@@ -103,9 +104,53 @@ public class Hands : MonoBehaviour
 
     void Awake()
     {
+        // Ammo count
         leftAmmoCount = GameObject.FindWithTag("LeftAmmoCount").GetComponent<TMP_Text>();
         rightAmmoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
         leftAmmoCount.enabled = false;
         rightAmmoCount.enabled = false;
+
+        // Initialize Hand Items
+        if (handContainerData.Container.collectibleSlots[0].collectible != null && leftItem == null) // Item missing from left hand
+        {
+            Debug.Log(handContainerData.Container.collectibleSlots[0].collectible.name);
+
+            string itemName = handContainerData.Container.collectibleSlots[0].collectible.name;
+            GameObject prefab = Resources.Load<GameObject>(itemName);
+            leftObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+            leftItem = leftObject.GetComponent<Item>();
+            leftItem.PickUp(gameObject.transform, false);
+            UsingLeft = true;
+            StartCoroutine(DelayedLeftInit());
+            
+        }
+        if (handContainerData.Container.collectibleSlots[1].collectible != null && rightItem == null) // Item missing from right hand
+        {
+            string itemName = handContainerData.Container.collectibleSlots[1].collectible.name;
+            GameObject prefab = Resources.Load<GameObject>(itemName);
+            rightObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+            rightItem = rightObject.GetComponent<Item>();
+            rightItem.PickUp(gameObject.transform, true);
+            UsingRight = true;
+            StartCoroutine(DelayedRightInit());
+        }
+
+    }
+
+    private IEnumerator DelayedLeftInit()
+    {
+        yield return new WaitForSeconds(0.5f);
+        
+    }
+
+    private IEnumerator DelayedRightInit()
+    {
+        yield return new WaitForSeconds(0.5f);
+        
+    }
+
+    private void Start()
+    {
+        
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2208294227549419385}
   - component: {fileID: 8225873307285844331}
   m_Layer: 12
-  m_Name: LongSword
+  m_Name: Longsword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,6 +62,7 @@ MonoBehaviour:
   groundSortOrder: -30
   heldSortOrder: 10
   airborneSortOrder: 20
+  rb: {fileID: 8298971315238355472}
   useHeld: 0
   weaponData: {fileID: 0}
   damageCollider: {fileID: 8589298506778409595}

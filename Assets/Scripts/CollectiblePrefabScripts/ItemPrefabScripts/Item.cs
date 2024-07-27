@@ -25,6 +25,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected float gripRotation = 130;
     [SerializeField] protected Transform pivotPoint;
     [SerializeField] protected Collider2D fullCollider;
+    [SerializeField] protected float minimumAirborneSpeed = 10;
     [Header("Sort Ordering")]
     [SerializeField] protected SpriteRenderer itemRenderer;
     [SerializeField] protected int groundSortOrder = -30;
@@ -32,6 +33,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected int airborneSortOrder = 20;
 
     protected Rigidbody2D rb;
+
     protected PlayerController playerController;
     protected Hands playerHands;
     protected Head playerHead;
@@ -45,28 +47,28 @@ public abstract class Item : MonoBehaviour, IInteractable
     private float pickupSpeed = 10;
 
 
-    protected void Awake()
+    public void Awake()
     {
-		playerController = FindObjectOfType<PlayerController>();
+        playerController = FindObjectOfType<PlayerController>();
         playerHands = playerController.GetComponentInParent<Hands>();
         playerHead = playerController.GetComponentInParent<Head>();
         playerData = playerController.playerData;
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
-        if(fullCollider == null) fullCollider = GetComponent<Collider2D>();
-        if(itemRenderer == null) itemRenderer = GetComponent<SpriteRenderer>();
-        
-        switch(currentState)
+        if (fullCollider == null) fullCollider = GetComponent<Collider2D>();
+        if (itemRenderer == null) itemRenderer = GetComponent<SpriteRenderer>();
+
+        switch (currentState)
         {
             case State.GROUNDED: itemRenderer.sortingOrder = groundSortOrder; break;
             case State.AIRBORNE: itemRenderer.sortingOrder = airborneSortOrder; break;
-            case State.HELD:     itemRenderer.sortingOrder = heldSortOrder; break;
+            case State.HELD: itemRenderer.sortingOrder = heldSortOrder; break;
         }
     }
 
     protected virtual void Update()
     {
-        if(currentState == State.AIRBORNE && rb.velocity.magnitude < 3)
+        if(currentState == State.AIRBORNE && rb.velocity.magnitude < minimumAirborneSpeed)
         {
             ChangeState(State.GROUNDED);
         }
@@ -98,7 +100,7 @@ public abstract class Item : MonoBehaviour, IInteractable
                 itemRenderer.sortingOrder = groundSortOrder;
                 if (currentState == State.HELD)rb.bodyType = RigidbodyType2D.Dynamic;
                 StartCoroutine(EnableFullCollider());
-                fullCollider.isTrigger = true;
+                //fullCollider.isTrigger = true;
 				break;
             case State.AIRBORNE:
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");

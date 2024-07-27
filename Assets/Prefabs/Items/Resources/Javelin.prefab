@@ -49,22 +49,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b69c06f53ae3042b861596cda65891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _quality: 100
-  _weight: 500
-  _rotationalFriction: 0.9
+  itemData: {fileID: 0}
+  rotationalFriction: 0.9
   friction: 0.98
-  _holdOffset: {x: 0.5, y: 0.2}
-  _spinThrow: 0
-  _aimAtMouse: 1
+  holdOffset: {x: 0.5, y: 0.5}
+  spinThrow: 1
+  aimAtMouse: 1
   gripRotation: 130
   pivotPoint: {fileID: 0}
-  knockbackPower: 0
   fullCollider: {fileID: 0}
-  _useHeld: 0
-  _damage: 40
-  _range: 10
-  _attackSpeed: 1
-  dismembering: 0
+  itemRenderer: {fileID: 0}
+  groundSortOrder: -30
+  heldSortOrder: 10
+  airborneSortOrder: 20
+  rb: {fileID: 1481152091677389883}
+  useHeld: 0
+  weaponData: {fileID: 0}
+  throwingWeaponData: {fileID: 0}
 --- !u!212 &2656671740393021855
 SpriteRenderer:
   m_ObjectHideFlags: 0

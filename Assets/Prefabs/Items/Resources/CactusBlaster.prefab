@@ -143,36 +143,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c42a995e62abb4aa6b0f0f1f138e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _quality: 100
-  _weight: 15000
-  _rotationalFriction: 0.9
+  itemData: {fileID: 0}
+  rotationalFriction: 0.9
   friction: 0.98
-  _holdOffset: {x: 0.5, y: 0.5}
-  _spinThrow: 1
-  _aimAtMouse: 1
+  holdOffset: {x: 0.5, y: 0.5}
+  spinThrow: 1
+  aimAtMouse: 1
   gripRotation: 130
   pivotPoint: {fileID: 0}
-  knockbackPower: 0
   fullCollider: {fileID: 0}
-  _useHeld: 0
-  _damage: 20
-  _range: 5
-  _attackSpeed: 0
-  dismembering: 0
-  bulletPrefab: {fileID: 2198095510141801857, guid: 5430daafacada5744ac457d5f55a7d24, type: 3}
+  itemRenderer: {fileID: 0}
+  groundSortOrder: -30
+  heldSortOrder: 10
+  airborneSortOrder: 20
+  rb: {fileID: 8608465535031704304}
+  useHeld: 0
+  weaponData: {fileID: 0}
   firePoints:
   - {fileID: 571813201470892697}
   - {fileID: 7653741256578842127}
   - {fileID: 5950425499944704752}
   muzzleFlashes: []
   flashAnimator: {fileID: 0}
-  _maxAmmo: 12
-  _currentAmmo: 12
-  _ammoConsumption: 3
-  _reloadTime: 2
-  _fireForce: 30
-  _reloading: 0
-  _isAutomatic: 0
+  projectileWeaponData: {fileID: 0}
+  reloading: 0
 --- !u!212 &3890775405625495789
 SpriteRenderer:
   m_ObjectHideFlags: 0

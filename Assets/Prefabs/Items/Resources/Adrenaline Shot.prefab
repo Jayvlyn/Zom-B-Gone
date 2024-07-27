@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2715985614024779500}
   - component: {fileID: 2245973136623882417}
   m_Layer: 12
-  m_Name: Adrenaline
+  m_Name: Adrenaline Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,6 +56,12 @@ MonoBehaviour:
   gripRotation: 130
   pivotPoint: {fileID: 0}
   fullCollider: {fileID: 2245973136623882417}
+  itemRenderer: {fileID: 0}
+  groundSortOrder: -30
+  heldSortOrder: 10
+  airborneSortOrder: 20
+  rb: {fileID: 2715985614024779500}
+  useHeld: 0
   consumableData: {fileID: 0}
 --- !u!212 &9185509544805037402
 SpriteRenderer:

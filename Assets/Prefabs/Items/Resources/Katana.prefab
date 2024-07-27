@@ -58,6 +58,7 @@ MonoBehaviour:
   gripRotation: 130
   pivotPoint: {fileID: 818514053000105829}
   fullCollider: {fileID: 1504697998909740283}
+  minimumAirborneSpeed: 10
   itemRenderer: {fileID: 0}
   groundSortOrder: -30
   heldSortOrder: 10
