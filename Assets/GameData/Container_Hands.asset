@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Container_Hands
   m_EditorClassIdentifier: 
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 6ff344c054c12a840ba9ed1c5a087660, type: 2}
+  onContainerCollectibleSwapped: {fileID: 11400000, guid: e4af4a6ce34359342b0bda89b75f830f, type: 2}
   testCollectibleSlot:
     collectible: {fileID: 11400000, guid: 6ddf5a9b7f0f1564287e32f82510541d, type: 2}
-    quantity: 1
+    quantity: 10
   size: 2
   Container:
+    containerName: Hands
     collectibleSlots:
     - collectible: {fileID: 0}
       quantity: 0

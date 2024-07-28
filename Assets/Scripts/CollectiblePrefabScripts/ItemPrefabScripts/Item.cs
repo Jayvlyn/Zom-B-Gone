@@ -38,7 +38,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     protected Hands playerHands;
     protected Head playerHead;
     protected PlayerData playerData;
-    protected bool inRightHand;
+    [HideInInspector] public bool inRightHand;
     [HideInInspector] public bool useHeld;
 
     protected bool moveToHand;
@@ -228,7 +228,7 @@ public abstract class Item : MonoBehaviour, IInteractable
             ChangeState(State.GROUNDED);
     }
 
-    protected void PositionInHand()
+    public void PositionInHand()
     {
         if (inRightHand) rotationTarget = Quaternion.Euler(0, 0, -gripRotation);
         else rotationTarget = Quaternion.Euler(0, 0, gripRotation);
@@ -290,6 +290,7 @@ public abstract class Item : MonoBehaviour, IInteractable
             }
         }
     }
+
 
     public void Interact(Head head)
     {

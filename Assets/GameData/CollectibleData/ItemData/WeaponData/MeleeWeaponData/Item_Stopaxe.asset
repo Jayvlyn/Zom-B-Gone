@@ -16,6 +16,7 @@ MonoBehaviour:
   description: An improvised battle axe cut from a stop sign.
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 4200
   damage: 10
   attackSpeed: 0.15

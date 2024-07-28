@@ -1,6 +1,7 @@
 using GameEvents;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -30,10 +31,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 smoothedMovementInput;
     private Vector2 movementInputSmoothVelocity;
     private bool holdingRun;
-
-    public float leftLumbering = 1;
-    public float rightLumbering = 1;
-    [SerializeField] private float lumberingLowerBound = 0.8f;
 
     private void Awake()
     {
@@ -101,7 +98,7 @@ public class PlayerController : MonoBehaviour
     private void SetPlayerVelocity()
     {
         smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, playerData.velocityChangeSpeed * Time.deltaTime * 100);
-        Vector3 newVelocity = (smoothedMovementInput) * currentMoveSpeed * playerData.speedModifier * leftLumbering * rightLumbering;
+        Vector3 newVelocity = (smoothedMovementInput) * currentMoveSpeed * playerData.speedModifier * hands.leftLumbering * hands.rightLumbering;
         #region hat buff
         if(head.wornHat != null)
         {
@@ -140,15 +137,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnLeftHand(InputValue inputValue)
     {
-        if(inputValue.isPressed)
+		if (EventSystem.current.IsPointerOverGameObject()) return;
+		if (inputValue.isPressed)
         {
 		    if (!hands.UsingLeft)
             {
                 interactor.Interact(false);
-                if(hands.UsingLeft)
-                { // Set lumbering after pickup
-                    leftLumbering = Utils.MapWeightToRange(hands.leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-                }
             }
             
 			else if (hands.leftItem != null) hands.leftItem.Use();
@@ -162,15 +156,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnRightHand(InputValue inputValue)
     {
+		if (EventSystem.current.IsPointerOverGameObject()) return;
 		if (inputValue.isPressed)
 		{
 			if (!hands.UsingRight)
             {
                 interactor.Interact(true);
-				if (hands.UsingRight)
-				{ // Set lumbering after pickup
-					rightLumbering = Utils.MapWeightToRange(hands.rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-				}
 			}
             
 			else if (hands.rightItem != null) hands.rightItem.Use();
@@ -184,6 +175,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnLeftHold(InputValue inputValue)
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
 		holdingLeft = true;
         if (hands.leftItem != null) hands.leftItem.useHeld = true;
 
@@ -191,6 +184,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnRightHold(InputValue inputValue)
     {
+		if (EventSystem.current.IsPointerOverGameObject()) return;
 		holdingRight = true;
         if (hands.rightItem != null) hands.rightItem.useHeld = true;
     }
@@ -203,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
             else hands.leftItem.Drop();
 
-            leftLumbering = 1;
+            hands.leftLumbering = 1;
         }
     }
 
@@ -215,7 +209,7 @@ public class PlayerController : MonoBehaviour
 
             else hands.rightItem.Drop();
 
-            rightLumbering = 1;
+            hands.rightLumbering = 1;
         }
     }
 

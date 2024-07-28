@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Pierce through an entire horde.
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 4000
   damage: 100
   attackSpeed: 0.15

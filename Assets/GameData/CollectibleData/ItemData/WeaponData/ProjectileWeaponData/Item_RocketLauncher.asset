@@ -16,11 +16,12 @@ MonoBehaviour:
   description: 
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 1500
   damage: 10
   attackSpeed: 0.15
   knockbackPower: 50
-  dismembering: 0
+  dismemberChance: 0
   range: 10
   maxAmmo: 1
   ammoConsumption: 1

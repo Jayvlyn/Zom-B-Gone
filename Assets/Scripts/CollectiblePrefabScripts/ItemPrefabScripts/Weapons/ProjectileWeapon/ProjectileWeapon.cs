@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class ProjectileWeapon : Weapon
 {
-    private TMP_Text ammoCount;
-    private TMP_Text reloadingIndicator;
-
-
     [Header("Projectile Weapon attributes")]
     [SerializeField] protected List<Transform> firePoints;
     [SerializeField] protected List<SpriteRenderer> muzzleFlashes;
@@ -27,7 +23,7 @@ public class ProjectileWeapon : Weapon
         get { return currentAmmo; }
         set { 
             currentAmmo = value;
-            ammoCount.text = currentAmmo + " / " + projectileWeaponData.maxAmmo;
+            UpdateAmmoCount();
         }
     }
 
@@ -66,9 +62,15 @@ public class ProjectileWeapon : Weapon
         }
     }
 
+    private void SetReloadIndicator(bool enabled)
+    {
+		if (inRightHand) playerHands.rightReloadingIndicator.enabled = enabled;
+		else playerHands.leftReloadingIndicator.enabled = enabled;
+	}
+
     private void PreRemoveFromHand()
     {
-        reloadingIndicator.enabled = false;
+        SetReloadIndicator(false);
     }
 
     public override void Drop()
@@ -87,16 +89,6 @@ public class ProjectileWeapon : Weapon
     public override void PickUp(Transform parent, bool rightHand)
     {
         if(parent.gameObject.TryGetComponent(out PlayerController pc)) playerController = pc;
-        if(rightHand)
-        {
-            ammoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
-            reloadingIndicator = GameObject.FindWithTag("RightReloadingIndicator").GetComponent<TMP_Text>();
-        }
-        else
-        {
-            ammoCount = GameObject.FindWithTag("LeftAmmoCount").GetComponent<TMP_Text>();
-            reloadingIndicator = GameObject.FindWithTag("LeftReloadingIndicator").GetComponent<TMP_Text>();
-        }
         base.PickUp(parent, rightHand);
         CurrentAmmo = CurrentAmmo; // update count text
     }
@@ -144,11 +136,17 @@ public class ProjectileWeapon : Weapon
     private IEnumerator Reload(float mod = 1)
     {
         reloading = true;
-        reloadingIndicator.enabled = true;
+        SetReloadIndicator(true);
         CurrentAmmo = 0;
         yield return new WaitForSeconds(projectileWeaponData.reloadTime * mod);
         CurrentAmmo = projectileWeaponData.maxAmmo;
         reloading = false;
-        reloadingIndicator.enabled = false;
+        SetReloadIndicator(false);
     }
+
+	public void UpdateAmmoCount()
+	{
+		if (inRightHand) playerHands.rightAmmoCount.text = currentAmmo + " / " + projectileWeaponData.maxAmmo;
+		else playerHands.leftAmmoCount.text = currentAmmo + " / " + projectileWeaponData.maxAmmo;
+	}
 }

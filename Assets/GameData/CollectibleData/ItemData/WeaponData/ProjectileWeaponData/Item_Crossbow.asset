@@ -16,13 +16,16 @@ MonoBehaviour:
   description: Silence of a melee with the range of a gun
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 990
   damage: 50
   attackSpeed: 1
   knockbackPower: 600
-  dismembering: 0
+  dismemberChance: 0
   range: 50
   maxAmmo: 1
   ammoConsumption: 1
   reloadTime: 4
   fireForce: 25
+  isAutomatic: 0
+  bulletPrefab: {fileID: 0}

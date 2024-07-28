@@ -16,11 +16,12 @@ MonoBehaviour:
   description: Watch your head!
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 1100
   damage: 60
   attackSpeed: 0.5
   knockbackPower: 30
-  dismembering: 1
+  dismemberChance: 0
   range: 50
   maxAmmo: 5
   ammoConsumption: 1

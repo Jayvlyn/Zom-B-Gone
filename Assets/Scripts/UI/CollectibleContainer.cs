@@ -3,9 +3,12 @@ using System;
 [Serializable]
 public class CollectibleContainer : ICollectibleContainer
 {
+    public string containerName; // if is "Hands" will do extra hand logic for moving items
+
     public CollectibleSlot[] collectibleSlots = new CollectibleSlot[0];
 
     public Action OnCollectibleUpdated = delegate { };
+    public Action OnCollectibleSwapped = delegate { };
 
     public CollectibleContainer(int size) => collectibleSlots = new CollectibleSlot[size];
 
@@ -135,7 +138,7 @@ public class CollectibleContainer : ICollectibleContainer
         CollectibleSlot firstSlot = collectibleSlots[indexOne];
         CollectibleSlot secondSlot = collectibleSlots[indexTwo];
 
-        if (firstSlot == secondSlot) return;
+        //if (firstSlot == secondSlot) return;
 
         if(secondSlot.collectible != null) // Check if same item, stack
         {
@@ -148,6 +151,7 @@ public class CollectibleContainer : ICollectibleContainer
                     collectibleSlots[indexOne] = new CollectibleSlot();
 
                     OnCollectibleUpdated.Invoke();
+                    OnCollectibleSwapped.Invoke();
 
                     return;
                 }
@@ -158,5 +162,6 @@ public class CollectibleContainer : ICollectibleContainer
         collectibleSlots[indexTwo] = firstSlot;
 
         OnCollectibleUpdated.Invoke();
+        OnCollectibleSwapped.Invoke();
     }
 }

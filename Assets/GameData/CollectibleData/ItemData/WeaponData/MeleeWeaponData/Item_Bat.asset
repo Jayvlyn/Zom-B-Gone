@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Batter up!
   rarity: {fileID: 11400000, guid: 705c066aaed3d914fa8be279498b3421, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 900
   damage: 15
   attackSpeed: 0.13

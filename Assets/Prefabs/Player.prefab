@@ -41,8 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8105131813210140981}
   - component: {fileID: 8105131813210140980}
-  - component: {fileID: 1034459641233780573}
   - component: {fileID: 2538085723734079734}
+  - component: {fileID: 1034459641233780573}
+  - component: {fileID: 404186174974829375}
   - component: {fileID: 998744478070939707}
   - component: {fileID: 8105131813210140982}
   - component: {fileID: 4277460431732484000}
@@ -96,21 +97,6 @@ MonoBehaviour:
   rightLumbering: 1
   lumberingLowerBound: 0.8
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
---- !u!114 &1034459641233780573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105131813210141130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41019db7d071f5944bb2b1b5faa0002f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handContainerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
-  leftItem: {fileID: 0}
-  rightItem: {fileID: 0}
 --- !u!114 &2538085723734079734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +112,49 @@ MonoBehaviour:
   wornHat: {fileID: 0}
   hatObject: {fileID: 0}
   hatPosition: {fileID: 5398307496003575394}
+--- !u!114 &1034459641233780573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105131813210141130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41019db7d071f5944bb2b1b5faa0002f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handContainerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  leftItem: {fileID: 0}
+  rightItem: {fileID: 0}
+--- !u!114 &404186174974829375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105131813210141130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b663e92038a8fc847b65ab6d544e0e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: e4af4a6ce34359342b0bda89b75f830f, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1034459641233780573}
+        m_TargetAssemblyTypeName: Hands, Assembly-CSharp
+        m_MethodName: OnHandItemSwapped
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &998744478070939707
 MonoBehaviour:
   m_ObjectHideFlags: 0

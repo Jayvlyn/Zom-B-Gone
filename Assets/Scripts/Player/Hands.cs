@@ -1,3 +1,4 @@
+using GameEvents;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,27 +9,35 @@ public class Hands : MonoBehaviour
 {
     public CollectibleContainerData handContainerData;
 
-    private TMP_Text leftAmmoCount;
-    private TMP_Text rightAmmoCount;
+	[HideInInspector] public TMP_Text leftAmmoCount;
+	[HideInInspector] public TMP_Text rightAmmoCount;
+
+	[HideInInspector] public TMP_Text leftReloadingIndicator;
+	[HideInInspector] public TMP_Text rightReloadingIndicator;
+
+	public float leftLumbering = 1;
+	public float rightLumbering = 1;
+	[SerializeField] private float lumberingLowerBound = 0.8f;
 
 
-    private bool usingRight;
+	private bool usingRight;
     public bool UsingRight { get { return usingRight; }
         set
         {
             usingRight = value;
             if (usingRight)
             {
-                if (rightObject.TryGetComponent(out ProjectileWeapon projectileWeapon))
-                {
-                    rightAmmoCount.enabled = true;
-                }
+                if(rightItem as ProjectileWeapon) rightAmmoCount.enabled = true;
+                else rightAmmoCount.enabled = false;
+
+			    rightLumbering = Utils.MapWeightToRange(rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
             }
             else
             {
-                rightAmmoCount.enabled = false;
-            }
-        }
+                rightLumbering = 1;
+				rightAmmoCount.enabled = false;
+			}
+		}
     }
 
     private bool usingLeft;
@@ -40,16 +49,18 @@ public class Hands : MonoBehaviour
             usingLeft = value;
             if (usingLeft)
             {
-                if (leftObject.TryGetComponent(out ProjectileWeapon projectileWeapon))
-                {
-                    leftAmmoCount.enabled = true;
-                }
-            }
+                if(leftItem as ProjectileWeapon) leftAmmoCount.enabled = true;
+                else leftAmmoCount.enabled = false;
+                
+				leftLumbering = Utils.MapWeightToRange(leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
+			}
             else
             {
-                leftAmmoCount.enabled = false;
-            }
-        }
+                leftLumbering = 1;
+				leftAmmoCount.enabled = false;
+			}
+			
+		}
     }
 
 
@@ -64,13 +75,15 @@ public class Hands : MonoBehaviour
                 {
                     this.leftItem = leftItem;
                     handContainerData.Container.collectibleSlots[0].collectible = leftItem.itemData;
-                    handContainerData.onContainerCollectibleUpdated.Raise();
+					handContainerData.Container.collectibleSlots[0].quantity = 1;
+					handContainerData.onContainerCollectibleUpdated.Raise();
                 }
             }
             else
             {
                 handContainerData.Container.collectibleSlots[0].collectible = null;
-                handContainerData.onContainerCollectibleUpdated.Raise();
+				handContainerData.Container.collectibleSlots[0].quantity = 0;
+				handContainerData.onContainerCollectibleUpdated.Raise();
                 leftItem = null;
             }
 		}
@@ -87,13 +100,15 @@ public class Hands : MonoBehaviour
                 {
                     this.rightItem = rightItem;
                     handContainerData.Container.collectibleSlots[1].collectible = rightItem.itemData;
+                    handContainerData.Container.collectibleSlots[1].quantity = 1;
                     handContainerData.onContainerCollectibleUpdated.Raise();
                 }
             }
             else
             {
                 handContainerData.Container.collectibleSlots[1].collectible = null;
-                handContainerData.onContainerCollectibleUpdated.Raise();
+				handContainerData.Container.collectibleSlots[1].quantity = 0;
+				handContainerData.onContainerCollectibleUpdated.Raise();
                 rightItem = null;
             }
         }
@@ -107,21 +122,22 @@ public class Hands : MonoBehaviour
         // Ammo count
         leftAmmoCount = GameObject.FindWithTag("LeftAmmoCount").GetComponent<TMP_Text>();
         rightAmmoCount = GameObject.FindWithTag("RightAmmoCount").GetComponent<TMP_Text>();
-        leftAmmoCount.enabled = false;
+		leftReloadingIndicator = GameObject.FindWithTag("LeftReloadingIndicator").GetComponent<TMP_Text>();
+		rightReloadingIndicator = GameObject.FindWithTag("RightReloadingIndicator").GetComponent<TMP_Text>();
+		leftAmmoCount.enabled = false;
         rightAmmoCount.enabled = false;
 
         // Initialize Hand Items
         if (handContainerData.Container.collectibleSlots[0].collectible != null && leftItem == null) // Item missing from left hand
         {
-            Debug.Log(handContainerData.Container.collectibleSlots[0].collectible.name);
-
             string itemName = handContainerData.Container.collectibleSlots[0].collectible.name;
             GameObject prefab = Resources.Load<GameObject>(itemName);
             leftObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
             leftItem = leftObject.GetComponent<Item>();
             leftItem.PickUp(gameObject.transform, false);
             UsingLeft = true;
-            StartCoroutine(DelayedLeftInit());
+
+			StartCoroutine(DelayedLeftInit());
             
         }
         if (handContainerData.Container.collectibleSlots[1].collectible != null && rightItem == null) // Item missing from right hand
@@ -149,8 +165,74 @@ public class Hands : MonoBehaviour
         
     }
 
-    private void Start()
+    public void OnHandItemSwapped()
     {
-        
-    }
+        ItemData leftSlotItem = (ItemData)handContainerData.Container.collectibleSlots[0].collectible;
+        ItemData rightSlotItem = (ItemData)handContainerData.Container.collectibleSlots[1].collectible;
+
+        Item cachedLeftItem = leftItem;
+        Item cachedRightItem = rightItem;
+
+        GameObject cachedLeftObject = leftObject;
+        GameObject cachedRightObject = rightObject;
+
+        bool swapLeftToRightIndicator = false;
+
+        if(leftItem) leftItem.useHeld = false;
+        if(rightItem) rightItem.useHeld = false;
+
+		if (rightSlotItem != null && leftItem != null && cachedLeftItem.itemData == rightSlotItem)
+		{ // swap left item to right hand
+            rightItem = cachedLeftItem;
+            rightObject = cachedLeftObject;
+
+			UsingRight = true;
+            if (leftSlotItem == null)
+            {
+                UsingLeft = false;
+                leftItem = null;
+                leftObject = null;
+            }
+
+            rightItem.inRightHand = true;
+            rightItem.PositionInHand();
+            if (rightItem as ProjectileWeapon)
+            {
+                ((ProjectileWeapon)rightItem).UpdateAmmoCount();
+                swapLeftToRightIndicator = ((ProjectileWeapon)rightItem).reloading;
+				if (swapLeftToRightIndicator)
+                {
+                    rightReloadingIndicator.enabled = true;
+                    leftReloadingIndicator.enabled = false;
+                }
+            }
+        }
+
+		if (leftSlotItem != null && rightItem != null && cachedRightItem.itemData == leftSlotItem)
+		{ // swap right item to left hand
+			leftItem = cachedRightItem;
+			leftObject = cachedRightObject;
+
+			UsingLeft = true;
+			if (rightSlotItem == null)
+            {
+                UsingRight = false;
+                rightItem = null;
+                leftObject = null;
+            }
+
+            leftItem.inRightHand = false;
+            leftItem.PositionInHand();
+            if (leftItem as ProjectileWeapon)
+            {
+                ((ProjectileWeapon)leftItem).UpdateAmmoCount();
+				if (((ProjectileWeapon)leftItem).reloading)
+				{
+					leftReloadingIndicator.enabled = true;
+					if (!swapLeftToRightIndicator) rightReloadingIndicator.enabled = false;
+				}
+			}
+		}
+
+	}
 }

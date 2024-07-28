@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Getting an Upgrade
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 850
   damage: 22
   attackSpeed: 0.14

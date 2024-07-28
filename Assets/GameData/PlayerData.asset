@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39668c512bbdc804ab53b9569cd3ddac, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  characterName: Splargus
   walkSpeed: 5
   runSpeed: 9
   sneakSpeed: 3

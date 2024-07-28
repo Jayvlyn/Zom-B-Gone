@@ -17,11 +17,12 @@ MonoBehaviour:
     end. It spins
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 1600
   damage: 50
   attackSpeed: 0.15
   knockbackPower: 500
-  dismembering: 0
+  dismemberChance: 0
   staminaCost: 1
   prepSpeed: 0.2
   swingCurve:

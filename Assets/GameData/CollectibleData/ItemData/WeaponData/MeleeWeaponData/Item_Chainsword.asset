@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   weight: 8700
   damage: 80
   attackSpeed: 2

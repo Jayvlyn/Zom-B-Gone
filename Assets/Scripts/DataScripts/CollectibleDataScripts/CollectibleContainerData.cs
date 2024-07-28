@@ -8,6 +8,7 @@ using UnityEngine;
 public class CollectibleContainerData : ScriptableObject
 {
     [SerializeField] public VoidEvent onContainerCollectibleUpdated = null;
+    [SerializeField] public VoidEvent onContainerCollectibleSwapped = null;
     [SerializeField] private CollectibleSlot testCollectibleSlot = new CollectibleSlot();
     [SerializeField] private int size = 42;
 
@@ -21,11 +22,13 @@ public class CollectibleContainerData : ScriptableObject
     public void OnEnable()
     {
         Container.OnCollectibleUpdated += onContainerCollectibleUpdated.Raise;
+        Container.OnCollectibleSwapped += onContainerCollectibleSwapped.Raise;
     }
 
     public void OnDisable()
     {
         Container.OnCollectibleUpdated -= onContainerCollectibleUpdated.Raise;
+        Container.OnCollectibleSwapped -= onContainerCollectibleSwapped.Raise;
     }
 
     [ContextMenu("Test Add")]

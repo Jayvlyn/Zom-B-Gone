@@ -18,7 +18,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
     public CollectibleSlot CollectibleSlot => containerData.Container.GetSlotByIndex(SlotIndex);
 
-    public override void OnDrop(PointerEventData eventData)
+    public override void OnDrop(PointerEventData eventData) // dropping item into slot
     {
         DragHandler dragHandler = eventData.pointerDrag.GetComponent<DragHandler>();
 
