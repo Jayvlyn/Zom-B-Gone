@@ -6,17 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] protected float _damageMod = 1;
-    [SerializeField] bool wallPiercing = false;
-    [SerializeField] int piercingPower = 0; // How many enemies the bullet can pierce through
-    int currentPiercingPower;
+    [SerializeField] public BulletData bulletData;
+    private int currentPiercingPower;
 
     public int ProjectileWeaponDamage { get; set; }
     public float LifeSpan { get; set; }
 
-    public Rigidbody2D _rb;
-    public Collider2D bulletCollider;
-    public Weapon shooter;
+    [HideInInspector] public Rigidbody2D rigidBody;
+    [HideInInspector] public Collider2D bulletCollider;
+    [HideInInspector] public Weapon shooter;
 
     private PlayerController playerController;
     private Head playerHead;
@@ -24,21 +22,21 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         StartCoroutine(lifeStart());
-        TryGetComponent(out Rigidbody2D _rb);
-        TryGetComponent(out Collider2D collider);
+        rigidBody = GetComponent<Rigidbody2D>();
+        bulletCollider = GetComponent<Collider2D>();
 
         playerController = FindObjectOfType<PlayerController>();
         playerHead = playerController.GetComponentInParent<Head>();
 
-        if (piercingPower > 0)
+        if (bulletData.piercingPower > 0)
         {
-            collider.isTrigger = true;
+            bulletCollider.isTrigger = true;
         }
     }
 
     private IEnumerator lifeStart()
     {
-        currentPiercingPower = piercingPower;
+        currentPiercingPower = bulletData.piercingPower;
         yield return new WaitForSeconds(LifeSpan);
         Destroy(gameObject);
     }
@@ -62,7 +60,7 @@ public class Bullet : MonoBehaviour
 		}
 		else if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
 		{
-			if (wallPiercing) currentPiercingPower--;
+			if (bulletData.wallPiercing) currentPiercingPower--;
 			else Destroy(gameObject);
 		}
 		if (currentPiercingPower < 0) Destroy(gameObject);
@@ -70,7 +68,7 @@ public class Bullet : MonoBehaviour
 
     protected void DealDamage(Health targetHealth)
     {
-        float damage = ProjectileWeaponDamage * _damageMod;
+        float damage = ProjectileWeaponDamage * bulletData.damageMultiplier;
         #region hat buff
         if (playerHead.wornHat != null)
         {
@@ -79,6 +77,12 @@ public class Bullet : MonoBehaviour
         }
         #endregion
         targetHealth.TakeDamage(damage, shooter.weaponData.dismemberChance);
-        shooter.TryDealKnockback(targetHealth);
+        //shooter.TryDealKnockback(targetHealth); Uses its own knockback logic now
+        TryDealKnockback(targetHealth);
+    }
+
+    protected void TryDealKnockback(Health targetHealth)
+    {
+        if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(rigidBody.velocity.normalized * shooter.weaponData.knockbackPower, ForceMode2D.Impulse);
     }
 }

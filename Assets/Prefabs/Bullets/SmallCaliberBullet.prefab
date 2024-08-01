@@ -47,11 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3017ab2ebb90b45b0100ab9cc4308e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageMod: 1
-  wallPiercing: 0
-  piercingPower: 0
-  _rb: {fileID: 0}
+  bulletData: {fileID: 11400000, guid: 497b5ac650a1fe24da54a65032cf1e37, type: 2}
+  rigidBody: {fileID: 0}
   bulletCollider: {fileID: 7744378673628910957}
+  shooter: {fileID: 0}
 --- !u!212 &4631466901030604047
 SpriteRenderer:
   m_ObjectHideFlags: 0
