@@ -55,9 +55,6 @@ public class Interactor : MonoBehaviour
                         //head.hatObject.transform.position = newHat.transform.position;
                     }
                     // Wear new hat
-                    head.HatObject = newHat;
-                    head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
-                    head.HatObject.transform.parent = transform;
                     interactedObject.Interact(head);
                 }
             }

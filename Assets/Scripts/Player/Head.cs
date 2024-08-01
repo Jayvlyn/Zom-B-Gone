@@ -14,5 +14,5 @@ public class Head : MonoBehaviour
             if (hatObject.TryGetComponent(out Hat hat)) wornHat = hat;
         }
     }
-    public Transform hatPosition;
+    public Transform hatTransform;
 }

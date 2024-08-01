@@ -11,9 +11,15 @@ public class Hat : MonoBehaviour, IInteractable
     private Transform transferTarget;
     private Vector3 transferPos;
     private Quaternion transferRot;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] private float transferSpeed = 8.0f;
 
-    void Update()
+	private void Awake()
+	{
+		spriteRenderer = GetComponent<SpriteRenderer>();
+	}
+
+	void Update()
     {
         if(transferring)
         {
@@ -30,9 +36,12 @@ public class Hat : MonoBehaviour, IInteractable
 
     public void Interact(Head head)
     {
-        this.head = head;
-        StartTransferPosition(head.hatPosition);
+		head.HatObject = gameObject;
+		spriteRenderer.sortingOrder = 1;
+		gameObject.transform.parent = head.gameObject.transform;
+		this.head = head;
         gameObject.layer = LayerMask.NameToLayer("Default");
+        StartTransferPosition(head.hatTransform);
     }
 
     public void StartTransferPosition(Transform target)
@@ -49,7 +58,7 @@ public class Hat : MonoBehaviour, IInteractable
         transferring = true;
     }
 
-    private void TransferPosition(Vector3 position, Quaternion rotation)
+	private void TransferPosition(Vector3 position, Quaternion rotation)
     {
         transform.position = Vector3.Lerp(transform.position, position, transferSpeed * Time.deltaTime);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, rotation, transferSpeed * Time.deltaTime);
@@ -62,7 +71,15 @@ public class Hat : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact(bool rightHand)
+    public void DropHat()
+    {
+        if (head != null)
+        {
+            //head.gameObject.transform.forward
+        }
+    }
+
+	public void Interact(bool rightHand)
     {
         throw new System.NotImplementedException();
     }

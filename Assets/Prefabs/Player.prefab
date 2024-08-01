@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5398307496003575394}
   m_Layer: 0
-  m_Name: HatPosition
+  m_Name: HatTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,9 +93,6 @@ MonoBehaviour:
   holdingRight: 0
   currentStamina: 0
   recoverStamina: 0
-  leftLumbering: 1
-  rightLumbering: 1
-  lumberingLowerBound: 0.8
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
 --- !u!114 &2538085723734079734
 MonoBehaviour:
@@ -111,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wornHat: {fileID: 0}
   hatObject: {fileID: 0}
-  hatPosition: {fileID: 5398307496003575394}
+  hatTransform: {fileID: 5398307496003575394}
 --- !u!114 &1034459641233780573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +122,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handContainerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  leftAmmoCount: {fileID: 0}
+  rightAmmoCount: {fileID: 0}
+  leftReloadingIndicator: {fileID: 0}
+  rightReloadingIndicator: {fileID: 0}
+  leftLumbering: 1
+  rightLumbering: 1
+  lumberingLowerBound: 0.8
   leftItem: {fileID: 0}
   rightItem: {fileID: 0}
 --- !u!114 &404186174974829375
