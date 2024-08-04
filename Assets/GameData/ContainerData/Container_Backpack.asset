@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd6978c264dd05418033ad901ef5d2c, type: 3}
   m_Name: Container_Backpack
   m_EditorClassIdentifier: 
+  containerType: 3
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 983335ffb38ed02479e5d514423e8996, type: 2}
   onContainerCollectibleSwapped: {fileID: 11400000, guid: 983335ffb38ed02479e5d514423e8996, type: 2}
   testCollectibleSlot:
@@ -19,7 +20,6 @@ MonoBehaviour:
     quantity: 40
   size: 42
   Container:
-    containerName: 
     collectibleSlots:
     - collectible: {fileID: 0}
       quantity: 0

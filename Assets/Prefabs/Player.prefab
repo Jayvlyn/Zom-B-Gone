@@ -86,9 +86,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: f55ec50488d6a194d8af1bb5a1a21097, type: 2}
-  hands: {fileID: 0}
+  hands: {fileID: 1034459641233780573}
   head: {fileID: 2538085723734079734}
-  staminaSlider: {fileID: 0}
+  rb: {fileID: 369753046641428115}
   holdingLeft: 0
   holdingRight: 0
   currentStamina: 0
@@ -106,9 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c08510b590ece44aa777fd4efb3f5ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wornHat: {fileID: 0}
-  hatObject: {fileID: 0}
+  headContainerData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
   hatTransform: {fileID: 5398307496003575394}
+  wornHat: {fileID: 0}
 --- !u!114 &1034459641233780573
 MonoBehaviour:
   m_ObjectHideFlags: 0

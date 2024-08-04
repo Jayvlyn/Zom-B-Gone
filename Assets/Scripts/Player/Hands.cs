@@ -9,35 +9,35 @@ public class Hands : MonoBehaviour
 {
     public CollectibleContainerData handContainerData;
 
-	[HideInInspector] public TMP_Text leftAmmoCount;
-	[HideInInspector] public TMP_Text rightAmmoCount;
+    [HideInInspector] public TMP_Text leftAmmoCount;
+    [HideInInspector] public TMP_Text rightAmmoCount;
 
-	[HideInInspector] public TMP_Text leftReloadingIndicator;
-	[HideInInspector] public TMP_Text rightReloadingIndicator;
+    [HideInInspector] public TMP_Text leftReloadingIndicator;
+    [HideInInspector] public TMP_Text rightReloadingIndicator;
 
-	public float leftLumbering = 1;
-	public float rightLumbering = 1;
-	[SerializeField] private float lumberingLowerBound = 0.8f;
+	[HideInInspector] public float leftLumbering = 1;
+	[HideInInspector] public float rightLumbering = 1;
+    [SerializeField] private float lumberingLowerBound = 0.8f;
 
 
-	private bool usingRight;
+    private bool usingRight;
     public bool UsingRight { get { return usingRight; }
         set
         {
             usingRight = value;
             if (usingRight)
             {
-                if(rightItem as ProjectileWeapon) rightAmmoCount.enabled = true;
+                if (rightItem as ProjectileWeapon) rightAmmoCount.enabled = true;
                 else rightAmmoCount.enabled = false;
 
-			    rightLumbering = Utils.MapWeightToRange(rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
+                rightLumbering = Utils.MapWeightToRange(rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
             }
             else
             {
                 rightLumbering = 1;
-				rightAmmoCount.enabled = false;
-			}
-		}
+                rightAmmoCount.enabled = false;
+            }
+        }
     }
 
     private bool usingLeft;
@@ -49,18 +49,18 @@ public class Hands : MonoBehaviour
             usingLeft = value;
             if (usingLeft)
             {
-                if(leftItem as ProjectileWeapon) leftAmmoCount.enabled = true;
+                if (leftItem as ProjectileWeapon) leftAmmoCount.enabled = true;
                 else leftAmmoCount.enabled = false;
-                
-				leftLumbering = Utils.MapWeightToRange(leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-			}
+
+                leftLumbering = Utils.MapWeightToRange(leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
+            }
             else
             {
                 leftLumbering = 1;
-				leftAmmoCount.enabled = false;
-			}
-			
-		}
+                leftAmmoCount.enabled = false;
+            }
+
+        }
     }
 
 
@@ -69,53 +69,51 @@ public class Hands : MonoBehaviour
     {
         get { return leftObject; }
         set { leftObject = value;
-            if(leftObject != null)
+            if (leftObject != null)
             {
-			    if (value.TryGetComponent(out Item leftItem))
+                if (value.TryGetComponent(out Item leftItem))
                 {
                     this.leftItem = leftItem;
                     handContainerData.Container.collectibleSlots[0].collectible = leftItem.itemData;
-					handContainerData.Container.collectibleSlots[0].quantity = 1;
-					handContainerData.onContainerCollectibleUpdated.Raise();
+                    handContainerData.Container.collectibleSlots[0].quantity = 1;
                 }
             }
             else
             {
                 handContainerData.Container.collectibleSlots[0].collectible = null;
-				handContainerData.Container.collectibleSlots[0].quantity = 0;
-				handContainerData.onContainerCollectibleUpdated.Raise();
+                handContainerData.Container.collectibleSlots[0].quantity = 0;
                 leftItem = null;
             }
-		}
+            handContainerData.onContainerCollectibleUpdated.Raise();
+        }
     }
 
-	private GameObject rightObject;
+    private GameObject rightObject;
     public GameObject RightObject
     {
         get { return rightObject; }
-        set { rightObject = value; 
-            if(rightObject != null)
+        set { rightObject = value;
+            if (rightObject != null)
             {
-                if(value.TryGetComponent(out Item rightItem))
+                if (value.TryGetComponent(out Item rightItem))
                 {
                     this.rightItem = rightItem;
                     handContainerData.Container.collectibleSlots[1].collectible = rightItem.itemData;
                     handContainerData.Container.collectibleSlots[1].quantity = 1;
-                    handContainerData.onContainerCollectibleUpdated.Raise();
                 }
             }
             else
             {
                 handContainerData.Container.collectibleSlots[1].collectible = null;
-				handContainerData.Container.collectibleSlots[1].quantity = 0;
-				handContainerData.onContainerCollectibleUpdated.Raise();
+                handContainerData.Container.collectibleSlots[1].quantity = 0;
                 rightItem = null;
             }
+            handContainerData.onContainerCollectibleUpdated.Raise();
         }
     }
 
-    public Item leftItem;
-    public Item rightItem;
+    [HideInInspector] public Item leftItem;
+	[HideInInspector] public Item rightItem;
 
     void Awake()
     {

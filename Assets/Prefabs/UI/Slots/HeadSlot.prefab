@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotUI: {fileID: 7138825994445509175}
-  onMouseStartHoverCollectible: {fileID: 11400000, guid: e81d013186172bb4c886dcdaafad026f, type: 2}
-  onMouseEndHoverCollectible: {fileID: 11400000, guid: b1ff1cd510090424397f8b62f58afcf4, type: 2}
+  onMouseStartHoverCollectible: {fileID: 11400000, guid: 7340d1e93a530e74f82cfe0f2ef56fab, type: 2}
+  onMouseEndHoverCollectible: {fileID: 11400000, guid: 6e637fb8f34ed884a8566617eac3a308, type: 2}
   collectibleDropper: {fileID: 167834833023445425}
 --- !u!114 &167834833023445425
 MonoBehaviour:
@@ -140,8 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca77c82a191ba9488cad828d77eb757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
-  handContainerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  container: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
+  handContainerData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
 --- !u!1 &7708131793567312717
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 3705534198587483533}
   - component: {fileID: 4182554935770497829}
   m_Layer: 5
-  m_Name: HandSlot
+  m_Name: HeadSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icomImage: {fileID: 6998675399385336187}
-  containerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  containerData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
   collectibleQuantityText: {fileID: 7907024424289654383}
 --- !u!114 &3705534198587483533
 MonoBehaviour:
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b663e92038a8fc847b65ab6d544e0e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 6ff344c054c12a840ba9ed1c5a087660, type: 2}
+  gameEvent: {fileID: 11400000, guid: 50e76d6449c94d140af5083aa69d4afb, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:

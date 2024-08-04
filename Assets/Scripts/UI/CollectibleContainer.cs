@@ -3,8 +3,6 @@ using System;
 [Serializable]
 public class CollectibleContainer : ICollectibleContainer
 {
-    public string containerName; // if is "Hands" will do extra hand logic for moving items
-
     public CollectibleSlot[] collectibleSlots = new CollectibleSlot[0];
 
     public Action OnCollectibleUpdated = delegate { };
@@ -12,6 +10,8 @@ public class CollectibleContainer : ICollectibleContainer
 
     public CollectibleContainer(int size) => collectibleSlots = new CollectibleSlot[size];
 
+
+    // Gets slot index based on its index under the parent, so if it is the third child to an object it will be an index of 2
     public CollectibleSlot GetSlotByIndex(int index) => collectibleSlots[index];
 
     public CollectibleSlot AddCollectible(CollectibleSlot collectibleSlot)

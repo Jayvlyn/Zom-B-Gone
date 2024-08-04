@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public PlayerData playerData;
     [SerializeField] private Hands hands;
     [SerializeField] private Head head;
-    [SerializeField] private Slider staminaSlider;
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
+    private Slider staminaSlider;
     private Camera gameCamera;
     private Interactor interactor;
 
@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
         // Find references
         gameCamera = FindObjectOfType<Camera>();
         interactor = GetComponent<Interactor>();
-        rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        staminaSlider = GameObject.FindGameObjectWithTag("Stamina").GetComponent<Slider>();
 
         // Set currents
         currentStamina = playerData.maxStamina;
@@ -308,6 +308,11 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    public void DropHat()
+    {
+        head.wornHat.DropHat();
+    }
 
     private void ChangeState(State newState)
     {

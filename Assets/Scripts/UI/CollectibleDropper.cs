@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class CollectibleDropper : MonoBehaviour
 {
     [SerializeField] private CollectibleContainerData container = null;
-    public CollectibleContainerData handContainerData;
 
     private int slotIndex = 0;
 
@@ -28,12 +27,22 @@ public class CollectibleDropper : MonoBehaviour
     {
         container.Container.RemoveAt(slotIndex);
 
-        if(container == handContainerData) // dropping out of hand slots
+        switch(container.containerType)
         {
-            if (playerController == null) playerController = FindObjectOfType<PlayerController>();
+            case ContainerType.HANDS:
+				if (playerController == null) playerController = FindObjectOfType<PlayerController>();
+				if (slotIndex == 0) playerController.DropLeft();
+				else if (slotIndex == 1) playerController.DropRight();
+                break;
+            case ContainerType.HEAD:
+				if (playerController == null) playerController = FindObjectOfType<PlayerController>();
+                playerController.DropHat();
 
-            if (slotIndex == 0) playerController.DropLeft();
-            else if (slotIndex == 1) playerController.DropRight();
+				break;
+
+            default: // LOCKER or BACKPACK
+
+                break;
 
         }
 

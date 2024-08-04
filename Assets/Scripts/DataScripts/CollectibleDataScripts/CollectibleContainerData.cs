@@ -7,6 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Container", menuName = "New Container")]
 public class CollectibleContainerData : ScriptableObject
 {
+    [SerializeField] public ContainerType containerType;
     [SerializeField] public VoidEvent onContainerCollectibleUpdated = null;
     [SerializeField] public VoidEvent onContainerCollectibleSwapped = null;
     [SerializeField] private CollectibleSlot testCollectibleSlot = new CollectibleSlot();
@@ -36,4 +37,9 @@ public class CollectibleContainerData : ScriptableObject
     {
         Container.AddCollectible(testCollectibleSlot);
     }
+}
+
+public enum ContainerType
+{
+    HANDS, HEAD, LOCKER, BACKPACK
 }

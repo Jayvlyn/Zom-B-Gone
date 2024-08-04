@@ -75,8 +75,14 @@ public class Hat : MonoBehaviour, IInteractable
     {
         if (head != null)
         {
-            //head.gameObject.transform.forward
-        }
+            head.HatObject = null;
+            gameObject.transform.parent = null;
+			gameObject.layer = LayerMask.NameToLayer("Interactable");
+			spriteRenderer.sortingOrder = -1;
+
+            StartTransferPosition(head.gameObject.transform.position + head.gameObject.transform.up, transform.rotation);
+			//head.gameObject.transform.forward
+		}
     }
 
 	public void Interact(bool rightHand)
