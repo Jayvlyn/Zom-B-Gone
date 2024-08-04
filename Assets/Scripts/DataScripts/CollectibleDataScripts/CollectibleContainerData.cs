@@ -41,5 +41,5 @@ public class CollectibleContainerData : ScriptableObject
 
 public enum ContainerType
 {
-    HANDS, HEAD, LOCKER, BACKPACK
+    HANDS, HEAD, LOCKER, BACKPACK, LOOTABLE
 }

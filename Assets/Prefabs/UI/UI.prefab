@@ -2683,6 +2683,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6993860720753308535}
   - {fileID: 7722773394869360961}
   - {fileID: 7827241544040940838}
   - {fileID: 5871317575756253037}
@@ -2692,7 +2693,6 @@ RectTransform:
   - {fileID: 4923805677614475638}
   - {fileID: 4181299583876576950}
   - {fileID: 1542198921876490428}
-  - {fileID: 6993860720753308535}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2776,7 +2776,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 0}
-  handContainerData: {fileID: 0}
 --- !u!114 &670117827808184370
 MonoBehaviour:
   m_ObjectHideFlags: 0

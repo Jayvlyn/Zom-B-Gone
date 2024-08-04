@@ -12,28 +12,28 @@ public class ContainerDragHandler : DragHandler
         if(eventData.button == PointerEventData.InputButton.Left)
         {
             base.OnPointerUp(eventData);
-
-            //for (int i = 0; i < eventData.hovered.Count; i++)
-            //{
-            //    if (eventData.hovered[i].layer != LayerMask.NameToLayer("UI"))
-            //    {
-            //        CollectibleContainerSlot thisSlot = GetSlotUI as CollectibleContainerSlot;
-            //        collectibleDestroyer.Activate(thisSlot.CollectibleSlot, thisSlot.SlotIndex);
-            //    }
-            //}
-
             if(eventData.hovered.Count == 0)
             {
                 CollectibleContainerSlot thisSlot = GetSlotUI as CollectibleContainerSlot;
                 collectibleDropper.Activate(thisSlot.SlotIndex);
-
             }
+			#region old stuff
+			//for (int i = 0; i < eventData.hovered.Count; i++)
+			//{
+			//    if (eventData.hovered[i].layer != LayerMask.NameToLayer("UI"))
+			//    {
+			//        CollectibleContainerSlot thisSlot = GetSlotUI as CollectibleContainerSlot;
+			//        collectibleDestroyer.Activate(thisSlot.CollectibleSlot, thisSlot.SlotIndex);
+			//    }
+			//}
 
-            //if(eventData.hovered.Count == 0)
-            //{
-            //    BackpackSlot thisSlot = GetSlotUI as BackpackSlot;
-            //    lootDestroyer.Activate(thisSlot.LootSlot, thisSlot.SlotIndex);
-            //}
-        }
-    }
+
+			//if(eventData.hovered.Count == 0)
+			//{
+			//    BackpackSlot thisSlot = GetSlotUI as BackpackSlot;
+			//    lootDestroyer.Activate(thisSlot.LootSlot, thisSlot.SlotIndex);
+			//}
+			#endregion
+		}
+	}
 }
