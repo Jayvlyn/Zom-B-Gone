@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
-  handContainerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
 --- !u!1 &7708131793567312717
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +336,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icomImage: {fileID: 6998675399385336187}
+  allowLoot: 0
+  allowItems: 1
+  allowHats: 0
   containerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
   collectibleQuantityText: {fileID: 7907024424289654383}
 --- !u!114 &3705534198587483533

@@ -69,24 +69,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DropLeft",
-                    "type": "Button",
-                    "id": "e15cddb0-2dda-4804-a0a1-6cb688cab984",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DropRight",
-                    "type": "Button",
-                    "id": "a6e1f616-e9c2-4ecb-b0b7-da7fb342c005",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LeftHold",
                     "type": "Button",
                     "id": "53ca7934-90e8-4c6d-8b3a-eb284670323b",
@@ -102,6 +84,42 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold(duration=0.15)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DropLeft",
+                    "type": "Button",
+                    "id": "e15cddb0-2dda-4804-a0a1-6cb688cab984",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DropRight",
+                    "type": "Button",
+                    "id": "a6e1f616-e9c2-4ecb-b0b7-da7fb342c005",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrowLeft",
+                    "type": "Button",
+                    "id": "165b524c-b49d-485f-9ea0-e7da0306a6e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap(duration=0.299)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThrowRight",
+                    "type": "Button",
+                    "id": "927b454c-306f-4ea3-b3a0-af5826a0b350",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap(duration=0.299)",
                     "initialStateCheck": false
                 },
                 {
@@ -330,7 +348,7 @@
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -352,19 +370,8 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "LeftHand",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b6dda624-8074-498e-80d8-6d9d3a41c66b",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RightHand",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -374,7 +381,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "DropLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -385,8 +392,41 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "DropRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b9e645b-cce8-4ac0-9dee-491dd5b499db",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleBackpack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ddbd8970-7f16-4455-8135-c2273b99a921",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb3f3a5d-60b1-4b3e-84b2-6c5201cb88ab",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -396,7 +436,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "LeftHold",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -414,12 +454,12 @@
                 },
                 {
                     "name": "",
-                    "id": "1b9e645b-cce8-4ac0-9dee-491dd5b499db",
-                    "path": "<Keyboard>/tab",
+                    "id": "b6dda624-8074-498e-80d8-6d9d3a41c66b",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "ToggleBackpack",
+                    "action": "RightHand",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

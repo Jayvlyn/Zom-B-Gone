@@ -120,7 +120,8 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10);
     }
 
-    #region Input Actions
+    #region INPUT ACTIONS -----------------------------------------------------
+
     private void OnMove(InputValue inputValue)
     {
         movementInput = inputValue.Get<Vector2>();
@@ -189,29 +190,24 @@ public class PlayerController : MonoBehaviour
         if (hands.rightItem != null) hands.rightItem.useHeld = true;
     }
 
-    public void DropLeft()
+    private void OnThrowLeft(InputValue inputValue)
     {
         if (hands.UsingLeft)
         {
-            if (movementInput.magnitude > 0) hands.leftItem.Throw();
+            hands.leftItem.Throw();
+			hands.leftLumbering = 1;
+		}
 
-            else hands.leftItem.Drop();
+	}
 
-            hands.leftLumbering = 1;
-        }
-    }
-
-    public void DropRight()
-    {
-        if (hands.UsingRight)
+	private void OnThrowRight(InputValue inputValue)
+	{
+		if (hands.UsingRight)
         {
-            if (movementInput.magnitude > 0) hands.rightItem.Throw();
-
-            else hands.rightItem.Drop();
-
-            hands.rightLumbering = 1;
-        }
-    }
+			hands.rightItem.Throw();
+			hands.rightLumbering = 1;
+		}
+	}
 
     private void OnDropLeft(InputValue inputValue)
     {
@@ -307,9 +303,27 @@ public class PlayerController : MonoBehaviour
         onBackpackToggle.Raise();
     }
 
-    #endregion
+	#endregion -----------------------------------------
 
-    public void DropHat()
+	public void DropLeft()
+	{
+		if (hands.UsingLeft)
+		{
+			hands.leftItem.Drop();
+			hands.leftLumbering = 1;
+		}
+	}
+
+	public void DropRight()
+	{
+		if (hands.UsingRight)
+		{
+			hands.rightItem.Drop();
+			hands.rightLumbering = 1;
+		}
+	}
+
+	public void DropHat()
     {
         head.wornHat.DropHat();
     }

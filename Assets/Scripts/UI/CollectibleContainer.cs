@@ -140,11 +140,11 @@ public class CollectibleContainer : ICollectibleContainer
 
         //if (firstSlot == secondSlot) return;
 
-        if(secondSlot.collectible != null) // Check if same item, stack
+        if(secondSlot.collectible != null)
         {
-            if(firstSlot.collectible == secondSlot.collectible)
-            {
-                if(firstSlot.quantity <= secondSlot.GetRemainingSpace())
+            if(firstSlot.collectible == secondSlot.collectible) // Check if same collectible, stack
+			{
+                if(firstSlot.quantity <= secondSlot.GetRemainingSpace()) // Enough space to stack
                 {
                     secondSlot.quantity += firstSlot.quantity;
 
