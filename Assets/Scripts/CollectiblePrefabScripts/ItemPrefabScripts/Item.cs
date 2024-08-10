@@ -16,31 +16,36 @@ public abstract class Item : MonoBehaviour, IInteractable
 
 	[Header("Item attributes")]
     [SerializeField] public ItemData itemData;
-    // Values that will be multiplied with velocity and angularVelocity to create friction
-    [SerializeField, Range(0.9f, 1.0f)] protected float rotationalFriction = 0.9f;
-    [SerializeField, Range(0.9f, 1.0f), Tooltip("Higher = less friction")] protected float friction = 0.98f;
-    [SerializeField] Vector2 holdOffset = new Vector2(0.5f, 0.5f);
+    // Component Refs
+    [SerializeField] protected Transform pivotPoint;
+    [SerializeField] protected Collider2D fullCollider;
+    [SerializeField] protected SpriteRenderer itemRenderer;
+    // Drag
+    [SerializeField, Range(0.0f, 10.0f)] protected float airborneAngularDrag = 0.4f;
+    [SerializeField, Range(0.0f, 10.0f)] protected float airborneLinearDrag = 0.4f;
+    [SerializeField, Range(0.0f, 10.0f)] protected float groundedAngularDrag = 3.0f;
+    [SerializeField, Range(0.0f, 10.0f)] protected float groundedLinearDrag = 3.0f;
+    // Customization
+	[SerializeField] Vector2 holdOffset = new Vector2(0.5f, 0.5f);
     [SerializeField] protected bool spinThrow = true;
     [SerializeField] protected bool aimAtMouse = true;
     [SerializeField] protected float gripRotation = 130;
-    [SerializeField] protected Transform pivotPoint;
-    [SerializeField] protected Collider2D fullCollider;
     [SerializeField] protected float minimumAirborneSpeed = 10;
-    [Header("Sort Ordering")]
-    [SerializeField] protected SpriteRenderer itemRenderer;
+    // Sort Ordering
     [SerializeField] protected int groundSortOrder = -30;
-    [SerializeField] protected int heldSortOrder = 10;
+    [SerializeField] protected int heldSortOrder = 5;
     [SerializeField] protected int airborneSortOrder = 20;
 
+    // Private Refs
     protected Rigidbody2D rb;
-
     protected PlayerController playerController;
     protected Hands playerHands;
     protected Head playerHead;
     protected PlayerData playerData;
+
+    // Functional vars
     [HideInInspector] public bool inRightHand;
     [HideInInspector] public bool useHeld;
-
     protected bool moveToHand;
     private Vector3 pickupTarget;
     private Quaternion rotationTarget;
@@ -58,6 +63,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         if (fullCollider == null) fullCollider = GetComponent<Collider2D>();
         if (itemRenderer == null) itemRenderer = GetComponent<SpriteRenderer>();
 
+        // Set sorting order based on awake state
         switch (currentState)
         {
             case State.GROUNDED: itemRenderer.sortingOrder = groundSortOrder; break;
@@ -71,10 +77,6 @@ public abstract class Item : MonoBehaviour, IInteractable
         if(currentState == State.AIRBORNE && rb.velocity.magnitude < minimumAirborneSpeed)
         {
             ChangeState(State.GROUNDED);
-        }
-        if(currentState == State.GROUNDED)
-        {
-            Friction();
         }
 
         if(moveToHand)
@@ -96,26 +98,63 @@ public abstract class Item : MonoBehaviour, IInteractable
         switch (newState)
         {
             case State.GROUNDED:
+                // Change to grounded drag
+                rb.drag = groundedLinearDrag;
+                rb.angularDrag = groundedAngularDrag;
+
+                // Change layer
                 gameObject.layer = LayerMask.NameToLayer("InteractableItem");
+
+                // Change sorting order
                 itemRenderer.sortingOrder = groundSortOrder;
-                if (currentState == State.HELD)rb.bodyType = RigidbodyType2D.Dynamic;
+
+                // If was held, set back to dynamic body
+                if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
+
+                // Reactivate full body collider
                 StartCoroutine(EnableFullCollider());
-                //fullCollider.isTrigger = true;
+
+                // Active objects should pass over it
+                fullCollider.isTrigger = true;
+
 				break;
             case State.AIRBORNE:
+                // Change to airborne drag
+                rb.drag = airborneLinearDrag;
+                rb.angularDrag = airborneAngularDrag;
+
+                // Change layer
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
+
+                // Change soring order
                 itemRenderer.sortingOrder = airborneSortOrder;
+
+                // If was held, set back to dynamic body
                 if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
+
+                // Reactivate full body collider
                 StartCoroutine(EnableFullCollider());
+
+                // Yes full collider
                 fullCollider.isTrigger = false;
+
                 break;
+
             case State.HELD:
-                itemRenderer.sortingOrder = heldSortOrder;
-                gameObject.layer = LayerMask.NameToLayer("AirborneItem");
+				// Change layer
+				gameObject.layer = LayerMask.NameToLayer("AirborneItem");
+
+				// Change sorting order
+				itemRenderer.sortingOrder = heldSortOrder;
+
+                // Set to kinematic body for manual movement
                 rb.bodyType = RigidbodyType2D.Kinematic;
-                //fullCollider.enabled = false;
+
+                // No full collider
+                fullCollider.enabled = false;
                 fullCollider.isTrigger = true;
                 break;
+
             default:
                 break;
 
@@ -133,13 +172,6 @@ public abstract class Item : MonoBehaviour, IInteractable
         ChangeState(State.AIRBORNE);
         float dropForwardForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
         rb.AddForce(playerT.up * dropForwardForce, ForceMode2D.Impulse);
-        StartCoroutine(DropTimer());
-    }
-
-    private IEnumerator DropTimer()
-    {
-        yield return new WaitForSeconds(0.3f);
-        ChangeState(State.GROUNDED);
     }
 
     public virtual void Throw()
@@ -204,12 +236,6 @@ public abstract class Item : MonoBehaviour, IInteractable
     public void Interact(bool rightHand)
     {
         PickUp(playerController.transform, rightHand);
-    }
-
-    private void Friction()
-    {
-        rb.velocity *= friction;
-        rb.angularVelocity *= rotationalFriction;
     }
 
     protected IEnumerator EnableFullCollider()

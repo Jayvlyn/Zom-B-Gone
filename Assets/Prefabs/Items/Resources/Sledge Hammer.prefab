@@ -166,19 +166,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: c615ffb9921c717449e87b20cd2b23c0, type: 2}
-  rotationalFriction: 0.9
-  friction: 0.98
+  pivotPoint: {fileID: 2340822962328068186}
+  fullCollider: {fileID: 7002657207091252952}
+  itemRenderer: {fileID: 0}
+  airborneAngularDrag: 0.4
+  airborneLinearDrag: 0.4
+  groundedAngularDrag: 3
+  groundedLinearDrag: 3
   holdOffset: {x: 0.48, y: 0.32}
   spinThrow: 1
   aimAtMouse: 0
   gripRotation: 150
-  pivotPoint: {fileID: 2340822962328068186}
-  fullCollider: {fileID: 7002657207091252952}
-  itemRenderer: {fileID: 0}
+  minimumAirborneSpeed: 10
   groundSortOrder: -30
   heldSortOrder: 10
   airborneSortOrder: 20
-  rb: {fileID: 4852402675784654869}
+  inRightHand: 0
   useHeld: 0
   weaponData: {fileID: 0}
   damageCollider: {fileID: 706384698941117940}
@@ -336,7 +339,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

@@ -134,8 +134,6 @@ public class Hands : MonoBehaviour
             leftItem = leftObject.GetComponent<Item>();
             leftItem.PickUp(gameObject.transform, false);
             UsingLeft = true;
-
-			StartCoroutine(DelayedLeftInit());
             
         }
         if (handContainerData.Container.collectibleSlots[1].collectible != null && rightItem == null) // Item missing from right hand
@@ -146,21 +144,8 @@ public class Hands : MonoBehaviour
             rightItem = rightObject.GetComponent<Item>();
             rightItem.PickUp(gameObject.transform, true);
             UsingRight = true;
-            StartCoroutine(DelayedRightInit());
         }
 
-    }
-
-    private IEnumerator DelayedLeftInit()
-    {
-        yield return new WaitForSeconds(0.5f);
-        
-    }
-
-    private IEnumerator DelayedRightInit()
-    {
-        yield return new WaitForSeconds(0.5f);
-        
     }
 
     public void OnHandItemSwapped()

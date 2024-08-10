@@ -29,4 +29,17 @@ public class Head : MonoBehaviour
 			headContainerData.onContainerCollectibleUpdated.Raise();
         }
     }
+
+	private void Awake()
+	{
+		// Initialize hat
+		if (headContainerData.Container.collectibleSlots[0].collectible != null && wornHat == null) // Hat missing from head
+		{
+			string hatName = headContainerData.Container.collectibleSlots[0].collectible.name;
+			GameObject prefab = Resources.Load<GameObject>(hatName);
+			hatObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+			wornHat = hatObject.GetComponent<Hat>();
+			wornHat.Interact(this);
+		}
+	}
 }
