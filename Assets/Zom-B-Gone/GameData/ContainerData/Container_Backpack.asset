@@ -17,90 +17,90 @@ MonoBehaviour:
   onContainerCollectibleSwapped: {fileID: 11400000, guid: 983335ffb38ed02479e5d514423e8996, type: 2}
   testCollectibleSlot:
     collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-    quantity: 40
+    quantity: 1
   size: 42
   Container:
     collectibleSlots:
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
     - collectible: {fileID: 0}
       quantity: 0
     - collectible: {fileID: 0}

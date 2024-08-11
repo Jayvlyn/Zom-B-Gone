@@ -173,7 +173,7 @@ MonoBehaviour:
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
   groundedLinearDrag: 3
-  holdOffset: {x: 0.48, y: 0.32}
+  holdOffset: {x: 0.63, y: 0.07}
   spinThrow: 1
   aimAtMouse: 0
   gripRotation: 150
@@ -297,18 +297,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00030612946, y: 0.8145118}
+  m_Offset: {x: -0.00030612946, y: 0.6476202}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.44, y: 1.84}
+    oldSize: {x: 1.84, y: 1.84}
     newSize: {x: 0.44, y: 1.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.44211006, y: 0.24638653}
+  m_Size: {x: 0.44211006, y: 0.5801697}
   m_EdgeRadius: 0
 --- !u!60 &7002657207091252952
 PolygonCollider2D:
@@ -346,7 +346,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.44, y: 1.84}
+    oldSize: {x: 1.84, y: 1.84}
     newSize: {x: 0.44, y: 1.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotUI: {fileID: 7138825994445509175}
-  onMouseStartHoverCollectible: {fileID: 11400000, guid: 7340d1e93a530e74f82cfe0f2ef56fab, type: 2}
-  onMouseEndHoverCollectible: {fileID: 11400000, guid: 6e637fb8f34ed884a8566617eac3a308, type: 2}
+  onMouseStartHoverCollectible: {fileID: 11400000, guid: 4748cf1022d4a02459626e2debec913d, type: 2}
+  onMouseEndHoverCollectible: {fileID: 11400000, guid: 8354cee0932d90c43aaeff1275d47b6e, type: 2}
   collectibleDropper: {fileID: 167834833023445425}
 --- !u!114 &167834833023445425
 MonoBehaviour:
