@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -111,11 +109,11 @@ public abstract class Item : MonoBehaviour, IInteractable
                 // If was held, set back to dynamic body
                 if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
-                // Reactivate full body collider
-                StartCoroutine(EnableFullCollider());
+				// Reactivate full body collider
+				fullCollider.enabled = true;
 
-                // Active objects should pass over it
-                fullCollider.isTrigger = true;
+				// Active objects should pass over it
+				// fullCollider.isTrigger = true;
 
 				break;
             case State.AIRBORNE:
@@ -132,11 +130,11 @@ public abstract class Item : MonoBehaviour, IInteractable
                 // If was held, set back to dynamic body
                 if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
-                // Reactivate full body collider
-                StartCoroutine(EnableFullCollider());
+				// Reactivate full body collider
+				fullCollider.enabled = true;
 
-                // Yes full collider
-                fullCollider.isTrigger = false;
+				// Yes full collider
+				fullCollider.isTrigger = false;
 
                 break;
 
@@ -184,7 +182,10 @@ public abstract class Item : MonoBehaviour, IInteractable
         Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
 
         float throwForce = Utils.MapWeightToRange(itemData.weight, 10, 20, true);
-        rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
+
+        // Velocity change instead because throw is fastest the second it the object leaves contact with the propelling force
+        rb.velocity = direction * throwForce;
+		//rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
 
         if(spinThrow)
         {
@@ -192,8 +193,6 @@ public abstract class Item : MonoBehaviour, IInteractable
             if (!inRightHand) spinForce *= -1;
             rb.angularVelocity = spinForce;
         }
-
-        StartCoroutine(Fall());
     }
 
     public virtual void PickUp(Transform parent, bool rightHand)
@@ -238,22 +237,6 @@ public abstract class Item : MonoBehaviour, IInteractable
         PickUp(playerController.transform, rightHand);
     }
 
-    protected IEnumerator EnableFullCollider()
-    {
-        yield return new WaitForSeconds(0.1f);
-        if(!fullCollider.enabled) fullCollider.enabled = true;
-    }
-
-    private IEnumerator Fall()
-    {
-        float fallTime = Utils.MapWeightToRange(itemData.weight, 1, 2, true);
-
-        yield return new WaitForSeconds(fallTime);
-        
-        if(currentState == State.AIRBORNE) 
-            ChangeState(State.GROUNDED);
-    }
-
     public void PositionInHand()
     {
         if (inRightHand) rotationTarget = Quaternion.Euler(0, 0, -gripRotation);
@@ -286,7 +269,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     protected virtual void RemoveFromHand()
     {
-        StartCoroutine(EnableFullCollider());
+        fullCollider.enabled = true;
         useHeld = false;
         moveToHand = false;
 
@@ -309,7 +292,8 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         if(currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
-            collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false));
+            Debug.Log(rb.velocity.magnitude);
+            collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * rb.velocity.magnitude);
             if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))
             {
                 hitRb.AddForce(rb.velocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 10, 70, true)), ForceMode2D.Impulse);
