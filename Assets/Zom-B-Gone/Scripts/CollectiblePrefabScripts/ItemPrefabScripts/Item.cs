@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Item : MonoBehaviour, IInteractable
@@ -9,7 +10,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         GROUNDED, AIRBORNE, HELD
     }
-    protected State currentState;
+    [SerializeField]protected State currentState;
 
 
 	[Header("Item attributes")]
@@ -64,9 +65,19 @@ public abstract class Item : MonoBehaviour, IInteractable
         // Set sorting order based on awake state
         switch (currentState)
         {
-            case State.GROUNDED: itemRenderer.sortingOrder = groundSortOrder; break;
-            case State.AIRBORNE: itemRenderer.sortingOrder = airborneSortOrder; break;
-            case State.HELD: itemRenderer.sortingOrder = heldSortOrder; break;
+            case State.GROUNDED: 
+                itemRenderer.sortingOrder = groundSortOrder;
+                rb.drag = groundedLinearDrag;
+                rb.angularDrag = groundedAngularDrag;
+                break;
+            case State.AIRBORNE: 
+                itemRenderer.sortingOrder = airborneSortOrder;
+                rb.drag = airborneLinearDrag;
+                rb.angularDrag = airborneAngularDrag;
+                break;
+            case State.HELD: 
+                itemRenderer.sortingOrder = heldSortOrder; 
+                break;
         }
     }
 
@@ -162,6 +173,12 @@ public abstract class Item : MonoBehaviour, IInteractable
     }
 
     public abstract void Use();
+
+    public virtual void InventoryDrop()
+    {
+        float dropForwardForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
+        rb.AddForce(transform.up * dropForwardForce, ForceMode2D.Impulse);
+    }
 
     public virtual void Drop()
     {
@@ -292,8 +309,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         if(currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
-            Debug.Log(rb.velocity.magnitude);
-            collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * rb.velocity.magnitude);
+            collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * (rb.velocity.magnitude/2));
             if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))
             {
                 hitRb.AddForce(rb.velocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 10, 70, true)), ForceMode2D.Impulse);

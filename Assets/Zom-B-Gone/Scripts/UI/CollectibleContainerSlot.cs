@@ -10,7 +10,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
     [SerializeField] private bool allowLoot = false;
     [SerializeField] private bool allowItems = false;
     [SerializeField] private bool allowHats = false;
-    [SerializeField] private CollectibleContainerData containerData = null;
+    [SerializeField] public CollectibleContainerData containerData = null;
     [SerializeField] private TextMeshProUGUI collectibleQuantityText = null;
 
     public override CollectibleData SlotCollectible

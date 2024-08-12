@@ -21,86 +21,86 @@ MonoBehaviour:
   size: 42
   Container:
     collectibleSlots:
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+    - collectible: {fileID: 11400000, guid: 87abeb40489f2894a88d2f42a31cc413, type: 2}
       quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
-    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
-      quantity: 1
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
+    - collectible: {fileID: 0}
+      quantity: 0
     - collectible: {fileID: 0}
       quantity: 0
     - collectible: {fileID: 0}

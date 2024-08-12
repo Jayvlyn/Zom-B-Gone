@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class HatChanger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CollectibleContainerSlot headSlot;
 
-    // Update is called once per frame
-    void Update()
+    public void CheckHatChange()
     {
-        
+        if(headSlot == null)
+        {
+            if(headSlot.SlotCollectible.name != headSlot.containerData.Container.collectibleSlots[0].collectible.name)
+            {
+
+            }
+        }
     }
 }

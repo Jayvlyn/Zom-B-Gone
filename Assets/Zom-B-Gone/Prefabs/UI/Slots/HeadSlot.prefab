@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 7138825994445509175}
   - component: {fileID: 3705534198587483533}
   - component: {fileID: 4182554935770497829}
+  - component: {fileID: 4513946200219866532}
   m_Layer: 5
   m_Name: HeadSlot
   m_TagString: Untagged
@@ -399,3 +400,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4513946200219866532}
+        m_TargetAssemblyTypeName: HatChanger, Assembly-CSharp
+        m_MethodName: CheckHatChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4513946200219866532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146110513072551543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202364e83d4f3514783c7c554e1d8bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headSlot: {fileID: 7138825994445509175}

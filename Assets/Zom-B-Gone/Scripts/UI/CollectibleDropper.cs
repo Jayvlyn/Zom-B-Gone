@@ -49,7 +49,7 @@ public class CollectibleDropper : MonoBehaviour
 				if (droppedCollectibleData as HatData)
                 {
                     Hat hat = collectibleObject.GetComponent<Hat>();
-					hat.StartTransferPosition(playerController.transform.position + gameObject.transform.up, transform.rotation);
+					hat.StartTransferPosition(playerController.transform.position + playerController.transform.up, hat.transform.rotation);
 				}
 				else if (droppedCollectibleData as LootData)
 				{
@@ -57,7 +57,8 @@ public class CollectibleDropper : MonoBehaviour
 				}
 				else if (droppedCollectibleData as ItemData)
 				{
-
+                    Item item = collectibleObject.GetComponent<Item>();
+                    item.InventoryDrop();
 				}
 
 				break;
