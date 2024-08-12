@@ -25,27 +25,46 @@ public class CollectibleDropper : MonoBehaviour
 
     public void Drop()
     {
-        container.Container.RemoveAt(slotIndex);
 
-        switch(container.containerType)
+		if (playerController == null) playerController = FindObjectOfType<PlayerController>();
+
+		switch (container.containerType)
         {
             case ContainerType.HANDS:
-				if (playerController == null) playerController = FindObjectOfType<PlayerController>();
 				if (slotIndex == 0) playerController.DropLeft();
 				else if (slotIndex == 1) playerController.DropRight();
                 break;
             case ContainerType.HEAD:
-				if (playerController == null) playerController = FindObjectOfType<PlayerController>();
+				
                 playerController.DropHat();
 
 				break;
 
             default: // LOCKER or BACKPACK
+                // Need to instantiate a collectible into the world
+                CollectibleData droppedCollectibleData = container.Container.collectibleSlots[slotIndex].collectible;
+				GameObject prefab = Resources.Load<GameObject>(droppedCollectibleData.name);
+				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation);
 
-                break;
+				if (droppedCollectibleData as HatData)
+                {
+                    Hat hat = collectibleObject.GetComponent<Hat>();
+					hat.StartTransferPosition(playerController.transform.position + gameObject.transform.up, transform.rotation);
+				}
+				else if (droppedCollectibleData as LootData)
+				{
+                    
+				}
+				else if (droppedCollectibleData as ItemData)
+				{
+
+				}
+
+				break;
 
         }
 
+        container.Container.RemoveAt(slotIndex);
         container.onContainerCollectibleUpdated.Raise();
     }
 }
