@@ -1,3 +1,5 @@
+using GameEvents;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,7 +15,9 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
     [SerializeField] public CollectibleContainerData containerData = null;
     [SerializeField] private TextMeshProUGUI collectibleQuantityText = null;
 
-    public override CollectibleData SlotCollectible
+	[Tooltip("Optional Event")] public VoidEvent OnContainerSwapped;
+
+	public override CollectibleData SlotCollectible
     {
         get { return CollectibleSlot.collectible; }
         set { }
@@ -99,6 +103,11 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
         otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex] = thisCollectibleSlot;
         containerData.Container.collectibleSlots[SlotIndex] = otherSlot;
+
+        if(OnContainerSwapped != null)
+        {
+            OnContainerSwapped.Raise();
+        }
 	}
 
 }

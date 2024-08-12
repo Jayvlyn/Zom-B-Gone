@@ -5,7 +5,7 @@ using UnityEngine;
 public class HatChanger : MonoBehaviour
 {
     public CollectibleContainerSlot headSlot;
-    public Head playerHead;
+    private Head playerHead;
 
     private void Awake()
     {
@@ -26,12 +26,12 @@ public class HatChanger : MonoBehaviour
 
         else if (headSlot.SlotCollectible != null && playerHead.wornHat != null) // swap hat on head
         {
-            if(playerHead.wornHat.hatData.name != headSlot.SlotCollectible.name)
+            if (playerHead.wornHat.hatData.name != headSlot.SlotCollectible.name)
             {
                 Destroy(playerHead.wornHat.gameObject);
 
                 SpawnNewHatOnHead();
-            }   
+            }
         }
     }
 
