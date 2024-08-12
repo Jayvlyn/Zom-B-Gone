@@ -5,15 +5,43 @@ using UnityEngine;
 public class HatChanger : MonoBehaviour
 {
     public CollectibleContainerSlot headSlot;
+    public Head playerHead;
+
+    private void Awake()
+    {
+        playerHead = FindObjectOfType<Head>();    
+    }
 
     public void CheckHatChange()
     {
-        if(headSlot == null)
+        if (headSlot.SlotCollectible == null && playerHead.wornHat != null) // remove hat on head from world (data not lost, exists in inventory)
         {
-            if(headSlot.SlotCollectible.name != headSlot.containerData.Container.collectibleSlots[0].collectible.name)
-            {
+            Destroy(playerHead.wornHat.gameObject);
+        }
 
-            }
+        else if (headSlot.SlotCollectible != null && playerHead.wornHat == null) // add hat on head
+        {
+            SpawnNewHatOnHead();
+        }
+
+        else if (headSlot.SlotCollectible != null && playerHead.wornHat != null) // swap hat on head
+        {
+            if(playerHead.wornHat.hatData.name != headSlot.SlotCollectible.name)
+            {
+                Destroy(playerHead.wornHat.gameObject);
+
+                SpawnNewHatOnHead();
+            }   
         }
     }
+
+    private void SpawnNewHatOnHead()
+    {
+        string hatName = headSlot.SlotCollectible.name;
+        GameObject prefab = Resources.Load<GameObject>(hatName);
+        GameObject hatObject = Instantiate(prefab, playerHead.transform.position, playerHead.transform.rotation);
+        Hat wornHat = hatObject.GetComponent<Hat>();
+        wornHat.Interact(playerHead);
+    }
 }
+

@@ -3308,10 +3308,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 369753046641428115, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
-      propertyPath: m_Mass
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1034459641233780573, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: handContainer.collectibleSlots.Array.size
       value: 0

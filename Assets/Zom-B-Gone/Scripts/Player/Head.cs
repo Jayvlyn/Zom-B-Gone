@@ -7,13 +7,16 @@ public class Head : MonoBehaviour
     public CollectibleContainerData headContainerData;
 
     public Transform hatTransform;
-    [HideInInspector] public Hat wornHat;
+    //[HideInInspector] 
+    public Hat wornHat;
 
-    private GameObject hatObject;
+    public GameObject lastHatObject;
+    public GameObject hatObject;
     public GameObject HatObject
     {
         get { return hatObject; }
         set {
+            lastHatObject = hatObject;
             hatObject = value;
             if (hatObject != null && hatObject.TryGetComponent(out Hat hat)) // Hat added or swapped
             {

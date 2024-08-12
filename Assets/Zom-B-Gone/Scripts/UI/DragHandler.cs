@@ -39,7 +39,7 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
             originalParent = transform.parent;
 
-            transform.SetParent(transform.parent.parent);
+            transform.SetParent(transform.parent.parent.parent);
 
             canvasGroup.blocksRaycasts = false;
         }
