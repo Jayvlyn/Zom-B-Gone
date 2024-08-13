@@ -108,6 +108,12 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
         {
             OnContainerSwapped.Raise();
         }
+        if(otherCollectibleSlot.OnContainerSwapped != null)
+        {
+            otherCollectibleSlot.OnContainerSwapped.Raise();
+
+		}
+
 	}
 
 }
