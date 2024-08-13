@@ -22,7 +22,7 @@ public class CollectibleContainer : ICollectibleContainer
             {
                 if (collectibleSlots[i].collectible == collectibleSlot.collectible)
                 {
-                    int remainingSpace = collectibleSlots[i].GetRemainingSpace();
+					int remainingSpace = collectibleSlots[i].GetRemainingSpace();
                     if (collectibleSlot.quantity <= remainingSpace)
                     {
                         collectibleSlots[i].quantity += collectibleSlot.quantity;
@@ -46,7 +46,12 @@ public class CollectibleContainer : ICollectibleContainer
             {
                 if(collectibleSlot.quantity <= collectibleSlot.collectible.MaxStack)
                 {
-                    collectibleSlots[i] = collectibleSlot;
+					if (collectibleSlot.collectible as LootData && !collectibleSlots[i].allowLoot) continue;
+					if (collectibleSlot.collectible as HatData && !collectibleSlots[i].allowHats) continue;
+					if (collectibleSlot.collectible as ItemData && !collectibleSlots[i].allowItems) continue;
+
+					collectibleSlots[i].collectible = collectibleSlot.collectible;
+                    collectibleSlots[i].quantity = collectibleSlot.quantity;
 
                     collectibleSlot.quantity = 0;
 
@@ -56,7 +61,7 @@ public class CollectibleContainer : ICollectibleContainer
                 }
                 else
                 {
-                    collectibleSlots[i] = new CollectibleSlot(collectibleSlot.collectible, collectibleSlot.collectible.MaxStack);
+                    collectibleSlots[i] = new CollectibleSlot(collectibleSlot.collectible, collectibleSlot.collectible.MaxStack, collectibleSlots[i].allowLoot, collectibleSlots[i].allowItems, collectibleSlots[i].allowHats);
 
                     collectibleSlot.quantity -= collectibleSlot.collectible.MaxStack;
                 }
@@ -96,7 +101,9 @@ public class CollectibleContainer : ICollectibleContainer
     {
         if (slotIndex < 0 || slotIndex > collectibleSlots.Length - 1) return;
 
-        collectibleSlots[slotIndex] = new CollectibleSlot();
+        collectibleSlots[slotIndex].collectible = null;
+        collectibleSlots[slotIndex].quantity = 0;
+
 
         OnCollectibleUpdated.Invoke();
     }
@@ -113,17 +120,18 @@ public class CollectibleContainer : ICollectibleContainer
                     {
                         collectibleSlot.quantity -= collectibleSlots[i].quantity;
 
-                        collectibleSlots[i] = new CollectibleSlot();
-                    }
+						collectibleSlots[i].collectible = null;
+						collectibleSlots[i].quantity = 0;
+					}
                     else
                     {
                         collectibleSlots[i].quantity -= collectibleSlot.quantity;
 
                         if (collectibleSlots[i].quantity == 0)
                         {
-                            collectibleSlots[i] = new CollectibleSlot();
+							collectibleSlots[i].collectible = null;
 
-                            OnCollectibleUpdated.Invoke();
+							OnCollectibleUpdated.Invoke();
 
                             return;
                         }

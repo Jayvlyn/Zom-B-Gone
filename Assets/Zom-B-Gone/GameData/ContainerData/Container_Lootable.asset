@@ -18,90 +18,59 @@ MonoBehaviour:
   testCollectibleSlot:
     collectible: {fileID: 0}
     quantity: 0
-  size: 42
+    allowLoot: 0
+    allowItems: 0
+    allowHats: 0
+  size: 10
   Container:
     collectibleSlots:
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-    - collectible: {fileID: 0}
-      quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0

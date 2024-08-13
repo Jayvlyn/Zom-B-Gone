@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public struct CollectibleSlot
@@ -6,10 +7,17 @@ public struct CollectibleSlot
     public CollectibleData collectible;
     public int quantity;
 
-    public CollectibleSlot(CollectibleData collectible, int quantity)
+	public bool allowLoot;
+	public bool allowItems;
+	public bool allowHats;
+
+	public CollectibleSlot(CollectibleData collectible, int quantity, bool allowLoot = true, bool allowItems = true, bool allowHats = true)
     {
         this.collectible = collectible;
         this.quantity = quantity;
+        this.allowLoot = allowLoot;
+        this.allowItems = allowItems;
+        this.allowHats = allowHats;
     }
 
     public int GetRemainingSpace()

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2103091485974351441}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.212, y: 7.635, z: 36.75}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49,20 +49,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7634af11e0d94a8df8dc1126f77eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   itemData: {fileID: 11400000, guid: 6ddf5a9b7f0f1564287e32f82510541d, type: 2}
-  rotationalFriction: 0.9
-  friction: 0.98
+  pivotPoint: {fileID: 818514053000105829}
+  fullCollider: {fileID: 1504697998909740283}
+  itemRenderer: {fileID: 0}
+  airborneAngularDrag: 0.4
+  airborneLinearDrag: 0.4
+  groundedAngularDrag: 3
+  groundedLinearDrag: 3
   holdOffset: {x: 0.81, y: 0.23}
   spinThrow: 1
   aimAtMouse: 0
   gripRotation: 130
-  pivotPoint: {fileID: 818514053000105829}
-  fullCollider: {fileID: 1504697998909740283}
   minimumAirborneSpeed: 10
-  itemRenderer: {fileID: 0}
   groundSortOrder: -30
   heldSortOrder: 10
   airborneSortOrder: 20
+  inRightHand: 0
   useHeld: 0
   weaponData: {fileID: 0}
   damageCollider: {fileID: 4896569074839128829}
@@ -130,7 +134,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.28, y: 1.52}
+    oldSize: {x: 1.5, y: 1.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -181,7 +185,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.28, y: 1.52}
+    oldSize: {x: 1.5, y: 1.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

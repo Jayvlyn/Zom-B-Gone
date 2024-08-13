@@ -9,9 +9,7 @@ using UnityEngine.EventSystems;
 
 public class CollectibleContainerSlot : SlotUI, IDropHandler
 {
-    [SerializeField] private bool allowLoot = false;
-    [SerializeField] private bool allowItems = false;
-    [SerializeField] private bool allowHats = false;
+
     [SerializeField] public CollectibleContainerData containerData = null;
     [SerializeField] private TextMeshProUGUI collectibleQuantityText = null;
 
@@ -25,7 +23,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
     public CollectibleSlot CollectibleSlot => containerData.Container.GetSlotByIndex(SlotIndex);
 
-    public override void OnDrop(PointerEventData eventData) // dropping item into slot
+    public override void OnDrop(PointerEventData eventData) // dropping collectible into slot
     {
         // drag handler of the slot you were hovering over when you let go of left click
         DragHandler dragHandler = eventData.pointerDrag.GetComponent<DragHandler>();
@@ -38,12 +36,12 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
             CollectibleData otherCollectible = otherSlot.containerData.Container.collectibleSlots[otherSlot.SlotIndex].collectible;
 
-            if (otherCollectible as LootData && !allowLoot) return; 
-            if (otherCollectible as HatData  && !allowHats) return; 
-            if (otherCollectible as ItemData && !allowItems) return;
-            if (SlotCollectible as LootData && !otherSlot.allowLoot) return;
-            if (SlotCollectible as HatData && !otherSlot.allowHats) return;
-            if (SlotCollectible as ItemData && !otherSlot.allowItems) return;
+            if (otherCollectible as LootData && !CollectibleSlot.allowLoot) return; 
+            if (otherCollectible as HatData  && !CollectibleSlot.allowHats) return; 
+            if (otherCollectible as ItemData && !CollectibleSlot.allowItems) return;
+            if (SlotCollectible as LootData && !otherSlot.CollectibleSlot.allowLoot) return;
+            if (SlotCollectible as HatData && !otherSlot.CollectibleSlot.allowHats) return;
+            if (SlotCollectible as ItemData && !otherSlot.CollectibleSlot.allowItems) return;
 
             if(otherSlot.containerData == containerData)
             {

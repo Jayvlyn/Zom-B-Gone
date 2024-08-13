@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3839145645533338256}
-  - component: {fileID: 2627580959142257514}
+  - component: {fileID: -5678323034716447804}
   - component: {fileID: 8510947219786376494}
   - component: {fileID: 6146197807928741351}
   m_Layer: 6
-  m_Name: Baseball Cap
+  m_Name: LootTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,13 +28,13 @@ Transform:
   m_GameObject: {fileID: 2492671934262699846}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.464, y: 8.853, z: -0.35356748}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2627580959142257514
+--- !u!114 &-5678323034716447804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +43,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2492671934262699846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8fb66e1502676645a5cdca59ec7809e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e1dee774aafe6340a848d41613b8ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hatData: {fileID: 11400000, guid: 87abeb40489f2894a88d2f42a31cc413, type: 2}
+  lootData: {fileID: 11400000, guid: 6723e4911033c79428faf0eb14f13513, type: 2}
+  lootCount: 2
+  containerToFill: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
   transferSpeed: 8
 --- !u!212 &8510947219786376494
 SpriteRenderer:
@@ -89,7 +91,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -20
-  m_Sprite: {fileID: 21300000, guid: d5e01b208ad229549b04ced5ecb4c90d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54eccf2bf3d1bac48846ca5a140a4b5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,6 +134,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.042724133}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.26158762
+  m_Radius: 0.26
