@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Hat : MonoBehaviour, IInteractable
 {
     [SerializeField] public HatData hatData;
@@ -63,7 +64,7 @@ public class Hat : MonoBehaviour, IInteractable
         transform.position = Vector3.Lerp(transform.position, position, transferSpeed * Time.deltaTime);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, rotation, transferSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, position) < 0.05f)
+        if (Vector3.Distance(transform.position, position) < 0.005f)
         {
             transferring = false;
             transform.position = position;
