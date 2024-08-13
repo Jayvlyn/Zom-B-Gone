@@ -6,6 +6,8 @@ using UnityEngine;
 public class Loot : MonoBehaviour, IInteractable
 {
 	[SerializeField] public LootData lootData;
+	[SerializeField] public int lootCount;
+	[SerializeField] private CollectibleContainerData containerToFill;
 	private bool transferring = false;
 
 	private Transform transferTarget;
@@ -53,12 +55,15 @@ public class Loot : MonoBehaviour, IInteractable
 		transform.position = Vector3.Lerp(transform.position, position, transferSpeed * Time.deltaTime);
 		transform.localRotation = Quaternion.Lerp(transform.localRotation, rotation, transferSpeed * Time.deltaTime);
 
-		if (Vector3.Distance(transform.position, position) < 0.005f)
+		if (Vector3.Distance(transform.position, position) < 0.05f)
 		{
+			containerToFill.AddToContainer(lootData, lootCount);
+			Destroy(gameObject);
+
 			//transferring = false;
 			//transform.position = position;
 			//transform.localRotation = rotation;
-			// Add to inventory
+			// Add to backpack
 			// Remove this object from world
 		}
 	}

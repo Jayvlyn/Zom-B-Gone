@@ -37,6 +37,12 @@ public class CollectibleContainerData : ScriptableObject
     {
         Container.AddCollectible(testCollectibleSlot);
     }
+
+    public void AddToContainer(CollectibleData data, int amount)
+    {
+        CollectibleSlot incomingCollectible = new CollectibleSlot(data, amount);
+        Container.AddCollectible(incomingCollectible);
+    }
 }
 
 public enum ContainerType

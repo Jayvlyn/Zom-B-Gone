@@ -14,21 +14,21 @@ public class Interactor : MonoBehaviour
 
     private Hands hands;
     private Head head;
-    private RaycastHit2D _hit;
-    private Camera _gameCamera;
+    private RaycastHit2D hit;
+    //private Camera gameCamera;
 
     private void Awake()
     {
-        _gameCamera = FindObjectOfType<Camera>();
+        //gameCamera = FindObjectOfType<Camera>();
         hands = GetComponent<Hands>();
         head = GetComponent<Head>();
     }
 
     public void Interact(bool rightHand)
     {
-        _hit = Physics2D.CircleCast(transform.position, _interactRange, Vector2.zero, 0, InteractionLm);
+        hit = Physics2D.CircleCast(transform.position, _interactRange, Vector2.zero, 0, InteractionLm);
 
-        if (_hit.collider != null && _hit.collider.TryGetComponent(out IInteractable interactedObject))
+        if (hit.collider != null && hit.collider.TryGetComponent(out IInteractable interactedObject))
         {
             if(interactedObject != null)
             {
@@ -55,6 +55,11 @@ public class Interactor : MonoBehaviour
                         //head.hatObject.transform.position = newHat.transform.position;
                     }
                     // Wear new hat
+                    interactedObject.Interact(head);
+                }
+
+                if(interactedObject is Loot)
+                {
                     interactedObject.Interact(head);
                 }
             }
