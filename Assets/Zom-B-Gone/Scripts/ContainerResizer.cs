@@ -24,9 +24,20 @@ public class ContainerResizer : MonoBehaviour
 		{
 			IncreaseRow();
 		}
-		else if (fullSlotsInLastRow == 0 && (lastSlotIndex+1) >= rowSize)
-		{ // Reduce row if there is more than one row and last row is empty
-			ReduceRow();
+		else if (fullSlotsInLastRow == 0)
+		{
+			int fullSlotsInSecondLastRow = 0;
+			for (int i = lastSlotIndex-rowSize; i > (lastSlotIndex - rowSize - rowSize); i--)
+			{
+				if (containerData.Container.collectibleSlots[i].collectible != null)
+				{
+					fullSlotsInSecondLastRow++;
+				}
+			}
+			if(fullSlotsInSecondLastRow == 0 && (lastSlotIndex + rowSize + 1) >= rowSize)
+			{
+				ReduceRow();
+			}
 		}
 	}
 
@@ -38,6 +49,10 @@ public class ContainerResizer : MonoBehaviour
 
 		containerData.size -= rowSize;
 		containerData.Container = new CollectibleContainer(containerData.size);
+		for (int i = 0; i < cachedSlots.Length - 1; i++)
+		{
+			containerData.Container.collectibleSlots[i] = cachedSlots[i];
+		}
 
 		// loop and destroy last row of slots in children
 		int lastSlotIndex = containerData.Container.collectibleSlots.Length - 1 - rowSize;
@@ -59,6 +74,20 @@ public class ContainerResizer : MonoBehaviour
 
 		containerData.size += rowSize;
 		containerData.Container = new CollectibleContainer(containerData.size);
+		for (int i = 0; i < cachedSlots.Length; i++)
+		{
+			containerData.Container.collectibleSlots[i] = cachedSlots[i];
+		}
+
+		// Makes an empty slot with the same allows
+		CollectibleSlot slotTemplate = cachedSlots[0];
+		slotTemplate.collectible = null;
+		slotTemplate.quantity = 0;
+
+		for (int i = (cachedSlots.Length+rowSize-1); i>=cachedSlots.Length; i--)
+		{
+			containerData.Container.collectibleSlots[i] = slotTemplate;
+		}
 
 		// loop and instantiate more slots, making them children of this
 		Object newSlot = Resources.Load(slotPrefabName);

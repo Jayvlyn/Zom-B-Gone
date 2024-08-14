@@ -9,6 +9,7 @@ public class Loot : MonoBehaviour, IInteractable
 	[SerializeField] public int lootCount;
 	[SerializeField] private CollectibleContainerData containerToFill;
 	private bool transferring = false;
+	private bool pickupTransfer = false;
 
 	private Transform transferTarget;
 	private Vector3 transferPos;
@@ -23,7 +24,19 @@ public class Loot : MonoBehaviour, IInteractable
 
 	void Update()
 	{
-		if (transferring)
+		if (pickupTransfer)
+		{
+			if (transferTarget == null)
+			{
+				PickupTransferPosition(transferPos, transferRot);
+			}
+			else
+			{
+				PickupTransferPosition(transferTarget.position, transferTarget.localRotation);
+			}
+		}
+
+		else if (transferring)
 		{
 			if (transferTarget == null)
 			{
@@ -50,21 +63,43 @@ public class Loot : MonoBehaviour, IInteractable
 		transferring = true;
 	}
 
-	private void TransferPosition(Vector3 position, Quaternion rotation)
+	public void StartPickupTransferPosition(Transform target)
+	{
+		transferTarget = target;
+		pickupTransfer = true;
+	}
+
+	public void StartPickupTransferPosition(Vector3 position, Quaternion rotation)
+	{
+		transferTarget = null;
+		transferRot = rotation;
+		transferPos = position;
+		pickupTransfer = true;
+	}
+
+	private void PickupTransferPosition(Vector3 position, Quaternion rotation)
 	{
 		transform.position = Vector3.Lerp(transform.position, position, transferSpeed * Time.deltaTime);
 		transform.localRotation = Quaternion.Lerp(transform.localRotation, rotation, transferSpeed * Time.deltaTime);
 
 		if (Vector3.Distance(transform.position, position) < 0.05f)
 		{
+			pickupTransfer = false;
 			containerToFill.AddToContainer(lootData, lootCount);
 			Destroy(gameObject);
+		}
+	}
 
-			//transferring = false;
-			//transform.position = position;
-			//transform.localRotation = rotation;
-			// Add to backpack
-			// Remove this object from world
+	private void TransferPosition(Vector3 position, Quaternion rotation)
+	{
+		transform.position = Vector3.Lerp(transform.position, position, transferSpeed * Time.deltaTime);
+		transform.localRotation = Quaternion.Lerp(transform.localRotation, rotation, transferSpeed * Time.deltaTime);
+
+		if (Vector3.Distance(transform.position, position) < 0.005f)
+		{
+			transferring = false;
+			transform.position = position;
+			transform.localRotation = rotation;
 		}
 	}
 
@@ -85,7 +120,7 @@ public class Loot : MonoBehaviour, IInteractable
 		spriteRenderer.sortingOrder = -50;
 		gameObject.transform.parent = head.gameObject.transform;
 		gameObject.layer = LayerMask.NameToLayer("Default");
-		StartTransferPosition(head.hatTransform);
+		StartPickupTransferPosition(head.hatTransform);
 	}
 
 	public void Interact(bool rightHand)

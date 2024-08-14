@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7085231660504167542}
   - component: {fileID: 1198267508947874189}
   - component: {fileID: 2049207967035570229}
+  - component: {fileID: 2400370541965741665}
   m_Layer: 5
   m_Name: CollectibleIcon
   m_TagString: Untagged
@@ -126,7 +127,20 @@ MonoBehaviour:
   slotUI: {fileID: 7138825994445509175}
   onMouseStartHoverCollectible: {fileID: 11400000, guid: 4748cf1022d4a02459626e2debec913d, type: 2}
   onMouseEndHoverCollectible: {fileID: 11400000, guid: 8354cee0932d90c43aaeff1275d47b6e, type: 2}
-  collectibleDropper: {fileID: 0}
+  collectibleDropper: {fileID: 2400370541965741665}
+--- !u!114 &2400370541965741665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425097700587940368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca77c82a191ba9488cad828d77eb757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
 --- !u!1 &7708131793567312717
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,11 +336,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icomImage: {fileID: 6998675399385336187}
-  allowLoot: 1
-  allowItems: 0
-  allowHats: 0
   containerData: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
   collectibleQuantityText: {fileID: 7907024424289654383}
+  OnContainerSwapped: {fileID: 0}
 --- !u!114 &3705534198587483533
 MonoBehaviour:
   m_ObjectHideFlags: 0

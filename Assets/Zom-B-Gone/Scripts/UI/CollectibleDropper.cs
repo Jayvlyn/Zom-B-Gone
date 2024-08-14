@@ -25,7 +25,6 @@ public class CollectibleDropper : MonoBehaviour
 
     public void Drop()
     {
-
 		if (playerController == null) playerController = FindObjectOfType<PlayerController>();
 
 		switch (container.containerType)
@@ -43,6 +42,7 @@ public class CollectibleDropper : MonoBehaviour
             default: // LOCKER or BACKPACK
                 // Need to instantiate a collectible into the world
                 CollectibleData droppedCollectibleData = container.Container.collectibleSlots[slotIndex].collectible;
+                int quantity = container.Container.collectibleSlots[slotIndex].quantity;
 				GameObject prefab = Resources.Load<GameObject>(droppedCollectibleData.name);
 				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation);
 
@@ -53,7 +53,13 @@ public class CollectibleDropper : MonoBehaviour
 				}
 				else if (droppedCollectibleData as LootData)
 				{
-                    
+					Loot loot = collectibleObject.GetComponent<Loot>();
+
+                    CollectibleContainerSlot slot = transform.parent.GetComponent<CollectibleContainerSlot>();
+                    int slotIndex = this.transform.GetSiblingIndex();
+                    loot.lootCount = quantity;
+
+					loot.StartTransferPosition(playerController.transform.position + playerController.transform.up, loot.transform.rotation);
 				}
 				else if (droppedCollectibleData as ItemData)
 				{
@@ -67,6 +73,5 @@ public class CollectibleDropper : MonoBehaviour
 
         container.Container.RemoveAt(slotIndex);
         container.onContainerCollectibleUpdated.Raise();
-        Debug.Log("UPDATED");
     }
 }
