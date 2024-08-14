@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8510947219786376494}
   - component: {fileID: 6146197807928741351}
   m_Layer: 6
-  m_Name: LootTest
+  m_Name: Supressor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1dee774aafe6340a848d41613b8ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootData: {fileID: 11400000, guid: 6723e4911033c79428faf0eb14f13513, type: 2}
-  lootCount: 2
+  lootData: {fileID: 11400000, guid: a0762a981573d554faac50b44adc8f47, type: 2}
+  lootCount: 1
   containerToFill: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
   transferSpeed: 8
 --- !u!212 &8510947219786376494

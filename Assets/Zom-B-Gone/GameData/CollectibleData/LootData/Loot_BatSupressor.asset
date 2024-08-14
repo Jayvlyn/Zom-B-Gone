@@ -16,4 +16,4 @@ MonoBehaviour:
   description: The bat that was sacrificed for this supressor didn't die in vain.
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 0}
-  maxStack: 64
+  maxStack: 4

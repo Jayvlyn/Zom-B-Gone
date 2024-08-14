@@ -16,4 +16,4 @@ MonoBehaviour:
   description: Fix anything, make anything. I love this stuff.
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 0}
-  maxStack: 16
+  maxStack: 8

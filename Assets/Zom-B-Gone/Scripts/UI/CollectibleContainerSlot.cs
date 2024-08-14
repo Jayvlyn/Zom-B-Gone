@@ -9,19 +9,21 @@ using UnityEngine.EventSystems;
 
 public class CollectibleContainerSlot : SlotUI, IDropHandler
 {
-
     [SerializeField] public CollectibleContainerData containerData = null;
     [SerializeField] private TextMeshProUGUI collectibleQuantityText = null;
 
-	[Tooltip("Optional Event")] public VoidEvent OnContainerSwapped;
+    [Tooltip("Optional Event")] public VoidEvent OnContainerSwapped;
 
-	public override CollectibleData SlotCollectible
+    public override CollectibleData SlotCollectible
     {
         get { return CollectibleSlot.collectible; }
         set { }
     }
 
-    public CollectibleSlot CollectibleSlot => containerData.Container.GetSlotByIndex(SlotIndex);
+    public CollectibleSlot CollectibleSlot
+    {
+        get { return containerData.Container.GetSlotByIndex(SlotIndex); }
+    }
 
     public override void OnDrop(PointerEventData eventData) // dropping collectible into slot
     {

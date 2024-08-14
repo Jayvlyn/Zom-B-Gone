@@ -16,4 +16,4 @@ MonoBehaviour:
   description: 
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 0}
-  maxStack: 64
+  maxStack: 4
