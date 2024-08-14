@@ -67,5 +67,6 @@ public class CollectibleDropper : MonoBehaviour
 
         container.Container.RemoveAt(slotIndex);
         container.onContainerCollectibleUpdated.Raise();
+        Debug.Log("UPDATED");
     }
 }

@@ -11,7 +11,7 @@ public class CollectibleContainerData : ScriptableObject
     [SerializeField] public VoidEvent onContainerCollectibleUpdated = null;
     [SerializeField] public VoidEvent onContainerCollectibleSwapped = null;
     [SerializeField] private CollectibleSlot testCollectibleSlot = new CollectibleSlot();
-    [SerializeField] private int size = 42;
+    [SerializeField] public int size = 42;
 
     public CollectibleContainer Container;
 
