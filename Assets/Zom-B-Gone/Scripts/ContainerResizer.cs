@@ -51,7 +51,8 @@ public class ContainerResizer : MonoBehaviour
 		containerData.Container = new CollectibleContainer(containerData.size);
 		containerData.Container.OnCollectibleUpdated += containerData.onContainerCollectibleUpdated.Raise;
 		containerData.Container.OnCollectibleSwapped += containerData.onContainerCollectibleSwapped.Raise;
-		for (int i = 0; i < cachedSlots.Length - 1; i++)
+
+		for (int i = 0; i < cachedSlots.Length - rowSize; i++)
 		{
 			containerData.Container.collectibleSlots[i] = cachedSlots[i];
 		}
@@ -78,6 +79,7 @@ public class ContainerResizer : MonoBehaviour
 		containerData.Container = new CollectibleContainer(containerData.size);
 		containerData.Container.OnCollectibleUpdated += containerData.onContainerCollectibleUpdated.Raise;
 		containerData.Container.OnCollectibleSwapped += containerData.onContainerCollectibleSwapped.Raise;
+
 		for (int i = 0; i < cachedSlots.Length; i++)
 		{
 			containerData.Container.collectibleSlots[i] = cachedSlots[i];
