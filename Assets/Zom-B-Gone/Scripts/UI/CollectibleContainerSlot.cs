@@ -94,7 +94,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 				{
 					thisCollectibleSlot.quantity += otherSlot.quantity;
 
-					containerData.Container.collectibleSlots[otherSlotIndex] = new CollectibleSlot();
+					containerData.Container.collectibleSlots[otherSlotIndex] = new CollectibleSlot(null, 0, containerData.Container.collectibleSlots[otherSlotIndex].allowLoot, containerData.Container.collectibleSlots[otherSlotIndex].allowItems, containerData.Container.collectibleSlots[otherSlotIndex].allowHats);
 
 					return;
 				}

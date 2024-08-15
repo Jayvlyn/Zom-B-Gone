@@ -1,3 +1,4 @@
+using GameEvents;
 using System;
 using System.Diagnostics;
 
@@ -8,11 +9,12 @@ public class CollectibleContainer : ICollectibleContainer
 
     public Action OnCollectibleUpdated = delegate { };
     public Action OnCollectibleSwapped = delegate { };
+    
 
     public CollectibleContainer(int size)
     {
         collectibleSlots = new CollectibleSlot[size];
-    }
+	}
 
     // Gets slot index based on its index under the parent, so if it is the third child to an object it will be an index of 2
     public CollectibleSlot GetSlotByIndex(int index)

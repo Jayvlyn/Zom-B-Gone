@@ -17,8 +17,8 @@ public class CollectibleContainerData : ScriptableObject
 
     private void Awake()
     {
-        //Container = new CollectibleContainer(size);
-    }
+		//Container = new CollectibleContainer(size);
+	}
 
     public void OnEnable()
     {
