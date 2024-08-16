@@ -2904,9 +2904,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b209794cb05a34c8f2c949cb10cfd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: The bottom needs to be set large enough to contain all slots, since this
-    container can be infinite, the bottom will need to be programatically expanded
-    when a row is added to the container.
+  Notes: The bottom on rect transform needs to be set large enough to contain all
+    slots, since this container can be infinite, the bottom will need to be programatically
+    expanded when a row is added to the container.
 --- !u!1 &6412526378179766326
 GameObject:
   m_ObjectHideFlags: 0
