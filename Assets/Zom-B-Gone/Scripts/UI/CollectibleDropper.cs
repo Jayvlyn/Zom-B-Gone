@@ -44,7 +44,7 @@ public class CollectibleDropper : MonoBehaviour
                 CollectibleData droppedCollectibleData = container.Container.collectibleSlots[slotIndex].collectible;
                 int quantity = container.Container.collectibleSlots[slotIndex].quantity;
 				GameObject prefab = Resources.Load<GameObject>(droppedCollectibleData.name);
-				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation);
+				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation * Quaternion.Euler(0, 0, -90));
 
 				if (droppedCollectibleData as HatData)
                 {

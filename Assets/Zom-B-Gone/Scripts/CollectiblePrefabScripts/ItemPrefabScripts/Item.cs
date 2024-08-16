@@ -177,7 +177,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     public virtual void InventoryDrop()
     {
         float dropForwardForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
-        rb.AddForce(transform.up * dropForwardForce, ForceMode2D.Impulse);
+        rb.AddForce(-transform.right * dropForwardForce, ForceMode2D.Impulse);
     }
 
     public virtual void Drop()
