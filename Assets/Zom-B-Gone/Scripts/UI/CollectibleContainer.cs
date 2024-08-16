@@ -19,7 +19,8 @@ public class CollectibleContainer : ICollectibleContainer
     // Gets slot index based on its index under the parent, so if it is the third child to an object it will be an index of 2
     public CollectibleSlot GetSlotByIndex(int index)
     {
-        return collectibleSlots[index];
+        if (collectibleSlots.Length > index) return collectibleSlots[index];
+        else return new CollectibleSlot();
     }
 
     public CollectibleSlot AddCollectible(CollectibleSlot collectibleSlot)

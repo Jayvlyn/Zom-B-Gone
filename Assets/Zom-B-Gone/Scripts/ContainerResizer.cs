@@ -58,7 +58,13 @@ public class ContainerResizer : MonoBehaviour
 		}
 
 		// loop and destroy last row of slots in children
-		int lastSlotIndex = containerData.Container.collectibleSlots.Length - 1 - rowSize;
+		//int lastSlotIndex = containerData.Container.collectibleSlots.Length - 1 - rowSize;
+		//for (int i = lastSlotIndex; i > (lastSlotIndex - rowSize); i--)
+		//{
+		//	Destroy(transform.GetChild(i).gameObject);
+		//	//Debug.Log("Destroy Slot at index: " + i);
+		//}		
+		int lastSlotIndex = containerData.Container.collectibleSlots.Length - 1 + rowSize;
 		for (int i = lastSlotIndex; i > (lastSlotIndex - rowSize); i--)
 		{
 			Destroy(transform.GetChild(i).gameObject);
