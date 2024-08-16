@@ -43,8 +43,6 @@ public class ContainerResizer : MonoBehaviour
 
 	private void ReduceRow()
 	{
-		//Debug.Log("Reduce");
-
 		CollectibleSlot[] cachedSlots = containerData.Container.collectibleSlots;
 
 		containerData.size -= rowSize;
@@ -57,28 +55,16 @@ public class ContainerResizer : MonoBehaviour
 			containerData.Container.collectibleSlots[i] = cachedSlots[i];
 		}
 
-		// loop and destroy last row of slots in children
-		//int lastSlotIndex = containerData.Container.collectibleSlots.Length - 1 - rowSize;
-		//for (int i = lastSlotIndex; i > (lastSlotIndex - rowSize); i--)
-		//{
-		//	Destroy(transform.GetChild(i).gameObject);
-		//	//Debug.Log("Destroy Slot at index: " + i);
-		//}		
+
 		int lastSlotIndex = containerData.Container.collectibleSlots.Length - 1 + rowSize;
 		for (int i = lastSlotIndex; i > (lastSlotIndex - rowSize); i--)
 		{
 			Destroy(transform.GetChild(i).gameObject);
-			//Debug.Log("Destroy Slot at index: " + i);
 		}
-
-
-
 	}
 
 	private void IncreaseRow()
 	{
-		//Debug.Log("Increase");
-
 		CollectibleSlot[] cachedSlots = containerData.Container.collectibleSlots;
 
 		containerData.size += rowSize;
@@ -109,8 +95,5 @@ public class ContainerResizer : MonoBehaviour
 			// new slot with this as the parent
 			Instantiate(newSlot, transform);
 		}
-
-
-
 	}
 }
