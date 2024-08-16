@@ -106,8 +106,8 @@ public class ContainerResizer : MonoBehaviour
 		int lastSlotIndex = containerData.Container.collectibleSlots.Length - 1 + rowSize;
 		for (int i = lastSlotIndex; i > (lastSlotIndex - rowSize); i--)
 		{
+			// new slot with this as the parent
 			Instantiate(newSlot, transform);
-			//Debug.Log("new slot");
 		}
 
 
