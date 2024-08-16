@@ -44,7 +44,7 @@ public class CollectibleDropper : MonoBehaviour
                 CollectibleData droppedCollectibleData = container.Container.collectibleSlots[slotIndex].collectible;
                 int quantity = container.Container.collectibleSlots[slotIndex].quantity;
 				GameObject prefab = Resources.Load<GameObject>(droppedCollectibleData.name);
-				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation * Quaternion.Euler(0, 0, -90));
+				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation);
 
 				if (droppedCollectibleData as HatData)
                 {
@@ -63,7 +63,9 @@ public class CollectibleDropper : MonoBehaviour
 				}
 				else if (droppedCollectibleData as ItemData)
 				{
-                    Item item = collectibleObject.GetComponent<Item>();
+                    collectibleObject.transform.rotation *= Quaternion.Euler(0, 0, -90);
+
+ 					Item item = collectibleObject.GetComponent<Item>();
                     item.InventoryDrop();
 				}
 
