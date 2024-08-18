@@ -29,8 +29,8 @@ MonoBehaviour:
       allowLoot: 0
       allowItems: 0
       allowHats: 1
-    - collectible: {fileID: 0}
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 3ea69505795e21d4db643120956aadfa, type: 2}
+      quantity: 9
       allowLoot: 1
       allowItems: 0
       allowHats: 0
