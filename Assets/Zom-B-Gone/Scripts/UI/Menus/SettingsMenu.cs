@@ -71,14 +71,16 @@ public class SettingsMenu : MonoBehaviour
     public void SetSFXVolume(float value)
     {
         sfxVolume = value;
-        sfxMixer.SetFloat("Volume", value);
+        if (value == sfxVolumeSlider.minValue) sfxMixer.SetFloat("Volume", -80);
+        else sfxMixer.SetFloat("Volume", value);
         SaveSystem.SaveSettings(this);
     }
 
     public void SetMusicVolume(float value)
     {
         musicVolume = value;
-        musicMixer.SetFloat("Volume", value);
+        if(value == musicVolumeSlider.minValue) musicMixer.SetFloat("Volume", -80);
+        else musicMixer.SetFloat("Volume", value);
         SaveSystem.SaveSettings(this);
     }
 
