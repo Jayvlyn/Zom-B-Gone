@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
@@ -39,7 +40,20 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
             originalParent = transform.parent;
 
-            transform.SetParent(transform.parent.parent.parent.parent.parent.parent);
+            Transform newParent = transform.parent.parent;
+            for(int i = 0; i < 20; i++)
+            {
+                if(!newParent.gameObject.TryGetComponent(out CanvasScaler cs))
+                {
+                    newParent = newParent.parent;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            transform.SetParent(newParent);
 
             canvasGroup.blocksRaycasts = false;
         }
