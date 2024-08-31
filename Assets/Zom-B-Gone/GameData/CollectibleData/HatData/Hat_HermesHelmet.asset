@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Swift and protective!
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 21300000, guid: 7ba2b535475e4e1408e9ec56e184b655, type: 3}
-  maxStack: 64
+  maxStack: 1
   swingTimeMultiplier: 1.2
   damageMultiplier: 1
   damageIncrease: 0

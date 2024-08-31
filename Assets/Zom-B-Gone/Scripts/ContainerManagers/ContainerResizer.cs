@@ -6,8 +6,23 @@ using UnityEngine;
 public class ContainerResizer : MonoBehaviour
 {
 	[SerializeField] public CollectibleContainerData containerData = null;
-    [SerializeField] public int rowSize = 6;
 	[SerializeField] private string slotPrefabName;
+
+
+    private ContainerSlotInitializer slotInitializer;
+	private RectTransform backgroundRect;
+    private int rowSize;
+
+	private void Awake()
+	{
+		slotInitializer = GetComponent<ContainerSlotInitializer>();
+	}
+
+	private void Start()
+	{
+		backgroundRect = slotInitializer.backgroundRect;
+		rowSize = slotInitializer.rowSize;
+	}
 
 	public void CheckResize()
 	{
@@ -84,7 +99,9 @@ public class ContainerResizer : MonoBehaviour
             // new slot with this as the parent
             Instantiate(newSlot, transform);
         }
-    }
+
+		backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y - slotInitializer.rowBackgroundIncrement);
+	}
 
     private void RemoveRows(int rowAmountToRemove)
     {
@@ -108,7 +125,9 @@ public class ContainerResizer : MonoBehaviour
         {
             Destroy(transform.GetChild(i).gameObject);
         }
-    }
+
+		backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y + slotInitializer.rowBackgroundIncrement * rowAmountToRemove);
+	}
 
     private void RemoveRow()
     {
@@ -130,5 +149,7 @@ public class ContainerResizer : MonoBehaviour
         {
             Destroy(transform.GetChild(i).gameObject);
         }
-    }
+
+		backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y + slotInitializer.rowBackgroundIncrement);
+	}
 }

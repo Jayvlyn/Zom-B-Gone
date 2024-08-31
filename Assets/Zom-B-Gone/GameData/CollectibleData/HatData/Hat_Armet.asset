@@ -17,6 +17,7 @@ MonoBehaviour:
     style
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 0}
+  maxStack: 1
   swingTimeMultiplier: 0.9
   damageMultiplier: 1.1
   damageIncrease: 0

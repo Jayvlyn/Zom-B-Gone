@@ -4346,6 +4346,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2470260102783082196, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470260102783082196, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -849.652
+      objectReference: {fileID: 0}
     - target: {fileID: 2562426608459645827, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5238,6 +5246,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5579337734529715882, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_MovementType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5824034046645416129, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5385,6 +5397,26 @@ PrefabInstance:
     - target: {fileID: 6212268295902485872, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292537376742775641, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292537376742775641, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_margin.w
+      value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292537376742775641, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_margin.x
+      value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292537376742775641, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_margin.y
+      value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292537376742775641, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_margin.z
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6341697554673167038, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -480,6 +480,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   containerData: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
   slotPrefabName: BackpackSlot
+  backgroundStartingBottom: 850
+  rowBackgroundIncrement: 130
+  rowSize: 6
+  backgroundRect: {fileID: 0}
 --- !u!1 &974619469871483275
 GameObject:
   m_ObjectHideFlags: 0
@@ -3878,6 +3882,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   containerData: {fileID: 11400000, guid: d899c3825dac2214d8da6860657eba97, type: 2}
   slotPrefabName: ItemLockerSlot
+  backgroundStartingBottom: 850
+  rowBackgroundIncrement: 130
+  rowSize: 6
+  backgroundRect: {fileID: 0}
 --- !u!114 &673570573206065409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3891,7 +3899,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   containerData: {fileID: 11400000, guid: d899c3825dac2214d8da6860657eba97, type: 2}
-  rowSize: 6
   slotPrefabName: ItemLockerSlot
 --- !u!114 &3496625762893662433
 MonoBehaviour:
@@ -4747,14 +4754,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5787233470402787721}
     m_Modifications:
-    - target: {fileID: 356736711215032566, guid: 461b1c96e0b05a54fac837f7db2d0c89, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: NaN
-      objectReference: {fileID: 0}
-    - target: {fileID: 356736711215032566, guid: 461b1c96e0b05a54fac837f7db2d0c89, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: NaN
-      objectReference: {fileID: 0}
     - target: {fileID: 1029186509674694672, guid: 461b1c96e0b05a54fac837f7db2d0c89, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
