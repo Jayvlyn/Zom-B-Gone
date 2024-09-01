@@ -20,7 +20,6 @@ public class ContainerSlotInitializer : MonoBehaviour
         backgroundRect.offsetMin = new Vector2(0, backgroundStartingBottom);
 
 		int rowCount = containerData.size / rowSize;
-        Debug.Log(rowCount);
         for (int i = 1; i < rowCount; i++)
         {
             backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y - rowBackgroundIncrement);
