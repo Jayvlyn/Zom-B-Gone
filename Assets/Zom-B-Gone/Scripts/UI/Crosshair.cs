@@ -13,11 +13,12 @@ public class Crosshair : MonoBehaviour
         Vector2 hotSpot = hotSpotAuto;
 
         _gameCamera = FindObjectOfType<Camera>();
-        Cursor.SetCursor(cursorTex, hotSpot, CursorMode.ForceSoftware);
+        //Cursor.SetCursor(cursorTex, hotSpot, CursorMode.ForceSoftware);
     }
 
     void Update()
     {
+        transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20);
         //transform.position = new Vector3(_gameCamera.ScreenToWorldPoint(Input.mousePosition).x, _gameCamera.ScreenToWorldPoint(Input.mousePosition).y, 20);
     }
 }
