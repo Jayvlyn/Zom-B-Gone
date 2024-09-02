@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    private Camera _gameCamera;
-    public Texture2D cursorTex;
-    private Vector2 hotSpotAuto;
-    private void Awake()
-    {
-        hotSpotAuto = new Vector2(cursorTex.width * 0.5f, cursorTex.height * 0.5f);
-        Vector2 hotSpot = hotSpotAuto;
+    //private Camera _gameCamera;
+    //public Texture2D cursorTex;
+    //private Vector2 hotSpotAuto;
+    //private void Awake()
+    //{
+    //    hotSpotAuto = new Vector2(cursorTex.width * 0.5f, cursorTex.height * 0.5f);
+    //    Vector2 hotSpot = hotSpotAuto;
 
-        _gameCamera = FindObjectOfType<Camera>();
-        //Cursor.SetCursor(cursorTex, hotSpot, CursorMode.ForceSoftware);
-    }
+    //    _gameCamera = FindObjectOfType<Camera>();
+    //    //Cursor.SetCursor(cursorTex, hotSpot, CursorMode.ForceSoftware);
+    //}
 
     void Update()
     {

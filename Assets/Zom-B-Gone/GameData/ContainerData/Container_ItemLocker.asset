@@ -27,15 +27,15 @@ MonoBehaviour:
     - collectible: {fileID: 0}
       quantity: 0
       allowLoot: 0
-      allowItems: 1
+      allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
       allowLoot: 0
       allowItems: 1
       allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 37a8308119c0b2b43932ad7f60cecddf, type: 2}
+      quantity: 1
       allowLoot: 0
       allowItems: 1
       allowHats: 0

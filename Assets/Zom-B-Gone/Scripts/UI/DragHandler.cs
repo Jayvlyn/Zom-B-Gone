@@ -43,7 +43,8 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
             Transform newParent = transform.parent.parent;
             for(int i = 0; i < 20; i++)
             {
-                if(!newParent.gameObject.TryGetComponent(out CanvasScaler cs))
+                //if(!newParent.gameObject.TryGetComponent(out CanvasScaler cs))
+                if(!newParent.CompareTag("HUD"))
                 {
                     newParent = newParent.parent;
                 }

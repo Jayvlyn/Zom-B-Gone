@@ -12,6 +12,7 @@ TagManager:
   - RightReloadingIndicator
   - LeftReloadingIndicator
   - Enemy
+  - HUD
   layers:
   - Default
   - TransparentFX
