@@ -8,7 +8,7 @@ public class ContainerSlotInitializer : MonoBehaviour
 {
     [SerializeField] public CollectibleContainerData containerData = null;
     [SerializeField] private string slotPrefabName;
-    [SerializeField] private float backgroundStartingBottom = 850;
+    [SerializeField] private float backgroundStartingBottom = 150;
 	[SerializeField] public int rowBackgroundIncrement = 130;
 	[SerializeField] public int rowSize = 6;
 
@@ -17,12 +17,15 @@ public class ContainerSlotInitializer : MonoBehaviour
 	private void Awake()
 	{
 		backgroundRect = transform.parent.GetComponent<RectTransform>();
-        backgroundRect.offsetMin = new Vector2(backgroundRect.offsetMin.x, backgroundStartingBottom);
+        //backgroundRect.offsetMin = new Vector2(backgroundRect.offsetMin.x, backgroundStartingBottom);
+        //backgroundRect.offsetMax = new Vector2(backgroundRect.offsetMax.x, backgroundStartingBottom);
+        backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundStartingBottom);
 
 		int rowCount = containerData.size / rowSize;
         for (int i = 1; i < rowCount; i++)
         {
-            backgroundRect.offsetMin = new Vector2(backgroundRect.offsetMin.x, backgroundRect.offsetMin.y - rowBackgroundIncrement);
+            backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundRect.sizeDelta.y + rowBackgroundIncrement);
+            //backgroundRect.offsetMin = new Vector2(backgroundRect.offsetMin.x, backgroundRect.offsetMin.y - rowBackgroundIncrement);
         }
     }
 

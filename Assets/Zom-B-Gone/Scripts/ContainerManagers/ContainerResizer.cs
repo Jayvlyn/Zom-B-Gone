@@ -100,8 +100,9 @@ public class ContainerResizer : MonoBehaviour
             Instantiate(newSlot, transform);
         }
 
-		backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y - slotInitializer.rowBackgroundIncrement);
-	}
+        //backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y + slotInitializer.rowBackgroundIncrement);
+        backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundRect.sizeDelta.y + slotInitializer.rowBackgroundIncrement);
+    }
 
     private void RemoveRows(int rowAmountToRemove)
     {
@@ -126,8 +127,9 @@ public class ContainerResizer : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
 
-		backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y + slotInitializer.rowBackgroundIncrement * rowAmountToRemove);
-	}
+        backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundRect.sizeDelta.y - slotInitializer.rowBackgroundIncrement);
+        //backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y - slotInitializer.rowBackgroundIncrement * rowAmountToRemove);
+    }
 
     private void RemoveRow()
     {
@@ -150,6 +152,7 @@ public class ContainerResizer : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
 
-		backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y + slotInitializer.rowBackgroundIncrement);
-	}
+        backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundRect.sizeDelta.y - slotInitializer.rowBackgroundIncrement);
+        //backgroundRect.offsetMin = new Vector2(0, backgroundRect.offsetMin.y + slotInitializer.rowBackgroundIncrement);
+    }
 }

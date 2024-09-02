@@ -226,7 +226,7 @@ MonoBehaviour:
   popupCanvasObject: {fileID: 6187051504437901011}
   popupObject: {fileID: 2804740763645331609}
   infoText: {fileID: 6627598812733298111}
-  offset: {x: 0, y: 50, z: 0}
+  offset: {x: 100, y: -150, z: 0}
   padding: 25
 --- !u!114 &8641860507747955810
 MonoBehaviour:
