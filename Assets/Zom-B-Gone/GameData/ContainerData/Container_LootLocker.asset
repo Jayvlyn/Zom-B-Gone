@@ -14,94 +14,223 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   containerType: 2
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 34d2d476f43ba2646961c28b21c9863c, type: 2}
-  onContainerCollectibleSwapped: {fileID: 11400000, guid: 34d2d476f43ba2646961c28b21c9863c, type: 2}
+  onContainerCollectibleSwapped: {fileID: 11400000, guid: db1939a001c76824ca99d878771209e8, type: 2}
   testCollectibleSlot:
     collectible: {fileID: 0}
     quantity: 0
+    allowLoot: 0
+    allowItems: 0
+    allowHats: 0
   size: 42
   Container:
     collectibleSlots:
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
       quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0

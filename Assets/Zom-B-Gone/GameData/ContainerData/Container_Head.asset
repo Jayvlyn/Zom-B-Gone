@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   containerType: 1
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 50e76d6449c94d140af5083aa69d4afb, type: 2}
-  onContainerCollectibleSwapped: {fileID: 11400000, guid: 50e76d6449c94d140af5083aa69d4afb, type: 2}
+  onContainerCollectibleSwapped: {fileID: 11400000, guid: a28fa3face654b64b8ed98e215ef583f, type: 2}
   testCollectibleSlot:
     collectible: {fileID: 0}
     quantity: 0
@@ -24,8 +24,8 @@ MonoBehaviour:
   size: 1
   Container:
     collectibleSlots:
-    - collectible: {fileID: 0}
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 87abeb40489f2894a88d2f42a31cc413, type: 2}
+      quantity: 1
       allowLoot: 0
       allowItems: 0
       allowHats: 1
