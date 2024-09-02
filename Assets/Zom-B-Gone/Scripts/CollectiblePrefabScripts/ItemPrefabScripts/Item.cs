@@ -174,10 +174,11 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public abstract void Use();
 
-    public virtual void InventoryDrop()
+    public virtual void InventoryDrop(bool invertDrop)
     {
-        float dropForwardForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
-        rb.AddForce(-transform.right * dropForwardForce, ForceMode2D.Impulse);
+        float dropForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
+        if(invertDrop) { dropForce = -dropForce; }
+        rb.AddForce(-transform.right * dropForce, ForceMode2D.Impulse);
     }
 
     public virtual void Drop()
@@ -186,7 +187,9 @@ public abstract class Item : MonoBehaviour, IInteractable
         RemoveFromHand();
         ChangeState(State.AIRBORNE);
         float dropForwardForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
-        rb.AddForce(playerT.up * dropForwardForce, ForceMode2D.Impulse);
+        Vector2 direction = playerT.up;
+        //if (Utils.WallInFront(playerT)) direction = -direction;
+        rb.AddForce(direction * dropForwardForce, ForceMode2D.Impulse);
     }
 
     public virtual void Throw()
@@ -197,6 +200,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+        //if (Utils.WallInFront(playerT)) direction = -direction;
 
         float throwForce = Utils.MapWeightToRange(itemData.weight, 10, 20, true);
 

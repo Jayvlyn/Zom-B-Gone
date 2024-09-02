@@ -75,5 +75,12 @@ public static class Utils
         float random = Random.Range(0f, 260f);
         return new Vector3(Mathf.Cos(random), Mathf.Sin(random), 0);
     }
+    
+    public static bool WallInFront(Transform t, float dist = 1f)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(t.position, t.up, dist, LayerMask.GetMask("World"));
+        return hit.collider != null;
+        //return false;
+    }
 
 }

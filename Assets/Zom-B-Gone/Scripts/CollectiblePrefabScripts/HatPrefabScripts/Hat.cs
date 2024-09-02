@@ -81,7 +81,11 @@ public class Hat : MonoBehaviour, IInteractable
 			gameObject.layer = LayerMask.NameToLayer("Interactable");
 			spriteRenderer.sortingOrder = -1;
 
-            StartTransferPosition(head.gameObject.transform.position + head.gameObject.transform.up, transform.rotation);
+            Vector2 dropPos;
+            if(Utils.WallInFront(head.gameObject.transform)) dropPos = head.gameObject.transform.position - head.gameObject.transform.up;
+            else dropPos = head.gameObject.transform.position + head.gameObject.transform.up;
+
+            StartTransferPosition(dropPos, transform.rotation);
 			//head.gameObject.transform.forward
 		}
     }

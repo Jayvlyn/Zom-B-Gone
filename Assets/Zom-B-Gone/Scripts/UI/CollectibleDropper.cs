@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,10 +47,19 @@ public class CollectibleDropper : MonoBehaviour
 				GameObject prefab = Resources.Load<GameObject>(droppedCollectibleData.name);
 				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation);
 
-				if (droppedCollectibleData as HatData)
+                bool invertDrop = false;
+                Vector2 dropPos;
+                if(Utils.WallInFront(playerController.transform))
+                {
+                    dropPos = playerController.transform.position - playerController.transform.up; 
+                    invertDrop = true;
+                }
+                else dropPos = playerController.transform.position + playerController.transform.up;
+
+                if (droppedCollectibleData as HatData)
                 {
                     Hat hat = collectibleObject.GetComponent<Hat>();
-					hat.StartTransferPosition(playerController.transform.position + playerController.transform.up, hat.transform.rotation);
+					hat.StartTransferPosition(dropPos, hat.transform.rotation);
 				}
 				else if (droppedCollectibleData as LootData)
 				{
@@ -59,14 +69,14 @@ public class CollectibleDropper : MonoBehaviour
                     int slotIndex = this.transform.GetSiblingIndex();
                     loot.lootCount = quantity;
 
-					loot.StartTransferPosition(playerController.transform.position + playerController.transform.up, loot.transform.rotation);
+					loot.StartTransferPosition(dropPos, loot.transform.rotation);
 				}
 				else if (droppedCollectibleData as ItemData)
 				{
                     collectibleObject.transform.rotation *= Quaternion.Euler(0, 0, -90);
 
  					Item item = collectibleObject.GetComponent<Item>();
-                    item.InventoryDrop();
+                    item.InventoryDrop(invertDrop);
 				}
 
 				break;
