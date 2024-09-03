@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6184317471720133942}
   - component: {fileID: 324675659194052198}
   m_Layer: 0
-  m_Name: DamagePopup
+  m_Name: IncomingDamagePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,9 +65,9 @@ MonoBehaviour:
   moveReductionScalar: 17.5
   growRotateAmount: -133
   disappearRotateAmount: 52.79
-  overrideRegularColor: 0
-  newRegularColor: {r: 0.8980392, g: 0.14724629, b: 0, a: 1}
-  overrideCriticalColor: 0
+  overrideRegularColor: 1
+  newRegularColor: {r: 0, g: 0.5471698, b: 0.10428478, a: 1}
+  overrideCriticalColor: 1
   newCriticalColor: {r: 0, g: 0.76860976, b: 0.8490566, a: 1}
 --- !u!23 &6184317471720133942
 MeshRenderer:

@@ -34,7 +34,7 @@ public abstract class Weapon : Item
         targetHealth.TakeDamage(damage, weaponData.dismemberChance);
 
         Vector3 hitTargetPosition = targetHealth.transform.position;
-        Vector3 popupVector = (hitTargetPosition - playerHead.transform.position).normalized * 10f;
+        Vector3 popupVector = (hitTargetPosition - playerHead.transform.position).normalized * 20f;
 
         bool invertRotate = popupVector.x < 0; // invert when enemy is on left of player
 

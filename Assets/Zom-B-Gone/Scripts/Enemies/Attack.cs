@@ -15,6 +15,13 @@ public class Attack : MonoBehaviour
         {
             collisionHealth.TakeDamage(damage * damageMultiplier);
             doDamage = false;
+
+            Vector3 hitTargetPosition = collisionHealth.transform.position;
+            Vector3 popupVector = (hitTargetPosition - transform.position).normalized * 20f;
+
+            bool invertRotate = popupVector.x < 0;
+
+            DamagePopup.Create(hitTargetPosition, damage, popupVector, false, invertRotate, true);
         }
     }
 

@@ -38,6 +38,7 @@ public class DamagePopup : MonoBehaviour
     [Header("Movement")]
     [SerializeField,Tooltip("Direction and speed")] 
     private Vector3 initialMoveVector;
+    [SerializeField] private Vector3 disappearMoveVector;
     [SerializeField,Tooltip("How fast the movement stops")] 
     private float moveReductionScalar = 8f;
 
@@ -96,18 +97,22 @@ public class DamagePopup : MonoBehaviour
         }
     }
 
-    public static DamagePopup Create(Vector3 position, int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false)
+    public static DamagePopup Create(Vector3 position, int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, bool incoming = false)
     {
-        Transform damagePopupT = Instantiate(Assets.i.damagePopup, position, Quaternion.identity);
+        Transform popupPrefab;
+        if (incoming) popupPrefab = Assets.i.incomingDamagePopup;
+        else popupPrefab = Assets.i.damagePopup;
+
+        Transform damagePopupT = Instantiate(popupPrefab, position, Quaternion.identity);
         DamagePopup damagePopup = damagePopupT.GetComponent<DamagePopup>();
         damagePopup.Setup(damageAmount, inputMoveVec, isCriticalHit, invertRotate);
 
         return damagePopup;
     }
 
-    public static DamagePopup Create(Vector3 position, float damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false)
+    public static DamagePopup Create(Vector3 position, float damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, bool incoming = false)
     {
-        return Create(position,Mathf.RoundToInt(damageAmount), inputMoveVec, isCriticalHit, invertRotate);
+        return Create(position,Mathf.RoundToInt(damageAmount), inputMoveVec, isCriticalHit, invertRotate, incoming);
     }
 
     public void Setup(int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false)
@@ -163,5 +168,6 @@ public class DamagePopup : MonoBehaviour
         { // Destroy once text turns completely transparent
             Destroy(gameObject);
         }
+        transform.position += disappearMoveVector * Time.deltaTime;
     }
 }
