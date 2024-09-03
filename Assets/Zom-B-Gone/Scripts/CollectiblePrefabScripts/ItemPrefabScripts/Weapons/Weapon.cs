@@ -16,9 +16,10 @@ public abstract class Weapon : Item
         else Debug.Log("Invalid Data & Class Matchup");
 	}
 
-	public void DealDamage(Health targetHealth)
+	public void DealDamage(Health targetHealth, float inputDamage = -1)
     {
         float damage = weaponData.damage;
+        if (inputDamage != -1) damage = inputDamage;
 
         TryDealKnockback(targetHealth);
 
@@ -31,6 +32,14 @@ public abstract class Weapon : Item
         #endregion
 
         targetHealth.TakeDamage(damage, weaponData.dismemberChance);
+
+        Vector3 hitTargetPosition = targetHealth.transform.position;
+        Vector3 popupVector = (hitTargetPosition - playerHead.transform.position).normalized * 10f;
+
+        bool invertRotate = popupVector.x < 0; // invert when enemy is on left of player
+
+        DamagePopup.Create(hitTargetPosition, damage, popupVector, false, invertRotate);
+
     }
 
     public void TryDealKnockback(Health targetHealth)

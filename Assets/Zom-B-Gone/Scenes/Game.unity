@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000bb43d6f327ab5c00
+  m_ApplyToSortingLayers: 00000000bb43d6f327ab5c00c794bce7
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -855,27 +855,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927230909421319411, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927230909421319411, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927230909421319411, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 2927230909421319411, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 2927230909421319411, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 2927230909421319411, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 3228862412750740071, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchorMax.y
@@ -907,7 +907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3447495420859274712, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3615220176988249268, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_Pivot.x
@@ -1030,6 +1030,7 @@ GameObject:
   - component: {fileID: 235199597}
   - component: {fileID: 235199599}
   - component: {fileID: 235199598}
+  - component: {fileID: 235199600}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1093,6 +1094,18 @@ MonoBehaviour:
   intervalSpawning: 1
   intervalTime: 5
   intervalSpawnAmount: 2
+--- !u!114 &235199600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235199596}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feaa92e0205b8f49911729df9681f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &251493660
 GameObject:
   m_ObjectHideFlags: 0

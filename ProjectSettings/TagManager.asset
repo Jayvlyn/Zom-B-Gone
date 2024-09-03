@@ -50,6 +50,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: DamagePopup
+    uniqueID: 3887895751
+    locked: 0
   - name: UI
     uniqueID: 6073127
     locked: 0

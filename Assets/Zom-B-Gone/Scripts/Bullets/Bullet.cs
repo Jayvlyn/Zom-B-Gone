@@ -69,20 +69,7 @@ public class Bullet : MonoBehaviour
     protected void DealDamage(Health targetHealth)
     {
         float damage = ProjectileWeaponDamage * bulletData.damageMultiplier;
-        #region hat buff
-        if (playerHead.wornHat != null)
-        {
-            damage += playerHead.wornHat.hatData.damageIncrease;
-            damage *= playerHead.wornHat.hatData.damageMultiplier;
-        }
-        #endregion
-        targetHealth.TakeDamage(damage, shooter.weaponData.dismemberChance);
-        //shooter.TryDealKnockback(targetHealth); Uses its own knockback logic now
-        TryDealKnockback(targetHealth);
+        shooter.DealDamage(targetHealth, damage);
     }
 
-    protected void TryDealKnockback(Health targetHealth)
-    {
-        if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(rigidBody.velocity.normalized * shooter.weaponData.knockbackPower, ForceMode2D.Impulse);
-    }
 }
