@@ -313,7 +313,20 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         if(currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
-            collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * (rb.velocity.magnitude/2));
+            int damage = Mathf.RoundToInt(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * (rb.velocity.magnitude / 2));
+
+            // apply damage
+            collisionHealth.TakeDamage(damage);
+
+            // show damage number
+            Vector3 hitTargetPosition = collisionHealth.transform.position;
+            Vector3 popupVector = (hitTargetPosition - playerHead.transform.position).normalized * 20f;
+
+            bool invertRotate = popupVector.x < 0; // invert when enemy is on left of player
+
+            DamagePopup.Create(hitTargetPosition, damage, popupVector, false, invertRotate);
+
+            // do knockback if there is rigidbody
             if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))
             {
                 hitRb.AddForce(rb.velocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 10, 70, true)), ForceMode2D.Impulse);

@@ -109,7 +109,8 @@ MonoBehaviour:
   headContainerData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
   hatTransform: {fileID: 5398307496003575394}
   wornHat: {fileID: 0}
-  lastWornHat: {fileID: 0}
+  lastHatObject: {fileID: 0}
+  hatObject: {fileID: 0}
 --- !u!114 &1034459641233780573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +131,10 @@ MonoBehaviour:
   leftLumbering: 1
   rightLumbering: 1
   lumberingLowerBound: 0.8
+  usingRight: 0
+  usingLeft: 0
+  leftObject: {fileID: 0}
+  rightObject: {fileID: 0}
   leftItem: {fileID: 0}
   rightItem: {fileID: 0}
 --- !u!114 &404186174974829375
@@ -285,6 +290,9 @@ MonoBehaviour:
   InteractionLm:
     serializedVersion: 2
     m_Bits: 4160
+  scanInterval: 0.1
+  defaultSpriteMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  outlineSpriteMaterial: {fileID: 2100000, guid: e3a1cdcb82b5de94eb33cdd74f6c98b8, type: 2}
 --- !u!50 &369753046641428115
 Rigidbody2D:
   serializedVersion: 4

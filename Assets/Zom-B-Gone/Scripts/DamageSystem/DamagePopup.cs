@@ -103,9 +103,28 @@ public class DamagePopup : MonoBehaviour
         if (incoming) popupPrefab = Assets.i.incomingDamagePopup;
         else popupPrefab = Assets.i.damagePopup;
 
+        float overrideFontSize = -1;
+        if(!Utils.IsPositionInCameraBounds(position))
+        {
+            // handle position in viewport context (0 to 1)
+            Vector3 viewportPos = Camera.main.WorldToViewportPoint(position);
+
+            // clamp position to inside viewport
+            if(viewportPos.x <= 0) viewportPos.x = 0.05f;
+            else if(viewportPos.x >= 1) viewportPos.x = 0.95f;
+            if (viewportPos.y <= 0) viewportPos.y = 0.05f;
+            else if (viewportPos.y >= 1) viewportPos.y = 0.95f;
+
+            // convert position back into world space
+            position = Camera.main.ViewportToWorldPoint(viewportPos);
+
+            inputMoveVec = -inputMoveVec; // come in towards the screen instead of away from player   
+            overrideFontSize = 4f;
+        }
+
         Transform damagePopupT = Instantiate(popupPrefab, position, Quaternion.identity);
         DamagePopup damagePopup = damagePopupT.GetComponent<DamagePopup>();
-        damagePopup.Setup(damageAmount, inputMoveVec, isCriticalHit, invertRotate);
+        damagePopup.Setup(damageAmount, inputMoveVec, isCriticalHit, invertRotate, overrideFontSize);
 
         return damagePopup;
     }
@@ -115,7 +134,7 @@ public class DamagePopup : MonoBehaviour
         return Create(position,Mathf.RoundToInt(damageAmount), inputMoveVec, isCriticalHit, invertRotate, incoming);
     }
 
-    public void Setup(int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false)
+    public void Setup(int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, float overrideFontSize = -1)
     {
         textMesh.SetText(damageAmount.ToString());
 
@@ -139,6 +158,8 @@ public class DamagePopup : MonoBehaviour
             if (overrideRegularColor) textColor = newRegularColor;
             else textColor = UtilsClass.GetColorFromString(regularColorHex);
         }
+
+        if(overrideFontSize != -1) textMesh.fontSize = overrideFontSize;
 
         textMesh.color = textColor;
 

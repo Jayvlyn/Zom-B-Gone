@@ -83,4 +83,15 @@ public static class Utils
         //return false;
     }
 
+    public static bool IsPositionInCameraBounds(Vector3 position)
+    {
+        // Convert the position to viewport coordinates
+        Vector3 viewportPos = Camera.main.WorldToViewportPoint(position);
+
+        // Check if the position is within the camera's viewport
+        return viewportPos.x >= 0 && viewportPos.x <= 1 &&
+               viewportPos.y >= 0 && viewportPos.y <= 1 &&
+               viewportPos.z >= 0; // z should be >= 0 to ensure the position is in front of the camera
+    }
+
 }

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4377371640630965164}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0044, y: 0.873, z: 0}
+  m_LocalPosition: {x: 0.0026, y: 0.8766, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1944429129
+  m_SortingLayer: -1
   m_SortingOrder: -1
   m_Sprite: {fileID: 362198861, guid: e82526c22490de343903d1ff9e026871, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -186,20 +186,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c42a995e62abb4aa6b0f0f1f138e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   itemData: {fileID: 11400000, guid: 37a8308119c0b2b43932ad7f60cecddf, type: 2}
-  rotationalFriction: 0.9
-  friction: 0.98
+  pivotPoint: {fileID: 0}
+  fullCollider: {fileID: 9007136600030232037}
+  itemRenderer: {fileID: 0}
+  airborneAngularDrag: 0.4
+  airborneLinearDrag: 0.4
+  groundedAngularDrag: 3
+  groundedLinearDrag: 3
   holdOffset: {x: 0.5, y: 0.5}
   spinThrow: 1
   aimAtMouse: 1
   gripRotation: 130
-  pivotPoint: {fileID: 0}
-  fullCollider: {fileID: 9007136600030232037}
-  itemRenderer: {fileID: 0}
+  minimumAirborneSpeed: 10
   groundSortOrder: -30
   heldSortOrder: 10
   airborneSortOrder: 20
-  rb: {fileID: 4881143944469047324}
+  inRightHand: 0
   useHeld: 0
   weaponData: {fileID: 0}
   firePoints:
@@ -297,7 +301,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.18, y: 1.42}
+    oldSize: {x: 1.5, y: 1.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
