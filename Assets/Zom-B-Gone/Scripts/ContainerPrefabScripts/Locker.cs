@@ -1,26 +1,28 @@
+using GameEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer)), RequireComponent(typeof(BoxCollider2D))]
 public class Locker : MonoBehaviour, IInteractable
 {
-	public GameObject ContainerUI;
-
-	// Start is called before the first frame update
-	void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[SerializeField] private CollectibleContainerData lockerData;
+	[SerializeField] private VoidEvent lockerOpened;
 
 	public void Interact(bool rightHand)
 	{
-		// Pull up locker menu on left side
+		OpenLockerUI();
+		gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+
+	private void OpenLockerUI()
+	{
+		lockerOpened.Raise();
+    }
+
+	public void OnLockerClosed()
+	{
+		gameObject.layer = LayerMask.NameToLayer("Interactable");
 	}
 
 	public void Interact(Head head)

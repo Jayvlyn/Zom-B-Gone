@@ -42,7 +42,6 @@ public class Limb : MonoBehaviour
                 detachBleeding.transform.localScale = Vector3.Lerp(detachBleeding.transform.localScale, Vector3.zero, disappearSpeed * Time.deltaTime);
                 if (transform.localScale.x < 0.3)
                 {
-                    Debug.Log("destroyed");
                     Destroy(gameObject);
                 }
             }

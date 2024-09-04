@@ -13,8 +13,11 @@ public class Interactor : MonoBehaviour
 
     [SerializeField] private LayerMask InteractionLm;
 
-    [SerializeField] private float scanInterval = .3f;
+    [SerializeField] private float scanInterval = .1f;
     private float scanTimer;
+
+    [SerializeField] private float openContainerDistanceCheckInterval = 0.1f;
+    private float distanceCheckTimer;
 
     [SerializeField] Material defaultSpriteMaterial;
     [SerializeField] Material outlineSpriteMaterial;
@@ -24,6 +27,9 @@ public class Interactor : MonoBehaviour
     private Head head;
     private RaycastHit2D hit;
     //private Camera gameCamera;
+
+    // when a container is interacted with, it will use this to track the distance, and close the container when you get out of interact range
+    private GameObject interactedContainer;
 
     private SpriteRenderer interactableSpriteRenderer;
     private IInteractable availableInteractable;
@@ -61,28 +67,32 @@ public class Interactor : MonoBehaviour
 
     private void Update()
     {
-        if(!hands.UsingLeft || !hands.UsingRight)
-        { // at least one hand available for interact, do scan
-            if (scanTimer <= 0)
+        //if(!hands.UsingLeft || !hands.UsingRight)
+        //{ // at least one hand available for interact, do scan
+
+
+        if (scanTimer <= 0)
+        {
+            scanTimer = scanInterval;
+
+            RaycastHit2D clostestHit = InteractableScan();
+            if(clostestHit.collider != null)
             {
-                scanTimer = scanInterval;
-
-                RaycastHit2D clostestHit = InteractableScan();
-                if(clostestHit.collider != null)
-                {
-                    AvailableInteractable = clostestHit.collider.GetComponent<IInteractable>();
-                }
-                else
-                {
-                    AvailableInteractable = null;
-                }
-
+                AvailableInteractable = clostestHit.collider.GetComponent<IInteractable>();
             }
             else
             {
-                scanTimer -= Time.deltaTime;
+                AvailableInteractable = null;
             }
+
         }
+        else
+        {
+            scanTimer -= Time.deltaTime;
+        }
+
+
+
     }
 
     /// <summary>
@@ -93,6 +103,16 @@ public class Interactor : MonoBehaviour
     /// <returns>Closest hit, if there are no hits it will return first hit with null collider</returns>
     public RaycastHit2D InteractableScan()
     {
+        // NEED TO ADD WALL DETECTION TO THIS
+        /**
+         * For wall check:
+         * 
+         * shoot three rays from interactor, one from left, center, and right of interactor, all towards the interactable that was hit in the circle cast
+         * if all three rays are blocked by environment, dont add as possible interaction
+         * only add as possible interaction when at least one of the rays was able to reach the interactable without obstruction
+         * this will stop interactions through walls, and when things are blocked by large obstacles, but wont interfere with nearby interacitons only blocked by small objects or corners
+        */
+
         // get all interactables within interactRange
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _interactRange, Vector2.zero, 0, InteractionLm);
 
@@ -140,9 +160,12 @@ public class Interactor : MonoBehaviour
     {
         if (AvailableInteractable != null)
         {
+
+            // INTERACT WITH ITEM
             if (AvailableInteractable is Item)
             {
                 AvailableInteractable.Interact(rightHand);
+
                 if (rightHand)
                 {
                     hands.RightObject = ((Component)AvailableInteractable).gameObject; 
@@ -154,14 +177,17 @@ public class Interactor : MonoBehaviour
                     hands.UsingLeft = true;
                 }
             }
-            if (AvailableInteractable is Hat)
+
+
+            // INTERACT WITH HAT
+            else if (AvailableInteractable is Hat)
             {
                 GameObject newHat = ((Component)AvailableInteractable).gameObject;
 
                 if (head.HatObject != null)
                 { // Remove current hat
                     head.HatObject.transform.parent = null;
-                    head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -20;
+                    head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "GroundedHat";
                     head.HatObject.gameObject.layer = LayerMask.NameToLayer("Interactable");
                     head.HatObject.GetComponent<Hat>().StartTransferPosition(newHat.transform.position, newHat.transform.localRotation);
                     //head.hatObject.transform.position = newHat.transform.position;
@@ -170,16 +196,26 @@ public class Interactor : MonoBehaviour
                 AvailableInteractable.Interact(head);
             }
 
-            if (AvailableInteractable is Loot)
+
+            // INTERACT WITH LOOT
+            else if (AvailableInteractable is Loot)
             {
                 AvailableInteractable.Interact(head);
             }
+
+            // OTHER INTERACTABLE, CONTAINER?
+            else
+            {
+                AvailableInteractable.Interact(rightHand);
+            }
+
 
             AvailableInteractable = null;
             
         }
     }
 
+    #region OLD INTERACTION METHOD (Circle cast and get closest)
     //public void Interact(bool rightHand)
     //{
     //    hit = Physics2D.CircleCast(transform.position, _interactRange, Vector2.zero, 0, InteractionLm);
@@ -221,4 +257,5 @@ public class Interactor : MonoBehaviour
     //        }
     //    }
     //}
+    #endregion
 }

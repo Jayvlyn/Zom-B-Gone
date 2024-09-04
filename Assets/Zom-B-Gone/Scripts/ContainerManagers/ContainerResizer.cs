@@ -18,10 +18,6 @@ public class ContainerResizer : MonoBehaviour
 		slotInitializer = GetComponent<ContainerSlotInitializer>();
         slotPrefabName = slotInitializer.slotPrefabName;
         containerData = slotInitializer.containerData;
-	}
-
-	private void Start()
-	{
 		backgroundRect = slotInitializer.backgroundRect;
 		rowSize = slotInitializer.rowSize;
 	}

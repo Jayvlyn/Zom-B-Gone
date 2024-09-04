@@ -13,6 +13,9 @@ TagManager:
   - LeftReloadingIndicator
   - Enemy
   - HUD
+  - ItemLockerUI
+  - HatLockerUI
+  - LootLockerUI
   layers:
   - Default
   - TransparentFX
