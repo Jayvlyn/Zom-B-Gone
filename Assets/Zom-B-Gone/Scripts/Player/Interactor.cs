@@ -86,22 +86,23 @@ public class Interactor : MonoBehaviour
     }
 
     /// <summary>
-    /// Finds interactables around interactor, and returns the closest one
+    /// Finds interactables around interactor. 
+    /// <para>First checks if mouse is within interact range, if so it will find the interactable closest to the mouse.</para>
+    /// <para>Otherwise it will find the interactable closest to the interactor.</para>
     /// </summary>
-    /// <returns>Closest hit, if there are no hits it will return first "hit" with no collider</returns>
+    /// <returns>Closest hit, if there are no hits it will return first hit with null collider</returns>
     public RaycastHit2D InteractableScan()
     {
         // get all interactables within interactRange
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _interactRange, Vector2.zero, 0, InteractionLm);
 
-        // quick exits, if there are no hits, will return hit with null collider, or if there is one hit return it with no extra logic required
+        // quick exits
         if (hits.Length == 0) return new RaycastHit2D(); 
         else if (hits.Length == 1) return hits[0];
 
         // Handle more than 1 interactable in interact range
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float mouseToInteractorDist = (mousePosition - new Vector2(transform.position.x, transform.position.y)).magnitude;
-
 
         RaycastHit2D closestHit = hits[0];
         float closestHitDist;

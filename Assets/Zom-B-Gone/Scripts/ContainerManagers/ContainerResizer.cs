@@ -41,8 +41,6 @@ public class ContainerResizer : MonoBehaviour
 		}
 		else if (fullSlotsInLastRow == 0)
 		{
-			// tiny tiny bug with this method, a specific case where it will leave two empty rows instead of one, not that serious
-
 			// start at the last slot excluding the very last row
 			int secondLastRowEndSlotIndex = lastSlotIndex - rowSize;
 			int emptySlots = 0;
@@ -60,7 +58,7 @@ public class ContainerResizer : MonoBehaviour
 				}
             }
 
-			if(emptySlots > rowSize) // at least one empty row to remove
+			if(emptySlots >= rowSize) // at least one empty row to remove
 			{
 				RemoveRows(emptySlots / rowSize);
 			}
