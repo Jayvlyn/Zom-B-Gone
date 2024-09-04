@@ -50,6 +50,9 @@ TagManager:
   - name: Ground
     uniqueID: 3359497755
     locked: 0
+  - name: DeadEnemy
+    uniqueID: 2024805571
+    locked: 0
   - name: GroundedItem
     uniqueID: 3828309721
     locked: 0
@@ -83,14 +86,14 @@ TagManager:
   - name: Enemy
     uniqueID: 2335529495
     locked: 0
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: EnemyAttack
-    uniqueID: 1797638487
+    uniqueID: 1323564269
     locked: 0
-  - name: ExplosionParticles
-    uniqueID: 1631101395
+  - name: Walls
+    uniqueID: 2660028171
+    locked: 0
+  - name: Ceilings
+    uniqueID: 1582768971
     locked: 0
   - name: DamagePopup
     uniqueID: 3887895751
@@ -100,4 +103,10 @@ TagManager:
     locked: 0
   - name: Crosshair
     uniqueID: 4090905531
+    locked: 0
+  - name: EnemyExplosion
+    uniqueID: 3480464825
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

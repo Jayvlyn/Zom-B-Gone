@@ -29,6 +29,7 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] private float attackSpawnDistance = 0.6f;
 	[SerializeField] public List<GameObject> attacks;
 	public List<Limb> limbs;
+	public List<GameObject> bleedingParticles;
 	[SerializeField] private int maxLimbs = 2;
 	[SerializeField] private float _turnSmoothing = 5;
 	[SerializeField] private float _changeDirectionCooldown = 5;
@@ -82,15 +83,21 @@ public abstract class Enemy : MonoBehaviour
 				decayTimer = decayTime;
 				transform.localScale = new Vector3(transform.localScale.x * 0.9f, transform.localScale.y * 0.9f, transform.localScale.z);
 				SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-				renderer.sortingOrder = -10;
-				renderer.color = new Color(renderer.color.r * 0.5f, renderer.color.r * 0.5f, renderer.color.r * 0.5f, renderer.color.a);
+				renderer.sortingLayerName = "DeadEnemy";
+                renderer.color = new Color(renderer.color.r * 0.5f, renderer.color.r * 0.5f, renderer.color.r * 0.5f, renderer.color.a);
 				Limb[] attachedLimbs = GetComponentsInChildren<Limb>();
 				foreach(var limb in attachedLimbs)
 				{
 					var limbRenderer = limb.gameObject.GetComponent<SpriteRenderer>();
-					limbRenderer.sortingOrder = -9;
+					limbRenderer.sortingLayerName = "DeadEnemy";
                     limbRenderer.color = new Color(limbRenderer.color.r * 0.5f, limbRenderer.color.r * 0.5f, limbRenderer.color.r * 0.5f, limbRenderer.color.a);
                 }
+				foreach(var bloodParticle in bleedingParticles)
+				{
+					var particleRenderer = bloodParticle.gameObject.GetComponent<ParticleSystemRenderer>();
+					particleRenderer.sortingLayerName = "DeadEnemy";
+					particleRenderer.sortingOrder = -1;
+				}
 				break;
 			default:
 				
@@ -401,8 +408,8 @@ public abstract class Enemy : MonoBehaviour
 		ChangeState(State.DEAD);
 	}
 
-	[SerializeField] private float limbLaunchMod = 0.1f;
-	[SerializeField] private float limbSpinForce = 100f;
+	private float limbLaunchMod = .3f;
+	private float limbSpinForce = 100f;
     public void OnHit(int damage, float dismemberChance = 0)
     {
 		if(limbs.Count > 0)
