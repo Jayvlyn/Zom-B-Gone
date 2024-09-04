@@ -8,10 +8,10 @@ public class Head : MonoBehaviour
 
     public Transform hatTransform;
     //[HideInInspector] 
-    public Hat wornHat;
+    [HideInInspector] public Hat wornHat;
 
-    public GameObject lastHatObject;
-    public GameObject hatObject;
+    [HideInInspector] public GameObject lastHatObject;
+    [HideInInspector] public GameObject hatObject;
     public GameObject HatObject
     {
         get { return hatObject; }

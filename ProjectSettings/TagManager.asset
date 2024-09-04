@@ -50,11 +50,47 @@ TagManager:
   - name: Ground
     uniqueID: 3359497755
     locked: 0
+  - name: GroundedItem
+    uniqueID: 3828309721
+    locked: 0
+  - name: Loot
+    uniqueID: 3541973225
+    locked: 0
+  - name: GroundedHat
+    uniqueID: 1157261609
+    locked: 0
+  - name: Obstacle
+    uniqueID: 97008305
+    locked: 0
+  - name: Bullet
+    uniqueID: 4153176839
+    locked: 0
   - name: MuzzleFlash
     uniqueID: 1944429129
     locked: 0
+  - name: ActiveItem
+    uniqueID: 1868784149
+    locked: 0
+  - name: BloodParticles
+    uniqueID: 3051746429
+    locked: 0
+  - name: Player
+    uniqueID: 3111442741
+    locked: 0
+  - name: WornHat
+    uniqueID: 807454059
+    locked: 0
+  - name: Enemy
+    uniqueID: 2335529495
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: EnemyAttack
+    uniqueID: 1797638487
+    locked: 0
+  - name: ExplosionParticles
+    uniqueID: 1631101395
     locked: 0
   - name: DamagePopup
     uniqueID: 3887895751

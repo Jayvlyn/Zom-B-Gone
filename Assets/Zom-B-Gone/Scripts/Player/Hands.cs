@@ -20,7 +20,7 @@ public class Hands : MonoBehaviour
     [SerializeField] private float lumberingLowerBound = 0.8f;
 
 
-	[SerializeField] private bool usingRight;
+	private bool usingRight;
     public bool UsingRight { get { return usingRight; }
         set
         {
@@ -40,7 +40,7 @@ public class Hands : MonoBehaviour
         }
     }
 
-	[SerializeField] private bool usingLeft;
+	private bool usingLeft;
     public bool UsingLeft
     {
         get { return usingLeft; }
@@ -64,7 +64,7 @@ public class Hands : MonoBehaviour
     }
 
 
-	[SerializeField] private GameObject leftObject;
+	private GameObject leftObject;
     public GameObject LeftObject
     {
         get { return leftObject; }
@@ -88,7 +88,7 @@ public class Hands : MonoBehaviour
         }
     }
 
-	[SerializeField] private GameObject rightObject;
+	private GameObject rightObject;
     public GameObject RightObject
     {
         get { return rightObject; }
@@ -112,9 +112,9 @@ public class Hands : MonoBehaviour
         }
     }
 
-    //[HideInInspector] 
+    [HideInInspector] 
     public Item leftItem;
-	//[HideInInspector] 
+	[HideInInspector] 
     public Item rightItem;
 
     void Awake()

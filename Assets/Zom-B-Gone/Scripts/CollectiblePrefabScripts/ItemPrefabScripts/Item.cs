@@ -30,10 +30,6 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected bool aimAtMouse = true;
     [SerializeField] protected float gripRotation = 130;
     [SerializeField] protected float minimumAirborneSpeed = 10;
-    // Sort Ordering
-    [SerializeField] protected int groundSortOrder = -30;
-    [SerializeField] protected int heldSortOrder = 5;
-    [SerializeField] protected int airborneSortOrder = 20;
 
     // Private Refs
     protected Rigidbody2D rb;
@@ -65,18 +61,18 @@ public abstract class Item : MonoBehaviour, IInteractable
         // Set sorting order based on awake state
         switch (currentState)
         {
-            case State.GROUNDED: 
-                itemRenderer.sortingOrder = groundSortOrder;
+            case State.GROUNDED:
+                itemRenderer.sortingLayerName = "GroundedItem";
                 rb.drag = groundedLinearDrag;
                 rb.angularDrag = groundedAngularDrag;
                 break;
             case State.AIRBORNE: 
-                itemRenderer.sortingOrder = airborneSortOrder;
+                itemRenderer.sortingLayerName = "ActiveItem";
                 rb.drag = airborneLinearDrag;
                 rb.angularDrag = airborneAngularDrag;
                 break;
-            case State.HELD: 
-                itemRenderer.sortingOrder = heldSortOrder; 
+            case State.HELD:
+                itemRenderer.sortingLayerName = "ActiveItem";
                 break;
         }
     }
@@ -115,7 +111,7 @@ public abstract class Item : MonoBehaviour, IInteractable
                 gameObject.layer = LayerMask.NameToLayer("InteractableItem");
 
                 // Change sorting order
-                itemRenderer.sortingOrder = groundSortOrder;
+                itemRenderer.sortingLayerName = "GroundedItem";
 
                 // If was held, set back to dynamic body
                 if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
@@ -136,7 +132,7 @@ public abstract class Item : MonoBehaviour, IInteractable
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
                 // Change soring order
-                itemRenderer.sortingOrder = airborneSortOrder;
+                itemRenderer.sortingLayerName = "ActiveItem";
 
                 // If was held, set back to dynamic body
                 if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
@@ -153,8 +149,8 @@ public abstract class Item : MonoBehaviour, IInteractable
 				// Change layer
 				gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
-				// Change sorting order
-				itemRenderer.sortingOrder = heldSortOrder;
+                // Change sorting order
+                itemRenderer.sortingLayerName = "ActiveItem";
 
                 // Set to kinematic body for manual movement
                 rb.bodyType = RigidbodyType2D.Kinematic;

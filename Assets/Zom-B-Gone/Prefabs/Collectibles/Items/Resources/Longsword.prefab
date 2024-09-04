@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7634af11e0d94a8df8dc1126f77eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   itemData: {fileID: 11400000, guid: 33dbac28ed08d424d9ef06917a075fb0, type: 2}
   pivotPoint: {fileID: 7922860649099438781}
   fullCollider: {fileID: 2208294227549419385}
@@ -62,9 +63,6 @@ MonoBehaviour:
   aimAtMouse: 0
   gripRotation: 145
   minimumAirborneSpeed: 10
-  groundSortOrder: -30
-  heldSortOrder: 10
-  airborneSortOrder: 20
   inRightHand: 0
   useHeld: 0
   weaponData: {fileID: 0}
@@ -133,7 +131,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.84, y: 1.84}
+    oldSize: {x: 1.91, y: 1.91}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -183,7 +181,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.84, y: 1.84}
+    oldSize: {x: 1.91, y: 1.91}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -243,8 +241,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -466657575
+  m_SortingLayer: -10
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: aea98899c71c7e146bdb8bef384c1a2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

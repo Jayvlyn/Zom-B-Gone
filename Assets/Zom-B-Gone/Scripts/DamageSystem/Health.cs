@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] Slider healthBar;
+    [SerializeField,Tooltip("Will be auto-filled for player")] Slider healthBar;
     [SerializeField,Range(1,1000)] int _maxHealth = 100;
     [SerializeField,Range(0,1000)] int _currentHealth = 100;
 

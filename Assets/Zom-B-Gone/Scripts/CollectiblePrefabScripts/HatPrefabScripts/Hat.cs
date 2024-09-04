@@ -38,7 +38,7 @@ public class Hat : MonoBehaviour, IInteractable
     public void Interact(Head head)
     {
 		head.HatObject = gameObject;
-		spriteRenderer.sortingOrder = 1;
+        spriteRenderer.sortingLayerName = "WornHat";
 		gameObject.transform.parent = head.gameObject.transform;
 		this.head = head;
         gameObject.layer = LayerMask.NameToLayer("Default");
@@ -79,7 +79,7 @@ public class Hat : MonoBehaviour, IInteractable
             head.HatObject = null;
             gameObject.transform.parent = null;
 			gameObject.layer = LayerMask.NameToLayer("Interactable");
-			spriteRenderer.sortingOrder = -1;
+			spriteRenderer.sortingLayerName = "GroundedHat";
 
             Vector2 dropPos;
             if(Utils.WallInFront(head.gameObject.transform)) dropPos = head.gameObject.transform.position - head.gameObject.transform.up;

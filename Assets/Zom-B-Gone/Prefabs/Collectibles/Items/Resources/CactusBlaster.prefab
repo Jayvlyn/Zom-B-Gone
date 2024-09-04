@@ -143,20 +143,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c42a995e62abb4aa6b0f0f1f138e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   itemData: {fileID: 0}
-  rotationalFriction: 0.9
-  friction: 0.98
+  pivotPoint: {fileID: 0}
+  fullCollider: {fileID: 0}
+  itemRenderer: {fileID: 0}
+  airborneAngularDrag: 0.4
+  airborneLinearDrag: 0.4
+  groundedAngularDrag: 3
+  groundedLinearDrag: 3
   holdOffset: {x: 0.5, y: 0.5}
   spinThrow: 1
   aimAtMouse: 1
   gripRotation: 130
-  pivotPoint: {fileID: 0}
-  fullCollider: {fileID: 0}
-  itemRenderer: {fileID: 0}
-  groundSortOrder: -30
-  heldSortOrder: 10
-  airborneSortOrder: 20
-  rb: {fileID: 8608465535031704304}
+  minimumAirborneSpeed: 10
+  inRightHand: 0
   useHeld: 0
   weaponData: {fileID: 0}
   firePoints:
@@ -205,8 +206,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -466657575
+  m_SortingLayer: -10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 051338796bf533c42a5c82ab3515045c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
