@@ -5,8 +5,8 @@ using UnityEngine;
 // Should be placed on the slot holder that has all slots as children
 public class ContainerResizer : MonoBehaviour
 {
-	[SerializeField] public CollectibleContainerData containerData = null;
-	[SerializeField] private string slotPrefabName;
+	[HideInInspector] public CollectibleContainerData containerData = null;
+	private string slotPrefabName;
 
 
     private ContainerSlotInitializer slotInitializer;
@@ -16,6 +16,8 @@ public class ContainerResizer : MonoBehaviour
 	private void Awake()
 	{
 		slotInitializer = GetComponent<ContainerSlotInitializer>();
+        slotPrefabName = slotInitializer.slotPrefabName;
+        containerData = slotInitializer.containerData;
 	}
 
 	private void Start()

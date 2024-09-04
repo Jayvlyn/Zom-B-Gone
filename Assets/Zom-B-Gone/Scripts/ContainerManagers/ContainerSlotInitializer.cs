@@ -7,7 +7,7 @@ using UnityEngine;
 public class ContainerSlotInitializer : MonoBehaviour
 {
     [SerializeField] public CollectibleContainerData containerData = null;
-    [SerializeField] private string slotPrefabName;
+    [SerializeField] public string slotPrefabName;
     [SerializeField] private float backgroundStartingBottom = 150;
 	[SerializeField] public int rowBackgroundIncrement = 130;
 	[SerializeField] public int rowSize = 6;
