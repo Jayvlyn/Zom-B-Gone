@@ -1,3 +1,4 @@
+using GameEvents;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,10 +23,11 @@ public class Interactor : MonoBehaviour
     [SerializeField] Material defaultSpriteMaterial;
     [SerializeField] Material outlineSpriteMaterial;
 
+    [SerializeField] VoidEvent[] closeContainerEvents;
 
     private Hands hands;
     private Head head;
-    private RaycastHit2D hit;
+    //private RaycastHit2D hit;
     //private Camera gameCamera;
 
     // when a container is interacted with, it will use this to track the distance, and close the container when you get out of interact range
@@ -75,15 +77,8 @@ public class Interactor : MonoBehaviour
         {
             scanTimer = scanInterval;
 
-            RaycastHit2D clostestHit = InteractableScan();
-            if(clostestHit.collider != null)
-            {
-                AvailableInteractable = clostestHit.collider.GetComponent<IInteractable>();
-            }
-            else
-            {
-                AvailableInteractable = null;
-            }
+            IInteractable selectedInteractable = InteractableScan();
+            AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
 
         }
         else
@@ -92,7 +87,41 @@ public class Interactor : MonoBehaviour
         }
 
 
+        if(interactedContainer != null)
+        {
+            if (distanceCheckTimer <= 0)
+            {
+                distanceCheckTimer = openContainerDistanceCheckInterval;
 
+                float distanceBetweenContainerAndInteractor = (transform.position - interactedContainer.transform.position).magnitude;
+                
+                if(distanceBetweenContainerAndInteractor > _interactRange)
+                {
+                    CloseOpenedContainer();
+                }
+
+            }
+            else
+            {
+                distanceCheckTimer -= Time.deltaTime;
+            }
+        }
+
+
+    }
+
+
+    private void CloseOpenedContainer()
+    {
+        string containersCloseEventName = interactedContainer.GetComponent<VoidListener>().GameEvent.name;
+        foreach(VoidEvent e in closeContainerEvents)
+        {
+            if(e.name.Equals(containersCloseEventName))
+            {
+                e.Raise();
+                break;
+            }
+        }
     }
 
     /// <summary>
@@ -100,8 +129,8 @@ public class Interactor : MonoBehaviour
     /// <para>First checks if mouse is within interact range, if so it will find the interactable closest to the mouse.</para>
     /// <para>Otherwise it will find the interactable closest to the interactor.</para>
     /// </summary>
-    /// <returns>Closest hit, if there are no hits it will return first hit with null collider</returns>
-    public RaycastHit2D InteractableScan()
+    /// <returns>Closest IInteractable, if there are no valid Interactables, will return null</returns>
+    public IInteractable InteractableScan()
     {
         // NEED TO ADD WALL DETECTION TO THIS
         /**
@@ -116,50 +145,69 @@ public class Interactor : MonoBehaviour
         // get all interactables within interactRange
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _interactRange, Vector2.zero, 0, InteractionLm);
 
-        // quick exits
-        if (hits.Length == 0) return new RaycastHit2D(); 
-        else if (hits.Length == 1) return hits[0];
+        // quick exit
+        if (hits.Length == 0) return null;
 
-        // Handle more than 1 interactable in interact range
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float mouseToInteractorDist = (mousePosition - new Vector2(transform.position.x, transform.position.y)).magnitude;
 
-        RaycastHit2D closestHit = hits[0];
-        float closestHitDist;
-        if(mouseToInteractorDist <= _interactRange)
-        { // mouse in interact range, find interactable closest to mouse
-            closestHitDist = (mousePosition - new Vector2(closestHit.transform.position.x, closestHit.transform.position.y)).magnitude;
-            for (int i = 1; i < hits.Length; i++)
+        RaycastHit2D closestHit;
+        IInteractable closestInteractable = null;
+        float closestHitDist = float.PositiveInfinity;
+        
+        Lootable closestLootable = null;
+        IInteractable closestLootableInteractable = null;
+        float clostestLootableDist = float.PositiveInfinity;
+        
+        // loop through hits
+        foreach (RaycastHit2D hit in hits)
+        {
+            IInteractable thisInteractable = hit.transform.gameObject.GetComponent<IInteractable>();
+
+            float dist;
+            if (mouseToInteractorDist <= _interactRange) dist = (mousePosition - new Vector2(hit.transform.position.x, hit.transform.position.y)).magnitude;
+            else                                         dist = (transform.position - hit.transform.position).magnitude;
+            
+
+            if (thisInteractable is Lootable lootable && dist < clostestLootableDist)
             {
-                float mouseToHitDist = (mousePosition - new Vector2(hits[i].transform.position.x, hits[i].transform.position.y)).magnitude;
-                if(mouseToHitDist < closestHitDist)
-                {
-                    closestHitDist = mouseToHitDist;
-                    closestHit = hits[i];
-                }
+                clostestLootableDist = dist;
+                closestLootableInteractable = thisInteractable;
+                closestLootable = lootable;
             }
-        }
-        else
-        { // mouse out of interact range, find interactable closest to interactor
-            closestHitDist = (transform.position - closestHit.transform.position).magnitude;
-            for (int i = 1; i < hits.Length; i++)
+
+            else if (dist < closestHitDist)
             {
-                float interactorToHitDist = (transform.position - hits[i].transform.position).magnitude;
-                if (interactorToHitDist < closestHitDist)
-                {
-                    closestHitDist = interactorToHitDist;
-                    closestHit = hits[i];
-                }
+                closestHitDist = dist;
+                closestInteractable = thisInteractable;
+                closestHit = hit;
             }
+
+
         }
 
-        return closestHit;
+        if(closestLootable != null)
+        {
+            // Manually auto interacts with lootable, but leaves availableInteractable how it was before
+            IInteractable lastAvailable = availableInteractable;
+            availableInteractable = closestInteractable;
+            Interact(false); // interact with thisInteractable
+            availableInteractable = lastAvailable;
+        }
+
+        if (!hands.UsingLeft || !hands.UsingRight) return closestInteractable;
+        else return null;
     }
 
     public void Interact(bool rightHand)
     {
         if (AvailableInteractable != null)
         {
+            if(interactedContainer != null)
+            {
+                CloseOpenedContainer();
+                interactedContainer = null;
+            }
 
             // INTERACT WITH ITEM
             if (AvailableInteractable is Item)
@@ -203,16 +251,21 @@ public class Interactor : MonoBehaviour
                 AvailableInteractable.Interact(head);
             }
 
-            // OTHER INTERACTABLE, CONTAINER?
-            else
+            else if (AvailableInteractable is Locker || AvailableInteractable is Lootable)
             {
+                if(AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
                 AvailableInteractable.Interact(rightHand);
             }
 
 
             AvailableInteractable = null;
-            
         }
+    }
+
+    // called by event listener when a container close button is clicked
+    public void OnContainerClosed()
+    {
+        interactedContainer = null;
     }
 
     #region OLD INTERACTION METHOD (Circle cast and get closest)

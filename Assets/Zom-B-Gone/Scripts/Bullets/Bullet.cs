@@ -43,14 +43,37 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        OnHit(collision.collider);
+        if (collision.gameObject.TryGetComponent(out Health targetHealth))
+        {
+            currentPiercingPower--;
+            DealDamage(targetHealth);
+        }
+        else
+        {
+            if (bulletData.wallPiercing) currentPiercingPower--;
+            else Destroy(gameObject);
+        }
+        if (currentPiercingPower < 0) Destroy(gameObject);
     }
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
-        OnHit(collider);
-	}
+        if (collider.gameObject.TryGetComponent(out Health targetHealth))
+        {
+            currentPiercingPower--;
+            DealDamage(targetHealth);
+            if (currentPiercingPower < 0) Destroy(gameObject);
+        }
+    }
 
+    protected void DealDamage(Health targetHealth)
+    {
+        float damage = ProjectileWeaponDamage * bulletData.damageMultiplier;
+        shooter.DealDamage(targetHealth, damage);
+    }
+
+
+    // depricated
     private void OnHit(Collider2D collision)
     {
 		if (collision.gameObject.TryGetComponent(out Health targetHealth))
@@ -58,18 +81,12 @@ public class Bullet : MonoBehaviour
 			currentPiercingPower--;
 			DealDamage(targetHealth);
 		}
-		else if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
+		else //if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
 		{
 			if (bulletData.wallPiercing) currentPiercingPower--;
 			else Destroy(gameObject);
 		}
 		if (currentPiercingPower < 0) Destroy(gameObject);
 	}
-
-    protected void DealDamage(Health targetHealth)
-    {
-        float damage = ProjectileWeaponDamage * bulletData.damageMultiplier;
-        shooter.DealDamage(targetHealth, damage);
-    }
 
 }

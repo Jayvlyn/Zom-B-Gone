@@ -18,7 +18,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     // Component Refs
     [SerializeField] protected Transform pivotPoint;
     [SerializeField] protected Collider2D fullCollider;
-    [SerializeField] protected SpriteRenderer itemRenderer;
+    protected SpriteRenderer itemRenderer;
     // Drag
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneAngularDrag = 0.4f;
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneLinearDrag = 0.4f;

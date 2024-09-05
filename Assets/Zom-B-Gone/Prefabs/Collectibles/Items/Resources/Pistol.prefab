@@ -242,7 +242,6 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
   pivotPoint: {fileID: 0}
   fullCollider: {fileID: 4164492863800837428}
-  itemRenderer: {fileID: 0}
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -273,10 +272,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
