@@ -70,7 +70,9 @@ public class CollectibleContainer : ICollectibleContainer
                 }
                 else
                 {
-                    collectibleSlots[i] = new CollectibleSlot(collectibleSlot.collectible, collectibleSlot.collectible.MaxStack, collectibleSlots[i].allowLoot, collectibleSlots[i].allowItems, collectibleSlots[i].allowHats);
+                    //collectibleSlots[i] = new CollectibleSlot(collectibleSlot.collectible, collectibleSlot.collectible.MaxStack, collectibleSlots[i].allowLoot, collectibleSlots[i].allowItems, collectibleSlots[i].allowHats);
+                    collectibleSlots[i].collectible = collectibleSlot.collectible;
+                    collectibleSlots[i].quantity = collectibleSlot.collectible.MaxStack;
 
                     collectibleSlot.quantity -= collectibleSlot.collectible.MaxStack;
                 }
@@ -157,26 +159,33 @@ public class CollectibleContainer : ICollectibleContainer
 
         //if (firstSlot == secondSlot) return;
 
-        if(secondSlot.collectible != null)
-        {
-            if(firstSlot.collectible == secondSlot.collectible) // Check if same collectible, stack
-			{
-                if(firstSlot.quantity <= secondSlot.GetRemainingSpace()) // Enough space to stack
-                {
-                    secondSlot.quantity += firstSlot.quantity;
+        if(firstSlot.collectible == secondSlot.collectible) // Check if same collectible, stack
+		{
+            if(firstSlot.quantity <= secondSlot.GetRemainingSpace()) // Enough space to stack
+            {
+                collectibleSlots[indexTwo].quantity += firstSlot.quantity;
 
-                    collectibleSlots[indexOne] = new CollectibleSlot();
-
-                    OnCollectibleUpdated.Invoke();
-                    OnCollectibleSwapped.Invoke();
-
-                    return;
-                }
+                collectibleSlots[indexOne].quantity = 0;
+                collectibleSlots[indexOne].collectible = null;
             }
-        }
+            else // not enough space to stack, but should move as much as possible
+            {
+                int amountFilled = secondSlot.collectible.MaxStack - secondSlot.quantity;
+                collectibleSlots[indexTwo].quantity = secondSlot.collectible.MaxStack;
 
-        collectibleSlots[indexOne] = secondSlot;
-        collectibleSlots[indexTwo] = firstSlot;
+                collectibleSlots[indexOne].quantity -= amountFilled;
+            }
+
+        }
+        else
+        {
+            collectibleSlots[indexOne].collectible = secondSlot.collectible;
+            collectibleSlots[indexOne].quantity = secondSlot.quantity;
+
+            collectibleSlots[indexTwo].collectible = firstSlot.collectible;
+            collectibleSlots[indexTwo].quantity = firstSlot.quantity;
+        }
+    
 
         OnCollectibleUpdated.Invoke();
         OnCollectibleSwapped.Invoke();

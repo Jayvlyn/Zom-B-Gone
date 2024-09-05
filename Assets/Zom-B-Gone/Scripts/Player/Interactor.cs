@@ -27,7 +27,6 @@ public class Interactor : MonoBehaviour
 
     private Hands hands;
     private Head head;
-    //private RaycastHit2D hit;
     //private Camera gameCamera;
 
     // when a container is interacted with, it will use this to track the distance, and close the container when you get out of interact range
@@ -125,6 +124,7 @@ public class Interactor : MonoBehaviour
             }
         }
         interactedContainer = null;
+        openedLootable = null;
     }
 
     /// <summary>
@@ -196,6 +196,8 @@ public class Interactor : MonoBehaviour
         {
             if(openedLootable == null || (openedLootable != null && lootableContainer != openedLootable))
             {
+                Debug.Log("Setting lootable");
+
                 // Manually auto interacts with lootable, but leaves availableInteractable how it was before
                 IInteractable lastAvailable = availableInteractable;
                 availableInteractable = closestLootableInteractable;

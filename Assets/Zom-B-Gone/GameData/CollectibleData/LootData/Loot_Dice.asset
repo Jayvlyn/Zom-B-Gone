@@ -15,5 +15,5 @@ MonoBehaviour:
   name: Dice
   description: I swear if it gives me snake eyes.
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a0e35f6b808bb7447826cc6c69ffe448, type: 3}
   maxStack: 64

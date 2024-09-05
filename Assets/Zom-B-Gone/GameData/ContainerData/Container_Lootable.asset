@@ -26,26 +26,26 @@ MonoBehaviour:
     collectibleSlots:
     - collectible: {fileID: 0}
       quantity: 0
-      allowLoot: 0
-      allowItems: 0
-      allowHats: 0
+      allowLoot: 1
+      allowItems: 1
+      allowHats: 1
     - collectible: {fileID: 0}
       quantity: 0
-      allowLoot: 0
-      allowItems: 0
-      allowHats: 0
+      allowLoot: 1
+      allowItems: 1
+      allowHats: 1
+    - collectible: {fileID: 11400000, guid: 0241abb5df8b2334c9f0fbfbb395572c, type: 2}
+      quantity: 1
+      allowLoot: 1
+      allowItems: 1
+      allowHats: 1
     - collectible: {fileID: 0}
       quantity: 0
-      allowLoot: 0
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 0
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 0
-      allowItems: 0
-      allowHats: 0
+      allowLoot: 1
+      allowItems: 1
+      allowHats: 1
+    - collectible: {fileID: 11400000, guid: c615ffb9921c717449e87b20cd2b23c0, type: 2}
+      quantity: 1
+      allowLoot: 1
+      allowItems: 1
+      allowHats: 1

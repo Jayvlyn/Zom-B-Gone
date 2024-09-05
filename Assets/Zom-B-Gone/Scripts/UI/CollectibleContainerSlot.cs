@@ -32,7 +32,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
         if (dragHandler == null) return;
 
-		if ((dragHandler.GetSlotUI as CollectibleContainerSlot) != null) 
+		if (dragHandler.GetSlotUI as CollectibleContainerSlot) 
         {
             CollectibleContainerSlot otherSlot = dragHandler.GetSlotUI as CollectibleContainerSlot;
 
@@ -55,9 +55,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
                 SwapBetweenContainers(otherSlot, otherSlot.SlotIndex);
 
                 containerData.Container.OnCollectibleUpdated.Invoke();
-                containerData.Container.OnCollectibleSwapped.Invoke();
 				otherSlot.containerData.Container.OnCollectibleUpdated.Invoke();
-                otherSlot.containerData.Container.OnCollectibleSwapped.Invoke();
             }
         }
     }
@@ -86,23 +84,36 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
         CollectibleSlot thisCollectibleSlot = containerData.Container.GetSlotByIndex(SlotIndex); // Required for mutability, cant use "CollectibleSlot"
         CollectibleSlot otherSlot = otherCollectibleSlot.containerData.Container.GetSlotByIndex(otherSlotIndex);
 
-		if (SlotCollectible != null)
+		if (otherSlot.collectible == SlotCollectible) // Check if same collectible, stack
 		{
-			if (otherSlot.collectible == SlotCollectible) // Check if same collectible, stack
+			if (otherSlot.quantity <= thisCollectibleSlot.GetRemainingSpace()) // Enough space to stack
 			{
-				if (otherSlot.quantity <= thisCollectibleSlot.GetRemainingSpace()) // Enough space to stack
-				{
-					thisCollectibleSlot.quantity += otherSlot.quantity;
+				thisCollectibleSlot.quantity += otherSlot.quantity;
+                containerData.Container.collectibleSlots[SlotIndex].quantity = thisCollectibleSlot.quantity;
 
-					containerData.Container.collectibleSlots[otherSlotIndex] = new CollectibleSlot(null, 0, containerData.Container.collectibleSlots[otherSlotIndex].allowLoot, containerData.Container.collectibleSlots[otherSlotIndex].allowItems, containerData.Container.collectibleSlots[otherSlotIndex].allowHats);
+                //containerData.Container.collectibleSlots[otherSlotIndex] = new CollectibleSlot(null, 0, containerData.Container.collectibleSlots[otherSlotIndex].allowLoot, containerData.Container.collectibleSlots[otherSlotIndex].allowItems, containerData.Container.collectibleSlots[otherSlotIndex].allowHats);
+                otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].collectible = null;
+                otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].quantity = 0;
 
-					return;
-				}
 			}
-		}
+            else // not enough space to stack, but should move as much as possible
+            {
+                int amountFilled = thisCollectibleSlot.collectible.MaxStack - thisCollectibleSlot.quantity;
+                containerData.Container.collectibleSlots[SlotIndex].quantity = thisCollectibleSlot.collectible.MaxStack;
 
-        otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex] = thisCollectibleSlot;
-        containerData.Container.collectibleSlots[SlotIndex] = otherSlot;
+                otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].quantity -= amountFilled;
+            }
+		}
+		
+        else
+        {
+            otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].collectible = thisCollectibleSlot.collectible;
+            otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].quantity = thisCollectibleSlot.quantity;
+
+            containerData.Container.collectibleSlots[SlotIndex].collectible = otherSlot.collectible;
+            containerData.Container.collectibleSlots[SlotIndex].quantity = otherSlot.quantity;
+        }
+
 
         if(OnContainerSwapped != null)
         {

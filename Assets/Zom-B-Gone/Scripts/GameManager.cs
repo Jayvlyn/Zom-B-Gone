@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-		IntervalSpawning();
+		if(intervalSpawning)IntervalSpawning();
     }
 
 	void IntervalSpawning()
