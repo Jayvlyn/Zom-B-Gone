@@ -32,6 +32,7 @@ public class Interactor : MonoBehaviour
 
     // when a container is interacted with, it will use this to track the distance, and close the container when you get out of interact range
     private GameObject interactedContainer;
+    private Lootable openedLootable;
 
     private SpriteRenderer interactableSpriteRenderer;
     private IInteractable availableInteractable;
@@ -93,9 +94,10 @@ public class Interactor : MonoBehaviour
             {
                 distanceCheckTimer = openContainerDistanceCheckInterval;
 
-                float distanceBetweenContainerAndInteractor = (transform.position - interactedContainer.transform.position).magnitude;
+                float containerToInteractorDist = (transform.position - interactedContainer.transform.position).magnitude;
+
                 
-                if(distanceBetweenContainerAndInteractor > _interactRange)
+                if(containerToInteractorDist > _interactRange + .5f)
                 {
                     CloseOpenedContainer();
                 }
@@ -122,6 +124,7 @@ public class Interactor : MonoBehaviour
                 break;
             }
         }
+        interactedContainer = null;
     }
 
     /// <summary>
@@ -143,56 +146,63 @@ public class Interactor : MonoBehaviour
         */
 
         // get all interactables within interactRange
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _interactRange, Vector2.zero, 0, InteractionLm);
-
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _interactRange, InteractionLm);
+        
         // quick exit
-        if (hits.Length == 0) return null;
+        if (colliders.Length == 0) return null;
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float mouseToInteractorDist = (mousePosition - new Vector2(transform.position.x, transform.position.y)).magnitude;
 
-        RaycastHit2D closestHit;
+        Collider2D closestCollider;
         IInteractable closestInteractable = null;
-        float closestHitDist = float.PositiveInfinity;
+        float closestColliderDist = float.PositiveInfinity;
         
         Lootable closestLootable = null;
         IInteractable closestLootableInteractable = null;
         float clostestLootableDist = float.PositiveInfinity;
         
         // loop through hits
-        foreach (RaycastHit2D hit in hits)
+        foreach (Collider2D collider in colliders)
         {
-            IInteractable thisInteractable = hit.transform.gameObject.GetComponent<IInteractable>();
+            IInteractable thisInteractable = collider.transform.gameObject.GetComponent<IInteractable>();
 
             float dist;
-            if (mouseToInteractorDist <= _interactRange) dist = (mousePosition - new Vector2(hit.transform.position.x, hit.transform.position.y)).magnitude;
-            else                                         dist = (transform.position - hit.transform.position).magnitude;
-            
+            if (mouseToInteractorDist <= _interactRange) dist = (mousePosition - new Vector2(collider.transform.position.x, collider.transform.position.y)).magnitude;
+            else                                         dist = (transform.position - collider.transform.position).magnitude;
 
-            if (thisInteractable is Lootable lootable && dist < clostestLootableDist)
+
+
+            if (thisInteractable is Lootable lootable)
             {
-                clostestLootableDist = dist;
-                closestLootableInteractable = thisInteractable;
-                closestLootable = lootable;
+                if (dist < clostestLootableDist)
+                {
+                    clostestLootableDist = dist;
+                    closestLootableInteractable = thisInteractable;
+                    closestLootable = lootable;
+                }
             }
-
-            else if (dist < closestHitDist)
+            else if (dist < closestColliderDist)
             {
-                closestHitDist = dist;
+                closestColliderDist = dist;
                 closestInteractable = thisInteractable;
-                closestHit = hit;
+                closestCollider = collider;
             }
 
 
         }
 
-        if(closestLootable != null)
+        if(closestLootable != null && closestLootableInteractable is Lootable lootableContainer)
         {
-            // Manually auto interacts with lootable, but leaves availableInteractable how it was before
-            IInteractable lastAvailable = availableInteractable;
-            availableInteractable = closestInteractable;
-            Interact(false); // interact with thisInteractable
-            availableInteractable = lastAvailable;
+            if(openedLootable == null || (openedLootable != null && lootableContainer != openedLootable))
+            {
+                // Manually auto interacts with lootable, but leaves availableInteractable how it was before
+                IInteractable lastAvailable = availableInteractable;
+                availableInteractable = closestLootableInteractable;
+                Interact(false);
+                availableInteractable = lastAvailable;
+                openedLootable = lootableContainer;
+            }
         }
 
         if (!hands.UsingLeft || !hands.UsingRight) return closestInteractable;
@@ -203,14 +213,19 @@ public class Interactor : MonoBehaviour
     {
         if (AvailableInteractable != null)
         {
-            if(interactedContainer != null)
+            if (AvailableInteractable is Locker || AvailableInteractable is Lootable)
             {
-                CloseOpenedContainer();
-                interactedContainer = null;
+                if (interactedContainer != null)
+                {
+                    CloseOpenedContainer();
+                }
+
+                if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
+                AvailableInteractable.Interact(rightHand);
             }
 
             // INTERACT WITH ITEM
-            if (AvailableInteractable is Item)
+            else if (AvailableInteractable is Item)
             {
                 AvailableInteractable.Interact(rightHand);
 
@@ -251,22 +266,10 @@ public class Interactor : MonoBehaviour
                 AvailableInteractable.Interact(head);
             }
 
-            else if (AvailableInteractable is Locker || AvailableInteractable is Lootable)
-            {
-                if(AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
-                AvailableInteractable.Interact(rightHand);
-            }
-
-
             AvailableInteractable = null;
         }
     }
 
-    // called by event listener when a container close button is clicked
-    public void OnContainerClosed()
-    {
-        interactedContainer = null;
-    }
 
     #region OLD INTERACTION METHOD (Circle cast and get closest)
     //public void Interact(bool rightHand)
