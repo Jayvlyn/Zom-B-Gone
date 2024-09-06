@@ -5249,6 +5249,14 @@ PrefabInstance:
       propertyPath: _interactRange
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4277460431732484000, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: closeContainerEvents.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277460431732484000, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
+      propertyPath: closeContainerEvents.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1074ef9a6659406408f5c2583c6d7f76, type: 2}
     - target: {fileID: 8105131813210140980, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: _slipAmount
       value: 0.14

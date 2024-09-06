@@ -31,6 +31,7 @@ public class Interactor : MonoBehaviour
 
     // when a container is interacted with, it will use this to track the distance, and close the container when you get out of interact range
     private GameObject interactedContainer;
+    private GameObject interactedCrafting;
     private Lootable openedLootable;
 
     private SpriteRenderer interactableSpriteRenderer;
@@ -92,21 +93,24 @@ public class Interactor : MonoBehaviour
         }
 
 
-        if(interactedContainer != null)
+        if (interactedContainer != null || interactedCrafting != null)
         {
             if (distanceCheckTimer <= 0)
             {
                 distanceCheckTimer = openContainerDistanceCheckInterval;
 
-                float containerToInteractorDist = (transform.position - interactedContainer.transform.position).magnitude;
-
-                
-                if(containerToInteractorDist > _interactRange + .5f)
+                if (interactedContainer)
                 {
-                    
-                    CloseOpenedContainer();
+                    float containerToInteractorDist = (transform.position - interactedContainer.transform.position).magnitude;
+                    if(containerToInteractorDist > _interactRange + .5f) CloseOpenedContainer();
                 }
 
+                if (interactedCrafting)
+                {
+                    float craftingToInteractorDist = (transform.position - interactedCrafting.transform.position).magnitude;
+                    if (craftingToInteractorDist > _interactRange + .5f) CloseOpenedCrafting();
+
+                }
             }
             else
             {
@@ -125,7 +129,6 @@ public class Interactor : MonoBehaviour
             PlayerController.mouseHeldIcon.sendBackToSlot();
             PlayerController.mouseHeldIcon = null;
         }
-
         string containersCloseEventName = interactedContainer.GetComponent<VoidListener>().GameEvent.name;
         foreach(VoidEvent e in closeContainerEvents)
         {
@@ -137,6 +140,26 @@ public class Interactor : MonoBehaviour
         }
         interactedContainer = null;
         openedLootable = null;
+    }
+
+    private void CloseOpenedCrafting()
+    {
+        if (PlayerController.mouseHeldIcon != null)
+        {
+            PlayerController.mouseHeldIcon.sendBackToSlot();
+            PlayerController.mouseHeldIcon = null;
+        }
+
+        string craftingCloseEventName = interactedCrafting.GetComponent<VoidListener>().GameEvent.name;
+        foreach (VoidEvent e in closeContainerEvents)
+        {
+            if (e.name.Equals(craftingCloseEventName))
+            {
+                e.Raise();
+                break;
+            }
+        }
+        interactedCrafting = null;
     }
 
     /// <summary>
@@ -225,7 +248,7 @@ public class Interactor : MonoBehaviour
     {
         if (AvailableInteractable != null)
         {
-            if (AvailableInteractable is Locker || AvailableInteractable is Lootable || AvailableInteractable is CraftingTable)
+            if (AvailableInteractable is Locker || AvailableInteractable is Lootable)
             {
                 if (interactedContainer != null)
                 {
@@ -233,6 +256,17 @@ public class Interactor : MonoBehaviour
                 }
 
                 if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
+                AvailableInteractable.Interact(rightHand);
+            }
+
+            else if (AvailableInteractable is CraftingTable)
+            {
+                if (interactedCrafting != null)
+                {
+                    CloseOpenedCrafting();
+                }
+
+                if (AvailableInteractable is MonoBehaviour mono) interactedCrafting = mono.gameObject;
                 AvailableInteractable.Interact(rightHand);
             }
 

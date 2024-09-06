@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e8784615d391f41b9317b9575e7647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactRange: 1
+  _interactRange: 2
   InteractionLm:
     serializedVersion: 2
     m_Bits: 4160
@@ -293,6 +293,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e827c2b02aead2b42894a29bd4a840f6, type: 2}
   - {fileID: 11400000, guid: b40db612806cdce4fa58882bf1d149e0, type: 2}
   - {fileID: 11400000, guid: 710e9a9ee455f1b4e849f94da7679bf4, type: 2}
+  - {fileID: 11400000, guid: 1074ef9a6659406408f5c2583c6d7f76, type: 2}
 --- !u!50 &369753046641428115
 Rigidbody2D:
   serializedVersion: 4
