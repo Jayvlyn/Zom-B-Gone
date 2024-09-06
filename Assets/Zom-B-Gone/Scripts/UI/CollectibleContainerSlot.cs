@@ -38,14 +38,14 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
             CollectibleData otherCollectible = otherSlot.containerData.Container.collectibleSlots[otherSlot.SlotIndex].collectible;
 
-            if (otherCollectible as LootData && !CollectibleSlot.allowLoot) return; 
-            if (otherCollectible as HatData  && !CollectibleSlot.allowHats) return; 
-            if (otherCollectible as ItemData && !CollectibleSlot.allowItems) return;
-            if (SlotCollectible as LootData && !otherSlot.CollectibleSlot.allowLoot) return;
-            if (SlotCollectible as HatData && !otherSlot.CollectibleSlot.allowHats) return;
-            if (SlotCollectible as ItemData && !otherSlot.CollectibleSlot.allowItems) return;
+            //if (SlotCollectible as LootData && !otherSlot.CollectibleSlot.allowLoot) return;
+            //if (SlotCollectible as HatData && !otherSlot.CollectibleSlot.allowHats) return;
+            //if (SlotCollectible as ItemData && !otherSlot.CollectibleSlot.allowItems) return;
+            if (otherSlot.CollectibleSlot.collectible as LootData && !CollectibleSlot.allowLoot) return;
+            if (otherSlot.CollectibleSlot.collectible as HatData && !CollectibleSlot.allowHats) return;
+            if (otherSlot.CollectibleSlot.collectible as ItemData && !CollectibleSlot.allowItems) return;
 
-            if(otherSlot.containerData == containerData)
+            if (otherSlot.containerData == containerData)
             {
                 containerData.Container.Swap(otherSlot.SlotIndex, SlotIndex);
             }
@@ -106,6 +106,15 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 		
         else
         {
+            //if (thisCollectibleSlot.collectible as LootData && !otherSlot.allowLoot) return;
+            //if (thisCollectibleSlot.collectible as HatData && !otherSlot.allowHats) return;
+            //if (thisCollectibleSlot.collectible as ItemData && !otherSlot.allowItems) return;
+
+            if (otherSlot.collectible as LootData && !thisCollectibleSlot.allowLoot) return;
+            if (otherSlot.collectible as HatData && !thisCollectibleSlot.allowHats) return;
+            if (otherSlot.collectible as ItemData && !thisCollectibleSlot.allowItems) return;
+
+
             otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].collectible = thisCollectibleSlot.collectible;
             otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].quantity = thisCollectibleSlot.quantity;
 

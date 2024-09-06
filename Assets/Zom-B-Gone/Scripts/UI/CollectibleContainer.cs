@@ -179,6 +179,13 @@ public class CollectibleContainer : ICollectibleContainer
         }
         else
         {
+            //if (firstSlot.collectible as LootData && !secondSlot.allowLoot) return;
+            //if (firstSlot.collectible as HatData && !secondSlot.allowHats) return;
+            //if (firstSlot.collectible as ItemData && !secondSlot.allowItems) return;
+            if (secondSlot.collectible as LootData && !firstSlot.allowLoot) return;
+            if (secondSlot.collectible as HatData && !firstSlot.allowHats) return;
+            if (secondSlot.collectible as ItemData && !firstSlot.allowItems) return;
+
             collectibleSlots[indexOne].collectible = secondSlot.collectible;
             collectibleSlots[indexOne].quantity = secondSlot.quantity;
 

@@ -9,6 +9,8 @@ public class CraftingTable : MonoBehaviour, IInteractable
     [SerializeField] private RecipeBook recipeBook;
     [SerializeField] private VoidEvent craftingTableOpened;
 
+    private bool activeCraftingTable = false;
+
     public Recipe foundRecipe;
 
     private int fullInputSlots;
@@ -18,6 +20,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
     {
         OpenCraftingUI();
         gameObject.layer = LayerMask.NameToLayer("World");
+        activeCraftingTable = true;
     }
 
     private void OpenCraftingUI()
@@ -28,10 +31,12 @@ public class CraftingTable : MonoBehaviour, IInteractable
     public void OnCraftingClosed()
     {
         gameObject.layer = LayerMask.NameToLayer("Interactable");
+        activeCraftingTable = false;
     }
 
     public void OnCraftingInputUpdated()
     {
+        if (!activeCraftingTable) return;
         int inputSlotCount = craftingTableInput.size;
         fullInputSlots = 0;
 
@@ -44,7 +49,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
             }
         }
 
-        if (foundRecipe.resultCollectible != null) return;
+        if (foundRecipe.resultCollectible != null) { foundRecipe = new Recipe(); return; }
 
         // Find crafting recipe to match
         foundRecipe = new Recipe();
@@ -87,6 +92,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
     public void OnCraftAccepted()
     {
+        if (!activeCraftingTable) return;
         foreach(RecipeItem ri in foundRecipe.recipeItems)
         {
             for (int i = 0; i < craftingTableInput.size; i++) // loop through each slot in crafting table input
@@ -98,13 +104,12 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
                     // if amount deducted reduces the inputted collectible to nothing, remove it from slot completely
                     if (craftingTableInput.Container.collectibleSlots[i].quantity == 0) craftingTableInput.Container.collectibleSlots[i].collectible = null;
+                    break;
                 }
-
-                continue;
             }
         }
         craftingTableInput.onContainerCollectibleUpdated.Raise();
-        foundRecipe.resultCollectible = null;
+        //foundRecipe.resultCollectible = null;
     }
 
     public void Interact(Head head)

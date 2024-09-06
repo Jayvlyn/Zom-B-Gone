@@ -25,5 +25,5 @@ MonoBehaviour:
     recipeItems:
     - collectible: {fileID: 11400000, guid: 3ea69505795e21d4db643120956aadfa, type: 2}
       requiredAmount: 2
-    - collectible: {fileID: 11400000, guid: 6ddf5a9b7f0f1564287e32f82510541d, type: 2}
+    - collectible: {fileID: 11400000, guid: c615ffb9921c717449e87b20cd2b23c0, type: 2}
       requiredAmount: 1
