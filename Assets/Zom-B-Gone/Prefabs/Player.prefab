@@ -89,8 +89,6 @@ MonoBehaviour:
   hands: {fileID: 1034459641233780573}
   head: {fileID: 2538085723734079734}
   rb: {fileID: 369753046641428115}
-  holdingLeft: 0
-  holdingRight: 0
   currentStamina: 0
   recoverStamina: 0
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}

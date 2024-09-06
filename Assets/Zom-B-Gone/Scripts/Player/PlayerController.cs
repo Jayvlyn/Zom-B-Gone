@@ -22,15 +22,18 @@ public class PlayerController : MonoBehaviour
     private Camera gameCamera;
     private Interactor interactor;
 
-    [HideInInspector] public bool holdingLeft;
-    [HideInInspector] public bool holdingRight;
+    [HideInInspector] public static bool holdingRun;
+    [HideInInspector] public static bool holdingSneak;
+    [HideInInspector] public static bool holdingLeft;
+    [HideInInspector] public static bool holdingRight;
     [HideInInspector] public float currentStamina;
     [HideInInspector] public bool recoverStamina;
     private float currentMoveSpeed;
     private Vector2 movementInput;
     private Vector2 smoothedMovementInput;
     private Vector2 movementInputSmoothVelocity;
-    private bool holdingRun;
+
+    public static ContainerDragHandler mouseHeldIcon = null;
 
     private void Awake()
     {
@@ -138,13 +141,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnLeftHand(InputValue inputValue)
     {
-		if (EventSystem.current.IsPointerOverGameObject()) return;
 		if (inputValue.isPressed)
         {
-		    if (!hands.UsingLeft)
-            {
-                interactor.Interact(false);
-            }
+		    if (EventSystem.current.IsPointerOverGameObject()) return;
+
+		    if (!hands.UsingLeft) interactor.Interact(false);
             
 			else if (hands.leftItem != null) hands.leftItem.Use();
 		}
@@ -157,14 +158,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnRightHand(InputValue inputValue)
     {
-		if (EventSystem.current.IsPointerOverGameObject()) return;
 		if (inputValue.isPressed)
 		{
-			if (!hands.UsingRight)
-            {
-                interactor.Interact(true);
-			}
-            
+		    if (EventSystem.current.IsPointerOverGameObject()) return;
+
+			if (!hands.UsingRight) interactor.Interact(true);
+			
 			else if (hands.rightItem != null) hands.rightItem.Use();
 		}
 		else
@@ -284,10 +283,12 @@ public class PlayerController : MonoBehaviour
         if (sneakPressed) // Sneak Key Pressed
         {
             ChangeState(State.SNEAKING);
+            holdingSneak = true;
         }
 
         else // Sneak Key Released
         {
+            holdingSneak = false;
             if(currentState == State.SNEAKING) // Letting go of sneak key only matters if sneaking
             {
                 if (holdingRun) { ChangeState(State.RUNNING);}

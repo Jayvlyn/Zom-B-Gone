@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public Rigidbody2D rigidBody;
     [HideInInspector] public Collider2D bulletCollider;
     [HideInInspector] public Weapon shooter;
-
+    
     private PlayerController playerController;
     private Head playerHead;
 
@@ -62,31 +62,20 @@ public class Bullet : MonoBehaviour
         {
             currentPiercingPower--;
             DealDamage(targetHealth);
-            if (currentPiercingPower < 0) Destroy(gameObject);
         }
+        else
+        {
+            if (bulletData.wallPiercing) currentPiercingPower--;
+            else Destroy(gameObject);
+        }
+        if (currentPiercingPower < 0) Destroy(gameObject);
     }
+
+
 
     protected void DealDamage(Health targetHealth)
     {
         float damage = ProjectileWeaponDamage * bulletData.damageMultiplier;
         shooter.DealDamage(targetHealth, damage);
     }
-
-
-    // depricated
-    private void OnHit(Collider2D collision)
-    {
-		if (collision.gameObject.TryGetComponent(out Health targetHealth))
-		{
-			currentPiercingPower--;
-			DealDamage(targetHealth);
-		}
-		else //if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
-		{
-			if (bulletData.wallPiercing) currentPiercingPower--;
-			else Destroy(gameObject);
-		}
-		if (currentPiercingPower < 0) Destroy(gameObject);
-	}
-
 }

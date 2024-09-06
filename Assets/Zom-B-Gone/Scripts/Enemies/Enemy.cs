@@ -408,12 +408,17 @@ public abstract class Enemy : MonoBehaviour
 		ChangeState(State.DEAD);
 	}
 
-	private float limbLaunchMod = .3f;
-	private float limbSpinForce = 100f;
     public void OnHit(int damage, float dismemberChance = 0)
     {
-		if(limbs.Count > 0)
-		{
+		DismemberLimb(damage, dismemberChance);
+    }
+
+	private float limbLaunchMod = .3f;
+	private float limbSpinForce = 100f;
+	public void DismemberLimb(int damage, float dismemberChance)
+	{
+        if (limbs.Count > 0)
+        {
 			float num = Random.Range(0f, 100f);
 			if (num < dismemberChance)
 			{
@@ -423,6 +428,6 @@ public abstract class Enemy : MonoBehaviour
 				victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
 				victimLimb.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
 			}
-		}
+        }
     }
 }

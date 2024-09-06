@@ -74,7 +74,7 @@
                     "id": "53ca7934-90e8-4c6d-8b3a-eb284670323b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=0.15)",
+                    "interactions": "Hold(duration=0.01)",
                     "initialStateCheck": false
                 },
                 {
@@ -83,7 +83,7 @@
                     "id": "7d206fd2-1dff-4156-8b6f-f173162fb28f",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=0.15)",
+                    "interactions": "Hold(duration=0.01)",
                     "initialStateCheck": false
                 },
                 {
@@ -92,7 +92,7 @@
                     "id": "e15cddb0-2dda-4804-a0a1-6cb688cab984",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=0.3)",
+                    "interactions": "Hold(duration=0.2)",
                     "initialStateCheck": false
                 },
                 {
@@ -101,7 +101,7 @@
                     "id": "a6e1f616-e9c2-4ecb-b0b7-da7fb342c005",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=0.3)",
+                    "interactions": "Hold(duration=0.2)",
                     "initialStateCheck": false
                 },
                 {
@@ -110,7 +110,7 @@
                     "id": "165b524c-b49d-485f-9ea0-e7da0306a6e3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap(duration=0.299)",
+                    "interactions": "Tap(duration=0.19999)",
                     "initialStateCheck": false
                 },
                 {
@@ -119,7 +119,7 @@
                     "id": "927b454c-306f-4ea3-b3a0-af5826a0b350",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap(duration=0.299)",
+                    "interactions": "Tap(duration=0.19999)",
                     "initialStateCheck": false
                 },
                 {

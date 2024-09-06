@@ -72,9 +72,7 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         if(eventData.button == PointerEventData.InputButton.Left)
         {
-            transform.SetParent(originalParent);
-            transform.localPosition = Vector3.zero;
-            canvasGroup.blocksRaycasts = true;
+            sendBackToSlot();
         }
     }
 
@@ -86,6 +84,15 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        onMouseEndHoverCollectible.Raise();
+        isHovering = false;
+    }
+
+    public void sendBackToSlot()
+    {
+        transform.SetParent(originalParent);
+        transform.localPosition = Vector3.zero;
+        canvasGroup.blocksRaycasts = true;
         onMouseEndHoverCollectible.Raise();
         isHovering = false;
     }

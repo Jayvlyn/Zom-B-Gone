@@ -24,13 +24,13 @@ MonoBehaviour:
   size: 2
   Container:
     collectibleSlots:
-    - collectible: {fileID: 0}
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      quantity: 1
       allowLoot: 0
       allowItems: 1
       allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 37a8308119c0b2b43932ad7f60cecddf, type: 2}
+      quantity: 1
       allowLoot: 0
       allowItems: 1
       allowHats: 0

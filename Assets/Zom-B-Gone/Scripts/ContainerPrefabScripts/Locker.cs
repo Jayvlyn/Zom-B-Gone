@@ -12,7 +12,7 @@ public class Locker : MonoBehaviour, IInteractable
 	public void Interact(bool rightHand)
 	{
 		OpenLockerUI();
-		gameObject.layer = LayerMask.NameToLayer("Default");
+		gameObject.layer = LayerMask.NameToLayer("World");
     }
 
 	private void OpenLockerUI()

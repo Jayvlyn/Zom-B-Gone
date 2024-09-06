@@ -36,4 +36,13 @@ public class ContainerDragHandler : DragHandler
 			#endregion
 		}
 	}
+
+	public override void OnPointerDown(PointerEventData eventData)
+	{
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+			base.OnPointerDown(eventData);
+			PlayerController.mouseHeldIcon = this;
+        }
+    }
 }

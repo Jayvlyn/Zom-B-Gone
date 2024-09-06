@@ -41,7 +41,7 @@ public class Hat : MonoBehaviour, IInteractable
         spriteRenderer.sortingLayerName = "WornHat";
 		gameObject.transform.parent = head.gameObject.transform;
 		this.head = head;
-        gameObject.layer = LayerMask.NameToLayer("Default");
+        gameObject.layer = LayerMask.NameToLayer("WornHat");
         StartTransferPosition(head.hatTransform);
     }
 

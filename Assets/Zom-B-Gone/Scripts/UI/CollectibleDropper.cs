@@ -40,7 +40,7 @@ public class CollectibleDropper : MonoBehaviour
 
 				break;
 
-            default: // LOCKER or BACKPACK
+            default: // LOCKER or BACKPACK or CRAFTING TABLE
                 // Need to instantiate a collectible into the world
                 CollectibleData droppedCollectibleData = container.Container.collectibleSlots[slotIndex].collectible;
                 int quantity = container.Container.collectibleSlots[slotIndex].quantity;

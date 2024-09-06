@@ -46,7 +46,7 @@ public class Interactor : MonoBehaviour
             // if previous value set to interactable, remove highlight first
             if(availableInteractable != null)
             { // remove highlight from old available
-                interactableSpriteRenderer.material = defaultSpriteMaterial;
+                if(interactableSpriteRenderer != null) interactableSpriteRenderer.material = defaultSpriteMaterial;
             }
 
             availableInteractable = value;
@@ -78,8 +78,13 @@ public class Interactor : MonoBehaviour
             scanTimer = scanInterval;
 
             IInteractable selectedInteractable = InteractableScan();
-            AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
 
+            if(selectedInteractable != null)
+            {
+                AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
+            }
+            else if (AvailableInteractable != null) AvailableInteractable = null;
+            
         }
         else
         {
@@ -98,6 +103,7 @@ public class Interactor : MonoBehaviour
                 
                 if(containerToInteractorDist > _interactRange + .5f)
                 {
+                    
                     CloseOpenedContainer();
                 }
 
@@ -114,6 +120,12 @@ public class Interactor : MonoBehaviour
 
     private void CloseOpenedContainer()
     {
+        if (PlayerController.mouseHeldIcon != null)
+        {
+            PlayerController.mouseHeldIcon.sendBackToSlot();
+            PlayerController.mouseHeldIcon = null;
+        }
+
         string containersCloseEventName = interactedContainer.GetComponent<VoidListener>().GameEvent.name;
         foreach(VoidEvent e in closeContainerEvents)
         {
@@ -168,7 +180,7 @@ public class Interactor : MonoBehaviour
             IInteractable thisInteractable = collider.transform.gameObject.GetComponent<IInteractable>();
 
             float dist;
-            if (mouseToInteractorDist <= _interactRange) dist = (mousePosition - new Vector2(collider.transform.position.x, collider.transform.position.y)).magnitude;
+            if (mouseToInteractorDist <= _interactRange + 0.5f) dist = (mousePosition - new Vector2(collider.transform.position.x, collider.transform.position.y)).magnitude;
             else                                         dist = (transform.position - collider.transform.position).magnitude;
 
 
@@ -194,10 +206,8 @@ public class Interactor : MonoBehaviour
 
         if(closestLootable != null && closestLootableInteractable is Lootable lootableContainer)
         {
-            if(openedLootable == null || (openedLootable != null && lootableContainer != openedLootable))
+            if(openedLootable == null || (openedLootable != null && lootableContainer != openedLootable) && !PlayerController.holdingLeft && !PlayerController.holdingSneak)
             {
-                Debug.Log("Setting lootable");
-
                 // Manually auto interacts with lootable, but leaves availableInteractable how it was before
                 IInteractable lastAvailable = availableInteractable;
                 availableInteractable = closestLootableInteractable;
@@ -215,7 +225,7 @@ public class Interactor : MonoBehaviour
     {
         if (AvailableInteractable != null)
         {
-            if (AvailableInteractable is Locker || AvailableInteractable is Lootable)
+            if (AvailableInteractable is Locker || AvailableInteractable is Lootable || AvailableInteractable is CraftingTable)
             {
                 if (interactedContainer != null)
                 {

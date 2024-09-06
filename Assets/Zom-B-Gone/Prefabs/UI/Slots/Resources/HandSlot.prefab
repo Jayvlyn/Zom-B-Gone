@@ -315,7 +315,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7760183535726806720
 CanvasRenderer:
@@ -338,9 +338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icomImage: {fileID: 6998675399385336187}
-  allowLoot: 0
-  allowItems: 1
-  allowHats: 0
   containerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
   collectibleQuantityText: {fileID: 7907024424289654383}
   OnContainerSwapped: {fileID: 11400000, guid: c176d0f5b9bfe1642b95b49ee74af55f, type: 2}
