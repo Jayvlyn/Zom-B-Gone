@@ -44,6 +44,8 @@ public class CraftingTable : MonoBehaviour, IInteractable
             }
         }
 
+        if (foundRecipe.resultCollectible != null) return;
+
         // Find crafting recipe to match
         foundRecipe = new Recipe();
 
@@ -85,7 +87,24 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
     public void OnCraftAccepted()
     {
+        foreach(RecipeItem ri in foundRecipe.recipeItems)
+        {
+            for (int i = 0; i < craftingTableInput.size; i++) // loop through each slot in crafting table input
+            {
+                if(ri.collectible == craftingTableInput.Container.collectibleSlots[i].collectible) // see if this recipie item collectible matches this slot's
+                {
+                    // deduct amount from inputted collectible
+                    craftingTableInput.Container.collectibleSlots[i].quantity -= ri.requiredAmount;
 
+                    // if amount deducted reduces the inputted collectible to nothing, remove it from slot completely
+                    if (craftingTableInput.Container.collectibleSlots[i].quantity == 0) craftingTableInput.Container.collectibleSlots[i].collectible = null;
+                }
+
+                continue;
+            }
+        }
+        craftingTableInput.onContainerCollectibleUpdated.Raise();
+        foundRecipe.resultCollectible = null;
     }
 
     public void Interact(Head head)

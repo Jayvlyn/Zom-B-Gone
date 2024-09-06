@@ -20,3 +20,10 @@ MonoBehaviour:
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: 6ddf5a9b7f0f1564287e32f82510541d, type: 2}
       requiredAmount: 1
+  - resultCollectible: {fileID: 11400000, guid: a9de3493f5d89db488cf5b063dfe7153, type: 2}
+    resultAmount: 16
+    recipeItems:
+    - collectible: {fileID: 11400000, guid: 3ea69505795e21d4db643120956aadfa, type: 2}
+      requiredAmount: 2
+    - collectible: {fileID: 11400000, guid: 6ddf5a9b7f0f1564287e32f82510541d, type: 2}
+      requiredAmount: 1

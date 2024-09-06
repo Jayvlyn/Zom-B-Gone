@@ -1649,7 +1649,7 @@ MonoBehaviour:
   numberOfEnemies: 0
   spawnRadius: 10
   enemies: []
-  intervalSpawning: 1
+  intervalSpawning: 0
   intervalTime: 5
   intervalSpawnAmount: 2
 --- !u!114 &235199600
