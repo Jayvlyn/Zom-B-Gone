@@ -56,31 +56,72 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         {
             onMouseEndHoverCollectible.Raise();
 
-            originalParent = transform.parent;
 
-            Transform newParent = transform.parent.parent;
-            for(int i = 0; i < 20; i++)
+            if(PlayerController.holdingSneak)
+            { // auto swap to other open container.
+
+                // find what container this is, and what would make the most sense to move into;
+                CollectibleContainerSlot thisSlot = transform.parent.GetComponent<CollectibleContainerSlot>();
+                CollectibleContainerData thisContainer = thisSlot.containerData;
+				switch (thisContainer.containerType)
+				{
+					case ContainerType.HANDS:
+						break;
+					case ContainerType.LOOTABLE:
+						break;
+					case ContainerType.HEAD:
+						break;
+					case ContainerType.LOCKER:
+						break;
+					case ContainerType.BACKPACK:
+						break;
+					case ContainerType.CRAFTINGTABLE:
+						break;
+				}
+
+				CollectibleData collectible = thisSlot.CollectibleSlot.collectible;
+                if(collectible as ItemData)
+                {
+
+                }
+                else if (collectible as HatData)
+                {
+
+                }
+                else if (collectible as LootData)
+                {
+
+                }
+			}
+			else // click and start dragging
             {
-                //if(!newParent.gameObject.TryGetComponent(out CanvasScaler cs))
-                if(!newParent.CompareTag("HUD"))
+                originalParent = transform.parent;
+
+                Transform newParent = transform.parent.parent;
+                for(int i = 0; i < 20; i++)
                 {
-                    newParent = newParent.parent;
+                    //if(!newParent.gameObject.TryGetComponent(out CanvasScaler cs))
+                    if(!newParent.CompareTag("HUD"))
+                    {
+                        newParent = newParent.parent;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                else
-                {
-                    break;
-                }
+
+                transform.SetParent(newParent);
+
+                canvasGroup.blocksRaycasts = false;
+
+                StartCoroutine(LerpToMouse());
             }
 
-            transform.SetParent(newParent);
+		}
+	}
 
-            canvasGroup.blocksRaycasts = false;
-
-            StartCoroutine(LerpToMouse());
-        }
-    }
-
-    public virtual void OnDrag(PointerEventData eventData)
+	public virtual void OnDrag(PointerEventData eventData)
     {
         if(eventData.button == PointerEventData.InputButton.Left)
         {
@@ -100,7 +141,6 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         {
 			if (lerpToMouse)
 			{
-                Debug.Log("p-up");
 				lerpToMouse = false;
 				StopCoroutine(LerpToMouse());
 			}

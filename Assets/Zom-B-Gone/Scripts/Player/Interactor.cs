@@ -30,9 +30,9 @@ public class Interactor : MonoBehaviour
     //private Camera gameCamera;
 
     // when a container is interacted with, it will use this to track the distance, and close the container when you get out of interact range
-    private GameObject interactedContainer;
-    private GameObject interactedCrafting;
-    private Lootable openedLootable;
+    [HideInInspector] public static GameObject interactedContainer;
+	[HideInInspector] public static GameObject interactedCrafting;
+	[HideInInspector] public static Lootable openedLootable;
 
     private SpriteRenderer interactableSpriteRenderer;
     private IInteractable availableInteractable;
