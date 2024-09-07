@@ -15,6 +15,8 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     private CanvasGroup canvasGroup = null;
     private Transform originalParent = null;
     private bool isHovering = false;
+    private bool lerpToMouse = false;
+    private float lerpSpeed = 12f;
 
     public SlotUI GetSlotUI => slotUI;
 
@@ -23,7 +25,23 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    private void OnDisable()
+	private void Update()
+	{
+		
+	}
+
+    private IEnumerator LerpToMouse()
+    {
+        lerpToMouse = true;
+        while(lerpToMouse)
+        {
+            transform.position = Vector3.Lerp(transform.position, Input.mousePosition, lerpSpeed * Time.deltaTime);
+            yield return null;
+        }
+        lerpToMouse = false;
+    }
+
+	private void OnDisable()
     {
         if(isHovering)
         {
@@ -57,6 +75,8 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
             transform.SetParent(newParent);
 
             canvasGroup.blocksRaycasts = false;
+
+            StartCoroutine(LerpToMouse());
         }
     }
 
@@ -64,6 +84,12 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         if(eventData.button == PointerEventData.InputButton.Left)
         {
+            if (lerpToMouse)
+            {
+                lerpToMouse = false;
+                StopCoroutine(LerpToMouse());
+            }
+
             transform.position = Input.mousePosition;
         }
     }
@@ -72,7 +98,14 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         if(eventData.button == PointerEventData.InputButton.Left)
         {
-            sendBackToSlot();
+			if (lerpToMouse)
+			{
+                Debug.Log("p-up");
+				lerpToMouse = false;
+				StopCoroutine(LerpToMouse());
+			}
+
+			sendBackToSlot();
         }
     }
 
