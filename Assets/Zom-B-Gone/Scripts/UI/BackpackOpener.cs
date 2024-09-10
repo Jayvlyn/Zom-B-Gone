@@ -6,6 +6,7 @@ using UnityEngine;
 public class BackpackOpener : MonoBehaviour
 {
     [SerializeField] RectTransform targetRect;
+    [SerializeField] RectTransform heightRef;
 
     private bool backpackOpened = true; // set to false when done, should start closed
 
@@ -28,14 +29,14 @@ public class BackpackOpener : MonoBehaviour
             targetRect.position = oldWorldPos;
 
             // lerp Pos Y to 0
-            StartCoroutine(SlideDown(1));
+            StartCoroutine(SlideDown(.5f));
         }
         else
         { // SLIDE OPEN
             backpackOpened = true;
 
             // lerp Pos Y to height + 40
-            StartCoroutine(SlideUp(1));
+            StartCoroutine(SlideUp(.5f));
 
         }
     }
@@ -59,9 +60,10 @@ public class BackpackOpener : MonoBehaviour
 
     public IEnumerator SlideUp(float duration)
     {
+        targetRect.sizeDelta = new Vector2(targetRect.sizeDelta.x, heightRef.rect.height);
         float height = targetRect.rect.height;
         Vector3 startPosition = targetRect.position;
-        Vector3 endPosition = new Vector3(startPosition.x, height, startPosition.z);
+        Vector3 endPosition = new Vector3(startPosition.x, height * .7f, startPosition.z);
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
@@ -70,20 +72,14 @@ public class BackpackOpener : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // Ensure the final position is set exactly to avoid any rounding issues
-        //targetRect.position = endPosition;
+        targetRect.position = endPosition; // ensure no rounding issue
 
 
-        //Vector3 oldWorldPos = targetRect.position;
-        //Vector2 oldSizeDelta = targetRect.sizeDelta;
+        // set anchor max y back to 1
+        targetRect.anchorMax = new Vector2(targetRect.anchorMax.x, 1);
 
-        //// set anchor max y back to 1
-        //targetRect.anchorMax = new Vector2(targetRect.anchorMax.x, 1);
-
-        //// apply preserved transforms to persist position and height
-        //targetRect.sizeDelta = new Vector2(oldSizeDelta.x, height);
-        //targetRect.position = oldWorldPos;
+        targetRect.sizeDelta = heightRef.sizeDelta;
+        targetRect.position = heightRef.position;
     }
 
     //public IEnumerator SlideDownBad()

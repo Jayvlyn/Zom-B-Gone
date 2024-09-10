@@ -17,16 +17,15 @@ public class ContainerSlotInitializer : MonoBehaviour
 	private void Awake()
 	{
 		backgroundRect = transform.parent.GetComponent<RectTransform>();
-        //backgroundRect.offsetMin = new Vector2(backgroundRect.offsetMin.x, backgroundStartingBottom);
-        //backgroundRect.offsetMax = new Vector2(backgroundRect.offsetMax.x, backgroundStartingBottom);
-        backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundStartingBottom);
-
 		int rowCount = containerData.size / rowSize;
-        for (int i = 1; i < rowCount; i++)
-        {
-            backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundRect.sizeDelta.y + rowBackgroundIncrement);
-            //backgroundRect.offsetMin = new Vector2(backgroundRect.offsetMin.x, backgroundRect.offsetMin.y - rowBackgroundIncrement);
-        }
+
+        backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundStartingBottom + rowBackgroundIncrement * (rowCount-1));
+
+        //for (int i = 1; i < rowCount; i++)
+        //{
+        //    backgroundRect.sizeDelta = new Vector2(backgroundRect.sizeDelta.x, backgroundRect.sizeDelta.y + rowBackgroundIncrement);
+        //    //backgroundRect.offsetMin = new Vector2(backgroundRect.offsetMin.x, backgroundRect.offsetMin.y - rowBackgroundIncrement);
+        //}
     }
 
 	void Start()
