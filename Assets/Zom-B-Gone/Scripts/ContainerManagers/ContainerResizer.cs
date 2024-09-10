@@ -43,7 +43,7 @@ public class ContainerResizer : MonoBehaviour
 			int secondLastRowEndSlotIndex = lastSlotIndex - rowSize;
 			int emptySlots = 0;
 
-			for (int i = secondLastRowEndSlotIndex; i > 0; i--)
+			for (int i = secondLastRowEndSlotIndex; i >= 0; i--)
 			{
                 if (containerData.Container.collectibleSlots[i].collectible == null)
                 {
