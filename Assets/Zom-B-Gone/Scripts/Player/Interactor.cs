@@ -252,7 +252,11 @@ public class Interactor : MonoBehaviour
             {
                 if (interactedContainer != null)
                 {
-                    CloseOpenedContainer();
+                    Lootable l;
+                    if(!interactedContainer.TryGetComponent<Lootable>(out l)) // dont close other container if it is lootable, lootable slider handles this
+                    {
+                        CloseOpenedContainer();
+                    }
                 }
 
                 if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
