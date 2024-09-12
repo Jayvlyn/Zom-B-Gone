@@ -2,7 +2,7 @@ using GameEvents;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer)), RequireComponent(typeof(BoxCollider2D))]
-public class CraftingTable : MonoBehaviour, IInteractable
+public class Workbench : MonoBehaviour, IInteractable
 {
     [SerializeField] private CollectibleContainerData craftingTableOutput;
     [SerializeField] private CollectibleContainerData craftingTableInput;

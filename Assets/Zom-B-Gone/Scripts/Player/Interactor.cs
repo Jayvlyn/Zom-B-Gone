@@ -263,7 +263,7 @@ public class Interactor : MonoBehaviour
                 AvailableInteractable.Interact(rightHand);
             }
 
-            else if (AvailableInteractable is CraftingTable)
+            else if (AvailableInteractable is Workbench)
             {
                 if (interactedCrafting != null)
                 {

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdd6978c264dd05418033ad901ef5d2c, type: 3}
-  m_Name: Container_CraftingTableOutput
+  m_Name: Container_WorkbenchOutput
   m_EditorClassIdentifier: 
   containerType: 5
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 55ea1c5b0540ed841ac1ebab90be5010, type: 2}
