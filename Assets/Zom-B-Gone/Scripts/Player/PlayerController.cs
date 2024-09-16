@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        //Cursor.visible = false;
         // Find references
         gameCamera = FindObjectOfType<Camera>();
         interactor = GetComponent<Interactor>();
