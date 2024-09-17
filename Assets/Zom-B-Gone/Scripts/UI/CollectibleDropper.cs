@@ -59,7 +59,7 @@ public class CollectibleDropper : MonoBehaviour
                 if (droppedCollectibleData as HatData)
                 {
                     Hat hat = collectibleObject.GetComponent<Hat>();
-					hat.StartTransferPosition(dropPos, hat.transform.rotation);
+					hat.StartCoroutine(hat.TransferPosition(dropPos, hat.transform.rotation));
 				}
 				else if (droppedCollectibleData as LootData)
 				{
@@ -69,7 +69,7 @@ public class CollectibleDropper : MonoBehaviour
                     int slotIndex = this.transform.GetSiblingIndex();
                     loot.lootCount = quantity;
 
-					loot.StartTransferPosition(dropPos, loot.transform.rotation);
+					loot.StartCoroutine(loot.TransferPosition(dropPos, loot.transform.rotation));
 				}
 				else if (droppedCollectibleData as ItemData)
 				{

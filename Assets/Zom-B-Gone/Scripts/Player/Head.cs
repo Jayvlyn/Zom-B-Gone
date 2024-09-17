@@ -7,7 +7,7 @@ public class Head : MonoBehaviour
     public CollectibleContainerData headContainerData;
 
     public Transform hatTransform;
-    //[HideInInspector] 
+    public SpriteRenderer hairRenderer;
     [HideInInspector] public Hat wornHat;
 
     [HideInInspector] public GameObject lastHatObject;
@@ -28,6 +28,7 @@ public class Head : MonoBehaviour
             {
                 // Hat can only be removed by dragging off, which will handle setting the slot to null and quantity 0
                 wornHat = null;
+                hairRenderer.enabled = true;
 			}
 			headContainerData.onContainerCollectibleUpdated.Raise();
         }

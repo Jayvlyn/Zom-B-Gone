@@ -302,7 +302,8 @@ public class Interactor : MonoBehaviour
                     head.HatObject.transform.parent = null;
                     head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "GroundedHat";
                     head.HatObject.gameObject.layer = LayerMask.NameToLayer("Interactable");
-                    head.HatObject.GetComponent<Hat>().StartTransferPosition(newHat.transform.position, newHat.transform.localRotation);
+                    Hat h = head.HatObject.GetComponent<Hat>();
+                    h.StartCoroutine(h.TransferPosition(newHat.transform.position, newHat.transform.localRotation));
                     //head.hatObject.transform.position = newHat.transform.position;
                 }
                 // Wear new hat

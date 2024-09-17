@@ -6,7 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Hat", menuName = "Collectibles/New Hat")]
 public class HatData : CollectibleData
 {
-	[Header("Bufss / Effects")]
+	[Header("Visual")]
+	public bool showHair = true;
+	[Header("Buffs / Effects")]
 	public float swingTimeMultiplier = 1;
 	public float damageMultiplier = 1;
 	public float damageIncrease = 0;

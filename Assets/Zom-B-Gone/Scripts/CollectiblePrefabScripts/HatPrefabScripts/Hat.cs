@@ -7,33 +7,14 @@ public class Hat : MonoBehaviour, IInteractable
 {
     [SerializeField] public HatData hatData;
     protected Head head;
-    private bool transferring = false;
-
-    private Transform transferTarget;
-    private Vector3 transferPos;
-    private Quaternion transferRot;
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private float transferSpeed = 8.0f;
+    private float transferTime = .2f;
 
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = hatData.icon;
 	}
-
-	void Update()
-    {
-        if(transferring)
-        {
-            if(transferTarget == null)
-            {
-                TransferPosition(transferPos, transferRot);
-            }
-            else
-            {
-                TransferPosition(transferTarget.position, transferTarget.localRotation);
-            }
-        }
-    }
 
     public void Interact(Head head)
     {
@@ -42,34 +23,44 @@ public class Hat : MonoBehaviour, IInteractable
 		gameObject.transform.parent = head.gameObject.transform;
 		this.head = head;
         gameObject.layer = LayerMask.NameToLayer("WornHat");
-        StartTransferPosition(head.hatTransform);
+        StartCoroutine(TransferPosition(head.hatTransform));
     }
 
-    public void StartTransferPosition(Transform target)
+	public IEnumerator TransferPosition(Vector3 position, Quaternion rotation)
     {
-        transferTarget = target;
-        transferring = true;
-    }
+        float elapsedTime = 0f;
+        Vector3 startPosition = transform.position;
+        Quaternion startRotation = transform.rotation;
 
-    public void StartTransferPosition(Vector3 position, Quaternion rotation)
-    {
-        transferTarget = null;
-        transferRot = rotation;
-        transferPos = position;
-        transferring = true;
-    }
-
-	private void TransferPosition(Vector3 position, Quaternion rotation)
-    {
-        transform.position = Vector3.Lerp(transform.position, position, transferSpeed * Time.deltaTime);
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, rotation, transferSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, position) < 0.005f)
+        while (elapsedTime < transferTime)
         {
-            transferring = false;
-            transform.position = position;
-            transform.localRotation = rotation;
+            transform.position = Vector3.Lerp(startPosition, position, elapsedTime / transferTime);
+            transform.rotation = Quaternion.Lerp(startRotation, rotation, elapsedTime / transferTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
+        transform.position = position;
+        transform.rotation = rotation;
+    }
+
+    public IEnumerator TransferPosition(Transform target)
+    {
+        float elapsedTime = 0f;
+        Vector3 startPosition = transform.position;
+        Quaternion startRotation = transform.rotation;
+
+        while (elapsedTime < transferTime)
+        {
+            transform.position = Vector3.Lerp(startPosition, target.position, elapsedTime / transferTime);
+            transform.rotation = Quaternion.Lerp(startRotation, target.rotation, elapsedTime / transferTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = target.position;
+        transform.rotation = target.rotation;
+        head.hairRenderer.enabled = hatData.showHair;
     }
 
     public void DropHat()
@@ -85,8 +76,7 @@ public class Hat : MonoBehaviour, IInteractable
             if(Utils.WallInFront(head.gameObject.transform)) dropPos = head.gameObject.transform.position - head.gameObject.transform.up;
             else dropPos = head.gameObject.transform.position + head.gameObject.transform.up;
 
-            StartTransferPosition(dropPos, transform.rotation);
-			//head.gameObject.transform.forward
+            StartCoroutine(TransferPosition(dropPos, transform.rotation));
 		}
     }
 
