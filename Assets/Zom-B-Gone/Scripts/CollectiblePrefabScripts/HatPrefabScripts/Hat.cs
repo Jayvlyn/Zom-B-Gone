@@ -6,14 +6,15 @@ using UnityEngine;
 public class Hat : MonoBehaviour, IInteractable
 {
     [SerializeField] public HatData hatData;
-    protected Head head;
+    [HideInInspector] public Head head;
     private SpriteRenderer spriteRenderer;
     private float transferTime = .2f;
+    public bool useDataIcon = true;
 
-	private void Awake()
+    private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = hatData.icon;
+        if (useDataIcon) spriteRenderer.sprite = hatData.icon;
 	}
 
     public void Interact(Head head)
@@ -77,6 +78,8 @@ public class Hat : MonoBehaviour, IInteractable
             else dropPos = head.gameObject.transform.position + head.gameObject.transform.up;
 
             StartCoroutine(TransferPosition(dropPos, transform.rotation));
+
+            head = null;
 		}
     }
 
