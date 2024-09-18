@@ -15,8 +15,9 @@ MonoBehaviour:
   name: Top Hat
   description: Very dapper!
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5e07e271138a6fa4a91da4698c58791d, type: 3}
   maxStack: 1
+  showHair: 1
   swingTimeMultiplier: 1
   damageMultiplier: 1
   damageIncrease: 0

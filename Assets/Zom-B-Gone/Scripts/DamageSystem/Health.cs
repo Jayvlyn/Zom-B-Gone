@@ -55,32 +55,32 @@ public class Health : MonoBehaviour
         }
     }
 
+  
     private Enemy enemyOwner;
-    public void TakeDamage(int damage, float dismemeberChance = 0, float knockback = 1)
+    public void TakeDamage(float damage, float dismemeberChance = 0, float knockback = 1, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default)
     {
-        CurrentHealth = CurrentHealth - damage;
-        if(gameObject.CompareTag("Enemy"))
-        {
-            if(enemyOwner != null) enemyOwner.OnHit(damage, dismemeberChance);
-            else if(gameObject.TryGetComponent(out Enemy enemy))
-            {
-                enemyOwner = enemy;
-                enemyOwner.OnHit(damage, dismemeberChance);
-            }
-            
-        }
-    }
-
-    public void TakeDamage(float damage, float dismemeberChance = 0, float knockback = 1)
-    {
-        float incomingDamage = damage;
+        int incomingDamage = Mathf.RoundToInt(damage);
         #region hat buff
         if (gameObject.CompareTag("Player") && gameObject.TryGetComponent(out Head head) && head.wornHat != null)
         {
             incomingDamage -= head.wornHat.hatData.defense;
         }
         #endregion
-        TakeDamage(Mathf.RoundToInt(incomingDamage), dismemeberChance, knockback);
+
+        CurrentHealth = CurrentHealth - incomingDamage;
+
+        if (gameObject.CompareTag("Enemy"))
+        {
+            if (enemyOwner != null) enemyOwner.OnHit(incomingDamage, dismemeberChance);
+            else if (gameObject.TryGetComponent(out Enemy enemy))
+            {
+                enemyOwner = enemy;
+                enemyOwner.OnHit(incomingDamage, dismemeberChance);
+            }
+
+        }
+
+        DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate);
     }
 
     public void OnDeath()

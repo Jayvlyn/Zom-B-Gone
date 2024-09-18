@@ -13,7 +13,7 @@ public class HatData : CollectibleData
 	public float damageMultiplier = 1;
 	public float damageIncrease = 0;
 	public float moveSpeedMod = 1;
-	public float defense = 0;
+	public int defense = 0;
 
 
 	public override string GetInfoDisplayText()

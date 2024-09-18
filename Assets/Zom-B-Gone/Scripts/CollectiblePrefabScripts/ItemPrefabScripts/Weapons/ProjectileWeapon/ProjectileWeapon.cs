@@ -91,6 +91,7 @@ public class ProjectileWeapon : Weapon
         if(parent.gameObject.TryGetComponent(out PlayerController pc)) playerController = pc;
         base.PickUp(parent, rightHand);
         CurrentAmmo = CurrentAmmo; // update count text
+        shotTimer = 0.2f;
     }
 
     public void Fire()

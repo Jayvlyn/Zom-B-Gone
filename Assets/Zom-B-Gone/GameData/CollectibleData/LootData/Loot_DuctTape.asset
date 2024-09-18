@@ -15,5 +15,5 @@ MonoBehaviour:
   name: Duct Tape
   description: Fix anything, make anything. I love this stuff.
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2e81a90af8e512441883e82014a29225, type: 3}
   maxStack: 8

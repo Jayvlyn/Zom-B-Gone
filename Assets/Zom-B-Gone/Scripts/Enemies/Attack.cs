@@ -6,6 +6,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [SerializeField] private int damage;
+    [SerializeField] private int knockback = 1;
     [NonSerialized] public float damageMultiplier = 1; // set by attacker, do not alter in this script
     private bool doDamage = false;
 
@@ -13,15 +14,13 @@ public class Attack : MonoBehaviour
     {
         if(doDamage && collision.TryGetComponent(out Health collisionHealth))
         {
-            collisionHealth.TakeDamage(damage * damageMultiplier);
             doDamage = false;
 
-            Vector3 hitTargetPosition = collisionHealth.transform.position;
-            Vector3 popupVector = (hitTargetPosition - transform.position).normalized * 20f;
-
+            Vector3 popupVector = (collisionHealth.transform.position - transform.position).normalized * 20f;
             bool invertRotate = popupVector.x < 0;
 
-            DamagePopup.Create(hitTargetPosition, damage, popupVector, false, invertRotate, true);
+            collisionHealth.TakeDamage(damage * damageMultiplier, 0, knockback, false, popupVector, invertRotate);
+
         }
     }
 

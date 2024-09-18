@@ -31,19 +31,14 @@ public abstract class Weapon : Item
         }
         #endregion
 
-        targetHealth.TakeDamage(damage, weaponData.dismemberChance);
-
-        Vector3 hitTargetPosition = targetHealth.transform.position;
-        Vector3 popupVector = (hitTargetPosition - playerHead.transform.position).normalized * 20f;
-
+        Vector3 popupVector = (targetHealth.transform.position - playerHead.transform.position).normalized * 20f;
         bool invertRotate = popupVector.x < 0; // invert when enemy is on left of player
 
-        DamagePopup.Create(hitTargetPosition, damage, popupVector, false, invertRotate);
-
+        targetHealth.TakeDamage(damage, weaponData.dismemberChance, 1, false, popupVector, invertRotate);
     }
 
     public void TryDealKnockback(Health targetHealth)
     {
-        if (targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * weaponData.knockbackPower, ForceMode2D.Impulse);
+        if (targetHealth && targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * weaponData.knockbackPower, ForceMode2D.Impulse);
     }
 }

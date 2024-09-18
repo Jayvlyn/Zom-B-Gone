@@ -311,16 +311,11 @@ public abstract class Item : MonoBehaviour, IInteractable
         {
             int damage = Mathf.RoundToInt(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * (rb.velocity.magnitude / 2));
 
-            // apply damage
-            collisionHealth.TakeDamage(damage);
 
-            // show damage number
-            Vector3 hitTargetPosition = collisionHealth.transform.position;
-            Vector3 popupVector = (hitTargetPosition - playerHead.transform.position).normalized * 20f;
-
+            Vector3 popupVector = (collisionHealth.transform.position - playerHead.transform.position).normalized * 20f;
             bool invertRotate = popupVector.x < 0; // invert when enemy is on left of player
 
-            DamagePopup.Create(hitTargetPosition, damage, popupVector, false, invertRotate);
+            collisionHealth.TakeDamage(damage, 0, 1, false, popupVector, invertRotate);
 
             // do knockback if there is rigidbody
             if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))

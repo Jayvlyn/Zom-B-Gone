@@ -57,30 +57,31 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
             onMouseEndHoverCollectible.Raise();
 
 
-            if(PlayerController.holdingSneak)
+            //if (PlayerController.holdingSneak)
+            if(false)
             { // auto swap to other open container.
 
                 // find what container this is, and what would make the most sense to move into;
                 CollectibleContainerSlot thisSlot = transform.parent.GetComponent<CollectibleContainerSlot>();
                 CollectibleContainerData thisContainer = thisSlot.containerData;
-				switch (thisContainer.containerType)
-				{
-					case ContainerType.HANDS:
-						break;
-					case ContainerType.LOOTABLE:
-						break;
-					case ContainerType.HEAD:
-						break;
-					case ContainerType.LOCKER:
-						break;
-					case ContainerType.BACKPACK:
-						break;
-					case ContainerType.CRAFTINGTABLE:
-						break;
-				}
+                switch (thisContainer.containerType)
+                {
+                    case ContainerType.HANDS:
+                        break;
+                    case ContainerType.LOOTABLE:
+                        break;
+                    case ContainerType.HEAD:
+                        break;
+                    case ContainerType.LOCKER:
+                        break;
+                    case ContainerType.BACKPACK:
+                        break;
+                    case ContainerType.CRAFTINGTABLE:
+                        break;
+                }
 
-				CollectibleData collectible = thisSlot.CollectibleSlot.collectible;
-                if(collectible as ItemData)
+                CollectibleData collectible = thisSlot.CollectibleSlot.collectible;
+                if (collectible as ItemData)
                 {
 
                 }
@@ -92,8 +93,8 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
                 {
 
                 }
-			}
-			else // click and start dragging
+            }
+            else // click and start dragging
             {
                 originalParent = transform.parent;
 

@@ -15,5 +15,5 @@ MonoBehaviour:
   name: Screws
   description: These are great for jank weapon fusions.
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 60dc980b916ee564996554b15cae46fa, type: 3}
   maxStack: 64
