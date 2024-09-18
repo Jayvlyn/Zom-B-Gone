@@ -299,14 +299,20 @@ public class Interactor : MonoBehaviour
 
                 if (head.HatObject != null)
                 { // Remove current hat
-                    Hat h = head.HatObject.GetComponent<Hat>();
+                    Hat h = head.wornHat;
                     head.hairRenderer.enabled = true;
                     head.HatObject.transform.parent = null;
                     head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "GroundedHat";
                     head.HatObject.gameObject.layer = LayerMask.NameToLayer("Interactable");
+                    if (head.HatObject.transform.childCount > 0)
+                    {
+                        SpriteRenderer[] childRenderers = head.HatObject.GetComponentsInChildren<SpriteRenderer>();
+                        foreach (SpriteRenderer childRenderer in childRenderers) childRenderer.sortingLayerName = "GroundedHat";
+                    }
                     h.StartCoroutine(h.TransferPosition(newHat.transform.position, newHat.transform.rotation));
                     h.head = null;
-                    //h.DropHat(newHat.transform.position, newHat.transform.localRotation);
+
+                    //h.DropHat(newHat.transform.position); makes duplicate on head for no reason
 
                 }
                 // Wear new hat

@@ -20,10 +20,18 @@ public class Hat : MonoBehaviour, IInteractable
     public void Interact(Head head)
     {
 		head.HatObject = gameObject;
-        spriteRenderer.sortingLayerName = "WornHat";
 		gameObject.transform.parent = head.gameObject.transform;
 		this.head = head;
         gameObject.layer = LayerMask.NameToLayer("WornHat");
+
+        spriteRenderer.sortingLayerName = "WornHat";
+
+        if (transform.childCount > 0)
+        {
+            SpriteRenderer[] childRenderers = GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer childRenderer in childRenderers) childRenderer.sortingLayerName = "WornHat";
+        }
+
         StartCoroutine(TransferPosition(head.hatTransform));
     }
 
@@ -64,7 +72,7 @@ public class Hat : MonoBehaviour, IInteractable
         head.hairRenderer.enabled = hatData.showHair;
     }
 
-    public void DropHat()
+    public void DropHat(Vector2? inputDropPosition = null)
     {
         if (head != null)
         {
@@ -73,9 +81,23 @@ public class Hat : MonoBehaviour, IInteractable
 			gameObject.layer = LayerMask.NameToLayer("Interactable");
 			spriteRenderer.sortingLayerName = "GroundedHat";
 
+            if(transform.childCount > 0)
+            {
+                SpriteRenderer[] childRenderers = GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer childRenderer in childRenderers) childRenderer.sortingLayerName = "GroundedHat";
+            }
+
             Vector2 dropPos;
-            if(Utils.WallInFront(head.gameObject.transform)) dropPos = head.gameObject.transform.position - head.gameObject.transform.up;
-            else dropPos = head.gameObject.transform.position + head.gameObject.transform.up;
+
+            if(inputDropPosition == null)
+            {
+                if(Utils.WallInFront(head.gameObject.transform)) dropPos = head.gameObject.transform.position - head.gameObject.transform.up;
+                else dropPos = head.gameObject.transform.position + head.gameObject.transform.up;
+            }
+            else
+            {
+                dropPos = (Vector2)inputDropPosition;
+            }
 
             StartCoroutine(TransferPosition(dropPos, transform.rotation));
 
