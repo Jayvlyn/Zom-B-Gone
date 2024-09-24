@@ -7,20 +7,22 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private enum State
+    public enum PlayerState
     {
-        IDLE, WALKING, RUNNING, SNEAKING
+        IDLE, WALKING, RUNNING, SNEAKING, DRIVING
     }
-    private State currentState;
+    public PlayerState currentState;
 
     [Header("References")]
     public PlayerData playerData;
     public Hands hands;
     public Head head;
     public Rigidbody2D rb;
+    public PlayerInput input;
     private Slider staminaSlider;
     private Camera gameCamera;
     private Interactor interactor;
+    
 
     [HideInInspector] public static bool holdingRun;
     [HideInInspector] public static bool holdingSneak;
@@ -53,13 +55,13 @@ public class PlayerController : MonoBehaviour
     {
         UpdateStaminaBar();
 
-        if (currentState == State.RUNNING) 
+        if (currentState == PlayerState.RUNNING) 
         {
             currentStamina -= Time.deltaTime;
             if (currentStamina <= 0)
             {
                 currentStamina = 0;
-                ChangeState(State.WALKING);
+                ChangeState(PlayerState.WALKING);
                 RecoverStamina();
             }
         }
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         SetPlayerVelocity();
-        RotateToMouse();
+        if(currentState != PlayerState.DRIVING) RotateToMouse();
     }
 
     private void UpdateStaminaBar()
@@ -127,14 +129,14 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         movementInput = inputValue.Get<Vector2>();
-        if(currentState != State.SNEAKING)
+        if(currentState != PlayerState.SNEAKING)
         {
-            if(movementInput != Vector2.zero && currentState == State.IDLE) 
+            if(movementInput != Vector2.zero && currentState == PlayerState.IDLE) 
             {
-                if (holdingRun) ChangeState(State.RUNNING);
-                else ChangeState(State.WALKING);
+                if (holdingRun) ChangeState(PlayerState.RUNNING);
+                else ChangeState(PlayerState.WALKING);
             }
-            else if(movementInput == Vector2.zero) { ChangeState(State.IDLE); }
+            else if(movementInput == Vector2.zero) { ChangeState(PlayerState.IDLE); }
         }
     }
 
@@ -257,7 +259,7 @@ public class PlayerController : MonoBehaviour
 
             if(rb.velocity.magnitude > 0 && movementInput != Vector2.zero && currentStamina > 0)
             {
-                ChangeState(State.RUNNING);
+                ChangeState(PlayerState.RUNNING);
             }
         }
 
@@ -266,10 +268,10 @@ public class PlayerController : MonoBehaviour
             
             holdingRun = false;
 
-            if(currentState == State.RUNNING) // Letting go of run key only matters if running
+            if(currentState == PlayerState.RUNNING) // Letting go of run key only matters if running
             {
-                if (movementInput != Vector2.zero) { ChangeState(State.WALKING); }
-                else { ChangeState(State.IDLE); }
+                if (movementInput != Vector2.zero) { ChangeState(PlayerState.WALKING); }
+                else { ChangeState(PlayerState.IDLE); }
             }
         }
     }
@@ -281,18 +283,18 @@ public class PlayerController : MonoBehaviour
 
         if (sneakPressed) // Sneak Key Pressed
         {
-            ChangeState(State.SNEAKING);
+            ChangeState(PlayerState.SNEAKING);
             holdingSneak = true;
         }
 
         else // Sneak Key Released
         {
             holdingSneak = false;
-            if(currentState == State.SNEAKING) // Letting go of sneak key only matters if sneaking
+            if(currentState == PlayerState.SNEAKING) // Letting go of sneak key only matters if sneaking
             {
-                if (holdingRun) { ChangeState(State.RUNNING);}
-                else if (smoothedMovementInput != Vector2.zero) { ChangeState(State.WALKING); }
-                else { ChangeState(State.IDLE); }
+                if (holdingRun) { ChangeState(PlayerState.RUNNING);}
+                else if (smoothedMovementInput != Vector2.zero) { ChangeState(PlayerState.WALKING); }
+                else { ChangeState(PlayerState.IDLE); }
             }
         }
     }
@@ -328,27 +330,34 @@ public class PlayerController : MonoBehaviour
         head.wornHat.DropHat();
     }
 
-    private void ChangeState(State newState)
+    public void ChangeState(PlayerState newState)
     {
 		if (currentState == newState) return;
 
 		switch (newState)
         {
-            case State.WALKING:
+            case PlayerState.WALKING:
                 if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = playerData.walkSpeed;
                 break;
-            case State.RUNNING:
+            case PlayerState.RUNNING:
                 currentMoveSpeed = playerData.runSpeed;
                 recoverStamina = false;
                 break;
-            case State.SNEAKING:
+            case PlayerState.SNEAKING:
                 if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = playerData.sneakSpeed;
                 break;
-            default: // IDLE:
+            case PlayerState.IDLE:
                 if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = playerData.walkSpeed; 
+                currentMoveSpeed = playerData.walkSpeed;
+                if(input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
+                if(rb.bodyType != RigidbodyType2D.Dynamic) rb.bodyType = RigidbodyType2D.Dynamic;
+                break;
+            case PlayerState.DRIVING:
+                if (!recoverStamina) RecoverStamina();
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                input.SwitchCurrentActionMap("Vehicle");
                 break;
         }
 

@@ -143,6 +143,7 @@ MonoBehaviour:
   hands: {fileID: 1034459641233780573}
   head: {fileID: 2538085723734079734}
   rb: {fileID: 369753046641428115}
+  input: {fileID: 8105131813210140982}
   currentStamina: 0
   recoverStamina: 0
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
@@ -351,7 +352,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1074ef9a6659406408f5c2583c6d7f76, type: 2}
   playerController: {fileID: 8105131813210140980}
   vehicleDriver: {fileID: 1215756169858613352}
-  playerInput: {fileID: 8105131813210140982}
   playerCollider: {fileID: 4474808106738882516}
   playerSprite: {fileID: 8105131813210140983}
 --- !u!50 &369753046641428115
@@ -499,4 +499,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicle: {fileID: 0}
-  enterExitSpeed: 1
+  enterExitSpeed: 0.4

@@ -2,38 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vehicle : MonoBehaviour, IInteractable
+public abstract class Vehicle : MonoBehaviour, IInteractable
 {
-    [SerializeField] private float accelerationSpeed;
-    [SerializeField] private float brakeSpeed;
-    [SerializeField] private float steeringSpeed;
-    [SerializeField] private float maxTurnAngle = 45;
-
+    [SerializeField] protected float accelerationSpeed;
+    [SerializeField] protected float brakeSpeed;
+    [SerializeField] protected float steeringSpeed;
+    [SerializeField] protected float maxTurnAngle = 45;
+    public float exitDistance = 3;
 
     public Transform driveSeat;
+    public Rigidbody2D rb;
+    public SpriteRenderer litHeadlights;
 
-    private float currentTurnAngle = 0;
+    protected float currentTurnAngle = 0;
 
-    private bool active = false;
-
-    public void Accelerate()
+    protected bool active = false;
+    public bool Active
     {
-
+        get { return active; }
+        set
+        {
+            active = value;
+            litHeadlights.enabled = value;
+        }
     }
 
-    public void Steer(float steerDirection)
+    abstract public void Accelerate();
+
+    abstract public void Steer(float steerDirection);
+
+    abstract public void Brake();
+
+    public virtual void CorrectSteering()
     {
-
-    }
-
-    public void Brake()
-    {
-
+        if (currentTurnAngle > 0)
+        {
+            currentTurnAngle -= Time.deltaTime * steeringSpeed;
+            if (currentTurnAngle < 0) currentTurnAngle = 0;
+        }
+        else
+        {
+            currentTurnAngle += Time.deltaTime * steeringSpeed;
+            if (currentTurnAngle > 0) currentTurnAngle = 0;
+        }
     }
 
     public void Interact(Head head)
     {
-        active = true;
+        Active = true;
+    }
+
+    public void OnExit()
+    {
+        Active = false;
     }
 
     public void Interact(bool rightHand)

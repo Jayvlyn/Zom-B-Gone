@@ -147,7 +147,6 @@ MonoBehaviour:
   itemData: {fileID: 0}
   pivotPoint: {fileID: 0}
   fullCollider: {fileID: 0}
-  itemRenderer: {fileID: 0}
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -207,7 +206,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -18
+  m_SortingLayer: -20
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 051338796bf533c42a5c82ab3515045c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

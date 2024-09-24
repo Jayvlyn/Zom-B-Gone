@@ -53,7 +53,6 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 33dbac28ed08d424d9ef06917a075fb0, type: 2}
   pivotPoint: {fileID: 7922860649099438781}
   fullCollider: {fileID: 2208294227549419385}
-  itemRenderer: {fileID: 0}
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -242,7 +241,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -18
+  m_SortingLayer: -20
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aea98899c71c7e146bdb8bef384c1a2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

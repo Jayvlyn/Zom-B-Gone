@@ -28,7 +28,6 @@ public class Interactor : MonoBehaviour
 
     [SerializeField] private PlayerController playerController;
     [SerializeField] private VehicleDriver vehicleDriver;
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private SpriteRenderer playerSprite;
 
@@ -69,23 +68,25 @@ public class Interactor : MonoBehaviour
         //if(!hands.UsingLeft || !hands.UsingRight)
         //{ // at least one hand available for interact, do scan
 
-
-        if (scanTimer <= 0)
+        if(playerController.currentState != PlayerController.PlayerState.DRIVING)
         {
-            scanTimer = scanInterval;
-
-            IInteractable selectedInteractable = InteractableScan();
-
-            if(selectedInteractable != null)
+            if (scanTimer <= 0)
             {
-                AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
-            }
-            else if (AvailableInteractable != null) AvailableInteractable = null;
+                scanTimer = scanInterval;
+
+                IInteractable selectedInteractable = InteractableScan();
+
+                if(selectedInteractable != null)
+                {
+                    AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
+                }
+                else if (AvailableInteractable != null) AvailableInteractable = null;
             
-        }
-        else
-        {
-            scanTimer -= Time.deltaTime;
+            }
+            else
+            {
+                scanTimer -= Time.deltaTime;
+            }
         }
 
 
@@ -326,14 +327,9 @@ public class Interactor : MonoBehaviour
             // INTERACT WITH VEHICLE
             else if (AvailableInteractable is Vehicle v)
             {
-                playerCollider.isTrigger = true;
-                if(playerController.hands.LeftObject) playerController.hands.LeftObject.SetActive(false);
-                if(playerController.hands.RightObject) playerController.hands.RightObject.SetActive(false);
-
                 vehicleDriver.vehicle = v;
-                StartCoroutine(vehicleDriver.TransferPosition(v.driveSeat.position, v.transform.rotation));
+                vehicleDriver.Enter(playerCollider, playerController);
                 AvailableInteractable.Interact(playerController.head);
-                playerInput.SwitchCurrentActionMap("Vehicle");
             }
 
             AvailableInteractable = null;
