@@ -1,6 +1,7 @@
 using GameEvents;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public interface IInteractable
 {
@@ -25,9 +26,11 @@ public class Interactor : MonoBehaviour
 
     [SerializeField] VoidEvent[] closeContainerEvents;
 
-    private Hands hands;
-    private Head head;
-    //private Camera gameCamera;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private VehicleDriver vehicleDriver;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private Collider2D playerCollider;
+    [SerializeField] private SpriteRenderer playerSprite;
 
     // when a container is interacted with, it will use this to track the distance, and close the container when you get out of interact range
     [HideInInspector] public static GameObject interactedContainer;
@@ -59,13 +62,6 @@ public class Interactor : MonoBehaviour
                 interactableSpriteRenderer.material = outlineSpriteMaterial;
             }
         }
-    }
-
-    private void Awake()
-    {
-        //gameCamera = FindObjectOfType<Camera>();
-        hands = GetComponent<Hands>();
-        head = GetComponent<Head>();
     }
 
     private void Update()
@@ -240,7 +236,7 @@ public class Interactor : MonoBehaviour
             }
         }
 
-        if (!hands.UsingLeft || !hands.UsingRight) return closestInteractable;
+        if (!playerController.hands.UsingLeft || !playerController.hands.UsingRight) return closestInteractable;
         else return null;
     }
 
@@ -253,7 +249,7 @@ public class Interactor : MonoBehaviour
                 if (interactedContainer != null)
                 {
                     Lootable l;
-                    if(!interactedContainer.TryGetComponent<Lootable>(out l)) // dont close other container if it is lootable, lootable slider handles this
+                    if(!interactedContainer.TryGetComponent(out l)) // dont close other container if it is lootable, lootable slider handles this
                     {
                         CloseOpenedContainer();
                     }
@@ -281,13 +277,13 @@ public class Interactor : MonoBehaviour
 
                 if (rightHand)
                 {
-                    hands.RightObject = ((Component)AvailableInteractable).gameObject; 
-                    hands.UsingRight = true;
+                    playerController.hands.RightObject = ((Component)AvailableInteractable).gameObject; 
+                    playerController.hands.UsingRight = true;
                 }
                 else
                 {
-                    hands.LeftObject = ((Component)AvailableInteractable).gameObject; 
-                    hands.UsingLeft = true;
+                    playerController.hands.LeftObject = ((Component)AvailableInteractable).gameObject; 
+                    playerController.hands.UsingLeft = true;
                 }
             }
 
@@ -297,16 +293,16 @@ public class Interactor : MonoBehaviour
             {
                 GameObject newHat = ((Component)AvailableInteractable).gameObject;
 
-                if (head.HatObject != null)
+                if (playerController.head.HatObject != null)
                 { // Remove current hat
-                    Hat h = head.wornHat;
-                    head.hairRenderer.enabled = true;
-                    head.HatObject.transform.parent = null;
-                    head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "GroundedHat";
-                    head.HatObject.gameObject.layer = LayerMask.NameToLayer("Interactable");
-                    if (head.HatObject.transform.childCount > 0)
+                    Hat h = playerController.head.wornHat;
+                    playerController.head.hairRenderer.enabled = true;
+                    playerController.head.HatObject.transform.parent = null;
+                    playerController.head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "GroundedHat";
+                    playerController.head.HatObject.gameObject.layer = LayerMask.NameToLayer("Interactable");
+                    if (playerController.head.HatObject.transform.childCount > 0)
                     {
-                        SpriteRenderer[] childRenderers = head.HatObject.GetComponentsInChildren<SpriteRenderer>();
+                        SpriteRenderer[] childRenderers = playerController.head.HatObject.GetComponentsInChildren<SpriteRenderer>();
                         foreach (SpriteRenderer childRenderer in childRenderers) childRenderer.sortingLayerName = "GroundedHat";
                     }
                     h.StartCoroutine(h.TransferPosition(newHat.transform.position, newHat.transform.rotation));
@@ -315,15 +311,29 @@ public class Interactor : MonoBehaviour
                     //h.DropHat(newHat.transform.position); makes duplicate on head for no reason
 
                 }
+
                 // Wear new hat
-                AvailableInteractable.Interact(head);
+                AvailableInteractable.Interact(playerController.head);
             }
 
 
             // INTERACT WITH LOOT
             else if (AvailableInteractable is Loot)
             {
-                AvailableInteractable.Interact(head);
+                AvailableInteractable.Interact(playerController.head);
+            }
+
+            // INTERACT WITH VEHICLE
+            else if (AvailableInteractable is Vehicle v)
+            {
+                playerCollider.isTrigger = true;
+                if(playerController.hands.LeftObject) playerController.hands.LeftObject.SetActive(false);
+                if(playerController.hands.RightObject) playerController.hands.RightObject.SetActive(false);
+
+                vehicleDriver.vehicle = v;
+                StartCoroutine(vehicleDriver.TransferPosition(v.driveSeat.position, v.transform.rotation));
+                AvailableInteractable.Interact(playerController.head);
+                playerInput.SwitchCurrentActionMap("Vehicle");
             }
 
             AvailableInteractable = null;

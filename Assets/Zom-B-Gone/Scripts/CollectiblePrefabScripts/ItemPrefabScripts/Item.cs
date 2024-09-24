@@ -103,59 +103,43 @@ public abstract class Item : MonoBehaviour, IInteractable
         switch (newState)
         {
             case State.GROUNDED:
-                // Change to grounded drag
                 rb.drag = groundedLinearDrag;
                 rb.angularDrag = groundedAngularDrag;
 
-                // Change layer
                 gameObject.layer = LayerMask.NameToLayer("InteractableItem");
 
-                // Change sorting order
                 itemRenderer.sortingLayerName = "GroundedItem";
 
-                // If was held, set back to dynamic body
                 if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
-				// Reactivate full body collider
 				fullCollider.enabled = true;
 
-				// Active objects should pass over it
 				// fullCollider.isTrigger = true;
 
 				break;
             case State.AIRBORNE:
-                // Change to airborne drag
                 rb.drag = airborneLinearDrag;
                 rb.angularDrag = airborneAngularDrag;
 
-                // Change layer
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
-                // Change soring order
                 itemRenderer.sortingLayerName = "ActiveItem";
 
-                // If was held, set back to dynamic body
                 if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
-				// Reactivate full body collider
 				fullCollider.enabled = true;
 
-				// Yes full collider
 				fullCollider.isTrigger = false;
 
                 break;
 
             case State.HELD:
-				// Change layer
 				gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
-                // Change sorting order
                 itemRenderer.sortingLayerName = "ActiveItem";
 
-                // Set to kinematic body for manual movement
                 rb.bodyType = RigidbodyType2D.Kinematic;
 
-                // No full collider
                 fullCollider.enabled = false;
                 fullCollider.isTrigger = true;
                 break;

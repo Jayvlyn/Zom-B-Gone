@@ -14,10 +14,10 @@ public class PlayerController : MonoBehaviour
     private State currentState;
 
     [Header("References")]
-    [SerializeField] public PlayerData playerData;
-    [SerializeField] private Hands hands;
-    [SerializeField] private Head head;
-    [SerializeField] private Rigidbody2D rb;
+    public PlayerData playerData;
+    public Hands hands;
+    public Head head;
+    public Rigidbody2D rb;
     private Slider staminaSlider;
     private Camera gameCamera;
     private Interactor interactor;

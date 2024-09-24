@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183524555
-  m_SortingLayer: -10
+  m_SortingLayer: -12
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 444a5b55dd81a1d498bd42b03bd7da07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 369753046641428115}
   - component: {fileID: 8105131813210140983}
   - component: {fileID: 4474808106738882516}
+  - component: {fileID: 1215756169858613352}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -348,6 +349,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b40db612806cdce4fa58882bf1d149e0, type: 2}
   - {fileID: 11400000, guid: 710e9a9ee455f1b4e849f94da7679bf4, type: 2}
   - {fileID: 11400000, guid: 1074ef9a6659406408f5c2583c6d7f76, type: 2}
+  playerController: {fileID: 8105131813210140980}
+  vehicleDriver: {fileID: 1215756169858613352}
+  playerInput: {fileID: 8105131813210140982}
+  playerCollider: {fileID: 4474808106738882516}
+  playerSprite: {fileID: 8105131813210140983}
 --- !u!50 &369753046641428115
 Rigidbody2D:
   serializedVersion: 4
@@ -414,7 +420,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183524555
-  m_SortingLayer: -10
+  m_SortingLayer: -12
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 09fff7c5ce70fdb4091f1f6963157880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -480,3 +486,17 @@ PolygonCollider2D:
       - {x: 0.23595797, y: 0.11918973}
       - {x: -0.22135384, y: 0.116282}
   m_UseDelaunayMesh: 0
+--- !u!114 &1215756169858613352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105131813210141130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e5b1f71903ed842be82009495d422a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vehicle: {fileID: 0}
+  enterExitSpeed: 1
