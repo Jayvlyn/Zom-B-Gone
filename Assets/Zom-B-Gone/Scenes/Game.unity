@@ -4087,8 +4087,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1357806790}
-  - component: {fileID: 1357806791}
   - component: {fileID: 1357806792}
+  - component: {fileID: 1357806791}
   m_Layer: 0
   m_Name: Van
   m_TagString: Untagged
