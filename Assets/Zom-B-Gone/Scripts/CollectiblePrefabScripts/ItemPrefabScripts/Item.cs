@@ -6,11 +6,11 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Item : MonoBehaviour, IInteractable
 {
-    protected enum State
+    public enum ItemState
     {
         GROUNDED, AIRBORNE, HELD
     }
-    [SerializeField]protected State currentState;
+    public ItemState currentState;
 
 
 	[Header("Item attributes")]
@@ -31,12 +31,12 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField] protected float gripRotation = 130;
     [SerializeField] protected float minimumAirborneSpeed = 10;
 
-    // Private Refs
     protected Rigidbody2D rb;
     protected PlayerController playerController;
     protected Hands playerHands;
     protected Head playerHead;
     protected PlayerData playerData;
+    [HideInInspector] public VanBack vanBack;
 
     // Functional vars
     [HideInInspector] public bool inRightHand;
@@ -61,17 +61,17 @@ public abstract class Item : MonoBehaviour, IInteractable
         // Set sorting order based on awake state
         switch (currentState)
         {
-            case State.GROUNDED:
+            case ItemState.GROUNDED:
                 itemRenderer.sortingLayerName = "GroundedItem";
                 rb.drag = groundedLinearDrag;
                 rb.angularDrag = groundedAngularDrag;
                 break;
-            case State.AIRBORNE: 
+            case ItemState.AIRBORNE: 
                 itemRenderer.sortingLayerName = "ActiveItem";
                 rb.drag = airborneLinearDrag;
                 rb.angularDrag = airborneAngularDrag;
                 break;
-            case State.HELD:
+            case ItemState.HELD:
                 itemRenderer.sortingLayerName = "ActiveItem";
                 break;
         }
@@ -79,9 +79,9 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     protected virtual void Update()
     {
-        if(currentState == State.AIRBORNE && rb.velocity.magnitude < minimumAirborneSpeed)
+        if(currentState == ItemState.AIRBORNE && rb.velocity.magnitude < minimumAirborneSpeed)
         {
-            ChangeState(State.GROUNDED);
+            ChangeState(ItemState.GROUNDED);
         }
 
         if(moveToHand)
@@ -92,17 +92,17 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     private void FixedUpdate()
     {
-        if(currentState == State.HELD && aimAtMouse)
+        if(currentState == ItemState.HELD && aimAtMouse)
         {
             RotateToMouse();
         }
     }
 
-    private void ChangeState(State newState)
+    private void ChangeState(ItemState newState)
     {
         switch (newState)
         {
-            case State.GROUNDED:
+            case ItemState.GROUNDED:
                 rb.drag = groundedLinearDrag;
                 rb.angularDrag = groundedAngularDrag;
 
@@ -110,14 +110,14 @@ public abstract class Item : MonoBehaviour, IInteractable
 
                 itemRenderer.sortingLayerName = "GroundedItem";
 
-                if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
+                if (currentState == ItemState.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
 				fullCollider.enabled = true;
 
 				// fullCollider.isTrigger = true;
 
 				break;
-            case State.AIRBORNE:
+            case ItemState.AIRBORNE:
                 rb.drag = airborneLinearDrag;
                 rb.angularDrag = airborneAngularDrag;
 
@@ -125,7 +125,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
                 itemRenderer.sortingLayerName = "ActiveItem";
 
-                if (currentState == State.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
+                if (currentState == ItemState.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
 				fullCollider.enabled = true;
 
@@ -133,7 +133,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
                 break;
 
-            case State.HELD:
+            case ItemState.HELD:
 				gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
                 itemRenderer.sortingLayerName = "ActiveItem";
@@ -165,7 +165,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         Transform playerT = transform.parent;
         RemoveFromHand();
-        ChangeState(State.AIRBORNE);
+        ChangeState(ItemState.AIRBORNE);
         float dropForwardForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
         Vector2 direction = playerT.up;
         //if (Utils.WallInFront(playerT)) direction = -direction;
@@ -176,7 +176,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     {
         Transform playerT = transform.parent;
         RemoveFromHand();
-        ChangeState(State.AIRBORNE);
+        ChangeState(ItemState.AIRBORNE);
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
@@ -201,7 +201,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
 
-        ChangeState(State.HELD);
+        ChangeState(ItemState.HELD);
         
         if (rightHand) inRightHand = true;
         else inRightHand = false;
@@ -286,12 +286,21 @@ public abstract class Item : MonoBehaviour, IInteractable
         }
 
         transform.SetParent(null);
+
+        if(vanBack)
+        {
+            if(fullCollider.IsTouching(vanBack.backCollider))
+            {
+                vanBack.AddToBack(this);
+            }
+        }
+
     }
 
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if(currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
+        if(currentState == ItemState.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
             int damage = Mathf.RoundToInt(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * (rb.velocity.magnitude / 2));
 
@@ -307,6 +316,12 @@ public abstract class Item : MonoBehaviour, IInteractable
                 hitRb.AddForce(rb.velocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 10, 70, true)), ForceMode2D.Impulse);
             }
         }
+    }
+
+    public void AddToVan()
+    {
+        fullCollider.isTrigger = true;
+        rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
 

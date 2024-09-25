@@ -1,4 +1,5 @@
 using GameEvents;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,7 @@ public class Interactor : MonoBehaviour
     [SerializeField] private float _interactRange = 1.5f;
 
     [SerializeField] private LayerMask InteractionLm;
+    [SerializeField] private LayerMask InteractionBlockersLm;
 
     [SerializeField] private float scanInterval = .1f;
     private float scanTimer;
@@ -174,14 +176,29 @@ public class Interactor : MonoBehaviour
          * shoot three rays from interactor, one from left, center, and right of interactor, all towards the interactable that was hit in the circle cast
          * if all three rays are blocked by environment, dont add as possible interaction
          * only add as possible interaction when at least one of the rays was able to reach the interactable without obstruction
-         * this will stop interactions through walls, and when things are blocked by large obstacles, but wont interfere with nearby interacitons only blocked by small objects or corners
+         * this will stop interactions through walls, and when things are blocked by large obstacles, but wont interfere with nearby interactions only blocked by small objects or corners
         */
 
         // get all interactables within interactRange
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _interactRange, InteractionLm);
-        
-        // quick exit
+
         if (colliders.Length == 0) return null;
+
+        List<Collider2D> validColliders = new List<Collider2D>();
+        foreach (Collider2D collider in colliders)
+        {
+            Vector2 leftStart = (Vector2)transform.position + (Vector2)(transform.rotation * new Vector2(-1,0));
+            Vector2 rightStart = (Vector2)transform.position + (Vector2)(transform.rotation * new Vector2(1,0));
+
+            float dist = (collider.transform.position - transform.position).magnitude;
+
+            RaycastHit2D hit1 = Physics2D.Raycast(transform.position, collider.transform.position - transform.position, dist, InteractionBlockersLm);
+            RaycastHit2D hit2 = Physics2D.Raycast(leftStart, collider.transform.position - transform.position, dist, InteractionBlockersLm);
+            RaycastHit2D hit3 = Physics2D.Raycast(rightStart, collider.transform.position - transform.position, dist, InteractionBlockersLm);
+            if(!hit1 || !hit2 || !hit3) validColliders.Add(collider);
+        }
+
+        if (validColliders.Count == 0) return null;
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float mouseToInteractorDist = (mousePosition - new Vector2(transform.position.x, transform.position.y)).magnitude;
@@ -195,15 +212,13 @@ public class Interactor : MonoBehaviour
         float clostestLootableDist = float.PositiveInfinity;
         
         // loop through hits
-        foreach (Collider2D collider in colliders)
+        foreach (Collider2D collider in validColliders)
         {
             IInteractable thisInteractable = collider.transform.gameObject.GetComponent<IInteractable>();
 
             float dist;
             if (mouseToInteractorDist <= _interactRange + 0.5f) dist = (mousePosition - new Vector2(collider.transform.position.x, collider.transform.position.y)).magnitude;
             else                                         dist = (transform.position - collider.transform.position).magnitude;
-
-
 
             if (thisInteractable is Lootable lootable)
             {

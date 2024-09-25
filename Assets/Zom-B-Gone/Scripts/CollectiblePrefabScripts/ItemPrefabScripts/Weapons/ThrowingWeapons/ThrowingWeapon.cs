@@ -25,7 +25,7 @@ public class ThrowingWeapon : Weapon
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (currentState == State.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
+        if (currentState == ItemState.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
             collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false) + weaponData.damage, weaponData.dismemberChance);
         }

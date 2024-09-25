@@ -46,7 +46,7 @@ public class FourWheeler : Vehicle
 
     private void RotateToTurnAngle(bool reverse)
     {
-        if (reverse) rb.MoveRotation(rb.rotation + -currentTurnAngle * Time.deltaTime * 5);
-        else rb.MoveRotation(rb.rotation + currentTurnAngle * Time.deltaTime * 5);
+        if (reverse) rb.MoveRotation(rb.rotation + -currentTurnAngle * Time.deltaTime * 7);
+        else rb.MoveRotation(rb.rotation + currentTurnAngle * Time.deltaTime * 7);
     }
 }

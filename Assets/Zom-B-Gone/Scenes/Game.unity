@@ -540,11 +540,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.82
+      value: -1.4199995
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.41
+      value: -11.9
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -869,11 +869,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: f7be2d677df87b242aad288bd9f6454c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.49
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: f7be2d677df87b242aad288bd9f6454c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.898542
+      value: -11.8
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: f7be2d677df87b242aad288bd9f6454c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1894,9 +1894,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1975659737
-  m_SortingLayer: -10
-  m_SortingOrder: -10
+  m_SortingLayerID: -935469541
+  m_SortingLayer: -22
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 8462f1bad0fc413408aefb440ffe7cca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2946,8 +2946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a9dbc9d79d0704eb431e3c667eed39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationSpeed: 20000
-  brakeSpeed: 15000
+  accelerationSpeed: 10000
+  brakeSpeed: 7000
   steeringSpeed: 100
   maxTurnAngle: 45
   exitDistance: 1.5
@@ -3283,8 +3283,10 @@ GameObject:
   m_Component:
   - component: {fileID: 995869797}
   - component: {fileID: 995869798}
+  - component: {fileID: 995869799}
+  - component: {fileID: 995869800}
   m_Layer: 0
-  m_Name: VanFloor
+  m_Name: VanBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3334,7 +3336,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0265522, y: -1.0755448}
@@ -3342,7 +3344,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.5, y: 6}
-    newSize: {x: 3.5, y: 6}
+    newSize: {x: 7, y: 12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -3350,6 +3352,73 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9307022, y: 3.346733}
   m_EdgeRadius: 0
+--- !u!114 &995869799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995869796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16672e8c922d44648906e4d4c1f873f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vehicle: {fileID: 808891219}
+  vanRoofSprite: {fileID: 1280066945}
+  backCollider: {fileID: 995869798}
+--- !u!212 &995869800
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995869796}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -935469541
+  m_SortingLayer: -22
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 21300000, guid: 86d84d74c74883f4580d742d13a53802, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 7, y: 12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1001 &1093472096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3364,11 +3433,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 7b3777a2fc590b14097f1ff0c92cd775, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.85
+      value: -2.68
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 7b3777a2fc590b14097f1ff0c92cd775, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.34
+      value: -11.77
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 7b3777a2fc590b14097f1ff0c92cd775, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4089,7 +4158,7 @@ GameObject:
   - component: {fileID: 1357806790}
   - component: {fileID: 1357806792}
   - component: {fileID: 1357806791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Van
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5925,7 +5994,7 @@ Transform:
   m_GameObject: {fileID: 1873980143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.82, y: -8.41, z: -11}
+  m_LocalPosition: {x: -1.4199995, y: -11.9, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6109,9 +6178,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1975659737
-  m_SortingLayer: -10
-  m_SortingOrder: -10
+  m_SortingLayerID: -935469541
+  m_SortingLayer: -22
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 8462f1bad0fc413408aefb440ffe7cca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6229,7 +6298,7 @@ Transform:
   m_GameObject: {fileID: 1940268239}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.82, y: -8.41, z: 0}
+  m_LocalPosition: {x: -1.42, y: -11.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6811,11 +6880,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8105131813210140981, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.82
+      value: -1.42
       objectReference: {fileID: 0}
     - target: {fileID: 8105131813210140981, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.41
+      value: -11.9
       objectReference: {fileID: 0}
     - target: {fileID: 8105131813210140981, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
       propertyPath: m_LocalPosition.z

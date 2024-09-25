@@ -20,10 +20,7 @@ public class VehicleDriver : MonoBehaviour
             if (steering) vehicle.Steer(steerDirection);
             if (accelerateHeld) vehicle.Accelerate();
             if (brakeHeld) vehicle.Brake();
-            if((accelerateHeld || brakeHeld) && !steering)
-            {
-                vehicle.CorrectSteering();
-            }
+            //if((accelerateHeld || brakeHeld) && !steering) vehicle.CorrectSteering();
         }
     }
 
@@ -45,7 +42,7 @@ public class VehicleDriver : MonoBehaviour
     private bool steering = false;
     private void OnSteer(InputValue inputValue)
     {
-        if (vehicle.Active)
+        if (vehicle && vehicle.Active)
         {
             steerDirection = inputValue.Get<float>();
             steering = steerDirection != 0;
@@ -56,7 +53,10 @@ public class VehicleDriver : MonoBehaviour
     {
         vehicle.OnExit();
 
-        Vector2 exitPos = new Vector2 (vehicle.driveSeat.position.x - vehicle.exitDistance, vehicle.driveSeat.position.y);
+        Vector2 localExitPosition = new Vector2(-vehicle.exitDistance, 0);
+        Vector2 exitPos = (Vector2)vehicle.driveSeat.position + (Vector2)(vehicle.transform.rotation * localExitPosition);
+
+        //Vector2 exitPos = new Vector2 (vehicle.driveSeat.position.x - vehicle.exitDistance, vehicle.driveSeat.position.y);
         Quaternion exitRot = vehicle.transform.rotation * Quaternion.Euler(0, 0, 90);
         StartCoroutine(ExitVehicle(exitPos, exitRot));
 
