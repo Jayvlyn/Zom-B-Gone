@@ -25,7 +25,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     [SerializeField, Range(0.0f, 10.0f)] protected float groundedAngularDrag = 3.0f;
     [SerializeField, Range(0.0f, 10.0f)] protected float groundedLinearDrag = 3.0f;
     // Customization
-	[SerializeField] Vector2 holdOffset = new Vector2(0.5f, 0.5f);
+	[SerializeField] protected Vector2 holdOffset = new Vector2(0.5f, 0.5f);
     [SerializeField] protected bool spinThrow = true;
     [SerializeField] protected bool aimAtMouse = true;
     [SerializeField] protected float gripRotation = 130;

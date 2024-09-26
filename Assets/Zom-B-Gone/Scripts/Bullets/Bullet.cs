@@ -60,15 +60,15 @@ public class Bullet : MonoBehaviour
 	{
         if (collider.gameObject.TryGetComponent(out Health targetHealth))
         {
-            currentPiercingPower--;
+            //currentPiercingPower--;
             DealDamage(targetHealth);
         }
         else
         {
-            if (bulletData.wallPiercing) currentPiercingPower--;
-            else Destroy(gameObject);
+            //if (bulletData.wallPiercing) currentPiercingPower--;
+            //else Destroy(gameObject);
         }
-        if (currentPiercingPower < 0) Destroy(gameObject);
+        //if (currentPiercingPower < 0) Destroy(gameObject);
     }
 
 

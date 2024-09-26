@@ -37,8 +37,6 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     private void FixedUpdate()
     {
-        
-
         KillOrthogonalVelocity();
     }
 

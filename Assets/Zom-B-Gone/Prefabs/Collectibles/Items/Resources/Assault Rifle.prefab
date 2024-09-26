@@ -199,6 +199,10 @@ MonoBehaviour:
   aimAtMouse: 1
   gripRotation: 130
   minimumAirborneSpeed: 10
+  useBlockers:
+    serializedVersion: 2
+    m_Bits: 128
+  vanBack: {fileID: 0}
   inRightHand: 0
   useHeld: 0
   weaponData: {fileID: 0}

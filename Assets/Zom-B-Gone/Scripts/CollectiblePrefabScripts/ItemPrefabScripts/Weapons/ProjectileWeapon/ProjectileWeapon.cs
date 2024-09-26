@@ -58,6 +58,21 @@ public class ProjectileWeapon : Weapon
     {
         if(shotTimer <= 0)
         {
+            LayerMask useBlockers = LayerMask.GetMask("World");
+
+            // Raycast to check if there is a wall between the player and the end of the weapon. Player shouldn't be able to fire weapon if it is clipping through wall
+            foreach (Transform firepoint in firePoints)
+            {
+                Vector2 pos = playerController.transform.position;
+                if (inRightHand) pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(holdOffset.x, 0));
+                else pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(-holdOffset.x, 0));
+
+                Vector2 dir = (Vector2)firepoint.position - pos;
+            
+                RaycastHit2D hit = Physics2D.Raycast(pos, dir.normalized, dir.magnitude, useBlockers);
+                if (hit.collider != null) return; // cancel use if it hits a use blocker on the way to the firepoint
+            }
+
             Fire();
         }
     }
