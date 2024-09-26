@@ -169,17 +169,6 @@ public class Interactor : MonoBehaviour
     /// <returns>Closest IInteractable, if there are no valid Interactables, will return null</returns>
     public IInteractable InteractableScan()
     {
-        // NEED TO ADD WALL DETECTION TO THIS
-        /**
-         * For wall check:
-         * 
-         * shoot three rays from interactor, one from left, center, and right of interactor, all towards the interactable that was hit in the circle cast
-         * if all three rays are blocked by environment, dont add as possible interaction
-         * only add as possible interaction when at least one of the rays was able to reach the interactable without obstruction
-         * this will stop interactions through walls, and when things are blocked by large obstacles, but wont interfere with nearby interactions only blocked by small objects or corners
-        */
-
-        // get all interactables within interactRange
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _interactRange, InteractionLm);
 
         if (colliders.Length == 0) return null;
@@ -187,15 +176,12 @@ public class Interactor : MonoBehaviour
         List<Collider2D> validColliders = new List<Collider2D>();
         foreach (Collider2D collider in colliders)
         {
-            Vector2 leftStart = (Vector2)transform.position + (Vector2)(transform.rotation * new Vector2(-1,0));
-            Vector2 rightStart = (Vector2)transform.position + (Vector2)(transform.rotation * new Vector2(1,0));
+            Vector2 direction = collider.transform.position - transform.position;
+            float dist = direction.magnitude;
+            Debug.DrawLine(transform.position, transform.position + (Vector3)direction.normalized * dist, Color.red);  // Ray from the center
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, collider.transform.position - transform.position, dist, InteractionBlockersLm);
+            if(!hit.collider) validColliders.Add(collider);
 
-            float dist = (collider.transform.position - transform.position).magnitude;
-
-            RaycastHit2D hit1 = Physics2D.Raycast(transform.position, collider.transform.position - transform.position, dist, InteractionBlockersLm);
-            RaycastHit2D hit2 = Physics2D.Raycast(leftStart, collider.transform.position - transform.position, dist, InteractionBlockersLm);
-            RaycastHit2D hit3 = Physics2D.Raycast(rightStart, collider.transform.position - transform.position, dist, InteractionBlockersLm);
-            if(!hit1 || !hit2 || !hit3) validColliders.Add(collider);
         }
 
         if (validColliders.Count == 0) return null;

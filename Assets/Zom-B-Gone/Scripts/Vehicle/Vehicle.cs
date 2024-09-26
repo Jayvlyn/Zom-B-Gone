@@ -8,7 +8,9 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     [SerializeField] protected float brakeSpeed;
     [SerializeField] protected float steeringSpeed;
     [SerializeField] protected float maxTurnAngle = 45;
+    [SerializeField] protected float maxSpeed = 100;
     public float exitDistance = 3;
+    [SerializeField] protected float driftFactor = 0.6f;
 
     public Transform driveSeat;
     public Rigidbody2D rb;
@@ -32,6 +34,21 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     abstract public void Steer(float steerDirection);
 
     abstract public void Brake();
+
+    private void FixedUpdate()
+    {
+        
+
+        KillOrthogonalVelocity();
+    }
+
+    void KillOrthogonalVelocity()
+    {
+        Vector2 forwardVelocity = transform.up * Vector2.Dot(rb.velocity, transform.up);
+        Vector2 rightVelocity = transform.right * Vector2.Dot(rb.velocity, transform.right);
+
+        rb.velocity = forwardVelocity + rightVelocity * driftFactor;
+    }
 
     public virtual void CorrectSteering()
     {

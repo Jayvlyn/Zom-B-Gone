@@ -9,6 +9,7 @@ public class FourWheeler : Vehicle
 
     public override void Accelerate()
     {
+        if (rb.velocity.magnitude > maxSpeed) return;
         rb.AddForce(transform.up * accelerationSpeed);
         RotateToTurnAngle(false);
     }
@@ -46,7 +47,7 @@ public class FourWheeler : Vehicle
 
     private void RotateToTurnAngle(bool reverse)
     {
-        if (reverse) rb.MoveRotation(rb.rotation + -currentTurnAngle * Time.deltaTime * 7);
-        else rb.MoveRotation(rb.rotation + currentTurnAngle * Time.deltaTime * 7);
+        if (reverse) rb.MoveRotation(rb.rotation + -currentTurnAngle * Time.deltaTime * rb.velocity.magnitude * 0.3f);
+        else rb.MoveRotation(rb.rotation + currentTurnAngle * Time.deltaTime * rb.velocity.magnitude * 0.3f);
     }
 }
