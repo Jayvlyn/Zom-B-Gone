@@ -78,7 +78,7 @@ public class ContainerResizer : MonoBehaviour
         }
 
         // Makes an empty slot with the same allows
-        CollectibleSlot slotTemplate = cachedSlots[0];
+        CollectibleSlot slotTemplate = cachedSlots[cachedSlots.Length-1];
         slotTemplate.collectible = null;
         slotTemplate.quantity = 0;
 
@@ -140,7 +140,6 @@ public class ContainerResizer : MonoBehaviour
         {
             containerData.Container.collectibleSlots[i] = cachedSlots[i];
         }
-
 
         int lastSlotIndex = containerData.Container.collectibleSlots.Length - 1 + rowSize;
         for (int i = lastSlotIndex; i > (lastSlotIndex - rowSize); i--)

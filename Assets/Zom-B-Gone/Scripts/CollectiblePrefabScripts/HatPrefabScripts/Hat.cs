@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Hat : MonoBehaviour, IInteractable
+public class Hat : Collectible
 {
     [SerializeField] public HatData hatData;
     [HideInInspector] public Head head;
@@ -17,8 +17,9 @@ public class Hat : MonoBehaviour, IInteractable
         if (useDataIcon) spriteRenderer.sprite = hatData.icon;
 	}
 
-    public void Interact(Head head)
+    public override void Interact(Head head)
     {
+        base.Interact(head);
 		head.HatObject = gameObject;
 		gameObject.transform.parent = head.gameObject.transform;
 		this.head = head;
@@ -103,10 +104,5 @@ public class Hat : MonoBehaviour, IInteractable
 
             head = null;
 		}
-    }
-
-	public void Interact(bool rightHand)
-    {
-        throw new System.NotImplementedException();
     }
 }

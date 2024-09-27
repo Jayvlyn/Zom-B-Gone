@@ -67,7 +67,7 @@ public class CollectibleDropper : MonoBehaviour
 
                     CollectibleContainerSlot slot = transform.parent.GetComponent<CollectibleContainerSlot>();
                     int slotIndex = this.transform.GetSiblingIndex();
-                    loot.lootCount = quantity;
+                    loot.quantity = quantity;
 
 					loot.StartCoroutine(loot.TransferPosition(dropPos, loot.transform.rotation));
 				}

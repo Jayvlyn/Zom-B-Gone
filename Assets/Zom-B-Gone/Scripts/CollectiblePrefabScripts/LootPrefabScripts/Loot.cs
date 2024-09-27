@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Loot : MonoBehaviour, IInteractable
+public class Loot : Collectible
 {
-	[SerializeField] public LootData lootData;
-	[SerializeField] public int lootCount;
+	public LootData lootData;
+	public int quantity;
 	[SerializeField] private CollectibleContainerData containerToFill;
 
 	private SpriteRenderer spriteRenderer;
@@ -50,19 +50,15 @@ public class Loot : MonoBehaviour, IInteractable
             yield return null;
         }
 
-        containerToFill.AddToContainer(lootData, lootCount);
+        containerToFill.AddToContainer(lootData, quantity);
         Destroy(gameObject);
     }
 
-    public void Interact(Head head)
+    public override void Interact(Head head)
 	{
+        base.Interact(head);
 		gameObject.transform.parent = head.gameObject.transform;
 		gameObject.layer = LayerMask.NameToLayer("Default");
 		StartCoroutine(PickupTransferPosition(head.hatTransform));
-	}
-
-	public void Interact(bool rightHand)
-	{
-		throw new System.NotImplementedException();
 	}
 }

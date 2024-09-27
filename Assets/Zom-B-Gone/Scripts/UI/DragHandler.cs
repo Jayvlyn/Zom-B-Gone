@@ -76,7 +76,7 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
                         break;
                     case ContainerType.BACKPACK:
                         break;
-                    case ContainerType.CRAFTINGTABLE:
+                    case ContainerType.WORKBENCH:
                         break;
                 }
 

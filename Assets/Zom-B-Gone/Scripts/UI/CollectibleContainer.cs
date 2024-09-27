@@ -84,6 +84,29 @@ public class CollectibleContainer : ICollectibleContainer
         return collectibleSlot;
     }
 
+    /// <summary>
+    /// Adds collectible in the next empty slot, ignoring which type of collectible the slot allows and does not stack on previously existing collectibles
+    /// </summary>
+    /// <param name="collectibleSlot"></param>
+    /// <returns>index of the slot the collectible(s) was stored in</returns>
+    public int AddCollectibleNoStackIgnoreAllows(CollectibleSlot collectibleSlot)
+    {
+        for (int i = 0; i < collectibleSlots.Length; i++)
+        {
+            if (collectibleSlots[i].collectible == null)
+            {
+                collectibleSlots[i].collectible = collectibleSlot.collectible;
+                collectibleSlots[i].quantity = collectibleSlot.quantity;
+
+                collectibleSlot.quantity = 0;
+
+                OnCollectibleUpdated.Invoke();
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public int GetTotalQuantity(CollectibleData collectible)
     {
         int totalCount = 0;

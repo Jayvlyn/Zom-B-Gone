@@ -4,7 +4,7 @@ using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class Item : MonoBehaviour, IInteractable
+public abstract class Item : Collectible
 {
     public enum ItemState
     {
@@ -14,7 +14,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 
 
 	[Header("Item attributes")]
-    [SerializeField] public ItemData itemData;
+    public ItemData itemData;
     // Component Refs
     [SerializeField] protected Transform pivotPoint;
     [SerializeField] protected Collider2D fullCollider;
@@ -45,6 +45,7 @@ public abstract class Item : MonoBehaviour, IInteractable
     private Vector3 pickupTarget;
     private Quaternion rotationTarget;
     private float pickupSpeed = 10;
+    [HideInInspector] public int quantity;
 
 
     public void Awake()
@@ -233,8 +234,9 @@ public abstract class Item : MonoBehaviour, IInteractable
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public void Interact(bool rightHand)
+    public override void Interact(bool rightHand)
     {
+        base.Interact(rightHand);
         PickUp(playerController.transform, rightHand);
     }
 
@@ -291,7 +293,7 @@ public abstract class Item : MonoBehaviour, IInteractable
         {
             if(fullCollider.IsTouching(vanBack.backCollider))
             {
-                vanBack.AddToBack(this);
+                vanBack.StartCoroutine(vanBack.AddToBack(this));
             }
         }
 
@@ -323,10 +325,5 @@ public abstract class Item : MonoBehaviour, IInteractable
         fullCollider.isTrigger = true;
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
-
-
-    public void Interact(Head head)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }

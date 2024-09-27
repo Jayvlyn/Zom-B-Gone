@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class VanBack : MonoBehaviour
 {
+    public FloorContainer vanContainer;
     public Vehicle vehicle;
     public SpriteRenderer vanRoofSprite;
     public Collider2D backCollider;
 
+    // make sure collectibles with multiple colliders only have 1 that interacts with floor container's collider
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (vehicle.Active) return;
+        // if player is driving vehicle, or vehicle is moving, dont do anything, dont want to pick stuff up by moving over it
+        if (vehicle.Active || vehicle.rb.velocity.magnitude > 0) return;
 
         if (collision.CompareTag("Player"))
         {
             PlayerController pc = collision.GetComponent<PlayerController>();
-            if (pc.currentState != PlayerController.PlayerState.DRIVING) StartCoroutine(HideRoof(2));
+            StopCoroutine("ShowRoof");
+            StartCoroutine(HideRoof(2));
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem"))
         {
@@ -27,22 +31,25 @@ public class VanBack : MonoBehaviour
             }
             else
             {
-                StopAllCoroutines();
                 StartCoroutine(AddToBack(item));
+                StartCoroutine(AddToFloorContainer(collision));
             }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             collision.gameObject.transform.parent = transform;
+            StartCoroutine(AddToFloorContainer(collision));
         }
 
     }
+
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            StopAllCoroutines();
+            StopCoroutine("HideRoof");
             StartCoroutine(ShowRoof(2));
         }
     }
@@ -70,5 +77,14 @@ public class VanBack : MonoBehaviour
         yield return new WaitForSeconds(2);
         item.transform.parent = transform;
         item.AddToVan();
+    }
+
+    public IEnumerator AddToFloorContainer(Collider2D collision)
+    {
+        yield return new WaitForSeconds(2);
+        if(collision.bounds.Intersects(backCollider.bounds))
+        {
+            vanContainer.AddColliderToContainer(collision);
+        }
     }
 }
