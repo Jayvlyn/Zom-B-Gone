@@ -53,6 +53,9 @@ TagManager:
   - name: Ground
     uniqueID: 3359497755
     locked: 0
+  - name: Skidmarks
+    uniqueID: 4117408425
+    locked: 0
   - name: DeadEnemy
     uniqueID: 2024805571
     locked: 0

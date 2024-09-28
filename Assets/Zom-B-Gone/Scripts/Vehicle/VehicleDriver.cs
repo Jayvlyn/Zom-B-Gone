@@ -37,6 +37,8 @@ public class VehicleDriver : MonoBehaviour
     {
         if (inputValue.isPressed) brakeHeld = true;
         else brakeHeld = false;
+
+        if (vehicle) vehicle.braking = brakeHeld;
     }
 
     private bool steering = false;

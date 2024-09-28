@@ -18,10 +18,12 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     [SerializeField] protected float driveDrag = 1f;
     protected float driftFactor;
     public bool drift = false;
+    public bool braking = false;
 
     public Transform driveSeat;
     public Rigidbody2D rb;
     public SpriteRenderer litHeadlights;
+
 
 
     protected bool active = false;
@@ -79,9 +81,37 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
             if (driftFactor < baseDriftFactor) driftFactor = baseDriftFactor;
         }
 
-        Debug.Log(driftFactor);
 
         rb.velocity = forwardVelocity + rightVelocity * driftFactor;
+    }
+
+    float GetLateralVelocity()
+    {
+        return Vector2.Dot(transform.right, rb.velocity);
+    }
+
+    float GetLogitudinalVelocity()
+    {
+        return Vector2.Dot(transform.up, rb.velocity);
+    }
+
+    public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)
+    {
+        lateralVelocity = GetLateralVelocity();
+        isBraking = false;
+
+        if(braking && GetLogitudinalVelocity() > 0)
+        {
+            isBraking = true;
+            return true;
+        }
+
+        if(Mathf.Abs(GetLateralVelocity()) > 4.0f)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public virtual void CorrectSteering()
