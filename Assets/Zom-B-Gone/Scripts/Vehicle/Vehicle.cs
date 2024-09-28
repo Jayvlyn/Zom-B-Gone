@@ -44,7 +44,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     protected void FixedUpdate()
     {
-        if (Mathf.Abs(currentTurnAngle) > 30 && drift)
+        if (Mathf.Abs(currentTurnAngle) > 30 && drift && !braking)
         {
             if (rb.drag > driftDrag) rb.drag -= 0.05f;
             if (rb.drag < driftDrag) rb.drag = driftDrag;
@@ -70,7 +70,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         //if (drift) driftFactor = driftingDriftFactor;
         //else driftFactor = baseDriftFactor;
 
-        if (drift)
+        if (drift && !braking)
         {
             if (driftFactor < driftingDriftFactor) driftFactor += 0.05f;
             if (driftFactor > driftingDriftFactor) driftFactor = driftingDriftFactor;

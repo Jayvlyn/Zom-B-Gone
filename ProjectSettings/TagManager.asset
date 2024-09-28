@@ -89,6 +89,9 @@ TagManager:
   - name: WornHat
     uniqueID: 807454059
     locked: 0
+  - name: TireSmoke
+    uniqueID: 3372290735
+    locked: 0
   - name: Vehicle
     uniqueID: 2319307559
     locked: 0
