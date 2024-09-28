@@ -35,12 +35,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     abstract public void Brake();
 
-    private void FixedUpdate()
-    {
-        KillOrthogonalVelocity();
-    }
-
-    void KillOrthogonalVelocity()
+    protected void KillOrthogonalVelocity()
     {
         Vector2 forwardVelocity = transform.up * Vector2.Dot(rb.velocity, transform.up);
         Vector2 rightVelocity = transform.right * Vector2.Dot(rb.velocity, transform.right);

@@ -9,8 +9,20 @@ public class FourWheeler : Vehicle
 
     private void Update()
     {
-        if(rb.velocity.magnitude > 3)
-            RotateToTurnAngle(false);
+        KillOrthogonalVelocity();
+        if (rb.velocity.magnitude > 0)
+        {
+            float dot = Vector2.Dot(rb.velocity, transform.up);
+
+            if(dot > 0.1)
+            {
+                RotateToTurnAngle(false);
+            }
+            else if (dot < -0.1)
+            {
+                RotateToTurnAngle(true);
+            }
+        }
     }
 
     public override void Accelerate()

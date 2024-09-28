@@ -13,7 +13,7 @@ public class VehicleDriver : MonoBehaviour
     private PlayerController playerController;
 
     private float steerDirection;
-    private void Update()
+    private void FixedUpdate()
     {
         if(vehicle && vehicle.Active)
         {
