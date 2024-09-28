@@ -7,8 +7,9 @@ public class FourWheeler : Vehicle
     [SerializeField] private Transform frontLeftWheel;
     [SerializeField] private Transform frontRightWheel;
 
-    private void Update()
+    protected void FixedUpdate()
     {
+        base.FixedUpdate();
         KillOrthogonalVelocity();
         if (rb.velocity.magnitude > 0)
         {
@@ -65,7 +66,7 @@ public class FourWheeler : Vehicle
 
     private void RotateToTurnAngle(bool reverse)
     {
-        if (reverse) rb.MoveRotation(rb.rotation + -currentTurnAngle * Time.deltaTime * rb.velocity.magnitude * 0.7f);
-        else rb.MoveRotation(rb.rotation + currentTurnAngle * Time.deltaTime * rb.velocity.magnitude * 0.7f);
+        if (reverse) rb.MoveRotation(rb.rotation + -currentTurnAngle * rb.velocity.magnitude * 0.005f);
+        else rb.MoveRotation(rb.rotation + currentTurnAngle * rb.velocity.magnitude * 0.005f);
     }
 }

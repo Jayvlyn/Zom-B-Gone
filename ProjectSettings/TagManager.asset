@@ -89,6 +89,9 @@ TagManager:
   - name: Vehicle
     uniqueID: 2319307559
     locked: 0
+  - name: VehicleRoof
+    uniqueID: 1164583589
+    locked: 0
   - name: Enemy
     uniqueID: 2335529495
     locked: 0
@@ -100,9 +103,6 @@ TagManager:
     locked: 0
   - name: Ceilings
     uniqueID: 1582768971
-    locked: 0
-  - name: VehicleRoof
-    uniqueID: 1164583589
     locked: 0
   - name: DamagePopup
     uniqueID: 3887895751

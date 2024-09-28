@@ -49,6 +49,16 @@ public class VehicleDriver : MonoBehaviour
         }
     }
 
+    private bool driftHeld = false;
+    private void OnDrift(InputValue inputValue)
+    {
+        if (inputValue.isPressed) driftHeld = true;
+        else driftHeld = false;
+
+        if (vehicle) vehicle.drift = driftHeld;
+    }
+
+
     private void OnExit(InputValue inputValue)
     {
         vehicle.OnExit();
