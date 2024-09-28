@@ -77,7 +77,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         }
         else
         {
-            if (driftFactor > baseDriftFactor) driftFactor -= 0.05f;
+            if (driftFactor > baseDriftFactor) driftFactor -= 0.005f;
             if (driftFactor < baseDriftFactor) driftFactor = baseDriftFactor;
         }
 

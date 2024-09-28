@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1dee774aafe6340a848d41613b8ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorContainer: {fileID: 0}
   lootData: {fileID: 11400000, guid: 5b0e176e8f61588469136e675aca5f24, type: 2}
-  lootCount: 1
+  quantity: 1
   containerToFill: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
 --- !u!212 &8510947219786376494
 SpriteRenderer:
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -752994071
-  m_SortingLayer: -17
+  m_SortingLayer: -20
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3e8d3d9cdd5a5f249b72308f88026153, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

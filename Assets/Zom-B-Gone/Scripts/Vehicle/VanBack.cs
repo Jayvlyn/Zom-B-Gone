@@ -13,13 +13,17 @@ public class VanBack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // if player is driving vehicle, or vehicle is moving, dont do anything, dont want to pick stuff up by moving over it
-        if (vehicle.Active || vehicle.rb.velocity.magnitude > 0) return;
+        if (vehicle.Active) return;
 
         if (collision.CompareTag("Player"))
         {
             PlayerController pc = collision.GetComponent<PlayerController>();
             StopCoroutine("ShowRoof");
             StartCoroutine(HideRoof(2));
+        }
+        else if (vehicle.rb.velocity.magnitude > 0.2)
+        {
+            return;
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem"))
         {

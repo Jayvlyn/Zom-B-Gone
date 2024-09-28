@@ -47,7 +47,6 @@ public class FloorContainer : MonoBehaviour
             }
 
             PosRot posRot = new PosRot(c.gameObject.transform.localPosition, c.gameObject.transform.localRotation);
-            Debug.Log(posRot.position + " " + posRot.rotation);
             vanCollectibles[posRot] = containerIndex;
             collectibleCount++;
         }
