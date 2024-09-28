@@ -20,7 +20,7 @@ MonoBehaviour:
   weight: 1100
   damage: 60
   attackSpeed: 0.5
-  knockbackPower: 30
+  knockbackPower: 10
   dismemberChance: 0
   range: 50
   maxAmmo: 5

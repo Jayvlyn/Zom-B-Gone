@@ -7,17 +7,23 @@ public class FourWheeler : Vehicle
     [SerializeField] private Transform frontLeftWheel;
     [SerializeField] private Transform frontRightWheel;
 
+    private void Update()
+    {
+        if(rb.velocity.magnitude > 3)
+            RotateToTurnAngle(false);
+    }
+
     public override void Accelerate()
     {
         if (rb.velocity.magnitude > maxSpeed) return;
         rb.AddForce(transform.up * accelerationSpeed);
-        RotateToTurnAngle(false);
+        
     }
 
     public override void Brake()
     {
         rb.AddForce(-transform.up * brakeSpeed);
-        RotateToTurnAngle(true);
+        
     }
 
     public override void Steer(float steerDirection)

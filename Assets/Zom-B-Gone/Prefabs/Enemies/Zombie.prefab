@@ -248,7 +248,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1959437801
-  m_SortingLayer: -1
+  m_SortingLayer: -9
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2f36ba37807f55244bf36a11520e186f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -278,7 +278,6 @@ MonoBehaviour:
   detachPoint: {fileID: 3072358557432829836}
   attachPoint: {fileID: 2943871043870995285}
   bleedParticles: {fileID: 7654700310716529146, guid: 90171f8a9712e264c9cc835bc1cab96a, type: 3}
-  fallOutSpeed: 1
 --- !u!50 &3362905060171268311
 Rigidbody2D:
   serializedVersion: 4
@@ -425,7 +424,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1959437801
-  m_SortingLayer: -1
+  m_SortingLayer: -9
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 758d3e1bdb71d4d48ba305969382b42f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -455,7 +454,6 @@ MonoBehaviour:
   detachPoint: {fileID: 8494637308942483538}
   attachPoint: {fileID: 7768140972022506243}
   bleedParticles: {fileID: 7654700310716529146, guid: 90171f8a9712e264c9cc835bc1cab96a, type: 3}
-  fallOutSpeed: 1
 --- !u!50 &4397759781912065639
 Rigidbody2D:
   serializedVersion: 4
@@ -879,9 +877,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881615510bb0eb146abaa82229789f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _droneSpeed: 40
-  _investigateSpeed: 30
-  _aggroSpeed: 75.3
+  _droneSpeed: 4
+  _investigateSpeed: 6
+  _aggroSpeed: 10
   attackDamageMultiplier: 1
   attackRange: 1
   attackCooldown: 1
@@ -889,6 +887,7 @@ MonoBehaviour:
   attacks:
   - {fileID: 8674619653201391516, guid: 29acada643e8c3946a888d829cd78737, type: 3}
   limbs: []
+  bleedingParticles: []
   maxLimbs: 2
   _turnSmoothing: 3.09
   _changeDirectionCooldown: 5
@@ -901,8 +900,6 @@ MonoBehaviour:
   _fov: 120
   targetChangeSpeed: 5.04
   fadeSpeed: 5
-  limbLaunchMod: 0.1
-  limbSpinForce: 40
 --- !u!114 &-8031090298879193519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -957,7 +954,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1959437801
-  m_SortingLayer: -1
+  m_SortingLayer: -9
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9dc6433e425d78f4fbb39b7e3fd83e55, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -982,7 +979,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.4
   m_GravityScale: 0

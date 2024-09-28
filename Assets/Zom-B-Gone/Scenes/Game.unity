@@ -2954,8 +2954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a9dbc9d79d0704eb431e3c667eed39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationSpeed: 1000
-  brakeSpeed: 200
+  accelerationSpeed: 15000
+  brakeSpeed: 5000
   steeringSpeed: 100
   maxTurnAngle: 45
   maxSpeed: 100
@@ -4397,9 +4397,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 4000
   m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_AngularDrag: 4
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

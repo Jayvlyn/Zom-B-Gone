@@ -20,7 +20,7 @@ MonoBehaviour:
   weight: 900
   damage: 15
   attackSpeed: 0.13
-  knockbackPower: 300
+  knockbackPower: 10
   dismemberChance: 0
   staminaCost: 1
   prepSpeed: 0.1
