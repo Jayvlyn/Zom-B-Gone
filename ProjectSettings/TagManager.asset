@@ -80,6 +80,9 @@ TagManager:
   - name: ActiveItem
     uniqueID: 1868784149
     locked: 0
+  - name: Bullet2
+    uniqueID: 1471518513
+    locked: 0
   - name: BloodParticles
     uniqueID: 3051746429
     locked: 0

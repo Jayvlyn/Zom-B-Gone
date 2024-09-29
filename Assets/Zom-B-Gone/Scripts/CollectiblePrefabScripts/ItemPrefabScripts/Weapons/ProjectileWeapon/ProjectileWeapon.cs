@@ -15,6 +15,9 @@ public class ProjectileWeapon : Weapon
     private float shotTimer = 0;
     protected int currentAmmo;
 
+    [SerializeField,Tooltip("Will use the sprites below when checked to display a loaded version of the weapon")] bool hasLoadedSprite;
+    [SerializeField, Tooltip("Secondary sprite that shows the weapon in a loaded state.")] protected Sprite loadedSprite;
+    [SerializeField, Tooltip("If sprite renderer sprite is set to something, it will be used for this sprite")] protected Sprite unloadedSprite;
 
     public bool IsAutomatic { get {  return projectileWeaponData.isAutomatic; } }
 
@@ -34,6 +37,10 @@ public class ProjectileWeapon : Weapon
 		{
 			projectileWeaponData = (ProjectileWeaponData)itemData;
             currentAmmo = projectileWeaponData.maxAmmo;
+            if(itemRenderer.sprite != null) unloadedSprite = itemRenderer.sprite;
+
+            if(hasLoadedSprite) itemRenderer.sprite = loadedSprite;
+            
 		}
 		else Debug.Log("Invalid Data & Class Matchup");
 	}
@@ -113,7 +120,7 @@ public class ProjectileWeapon : Weapon
     {
         if(CurrentAmmo > 0 && !reloading)
         {
-            flashAnimator.SetTrigger("Fire");
+            if(flashAnimator) flashAnimator.SetTrigger("Fire");
 
             shotTimer = weaponData.attackSpeed;
             CurrentAmmo -= projectileWeaponData.ammoConsumption;
@@ -131,6 +138,11 @@ public class ProjectileWeapon : Weapon
                     bulletScript.ProjectileWeaponDamage = weaponData.damage;
                     bulletScript.LifeSpan = projectileWeaponData.range;
                 }
+            }
+
+            if(hasLoadedSprite && CurrentAmmo <= 0)
+            {
+                itemRenderer.sprite = unloadedSprite;
             }
             
         }
@@ -151,10 +163,11 @@ public class ProjectileWeapon : Weapon
 
     private IEnumerator Reload(float mod = 1)
     {
-        reloading = true;
         SetReloadIndicator(true);
+        reloading = true;
         CurrentAmmo = 0;
         yield return new WaitForSeconds(projectileWeaponData.reloadTime * mod);
+        if(hasLoadedSprite) itemRenderer.sprite = loadedSprite;
         CurrentAmmo = projectileWeaponData.maxAmmo;
         reloading = false;
         SetReloadIndicator(false);

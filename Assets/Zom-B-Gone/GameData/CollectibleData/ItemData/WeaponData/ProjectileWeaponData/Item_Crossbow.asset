@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Crossbow
   description: Silence of a melee with the range of a gun
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 461a5fd54e086d349970aa3ee66f3343, type: 3}
   maxStack: 1
   weight: 990
   damage: 50
@@ -28,4 +28,4 @@ MonoBehaviour:
   reloadTime: 4
   fireForce: 25
   isAutomatic: 0
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 2198095510141801857, guid: 8713b6f4291314b47b15c473a09200f8, type: 3}
