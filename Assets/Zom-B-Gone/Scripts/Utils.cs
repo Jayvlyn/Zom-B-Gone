@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public static class Utils
@@ -78,7 +79,7 @@ public static class Utils
     
     public static bool WallInFront(Transform t, float dist = 1f)
     {
-        RaycastHit2D hit = Physics2D.Raycast(t.position, t.up, dist, LayerMask.GetMask("World"));
+        RaycastHit2D hit = Physics2D.Raycast(t.position, t.up, dist, LayerMask.GetMask("World","Vehicle"));
         return hit.collider != null;
         //return false;
     }
@@ -92,6 +93,69 @@ public static class Utils
         return viewportPos.x >= 0 && viewportPos.x <= 1 &&
                viewportPos.y >= 0 && viewportPos.y <= 1 &&
                viewportPos.z >= 0; // z should be >= 0 to ensure the position is in front of the camera
+    }
+
+    public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int damage)
+    {
+        LayerMask lm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem");
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, radius, lm);
+        foreach (Collider2D collider in colliders)
+        {
+            if(collider.TryGetComponent(out Rigidbody2D rb))
+            {
+                float finalForce = force;
+                if(collider.gameObject.layer == LayerMask.NameToLayer("Vehicle"))
+                {
+                    Vehicle v = collider.gameObject.GetComponentInChildren<Vehicle>();
+                    v.StartCoroutine(v.ExplodedTimer());
+                    finalForce *= 1000;
+                    Vector2 explosionToVehicle = (Vector2)collider.transform.position - sourcePosition;
+                    Vector2 explosionForceDirection = explosionToVehicle.normalized;
+                    float distance = explosionToVehicle.magnitude;
+
+                    float torque = 0f;
+                    float torqueAmount = 10000f;
+
+                    float inverseDistance = 1f / distance;
+
+                    // Calculate 2D torque (cross product approximation)
+                    torque = (explosionToVehicle.x * explosionForceDirection.y - explosionToVehicle.y * explosionForceDirection.x)
+                                   * finalForce;
+
+                    // Scale torque by inverse distance
+                    float scaledTorque = torque * inverseDistance;
+
+
+                    //if (explosionToVehicle.x > 0 && explosionToVehicle.y > 0)
+                    //{
+                    //    torque = torqueAmount;
+                    //}
+                    //else if (explosionToVehicle.x < 0 && explosionToVehicle.y > 0)
+                    //{
+                    //    torque = -torqueAmount;
+                    //}
+                    //else if (explosionToVehicle.x < 0 && explosionToVehicle.y < 0)
+                    //{
+                    //    torque = torqueAmount;
+                    //}
+                    //else if (explosionToVehicle.x > 0 && explosionToVehicle.y < 0)
+                    //{
+                    //    torque = -torqueAmount;
+                    //}
+                    Debug.Log(scaledTorque);
+                    rb.AddTorque(scaledTorque * 1000000, ForceMode2D.Impulse);
+                }
+
+
+                Vector2 dir = ((Vector2)collider.transform.position - sourcePosition).normalized;
+                rb.AddForce(dir * finalForce);
+            }
+
+            if(collider.TryGetComponent(out Health h))
+            {
+                h.TakeDamage(damage, 30, 1, false);
+            }
+        }
     }
 
 }

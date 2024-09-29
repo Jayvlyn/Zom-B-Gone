@@ -2,12 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : Weapon
+public class Bomb : ThrowingWeapon
 {
-    // throw or drop bomb after using to effectively blow up bomb
+    [SerializeField] private float fuseTime = 3.5f;
+    [SerializeField] private float explosionRadius = 10f;
+    [SerializeField] private float explosionForce = 10f;
+    [SerializeField,Tooltip("If this is checked, will change bomb to sprite below when lit")] private bool hasLitSprite;
+    [SerializeField] private Sprite litSprite;
+
+
     public override void Use()
     {
-        // pull pin on bomb
+        base.Use();
+        if(lastThrownItem is Bomb b)
+        {
+            ArmBomb(b);
+        }
     }
+
+    private void ArmBomb(Bomb bomb)
+    {
+        if (bomb.hasLitSprite) bomb.itemRenderer.sprite = bomb.litSprite;
+        bomb.StartCoroutine(bomb.CountdownExplosion(bomb));
+
+    }
+
+    private IEnumerator CountdownExplosion(Bomb bomb)
+    {
+        yield return new WaitForSeconds(bomb.fuseTime);
+        Utils.CreateExplosion(bomb.transform.position, bomb.explosionRadius, bomb.explosionForce, bomb.throwingWeaponData.damage);
+        Destroy(bomb.gameObject);
+    }
+
 
 }

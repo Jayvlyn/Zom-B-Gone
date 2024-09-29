@@ -10,8 +10,8 @@ public class FourWheeler : Vehicle
     protected void FixedUpdate()
     {
         base.FixedUpdate();
-        KillOrthogonalVelocity();
-        if (rb.velocity.magnitude > 0)
+        if(active) KillOrthogonalVelocity();
+        if (rb.velocity.magnitude > 0 && !movedFromExplosion)
         {
             float dot = Vector2.Dot(rb.velocity, transform.up);
 
@@ -36,7 +36,6 @@ public class FourWheeler : Vehicle
     public override void Brake()
     {
         rb.AddForce(-transform.up * brakeSpeed);
-        
     }
 
     public override void Steer(float steerDirection)

@@ -8,7 +8,10 @@ public class ThrowingWeapon : Weapon
     
     [HideInInspector] public ThrowingWeaponData throwingWeaponData;
 
-	private void Awake()
+    protected Item lastThrownItem;
+
+
+    private void Awake()
 	{
 		base.Awake();
 		if (itemData as ThrowingWeaponData != null)
@@ -25,25 +28,26 @@ public class ThrowingWeapon : Weapon
             Quantity--;
             GameObject prefab = Resources.Load<GameObject>(throwingWeaponData.name);
             GameObject thrownObject = Instantiate(prefab, transform.position, transform.rotation);
-            Item thrownItem = thrownObject.GetComponent<Item>();
-            thrownItem.ChangeState(ItemState.AIRBORNE);
+            lastThrownItem = thrownObject.GetComponent<Item>();
+            lastThrownItem.ChangeState(ItemState.AIRBORNE);
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
 
-            float throwForce = Utils.MapWeightToRange(thrownItem.itemData.weight, 10, 20, true);
+            float throwForce = Utils.MapWeightToRange(lastThrownItem.itemData.weight, 10, 20, true);
 
-            thrownItem.rb.velocity = direction * throwForce;
+            lastThrownItem.rb.velocity = direction * throwForce;
 
             if (spinThrow)
             {
                 float spinForce = Utils.MapWeightToRange(itemData.weight, 100, 700, true);
                 if (!inRightHand) spinForce *= -1;
-                thrownItem.rb.angularVelocity = spinForce;
+                lastThrownItem.rb.angularVelocity = spinForce;
             }
         }
         else
         {
+            lastThrownItem = this;
             Throw();
         }
     }

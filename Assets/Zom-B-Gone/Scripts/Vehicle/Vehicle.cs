@@ -24,7 +24,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public Rigidbody2D rb;
     public SpriteRenderer litHeadlights;
 
-
+    public bool movedFromExplosion = false;
 
     protected bool active = false;
     public bool Active
@@ -141,5 +141,12 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public void Interact(bool rightHand)
     {
         throw new System.NotImplementedException();
+    }
+
+    public IEnumerator ExplodedTimer()
+    {
+        movedFromExplosion = true;
+        yield return new WaitForSeconds(2);
+        movedFromExplosion = false;
     }
 }

@@ -18,7 +18,7 @@ public abstract class Item : Collectible
     // Component Refs
     [SerializeField] protected Transform pivotPoint;
     [SerializeField] protected Collider2D fullCollider;
-    protected SpriteRenderer itemRenderer;
+    [HideInInspector] public SpriteRenderer itemRenderer;
     // Drag
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneAngularDrag = 0.4f;
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneLinearDrag = 0.4f;
@@ -45,7 +45,7 @@ public abstract class Item : Collectible
     private Vector3 pickupTarget;
     private Quaternion rotationTarget;
     private float pickupSpeed = 10;
-    [SerializeField] private int quantity;
+    [SerializeField] private int quantity = 1;
     public int Quantity
     {
         get { return quantity; }

@@ -571,6 +571,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 790960970}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &57041117
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.773334
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.192426
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441266564750389590, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: quantity
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148136501575650614, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_Name
+      value: Big Bomb
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
 --- !u!1001 &75655558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1878,7 +1939,7 @@ MonoBehaviour:
   numberOfEnemies: 0
   spawnRadius: 10
   enemies: []
-  intervalSpawning: 1
+  intervalSpawning: 0
   intervalTime: 5
   intervalSpawnAmount: 2
 --- !u!114 &235199600
@@ -9488,7 +9549,7 @@ GameObject:
   - component: {fileID: 1357806790}
   - component: {fileID: 1357806792}
   - component: {fileID: 1357806791}
-  m_Layer: 7
+  m_Layer: 15
   m_Name: Van
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9592,7 +9653,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 4000
   m_LinearDrag: 1
-  m_AngularDrag: 4
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -17559,3 +17620,4 @@ SceneRoots:
   - {fileID: 432671561}
   - {fileID: 1683079191}
   - {fileID: 348911463}
+  - {fileID: 57041117}
