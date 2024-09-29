@@ -20,11 +20,11 @@ public class FloorContainer : MonoBehaviour
             int containerIndex = -1;
             if (c is Item i)
             {
-                containerIndex = floorContainer.AddToContainerNSIA(i.itemData, i.quantity);
+                containerIndex = floorContainer.AddToContainerNSIA(i.itemData, i.Quantity);
                 if (containerIndex == -1)
                 {
                     floorContainer.AddSpace(100);
-                    containerIndex = floorContainer.AddToContainerNSIA(i.itemData, i.quantity);
+                    containerIndex = floorContainer.AddToContainerNSIA(i.itemData, i.Quantity);
                 }
             }
             else if (c is Loot l)

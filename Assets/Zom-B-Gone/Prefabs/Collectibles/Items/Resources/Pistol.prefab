@@ -103,7 +103,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1944429129
-  m_SortingLayer: -15
+  m_SortingLayer: -16
   m_SortingOrder: -1
   m_Sprite: {fileID: 1783299052, guid: fcccd2e970c5eda48bad6c92e13b09ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -213,7 +213,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -20
+  m_SortingLayer: -21
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 86e20fc946f88dd409f8d22e8e8aa1b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0d2a639a920ac41ba7ab6f3d6fd958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorContainer: {fileID: 0}
   currentState: 0
   itemData: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
   pivotPoint: {fileID: 0}
@@ -254,6 +255,7 @@ MonoBehaviour:
   vanBack: {fileID: 0}
   inRightHand: 0
   useHeld: 0
+  quantity: 1
   weaponData: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
   firePoints:
   - {fileID: 2353463699975327284}

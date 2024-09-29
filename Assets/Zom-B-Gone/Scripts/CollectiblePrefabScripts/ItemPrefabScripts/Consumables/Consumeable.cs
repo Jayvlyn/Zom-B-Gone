@@ -6,8 +6,8 @@ public abstract class Consumeable : Item
     [HideInInspector] public ConsumableData consumableData;
 
     // Cached data to restore to original stats
-    private float playerRecoverySpeed;
-    private float playerSpeedMod;
+    private float cachedPlayerRecoverySpeed;
+    private float cahcedPlayerSpeedMod;
 
     private void Awake()
     {
@@ -23,20 +23,6 @@ public abstract class Consumeable : Item
     {
         CacheOriginalPlayerData();
 
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        if (inRightHand)
-        {
-            playerHands.RightObject = null;
-            playerHands.UsingRight = false;
-            inRightHand = false;
-        }
-        else
-        {
-            playerHands.LeftObject = null;
-            playerHands.UsingLeft = false;
-
-        }
-
         #region bonus method calls --------
 
         InstantStaminaRecovery();
@@ -47,22 +33,42 @@ public abstract class Consumeable : Item
 
         #endregion ------------------------
 
-        if(consumableData.effectTime > 0)
+        Quantity--;
+        if(Quantity <= 0)
         {
-            // Will start consume process, includes restoration of player stats
-            StartCoroutine(DestroyTimer());
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            if (inRightHand)
+            {
+                playerHands.RightObject = null;
+                playerHands.UsingRight = false;
+                inRightHand = false;
+            }
+            else
+            {
+                playerHands.LeftObject = null;
+                playerHands.UsingLeft = false;
+
+            }
+
+
+            if (consumableData.effectTime > 0)
+            {
+                // Will start consume process, includes restoration of player stats
+                StartCoroutine(DestroyTimer());
+            }
+            else
+            {
+                // Will not restore stats, permanent effect.
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            // Will not restore stats, permanent effect.
-            Destroy(gameObject);
-        }
+
     }
 
     public void CacheOriginalPlayerData()
     {
-        playerRecoverySpeed = playerData.staminaRecoverySpeed;
-        playerSpeedMod = playerData.speedModifier;
+        cachedPlayerRecoverySpeed = playerData.staminaRecoverySpeed;
+        cahcedPlayerSpeedMod = playerData.speedModifier;
     }
 
     /// <summary>
@@ -70,8 +76,8 @@ public abstract class Consumeable : Item
     /// </summary>
     public virtual void RestorePlayer()
     {
-        playerData.staminaRecoverySpeed = playerRecoverySpeed;
-        playerData.speedModifier = playerSpeedMod;
+        playerData.staminaRecoverySpeed = cachedPlayerRecoverySpeed;
+        playerData.speedModifier = cahcedPlayerSpeedMod;
     }
 
     private IEnumerator DestroyTimer()

@@ -1182,7 +1182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1891241592341271445, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -57.49945
+      value: -57.49939
       objectReference: {fileID: 0}
     - target: {fileID: 1925102843804742081, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1514,7 +1514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4083468318651213842, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -57.49945
+      value: -57.49939
       objectReference: {fileID: 0}
     - target: {fileID: 4213518153789909904, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_Enabled
@@ -1546,7 +1546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5151811660629786077, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -57.49945
+      value: -57.49939
       objectReference: {fileID: 0}
     - target: {fileID: 5295294619674490524, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   numberOfEnemies: 0
   spawnRadius: 10
   enemies: []
-  intervalSpawning: 0
+  intervalSpawning: 1
   intervalTime: 5
   intervalSpawnAmount: 2
 --- !u!114 &235199600
@@ -7536,6 +7536,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &432671561
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.815136
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.347161
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 142410594585221147, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148136501575650614, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_Name
+      value: Javelin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652609522370649260, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: quantity
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
 --- !u!1001 &443357151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9824,6 +9885,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1721834492454588363, guid: d9a385f568c5ff4488786e07be9db9ec, type: 3}
+      propertyPath: quantity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3701516494607976735, guid: d9a385f568c5ff4488786e07be9db9ec, type: 3}
       propertyPath: m_Name
       value: Adrenaline
@@ -17435,3 +17500,4 @@ SceneRoots:
   - {fileID: 1108775780}
   - {fileID: 1357806790}
   - {fileID: 944610643}
+  - {fileID: 432671561}

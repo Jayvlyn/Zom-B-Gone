@@ -31,7 +31,7 @@ public abstract class Item : Collectible
     [SerializeField] protected float gripRotation = 130;
     [SerializeField] protected float minimumAirborneSpeed = 10;
 
-    protected Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     protected PlayerController playerController;
     protected Hands playerHands;
     protected Head playerHead;
@@ -45,7 +45,21 @@ public abstract class Item : Collectible
     private Vector3 pickupTarget;
     private Quaternion rotationTarget;
     private float pickupSpeed = 10;
-    [HideInInspector] public int quantity;
+    [SerializeField] private int quantity;
+    public int Quantity
+    {
+        get { return quantity; }
+        set {
+            quantity = value;
+            if(currentState == ItemState.HELD)
+            {
+                if (inRightHand) playerHands.handContainerData.Container.collectibleSlots[1].quantity = quantity;
+                else             playerHands.handContainerData.Container.collectibleSlots[0].quantity = quantity;
+            
+                playerHands.handContainerData.onContainerCollectibleUpdated.Raise();
+            }
+        }
+    }
 
 
     public void Awake()
@@ -99,7 +113,7 @@ public abstract class Item : Collectible
         }
     }
 
-    private void ChangeState(ItemState newState)
+    public void ChangeState(ItemState newState)
     {
         switch (newState)
         {

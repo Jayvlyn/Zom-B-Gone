@@ -66,7 +66,7 @@ MonoBehaviour:
   vanBack: {fileID: 0}
   inRightHand: 0
   useHeld: 0
-  quantity: 0
+  quantity: 1
   weaponData: {fileID: 0}
   damageCollider: {fileID: 4896569074839128829}
   meleeWeaponData: {fileID: 0}
@@ -244,7 +244,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -20
+  m_SortingLayer: -21
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c15a0fe5c1cd5e144b1ebf8174567a3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

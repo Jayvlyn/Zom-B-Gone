@@ -75,7 +75,7 @@ public class Hands : MonoBehaviour
                 {
                     this.leftItem = leftItem;
                     handContainerData.Container.collectibleSlots[0].collectible = leftItem.itemData;
-                    handContainerData.Container.collectibleSlots[0].quantity = 1;
+                    handContainerData.Container.collectibleSlots[0].quantity = leftItem.Quantity;
                 }
             }
             else
@@ -99,7 +99,7 @@ public class Hands : MonoBehaviour
                 {
                     this.rightItem = rightItem;
                     handContainerData.Container.collectibleSlots[1].collectible = rightItem.itemData;
-                    handContainerData.Container.collectibleSlots[1].quantity = 1;
+                    handContainerData.Container.collectibleSlots[1].quantity = rightItem.Quantity;
                 }
             }
             else
