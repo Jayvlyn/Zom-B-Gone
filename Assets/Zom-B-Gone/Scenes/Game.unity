@@ -1241,6 +1241,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1792449917339067869, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1891241592341271445, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -57.49939
@@ -1597,13 +1601,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4863698048979497981, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4945378023618631264, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5017551967532338069, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5151811660629786077, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1749,6 +1757,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -61.299805
       objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6613976882897596276, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1777,6 +1809,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7042613142963250495, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -13.000061
+      objectReference: {fileID: 0}
     - target: {fileID: 7187066987515605367, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1795,7 +1831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436993398959353874, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7617108710880864768, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1858,7 +1894,8 @@ PrefabInstance:
       value: -36.799805
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3579759411300998491, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
@@ -8218,6 +8255,7 @@ MonoBehaviour:
   driveSeat: {fileID: 1300973419}
   rb: {fileID: 1357806792}
   litHeadlights: {fileID: 1759818546}
+  movedFromExplosion: 0
   frontLeftWheel: {fileID: 1146592654}
   frontRightWheel: {fileID: 1725482268}
 --- !u!212 &808891220
