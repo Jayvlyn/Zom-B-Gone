@@ -8,17 +8,18 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 {
     public VoidEvent OnClickEvent;
     public RectTransform rect;
+    public float buttonPressedOffset = -20;
 
     public void OnPointerDown(PointerEventData eventData)
     {
 
-        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, 0);
+        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, buttonPressedOffset);
 
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, 9.36f);
+        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, 0);
         OnClickEvent.Raise();
     }
 }
