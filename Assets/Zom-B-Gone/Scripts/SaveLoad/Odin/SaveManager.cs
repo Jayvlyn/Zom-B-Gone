@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveInitializer : MonoBehaviour
+public class SaveManager : MonoBehaviour
 {
-    public static Saves lootrunnerSaves;
+    public static Saves saves;
+    public static string loadedSave;
     private static bool hasInitialized = false;
 
     private void Awake()
@@ -13,14 +14,14 @@ public class SaveInitializer : MonoBehaviour
 
         try
         {
-            lootrunnerSaves = OdinSaveSystem.Load(OdinSaveSystem.path);
+            saves = OdinSaveSystem.Load();
         }
         catch (System.Exception e)
         {
             Debug.Log("Failed to load lootrunner saves, creating new saves");
-            Saves saves = new Saves();
-            OdinSaveSystem.Save(saves, OdinSaveSystem.path);
-            lootrunnerSaves = saves; // probably redundant but its okay
+            Saves newSaves = new Saves();
+            OdinSaveSystem.Save(newSaves);
+            saves = newSaves; // probably redundant but its okay
         }
 
         hasInitialized = true;

@@ -6,26 +6,22 @@ using UnityEngine.UI;
 
 public class LootrunnerCreator : MonoBehaviour
 {
+    public GameObject takenNamePrompt;
     public TMP_InputField nameField;
-    public ItemData itemData;
-    public void CreateLootrunner()
+
+    public void TryCreateLootrunner()
     {
-        LootrunnerSave newSave = new LootrunnerSave();
-        newSave.lootrunnerName = nameField.text;
+        string lootrunnerName = nameField.text;
 
-
-        //saves.lootrunnerSaves.Add(newSave);
-
-
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
+        if(SaveManager.saves.lootrunnerSaves.ContainsKey(lootrunnerName))
         {
-            Saves saves = OdinSaveSystem.Load(OdinSaveSystem.path);
-            LootrunnerSave loadedSave = saves.lootrunnerSaves[0];
-            Debug.Log(loadedSave.leftHandItem.name);
-        }
+			takenNamePrompt.SetActive(true);
+			return;
+		}
+
+        LootrunnerSave newSave = new LootrunnerSave();
+
+        SaveManager.saves.lootrunnerSaves[lootrunnerName] = newSave;
+        OdinSaveSystem.Save(SaveManager.saves);
     }
 }

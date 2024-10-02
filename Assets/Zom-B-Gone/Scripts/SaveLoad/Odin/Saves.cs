@@ -6,5 +6,5 @@ using UnityEngine;
 [Serializable]
 public class Saves
 {
-    public List<LootrunnerSave> lootrunnerSaves = new List<LootrunnerSave>();
+    public Dictionary<string, LootrunnerSave> lootrunnerSaves;
 }
