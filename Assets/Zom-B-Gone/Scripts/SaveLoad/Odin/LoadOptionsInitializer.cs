@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class LoadOptionsInitializer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] RectTransform loadOptionsBackground;
+	[SerializeField] float loadOptionsHeight = 100;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void Awake()
+	{
+		Object loadOption = Resources.Load("LoadOption");
+		foreach(string name in SaveManager.saves.lootrunnerSaves.Keys)
+		{
+			// Increase scrollable background size
+			loadOptionsBackground.sizeDelta = new Vector2(loadOptionsBackground.sizeDelta.x, loadOptionsBackground.sizeDelta.y + loadOptionsHeight);
+		}
+	}
 }
