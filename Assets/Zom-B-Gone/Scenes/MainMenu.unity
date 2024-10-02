@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f9f9182246a18469a9c2c5b3c8855b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadOptionsBackground: {fileID: 0}
+  loadOptionsBackground: {fileID: 450237617}
   loadOptionsHeight: 80
 --- !u!114 &210043641
 MonoBehaviour:
@@ -1265,7 +1265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 59.680054, y: -30.659424}
+  m_AnchoredPosition: {x: 59.680054, y: -30.659454}
   m_SizeDelta: {x: 350, y: -61.320133}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &490976564
@@ -1347,7 +1347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &562848899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2372,8 +2372,20 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1146438976}
         m_TargetAssemblyTypeName: LootrunnerCreator, Assembly-CSharp
-        m_MethodName: CreateLootrunner
+        m_MethodName: TryCreateLootrunner
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1766383051}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2861,7 +2873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 30, y: -25}
+  m_AnchoredPosition: {x: 30, y: -25.00003}
   m_SizeDelta: {x: 430, y: -110}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1340717651
@@ -5631,7 +5643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8366004654198048485, guid: 04edf3d339e17d548ae2df89bf2fb720, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8366004654198048485, guid: 04edf3d339e17d548ae2df89bf2fb720, type: 3}
       propertyPath: m_AnchorMin.x
@@ -5639,15 +5651,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8366004654198048485, guid: 04edf3d339e17d548ae2df89bf2fb720, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8366004654198048485, guid: 04edf3d339e17d548ae2df89bf2fb720, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8366004654198048485, guid: 04edf3d339e17d548ae2df89bf2fb720, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8366004654198048485, guid: 04edf3d339e17d548ae2df89bf2fb720, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5679,7 +5691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8366004654198048485, guid: 04edf3d339e17d548ae2df89bf2fb720, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 215
       objectReference: {fileID: 0}
     - target: {fileID: 8366004654198048485, guid: 04edf3d339e17d548ae2df89bf2fb720, type: 3}
       propertyPath: m_AnchoredPosition.y

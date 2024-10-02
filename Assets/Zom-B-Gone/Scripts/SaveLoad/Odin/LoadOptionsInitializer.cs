@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LoadOptionsInitializer : MonoBehaviour
@@ -14,6 +16,10 @@ public class LoadOptionsInitializer : MonoBehaviour
 		{
 			// Increase scrollable background size
 			loadOptionsBackground.sizeDelta = new Vector2(loadOptionsBackground.sizeDelta.x, loadOptionsBackground.sizeDelta.y + loadOptionsHeight);
+
+			Object option = Instantiate(loadOption, this.transform);
+
+			option.GetComponentInChildren<TMP_Text>().text = name;
 		}
 	}
 }
