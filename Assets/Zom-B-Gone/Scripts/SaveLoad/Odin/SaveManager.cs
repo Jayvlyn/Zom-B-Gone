@@ -30,5 +30,10 @@ public class SaveManager : MonoBehaviour
     public void DeleteLootrunner()
     {
         string name = DeletePopupShower.saveToDelete;
-    }
+        Destroy(SaveOptionDeleteReserve.reserve); // destroys option button from list
+
+        saves.lootrunnerSaves.Remove(name);
+		OdinSaveSystem.Save(saves);
+
+	}
 }
