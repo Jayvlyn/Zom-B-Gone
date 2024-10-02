@@ -26,4 +26,9 @@ public class SaveManager : MonoBehaviour
 
         hasInitialized = true;
     }
+
+    public void DeleteLootrunner()
+    {
+        string name = DeletePopupShower.saveToDelete;
+    }
 }
