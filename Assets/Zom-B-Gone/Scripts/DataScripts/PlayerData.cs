@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable,CreateAssetMenu(fileName = "New Player", menuName = "Player")]
+[Serializable,CreateAssetMenu(fileName = "New Player", menuName = "New Player")]
 public class PlayerData : ScriptableObject
 {
     [Header("Info")]

@@ -7,7 +7,7 @@ public class FloorContainer : MonoBehaviour
     public CollectibleContainerData floorContainer;
 
     // int is index in the container, PosRot is the local position and rotation of the collectibles on the floor
-    private Dictionary<PosRot, int> vanCollectibles = new Dictionary<PosRot, int>();
+    private Dictionary<PosRot, int> collectibles = new Dictionary<PosRot, int>();
 
     public int collectibleCount = 0;
 
@@ -47,14 +47,14 @@ public class FloorContainer : MonoBehaviour
             }
 
             PosRot posRot = new PosRot(c.gameObject.transform.localPosition, c.gameObject.transform.localRotation);
-            vanCollectibles[posRot] = containerIndex;
+            collectibles[posRot] = containerIndex;
             collectibleCount++;
         }
     }
 
     public void RemoveFromContainer(PosRot posRot)
     {
-        int containerIndex = vanCollectibles[posRot];
+        int containerIndex = collectibles[posRot];
         floorContainer.Container.RemoveAt(containerIndex);
         collectibleCount--;
     }
