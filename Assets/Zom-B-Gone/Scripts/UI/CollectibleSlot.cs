@@ -1,10 +1,11 @@
 using OdinSerializer;
 using System;
+using UnityEngine;
 
 [Serializable]
 public struct CollectibleSlot
 {
-	[OdinSerialize] public CollectibleData collectible;
+	public CollectibleData collectible;
     public int quantity;
 
 	public bool allowLoot;
@@ -18,7 +19,7 @@ public struct CollectibleSlot
         this.allowLoot = allowLoot;
         this.allowItems = allowItems;
         this.allowHats = allowHats;
-    }
+	}
 
     public int GetRemainingSpace()
     {

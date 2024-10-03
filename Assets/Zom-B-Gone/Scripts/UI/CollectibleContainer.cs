@@ -11,6 +11,7 @@ public class CollectibleContainer : ICollectibleContainer
     public Action OnCollectibleSwapped = delegate { };
     
 
+
     public CollectibleContainer(int size)
     {
         collectibleSlots = new CollectibleSlot[size];
