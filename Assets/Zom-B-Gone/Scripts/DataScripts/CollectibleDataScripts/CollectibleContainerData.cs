@@ -14,7 +14,17 @@ public class CollectibleContainerData : ScriptableObject
     [SerializeField] private CollectibleSlot testCollectibleSlot = new CollectibleSlot();
     [SerializeField] public int size = 42;
 
-    public CollectibleContainer Container;
+    public CollectibleContainer container;
+    public CollectibleContainer Container
+    {
+        get { return container; }
+        set
+        {
+            container = value;
+            Container.OnCollectibleUpdated += onContainerCollectibleUpdated.Raise;
+            Container.OnCollectibleSwapped += onContainerCollectibleSwapped.Raise;
+        }
+    }
 
     private void Awake()
     {
@@ -57,8 +67,8 @@ public class CollectibleContainerData : ScriptableObject
 
         size += addedSpace;
         Container = new CollectibleContainer(size);
-        Container.OnCollectibleUpdated += onContainerCollectibleUpdated.Raise;
-        Container.OnCollectibleSwapped += onContainerCollectibleSwapped.Raise;
+        //Container.OnCollectibleUpdated += onContainerCollectibleUpdated.Raise;
+        //Container.OnCollectibleSwapped += onContainerCollectibleSwapped.Raise;
 
         for (int i = 0; i < cachedSlots.Length; i++)
         {

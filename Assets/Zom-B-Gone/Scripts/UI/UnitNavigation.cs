@@ -16,6 +16,7 @@ public class UnitNavigation : MonoBehaviour
         SaveManager.currentSave.itemLocker = dataRefs.itemLockerData.Container;
         SaveManager.currentSave.lootLocker = dataRefs.lootLockerData.Container;
         OdinSaveSystem.Save(SaveManager.saves);
+        if(SaveManager.currentSave.head.collectibleSlots[0].collectible) Debug.Log(SaveManager.currentSave.head.collectibleSlots[0].collectible.name);
         SceneManager.LoadScene("MainMenu");
     }
 }

@@ -22,7 +22,7 @@ MonoBehaviour:
     allowItems: 0
     allowHats: 0
   size: 5
-  Container:
+  container:
     collectibleSlots:
     - collectible: {fileID: 0}
       quantity: 0
