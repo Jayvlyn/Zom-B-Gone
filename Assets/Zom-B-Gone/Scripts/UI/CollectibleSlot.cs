@@ -1,9 +1,10 @@
+using OdinSerializer;
 using System;
 
 [Serializable]
 public struct CollectibleSlot
 {
-    public CollectibleData collectible;
+	[OdinSerialize] public CollectibleData collectible;
     public int quantity;
 
 	public bool allowLoot;
