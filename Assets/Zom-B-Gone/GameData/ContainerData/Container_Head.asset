@@ -24,8 +24,8 @@ MonoBehaviour:
   size: 1
   Container:
     collectibleSlots:
-    - collectible: {fileID: 11400000, guid: 87abeb40489f2894a88d2f42a31cc413, type: 2}
-      quantity: 1
+    - collectible: {fileID: 0}
+      quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 1

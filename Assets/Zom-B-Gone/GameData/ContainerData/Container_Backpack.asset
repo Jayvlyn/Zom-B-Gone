@@ -21,16 +21,16 @@ MonoBehaviour:
     allowLoot: 0
     allowItems: 0
     allowHats: 0
-  size: 60
+  size: 30
   Container:
     collectibleSlots:
-    - collectible: {fileID: 11400000, guid: 87abeb40489f2894a88d2f42a31cc413, type: 2}
-      quantity: 1
+    - collectible: {fileID: 0}
+      quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 1
-    - collectible: {fileID: 11400000, guid: 3ea69505795e21d4db643120956aadfa, type: 2}
-      quantity: 12
+    - collectible: {fileID: 0}
+      quantity: 0
       allowLoot: 1
       allowItems: 0
       allowHats: 0
@@ -56,156 +56,6 @@ MonoBehaviour:
       allowHats: 0
     - collectible: {fileID: 11400000, guid: a9de3493f5d89db488cf5b063dfe7153, type: 2}
       quantity: 2
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
       allowLoot: 1
       allowItems: 0
       allowHats: 0

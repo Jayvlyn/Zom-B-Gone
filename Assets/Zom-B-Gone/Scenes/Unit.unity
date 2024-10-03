@@ -767,7 +767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.403593
+      value: -9.38694
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1904,6 +1904,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -61.299805
       objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515380882536400510, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6613976882897596276, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2025,6 +2049,8 @@ GameObject:
   - component: {fileID: 235199599}
   - component: {fileID: 235199598}
   - component: {fileID: 235199600}
+  - component: {fileID: 235199601}
+  - component: {fileID: 235199602}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2100,6 +2126,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9feaa92e0205b8f49911729df9681f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &235199601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235199596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dfb8a86dedffdc43b202b2a14c54b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataRefs: {fileID: 235199602}
+--- !u!114 &235199602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235199596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc257874c664ba74aac3539cf055cb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handsData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  headData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
+  backpackData: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
+  hatLockerData: {fileID: 11400000, guid: 5abd42d350350924298d165742e4ec72, type: 2}
+  itemLockerData: {fileID: 11400000, guid: d899c3825dac2214d8da6860657eba97, type: 2}
+  lootLockerData: {fileID: 11400000, guid: 586d250204d4c45408bf05e6362d6fbf, type: 2}
 --- !u!1 &251493660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,6 +2319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 359827346}
+  - component: {fileID: 359827347}
   m_Layer: 5
   m_Name: UnitFraming
   m_TagString: Untagged
@@ -2290,6 +2348,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &359827347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359827345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ee0063f697dab49be6d1411832f55c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataRefs: {fileID: 235199602}
 --- !u!1 &465742518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3643,7 +3714,7 @@ Transform:
   m_GameObject: {fileID: 1873980143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.403593, y: -7.92, z: -11}
+  m_LocalPosition: {x: -9.38694, y: -7.92, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

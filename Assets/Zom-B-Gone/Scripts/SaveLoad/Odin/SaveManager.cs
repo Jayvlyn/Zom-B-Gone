@@ -6,6 +6,7 @@ public class SaveManager : MonoBehaviour
 {
     public static Saves saves;
     public static string loadedSave;
+    public static LootrunnerSave currentSave;
     private static bool hasInitialized = false;
 
     private void Awake()

@@ -9,9 +9,8 @@ public class LootrunnerSave
     public int gold;
     public int kills;
 
-    public ItemData leftHandItem;
-    public ItemData rightHandItem;
-    public HatData wornHat;
+    public CollectibleContainer hands;
+    public CollectibleContainer head;
 
     public CollectibleContainer backpack;
     public CollectibleContainer hatLocker;
