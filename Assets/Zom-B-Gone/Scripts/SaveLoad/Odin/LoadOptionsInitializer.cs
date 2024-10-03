@@ -9,7 +9,7 @@ public class LoadOptionsInitializer : MonoBehaviour
 	[SerializeField] RectTransform loadOptionsBackground;
 	[SerializeField] float loadOptionsHeight = 100;
 
-	private void Awake()
+	private void OnEnable()
 	{
 		Object loadOption = Resources.Load("LoadOption");
 		foreach(string name in SaveManager.saves.lootrunnerSaves.Keys)
@@ -22,4 +22,15 @@ public class LoadOptionsInitializer : MonoBehaviour
 			option.GetComponentInChildren<TMP_Text>().text = name;
 		}
 	}
+
+    private void OnDisable()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--) 
+			Destroy(transform.GetChild(i).gameObject);
+    }
+
+	public void ReduceSize()
+	{
+        loadOptionsBackground.sizeDelta = new Vector2(loadOptionsBackground.sizeDelta.x, loadOptionsBackground.sizeDelta.y - loadOptionsHeight);
+    }
 }

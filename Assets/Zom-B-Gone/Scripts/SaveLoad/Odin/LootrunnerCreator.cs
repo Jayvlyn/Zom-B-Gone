@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LootrunnerCreator : MonoBehaviour
 {
     public GameObject takenNamePrompt;
+    public GameObject nameEntryPopup;
     public TMP_InputField nameField;
 
     public void TryCreateLootrunner()
@@ -23,5 +24,6 @@ public class LootrunnerCreator : MonoBehaviour
 
         SaveManager.saves.lootrunnerSaves[lootrunnerName] = newSave;
         OdinSaveSystem.Save(SaveManager.saves);
+        nameEntryPopup.SetActive(false);
     }
 }

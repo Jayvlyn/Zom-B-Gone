@@ -34,6 +34,5 @@ public class SaveManager : MonoBehaviour
 
         saves.lootrunnerSaves.Remove(name);
 		OdinSaveSystem.Save(saves);
-
 	}
 }
