@@ -6,6 +6,8 @@ using UnityEngine;
 [Serializable]
 public class LootrunnerSave
 {
+    public string name;
+
     public int gold;
     public int kills;
 

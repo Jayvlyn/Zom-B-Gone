@@ -21,6 +21,7 @@ public class LootrunnerCreator : MonoBehaviour
 		}
 
         LootrunnerSave newSave = new LootrunnerSave();
+        newSave.name = lootrunnerName;
 
         SaveManager.saves.lootrunnerSaves[lootrunnerName] = newSave;
         OdinSaveSystem.Save(SaveManager.saves);

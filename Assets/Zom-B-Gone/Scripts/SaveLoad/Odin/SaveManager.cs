@@ -36,4 +36,19 @@ public class SaveManager : MonoBehaviour
         saves.lootrunnerSaves.Remove(name);
 		OdinSaveSystem.Save(saves);
 	}
+
+	public static CollectibleContainer DeepCopyContainer(CollectibleContainer original)
+	{
+		CollectibleContainer copy = new CollectibleContainer(original.collectibleSlots.Length);
+		copy.collectibleSlots = new CollectibleSlot[original.collectibleSlots.Length];
+
+		for (int i = 0; i < original.collectibleSlots.Length; i++)
+		{
+			copy.collectibleSlots[i] = new CollectibleSlot();
+			copy.collectibleSlots[i].collectible = original.collectibleSlots[i].collectible;
+			copy.collectibleSlots[i].quantity = original.collectibleSlots[i].quantity;
+		}
+
+		return copy;
+	}
 }
