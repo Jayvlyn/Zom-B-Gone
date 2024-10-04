@@ -33,7 +33,8 @@ public class LootrunnerDataInitializer : MonoBehaviour
     {
         for (int i = 0; i < container.collectibleSlots.Length; i++)
         {
-            container.collectibleSlots[i].collectible = null;
+            //container.collectibleSlots[i].Collectible = null;
+            container.collectibleSlots[i].CollectibleName = null;
             container.collectibleSlots[i].quantity = 0;
         }
     }

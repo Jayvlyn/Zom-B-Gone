@@ -5,16 +5,46 @@ using UnityEngine;
 [Serializable]
 public struct CollectibleSlot
 {
-	public CollectibleData collectible;
+    [SerializeField] private CollectibleData collectible;
+	public CollectibleData Collectible
+    {
+        get {
+            if (collectible == null && collectibleName != null)
+            {
+                collectible = Resources.Load<CollectibleData>(collectibleName);
+            }
+            return collectible; 
+        }
+    }
+
+    [HideInInspector, SerializeField] private string collectibleName;
+    public string CollectibleName
+    {
+        get {
+            if (collectibleName == null && collectible != null) collectibleName = collectible.name;
+
+            return collectibleName;
+        }
+        set
+        {
+            collectibleName = value;
+
+            if(value == null) collectible = null;
+            else collectible = Resources.Load<CollectibleData>(collectibleName);
+        }
+    }
+
+
     public int quantity;
 
 	public bool allowLoot;
 	public bool allowItems;
 	public bool allowHats;
 
-	public CollectibleSlot(CollectibleData collectible, int quantity, bool allowLoot = true, bool allowItems = true, bool allowHats = true)
+	public CollectibleSlot(CollectibleData collectible, string collectibleName, int quantity, bool allowLoot = true, bool allowItems = true, bool allowHats = true)
     {
         this.collectible = collectible;
+        this.collectibleName = collectibleName;
         this.quantity = quantity;
         this.allowLoot = allowLoot;
         this.allowItems = allowItems;
@@ -23,7 +53,7 @@ public struct CollectibleSlot
 
     public int GetRemainingSpace()
     {
-        return collectible.MaxStack - quantity;
+        return Collectible.MaxStack - quantity;
     }
 
     public static bool operator == (CollectibleSlot a, CollectibleSlot b) { return a.Equals(b); }

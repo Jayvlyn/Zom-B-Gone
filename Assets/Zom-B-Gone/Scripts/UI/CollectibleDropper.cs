@@ -42,7 +42,7 @@ public class CollectibleDropper : MonoBehaviour
 
             default: // LOCKER or BACKPACK or CRAFTING TABLE
                 // Need to instantiate a collectible into the world
-                CollectibleData droppedCollectibleData = container.Container.collectibleSlots[slotIndex].collectible;
+                CollectibleData droppedCollectibleData = container.Container.collectibleSlots[slotIndex].Collectible;
                 int quantity = container.Container.collectibleSlots[slotIndex].quantity;
 				GameObject prefab = Resources.Load<GameObject>(droppedCollectibleData.name);
 				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation);

@@ -30,7 +30,7 @@ public class CollectibleContainer : ICollectibleContainer
         {
             if (collectibleSlots[i] != null)
             {
-                if (collectibleSlots[i].collectible == collectibleSlot.collectible)
+                if (collectibleSlots[i].Collectible == collectibleSlot.Collectible)
                 {
 					int remainingSpace = collectibleSlots[i].GetRemainingSpace();
                     if (collectibleSlot.quantity <= remainingSpace)
@@ -52,15 +52,16 @@ public class CollectibleContainer : ICollectibleContainer
 
         for (int i = 0; i < collectibleSlots.Length; i++)
         {
-            if (collectibleSlots[i].collectible == null)
+            if (collectibleSlots[i].Collectible == null)
             {
-                if(collectibleSlot.quantity <= collectibleSlot.collectible.MaxStack)
+                if(collectibleSlot.quantity <= collectibleSlot.Collectible.MaxStack)
                 {
-					if (collectibleSlot.collectible as LootData && !collectibleSlots[i].allowLoot) continue;
-					if (collectibleSlot.collectible as HatData && !collectibleSlots[i].allowHats) continue;
-					if (collectibleSlot.collectible as ItemData && !collectibleSlots[i].allowItems) continue;
+					if (collectibleSlot.Collectible as LootData && !collectibleSlots[i].allowLoot) continue;
+					if (collectibleSlot.Collectible as HatData && !collectibleSlots[i].allowHats) continue;
+					if (collectibleSlot.Collectible as ItemData && !collectibleSlots[i].allowItems) continue;
 
-					collectibleSlots[i].collectible = collectibleSlot.collectible;
+					//collectibleSlots[i].Collectible = collectibleSlot.Collectible;
+					collectibleSlots[i].CollectibleName = collectibleSlot.CollectibleName;
                     collectibleSlots[i].quantity = collectibleSlot.quantity;
 
                     collectibleSlot.quantity = 0;
@@ -72,10 +73,11 @@ public class CollectibleContainer : ICollectibleContainer
                 else
                 {
                     //collectibleSlots[i] = new CollectibleSlot(collectibleSlot.collectible, collectibleSlot.collectible.MaxStack, collectibleSlots[i].allowLoot, collectibleSlots[i].allowItems, collectibleSlots[i].allowHats);
-                    collectibleSlots[i].collectible = collectibleSlot.collectible;
-                    collectibleSlots[i].quantity = collectibleSlot.collectible.MaxStack;
+                    //collectibleSlots[i].Collectible = collectibleSlot.Collectible;
+                    collectibleSlots[i].CollectibleName = collectibleSlot.CollectibleName;
+                    collectibleSlots[i].quantity = collectibleSlot.Collectible.MaxStack;
 
-                    collectibleSlot.quantity -= collectibleSlot.collectible.MaxStack;
+                    collectibleSlot.quantity -= collectibleSlot.Collectible.MaxStack;
                 }
             }
         }
@@ -94,9 +96,10 @@ public class CollectibleContainer : ICollectibleContainer
     {
         for (int i = 0; i < collectibleSlots.Length; i++)
         {
-            if (collectibleSlots[i].collectible == null)
+            if (collectibleSlots[i].Collectible == null)
             {
-                collectibleSlots[i].collectible = collectibleSlot.collectible;
+                //collectibleSlots[i].Collectible = collectibleSlot.Collectible;
+                collectibleSlots[i].CollectibleName = collectibleSlot.CollectibleName;
                 collectibleSlots[i].quantity = collectibleSlot.quantity;
 
                 collectibleSlot.quantity = 0;
@@ -114,7 +117,7 @@ public class CollectibleContainer : ICollectibleContainer
 
         foreach(var slot in collectibleSlots)
         {
-            if(slot.collectible == null || slot.collectible != collectible) continue;
+            if(slot.Collectible == null || slot.Collectible != collectible) continue;
 
             totalCount += slot.quantity;
         }
@@ -126,7 +129,7 @@ public class CollectibleContainer : ICollectibleContainer
     {
         foreach(var slot in collectibleSlots)
         {
-            if (slot.collectible == null || slot.collectible != collectible) continue;
+            if (slot.Collectible == null || slot.Collectible != collectible) continue;
             return true;
         }
         return false;
@@ -136,7 +139,8 @@ public class CollectibleContainer : ICollectibleContainer
     {
         if (slotIndex < 0 || slotIndex > collectibleSlots.Length - 1) return;
 
-        collectibleSlots[slotIndex].collectible = null;
+        //collectibleSlots[slotIndex].Collectible = null;
+        collectibleSlots[slotIndex].CollectibleName = null;
         collectibleSlots[slotIndex].quantity = 0;
 
 
@@ -147,15 +151,16 @@ public class CollectibleContainer : ICollectibleContainer
     {
         for (int i = 0; i < collectibleSlots.Length; i++)
         {
-            if (collectibleSlots[i].collectible != null)
+            if (collectibleSlots[i].Collectible != null)
             {
-                if (collectibleSlots[i].collectible == collectibleSlot.collectible)
+                if (collectibleSlots[i].Collectible == collectibleSlot.Collectible)
                 {
                     if (collectibleSlots[i].quantity < collectibleSlot.quantity)
                     {
                         collectibleSlot.quantity -= collectibleSlots[i].quantity;
 
-						collectibleSlots[i].collectible = null;
+						//collectibleSlots[i].Collectible = null;
+						collectibleSlots[i].CollectibleName = null;
 						collectibleSlots[i].quantity = 0;
 					}
                     else
@@ -164,7 +169,8 @@ public class CollectibleContainer : ICollectibleContainer
 
                         if (collectibleSlots[i].quantity == 0)
                         {
-							collectibleSlots[i].collectible = null;
+							//collectibleSlots[i].Collectible = null;
+							collectibleSlots[i].CollectibleName = null;
 
 							OnCollectibleUpdated.Invoke();
 
@@ -183,19 +189,20 @@ public class CollectibleContainer : ICollectibleContainer
 
         //if (firstSlot == secondSlot) return;
 
-        if(firstSlot.collectible == secondSlot.collectible) // Check if same collectible, stack
+        if(firstSlot.Collectible == secondSlot.Collectible) // Check if same collectible, stack
 		{
             if(firstSlot.quantity <= secondSlot.GetRemainingSpace()) // Enough space to stack
             {
                 collectibleSlots[indexTwo].quantity += firstSlot.quantity;
 
+                //collectibleSlots[indexOne].Collectible = null;
+                collectibleSlots[indexOne].CollectibleName = null;
                 collectibleSlots[indexOne].quantity = 0;
-                collectibleSlots[indexOne].collectible = null;
             }
             else // not enough space to stack, but should move as much as possible
             {
-                int amountFilled = secondSlot.collectible.MaxStack - secondSlot.quantity;
-                collectibleSlots[indexTwo].quantity = secondSlot.collectible.MaxStack;
+                int amountFilled = secondSlot.Collectible.MaxStack - secondSlot.quantity;
+                collectibleSlots[indexTwo].quantity = secondSlot.Collectible.MaxStack;
 
                 collectibleSlots[indexOne].quantity -= amountFilled;
             }
@@ -206,14 +213,16 @@ public class CollectibleContainer : ICollectibleContainer
             //if (firstSlot.collectible as LootData && !secondSlot.allowLoot) return;
             //if (firstSlot.collectible as HatData && !secondSlot.allowHats) return;
             //if (firstSlot.collectible as ItemData && !secondSlot.allowItems) return;
-            if (secondSlot.collectible as LootData && !firstSlot.allowLoot) return;
-            if (secondSlot.collectible as HatData && !firstSlot.allowHats) return;
-            if (secondSlot.collectible as ItemData && !firstSlot.allowItems) return;
+            if (secondSlot.Collectible as LootData && !firstSlot.allowLoot) return;
+            if (secondSlot.Collectible as HatData && !firstSlot.allowHats) return;
+            if (secondSlot.Collectible as ItemData && !firstSlot.allowItems) return;
 
-            collectibleSlots[indexOne].collectible = secondSlot.collectible;
+            //collectibleSlots[indexOne].Collectible = secondSlot.Collectible;
+            collectibleSlots[indexOne].CollectibleName = secondSlot.CollectibleName;
             collectibleSlots[indexOne].quantity = secondSlot.quantity;
 
-            collectibleSlots[indexTwo].collectible = firstSlot.collectible;
+            //collectibleSlots[indexTwo].Collectible = firstSlot.Collectible;
+            collectibleSlots[indexTwo].CollectibleName = firstSlot.CollectibleName;
             collectibleSlots[indexTwo].quantity = firstSlot.quantity;
         }
     

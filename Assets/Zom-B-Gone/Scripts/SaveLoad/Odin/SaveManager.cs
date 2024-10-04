@@ -45,9 +45,13 @@ public class SaveManager : MonoBehaviour
 		for (int i = 0; i < original.collectibleSlots.Length; i++)
 		{
 			copy.collectibleSlots[i] = new CollectibleSlot();
-			copy.collectibleSlots[i].collectible = original.collectibleSlots[i].collectible;
+			//copy.collectibleSlots[i].Collectible = original.collectibleSlots[i].Collectible;
+			copy.collectibleSlots[i].CollectibleName = original.collectibleSlots[i].CollectibleName;
 			copy.collectibleSlots[i].quantity = original.collectibleSlots[i].quantity;
-		}
+            copy.collectibleSlots[i].allowLoot = original.collectibleSlots[i].allowLoot;
+            copy.collectibleSlots[i].allowItems = original.collectibleSlots[i].allowItems;
+            copy.collectibleSlots[i].allowHats = original.collectibleSlots[i].allowHats;
+        }
 
 		return copy;
 	}

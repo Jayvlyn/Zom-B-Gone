@@ -74,13 +74,15 @@ public class Hands : MonoBehaviour
                 if (value.TryGetComponent(out Item leftItem))
                 {
                     this.leftItem = leftItem;
-                    handContainerData.Container.collectibleSlots[0].collectible = leftItem.itemData;
+                    //handContainerData.Container.collectibleSlots[0].Collectible = leftItem.itemData;
+                    handContainerData.Container.collectibleSlots[0].CollectibleName = leftItem.itemData.name;
                     handContainerData.Container.collectibleSlots[0].quantity = leftItem.Quantity;
                 }
             }
             else
             {
-                handContainerData.Container.collectibleSlots[0].collectible = null;
+                //handContainerData.Container.collectibleSlots[0].Collectible = null;
+                handContainerData.Container.collectibleSlots[0].CollectibleName = null;
                 handContainerData.Container.collectibleSlots[0].quantity = 0;
                 leftItem = null;
             }
@@ -98,13 +100,15 @@ public class Hands : MonoBehaviour
                 if (value.TryGetComponent(out Item rightItem))
                 {
                     this.rightItem = rightItem;
-                    handContainerData.Container.collectibleSlots[1].collectible = rightItem.itemData;
+                    //handContainerData.Container.collectibleSlots[1].Collectible = rightItem.itemData;
+                    handContainerData.Container.collectibleSlots[1].CollectibleName = rightItem.itemData.name;
                     handContainerData.Container.collectibleSlots[1].quantity = rightItem.Quantity;
                 }
             }
             else
             {
-                handContainerData.Container.collectibleSlots[1].collectible = null;
+                //handContainerData.Container.collectibleSlots[1].Collectible = null;
+                handContainerData.Container.collectibleSlots[1].CollectibleName = null;
                 handContainerData.Container.collectibleSlots[1].quantity = 0;
                 rightItem = null;
             }
@@ -128,9 +132,9 @@ public class Hands : MonoBehaviour
         rightAmmoCount.enabled = false;
 
         // Initialize Hand Items
-        if (handContainerData.Container.collectibleSlots[0].collectible != null && leftItem == null) // Item missing from left hand
+        if (handContainerData.Container.collectibleSlots[0].Collectible != null && leftItem == null) // Item missing from left hand
         {
-            string itemName = handContainerData.Container.collectibleSlots[0].collectible.name;
+            string itemName = handContainerData.Container.collectibleSlots[0].Collectible.name;
             GameObject prefab = Resources.Load<GameObject>(itemName);
             leftObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
             leftItem = leftObject.GetComponent<Item>();
@@ -138,9 +142,9 @@ public class Hands : MonoBehaviour
             UsingLeft = true;
             
         }
-        if (handContainerData.Container.collectibleSlots[1].collectible != null && rightItem == null) // Item missing from right hand
+        if (handContainerData.Container.collectibleSlots[1].Collectible != null && rightItem == null) // Item missing from right hand
         {
-            string itemName = handContainerData.Container.collectibleSlots[1].collectible.name;
+            string itemName = handContainerData.Container.collectibleSlots[1].Collectible.name;
             GameObject prefab = Resources.Load<GameObject>(itemName);
             rightObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
             rightItem = rightObject.GetComponent<Item>();
@@ -152,8 +156,8 @@ public class Hands : MonoBehaviour
 
     public void OnHandItemSwapped()
     {
-        ItemData leftSlotItem = (ItemData)handContainerData.Container.collectibleSlots[0].collectible;
-        ItemData rightSlotItem = (ItemData)handContainerData.Container.collectibleSlots[1].collectible;
+        ItemData leftSlotItem = (ItemData)handContainerData.Container.collectibleSlots[0].Collectible;
+        ItemData rightSlotItem = (ItemData)handContainerData.Container.collectibleSlots[1].Collectible;
 
         Item cachedLeftItem = leftItem;
         Item cachedRightItem = rightItem;

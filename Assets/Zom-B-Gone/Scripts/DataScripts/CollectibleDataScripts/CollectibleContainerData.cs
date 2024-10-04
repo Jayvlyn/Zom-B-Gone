@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu(fileName = "New Container", menuName = "New Container")]
 public class CollectibleContainerData : ScriptableObject
@@ -49,15 +48,22 @@ public class CollectibleContainerData : ScriptableObject
         Container.AddCollectible(testCollectibleSlot);
     }
 
+    [ContextMenu("Test Add")]
+    public void SubscribeToEvents()
+    {
+        Container.OnCollectibleUpdated += onContainerCollectibleUpdated.Raise;
+        Container.OnCollectibleSwapped += onContainerCollectibleSwapped.Raise;
+    }
+
     public void AddToContainer(CollectibleData data, int amount)
     {
-        CollectibleSlot incomingCollectible = new CollectibleSlot(data, amount);
+        CollectibleSlot incomingCollectible = new CollectibleSlot(data, data.name, amount);
         Container.AddCollectible(incomingCollectible);
     }
 
     public int AddToContainerNSIA(CollectibleData data, int amount)
     {
-        CollectibleSlot incomingCollectible = new CollectibleSlot(data, amount);
+        CollectibleSlot incomingCollectible = new CollectibleSlot(data, data.name, amount);
         return Container.AddCollectibleNoStackIgnoreAllows(incomingCollectible);
     }
 

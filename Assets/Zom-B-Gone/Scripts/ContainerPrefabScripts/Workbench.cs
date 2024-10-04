@@ -43,7 +43,7 @@ public class Workbench : MonoBehaviour, IInteractable
         // Find full input slots
         for(int i = 0; i < inputSlotCount; i++)
         {
-            if (craftingTableInput.Container.collectibleSlots[i].collectible != null)
+            if (craftingTableInput.Container.collectibleSlots[i].Collectible != null)
             {
                 fullInputSlots++;
             }
@@ -64,7 +64,7 @@ public class Workbench : MonoBehaviour, IInteractable
             {
                 for(int i = 0; i < inputSlotCount; i++)
                 {
-                    if (ri.collectible != craftingTableInput.Container.collectibleSlots[i].collectible) continue;
+                    if (ri.collectible != craftingTableInput.Container.collectibleSlots[i].Collectible) continue;
                     if (ri.requiredAmount > craftingTableInput.Container.collectibleSlots[i].quantity) continue;
                     requirementsMetCount++;
                     break;
@@ -79,12 +79,14 @@ public class Workbench : MonoBehaviour, IInteractable
 
         if(foundRecipe.resultCollectible != null) // recipe made! show crafted item!
         {
-            craftingTableOutput.Container.collectibleSlots[0].collectible = foundRecipe.resultCollectible;
+            //craftingTableOutput.Container.collectibleSlots[0].Collectible = foundRecipe.resultCollectible;
+            craftingTableOutput.Container.collectibleSlots[0].CollectibleName = foundRecipe.resultCollectible.name;
             craftingTableOutput.Container.collectibleSlots[0].quantity = foundRecipe.resultAmount;
         }
         else // no recipe match, clear result slot
         {
-            craftingTableOutput.Container.collectibleSlots[0].collectible = null;
+            //craftingTableOutput.Container.collectibleSlots[0].Collectible = null;
+            craftingTableOutput.Container.collectibleSlots[0].CollectibleName = null;
             craftingTableOutput.Container.collectibleSlots[0].quantity = 0;
         }
         craftingTableOutput.onContainerCollectibleUpdated.Raise();
@@ -97,13 +99,14 @@ public class Workbench : MonoBehaviour, IInteractable
         {
             for (int i = 0; i < craftingTableInput.size; i++) // loop through each slot in crafting table input
             {
-                if(ri.collectible == craftingTableInput.Container.collectibleSlots[i].collectible) // see if this recipie item collectible matches this slot's
+                if(ri.collectible == craftingTableInput.Container.collectibleSlots[i].Collectible) // see if this recipie item collectible matches this slot's
                 {
                     // deduct amount from inputted collectible
                     craftingTableInput.Container.collectibleSlots[i].quantity -= ri.requiredAmount;
 
                     // if amount deducted reduces the inputted collectible to nothing, remove it from slot completely
-                    if (craftingTableInput.Container.collectibleSlots[i].quantity == 0) craftingTableInput.Container.collectibleSlots[i].collectible = null;
+                    //if (craftingTableInput.Container.collectibleSlots[i].quantity == 0) craftingTableInput.Container.collectibleSlots[i].Collectible = null;
+                    if (craftingTableInput.Container.collectibleSlots[i].quantity == 0) craftingTableInput.Container.collectibleSlots[i].CollectibleName = null;
                     break;
                 }
             }

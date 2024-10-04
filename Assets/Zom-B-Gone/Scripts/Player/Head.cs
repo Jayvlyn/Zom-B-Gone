@@ -21,7 +21,8 @@ public class Head : MonoBehaviour
             if (hatObject != null && hatObject.TryGetComponent(out Hat hat)) // Hat added or swapped
             {
                 wornHat = hat;
-				headContainerData.Container.collectibleSlots[0].collectible = wornHat.hatData;
+				//headContainerData.Container.collectibleSlots[0].Collectible = wornHat.hatData;
+				headContainerData.Container.collectibleSlots[0].CollectibleName = wornHat.hatData.name;
 				headContainerData.Container.collectibleSlots[0].quantity = 1;
 			}
             else // Hat taken off
@@ -37,9 +38,9 @@ public class Head : MonoBehaviour
 	private void Awake()
 	{
 		// Initialize hat
-		if (headContainerData.Container.collectibleSlots[0].collectible != null && wornHat == null) // Hat missing from head
+		if (headContainerData.Container.collectibleSlots[0].Collectible != null && wornHat == null) // Hat missing from head
 		{
-			string hatName = headContainerData.Container.collectibleSlots[0].collectible.name;
+			string hatName = headContainerData.Container.collectibleSlots[0].Collectible.name;
 			GameObject prefab = Resources.Load<GameObject>(hatName);
 			hatObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
 			wornHat = hatObject.GetComponent<Hat>();

@@ -80,7 +80,7 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
                         break;
                 }
 
-                CollectibleData collectible = thisSlot.CollectibleSlot.collectible;
+                CollectibleData collectible = thisSlot.CollectibleSlot.Collectible;
                 if (collectible as ItemData)
                 {
 

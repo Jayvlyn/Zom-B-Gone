@@ -35,8 +35,9 @@ public class ContainerSlotInitializer : MonoBehaviour
         {
             // Makes an empty slot with the same allows
             // makes template with last slot, as containers like backpack have a first slot that is different from the rest
-            CollectibleSlot slotTemplate = containerData.Container.collectibleSlots[containerData.size-1]; 
-            slotTemplate.collectible = null;
+            CollectibleSlot slotTemplate = containerData.Container.collectibleSlots[containerData.size-1];
+            //slotTemplate.Collectible = null;
+            slotTemplate.CollectibleName = null;
             slotTemplate.quantity = 0;
 
             Object newSlot = Resources.Load(slotPrefabName);

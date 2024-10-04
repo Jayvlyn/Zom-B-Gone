@@ -16,7 +16,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
     public override CollectibleData SlotCollectible
     {
-        get { return CollectibleSlot.collectible; }
+        get { return CollectibleSlot.Collectible; }
         set { }
     }
 
@@ -36,14 +36,14 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
         {
             CollectibleContainerSlot otherSlot = dragHandler.GetSlotUI as CollectibleContainerSlot;
 
-            CollectibleData otherCollectible = otherSlot.containerData.Container.collectibleSlots[otherSlot.SlotIndex].collectible;
+            CollectibleData otherCollectible = otherSlot.containerData.Container.collectibleSlots[otherSlot.SlotIndex].Collectible;
 
             //if (SlotCollectible as LootData && !otherSlot.CollectibleSlot.allowLoot) return;
             //if (SlotCollectible as HatData && !otherSlot.CollectibleSlot.allowHats) return;
             //if (SlotCollectible as ItemData && !otherSlot.CollectibleSlot.allowItems) return;
-            if (otherSlot.CollectibleSlot.collectible as LootData && !CollectibleSlot.allowLoot) return;
-            if (otherSlot.CollectibleSlot.collectible as HatData && !CollectibleSlot.allowHats) return;
-            if (otherSlot.CollectibleSlot.collectible as ItemData && !CollectibleSlot.allowItems) return;
+            if (otherSlot.CollectibleSlot.Collectible as LootData && !CollectibleSlot.allowLoot) return;
+            if (otherSlot.CollectibleSlot.Collectible as HatData && !CollectibleSlot.allowHats) return;
+            if (otherSlot.CollectibleSlot.Collectible as ItemData && !CollectibleSlot.allowItems) return;
 
             if (otherSlot.containerData == containerData)
             {
@@ -62,14 +62,14 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
     public override void UpdateSlotUI()
     {
-        if(CollectibleSlot.collectible == null) // causes out of bounds error on storage shrink
+        if(CollectibleSlot.Collectible == null) // causes out of bounds error on storage shrink
         {
             EnableSlotUI(false);
             return;
         }
         EnableSlotUI(true);
 
-        icomImage.sprite = CollectibleSlot.collectible.Icon;
+        icomImage.sprite = CollectibleSlot.Collectible.Icon;
         collectibleQuantityText.text = CollectibleSlot.quantity > 1 ? CollectibleSlot.quantity.ToString() : "";
     }
 
@@ -84,21 +84,22 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
         CollectibleSlot thisCollectibleSlot = containerData.Container.GetSlotByIndex(SlotIndex); // Required for mutability, cant use "CollectibleSlot"
         CollectibleSlot otherSlot = otherCollectibleSlot.containerData.Container.GetSlotByIndex(otherSlotIndex);
 
-		if (otherSlot.collectible == SlotCollectible) // Check if same collectible, stack
+		if (otherSlot.Collectible == SlotCollectible) // Check if same collectible, stack
 		{
 			if (otherSlot.quantity <= thisCollectibleSlot.GetRemainingSpace()) // Enough space to stack
 			{
 				thisCollectibleSlot.quantity += otherSlot.quantity;
                 containerData.Container.collectibleSlots[SlotIndex].quantity = thisCollectibleSlot.quantity;
 
-                otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].collectible = null;
+                //otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].Collectible = null;
+                otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].CollectibleName = null;
                 otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].quantity = 0;
 
 			}
             else // not enough space to stack, but should move as much as possible
             {
-                int amountFilled = thisCollectibleSlot.collectible.MaxStack - thisCollectibleSlot.quantity;
-                containerData.Container.collectibleSlots[SlotIndex].quantity = thisCollectibleSlot.collectible.MaxStack;
+                int amountFilled = thisCollectibleSlot.Collectible.MaxStack - thisCollectibleSlot.quantity;
+                containerData.Container.collectibleSlots[SlotIndex].quantity = thisCollectibleSlot.Collectible.MaxStack;
 
                 otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].quantity -= amountFilled;
             }
@@ -110,15 +111,17 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
             //if (thisCollectibleSlot.collectible as HatData && !otherSlot.allowHats) return;
             //if (thisCollectibleSlot.collectible as ItemData && !otherSlot.allowItems) return;
 
-            if (otherSlot.collectible as LootData && !thisCollectibleSlot.allowLoot) return;
-            if (otherSlot.collectible as HatData && !thisCollectibleSlot.allowHats) return;
-            if (otherSlot.collectible as ItemData && !thisCollectibleSlot.allowItems) return;
+            if (otherSlot.Collectible as LootData && !thisCollectibleSlot.allowLoot) return;
+            if (otherSlot.Collectible as HatData && !thisCollectibleSlot.allowHats) return;
+            if (otherSlot.Collectible as ItemData && !thisCollectibleSlot.allowItems) return;
 
 
-            otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].collectible = thisCollectibleSlot.collectible;
+            //otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].Collectible = thisCollectibleSlot.Collectible;
+            otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].CollectibleName = thisCollectibleSlot.CollectibleName;
             otherCollectibleSlot.containerData.Container.collectibleSlots[otherSlotIndex].quantity = thisCollectibleSlot.quantity;
 
-            containerData.Container.collectibleSlots[SlotIndex].collectible = otherSlot.collectible;
+            //containerData.Container.collectibleSlots[SlotIndex].Collectible = otherSlot.Collectible;
+            containerData.Container.collectibleSlots[SlotIndex].CollectibleName = otherSlot.CollectibleName;
             containerData.Container.collectibleSlots[SlotIndex].quantity = otherSlot.quantity;
         }
 

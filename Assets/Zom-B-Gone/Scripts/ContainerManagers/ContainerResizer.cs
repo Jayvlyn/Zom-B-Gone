@@ -28,7 +28,7 @@ public class ContainerResizer : MonoBehaviour
 		int fullSlotsInLastRow = 0;
 		for (int i = lastSlotIndex; i > (lastSlotIndex-rowSize); i--)
 		{
-			if (containerData.Container.collectibleSlots[i].collectible != null)
+			if (containerData.Container.collectibleSlots[i].Collectible != null)
 			{
 				fullSlotsInLastRow++;
 			}
@@ -45,7 +45,7 @@ public class ContainerResizer : MonoBehaviour
 
 			for (int i = secondLastRowEndSlotIndex; i >= 0; i--)
 			{
-                if (containerData.Container.collectibleSlots[i].collectible == null)
+                if (containerData.Container.collectibleSlots[i].Collectible == null)
                 {
                     emptySlots++;
                 }
@@ -79,7 +79,7 @@ public class ContainerResizer : MonoBehaviour
 
         // Makes an empty slot with the same allows
         CollectibleSlot slotTemplate = cachedSlots[cachedSlots.Length-1];
-        slotTemplate.collectible = null;
+        slotTemplate.CollectibleName = null;
         slotTemplate.quantity = 0;
 
         for (int i = (cachedSlots.Length + rowSize - 1); i >= cachedSlots.Length; i--)

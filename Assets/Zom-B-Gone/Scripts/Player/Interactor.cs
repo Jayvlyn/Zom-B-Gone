@@ -300,8 +300,8 @@ public class Interactor : MonoBehaviour
                     Hat h = playerController.head.wornHat;
                     playerController.head.hairRenderer.enabled = true;
                     playerController.head.HatObject.transform.parent = null;
-                    playerController.head.HatObject.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "GroundedHat";
-                    playerController.head.HatObject.gameObject.layer = LayerMask.NameToLayer("Interactable");
+                    playerController.head.HatObject.GetComponent<SpriteRenderer>().sortingLayerName = "GroundedHat";
+                    playerController.head.HatObject.layer = LayerMask.NameToLayer("Interactable");
                     if (playerController.head.HatObject.transform.childCount > 0)
                     {
                         SpriteRenderer[] childRenderers = playerController.head.HatObject.GetComponentsInChildren<SpriteRenderer>();
