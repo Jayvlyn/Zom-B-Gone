@@ -25,7 +25,6 @@ public class FourWheeler : Vehicle
             }
         }
 
-        if(transform.parent.name == "Van") rb.velocity = Vector3.zero;
     }
 
     public override void Accelerate()

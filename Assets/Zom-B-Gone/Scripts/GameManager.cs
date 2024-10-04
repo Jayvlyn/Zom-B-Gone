@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -66,5 +67,17 @@ public class GameManager : MonoBehaviour
 		}
 
 		return neighborsFound;
+	}
+
+	// Add extra function to these bottom two later
+
+	public void StartRun()
+	{
+		SceneManager.LoadScene("Game");
+	}
+
+	public void Extract()
+	{
+		SceneManager.LoadScene("Unit");
 	}
 }

@@ -363,6 +363,24 @@ public class PlayerController : MonoBehaviour
 
         currentState = newState;
     }
+
+	void OnApplicationFocus(bool hasFocus)
+	{
+		if (!hasFocus) Unhold();
+	}
+
+	void OnApplicationPause(bool isPaused)
+	{
+		if (isPaused) Unhold();
+	}
+
+	private void Unhold()
+	{
+        holdingSneak = false;
+        holdingRun = false;
+        holdingRight = false;
+        holdingLeft = false;
+	}
 }
 
 

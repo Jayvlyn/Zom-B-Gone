@@ -1832,6 +1832,7 @@ GameObject:
   - component: {fileID: 235199599}
   - component: {fileID: 235199598}
   - component: {fileID: 235199600}
+  - component: {fileID: 235199601}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1907,6 +1908,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9feaa92e0205b8f49911729df9681f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &235199601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235199596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b663e92038a8fc847b65ab6d544e0e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 622a6d47909437141af504ecbffdb8f3, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 235199599}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Extract
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &251493660
 GameObject:
   m_ObjectHideFlags: 0

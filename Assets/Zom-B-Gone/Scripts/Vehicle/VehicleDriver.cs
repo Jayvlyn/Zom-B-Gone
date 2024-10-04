@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using GameEvents;
+using UnityEngine.SceneManagement;
 
 public class VehicleDriver : MonoBehaviour
 {
@@ -19,10 +20,11 @@ public class VehicleDriver : MonoBehaviour
     {
         if(vehicle && vehicle.Active)
         {
-            if (travelHeld && vehicle.transform.parent.name == "Van")
+            if (TravelHeld && vehicle.transform.parent.name == "Van")
             {
                 pressTimer += Time.deltaTime;
                 if (pressTimer >= pressTimeRequired) onTravel.Raise();
+                travelPercent = pressTimer / pressTimeRequired;
             }
 
             if (steering) vehicle.Steer(steerDirection);
@@ -84,13 +86,27 @@ public class VehicleDriver : MonoBehaviour
     }
 
     private bool travelHeld = false;
-    private float pressTimer = 0;
-    private float pressTimeRequired = 3;
-    private void OnTravel(InputValue inputValue)
+    private bool TravelHeld
     {
+        get { return travelHeld; }
+        set { travelHeld = value;
+            if (!value) travelPercent = 0;
+        }
+    }
+    
+    private float pressTimer = 0;
+    private float pressTimeRequired;
+    private float extractTime = 3;
+    private float startRunTime = 1;
+    [HideInInspector] public static float travelPercent;
+	private void OnTravel(InputValue inputValue)
+    {
+        if (SceneManager.GetActiveScene().name == "Unit") pressTimeRequired = startRunTime;
+        else pressTimeRequired = extractTime;
+
         pressTimer = 0;
-        if (inputValue.isPressed) travelHeld = true;
-        else travelHeld = false;
+        if (inputValue.isPressed) TravelHeld = true;
+        else TravelHeld = false;
     }
 
     public void Enter(Collider2D playerCollider, PlayerController playerController)
@@ -151,4 +167,22 @@ public class VehicleDriver : MonoBehaviour
 
         playerController.ChangeState(PlayerController.PlayerState.IDLE);
     }
+
+	void OnApplicationFocus(bool hasFocus)
+	{
+		if (!hasFocus) Unhold();
+	}
+
+    void OnApplicationPause(bool isPaused)
+    {
+		if (isPaused) Unhold();
+	}
+
+	private void Unhold()
+    {
+		accelerateHeld = false;
+		brakeHeld = false;
+		driftHeld = false;
+		TravelHeld = false;
+	}
 }
