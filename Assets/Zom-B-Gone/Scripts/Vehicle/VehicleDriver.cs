@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using GameEvents;
 
 public class VehicleDriver : MonoBehaviour
 {
     [HideInInspector] public Vehicle vehicle;
     [SerializeField] private float enterExitSpeed = 1;
+    [SerializeField] private VoidEvent onTravel;
 
     private Collider2D playerCollider;
     private PlayerController playerController;
@@ -17,6 +19,12 @@ public class VehicleDriver : MonoBehaviour
     {
         if(vehicle && vehicle.Active)
         {
+            if (travelHeld && vehicle.transform.parent.name == "Van")
+            {
+                pressTimer += Time.deltaTime;
+                if (pressTimer >= pressTimeRequired) onTravel.Raise();
+            }
+
             if (steering) vehicle.Steer(steerDirection);
             if (accelerateHeld) vehicle.Accelerate();
             if (brakeHeld) vehicle.Brake();
@@ -73,6 +81,16 @@ public class VehicleDriver : MonoBehaviour
         StartCoroutine(ExitVehicle(exitPos, exitRot));
 
         vehicle = null;
+    }
+
+    private bool travelHeld = false;
+    private float pressTimer = 0;
+    private float pressTimeRequired = 3;
+    private void OnTravel(InputValue inputValue)
+    {
+        pressTimer = 0;
+        if (inputValue.isPressed) travelHeld = true;
+        else travelHeld = false;
     }
 
     public void Enter(Collider2D playerCollider, PlayerController playerController)

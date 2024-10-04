@@ -1,9 +1,13 @@
+using GameEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Vehicle : MonoBehaviour, IInteractable
 {
+    [SerializeField] private VoidEvent enterEvent;
+    [SerializeField] private VoidEvent exitEvent;
+
     [SerializeField] protected float accelerationSpeed;
     [SerializeField] protected float brakeSpeed;
     [SerializeField] protected float steeringSpeed;
@@ -131,11 +135,13 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public void Interact(Head head)
     {
         Active = true;
+        enterEvent.Raise();
     }
 
     public void OnExit()
     {
         Active = false;
+        exitEvent.Raise();
     }
 
     public void Interact(bool rightHand)
