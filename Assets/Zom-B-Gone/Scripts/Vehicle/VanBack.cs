@@ -41,7 +41,6 @@ public class VanBack : MonoBehaviour
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
-            collision.gameObject.transform.parent = transform;
             StartCoroutine(AddToFloorContainer(collision));
         }
 
@@ -88,7 +87,11 @@ public class VanBack : MonoBehaviour
         yield return new WaitForSeconds(2);
         if(collision.bounds.Intersects(backCollider.bounds))
         {
-            vanContainer.AddColliderToContainer(collision);
+            if(collision.TryGetComponent(out Collectible c))
+            {
+                collision.gameObject.transform.parent = transform;
+                vanContainer.AddCollectibleToContainer(c);
+            }
         }
     }
 }

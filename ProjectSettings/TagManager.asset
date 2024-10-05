@@ -16,6 +16,7 @@ TagManager:
   - ItemLockerUI
   - HatLockerUI
   - LootLockerUI
+  - VanFloor
   layers:
   - Default
   - TransparentFX

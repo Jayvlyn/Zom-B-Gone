@@ -11,6 +11,8 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
+        LootrunnerDataInitializer.initialized = false;
+        
         if (hasInitialized) return;
 
         try

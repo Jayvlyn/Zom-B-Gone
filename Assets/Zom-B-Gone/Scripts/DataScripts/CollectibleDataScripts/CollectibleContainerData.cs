@@ -73,8 +73,6 @@ public class CollectibleContainerData : ScriptableObject
 
         size += addedSpace;
         Container = new CollectibleContainer(size);
-        //Container.OnCollectibleUpdated += onContainerCollectibleUpdated.Raise;
-        //Container.OnCollectibleSwapped += onContainerCollectibleSwapped.Raise;
 
         for (int i = 0; i < cachedSlots.Length; i++)
         {

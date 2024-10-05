@@ -6,8 +6,13 @@ public class LootrunnerDataInitializer : MonoBehaviour
 {
     public LootrunnerDataRefs dataRefs;
 
+    public static bool initialized = false;
+
     private void Awake()
     {
+        if (initialized) return;
+        initialized = true;
+
         SaveManager.currentSave = SaveManager.saves.lootrunnerSaves[SaveManager.loadedSave];
         
         if (SaveManager.currentSave.hands != null) dataRefs.handsData.Container = SaveManager.currentSave.hands;
@@ -27,6 +32,28 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
         if (SaveManager.currentSave.lootLocker != null) dataRefs.lootLockerData.Container = SaveManager.currentSave.lootLocker;
         else ClearContainerSlots(dataRefs.lootLockerData.Container);
+
+        if (SaveManager.currentSave.vanFloor != null)
+        {
+            dataRefs.vanFloor.floorContainer.Container = SaveManager.currentSave.vanFloor.floorContainer;
+            dataRefs.vanFloor.floorContainer.collectibleDict = SaveManager.currentSave.vanFloor.collectibleDict;
+        }
+        else
+        {
+            ClearContainerSlots(dataRefs.vanFloor.floorContainer.Container);
+            dataRefs.vanFloor.floorContainer.ClearFloorSpecificVals();
+        }
+
+        if (SaveManager.currentSave.unitFloor != null)
+        {
+            dataRefs.unitFloor.floorContainer.Container = SaveManager.currentSave.unitFloor.floorContainer;
+            dataRefs.unitFloor.floorContainer.collectibleDict = SaveManager.currentSave.unitFloor.collectibleDict;
+        }
+        else
+        {
+            ClearContainerSlots(dataRefs.unitFloor.floorContainer.Container);
+            dataRefs.unitFloor.floorContainer.ClearFloorSpecificVals();
+        }
     }
 
     private void ClearContainerSlots(CollectibleContainer container)

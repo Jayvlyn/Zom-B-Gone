@@ -10914,7 +10914,7 @@ GameObject:
   - component: {fileID: 4007668367297085467}
   m_Layer: 14
   m_Name: VanBack
-  m_TagString: Untagged
+  m_TagString: VanFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10991,8 +10991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd58562572633ad4ca41c84eb3f71090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorContainer: {fileID: 11400000, guid: dcca182ad77644745957dc80986447e5, type: 2}
-  collectibleCount: 0
+  floorContainer: {fileID: 11400000, guid: aba0a36980fe9be42bc037db00a96398, type: 2}
 --- !u!114 &7963152559279586361
 MonoBehaviour:
   m_ObjectHideFlags: 0

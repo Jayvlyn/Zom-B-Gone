@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd6978c264dd05418033ad901ef5d2c, type: 3}
-  m_Name: Container_Unit
+  m_Script: {fileID: 11500000, guid: 52d7113ad8264514b9e24d3f4f17ec93, type: 3}
+  m_Name: FloorContainer_Unit
   m_EditorClassIdentifier: 
   containerType: 6
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 9e2434f293882f045a7fd5dc775b5318, type: 2}
@@ -625,3 +625,4 @@ MonoBehaviour:
       allowLoot: 0
       allowItems: 0
       allowHats: 0
+  collectibleCount: 0

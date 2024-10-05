@@ -19,6 +19,6 @@ public class LootrunnerSave
     public CollectibleContainer itemLocker;
     public CollectibleContainer lootLocker;
 
-    public FloorContainer vanFloor;
-    //public FloorContainer unitFloor;
+    public SaveableFloor vanFloor;
+    public SaveableFloor unitFloor;
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -37,6 +38,7 @@ public abstract class Item : Collectible
     protected Head playerHead;
     protected PlayerData playerData;
     [HideInInspector] public VanBack vanBack;
+    [HideInInspector] public UnitFloor unitFloor;
 
     // Functional vars
     [HideInInspector] public bool inRightHand;
@@ -309,6 +311,10 @@ public abstract class Item : Collectible
             {
                 vanBack.StartCoroutine(vanBack.AddToBack(this));
             }
+        }
+        else if (unitFloor)
+        {
+            unitFloor.floorContainer.AddCollectibleToContainer(this);
         }
 
     }
