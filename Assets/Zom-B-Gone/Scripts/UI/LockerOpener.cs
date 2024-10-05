@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class LockerOpener : MonoBehaviour
 {
+	[SerializeField] GameObject worldCounterpart;
+	[SerializeField] Interactor interactor;
 	[SerializeField] RectTransform targetRect;
 	[SerializeField] RectTransform heightRef;
 
 	public void OnLockerOpened()
     {
+		if (Interactor.interactedContainer != null)
+			interactor.CloseOpenedContainer();
+		Interactor.interactedContainer = worldCounterpart;
+		
 		StartCoroutine(PreSlideUp(-30, .1f));
 	}
 

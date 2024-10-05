@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public interface IInteractable
 {
@@ -92,7 +93,7 @@ public class Interactor : MonoBehaviour
         }
 
 
-        if (interactedContainer != null || interactedCrafting != null)
+        if ((interactedContainer != null || interactedCrafting != null) && SceneManager.GetActiveScene().name != "Unit")
         {
             if (distanceCheckTimer <= 0)
             {
@@ -121,7 +122,7 @@ public class Interactor : MonoBehaviour
     }
 
 
-    private void CloseOpenedContainer()
+    public void CloseOpenedContainer()
     {
         if (PlayerController.mouseHeldIcon != null)
         {
