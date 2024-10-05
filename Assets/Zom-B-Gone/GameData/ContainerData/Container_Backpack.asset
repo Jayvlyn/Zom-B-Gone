@@ -31,9 +31,9 @@ MonoBehaviour:
       allowLoot: 0
       allowItems: 0
       allowHats: 1
-    - collectible: {fileID: 11400000, guid: 12806186951343d46ba4d605585dd5ae, type: 2}
-      collectibleName: Scrap Metal
-      quantity: 1
+    - collectible: {fileID: 0}
+      collectibleName: 
+      quantity: 0
       allowLoot: 1
       allowItems: 0
       allowHats: 0
