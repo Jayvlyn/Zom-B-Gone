@@ -1,4 +1,5 @@
 using OdinSerializer;
+using OdinSerializer.Utilities;
 using System;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public struct CollectibleSlot
 	public CollectibleData Collectible
     {
         get {
-            if (collectible == null && collectibleName != null)
+            if (collectible == null && !string.IsNullOrEmpty(collectibleName))
             {
                 collectible = Resources.Load<CollectibleData>(collectibleName);
             }
@@ -21,7 +22,8 @@ public struct CollectibleSlot
     public string CollectibleName
     {
         get {
-            if (collectibleName == null && collectible != null) collectibleName = collectible.name;
+            if (string.IsNullOrEmpty(collectibleName) && collectible != null) 
+                collectibleName = collectible.name;
 
             return collectibleName;
         }
@@ -29,7 +31,7 @@ public struct CollectibleSlot
         {
             collectibleName = value;
 
-            if(value == null) collectible = null;
+            if(string.IsNullOrEmpty(value)) collectible = null;
             else collectible = Resources.Load<CollectibleData>(collectibleName);
         }
     }

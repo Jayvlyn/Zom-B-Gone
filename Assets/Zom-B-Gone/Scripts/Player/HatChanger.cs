@@ -17,6 +17,7 @@ public class HatChanger : MonoBehaviour
         if (headSlot.SlotCollectible == null && playerHead.wornHat != null) // remove hat on head from world (data not lost, exists in inventory)
         {
             Destroy(playerHead.wornHat.gameObject);
+            playerHead.HatObject = null;
         }
 
         else if (headSlot.SlotCollectible != null && playerHead.wornHat == null) // add hat on head
