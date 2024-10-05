@@ -64,10 +64,13 @@ public class FloorContainer : MonoBehaviour
             string collectibleName = floorContainer.Container.collectibleSlots[index].CollectibleName;
             GameObject prefab = Resources.Load<GameObject>(collectibleName);
             GameObject obj = Instantiate(prefab, posRot.position, posRot.rotation);
+            Collectible collectible = obj.GetComponent<Collectible>();
+            collectible.floorContainer = this;
+
             if (gameObject.CompareTag("VanFloor"))
             {
                 obj.transform.parent = transform;
-                if(obj.TryGetComponent(out Item item))
+                if(collectible is Item item)
                 {
                     item.AddToVan();
                 }

@@ -84,7 +84,7 @@ public class VanBack : MonoBehaviour
 
     public IEnumerator AddToFloorContainer(Collider2D collision)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.2f);
         if(collision.bounds.Intersects(backCollider.bounds))
         {
             if(collision.TryGetComponent(out Collectible c))
