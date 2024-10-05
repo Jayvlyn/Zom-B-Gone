@@ -343,7 +343,7 @@ MonoBehaviour:
     m_Bits: 4160
   InteractionBlockersLm:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 32896
   scanInterval: 0.1
   openContainerDistanceCheckInterval: 0.1
   defaultSpriteMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
