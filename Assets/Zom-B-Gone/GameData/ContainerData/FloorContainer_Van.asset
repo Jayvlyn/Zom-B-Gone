@@ -25,14 +25,8 @@ MonoBehaviour:
   size: 100
   container:
     collectibleSlots:
-    - collectible: {fileID: 11400000, guid: f498e0bf147fc4d46b9d95f5260d25d4, type: 2}
-      collectibleName: Javelin
-      quantity: 1
-      allowLoot: 0
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 11400000, guid: f498e0bf147fc4d46b9d95f5260d25d4, type: 2}
-      collectibleName: Javelin
+    - collectible: {fileID: 11400000, guid: 0e1b9a2d59aa58348b1f0bc7fd3bef6b, type: 2}
+      collectibleName: Cowboy Hat
       quantity: 1
       allowLoot: 0
       allowItems: 0
@@ -625,4 +619,10 @@ MonoBehaviour:
       allowLoot: 0
       allowItems: 0
       allowHats: 0
-  collectibleCount: 2
+    - collectible: {fileID: 0}
+      collectibleName: 
+      quantity: 0
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
+  collectibleCount: 1

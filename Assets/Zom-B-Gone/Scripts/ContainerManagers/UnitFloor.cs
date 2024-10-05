@@ -6,14 +6,9 @@ public class UnitFloor : Floor
 {
     [SerializeField] VanFloor vanBack;
 
-    private List<Collider2D> dealtWith = new List<Collider2D>();
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (dealtWith.Contains(collision)) return; 
-
-        dealtWith.Add(collision);
-
         if (collision.bounds.Intersects(vanBack.floorCollider.bounds)) return;
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem"))
