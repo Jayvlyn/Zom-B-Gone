@@ -37,7 +37,7 @@ public abstract class Item : Collectible
     protected Hands playerHands;
     protected Head playerHead;
     protected PlayerData playerData;
-    [HideInInspector] public VanBack vanBack;
+    [HideInInspector] public VanFloor vanBack;
     [HideInInspector] public UnitFloor unitFloor;
 
     // Functional vars
@@ -307,7 +307,7 @@ public abstract class Item : Collectible
 
         if(vanBack)
         {
-            if(fullCollider.IsTouching(vanBack.backCollider))
+            if(fullCollider.IsTouching(vanBack.floorCollider))
             {
                 vanBack.StartCoroutine(vanBack.AddToBack(this));
             }

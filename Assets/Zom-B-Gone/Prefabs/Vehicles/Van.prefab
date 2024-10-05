@@ -11004,10 +11004,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16672e8c922d44648906e4d4c1f873f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vanContainer: {fileID: 474844758639512829}
+  floorContainer: {fileID: 474844758639512829}
+  floorCollider: {fileID: 9145488007210909336}
   vehicle: {fileID: 5343874904298946327}
   vanRoofSprite: {fileID: 8285859413868435578}
-  backCollider: {fileID: 9145488007210909336}
 --- !u!212 &6150787739262144366
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -654,8 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 076b2404926004e48b7177610a19e439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vanBack: {fileID: 1235000420}
   floorContainer: {fileID: 61883576}
+  floorCollider: {fileID: 61883579}
+  vanBack: {fileID: 1235000420}
 --- !u!61 &61883579
 BoxCollider2D:
   m_ObjectHideFlags: 0

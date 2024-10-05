@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
-public class UnitFloor : MonoBehaviour
+public class UnitFloor : Floor
 {
-    [SerializeField] VanBack vanBack;
-    public FloorContainer floorContainer;
+    [SerializeField] VanFloor vanBack;
 
     private List<Collider2D> dealtWith = new List<Collider2D>();
 
@@ -16,7 +14,7 @@ public class UnitFloor : MonoBehaviour
 
         dealtWith.Add(collision);
 
-        if (collision.bounds.Intersects(vanBack.backCollider.bounds)) return;
+        if (collision.bounds.Intersects(vanBack.floorCollider.bounds)) return;
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem"))
         {
@@ -28,15 +26,15 @@ public class UnitFloor : MonoBehaviour
             }
             else
             {
-                floorContainer.AddCollectibleToContainer(item);
+				StartCoroutine(AddToFloorContainer(collision));
             }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             if (collision.TryGetComponent(out Collectible c))
             {
-                floorContainer.AddCollectibleToContainer(c);
-            }
+				StartCoroutine(AddToFloorContainer(collision));
+			}
         }
     }
 }

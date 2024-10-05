@@ -63,8 +63,11 @@ public class FloorContainer : MonoBehaviour
             int index = floorContainer.collectibleDict[posRot];
             string collectibleName = floorContainer.Container.collectibleSlots[index].CollectibleName;
             GameObject prefab = Resources.Load<GameObject>(collectibleName);
-            GameObject obj = Instantiate(prefab, posRot.position, posRot.rotation);
-            Collectible collectible = obj.GetComponent<Collectible>();
+            GameObject obj = Instantiate(prefab, transform);
+			obj.transform.localPosition = posRot.position;
+			obj.transform.localRotation = posRot.rotation;
+
+			Collectible collectible = obj.GetComponent<Collectible>();
             collectible.floorContainer = this;
 
             if (gameObject.CompareTag("VanFloor"))
@@ -74,8 +77,6 @@ public class FloorContainer : MonoBehaviour
                 {
                     item.AddToVan();
                 }
-                obj.transform.localPosition = posRot.position;
-                obj.transform.localRotation = posRot.rotation;
             }
         }
     }

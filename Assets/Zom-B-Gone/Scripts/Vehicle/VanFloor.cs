@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VanBack : MonoBehaviour
+public class VanFloor : Floor
 {
-    public FloorContainer vanContainer;
     public Vehicle vehicle;
     public SpriteRenderer vanRoofSprite;
-    public Collider2D backCollider;
+
 
     // make sure collectibles with multiple colliders only have 1 that interacts with floor container's collider
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,7 +18,7 @@ public class VanBack : MonoBehaviour
         {
             PlayerController pc = collision.GetComponent<PlayerController>();
             StopCoroutine("ShowRoof");
-            StartCoroutine(HideRoof(2));
+			if (gameObject.activeInHierarchy) StartCoroutine(HideRoof(2));
         }
         else if (vehicle.rb.velocity.magnitude > 0.2)
         {
@@ -53,7 +52,7 @@ public class VanBack : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             StopCoroutine("HideRoof");
-            StartCoroutine(ShowRoof(2));
+			if (gameObject.activeInHierarchy) StartCoroutine(ShowRoof(2));
         }
     }
 
@@ -80,18 +79,5 @@ public class VanBack : MonoBehaviour
         yield return new WaitForSeconds(2);
         item.transform.parent = transform;
         item.AddToVan();
-    }
-
-    public IEnumerator AddToFloorContainer(Collider2D collision)
-    {
-        yield return new WaitForSeconds(2.2f);
-        if(collision.bounds.Intersects(backCollider.bounds))
-        {
-            if(collision.TryGetComponent(out Collectible c))
-            {
-                collision.gameObject.transform.parent = transform;
-                vanContainer.AddCollectibleToContainer(c);
-            }
-        }
     }
 }
