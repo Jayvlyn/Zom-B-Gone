@@ -4,58 +4,79 @@ using UnityEngine;
 
 public class FloorContainer : MonoBehaviour
 {
-    public CollectibleContainerData floorContainer;
+    public FloorContainerData floorContainer;
 
-    // int is index in the container, PosRot is the local position and rotation of the collectibles on the floor
-    private Dictionary<PosRot, int> collectibles = new Dictionary<PosRot, int>();
-
-    public int collectibleCount = 0;
-
-    public void AddColliderToContainer(Collider2D collider)
+    private void Awake()
     {
-        if (collider.gameObject.TryGetComponent(out Collectible c))
+        LoadCollectiblesInWorld();
+    }
+
+    public void AddCollectibleToContainer(Collectible c)
+    {
+        c.floorContainer = this;
+
+        int containerIndex = -1;
+        if (c is Item i)
         {
-            c.floorContainer = this;
-
-            int containerIndex = -1;
-            if (c is Item i)
+            containerIndex = floorContainer.AddToContainerNSIA(i.itemData, i.Quantity);
+            if (containerIndex == -1)
             {
+                floorContainer.AddSpace(100);
                 containerIndex = floorContainer.AddToContainerNSIA(i.itemData, i.Quantity);
-                if (containerIndex == -1)
-                {
-                    floorContainer.AddSpace(100);
-                    containerIndex = floorContainer.AddToContainerNSIA(i.itemData, i.Quantity);
-                }
             }
-            else if (c is Loot l)
-            {
-                containerIndex = floorContainer.AddToContainerNSIA(l.lootData, l.quantity);
-                if (containerIndex == -1)
-                {
-                    floorContainer.AddSpace(100);
-                    containerIndex = floorContainer.AddToContainerNSIA(l.lootData, l.quantity);
-                }
-            }
-            else if (c is Hat h)
-            {
-                containerIndex = floorContainer.AddToContainerNSIA(h.hatData, 1);
-                if (containerIndex == -1)
-                {
-                    floorContainer.AddSpace(100);
-                    containerIndex = floorContainer.AddToContainerNSIA(h.hatData, 1);
-                }
-            }
-
-            PosRot posRot = new PosRot(c.gameObject.transform.localPosition, c.gameObject.transform.localRotation);
-            collectibles[posRot] = containerIndex;
-            collectibleCount++;
         }
+        else if (c is Loot l)
+        {
+            containerIndex = floorContainer.AddToContainerNSIA(l.lootData, l.quantity);
+            if (containerIndex == -1)
+            {
+                floorContainer.AddSpace(100);
+                containerIndex = floorContainer.AddToContainerNSIA(l.lootData, l.quantity);
+            }
+        }
+        else if (c is Hat h)
+        {
+            containerIndex = floorContainer.AddToContainerNSIA(h.hatData, 1);
+            if (containerIndex == -1)
+            {
+                floorContainer.AddSpace(100);
+                containerIndex = floorContainer.AddToContainerNSIA(h.hatData, 1);
+            }
+        }
+
+        PosRot posRot = new PosRot(c.gameObject.transform.localPosition, c.gameObject.transform.localRotation);
+        floorContainer.collectibleDict[posRot] = containerIndex;
+        floorContainer.collectibleCount++;
     }
 
     public void RemoveFromContainer(PosRot posRot)
     {
-        int containerIndex = collectibles[posRot];
+        int containerIndex = floorContainer.collectibleDict[posRot];
         floorContainer.Container.RemoveAt(containerIndex);
-        collectibleCount--;
+        floorContainer.collectibleCount--;
+    }
+
+    public void LoadCollectiblesInWorld()
+    {
+        foreach (PosRot posRot in floorContainer.collectibleDict.Keys)
+        {
+            int index = floorContainer.collectibleDict[posRot];
+            string collectibleName = floorContainer.Container.collectibleSlots[index].CollectibleName;
+            GameObject prefab = Resources.Load<GameObject>(collectibleName);
+            GameObject obj = Instantiate(prefab, posRot.position, posRot.rotation);
+            Collectible collectible = obj.GetComponent<Collectible>();
+            collectible.floorContainer = this;
+
+            if (gameObject.CompareTag("VanFloor"))
+            {
+                obj.transform.parent = transform;
+                if(collectible is Item item)
+                {
+                    item.AddToVan();
+                }
+                obj.transform.localPosition = posRot.position;
+                obj.transform.localRotation = posRot.rotation;
+            }
+        }
     }
 }

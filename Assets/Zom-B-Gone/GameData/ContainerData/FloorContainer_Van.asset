@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd6978c264dd05418033ad901ef5d2c, type: 3}
-  m_Name: Container_Van
+  m_Script: {fileID: 11500000, guid: 52d7113ad8264514b9e24d3f4f17ec93, type: 3}
+  m_Name: FloorContainer_Van
   m_EditorClassIdentifier: 
   containerType: 6
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 9f8f02191534d784195cb7d66ff69232, type: 2}
   onContainerCollectibleSwapped: {fileID: 11400000, guid: aa223d0b9a3f4b44489f967ba94d53a0, type: 2}
   testCollectibleSlot:
     collectible: {fileID: 0}
+    collectibleName: 
     quantity: 0
     allowLoot: 0
     allowItems: 0
@@ -24,503 +25,604 @@ MonoBehaviour:
   size: 100
   container:
     collectibleSlots:
-    - collectible: {fileID: 0}
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: f498e0bf147fc4d46b9d95f5260d25d4, type: 2}
+      collectibleName: Javelin
+      quantity: 1
       allowLoot: 0
       allowItems: 0
       allowHats: 0
-    - collectible: {fileID: 0}
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: f498e0bf147fc4d46b9d95f5260d25d4, type: 2}
+      collectibleName: Javelin
+      quantity: 1
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 0
       allowItems: 0
       allowHats: 0
+  collectibleCount: 2

@@ -111,6 +111,7 @@ public class VehicleDriver : MonoBehaviour
 
     public void Enter(Collider2D playerCollider, PlayerController playerController)
     {
+        travelPercent = pressTimer / pressTimeRequired;
         this.playerCollider = playerCollider;
         this.playerController = playerController;
 

@@ -134,7 +134,7 @@ public class Hands : MonoBehaviour
         // Initialize Hand Items
         if (handContainerData.Container.collectibleSlots[0].Collectible != null && leftItem == null) // Item missing from left hand
         {
-            string itemName = handContainerData.Container.collectibleSlots[0].Collectible.name;
+            string itemName = handContainerData.Container.collectibleSlots[0].CollectibleName;
             GameObject prefab = Resources.Load<GameObject>(itemName);
             leftObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
             leftItem = leftObject.GetComponent<Item>();
@@ -144,7 +144,7 @@ public class Hands : MonoBehaviour
         }
         if (handContainerData.Container.collectibleSlots[1].Collectible != null && rightItem == null) // Item missing from right hand
         {
-            string itemName = handContainerData.Container.collectibleSlots[1].Collectible.name;
+            string itemName = handContainerData.Container.collectibleSlots[1].CollectibleName;
             GameObject prefab = Resources.Load<GameObject>(itemName);
             rightObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
             rightItem = rightObject.GetComponent<Item>();
