@@ -95,7 +95,6 @@ public class VanFloor : Floor
 	public IEnumerator AddToBack(Item item)
 	{
 		yield return new WaitForSeconds(2);
-		item.transform.parent = transform;
-		item.AddToVan();
+		item.AddToFloor();
 	}
 }

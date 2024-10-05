@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Item : Collectible
@@ -18,7 +19,7 @@ public abstract class Item : Collectible
     public ItemData itemData;
     // Component Refs
     [SerializeField] protected Transform pivotPoint;
-    [SerializeField] protected Collider2D fullCollider;
+    public Collider2D fullCollider;
     [HideInInspector] public SpriteRenderer itemRenderer;
     // Drag
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneAngularDrag = 0.4f;
@@ -307,15 +308,13 @@ public abstract class Item : Collectible
 
         if(vanBack)
         {
-            if(fullCollider.IsTouching(vanBack.floorCollider))
-            {
-                vanBack.StartCoroutine(vanBack.AddToBack(this));
-            }
-        }
+            vanBack.StartCoroutine(vanBack.AddToFloorContainer(this));
+			vanBack.StartCoroutine(vanBack.AddToBack(this));
+		}
         else if (unitFloor)
         {
-            unitFloor.floorContainer.AddCollectibleToContainer(this);
-        }
+            unitFloor.StartCoroutine(unitFloor.AddToFloorContainer(this));
+		}
 
     }
 
@@ -340,9 +339,11 @@ public abstract class Item : Collectible
         }
     }
 
-    public void AddToVan()
+    public void AddToFloor()
     {
-        fullCollider.isTrigger = true;
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = 0;
+		fullCollider.isTrigger = true;
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
     

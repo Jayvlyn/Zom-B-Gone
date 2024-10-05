@@ -19,4 +19,15 @@ public class Floor : MonoBehaviour
 			}
 		}
 	}
+
+	public IEnumerator AddToFloorContainer(Item item)
+	{
+		yield return new WaitForSeconds(2.2f);
+		if (item.fullCollider.bounds.Intersects(floorCollider.bounds))
+		{
+			item.fullCollider.gameObject.transform.parent = transform;
+			floorContainer.AddCollectibleToContainer(item);
+			
+		}
+	}
 }

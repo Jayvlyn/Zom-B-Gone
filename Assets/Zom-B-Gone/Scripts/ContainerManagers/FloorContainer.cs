@@ -54,6 +54,7 @@ public class FloorContainer : MonoBehaviour
         int containerIndex = floorContainer.collectibleDict[posRot];
         floorContainer.Container.RemoveAt(containerIndex);
         floorContainer.collectibleCount--;
+        floorContainer.collectibleDict.Remove(posRot);
     }
 
     public void LoadCollectiblesInWorld()
@@ -70,13 +71,9 @@ public class FloorContainer : MonoBehaviour
 			Collectible collectible = obj.GetComponent<Collectible>();
             collectible.floorContainer = this;
 
-            if (gameObject.CompareTag("VanFloor"))
+            if(collectible is Item item)
             {
-                obj.transform.parent = transform;
-                if(collectible is Item item)
-                {
-                    item.AddToVan();
-                }
+                item.AddToFloor();
             }
         }
     }
