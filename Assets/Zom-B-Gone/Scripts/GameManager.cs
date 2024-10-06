@@ -71,9 +71,9 @@ public class GameManager : MonoBehaviour
 
 	// Add extra function to these bottom two later
 
-	public void StartRun()
+	public void StartRun(string run)
 	{
-		SceneManager.LoadScene("Game");
+		SceneManager.LoadScene(run);
 	}
 
 	public void Extract()
