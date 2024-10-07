@@ -34,23 +34,32 @@ public class VanFloor : Floor
 		{
 			return;
 		}
-		else if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem"))
+		else if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem") || collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
 		{
-			GameObject itemObject = collision.gameObject;
-			Item item = itemObject.GetComponent<Item>();
-			if (item.currentState == Item.ItemState.HELD)
+			GameObject collectibleObject = collision.gameObject;
+			Collectible c = collectibleObject.GetComponent<Collectible>();
+			if(c.addContainer != null)
 			{
-				item.vanBack = this;
+				c.StopCoroutine(c.addContainer);
+				c.addContainer = null;
+			}
+			if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem"))
+			{
+				GameObject itemObject = collision.gameObject;
+				Item item = c as Item;
+				if (item.currentState == Item.ItemState.HELD)
+				{
+					item.vanBack = this;
+				}
+				else
+				{
+					item.addContainer = item.StartCoroutine(item.AddToFloorContainer(this));
+				}
 			}
 			else
 			{
-				StartCoroutine(AddToBack(item));
-				StartCoroutine(AddToFloorContainer(collision));
+				c.addContainer = c.StartCoroutine(c.AddToFloorContainer(this));
 			}
-		}
-		else if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
-		{
-			StartCoroutine(AddToFloorContainer(collision));
 		}
 	}
 
@@ -91,11 +100,5 @@ public class VanFloor : Floor
 		}
 
 		showRoofCoroutine = null;
-	}
-
-	public IEnumerator AddToBack(Item item)
-	{
-		yield return new WaitForSeconds(2);
-		item.AddToFloor();
 	}
 }

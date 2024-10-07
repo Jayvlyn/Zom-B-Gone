@@ -4,9 +4,16 @@ using UnityEngine;
 
 public abstract class Collectible : MonoBehaviour, IInteractable
 {
-    public virtual void Interact(bool rightHand)
+	public Collider2D fullCollider;
+
+	public virtual void Interact(bool rightHand)
     {
-        if(floorContainer)
+		if (addContainer != null)
+		{
+			StopCoroutine(addContainer);
+			addContainer = null;
+		}
+		if (floorContainer)
         {
             PosRot posRot = new PosRot(transform.localPosition, transform.localRotation);
             floorContainer.RemoveFromContainer(posRot);
@@ -15,6 +22,11 @@ public abstract class Collectible : MonoBehaviour, IInteractable
     }
     public virtual void Interact(Head head)
     {
+        if (addContainer != null)
+        {
+            StopCoroutine(addContainer);
+            addContainer = null;
+        }
         if (floorContainer)
         {
             PosRot posRot = new PosRot(transform.localPosition, transform.localRotation);
@@ -22,5 +34,17 @@ public abstract class Collectible : MonoBehaviour, IInteractable
             floorContainer = null;
         }
     }
-    [HideInInspector] public FloorContainer floorContainer = null;
+
+	public virtual IEnumerator AddToFloorContainer(Floor floor)
+	{
+		yield return new WaitForSeconds(2f);
+		if (fullCollider.bounds.Intersects(floor.floorCollider.bounds))
+		{
+			fullCollider.gameObject.transform.parent = floor.floorCollider.transform;
+			floor.floorContainer.AddCollectibleToContainer(this);
+		}
+	}
+
+    public Coroutine addContainer = null;
+	[HideInInspector] public FloorContainer floorContainer = null;
 }

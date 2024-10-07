@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Item : Collectible
@@ -15,11 +12,10 @@ public abstract class Item : Collectible
     public ItemState currentState;
 
 
-	[Header("Item attributes")]
+    [Header("Item attributes")]
     public ItemData itemData;
     // Component Refs
     [SerializeField] protected Transform pivotPoint;
-    public Collider2D fullCollider;
     [HideInInspector] public SpriteRenderer itemRenderer;
     // Drag
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneAngularDrag = 0.4f;
@@ -27,7 +23,7 @@ public abstract class Item : Collectible
     [SerializeField, Range(0.0f, 10.0f)] protected float groundedAngularDrag = 3.0f;
     [SerializeField, Range(0.0f, 10.0f)] protected float groundedLinearDrag = 3.0f;
     // Customization
-	[SerializeField] protected Vector2 holdOffset = new Vector2(0.5f, 0.5f);
+    [SerializeField] protected Vector2 holdOffset = new Vector2(0.5f, 0.5f);
     [SerializeField] protected bool spinThrow = true;
     [SerializeField] protected bool aimAtMouse = true;
     [SerializeField] protected float gripRotation = 130;
@@ -38,6 +34,7 @@ public abstract class Item : Collectible
     protected Hands playerHands;
     protected Head playerHead;
     protected PlayerData playerData;
+
     [HideInInspector] public VanFloor vanBack;
     [HideInInspector] public UnitFloor unitFloor;
 
@@ -52,13 +49,14 @@ public abstract class Item : Collectible
     public int Quantity
     {
         get { return quantity; }
-        set {
+        set
+        {
             quantity = value;
-            if(currentState == ItemState.HELD)
+            if (currentState == ItemState.HELD)
             {
                 if (inRightHand) playerHands.handContainerData.Container.collectibleSlots[1].quantity = quantity;
-                else             playerHands.handContainerData.Container.collectibleSlots[0].quantity = quantity;
-            
+                else playerHands.handContainerData.Container.collectibleSlots[0].quantity = quantity;
+
                 playerHands.handContainerData.onContainerCollectibleUpdated.Raise();
             }
         }
@@ -84,7 +82,7 @@ public abstract class Item : Collectible
                 rb.drag = groundedLinearDrag;
                 rb.angularDrag = groundedAngularDrag;
                 break;
-            case ItemState.AIRBORNE: 
+            case ItemState.AIRBORNE:
                 itemRenderer.sortingLayerName = "ActiveItem";
                 rb.drag = airborneLinearDrag;
                 rb.angularDrag = airborneAngularDrag;
@@ -97,20 +95,20 @@ public abstract class Item : Collectible
 
     protected virtual void Update()
     {
-        if(currentState == ItemState.AIRBORNE && rb.velocity.magnitude < minimumAirborneSpeed)
+        if (currentState == ItemState.AIRBORNE && rb.velocity.magnitude < minimumAirborneSpeed)
         {
             ChangeState(ItemState.GROUNDED);
         }
 
-        if(moveToHand)
+        if (moveToHand)
         {
             ReturnToGrip();
-		}
+        }
     }
 
     private void FixedUpdate()
     {
-        if(currentState == ItemState.HELD && aimAtMouse)
+        if (currentState == ItemState.HELD && aimAtMouse)
         {
             RotateToMouse();
         }
@@ -130,11 +128,11 @@ public abstract class Item : Collectible
 
                 if (currentState == ItemState.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
-				fullCollider.enabled = true;
+                fullCollider.enabled = true;
 
-				// fullCollider.isTrigger = true;
+                // fullCollider.isTrigger = true;
 
-				break;
+                break;
             case ItemState.AIRBORNE:
                 rb.drag = airborneLinearDrag;
                 rb.angularDrag = airborneAngularDrag;
@@ -145,14 +143,14 @@ public abstract class Item : Collectible
 
                 if (currentState == ItemState.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
-				fullCollider.enabled = true;
+                fullCollider.enabled = true;
 
-				fullCollider.isTrigger = false;
+                fullCollider.isTrigger = false;
 
                 break;
 
             case ItemState.HELD:
-				gameObject.layer = LayerMask.NameToLayer("AirborneItem");
+                gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
                 itemRenderer.sortingLayerName = "ActiveItem";
 
@@ -175,7 +173,7 @@ public abstract class Item : Collectible
     public virtual void InventoryDrop(bool invertDrop)
     {
         float dropForce = Utils.MapWeightToRange(itemData.weight, 1.5f, 3, true);
-        if(invertDrop) { dropForce = -dropForce; }
+        if (invertDrop) { dropForce = -dropForce; }
         rb.AddForce(-transform.right * dropForce, ForceMode2D.Impulse);
     }
 
@@ -204,9 +202,9 @@ public abstract class Item : Collectible
 
         // Velocity change instead because throw is fastest the second it the object leaves contact with the propelling force
         rb.velocity = direction * throwForce;
-		//rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
+        //rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
 
-        if(spinThrow)
+        if (spinThrow)
         {
             float spinForce = Utils.MapWeightToRange(itemData.weight, 100, 700, true);
             if (!inRightHand) spinForce *= -1;
@@ -220,19 +218,19 @@ public abstract class Item : Collectible
         rb.angularVelocity = 0;
 
         ChangeState(ItemState.HELD);
-        
+
         if (rightHand) inRightHand = true;
         else inRightHand = false;
         CheckFlip();
-        
-        
+
+
         transform.SetParent(parent);
         PositionInHand();
     }
 
     protected void CheckFlip()
     {
-        if((inRightHand && transform.localScale.x < 0) || (!inRightHand && transform.localScale.x > 0))
+        if ((inRightHand && transform.localScale.x < 0) || (!inRightHand && transform.localScale.x > 0))
         {
             FlipX();
         }
@@ -263,29 +261,29 @@ public abstract class Item : Collectible
         else rotationTarget = Quaternion.Euler(0, 0, gripRotation);
 
         CheckFlip();
-		
+
         moveToHand = true; // see update()
     }
 
     protected void ReturnToGrip()
     {
-		if (inRightHand)
-		{
-			pickupTarget = transform.parent.position + (transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
-		}
-		else
-		{
-			pickupTarget = transform.parent.position + (-transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
-		}
-		if (Vector3.Distance(transform.position, pickupTarget) < 0.02f)
-		{
-			transform.position = pickupTarget;
-			moveToHand = false;
-			return;
-		}
-		transform.position = Vector2.Lerp(transform.position, pickupTarget, Time.deltaTime * pickupSpeed);
-		if (!aimAtMouse) transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationTarget, pickupSpeed * Time.deltaTime);
-	}
+        if (inRightHand)
+        {
+            pickupTarget = transform.parent.position + (transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
+        }
+        else
+        {
+            pickupTarget = transform.parent.position + (-transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
+        }
+        if (Vector3.Distance(transform.position, pickupTarget) < 0.02f)
+        {
+            transform.position = pickupTarget;
+            moveToHand = false;
+            return;
+        }
+        transform.position = Vector2.Lerp(transform.position, pickupTarget, Time.deltaTime * pickupSpeed);
+        if (!aimAtMouse) transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationTarget, pickupSpeed * Time.deltaTime);
+    }
 
     protected virtual void RemoveFromHand()
     {
@@ -295,33 +293,32 @@ public abstract class Item : Collectible
 
         if (inRightHand)
         {
-            playerHands.RightObject = null; 
+            playerHands.RightObject = null;
             playerHands.UsingRight = false;
         }
         else
         {
-            playerHands.LeftObject = null; 
+            playerHands.LeftObject = null;
             playerHands.UsingLeft = false;
         }
 
         transform.SetParent(null);
 
-        if(vanBack)
+        if (vanBack)
         {
-            vanBack.StartCoroutine(vanBack.AddToFloorContainer(this));
-			vanBack.StartCoroutine(vanBack.AddToBack(this));
-		}
+            StartCoroutine(AddToFloorContainer(vanBack));
+        }
         else if (unitFloor)
         {
-            unitFloor.StartCoroutine(unitFloor.AddToFloorContainer(this));
-		}
+            StartCoroutine(AddToFloorContainer(unitFloor));
+        }
 
     }
-
+    
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if(currentState == ItemState.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
+        if (currentState == ItemState.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
             int damage = Mathf.RoundToInt(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * (rb.velocity.magnitude / 2));
 
@@ -341,10 +338,22 @@ public abstract class Item : Collectible
 
     public void AddToFloor()
     {
-		rb.velocity = Vector3.zero;
-		rb.angularVelocity = 0;
-		fullCollider.isTrigger = true;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = 0;
+        fullCollider.isTrigger = true;
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
-    
+
+    public override IEnumerator AddToFloorContainer(Floor floor)
+    {
+        yield return new WaitForSeconds(2.2f);
+		if (fullCollider.bounds.Intersects(floor.floorCollider.bounds))
+        {
+		    AddToFloor();
+            fullCollider.gameObject.transform.parent = floor.floorCollider.transform;
+            floor.floorContainer.AddCollectibleToContainer(this);
+
+        }
+    }
+
 }

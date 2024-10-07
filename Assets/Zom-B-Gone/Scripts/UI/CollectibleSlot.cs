@@ -31,7 +31,7 @@ public struct CollectibleSlot
         {
             collectibleName = value;
 
-            if(string.IsNullOrEmpty(value)) collectible = null;
+            if(string.IsNullOrEmpty(collectibleName)) collectible = null;
             else collectible = Resources.Load<CollectibleData>(collectibleName);
         }
     }

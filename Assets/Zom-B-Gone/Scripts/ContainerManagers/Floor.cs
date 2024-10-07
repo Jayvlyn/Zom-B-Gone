@@ -12,30 +12,4 @@ public class Floor : MonoBehaviour
 	{
 		timeSinceAwake += Time.deltaTime;
 	}
-
-	// probably move these to the collectible, so we can know if the coroutine should be canceled when it gets picked up early
-
-	public IEnumerator AddToFloorContainer(Collider2D collision)
-	{
-		yield return new WaitForSeconds(2.2f);
-		if (collision.bounds.Intersects(floorCollider.bounds))
-		{
-			if (collision.TryGetComponent(out Collectible c))
-			{
-				collision.gameObject.transform.parent = transform;
-				floorContainer.AddCollectibleToContainer(c);
-			}
-		}
-	}
-
-	public IEnumerator AddToFloorContainer(Item item)
-	{
-		yield return new WaitForSeconds(2.2f);
-		if (item.fullCollider.bounds.Intersects(floorCollider.bounds))
-		{
-			item.fullCollider.gameObject.transform.parent = transform;
-			floorContainer.AddCollectibleToContainer(item);
-			
-		}
-	}
 }

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1dee774aafe6340a848d41613b8ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullCollider: {fileID: 6146197807928741351}
   floorContainer: {fileID: 0}
   lootData: {fileID: 11400000, guid: 12806186951343d46ba4d605585dd5ae, type: 2}
   quantity: 1

@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8608465535031704304}
   - component: {fileID: 6318442689965624312}
   m_Layer: 12
-  m_Name: CactusBlaster
+  m_Name: CactusBlasterBAD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
