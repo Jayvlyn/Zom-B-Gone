@@ -657,6 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorContainer: {fileID: 61883576}
   floorCollider: {fileID: 61883579}
+  timeSinceAwake: 0
   vanBack: {fileID: 1235000420}
 --- !u!61 &61883579
 BoxCollider2D:

@@ -17,13 +17,13 @@ public struct PosRot
 	{
 		Quaternion normalizedRotation = NormalizeQuaternion(rotation);
 
-		float roundedPosX = Mathf.Round(position.x * 10000f) / 10000f;
-		float roundedPosY = Mathf.Round(position.y * 10000f) / 10000f;
+		float roundedPosX = Mathf.Round(position.x * 1000f) / 1000f;
+		float roundedPosY = Mathf.Round(position.y * 1000f) / 1000f;
 
-		float roundedRotX = Mathf.Round(normalizedRotation.x * 10000f) / 10000f;
-		float roundedRotY = Mathf.Round(normalizedRotation.y * 10000f) / 10000f;
-		float roundedRotZ = Mathf.Round(normalizedRotation.z * 10000f) / 10000f;
-		float roundedRotW = Mathf.Round(normalizedRotation.w * 10000f) / 10000f;
+		float roundedRotX = Mathf.Round(normalizedRotation.x * 1000f) / 1000f;
+		float roundedRotY = Mathf.Round(normalizedRotation.y * 1000f) / 1000f;
+		float roundedRotZ = Mathf.Round(normalizedRotation.z * 1000f) / 1000f;
+		float roundedRotW = Mathf.Round(normalizedRotation.w * 1000f) / 1000f;
 
 		return $"{roundedPosX},{roundedPosY},{roundedRotX},{roundedRotY},{roundedRotZ},{roundedRotW}";
 	}

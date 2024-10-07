@@ -45,14 +45,12 @@ public class FloorContainer : MonoBehaviour
         }
 
 		PosRot posRot = new PosRot(c.gameObject.transform.localPosition, c.gameObject.transform.localRotation);
-		Debug.Log("Adding " + posRot.ToStringKey());
 		floorContainer.collectibleDict[posRot.ToStringKey()] = containerIndex;
         floorContainer.collectibleCount++;
     }
 
     public void RemoveFromContainer(PosRot posRot)
     {
-        Debug.Log("Removing " + posRot.ToStringKey());
         string balls = posRot.ToStringKey();
         int containerIndex = floorContainer.collectibleDict[posRot.ToStringKey()];
         floorContainer.Container.RemoveAt(containerIndex);
