@@ -9,7 +9,8 @@ public class UnitFloor : Floor
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.bounds.Intersects(vanBack.floorCollider.bounds)) return;
+		if (timeSinceAwake < .1) return; // dont re-add initialized collectibles
+		if (collision.bounds.Intersects(vanBack.floorCollider.bounds)) return;
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem"))
         {

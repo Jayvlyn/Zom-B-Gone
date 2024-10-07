@@ -44,13 +44,15 @@ public class FloorContainer : MonoBehaviour
             }
         }
 
-        PosRot posRot = new PosRot(c.gameObject.transform.localPosition, c.gameObject.transform.localRotation);
+		PosRot posRot = new PosRot(c.gameObject.transform.localPosition, c.gameObject.transform.localRotation);
+		Debug.Log("adding to dict at: " + posRot.position + " " + posRot.rotation);
         floorContainer.collectibleDict[posRot] = containerIndex;
         floorContainer.collectibleCount++;
     }
 
     public void RemoveFromContainer(PosRot posRot)
     {
+        Debug.Log("trying to remove at: " + posRot.position + " " + posRot.rotation);
         int containerIndex = floorContainer.collectibleDict[posRot];
         floorContainer.Container.RemoveAt(containerIndex);
         floorContainer.collectibleCount--;
@@ -61,7 +63,8 @@ public class FloorContainer : MonoBehaviour
     {
         foreach (PosRot posRot in floorContainer.collectibleDict.Keys)
         {
-            int index = floorContainer.collectibleDict[posRot];
+			Debug.Log("loading at: " + posRot.position + " " + posRot.rotation);
+			int index = floorContainer.collectibleDict[posRot];
             string collectibleName = floorContainer.Container.collectibleSlots[index].CollectibleName;
             GameObject prefab = Resources.Load<GameObject>(collectibleName);
             GameObject obj = Instantiate(prefab, transform);

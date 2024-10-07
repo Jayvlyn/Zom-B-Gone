@@ -12,6 +12,7 @@ public class VanFloor : Floor
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		if(timeSinceAwake < .1) return; // dont re-add initialized collectibles
 		if (vehicle.Active) return;
 
 		if (collision.CompareTag("Player"))
