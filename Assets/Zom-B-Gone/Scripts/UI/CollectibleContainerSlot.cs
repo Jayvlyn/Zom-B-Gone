@@ -12,6 +12,8 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
     [SerializeField] public CollectibleContainerData containerData = null;
     [SerializeField] private TextMeshProUGUI collectibleQuantityText = null;
 
+    public VoidEvent containerSwappedEvent = null;
+
     public override CollectibleData SlotCollectible
     {
         get { return CollectibleSlot.Collectible; }
@@ -121,6 +123,9 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
             //containerData.Container.collectibleSlots[SlotIndex].Collectible = otherSlot.Collectible;
             containerData.Container.collectibleSlots[SlotIndex].CollectibleName = otherSlot.CollectibleName;
             containerData.Container.collectibleSlots[SlotIndex].quantity = otherSlot.quantity;
+
+            if(containerSwappedEvent) containerSwappedEvent.Raise();
+            if(otherCollectibleSlot.containerSwappedEvent) otherCollectibleSlot.containerSwappedEvent.Raise();
         }
 
         containerData.onContainerCollectibleSwapped.Raise();

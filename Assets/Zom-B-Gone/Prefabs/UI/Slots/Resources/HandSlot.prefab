@@ -416,7 +416,7 @@ MonoBehaviour:
   icomImage: {fileID: 6998675399385336187}
   containerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
   collectibleQuantityText: {fileID: 7907024424289654383}
-  OnContainerSwapped: {fileID: 11400000, guid: c176d0f5b9bfe1642b95b49ee74af55f, type: 2}
+  containerSwappedEvent: {fileID: 11400000, guid: c176d0f5b9bfe1642b95b49ee74af55f, type: 2}
 --- !u!114 &3705534198587483533
 MonoBehaviour:
   m_ObjectHideFlags: 0
