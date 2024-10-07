@@ -913,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.282576
+      value: -9.125277
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1496,7 +1496,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -481.91492, y: -19.999756}
+  m_AnchoredPosition: {x: -481.91492, y: -19.999329}
   m_SizeDelta: {x: -1069.4299, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &188851336
@@ -2624,7 +2624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7042613142963250495, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -12.998657
+      value: -12.998352
       objectReference: {fileID: 0}
     - target: {fileID: 7187066987515605367, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_Enabled
@@ -4263,7 +4263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 300
+  m_MinHeight: 100
   m_PreferredWidth: -1
   m_PreferredHeight: 600
   m_FlexibleWidth: -1
@@ -6765,23 +6765,23 @@ MonoBehaviour:
   textMaterial: {fileID: 2100000, guid: e490a80c3724140c0ad176edb075a09e, type: 2}
   textMesh: {fileID: 454973318}
   rawTopLeftBounds: {x: 425.28503, y: 0, z: 0}
-  rawBottomRightBounds: {x: -425.28503, y: 161.4221, z: 0}
+  rawBottomRightBounds: {x: -425.28503, y: 175.11487, z: 0}
   rawBottomRightTextBounds: {x: 193.28749, y: -37.6, z: 0}
-  topLeftBounds: {x: 26.500854, y: 324.6247, z: 0}
-  topRightBounds: {x: 453.41025, y: 324.6247, z: 0}
-  bottomLeftBounds: {x: 26.500854, y: 243.60536, z: 0}
-  bottomRightBounds: {x: 453.41025, y: 243.60536, z: 0}
-  centerBounds: {x: 239.95555, y: 284.11502, z: 0}
-  topLeftTextBounds: {x: 26.500854, y: 324.6247, z: 0}
-  topRightTextBounds: {x: 123.51373, y: 324.6247, z: 0}
-  bottomLeftTextBounds: {x: 26.500854, y: 305.7529, z: 0}
-  bottomRightTextBounds: {x: 123.51373, y: 305.7529, z: 0}
-  centerTextBounds: {x: 75.00729, y: 315.18878, z: 0}
-  finalTopLeftTextBounds: {x: 26.500854, y: 324.6247, z: 0}
-  finalTopRightTextBounds: {x: 123.51373, y: 324.6247, z: 0}
-  finalBottomLeftTextBounds: {x: 26.500854, y: 305.7529, z: 0}
-  finalBottomRightTextBounds: {x: 123.51373, y: 305.7529, z: 0}
-  finalCenterTextBounds: {x: 75.00729, y: 315.18878, z: 0}
+  topLeftBounds: {x: 26.500854, y: 349.78024, z: 0}
+  topRightBounds: {x: 453.41025, y: 349.78024, z: 0}
+  bottomLeftBounds: {x: 26.500854, y: 261.8884, z: 0}
+  bottomRightBounds: {x: 453.41025, y: 261.8884, z: 0}
+  centerBounds: {x: 239.95555, y: 305.83432, z: 0}
+  topLeftTextBounds: {x: 26.500854, y: 349.78024, z: 0}
+  topRightTextBounds: {x: 123.51373, y: 349.78024, z: 0}
+  bottomLeftTextBounds: {x: 26.500854, y: 330.90845, z: 0}
+  bottomRightTextBounds: {x: 123.51373, y: 330.90845, z: 0}
+  centerTextBounds: {x: 75.00729, y: 340.34436, z: 0}
+  finalTopLeftTextBounds: {x: 26.500854, y: 349.78024, z: 0}
+  finalTopRightTextBounds: {x: 123.51373, y: 349.78024, z: 0}
+  finalBottomLeftTextBounds: {x: 26.500854, y: 330.90845, z: 0}
+  finalBottomRightTextBounds: {x: 123.51373, y: 330.90845, z: 0}
+  finalCenterTextBounds: {x: 75.00729, y: 340.34436, z: 0}
   unwrappedBottomRightTextBounds: {x: 192.7, y: -37.6, z: 0}
   onCompleteEvent:
     m_PersistentCalls:
@@ -6833,7 +6833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: -1
+  m_MinHeight: 100
   m_PreferredWidth: -1
   m_PreferredHeight: 100
   m_FlexibleWidth: -1
@@ -7375,7 +7375,7 @@ Transform:
   m_GameObject: {fileID: 1873980143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.282576, y: -7.92, z: -10}
+  m_LocalPosition: {x: -9.125277, y: -7.92, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
