@@ -6,6 +6,6 @@ using UnityEngine;
 [Serializable]
 public class SaveableFloor
 {
-    public Dictionary<PosRot, int> collectibleDict;
+    public Dictionary<string, int> collectibleDict;
     public CollectibleContainer floorContainer;
 }

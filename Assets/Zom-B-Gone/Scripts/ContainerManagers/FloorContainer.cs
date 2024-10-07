@@ -45,31 +45,40 @@ public class FloorContainer : MonoBehaviour
         }
 
 		PosRot posRot = new PosRot(c.gameObject.transform.localPosition, c.gameObject.transform.localRotation);
-		Debug.Log("adding to dict at: " + posRot.position + " " + posRot.rotation);
-        floorContainer.collectibleDict[posRot] = containerIndex;
+		Debug.Log("Adding " + posRot.ToStringKey());
+		floorContainer.collectibleDict[posRot.ToStringKey()] = containerIndex;
         floorContainer.collectibleCount++;
     }
 
     public void RemoveFromContainer(PosRot posRot)
     {
-        Debug.Log("trying to remove at: " + posRot.position + " " + posRot.rotation);
-        int containerIndex = floorContainer.collectibleDict[posRot];
+        Debug.Log("Removing " + posRot.ToStringKey());
+        string balls = posRot.ToStringKey();
+        int containerIndex = floorContainer.collectibleDict[posRot.ToStringKey()];
         floorContainer.Container.RemoveAt(containerIndex);
         floorContainer.collectibleCount--;
-        floorContainer.collectibleDict.Remove(posRot);
+        floorContainer.collectibleDict.Remove(posRot.ToStringKey());
     }
 
     public void LoadCollectiblesInWorld()
     {
-        foreach (PosRot posRot in floorContainer.collectibleDict.Keys)
+        foreach (string posRotKey in floorContainer.collectibleDict.Keys)
         {
-			Debug.Log("loading at: " + posRot.position + " " + posRot.rotation);
-			int index = floorContainer.collectibleDict[posRot];
+			int index = floorContainer.collectibleDict[posRotKey];
             string collectibleName = floorContainer.Container.collectibleSlots[index].CollectibleName;
             GameObject prefab = Resources.Load<GameObject>(collectibleName);
             GameObject obj = Instantiate(prefab, transform);
-			obj.transform.localPosition = posRot.position;
-			obj.transform.localRotation = posRot.rotation;
+
+			string[] keyParts = posRotKey.Split(',');
+			float posX = float.Parse(keyParts[0]);
+			float posY = float.Parse(keyParts[1]);
+			float rotX = float.Parse(keyParts[2]);
+			float rotY = float.Parse(keyParts[3]);
+			float rotZ = float.Parse(keyParts[4]);
+			float rotW = float.Parse(keyParts[5]);
+
+			obj.transform.localPosition = new Vector2(posX, posY);
+			obj.transform.localRotation = new Quaternion(rotX, rotY, rotZ, rotW);
 
 			Collectible collectible = obj.GetComponent<Collectible>();
             collectible.floorContainer = this;
