@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4123f08d42f47946806b485fad4cbab, type: 3}
+  m_Name: MarketData
+  m_EditorClassIdentifier: 
+  merchants:
+  - {fileID: 11400000, guid: 8d8545756139f3242b6cde4156842ec5, type: 2}
+  - {fileID: 11400000, guid: b18492fda1b1938449179dd0b3d02d2a, type: 2}
+  - {fileID: 11400000, guid: 9bc41d2e1988432419402f1b8f8a662c, type: 2}
+  hatList: {fileID: 11400000, guid: 630cc084acdc6ec4c9cd0738c4efd80c, type: 2}
+  itemList: {fileID: 11400000, guid: 368924e80fb62ef4caaa799945d7228a, type: 2}
+  lootList: {fileID: 11400000, guid: 5046aadf7d6d3e94e838014ca527474c, type: 2}

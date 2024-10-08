@@ -3954,6 +3954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cf154da84bd874ab7d79cdde1e1542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  marketData: {fileID: 11400000, guid: 1c50df99ec83d07449d49c207a6a96f4, type: 2}
   merchantImage: {fileID: 688607863}
   merchantNameText: {fileID: 1443943425}
   merchantDialogue: {fileID: 1540621323}

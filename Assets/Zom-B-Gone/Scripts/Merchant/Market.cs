@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Market : MonoBehaviour
 {
+    [SerializeField] MarketData marketData;
+
     [Header("UI Refs")]
     [SerializeField] Image merchantImage;
     [SerializeField] TMP_Text merchantNameText;
@@ -15,7 +17,14 @@ public class Market : MonoBehaviour
 
     public void LoadMerchant(string name)
     {
-        loadedMerchant = Resources.Load<MerchantData>(name);
+        foreach (var merchant in marketData.merchants)
+        {
+            if (merchant.name == name)
+            {
+                loadedMerchant = merchant;
+            }
+        }
+
         merchantImage.sprite = loadedMerchant.merchantSprite;
         merchantNameText.text = loadedMerchant.merchantName;
         merchantNameText.color = loadedMerchant.nameColor;
