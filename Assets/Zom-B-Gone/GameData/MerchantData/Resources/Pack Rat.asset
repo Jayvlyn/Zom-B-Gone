@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pack Rat
   m_EditorClassIdentifier: 
   merchantName: Pack Rat
-  nameColor: {r: 0.4825796, g: 0.30093983, b: 0.7283019, a: 0}
+  nameColor: {r: 0.8113208, g: 0.74788874, b: 0.06582408, a: 1}
   merchantSprite: {fileID: 21300000, guid: 4624a2810bfbab748ac80e91e110c866, type: 3}
   talkSpeed: 0.03
   dialogueOptions:

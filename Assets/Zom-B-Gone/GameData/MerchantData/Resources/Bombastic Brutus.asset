@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Bombastic Brutus
   m_EditorClassIdentifier: 
   merchantName: Bombastic Brutus
-  nameColor: {r: 0.8792453, g: 0.50581676, b: 0.37658238, a: 0}
+  nameColor: {r: 0.8792453, g: 0.50581676, b: 0.37658238, a: 1}
   merchantSprite: {fileID: 21300000, guid: ae24f88d4a742b44aa41cadefb6ca58c, type: 3}
+  talkSpeed: 0.05
   dialogueOptions:
   - YOU HAVE THE RIGHT TO BEAR ARMS! I DON'T KNOW WHY YOU'D WANT THOSE THOUGH...
   - I HAVE A BOMB! AND OTHER STUFF.
