@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c8a1c5797a77644b33c46bfe0ceb70, type: 3}
+  m_Name: Victor Von Vellini
+  m_EditorClassIdentifier: 
+  merchantName: Victor Von Vellini
+  nameColor: {r: 0.38928437, g: 0.6306289, b: 0.8490566, a: 0}
+  merchantSprite: {fileID: 21300000, guid: 5e07e271138a6fa4a91da4698c58791d, type: 3}
+  talkSpeed: 0.06
+  dialogueOptions:
+  - Try not to look in my general direction if you can help it.
+  - No you can't buy my top hat. I might have a less stylish one for sale though.
+  - Oh, dear, is that dirt on your boots? Truly, the lost lands have no respect for
+    decorum.
+  - You look like you could use a dash of elegance. Heavy emphasis on the 'could.'
+    But worry not, I am here to elevate even the most hopeless cases.
+  - "Oh, how quaint\u2014another visitor. Do try not to touch anything unless you
+    plan to buy. These hands aren't accustomed to dusting off peasantry."
+  - "Ah, another customer. How... expected. Well, let\u2019s make this quick, I have
+    more distinguished clientele awaiting my services."
+  - "Ah, another customer. How... expected. Well, let\u2019s make this quick, I have
+    more distinguished clientele awaiting my services."
+  - Yes, yes, I do have helmets, dear, but they aren't just helmets. They are headwear
+    of exceptional taste. Even that football helmet has a certain... rustic charm.
+  - I assure you, each piece here has been curated with care. That armet? Impeccable
+    for keeping the undead claws away... and quite the conversation starter!
+  - "Well, well, here for protection or presentation? It\u2019s all the same to me,
+    as long as you can afford it."
+  - A head is a terrible thing to waste... fortunately, I have just the solution
+    to keep yours intact.
+  - "In times like these, standing out isn\u2019t just a luxury; it\u2019s a statement.
+    A statement I\u2019m more than equipped to help you make."
+  - "Buying, selling, yes, yes, I do it all. But don\u2019t insult me with something
+    that\u2019s been through a shredder."
+  - Yes, I buy. But not everything that crosses my counter is... worthy. I suggest
+    you bring something that can impress.
+  - I must warn you, I don't take second-rate goods. Keep your threadbare trash to
+    yourself.
+  - Bring me a hat with a hole, and I might as well hand you a shovel to dig your
+    own grave!
+  reputationLevel: 0
+  reputationExp: 0

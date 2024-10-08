@@ -804,6 +804,7 @@ GameObject:
   - component: {fileID: 330471642516840060}
   - component: {fileID: 1086860009927970248}
   - component: {fileID: 1794163065409103123}
+  - component: {fileID: 3469848753348658332}
   m_Layer: 5
   m_Name: LootShopButton
   m_TagString: Untagged
@@ -924,6 +925,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3469848753348658332}
+        m_TargetAssemblyTypeName: StringEventRaiser, Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Pack Rat
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3469848753348658332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929233268837307575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d11c7bf9d6a5d47b66945792ec06bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToRaise: {fileID: 11400000, guid: 86e60e67152d8bb4bb1e6d4fb472903e, type: 2}
 --- !u!1 &936109484117188270
 GameObject:
   m_ObjectHideFlags: 0
@@ -3589,6 +3615,7 @@ GameObject:
   - component: {fileID: 2232784380141659360}
   - component: {fileID: 3832459223804892573}
   - component: {fileID: 2738979800554863321}
+  - component: {fileID: 8954616769171942364}
   m_Layer: 5
   m_Name: HatShopButton
   m_TagString: Untagged
@@ -3709,6 +3736,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8954616769171942364}
+        m_TargetAssemblyTypeName: StringEventRaiser, Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Victor Von Vallini
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8954616769171942364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4545577263589613815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d11c7bf9d6a5d47b66945792ec06bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToRaise: {fileID: 11400000, guid: 86e60e67152d8bb4bb1e6d4fb472903e, type: 2}
 --- !u!1 &4573722770828960093
 GameObject:
   m_ObjectHideFlags: 0
@@ -5364,6 +5416,7 @@ GameObject:
   - component: {fileID: 4746480214710433366}
   - component: {fileID: 5388895721217078532}
   - component: {fileID: 7834239139824065466}
+  - component: {fileID: 3800576080242273163}
   m_Layer: 5
   m_Name: ItemShopButton
   m_TagString: Untagged
@@ -5484,6 +5537,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3800576080242273163}
+        m_TargetAssemblyTypeName: StringEventRaiser, Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Bombastic Brutus
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3800576080242273163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6562552011181495538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d11c7bf9d6a5d47b66945792ec06bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToRaise: {fileID: 11400000, guid: 86e60e67152d8bb4bb1e6d4fb472903e, type: 2}
 --- !u!1 &6613976882897596276
 GameObject:
   m_ObjectHideFlags: 0

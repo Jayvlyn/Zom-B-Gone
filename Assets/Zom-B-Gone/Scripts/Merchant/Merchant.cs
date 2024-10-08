@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Merchant : ScriptableObject
+public class Merchant : MonoBehaviour
 {
-    public string[] dialogueOptions = new string[0];
+    public MerchantData merchantData;
 
 }

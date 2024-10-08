@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c8a1c5797a77644b33c46bfe0ceb70, type: 3}
+  m_Name: Pack Rat
+  m_EditorClassIdentifier: 
+  merchantName: Pack Rat
+  nameColor: {r: 0.4825796, g: 0.30093983, b: 0.7283019, a: 0}
+  merchantSprite: {fileID: 21300000, guid: 4624a2810bfbab748ac80e91e110c866, type: 3}
+  talkSpeed: 0.03
+  dialogueOptions:
+  - "Hey, hey, hey, you lookin\u2019 for stuff? I got stuff, all kinds of stuff,
+    so much stuff I don\u2019t even know what half of it is anymore!"
+  - "Look, look, you don\u2019t just throw things away! That\u2019s how you end up
+    needing a left-handed sprocket at 3 AM and\u2014oh, wait, I got one right here!"
+  - "Oh, you like shiny things? I got shiny things! Dull things, rusty things, things
+    that go click-clack, things that might explode\u2014who knows!"
+  - "You never know when you\u2019ll need a bent fork, or a half-burned candle, or
+    a broken flashlight. "
+  - "Need a thingamajig? A whatchamacallit? A doodad? I got \u2018em all! I think.
+    Somewhere. Lemme just dig around a bit..."
+  - Try not to bump into any of my carefully balanced towers of goods!
+  - "Yeah, yeah, I know it looks like junk to you, but every piece has a story, a
+    purpose! Well, maybe not that one... but most of \u2018em!"
+  - Oh, you need one of those? Yeah, I got one! Or maybe two! Or twenty... you can
+    never have too many, right?
+  - "You need a left shoe? A right shoe? A shoe that doesn\u2019t fit? I got options!
+    No refunds, though... or exchanges... or warranties!"
+  - "No, no, no, you can\u2019t have this, it\u2019s my favorite rusty spoon... but
+    I do have a bent wrench with your name on it!"
+  - "A trade, you say? Oh, I love trades! I\u2019ll give you three broken light bulbs,
+    a rubber band, and this mystery jar in exchange for... what do you got?"
+  - You say you have junk? I say you have potential!
+  - "Hoarding? More like curating! Each piece has its own charm, and I can\u2019t
+    wait to see what\u2019s in your collection!"
+  - "Oh, I can feel it! Today\u2019s the day for hidden gems! What do you have? A
+    broken toy? An old bottle cap? Perfect!"
+  - "Let\u2019s get down to business! I\u2019ll take your discarded bits and turn
+    them into gold. Literally!!"
+  - Time is money, my friend! The faster you show me your stuff, the faster it gets
+    added to that huge pile behind me!
+  - "Come on, come on! Let\u2019s see what you\u2019ve got! I\u2019m buzzing with
+    excitement! The world\u2019s full of surprises, and I want them all!"
+  reputationLevel: 0
+  reputationExp: 0
