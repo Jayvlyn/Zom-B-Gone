@@ -1613,6 +1613,7 @@ GameObject:
   - component: {fileID: 1275195972881909820}
   - component: {fileID: 1650109081502514324}
   - component: {fileID: 654534477686818261}
+  - component: {fileID: 998275804953816358}
   m_Layer: 5
   m_Name: MerchantBuyOption
   m_TagString: Untagged
@@ -1680,6 +1681,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &998275804953816358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176635897317309037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0033ac2f600b8ca48b882cb68d42caaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibleImage: {fileID: 6316431298187708340}
+  unitPrice: {fileID: 7807502215192610561}
+  selectedAmount: {fileID: 3326969454248692258}
+  maxAmount: {fileID: 146020988727034488}
+  buyTotal: {fileID: 7808054919546195732}
 --- !u!1001 &9053207527842478389
 PrefabInstance:
   m_ObjectHideFlags: 0

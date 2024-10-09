@@ -6,13 +6,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Market", menuName = "New Market")]
 public class MarketData : ScriptableObject
 {
-    private int day = 0;
+    private int day = 1;
     public int Day
     {
         get { return day; }
         set
         {
-            day = value;
+            if (value < 1 || value > 4) return;
+            if (value == 4) day = 1;
+            else day = value;
+
             foreach (var merchant in merchants)
             {
                 RefreshMerchantInventory(merchant);
@@ -28,6 +31,9 @@ public class MarketData : ScriptableObject
 
     public void RefreshMerchantInventory(MerchantData merchant)
     {
+        merchant.inventory.Clear();
+        merchant.prices.Clear();
+
         int count = Random.Range(6, 11);
         List<CollectibleData> possibleCollectibles = new List<CollectibleData>();
 
@@ -48,6 +54,11 @@ public class MarketData : ScriptableObject
 
             merchant.inventory.Add(chosenCollectible, chosenAmount);
             possibleCollectibles.Remove(chosenCollectible); // no duplicate keys
+
+            int price = DeterminePrice(chosenCollectible);
+
+            merchant.prices.Add(chosenCollectible, price);
+
         }
     }
 
@@ -70,6 +81,29 @@ public class MarketData : ScriptableObject
 
             possibleCollectibles.Remove(chosenCollectible);
         }
+    }
+
+    public int DeterminePrice(CollectibleData c)
+    {
+        // Determine price
+        int price = 10;
+        float preRandomMult = Random.Range(0.8f, 1.5f);
+        price = Mathf.RoundToInt(price * preRandomMult);
+             if (c.rarity.Name == "Common")          price = Mathf.RoundToInt(price * 0.8f);
+        else if (c.rarity.Name == "Valuable")        price = Mathf.RoundToInt(price * 1.1f);
+        else if (c.rarity.Name == "Very Valuable")   price = Mathf.RoundToInt(price * 1.3f);
+        else if (c.rarity.Name == "Super Valuable")  price = Mathf.RoundToInt(price * 1.6f);
+        else if (c.rarity.Name == "Super Legendary") price = Mathf.RoundToInt(price * 2f);
+
+        float postRandomMult = Random.Range(0.7f, 1.7f);
+        price = Mathf.RoundToInt(price * postRandomMult);
+
+        int randomAdd = Random.Range(-(price / 4), price / 4);
+        price += randomAdd;
+
+        return price;
+
+
     }
 
 }

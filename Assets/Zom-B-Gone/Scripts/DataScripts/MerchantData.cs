@@ -21,4 +21,5 @@ public class MerchantData : ScriptableObject
     [HideInInspector] public int reputationExp;
     [HideInInspector] public CollectibleData[] buyOffers;
     public Dictionary<CollectibleData, int> inventory; // collectible and amount
+    public Dictionary<CollectibleData, int> prices; // collectible and price
 }

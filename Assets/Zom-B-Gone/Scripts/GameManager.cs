@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private int intervalSpawnAmount = 2;
 	private float intervalTimer;
 
+	[Header("For unit scene")]
+	public MarketData marketData;
+
 	private void Start()
 	{
 		enemies = new List<Enemy>();
@@ -73,6 +76,7 @@ public class GameManager : MonoBehaviour
 
 	public void StartRun(string run)
 	{
+		marketData.Day++;
 		SceneManager.LoadScene(run);
 	}
 

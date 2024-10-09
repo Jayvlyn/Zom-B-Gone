@@ -7,11 +7,14 @@ using UnityEngine.UI;
 public class Market : MonoBehaviour
 {
     [SerializeField] MarketData marketData;
+    [SerializeField] GameObject buyOptionPrefab;
+    private MerchantBuyOptionRefs buyOptionRefs;
 
     [Header("UI Refs")]
     [SerializeField] Image merchantImage;
     [SerializeField] TMP_Text merchantNameText;
     [SerializeField] SuperTextMesh merchantDialogue;
+    [SerializeField] RectTransform sellingItemHolder;
 
     [HideInInspector] public MerchantData loadedMerchant;
 
@@ -38,5 +41,20 @@ public class Market : MonoBehaviour
         int dialogueIndex = Random.Range(0, loadedMerchant.dialogueOptions.Length);
         merchantDialogue.text = loadedMerchant.dialogueOptions[dialogueIndex];
         merchantDialogue.Read();
+    }
+
+    public void OnOpenBuy()
+    {
+        for (int i = sellingItemHolder.childCount - 1; i >= 0; i--) Destroy(sellingItemHolder.GetChild(i).gameObject);
+
+        int optionsCount = loadedMerchant.buyOffers.Length;
+        for (int i = 0; i < optionsCount; i++)
+        {
+            GameObject option = Instantiate(buyOptionPrefab, sellingItemHolder);
+            MerchantBuyOptionRefs refs = option.GetComponent<MerchantBuyOptionRefs>();
+            CollectibleData thisCollectible = loadedMerchant.buyOffers[i];
+            refs.collectibleImage.sprite = thisCollectible.Icon;
+            //refs.unitPrice.text = 
+        }
     }
 }
