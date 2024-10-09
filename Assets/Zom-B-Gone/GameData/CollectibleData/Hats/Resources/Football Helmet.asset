@@ -15,9 +15,9 @@ MonoBehaviour:
   name: Football Helmet
   description: At least I wont get my face eaten off now.
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d4d489d50e8d1f34c92a21c2bc4da6e2, type: 3}
   maxStack: 1
-  showHair: 1
+  showHair: 0
   swingTimeMultiplier: 1
   damageMultiplier: 1
   damageIncrease: 0

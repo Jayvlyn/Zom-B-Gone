@@ -54,7 +54,13 @@ public class Market : MonoBehaviour
             MerchantBuyOptionRefs refs = option.GetComponent<MerchantBuyOptionRefs>();
             CollectibleData thisCollectible = loadedMerchant.vals.buyOffers[i];
             refs.collectibleImage.sprite = thisCollectible.Icon;
-            //refs.unitPrice.text = 
+
+            refs.unitPrice.text = loadedMerchant.vals.prices[thisCollectible].ToString();
+            refs.buyTotal.text = refs.unitPrice.text; // starts at one selected
+
+            refs.maxAmount.text = loadedMerchant.vals.inventory[thisCollectible].ToString();
+
+            refs.minusButton.interactable = false;
         }
     }
 }

@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 7220739363166241881}
   - component: {fileID: 5744342107732578466}
   - component: {fileID: 5743223617699872626}
-  - component: {fileID: 5486854424148108803}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -300,34 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1855626311c27ee46bd77e7c612a79a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnClickEvent: {fileID: 11400000, guid: bfed846658205c14582b4e3420d7b3d8, type: 2}
+  OnClickEvent: {fileID: 0}
   rect: {fileID: 6105557953000952788}
   buttonPressedOffset: -25.4
---- !u!114 &5486854424148108803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7853369115776555622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b663e92038a8fc847b65ab6d544e0e21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 0}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2

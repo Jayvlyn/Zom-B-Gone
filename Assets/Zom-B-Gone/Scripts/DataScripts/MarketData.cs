@@ -34,7 +34,7 @@ public class MarketData : ScriptableObject
         merchant.vals.inventory.Clear();
         merchant.vals.prices.Clear();
 
-        int count = Random.Range(6, 11);
+        int count = Random.Range(6, 9);
         List<CollectibleData> possibleCollectibles = new List<CollectibleData>();
 
         if (merchant.dealsHats) possibleCollectibles.AddRange(hatList.collectibles);
@@ -50,7 +50,7 @@ public class MarketData : ScriptableObject
             else if (chosenCollectible is HatData) maxAmount = 1;
             else maxAmount = 10; // Loot data
 
-            int chosenAmount = Random.Range(0, maxAmount + 1);
+            int chosenAmount = Random.Range(1, maxAmount + 1);
 
             merchant.vals.inventory.Add(chosenCollectible, chosenAmount);
             possibleCollectibles.Remove(chosenCollectible); // no duplicate keys
@@ -59,12 +59,15 @@ public class MarketData : ScriptableObject
 
             merchant.vals.prices.Add(chosenCollectible, price);
 
+            Debug.Log("Chosen AMT " + chosenAmount);
+            Debug.Log("Chosen price " + price);
+
         }
     }
 
     public void RefreshBuyOffers(MerchantData merchant)
     {
-        int count = Random.Range(4, 15);
+        int count = Random.Range(4, 9);
         List<CollectibleData> possibleCollectibles = new List<CollectibleData>();
 
         if (merchant.dealsHats) possibleCollectibles.AddRange(hatList.collectibles);
@@ -81,6 +84,8 @@ public class MarketData : ScriptableObject
 
             possibleCollectibles.Remove(chosenCollectible);
         }
+
+        merchant.vals.buyOffers = newBuyOffers;
     }
 
     public int DeterminePrice(CollectibleData c)
@@ -95,10 +100,10 @@ public class MarketData : ScriptableObject
         else if (c.rarity.Name == "Super Valuable")  price = Mathf.RoundToInt(price * 1.6f);
         else if (c.rarity.Name == "Super Legendary") price = Mathf.RoundToInt(price * 2f);
 
-        float postRandomMult = Random.Range(0.7f, 1.7f);
+        float postRandomMult = Random.Range(0.9f, 1.1f);
         price = Mathf.RoundToInt(price * postRandomMult);
 
-        int randomAdd = Random.Range(-(price / 4), price / 4);
+        int randomAdd = Random.Range(-(price / 5), price / 5);
         price += randomAdd;
 
         return price;

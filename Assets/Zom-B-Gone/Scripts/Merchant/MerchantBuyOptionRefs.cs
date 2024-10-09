@@ -11,4 +11,6 @@ public class MerchantBuyOptionRefs : MonoBehaviour
     public TMP_Text selectedAmount;
     public TMP_Text maxAmount;
     public TMP_Text buyTotal;
+    public Button minusButton;
+    public Button plusButton;
 }

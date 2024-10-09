@@ -15,11 +15,11 @@ MonoBehaviour:
   name: Mining Helmet
   description: Seeing at night makes me feel a lot safer.
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6ceba0e7fc9cfe146a7c600a6dc1e434, type: 3}
   maxStack: 1
   showHair: 1
   swingTimeMultiplier: 1
   damageMultiplier: 1
   damageIncrease: 0
   moveSpeedMod: 1
-  defense: 0
+  defense: 1
