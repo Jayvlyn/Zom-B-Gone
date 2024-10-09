@@ -47,12 +47,12 @@ public class Market : MonoBehaviour
     {
         for (int i = sellingItemHolder.childCount - 1; i >= 0; i--) Destroy(sellingItemHolder.GetChild(i).gameObject);
 
-        int optionsCount = loadedMerchant.buyOffers.Length;
+        int optionsCount = loadedMerchant.vals.buyOffers.Length;
         for (int i = 0; i < optionsCount; i++)
         {
             GameObject option = Instantiate(buyOptionPrefab, sellingItemHolder);
             MerchantBuyOptionRefs refs = option.GetComponent<MerchantBuyOptionRefs>();
-            CollectibleData thisCollectible = loadedMerchant.buyOffers[i];
+            CollectibleData thisCollectible = loadedMerchant.vals.buyOffers[i];
             refs.collectibleImage.sprite = thisCollectible.Icon;
             //refs.unitPrice.text = 
         }

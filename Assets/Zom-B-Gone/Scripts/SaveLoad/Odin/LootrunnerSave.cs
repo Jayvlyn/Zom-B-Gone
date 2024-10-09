@@ -21,4 +21,6 @@ public class LootrunnerSave
 
     public SaveableFloor vanFloor;
     public SaveableFloor unitFloor;
+
+    public List<MerchantVals> merchantVals;
 }

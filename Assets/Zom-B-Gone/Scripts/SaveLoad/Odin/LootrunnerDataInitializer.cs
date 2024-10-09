@@ -54,6 +54,23 @@ public class LootrunnerDataInitializer : MonoBehaviour
             ClearContainerSlots(dataRefs.unitFloor.floorContainer.Container);
             dataRefs.unitFloor.floorContainer.ClearFloorSpecificVals();
         }
+
+        if(SaveManager.currentSave.merchantVals != null)
+        {
+            for (int i = 0; i < dataRefs.marketData.merchants.Length; i++)
+            {
+                dataRefs.marketData.merchants[i].vals = SaveManager.currentSave.merchantVals[i];
+            }
+        }
+        else
+        {
+            foreach (var merchant in dataRefs.marketData.merchants)
+            {
+                merchant.vals = new MerchantVals();
+                dataRefs.marketData.RefreshMerchantInventory(merchant);
+                dataRefs.marketData.RefreshBuyOffers(merchant);
+            }
+        }
     }
 
     private void ClearContainerSlots(CollectibleContainer container)

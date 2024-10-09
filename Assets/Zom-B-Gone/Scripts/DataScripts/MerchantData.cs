@@ -16,10 +16,5 @@ public class MerchantData : ScriptableObject
     public bool dealsLoot;
     public bool dealsHats;
 
-    [Header("Changing Vals")]
-    [HideInInspector] public int reputationLevel;
-    [HideInInspector] public int reputationExp;
-    [HideInInspector] public CollectibleData[] buyOffers;
-    public Dictionary<CollectibleData, int> inventory; // collectible and amount
-    public Dictionary<CollectibleData, int> prices; // collectible and price
+    public MerchantVals vals;
 }

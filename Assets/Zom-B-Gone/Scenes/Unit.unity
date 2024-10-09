@@ -2980,7 +2980,7 @@ MonoBehaviour:
   intervalSpawning: 0
   intervalTime: 5
   intervalSpawnAmount: 2
-  marketData: {fileID: 0}
+  marketData: {fileID: 11400000, guid: 1c50df99ec83d07449d49c207a6a96f4, type: 2}
 --- !u!114 &235199600
 MonoBehaviour:
   m_ObjectHideFlags: 0

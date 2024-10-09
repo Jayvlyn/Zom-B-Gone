@@ -40,5 +40,10 @@ MonoBehaviour:
     TOASTER AND I\u2019LL FIND A WAY TO TURN IT INTO A ZOMBIE-SMASHER!"
   - "STOP SIGNS AIN\u2019T JUST FOR TRAFFIC, KID! YOU SWING THIS AT A ZOMBIE, AND
     TRUST ME, THEY'LL STOP."
-  reputationLevel: 0
-  reputationExp: 0
+  dealsItems: 1
+  dealsLoot: 0
+  dealsHats: 0
+  vals:
+    reputationLevel: 0
+    reputationExp: 0
+    buyOffers: []

@@ -45,5 +45,10 @@ MonoBehaviour:
     yourself.
   - Give me a hat with a hole, and I might as well give you a shovel to dig a hole
     for yourself!
-  reputationLevel: 0
-  reputationExp: 0
+  dealsItems: 0
+  dealsLoot: 0
+  dealsHats: 1
+  vals:
+    reputationLevel: 0
+    reputationExp: 0
+    buyOffers: []

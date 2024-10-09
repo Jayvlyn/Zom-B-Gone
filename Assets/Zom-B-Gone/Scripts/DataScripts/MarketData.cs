@@ -31,8 +31,8 @@ public class MarketData : ScriptableObject
 
     public void RefreshMerchantInventory(MerchantData merchant)
     {
-        merchant.inventory.Clear();
-        merchant.prices.Clear();
+        merchant.vals.inventory.Clear();
+        merchant.vals.prices.Clear();
 
         int count = Random.Range(6, 11);
         List<CollectibleData> possibleCollectibles = new List<CollectibleData>();
@@ -52,12 +52,12 @@ public class MarketData : ScriptableObject
 
             int chosenAmount = Random.Range(0, maxAmount + 1);
 
-            merchant.inventory.Add(chosenCollectible, chosenAmount);
+            merchant.vals.inventory.Add(chosenCollectible, chosenAmount);
             possibleCollectibles.Remove(chosenCollectible); // no duplicate keys
 
             int price = DeterminePrice(chosenCollectible);
 
-            merchant.prices.Add(chosenCollectible, price);
+            merchant.vals.prices.Add(chosenCollectible, price);
 
         }
     }

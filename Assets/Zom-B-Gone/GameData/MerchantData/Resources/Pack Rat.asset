@@ -49,5 +49,10 @@ MonoBehaviour:
     added to that huge pile behind me!
   - "Come on, come on! Let\u2019s see what you\u2019ve got! I\u2019m buzzing with
     excitement! The world\u2019s full of surprises, and I want them all!"
-  reputationLevel: 0
-  reputationExp: 0
+  dealsItems: 0
+  dealsLoot: 1
+  dealsHats: 0
+  vals:
+    reputationLevel: 0
+    reputationExp: 0
+    buyOffers: []
