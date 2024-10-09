@@ -58,10 +58,6 @@ public class MarketData : ScriptableObject
             int price = DeterminePrice(chosenCollectible);
 
             merchant.vals.prices.Add(chosenCollectible, price);
-
-            Debug.Log("Chosen AMT " + chosenAmount);
-            Debug.Log("Chosen price " + price);
-
         }
     }
 

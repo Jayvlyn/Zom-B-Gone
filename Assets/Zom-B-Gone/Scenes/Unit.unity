@@ -5139,7 +5139,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 730.9}
+  m_SizeDelta: {x: 0, y: 4646.8}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &896022130
 MonoBehaviour:
@@ -6090,8 +6090,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1267612731}
-  - {fileID: 1349588317}
   - {fileID: 1832726698}
+  - {fileID: 1349588317}
   m_Father: {fileID: 535484148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7454,11 +7454,11 @@ MonoBehaviour:
   bottomLeftBounds: {x: 24.190796, y: 217.86551, z: 0}
   bottomRightBounds: {x: 413.88776, y: 217.86551, z: 0}
   centerBounds: {x: 219.03928, y: 249.17926, z: 0}
-  topLeftTextBounds: {x: 24.190796, y: 280.493, z: 0}
-  topRightTextBounds: {x: 113.68942, y: 280.493, z: 0}
-  bottomLeftTextBounds: {x: 24.190796, y: 263.08295, z: 0}
-  bottomRightTextBounds: {x: 113.68942, y: 263.08295, z: 0}
-  centerTextBounds: {x: 68.94011, y: 271.78796, z: 0}
+  topLeftTextBounds: {x: 24.190796, y: 581.6741, z: 0}
+  topRightTextBounds: {x: 113.68942, y: 581.6741, z: 0}
+  bottomLeftTextBounds: {x: 24.190796, y: 564.264, z: 0}
+  bottomRightTextBounds: {x: 113.68942, y: 564.264, z: 0}
+  centerTextBounds: {x: 68.94011, y: 572.969, z: 0}
   finalTopLeftTextBounds: {x: 24.190796, y: 280.493, z: 0}
   finalTopRightTextBounds: {x: 113.68942, y: 280.493, z: 0}
   finalBottomLeftTextBounds: {x: 24.190796, y: 263.08295, z: 0}

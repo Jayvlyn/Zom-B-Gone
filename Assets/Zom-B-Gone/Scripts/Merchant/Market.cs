@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -38,7 +39,7 @@ public class Market : MonoBehaviour
 
     public void MerchantSaySomething()
     {
-        int dialogueIndex = Random.Range(0, loadedMerchant.dialogueOptions.Length);
+        int dialogueIndex = UnityEngine.Random.Range(0, loadedMerchant.dialogueOptions.Length);
         merchantDialogue.text = loadedMerchant.dialogueOptions[dialogueIndex];
         merchantDialogue.Read();
     }
@@ -47,20 +48,23 @@ public class Market : MonoBehaviour
     {
         for (int i = sellingItemHolder.childCount - 1; i >= 0; i--) Destroy(sellingItemHolder.GetChild(i).gameObject);
 
-        int optionsCount = loadedMerchant.vals.buyOffers.Length;
-        for (int i = 0; i < optionsCount; i++)
-        {
+        foreach(CollectibleData collectible in loadedMerchant.vals.inventory.Keys)
+        { 
             GameObject option = Instantiate(buyOptionPrefab, sellingItemHolder);
             MerchantBuyOptionRefs refs = option.GetComponent<MerchantBuyOptionRefs>();
-            CollectibleData thisCollectible = loadedMerchant.vals.buyOffers[i];
-            refs.collectibleImage.sprite = thisCollectible.Icon;
+            refs.collectibleImage.sprite = collectible.Icon;
 
-            refs.unitPrice.text = loadedMerchant.vals.prices[thisCollectible].ToString();
+			refs.unitPrice.text = loadedMerchant.vals.prices[collectible].ToString();
+
             refs.buyTotal.text = refs.unitPrice.text; // starts at one selected
 
-            refs.maxAmount.text = loadedMerchant.vals.inventory[thisCollectible].ToString();
+            int maxAmt = loadedMerchant.vals.inventory[collectible];
+
+			refs.maxAmount.text = maxAmt.ToString();
+            if (maxAmt == 1) refs.plusButton.interactable = false;
 
             refs.minusButton.interactable = false;
+
         }
     }
 }
