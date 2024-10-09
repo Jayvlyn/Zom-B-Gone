@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Aluminum Bat
   description: Getting an Upgrade
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6fae59e5760c62341b0855a64067d0e6, type: 3}
   maxStack: 1
   weight: 850
   damage: 22

@@ -78,9 +78,20 @@ public class SaveManager : MonoBehaviour
         currentSave.vanFloor = vanFloor;
         currentSave.unitFloor = unitFloor;
 
-        for(int i = 0; i < dataRefs.marketData.merchants.Length; i++)
+
+        if(currentSave.merchantVals.Count != dataRefs.marketData.merchants.Length)
         {
-            currentSave.merchantVals[i] = dataRefs.marketData.merchants[i].vals;
+			for (int i = 0; i < dataRefs.marketData.merchants.Length; i++)
+			{
+				currentSave.merchantVals.Add(dataRefs.marketData.merchants[i].vals);
+			}
+		}
+        else
+        {
+            for(int i = 0; i < dataRefs.marketData.merchants.Length; i++)
+            {
+                currentSave.merchantVals[i] = dataRefs.marketData.merchants[i].vals;
+            }
         }
 
     }

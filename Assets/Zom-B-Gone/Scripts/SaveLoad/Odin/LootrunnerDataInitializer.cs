@@ -57,15 +57,14 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
         if(SaveManager.currentSave.merchantVals != null)
         {
-            Debug.Log("should only go to three: ");
-            for (int i = 0; i <= dataRefs.marketData.merchants.Length; i++)
+            for (int i = 0; i < dataRefs.marketData.merchants.Length; i++)
             {
-                Debug.Log(i);
                 dataRefs.marketData.merchants[i].vals = SaveManager.currentSave.merchantVals[i];
             }
         }
         else
         {
+            SaveManager.currentSave.merchantVals = new List<MerchantVals>();
             foreach (var merchant in dataRefs.marketData.merchants)
             {
                 merchant.vals = new MerchantVals();

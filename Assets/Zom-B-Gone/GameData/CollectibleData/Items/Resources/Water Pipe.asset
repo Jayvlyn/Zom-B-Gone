@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0daed25ccdb3ca44fb9626e86bfd5ce4, type: 3}
-  m_Name: Stopaxe
+  m_Name: Water Pipe
   m_EditorClassIdentifier: 
-  name: Stopaxe
-  description: An improvised battle axe cut from a stop sign.
-  rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
-  icon: {fileID: 21300000, guid: 50f85a7f8d85ed844a24f601ff05ab64, type: 3}
+  name: Water Pipe
+  description: Better than nothin'
+  rarity: {fileID: 11400000, guid: 705c066aaed3d914fa8be279498b3421, type: 2}
+  icon: {fileID: 21300000, guid: 5f98ea97c0a8b8347b97e1cb8ec21777, type: 3}
   maxStack: 1
-  weight: 4200
+  weight: 1000
   damage: 10
   attackSpeed: 0.15
   knockbackPower: 10
