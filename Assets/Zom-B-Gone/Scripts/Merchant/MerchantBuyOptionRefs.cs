@@ -114,7 +114,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
             else
             { // none left to buy
                 loadedMerchant.vals.inventory.Remove(hoverableCollectible.CollectibleData);
-                Destroy(this);
+                Destroy(gameObject);
             }
 
 
