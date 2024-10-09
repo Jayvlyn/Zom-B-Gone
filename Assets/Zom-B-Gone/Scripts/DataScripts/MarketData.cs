@@ -12,6 +12,7 @@ public class MarketData : ScriptableObject
         get { return day; }
         set
         {
+            Debug.Log(value);
             if (value < 1 || value > 4) return;
             if (value == 4) day = 1;
             else day = value;
