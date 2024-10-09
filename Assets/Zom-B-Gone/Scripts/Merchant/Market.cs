@@ -16,6 +16,7 @@ public class Market : MonoBehaviour
     [SerializeField] TMP_Text merchantNameText;
     [SerializeField] SuperTextMesh merchantDialogue;
     [SerializeField] RectTransform sellingItemHolder;
+    [SerializeField] TMP_Text goldCount;
 
     [HideInInspector] public MerchantData loadedMerchant;
 
@@ -33,9 +34,15 @@ public class Market : MonoBehaviour
         merchantNameText.text = loadedMerchant.merchantName;
         merchantNameText.color = loadedMerchant.nameColor;
         merchantDialogue.readDelay = loadedMerchant.talkSpeed;
+        UpdatePlayerGoldText();
 
         MerchantSaySomething();
     }
+
+    public void UpdatePlayerGoldText()
+    {
+		goldCount.text = SaveManager.currentSave.gold.ToString();
+	}
 
     public void MerchantSaySomething()
     {
@@ -52,7 +59,9 @@ public class Market : MonoBehaviour
         { 
             GameObject option = Instantiate(buyOptionPrefab, sellingItemHolder);
             MerchantBuyOptionRefs refs = option.GetComponent<MerchantBuyOptionRefs>();
-            refs.collectibleImage.sprite = collectible.Icon;
+            refs.loadedMerchant = loadedMerchant;
+
+            refs.hoverableCollectible.CollectibleData = collectible;
 
 			refs.unitPrice.text = loadedMerchant.vals.prices[collectible].ToString();
 

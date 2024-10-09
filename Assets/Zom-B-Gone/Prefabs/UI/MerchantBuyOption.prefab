@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 3086990051348945332}
   - component: {fileID: 5450002737412759209}
   - component: {fileID: 6316431298187708340}
+  - component: {fileID: 4592803733876220772}
   m_Layer: 5
   m_Name: CollectibleImage
   m_TagString: Untagged
@@ -347,6 +348,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4592803733876220772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490021885796799106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 633ab3c346ec2e4409dd381b6fa83d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibleImage: {fileID: 6316431298187708340}
+  onMouseStartHoverCollectible: {fileID: 11400000, guid: 4748cf1022d4a02459626e2debec913d, type: 2}
+  onMouseEndHoverCollectible: {fileID: 11400000, guid: 8354cee0932d90c43aaeff1275d47b6e, type: 2}
 --- !u!1 &2689803735453899414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,13 +1733,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0033ac2f600b8ca48b882cb68d42caaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectibleImage: {fileID: 6316431298187708340}
+  loadedMerchant: {fileID: 0}
+  hoverableCollectible: {fileID: 4592803733876220772}
+  updatePlayerGold: {fileID: 11400000, guid: ff67a260c34c90c4faa049096bfddab2, type: 2}
+  normalTotalPriceColor: {r: 0.9058824, g: 0.7019608, b: 0.227451, a: 1}
+  cannotAffordTotalPriceColor: {r: 0.72327036, g: 0.19787577, b: 0.19787577, a: 1}
   unitPrice: {fileID: 7807502215192610561}
   selectedAmount: {fileID: 3326969454248692258}
   maxAmount: {fileID: 146020988727034488}
   buyTotal: {fileID: 7808054919546195732}
   minusButton: {fileID: 2967138022768914133}
   plusButton: {fileID: 5456527592273381265}
+  lootLocker: {fileID: 11400000, guid: 586d250204d4c45408bf05e6362d6fbf, type: 2}
+  itemLocker: {fileID: 11400000, guid: d899c3825dac2214d8da6860657eba97, type: 2}
+  hatLocker: {fileID: 11400000, guid: 5abd42d350350924298d165742e4ec72, type: 2}
 --- !u!1001 &9053207527842478389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1743,6 +1766,34 @@ PrefabInstance:
     - target: {fileID: 5486854424148108803, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
       propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743223617699872626, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743223617699872626, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743223617699872626, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 998275804953816358}
+    - target: {fileID: 5743223617699872626, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743223617699872626, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743223617699872626, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MerchantBuyOptionRefs, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743223617699872626, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6105557953000952788, guid: c6365e49b15d840448cdc7aed37634a3, type: 3}
       propertyPath: m_SizeDelta.x

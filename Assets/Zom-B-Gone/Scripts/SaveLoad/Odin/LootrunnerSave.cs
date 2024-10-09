@@ -8,7 +8,7 @@ public class LootrunnerSave
 {
     public string name;
 
-    public int gold;
+    public int gold = 1000;
     public int kills;
 
     public CollectibleContainer hands;
