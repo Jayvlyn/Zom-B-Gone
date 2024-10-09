@@ -57,4 +57,25 @@ public class SaveManager : MonoBehaviour
 
 		return copy;
 	}
+
+    public static void UpdateCurrentSave(LootrunnerDataRefs dataRefs)
+    {
+        currentSave.hands = DeepCopyContainer(dataRefs.handsData.Container);
+        currentSave.head = DeepCopyContainer(dataRefs.headData.Container);
+        currentSave.backpack = DeepCopyContainer(dataRefs.backpackData.Container);
+        currentSave.hatLocker = DeepCopyContainer(dataRefs.hatLockerData.Container);
+        currentSave.itemLocker = DeepCopyContainer(dataRefs.itemLockerData.Container);
+        currentSave.lootLocker = DeepCopyContainer(dataRefs.lootLockerData.Container);
+
+        SaveableFloor vanFloor = new SaveableFloor();
+        vanFloor.collectibleDict = dataRefs.vanFloor.floorContainer.collectibleDict;
+        vanFloor.floorContainer = DeepCopyContainer(dataRefs.vanFloor.floorContainer.Container);
+
+        SaveableFloor unitFloor = new SaveableFloor();
+        unitFloor.collectibleDict = dataRefs.unitFloor.floorContainer.collectibleDict;
+        unitFloor.floorContainer = DeepCopyContainer(dataRefs.unitFloor.floorContainer.Container);
+
+        currentSave.vanFloor = vanFloor;
+        currentSave.unitFloor = unitFloor;
+    }
 }

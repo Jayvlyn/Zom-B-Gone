@@ -13,4 +13,6 @@ public class LootrunnerDataRefs : MonoBehaviour
 
     public FloorContainer vanFloor;
     public FloorContainer unitFloor;
+
+    public MarketData marketData;
 }

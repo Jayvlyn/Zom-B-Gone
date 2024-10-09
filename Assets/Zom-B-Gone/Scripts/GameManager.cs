@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
 	public void StartRun(string run)
 	{
-		marketData.Day++;
+		if(marketData) marketData.Day++;
 		SceneManager.LoadScene(run);
 	}
 
