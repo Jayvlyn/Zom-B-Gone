@@ -30,6 +30,7 @@ public class Market : MonoBehaviour
             }
         }
 
+        CanvasUpdate update = new CanvasUpdate();
         merchantImage.sprite = loadedMerchant.merchantSprite;
         merchantNameText.text = loadedMerchant.merchantName;
         merchantNameText.color = loadedMerchant.nameColor;

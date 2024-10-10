@@ -8,23 +8,23 @@ public class WheelSmokeHandler : MonoBehaviour
 
     public Vehicle vehicle;
     public ParticleSystem particleSystemSmoke;
-    private ParticleSystem.EmissionModule particleSystemEmissionModule;
 
     private void Awake()
     {
-        particleSystemEmissionModule = particleSystemSmoke.emission;
-        particleSystemEmissionModule.rateOverTime = 0;
+        var emissionModule = particleSystemSmoke.emission;
+        emissionModule.rateOverTime = 0;
     }
 
     private void Update()
     {
         particleEmissionRate = Mathf.Lerp(particleEmissionRate, 0, Time.deltaTime * 5);
-        particleSystemEmissionModule.rateOverTime = particleEmissionRate;
 
-        if(vehicle.IsTireScreeching(out float lateralVelocity, out bool isBraking))
+        var emissionModule = particleSystemSmoke.emission;
+        emissionModule.rateOverTime = particleEmissionRate;
+
+        if (vehicle.IsTireScreeching(out float lateralVelocity, out bool isBraking))
         {
             if (isBraking) particleEmissionRate = 30;
-
             else particleEmissionRate = Mathf.Abs(lateralVelocity) * 3;
         }
     }

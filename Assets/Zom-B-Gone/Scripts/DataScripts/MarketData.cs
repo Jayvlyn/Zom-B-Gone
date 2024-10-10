@@ -12,16 +12,18 @@ public class MarketData : ScriptableObject
         get { return day; }
         set
         {
-            Debug.Log(value);
             if (value < 1 || value > 4) return;
-            if (value == 4) day = 1;
-            else day = value;
-
-            foreach (var merchant in merchants)
+            if (value == 4)
             {
-                RefreshMerchantInventory(merchant);
-                RefreshBuyOffers(merchant);
+                day = 1;
+                foreach (var merchant in merchants)
+                {
+                    RefreshMerchantInventory(merchant);
+                    RefreshBuyOffers(merchant);
+                }
             }
+
+            else day = value;
         }
     }
 
@@ -59,6 +61,7 @@ public class MarketData : ScriptableObject
             int price = DeterminePrice(chosenCollectible);
 
             merchant.vals.prices.Add(chosenCollectible, price);
+
         }
     }
 

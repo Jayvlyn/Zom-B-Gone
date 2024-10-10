@@ -70,7 +70,7 @@ Material:
     - _Blend: 0.05
     - _BumpScale: 1
     - _ColorMask: 15
-    - _CullMode: 0
+    - _CullMode: 2
     - _Cutoff: 0.0001
     - _DetailNormalMapScale: 1
     - _DstBlend: 0

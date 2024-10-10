@@ -913,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.934999
+      value: -10.386616
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2940,10 +2940,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3615220176988249268, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       insertIndex: 0
       addedObject: {fileID: 359827346}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2714138195273567196, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 205977540}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
 --- !u!1 &205977535 stripped
 GameObject:
@@ -2983,34 +2980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d11c7bf9d6a5d47b66945792ec06bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &205977539 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2714138195273567196, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
-  m_PrefabInstance: {fileID: 205977534}
-  m_PrefabAsset: {fileID: 0}
---- !u!223 &205977540
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 205977539}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 1000
-  m_TargetDisplay: 0
 --- !u!4 &220420680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8105131813210140981, guid: 33ede6c4a5409c9418eeaddcee1ad5b1, type: 3}
@@ -4347,7 +4316,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -924.71576}
+  m_AnchoredPosition: {x: 0, y: -829.35345}
   m_SizeDelta: {x: 850.57, y: 378.96}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &656766008
@@ -4433,7 +4402,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 425.28506, y: -58}
-  m_SizeDelta: {x: 850.5701, y: 523.54504}
+  m_SizeDelta: {x: 850.5701, y: 430.31586}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &688607863
 MonoBehaviour:
@@ -6554,8 +6523,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420.3, y: -608.3904}
-  m_SizeDelta: {x: 840.6, y: 53.69071}
+  m_AnchoredPosition: {x: 420.3, y: -514.09467}
+  m_SizeDelta: {x: 840.6, y: 51.557625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443943423
 MonoBehaviour:
@@ -7030,7 +6999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 425.28503, y: -635.2358}
+  m_AnchoredPosition: {x: 425.28503, y: -539.8735}
   m_SizeDelta: {x: 850.57007, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1540621322
@@ -7058,10 +7027,10 @@ MonoBehaviour:
   showMaterialFoldout: 1
   showPositionFoldout: 1
   showTimingFoldout: 1
-  showFunctionalityFoldout: 0
+  showFunctionalityFoldout: 1
   showAudioFoldout: 0
   showEventFoldout: 0
-  showBetaFoldout: 0
+  showBetaFoldout: 1
   info:
   - pos: {x: -425.28503, y: -38, z: 0}
     offset: {x: 0, y: 0, z: 0}
@@ -7084,7 +7053,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7111,7 +7080,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.1
+    readTime: 0.03
     unreadTime: 0
     line: 0
     rawIndex: 1
@@ -7128,7 +7097,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7155,7 +7124,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.2
+    readTime: 0.06
     unreadTime: 0
     line: 0
     rawIndex: 2
@@ -7172,7 +7141,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7199,7 +7168,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.3
+    readTime: 0.089999996
     unreadTime: 0
     line: 0
     rawIndex: 3
@@ -7216,7 +7185,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7243,7 +7212,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.4
+    readTime: 0.12
     unreadTime: 0
     line: 0
     rawIndex: 4
@@ -7260,7 +7229,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7287,7 +7256,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.5
+    readTime: 0.14999999
     unreadTime: 0
     line: 0
     rawIndex: 5
@@ -7304,7 +7273,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7331,7 +7300,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.6
+    readTime: 0.17999999
     unreadTime: 0
     line: 0
     rawIndex: 6
@@ -7348,7 +7317,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7375,7 +7344,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.70000005
+    readTime: 0.21
     unreadTime: 0
     line: 0
     rawIndex: 7
@@ -7392,7 +7361,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7419,7 +7388,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.8000001
+    readTime: 0.24
     unreadTime: 0
     line: 0
     rawIndex: 8
@@ -7436,7 +7405,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7463,7 +7432,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.9000001
+    readTime: 0.26999998
     unreadTime: 0
     line: 0
     rawIndex: 9
@@ -7480,7 +7449,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.03
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7516,9 +7485,9 @@ MonoBehaviour:
   _color: {r: 1, g: 1, b: 1, a: 1}
   forceAnimation: 0
   richText: 1
-  readDelay: 0.1
+  readDelay: 0.03
   speedReadScale: 2
-  ignoreTimeScale: 1
+  ignoreTimeScale: 0
   disableAnimatedText: 0
   drawAnimName: Appear
   unreadDelay: 0.05
@@ -7558,25 +7527,25 @@ MonoBehaviour:
   verticalLimitMode: 2
   leftoverText: 
   textMaterial: {fileID: 2100000, guid: e490a80c3724140c0ad176edb075a09e, type: 2}
-  textMesh: {fileID: 0}
+  textMesh: {fileID: 1732395022}
   rawTopLeftBounds: {x: 425.28503, y: 0, z: 0}
   rawBottomRightBounds: {x: -425.28503, y: 100, z: 0}
   rawBottomRightTextBounds: {x: 195.34375, y: -38, z: 0}
-  topLeftBounds: {x: 22.999146, y: 208.6308, z: 0}
-  topRightBounds: {x: 393.49918, y: 208.6308, z: 0}
-  bottomLeftBounds: {x: 22.999146, y: 165.07178, z: 0}
-  bottomRightBounds: {x: 393.49918, y: 165.07178, z: 0}
-  centerBounds: {x: 208.24916, y: 186.85129, z: 0}
-  topLeftTextBounds: {x: 22.999146, y: 208.6308, z: 0}
-  topRightTextBounds: {x: 108.08896, y: 208.6308, z: 0}
-  bottomLeftTextBounds: {x: 22.999146, y: 192.07837, z: 0}
-  bottomRightTextBounds: {x: 108.08896, y: 192.07837, z: 0}
-  centerTextBounds: {x: 65.54405, y: 200.35458, z: 0}
-  finalTopLeftTextBounds: {x: 22.999146, y: 208.6308, z: 0}
-  finalTopRightTextBounds: {x: 108.08896, y: 208.6308, z: 0}
-  finalBottomLeftTextBounds: {x: 22.999146, y: 192.07837, z: 0}
-  finalBottomRightTextBounds: {x: 108.08896, y: 192.07837, z: 0}
-  finalCenterTextBounds: {x: 65.54405, y: 200.35458, z: 0}
+  topLeftBounds: {x: 29.166473, y: 264.57614, z: 0}
+  topRightBounds: {x: 499.01782, y: 264.57614, z: 0}
+  bottomLeftBounds: {x: 29.166473, y: 209.33655, z: 0}
+  bottomRightBounds: {x: 499.01782, y: 209.33655, z: 0}
+  centerBounds: {x: 264.09216, y: 236.95634, z: 0}
+  topLeftTextBounds: {x: 29.166473, y: 264.57614, z: 0}
+  topRightTextBounds: {x: 137.07352, y: 264.57614, z: 0}
+  bottomLeftTextBounds: {x: 29.166473, y: 243.58508, z: 0}
+  bottomRightTextBounds: {x: 137.07352, y: 243.58508, z: 0}
+  centerTextBounds: {x: 83.119995, y: 254.08061, z: 0}
+  finalTopLeftTextBounds: {x: 29.166473, y: 264.57614, z: 0}
+  finalTopRightTextBounds: {x: 137.07352, y: 264.57614, z: 0}
+  finalBottomLeftTextBounds: {x: 29.166473, y: 243.58508, z: 0}
+  finalBottomRightTextBounds: {x: 137.07352, y: 243.58508, z: 0}
+  finalCenterTextBounds: {x: 83.119995, y: 254.08061, z: 0}
   unwrappedBottomRightTextBounds: {x: 194.75, y: -38, z: 0}
   onCompleteEvent:
     m_PersistentCalls:
@@ -7600,11 +7569,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   debugMode: 0
-  totalReadTime: 0.9000101
+  totalReadTime: 0.27001
   totalUnreadTime: 0.00001
-  currentReadTime: 0.9000101
+  currentReadTime: 0.27001
   autoRead: 0
-  rememberReadPosition: 1
+  rememberReadPosition: 0
   autoQuality: 0
   drawOrder: 0
   removeEmoji: 1
@@ -7819,6 +7788,171 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!43 &1732395022
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 11
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 60
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 40
+    localAABB:
+      m_Center: {x: -327.61316, y: -27.609375, z: 0}
+      m_Extent: {x: 97.671875, y: 19.296875, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 000001000200000002000300040005000600040006000700080009000a0008000a000b000c000d000e000c000e000f00100011001200100012001300140015001600140016001700180019001a0018001a001b001c001d001e001c001e001f00200021002200200022002300240025002600240026002700
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 40
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 2
+      dimension: 4
+    - stream: 0
+      offset: 16
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 24
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 32
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 48
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 2560
+    _typelessdata: 7ca4d4c3000005c100000000ffffffff0000e23e0000953e000000000000000000008043000000440000043f0000af3e00000000000018420000803f0000003f7c5cc9c3000005c100000000ffffffff0000173f0000953e000000000000000000008043000000440000043f0000af3e00000000000018420000803f0000003f7c5cc9c300c01cc200000000ffffffff0000173f0000c93e000000000000000000008043000000440000043f0000af3e00000000000018420000803f0000003f7ca4d4c300c01cc200000000ffffffff0000e23e0000c93e000000000000000000008043000000440000043f0000af3e00000000000018420000803f0000003f7c5cc9c3000064c100000000ffffffff00001f3f00000000000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7c60bec3000064c100000000ffffffff0000443f00000000000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7c60bec300601ac200000000ffffffff0000443f0000a43d000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7c5cc9c300601ac200000000ffffffff00001f3f0000a43d000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7cacbec300805ac100000000ffffffff000000000000cc3d000000000000000000008043000000440000a03d00001e3e00000000000018420000803f0000003f7cccb2c300805ac100000000ffffffff0000203e0000cc3d000000000000000000008043000000440000a03d00001e3e00000000000018420000803f0000003f7cccb2c300a03bc200000000ffffffff0000203e0000563e000000000000000000008043000000440000a03d00001e3e00000000000018420000803f0000003f7cacbec300a03bc200000000ffffffff000000000000563e000000000000000000008043000000440000a03d00001e3e00000000000018420000803f0000003f7c64b3c300a015c200000000ffffffff00008a3e000000000000000000000000000080430000004400008c3e0000003b00000000000018420000803f0000003f7cccb2c300a015c200000000ffffffff00008e3e000000000000000000000000000080430000004400008c3e0000003b00000000000018420000803f0000003f7cccb2c300601ac200000000ffffffff00008e3e0000803b0000000000000000000080430000004400008c3e0000003b00000000000018420000803f0000003f7c64b3c300601ac200000000ffffffff00008a3e0000803b0000000000000000000080430000004400008c3e0000003b00000000000018420000803f0000003f7cc0adc300800ec100000000ffffffff0000000000000000000000000000000000008043000000440000943d00004c3d00000000000018420000803f0000003f7cc4a2c300800ec100000000ffffffff0000143e00000000000000000000000000008043000000440000943d00004c3d00000000000018420000803f0000003f7cc4a2c300c01cc200000000ffffffff0000143e0000cc3d000000000000000000008043000000440000943d00004c3d00000000000018420000803f0000003f7cc0adc300c01cc200000000ffffffff000000000000cc3d000000000000000000008043000000440000943d00004c3d00000000000018420000803f0000003f7cc4a2c3000005c100000000ffffffff00003e3f0000483e000000000000000000008043000000440080513f00007b3e00000000000018420000803f0000003f7c3097c3000005c100000000ffffffff0000653f0000483e000000000000000000008043000000440080513f00007b3e00000000000018420000803f0000003f7c3097c300601ac200000000ffffffff0000653f0000973e000000000000000000008043000000440080513f00007b3e00000000000018420000803f0000003f7cc4a2c300601ac200000000ffffffff00003e3f0000973e000000000000000000008043000000440080513f00007b3e00000000000018420000803f0000003f7c3097c3000064c100000000ffffffff00001f3f00000000000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7c348cc3000064c100000000ffffffff0000443f00000000000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7c348cc300601ac200000000ffffffff0000443f0000a43d000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7c3097c300601ac200000000ffffffff00001f3f0000a43d000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7c348cc3000064c100000000ffffffff0000143e00000000000000000000000000008043000000440000543e0000243d00000000000018420000803f0000003f7cb482c3000064c100000000ffffffff00008a3e00000000000000000000000000008043000000440000543e0000243d00000000000018420000803f0000003f7cb482c300601ac200000000ffffffff00008a3e0000a43d000000000000000000008043000000440000543e0000243d00000000000018420000803f0000003f7c348cc300601ac200000000ffffffff0000143e0000a43d000000000000000000008043000000440000543e0000243d00000000000018420000803f0000003f7cb482c3000064c100000000ffffffff00001f3f00000000000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003ff8706fc3000064c100000000ffffffff0000443f00000000000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003ff8706fc300601ac200000000ffffffff0000443f0000a43d000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003f7cb482c300601ac200000000ffffffff00001f3f0000a43d000000000000000000008043000000440080313f0000243d00000000000018420000803f0000003ff8706fc300800ec100000000ffffffff0000a63e0000c23e000000000000000000008043000000440000b63e0080db3e00000000000018420000803f0000003ff8f065c300800ec100000000ffffffff0000c63e0000c23e000000000000000000008043000000440000b63e0080db3e00000000000018420000803f0000003ff8f065c300c01cc200000000ffffffff0000c63e0000f53e000000000000000000008043000000440000b63e0080db3e00000000000018420000803f0000003ff8706fc300c01cc200000000ffffffff0000a63e0000f53e000000000000000000008043000000440000b63e0080db3e00000000000018420000803f0000003f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: -327.61316, y: -27.609375, z: 0}
+    m_Extent: {x: 97.671875, y: 19.296875, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1770436181
 GameObject:
   m_ObjectHideFlags: 0
@@ -8355,7 +8489,7 @@ Transform:
   m_GameObject: {fileID: 1873980143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.934999, y: -7.92, z: -10}
+  m_LocalPosition: {x: -10.386616, y: -7.92, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
