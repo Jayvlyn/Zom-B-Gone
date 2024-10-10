@@ -36,7 +36,8 @@ public class Market : MonoBehaviour
         UpdatePlayerGoldText();
 
         MerchantSaySomething();
-    }
+
+	}
 
     public void UpdatePlayerGoldText()
     {
