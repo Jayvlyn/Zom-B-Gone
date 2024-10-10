@@ -20,7 +20,7 @@ public class Market : MonoBehaviour
 
     [HideInInspector] public MerchantData loadedMerchant;
 
-    public void LoadMerchant(string name)
+	public void LoadMerchant(string name)
     {
         foreach (var merchant in marketData.merchants)
         {
@@ -30,11 +30,9 @@ public class Market : MonoBehaviour
             }
         }
 
-        CanvasUpdate update = new CanvasUpdate();
         merchantImage.sprite = loadedMerchant.merchantSprite;
         merchantNameText.text = loadedMerchant.merchantName;
         merchantNameText.color = loadedMerchant.nameColor;
-        merchantDialogue.readDelay = loadedMerchant.talkSpeed;
         UpdatePlayerGoldText();
 
         MerchantSaySomething();
@@ -48,8 +46,8 @@ public class Market : MonoBehaviour
     public void MerchantSaySomething()
     {
         int dialogueIndex = UnityEngine.Random.Range(0, loadedMerchant.dialogueOptions.Length);
-        merchantDialogue.text = loadedMerchant.dialogueOptions[dialogueIndex];
-        merchantDialogue.Read();
+        merchantDialogue.text = "<readDelay="+loadedMerchant.talkSpeed+">" + loadedMerchant.dialogueOptions[dialogueIndex];
+        //merchantDialogue.Read();
     }
 
     public void OnOpenBuy()
