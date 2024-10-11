@@ -19,3 +19,7 @@ MonoBehaviour:
   hatList: {fileID: 11400000, guid: 630cc084acdc6ec4c9cd0738c4efd80c, type: 2}
   itemList: {fileID: 11400000, guid: 368924e80fb62ef4caaa799945d7228a, type: 2}
   lootList: {fileID: 11400000, guid: 5046aadf7d6d3e94e838014ca527474c, type: 2}
+  backpackData: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
+  lootLockerData: {fileID: 11400000, guid: 586d250204d4c45408bf05e6362d6fbf, type: 2}
+  hatLockerData: {fileID: 11400000, guid: 5abd42d350350924298d165742e4ec72, type: 2}
+  itemLockerData: {fileID: 11400000, guid: d899c3825dac2214d8da6860657eba97, type: 2}

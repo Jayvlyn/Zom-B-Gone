@@ -1733,6 +1733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0033ac2f600b8ca48b882cb68d42caaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sellOption: 0
   loadedMerchant: {fileID: 0}
   hoverableCollectible: {fileID: 4592803733876220772}
   updatePlayerGold: {fileID: 11400000, guid: ff67a260c34c90c4faa049096bfddab2, type: 2}
@@ -1744,6 +1745,7 @@ MonoBehaviour:
   buyTotal: {fileID: 7808054919546195732}
   minusButton: {fileID: 2967138022768914133}
   plusButton: {fileID: 5456527592273381265}
+  backpack: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
   lootLocker: {fileID: 11400000, guid: 586d250204d4c45408bf05e6362d6fbf, type: 2}
   itemLocker: {fileID: 11400000, guid: d899c3825dac2214d8da6860657eba97, type: 2}
   hatLocker: {fileID: 11400000, guid: 5abd42d350350924298d165742e4ec72, type: 2}
