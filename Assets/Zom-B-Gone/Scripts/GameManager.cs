@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private int intervalSpawnAmount = 2;
 	private float intervalTimer;
 
-	[Header("For unit scene")]
+	[Header("MUST REFERENCE TO PRESERVE DATA")]
 	public MarketData marketData;
 
 	private void Start()

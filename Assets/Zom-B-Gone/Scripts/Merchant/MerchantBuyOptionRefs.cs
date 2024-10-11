@@ -129,15 +129,18 @@ public class MerchantBuyOptionRefs : MonoBehaviour
             if(hoverableCollectible.CollectibleData is LootData)
             {
                 lootLocker.AddToContainer(hoverableCollectible.CollectibleData, currentSelectedAmt);
+                lootLocker.onContainerCollectibleUpdated.Raise();
             }
             else if (hoverableCollectible.CollectibleData is HatData)
             {
 				hatLocker.AddToContainer(hoverableCollectible.CollectibleData, currentSelectedAmt);
-			}
+                hatLocker.onContainerCollectibleUpdated.Raise();
+            }
 			else if (hoverableCollectible.CollectibleData is ItemData)
 			{
 				itemLocker.AddToContainer(hoverableCollectible.CollectibleData, currentSelectedAmt);
-			}
+                itemLocker.onContainerCollectibleUpdated.Raise();
+            }
 
 		}
 	}
@@ -174,6 +177,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
                     backpack.container.collectibleSlots[i].CollectibleName = null;
                 }
             }
+            backpack.onContainerCollectibleUpdated.Raise();
             if (amountLeftToFind > 0)
             {
                 for (int i = 0; i < lootLocker.container.collectibleSlots.Length; i++) // when more left to find, search locker
@@ -198,6 +202,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
                         lootLocker.container.collectibleSlots[i].CollectibleName = null;
                     }
                 }
+                lootLocker.onContainerCollectibleUpdated.Raise();
             }
         }
         else if(hoverableCollectible.CollectibleData is HatData)
@@ -224,6 +229,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
                     hatLocker.container.collectibleSlots[i].CollectibleName = null;
                 }
             }
+            hatLocker.onContainerCollectibleUpdated.Raise();
         }
         else if (hoverableCollectible.CollectibleData is ItemData)
         {
@@ -249,6 +255,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
                     itemLocker.container.collectibleSlots[i].CollectibleName = null;
                 }
             }
+            itemLocker.onContainerCollectibleUpdated.Raise();
         }
 
         maxAmt -= currentSelectedAmt;
