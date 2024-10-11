@@ -18,6 +18,7 @@ public class MarketData : ScriptableObject
                 day = 1;
                 foreach (var merchant in merchants)
                 {
+                    RefreshDealingCollectibles(merchant);
                     RefreshMerchantInventory(merchant);
                     RefreshBuyOffers(merchant);
                 }
@@ -32,21 +33,32 @@ public class MarketData : ScriptableObject
     [SerializeField] CollectibleList itemList;
     [SerializeField] CollectibleList lootList;
 
+    public CollectibleContainerData backpackData;
+    public CollectibleContainerData lootLockerData;
+    public CollectibleContainerData hatLockerData;
+    public CollectibleContainerData itemLockerData;
+
+    private List<CollectibleData> dealingCollectibles = new List<CollectibleData>();
+
+    public void RefreshDealingCollectibles(MerchantData merchant)
+    {
+         dealingCollectibles.Clear();
+        if (merchant.dealsHats) dealingCollectibles.AddRange(hatList.collectibles);
+        if (merchant.dealsItems) dealingCollectibles.AddRange(itemList.collectibles);
+        if (merchant.dealsLoot) dealingCollectibles.AddRange(lootList.collectibles);
+    }
+
     public void RefreshMerchantInventory(MerchantData merchant)
     {
         merchant.vals.inventory.Clear();
         merchant.vals.prices.Clear();
 
         int count = Random.Range(6, 9);
-        List<CollectibleData> possibleCollectibles = new List<CollectibleData>();
-
-        if (merchant.dealsHats) possibleCollectibles.AddRange(hatList.collectibles);
-        if (merchant.dealsItems) possibleCollectibles.AddRange(itemList.collectibles);
-        if (merchant.dealsLoot) possibleCollectibles.AddRange(lootList.collectibles);
 
         for (int i = 0; i < count; i++)
         {
-            CollectibleData chosenCollectible = possibleCollectibles[Random.Range(0, possibleCollectibles.Count)];
+            if (dealingCollectibles.Count <= 0) break;
+            CollectibleData chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
 
             int maxAmount;
             if (chosenCollectible is ItemData) maxAmount = 3;
@@ -56,7 +68,7 @@ public class MarketData : ScriptableObject
             int chosenAmount = Random.Range(1, maxAmount + 1);
 
             merchant.vals.inventory.Add(chosenCollectible, chosenAmount);
-            possibleCollectibles.Remove(chosenCollectible); // no duplicate keys
+            dealingCollectibles.Remove(chosenCollectible); // no duplicate keys
 
             int price = DeterminePrice(chosenCollectible);
 
@@ -67,25 +79,21 @@ public class MarketData : ScriptableObject
 
     public void RefreshBuyOffers(MerchantData merchant)
     {
+        merchant.vals.buyOffers.Clear();
+
         int count = Random.Range(4, 9);
-        List<CollectibleData> possibleCollectibles = new List<CollectibleData>();
-
-        if (merchant.dealsHats) possibleCollectibles.AddRange(hatList.collectibles);
-        if (merchant.dealsItems) possibleCollectibles.AddRange(itemList.collectibles);
-        if (merchant.dealsLoot) possibleCollectibles.AddRange(lootList.collectibles);
-
-        CollectibleData[] newBuyOffers = new CollectibleData[count];
 
         for (int i = 0; i < count; i++)
         {
-            CollectibleData chosenCollectible = possibleCollectibles[Random.Range(0, possibleCollectibles.Count)];
+            if (dealingCollectibles.Count <= 0) break;
+            CollectibleData chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
 
-            newBuyOffers[i] = chosenCollectible;
+            dealingCollectibles.Remove(chosenCollectible);
 
-            possibleCollectibles.Remove(chosenCollectible);
+            int price = DeterminePrice(chosenCollectible);
+
+            merchant.vals.buyOffers.Add(chosenCollectible, price);
         }
-
-        merchant.vals.buyOffers = newBuyOffers;
     }
 
     public int DeterminePrice(CollectibleData c)

@@ -15,6 +15,7 @@ public class UnitFloor : Floor
         if (collision.gameObject.layer == LayerMask.NameToLayer("AirborneItem") || collision.gameObject.layer == LayerMask.NameToLayer("InteractableItem") || collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             Collectible c = collision.gameObject.GetComponent<Collectible>();
+            if(c == null) return;
 			if (c.addContainer != null)
 			{
 				c.StopCoroutine(c.addContainer);

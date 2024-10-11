@@ -68,6 +68,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
             foreach (var merchant in dataRefs.marketData.merchants)
             {
                 merchant.vals = new MerchantVals();
+                dataRefs.marketData.RefreshDealingCollectibles(merchant);
                 dataRefs.marketData.RefreshMerchantInventory(merchant);
                 dataRefs.marketData.RefreshBuyOffers(merchant);
             }

@@ -38,7 +38,8 @@ public class VanFloor : Floor
 		{
 			GameObject collectibleObject = collision.gameObject;
 			Collectible c = collectibleObject.GetComponent<Collectible>();
-			if(c.addContainer != null)
+			if (c == null) return;
+            if (c.addContainer != null)
 			{
 				c.StopCoroutine(c.addContainer);
 				c.addContainer = null;
