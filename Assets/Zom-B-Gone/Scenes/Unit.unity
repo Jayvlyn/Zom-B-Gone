@@ -913,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.775415
+      value: -9.965286
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2634,7 +2634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4593481626318583662, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -286.28693
+      value: -169.53961
       objectReference: {fileID: 0}
     - target: {fileID: 4673682736621625068, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3064,6 +3064,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 4433974582028943305, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
     - {fileID: 2714138195273567196, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+    - {fileID: 8670690801531846537, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3615220176988249268, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
       insertIndex: 0
@@ -4299,6 +4300,18 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 535484147}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 766296580}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -9007,7 +9020,7 @@ Transform:
   m_GameObject: {fileID: 1873980143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.775415, y: -7.92, z: -10}
+  m_LocalPosition: {x: -9.965286, y: -7.92, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
