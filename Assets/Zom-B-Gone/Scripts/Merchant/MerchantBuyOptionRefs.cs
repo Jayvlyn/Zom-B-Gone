@@ -155,107 +155,129 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 
         if(hoverableCollectible.CollectibleData is LootData)
         {
-            for(int i = 0; i < backpack.container.collectibleSlots.Length; i++) // search backpack
+            for (int i = 0; i < backpack.container.collectibleSlots.Length; i++) // search backpack
             {
-                if(backpack.container.collectibleSlots[i].quantity > amountLeftToFind)
+                if (backpack.container.collectibleSlots[i].Collectible == hoverableCollectible.CollectibleData)
                 {
-                    backpack.container.collectibleSlots[i].quantity -= amountLeftToFind;
-                    amountLeftToFind = 0;
-                    break;
-                }
-                else if (backpack.container.collectibleSlots[i].quantity == amountLeftToFind)
-                {
-                    backpack.container.collectibleSlots[i].quantity = 0;
-                    amountLeftToFind = 0;
-                    backpack.container.collectibleSlots[i].CollectibleName = null;
-                    break;
-                }
-                else if (backpack.container.collectibleSlots[i].quantity < amountLeftToFind)
-                {
-                    amountLeftToFind -= backpack.container.collectibleSlots[i].quantity;
-                    backpack.container.collectibleSlots[i].quantity = 0;
-                    backpack.container.collectibleSlots[i].CollectibleName = null;
+                    if (backpack.container.collectibleSlots[i].quantity > amountLeftToFind)
+                    {
+                        backpack.container.collectibleSlots[i].quantity -= amountLeftToFind;
+                        amountLeftToFind = 0;
+						backpack.onContainerCollectibleUpdated.Raise();
+						break;
+                    }
+                    else if (backpack.container.collectibleSlots[i].quantity == amountLeftToFind)
+                    {
+                        backpack.container.collectibleSlots[i].quantity = 0;
+                        amountLeftToFind = 0;
+                        backpack.container.collectibleSlots[i].CollectibleName = null;
+						backpack.onContainerCollectibleUpdated.Raise();
+						break;
+                    }
+                    else if (backpack.container.collectibleSlots[i].quantity < amountLeftToFind)
+                    {
+                        amountLeftToFind -= backpack.container.collectibleSlots[i].quantity;
+                        backpack.container.collectibleSlots[i].quantity = 0;
+                        backpack.container.collectibleSlots[i].CollectibleName = null;
+						backpack.onContainerCollectibleUpdated.Raise();
+					}
                 }
             }
-            backpack.onContainerCollectibleUpdated.Raise();
             if (amountLeftToFind > 0)
             {
-                for (int i = 0; i < lootLocker.container.collectibleSlots.Length; i++) // when more left to find, search locker
+
+				for (int i = 0; i < lootLocker.container.collectibleSlots.Length; i++) // when more left to find, search locker
                 {
-                    if (lootLocker.container.collectibleSlots[i].quantity > amountLeftToFind)
+                    if (lootLocker.container.collectibleSlots[i].Collectible == hoverableCollectible.CollectibleData)
                     {
-                        lootLocker.container.collectibleSlots[i].quantity -= amountLeftToFind;
-                        amountLeftToFind = 0;
-                        break;
-                    }
-                    else if (lootLocker.container.collectibleSlots[i].quantity == amountLeftToFind)
-                    {
-                        lootLocker.container.collectibleSlots[i].quantity = 0;
-                        amountLeftToFind = 0;
-                        lootLocker.container.collectibleSlots[i].CollectibleName = null;
-                        break;
-                    }
-                    else if (lootLocker.container.collectibleSlots[i].quantity < amountLeftToFind)
-                    {
-                        amountLeftToFind -= lootLocker.container.collectibleSlots[i].quantity;
-                        lootLocker.container.collectibleSlots[i].quantity = 0;
-                        lootLocker.container.collectibleSlots[i].CollectibleName = null;
+					    if (lootLocker.container.collectibleSlots[i].quantity > amountLeftToFind)
+                        {
+                            lootLocker.container.collectibleSlots[i].quantity -= amountLeftToFind;
+                            amountLeftToFind = 0;
+						    lootLocker.onContainerCollectibleUpdated.Raise();
+						    break;
+                        }
+                        else if (lootLocker.container.collectibleSlots[i].quantity == amountLeftToFind)
+                        {
+                            lootLocker.container.collectibleSlots[i].quantity = 0;
+                            amountLeftToFind = 0;
+                            lootLocker.container.collectibleSlots[i].CollectibleName = null;
+						    lootLocker.onContainerCollectibleUpdated.Raise();
+						    break;
+                        }
+                        else if (lootLocker.container.collectibleSlots[i].quantity < amountLeftToFind)
+                        {
+                            amountLeftToFind -= lootLocker.container.collectibleSlots[i].quantity;
+                            lootLocker.container.collectibleSlots[i].quantity = 0;
+                            lootLocker.container.collectibleSlots[i].CollectibleName = null;
+						    lootLocker.onContainerCollectibleUpdated.Raise();
+					    }
                     }
                 }
-                lootLocker.onContainerCollectibleUpdated.Raise();
+                
             }
         }
         else if(hoverableCollectible.CollectibleData is HatData)
         {
             for (int i = 0; i < hatLocker.container.collectibleSlots.Length; i++)
             {
-                if (hatLocker.container.collectibleSlots[i].quantity > amountLeftToFind)
+                if (hatLocker.container.collectibleSlots[i].Collectible == hoverableCollectible.CollectibleData)
                 {
-                    hatLocker.container.collectibleSlots[i].quantity -= amountLeftToFind;
-                    amountLeftToFind = 0;
-                    break;
-                }
-                else if (hatLocker.container.collectibleSlots[i].quantity == amountLeftToFind)
-                {
-                    hatLocker.container.collectibleSlots[i].quantity = 0;
-                    amountLeftToFind = 0;
-                    hatLocker.container.collectibleSlots[i].CollectibleName = null;
-                    break;
-                }
-                else if (hatLocker.container.collectibleSlots[i].quantity < amountLeftToFind)
-                {
-                    amountLeftToFind -= hatLocker.container.collectibleSlots[i].quantity;
-                    hatLocker.container.collectibleSlots[i].quantity = 0;
-                    hatLocker.container.collectibleSlots[i].CollectibleName = null;
+                    if (hatLocker.container.collectibleSlots[i].quantity > amountLeftToFind)
+                    {
+                        hatLocker.container.collectibleSlots[i].quantity -= amountLeftToFind;
+                        amountLeftToFind = 0;
+						hatLocker.onContainerCollectibleUpdated.Raise();
+						break;
+                    }
+                    else if (hatLocker.container.collectibleSlots[i].quantity == amountLeftToFind)
+                    {
+                        hatLocker.container.collectibleSlots[i].quantity = 0;
+                        amountLeftToFind = 0;
+                        hatLocker.container.collectibleSlots[i].CollectibleName = null;
+						hatLocker.onContainerCollectibleUpdated.Raise();
+						break;
+                    }
+                    else if (hatLocker.container.collectibleSlots[i].quantity < amountLeftToFind)
+                    {
+                        amountLeftToFind -= hatLocker.container.collectibleSlots[i].quantity;
+                        hatLocker.container.collectibleSlots[i].quantity = 0;
+                        hatLocker.container.collectibleSlots[i].CollectibleName = null;
+						hatLocker.onContainerCollectibleUpdated.Raise();
+					}
                 }
             }
-            hatLocker.onContainerCollectibleUpdated.Raise();
         }
         else if (hoverableCollectible.CollectibleData is ItemData)
         {
             for (int i = 0; i < itemLocker.container.collectibleSlots.Length; i++)
             {
-                if (itemLocker.container.collectibleSlots[i].quantity > amountLeftToFind)
+                if (itemLocker.container.collectibleSlots[i].Collectible == hoverableCollectible.CollectibleData)
                 {
-                    itemLocker.container.collectibleSlots[i].quantity -= amountLeftToFind;
-                    amountLeftToFind = 0;
-                    break;
-                }
-                else if (itemLocker.container.collectibleSlots[i].quantity == amountLeftToFind)
-                {
-                    itemLocker.container.collectibleSlots[i].quantity = 0;
-                    amountLeftToFind = 0;
-                    itemLocker.container.collectibleSlots[i].CollectibleName = null;
-                    break;
-                }
-                else if (itemLocker.container.collectibleSlots[i].quantity < amountLeftToFind)
-                {
-                    amountLeftToFind -= itemLocker.container.collectibleSlots[i].quantity;
-                    itemLocker.container.collectibleSlots[i].quantity = 0;
-                    itemLocker.container.collectibleSlots[i].CollectibleName = null;
+                    if (itemLocker.container.collectibleSlots[i].quantity > amountLeftToFind)
+                    {
+                        itemLocker.container.collectibleSlots[i].quantity -= amountLeftToFind;
+                        amountLeftToFind = 0;
+						itemLocker.onContainerCollectibleUpdated.Raise();
+						break;
+                    }
+                    else if (itemLocker.container.collectibleSlots[i].quantity == amountLeftToFind)
+                    {
+                        itemLocker.container.collectibleSlots[i].quantity = 0;
+                        amountLeftToFind = 0;
+                        itemLocker.container.collectibleSlots[i].CollectibleName = null;
+						itemLocker.onContainerCollectibleUpdated.Raise();
+						break;
+                    }
+                    else if (itemLocker.container.collectibleSlots[i].quantity < amountLeftToFind)
+                    {
+                        amountLeftToFind -= itemLocker.container.collectibleSlots[i].quantity;
+                        itemLocker.container.collectibleSlots[i].quantity = 0;
+                        itemLocker.container.collectibleSlots[i].CollectibleName = null;
+						itemLocker.onContainerCollectibleUpdated.Raise();
+					}
                 }
             }
-            itemLocker.onContainerCollectibleUpdated.Raise();
         }
 
         maxAmt -= currentSelectedAmt;
