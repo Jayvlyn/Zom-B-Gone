@@ -12,6 +12,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 	[HideInInspector] public MerchantData loadedMerchant;
 	public HoverableCollectible hoverableCollectible;
     public VoidEvent updatePlayerGold;
+    public VoidEvent updateReputation;
 
     public Color normalTotalPriceColor;
     public Color cannotAffordTotalPriceColor;
@@ -124,6 +125,9 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 
             SaveManager.currentSave.gold -= totalCost;
             updatePlayerGold.Raise();
+
+            loadedMerchant.vals.GainExp(Mathf.RoundToInt(totalCost * 1.5f));
+            updateReputation.Raise();
 
 
             if(hoverableCollectible.CollectibleData is LootData)
@@ -300,8 +304,11 @@ public class MerchantBuyOptionRefs : MonoBehaviour
         SaveManager.currentSave.gold += totalCost;
         updatePlayerGold.Raise();
 
+        loadedMerchant.vals.GainExp(Mathf.RoundToInt(totalCost * 1.5f));
+        updateReputation.Raise();
+
         // Add collectible to merchant inventory
-        if(loadedMerchant.vals.inventory.ContainsKey(hoverableCollectible.CollectibleData))
+        if (loadedMerchant.vals.inventory.ContainsKey(hoverableCollectible.CollectibleData))
         {
             loadedMerchant.vals.inventory[hoverableCollectible.CollectibleData] += currentSelectedAmt;
         }

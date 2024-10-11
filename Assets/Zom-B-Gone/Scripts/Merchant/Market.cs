@@ -22,13 +22,15 @@ public class Market : MonoBehaviour
     [SerializeField] TMP_Text goldCount;
     [SerializeField] RectTransform scrollingBackground;
     [SerializeField] float backgroundIncrementPerItem;
+    [SerializeField] Slider repSlider;
+    [SerializeField] TMP_Text currentRepText;
+    [SerializeField] TMP_Text nextRepText;
 
     [Header("Sell UI Refs")]
     [SerializeField] RectTransform sellScrollingBackground;
     [SerializeField] RectTransform buyingItemHolder;
 
     [SerializeField] RectTransform interestItemHolder;
-
 
     [HideInInspector] public MerchantData loadedMerchant;
 
@@ -45,11 +47,22 @@ public class Market : MonoBehaviour
         merchantImage.sprite = loadedMerchant.merchantSprite;
         merchantNameText.text = loadedMerchant.merchantName;
         merchantNameText.color = loadedMerchant.nameColor;
+
+        UpdateReputationUI();
+
         UpdatePlayerGoldText();
 
         MerchantSaySomething();
 
 	}
+
+    public void UpdateReputationUI()
+    {
+        if (loadedMerchant.vals.reputationExp == 0) repSlider.value = 0;
+        else repSlider.value = loadedMerchant.vals.reputationExp / (float)loadedMerchant.vals.GetNextLevelRequirement();
+        currentRepText.text = loadedMerchant.vals.reputationLevel.ToString();
+        nextRepText.text = (loadedMerchant.vals.reputationLevel + 1).ToString();
+    }
 
     public void UpdatePlayerGoldText()
     {

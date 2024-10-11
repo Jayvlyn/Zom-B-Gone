@@ -11,4 +11,23 @@ public class MerchantVals
     public Dictionary<CollectibleData, int> buyOffers = new Dictionary<CollectibleData, int>(); // collectible and price
     public Dictionary<CollectibleData, int> inventory = new Dictionary<CollectibleData, int>(); // collectible and amount
     public Dictionary<CollectibleData, int> prices = new Dictionary<CollectibleData, int>(); // collectible and price
+
+    public int GetNextLevelRequirement()
+    {
+        int baseExp = 1;
+        float exponent = 1.5f;
+
+        return Mathf.RoundToInt(baseExp * Mathf.Pow(reputationLevel, exponent));
+    }
+
+    public void GainExp(int amount)
+    {
+        reputationExp += amount;
+
+        while(reputationExp >= GetNextLevelRequirement())
+        {
+            reputationExp -= GetNextLevelRequirement();
+            reputationLevel++;
+        }
+    }
 }
