@@ -81,6 +81,7 @@ public class SaveManager : MonoBehaviour
 
         if(currentSave.merchantVals.Count != dataRefs.marketData.merchants.Length)
         {
+            currentSave.merchantVals.Clear();
 			for (int i = 0; i < dataRefs.marketData.merchants.Length; i++)
 			{
 				currentSave.merchantVals.Add(dataRefs.marketData.merchants[i].vals);
