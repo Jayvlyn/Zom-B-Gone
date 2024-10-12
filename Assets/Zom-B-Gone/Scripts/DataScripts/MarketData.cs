@@ -53,14 +53,35 @@ public class MarketData : ScriptableObject
         merchant.vals.inventory.Clear();
         merchant.vals.prices.Clear();
 
-        int count = Random.Range(6, 9);
+		float repModifier = merchant.vals.reputationLevel;
 
-        for (int i = 0; i < count; i++)
+		int baseCount = 3 + (int)repModifier;
+
+		if (repModifier <= 0) repModifier = 1;
+		else repModifier = Mathf.CeilToInt(Mathf.Sqrt(repModifier));
+
+		int count = Random.Range(baseCount, Mathf.RoundToInt((baseCount) + (2 * repModifier)));
+
+		for (int i = 0; i < count; i++)
         {
-            if (dealingCollectibles.Count <= 0) break;
+            if (dealingCollectibles.Count <= 1) break;
             CollectibleData chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
 
-            int maxAmount;
+            
+            // these are base chances, rerolls get less likely with higher rep
+            // 1 in 20 chance to reroll on valuable
+            if(chosenCollectible.Rarity.Name == "Valuable" && Random.Range(0, 20 + merchant.vals.reputationLevel) == 0) chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
+
+			// 1 in 10 chance to reroll on very valuable
+			else if (chosenCollectible.Rarity.Name == "Very Valuable" && Random.Range(0, 10 + merchant.vals.reputationLevel) == 0) chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
+
+			// 1 in 5 chance to reroll on super valuable
+			else if (chosenCollectible.Rarity.Name == "Super Valuable" && Random.Range(0, 5 + merchant.vals.reputationLevel) == 0) chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
+
+			// 1 in 2 chance to reroll on super legendary
+			else if (chosenCollectible.Rarity.Name == "Super Legendary" && Random.Range(0, 2 + merchant.vals.reputationLevel) == 0) chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
+
+			int maxAmount;
             if (chosenCollectible is ItemData) maxAmount = 3;
             else if (chosenCollectible is HatData) maxAmount = 1;
             else maxAmount = 10; // Loot data
@@ -71,8 +92,9 @@ public class MarketData : ScriptableObject
             dealingCollectibles.Remove(chosenCollectible); // no duplicate keys
 
             int price = DeterminePrice(chosenCollectible);
+			price = DiscountPriceWithRep(price, merchant);
 
-            merchant.vals.prices.Add(chosenCollectible, price);
+			merchant.vals.prices.Add(chosenCollectible, price);
 
         }
     }
@@ -81,16 +103,24 @@ public class MarketData : ScriptableObject
     {
         merchant.vals.buyOffers.Clear();
 
-        int count = Random.Range(4, 9);
+        float repModifier = merchant.vals.reputationLevel;
+
+		int baseCount = 4 + (int)repModifier;
+
+        if (repModifier <= 0) repModifier = 1;
+        else repModifier = Mathf.CeilToInt(Mathf.Sqrt(repModifier));
+
+        int count = Random.Range(baseCount, Mathf.RoundToInt((baseCount) + (4*repModifier)));
 
         for (int i = 0; i < count; i++)
         {
-            if (dealingCollectibles.Count <= 0) break;
+            if (dealingCollectibles.Count <= 1) break;
             CollectibleData chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
 
             dealingCollectibles.Remove(chosenCollectible);
 
             int price = DeterminePrice(chosenCollectible);
+            price = IncreaseOfferWithRep(price, merchant);
 
             merchant.vals.buyOffers.Add(chosenCollectible, price);
         }
@@ -115,8 +145,22 @@ public class MarketData : ScriptableObject
         price += randomAdd;
 
         return price;
-
-
     }
+
+    public int DiscountPriceWithRep(int price, MerchantData merchant)
+    {
+        int newPrice = price;
+        float mod = 1 + Mathf.Sqrt(merchant.vals.reputationLevel);
+        newPrice = Mathf.RoundToInt(price / mod);
+        return newPrice;
+    }
+
+	public int IncreaseOfferWithRep(int price, MerchantData merchant)
+	{
+		int newPrice = price;
+		float mod = 1 + Mathf.Sqrt(merchant.vals.reputationLevel);
+		newPrice = Mathf.RoundToInt(price * mod);
+		return newPrice;
+	}
 
 }
