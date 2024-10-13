@@ -16,5 +16,7 @@ public class MerchantData : ScriptableObject
     public bool dealsLoot;
     public bool dealsHats;
 
+    public LootTable lootTable;
+
     public MerchantVals vals;
 }

@@ -52,7 +52,7 @@ MonoBehaviour:
   dealsItems: 0
   dealsLoot: 1
   dealsHats: 0
+  lootTable: {fileID: 11400000, guid: c639a1549a96955489bb350b908b6470, type: 2}
   vals:
     reputationLevel: 0
     reputationExp: 0
-    buyOffers: []

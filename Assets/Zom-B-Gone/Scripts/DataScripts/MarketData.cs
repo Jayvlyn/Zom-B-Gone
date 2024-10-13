@@ -29,9 +29,6 @@ public class MarketData : ScriptableObject
     }
 
     public MerchantData[] merchants = new MerchantData[3];
-    [SerializeField] CollectibleList hatList;
-    [SerializeField] CollectibleList itemList;
-    [SerializeField] CollectibleList lootList;
 
     public CollectibleContainerData backpackData;
     public CollectibleContainerData lootLockerData;
@@ -42,10 +39,8 @@ public class MarketData : ScriptableObject
 
     public void RefreshDealingCollectibles(MerchantData merchant)
     {
-         dealingCollectibles.Clear();
-        if (merchant.dealsHats) dealingCollectibles.AddRange(hatList.collectibles);
-        if (merchant.dealsItems) dealingCollectibles.AddRange(itemList.collectibles);
-        if (merchant.dealsLoot) dealingCollectibles.AddRange(lootList.collectibles);
+        dealingCollectibles.Clear();
+        dealingCollectibles.AddRange(merchant.lootTable.table);
     }
 
     public void RefreshMerchantInventory(MerchantData merchant)
@@ -65,25 +60,17 @@ public class MarketData : ScriptableObject
 		for (int i = 0; i < count; i++)
         {
             if (dealingCollectibles.Count <= 1) break;
+
+            Rarity chosenRarity = merchant.lootTable.GetRandomRarity();
             CollectibleData chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
-
-            
-            // these are base chances, rerolls get less likely with higher rep
-            // 1 in 20 chance to reroll on valuable
-            if(chosenCollectible.Rarity.Name == "Valuable" && Random.Range(0, 20 + merchant.vals.reputationLevel) == 0) chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
-
-			// 1 in 10 chance to reroll on very valuable
-			else if (chosenCollectible.Rarity.Name == "Very Valuable" && Random.Range(0, 10 + merchant.vals.reputationLevel) == 0) chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
-
-			// 1 in 5 chance to reroll on super valuable
-			else if (chosenCollectible.Rarity.Name == "Super Valuable" && Random.Range(0, 5 + merchant.vals.reputationLevel) == 0) chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
-
-			// 1 in 2 chance to reroll on super legendary
-			else if (chosenCollectible.Rarity.Name == "Super Legendary" && Random.Range(0, 2 + merchant.vals.reputationLevel) == 0) chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
+            while (chosenCollectible.rarity != chosenRarity)
+            {
+				chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
+			}
 
 			int maxAmount;
-            if (chosenCollectible is ItemData) maxAmount = 3;
-            else if (chosenCollectible is HatData) maxAmount = 1;
+            if (chosenCollectible is ItemData) maxAmount = 4;
+            else if (chosenCollectible is HatData) maxAmount = 2;
             else maxAmount = 10; // Loot data
 
             int chosenAmount = Random.Range(1, maxAmount + 1);
