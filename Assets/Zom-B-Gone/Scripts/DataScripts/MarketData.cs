@@ -59,10 +59,20 @@ public class MarketData : ScriptableObject
 
 		for (int i = 0; i < count; i++)
         {
-            if (dealingCollectibles.Count <= 1) break;
+            if (dealingCollectibles.Count <= 1) return;
 
-            Rarity chosenRarity = merchant.lootTable.GetRandomRarity();
-            CollectibleData chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
+            Rarity chosenRarity = merchant.lootTable.GetRandomRarity(0);
+
+            int attempts = 0;
+            while(!LootTable.HasRarity(chosenRarity, dealingCollectibles))
+            {
+				chosenRarity = merchant.lootTable.GetRandomRarity(0);
+                if (attempts > 10) return;
+                attempts++;
+			}
+
+
+			CollectibleData chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];
             while (chosenCollectible.rarity != chosenRarity)
             {
 				chosenCollectible = dealingCollectibles[Random.Range(0, dealingCollectibles.Count)];

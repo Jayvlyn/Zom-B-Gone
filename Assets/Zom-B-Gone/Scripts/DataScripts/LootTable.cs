@@ -63,7 +63,7 @@ public class LootTable : ScriptableObject
 		{
 			float weight = (Mathf.Pow(decayFactor, i) / totalWeight) * 100f;
 			cumulativeWeight += weight;
-			Debug.Log(cumulativeWeight);
+			
 			weights.Add(cumulativeWeight);
 		}
 
@@ -82,8 +82,9 @@ public class LootTable : ScriptableObject
 				return rarityList.rarities[i];
 			}
 		}
-		return rarityList.rarities[rarityList.rarities.Length - 1]; // Return the last rarity if no other match
+		return rarityList.rarities[0];
 	}
+
 
 	public Rarity GetRandomRarity(int level)
 	{
@@ -97,6 +98,34 @@ public class LootTable : ScriptableObject
 				return rarityList.rarities[i];
 			}
 		}
-		return rarityList.rarities[rarityList.rarities.Length - 1]; // Return the last rarity if no other match
+		return rarityList.rarities[0];
 	}
+
+	public bool HasRarity(Rarity r)
+	{
+		foreach (CollectibleData c in table)
+		{
+			if(c.rarity == r) return true;
+		}
+		return false;
+	}
+
+	public static bool HasRarity(Rarity r, CollectibleData[] arr)
+	{
+		foreach (CollectibleData c in arr)
+		{
+			if (c.rarity == r) return true;
+		}
+		return false;
+	}
+
+	public static bool HasRarity(Rarity r, List<CollectibleData> arr)
+	{
+		foreach (CollectibleData c in arr)
+		{
+			if (c.rarity == r) return true;
+		}
+		return false;
+	}
+
 }
