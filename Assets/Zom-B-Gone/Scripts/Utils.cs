@@ -20,10 +20,11 @@ public static class Utils
         return result;
     }
 
-    public static float MapWeightToRange(float scalarValue, float minValue, float maxValue, bool invert)
+    public static float MapWeightToRange(float scalarValue, float minValue, float maxValue, bool invert, bool obstacle = false)
     {
         // Normalize the weight value between 0 and 1
-        float maxWeight = 20000.0f;
+        float maxWeight = 20000f;
+        if (obstacle) maxWeight = 75000f;
         float normalizedValue = (scalarValue / maxWeight); 
         if (invert) normalizedValue = 1 - normalizedValue;
 

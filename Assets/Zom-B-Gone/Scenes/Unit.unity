@@ -913,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.227841
+      value: -9.720688
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3276,6 +3276,7 @@ MonoBehaviour:
   intervalTime: 5
   intervalSpawnAmount: 2
   marketData: {fileID: 11400000, guid: 1c50df99ec83d07449d49c207a6a96f4, type: 2}
+  floorData: {fileID: 11400000, guid: ba4ee8c84bbc5594993c4f71ead59a4b, type: 2}
 --- !u!114 &235199600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9583,7 +9584,7 @@ Transform:
   m_GameObject: {fileID: 1873980143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.227841, y: -7.92, z: -10}
+  m_LocalPosition: {x: -9.720688, y: -7.92, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -73,22 +73,25 @@ public class Interactor : MonoBehaviour
 
         if(playerController.currentState != PlayerController.PlayerState.DRIVING)
         {
-            if (scanTimer <= 0)
+            if (!playerController.hands.UsingLeft || !playerController.hands.UsingRight)
             {
-                scanTimer = scanInterval;
-
-                IInteractable selectedInteractable = InteractableScan();
-
-                if(selectedInteractable != null)
+                if (scanTimer <= 0)
                 {
-                    AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
-                }
-                else if (AvailableInteractable != null) AvailableInteractable = null;
+                    scanTimer = scanInterval;
+
+                    IInteractable selectedInteractable = InteractableScan();
+
+                    if(selectedInteractable != null)
+                    {
+                        AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
+                    }
+                    else if (AvailableInteractable != null) AvailableInteractable = null;
             
-            }
-            else
-            {
-                scanTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    scanTimer -= Time.deltaTime;
+                }
             }
         }
 
@@ -239,8 +242,7 @@ public class Interactor : MonoBehaviour
             }
         }
 
-        if (!playerController.hands.UsingLeft || !playerController.hands.UsingRight) return closestInteractable;
-        else return null;
+        return closestInteractable;
     }
 
     public void Interact(bool rightHand)
@@ -332,6 +334,21 @@ public class Interactor : MonoBehaviour
                 vehicleDriver.vehicle = v;
                 vehicleDriver.Enter(playerCollider, playerController);
                 AvailableInteractable.Interact(playerController.head);
+            }
+
+            else if (AvailableInteractable is Obstacle o)
+            {
+                AvailableInteractable.Interact(rightHand);
+                if (rightHand)
+                {
+                    playerController.hands.UsingRight = true;
+                    playerController.hands.rightObstacle = o;
+                }
+                else
+                {
+                    playerController.hands.UsingLeft = true;
+					playerController.hands.leftObstacle = o;
+				}
             }
 
             AvailableInteractable = null;

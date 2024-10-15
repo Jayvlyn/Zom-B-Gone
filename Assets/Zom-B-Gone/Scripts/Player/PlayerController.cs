@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     private Camera gameCamera;
     private Interactor interactor;
     
-
     [HideInInspector] public static bool holdingRun;
     [HideInInspector] public static bool holdingSneak;
     [HideInInspector] public static bool holdingLeft;

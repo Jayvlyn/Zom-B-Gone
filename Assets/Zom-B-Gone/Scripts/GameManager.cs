@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
 	[Header("MUST REFERENCE TO PRESERVE DATA")]
 	public MarketData marketData;
+	public FloorContainerData floorData;
 
 	private void Start()
 	{
