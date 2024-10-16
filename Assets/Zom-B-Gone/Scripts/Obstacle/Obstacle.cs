@@ -11,7 +11,7 @@ public class Obstacle : MonoBehaviour, IInteractable
 	}
 	public ObstacleState currentState;
 
-	[Range(20000f, 75000f)]public float weight = 20000f;
+	public bool moveable = true;
 	public Rigidbody2D rb;
 	public HingeJoint2D joint;
 	public Collider2D coll;
@@ -22,6 +22,12 @@ public class Obstacle : MonoBehaviour, IInteractable
 
     private void Awake()
     {
+		if (!moveable)
+		{
+			gameObject.layer = LayerMask.NameToLayer("Obstacle");
+			rb.bodyType = RigidbodyType2D.Static;
+		}
+
 		baseDensity = coll.density;
     }
 
