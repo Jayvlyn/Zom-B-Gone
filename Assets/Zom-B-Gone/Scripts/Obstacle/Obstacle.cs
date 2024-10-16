@@ -13,32 +13,68 @@ public class Obstacle : MonoBehaviour, IInteractable
 
 	[Range(20000f, 75000f)]public float weight = 20000f;
 	public Rigidbody2D rb;
-	public Joint2D joint;
+	public HingeJoint2D joint;
+	public Collider2D coll;
+	public float grabRange = 0.6f;
 
-	public void ChangeState(ObstacleState state)
+	public bool twoHandsOn;
+	private float baseDensity;
+
+    private void Awake()
+    {
+		baseDensity = coll.density;
+    }
+
+    public void ChangeState(ObstacleState state)
 	{
 		switch(state)
 		{
 			case ObstacleState.FREE:
-				if(joint)
-				{
-					Destroy(joint.gameObject);
-					joint = null;
-				}
-				rb.bodyType = RigidbodyType2D.Dynamic;
-				break;
+				//gameObject.layer = LayerMask.NameToLayer("Interactable");
+				joint.connectedBody = null;
+				joint.enabled = false;
+				coll.density = baseDensity;
+                twoHandsOn = false;
+                break;
 
 			case ObstacleState.GRABBED:
-				rb.bodyType = RigidbodyType2D.Kinematic;
-				//joint.
+                //gameObject.layer = LayerMask.NameToLayer("Obstacle");
+                joint.enabled = true;
+				OnOneHandOn();
 				break;
 		}
+		currentState = state;
 	}
 
 	public void Interact(bool rightHand)
 	{
-		Debug.Log("interact with obstacle");
+		ChangeState(ObstacleState.GRABBED);
 	}
+
+	public void BeFreed()
+	{
+		ChangeState(ObstacleState.FREE);
+	}
+
+	public void OnTwoHandsOn()
+	{
+		coll.density = baseDensity * 0.12f;
+		twoHandsOn = true;
+	}
+
+	public void OnOneHandOn()
+	{
+		coll.density = baseDensity * 0.25f;
+		twoHandsOn = false;
+	}
+
+	public void ChangeMotorSpeed(float speed = 0)
+	{
+		if (twoHandsOn) speed *= 2;
+		JointMotor2D motor = joint.motor;
+        motor.motorSpeed = speed;
+        joint.motor = motor;
+    }
 
 	public void Interact(Head head)
 	{

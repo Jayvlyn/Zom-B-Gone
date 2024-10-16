@@ -36,16 +36,16 @@ public class Hands : MonoBehaviour
                 else rightAmmoCount.enabled = false;
 
                 if (rightItem != null) rightLumbering = Utils.MapWeightToRange(rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-                else if (rightObstacle != null)
-                {
-                    float weight = rightObstacle.weight;
-                    if (leftObstacle != null && leftObstacle == rightObstacle)
-                    {
-                        weight *= 0.5f; // split weight between hands
-						leftLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
-					}
-                    rightLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
-                }
+     //           else if (rightObstacle != null)
+     //           {
+     //               float weight = rightObstacle.weight;
+     //               if (leftObstacle != null && leftObstacle == rightObstacle)
+     //               {
+     //                   weight *= 0.5f; // split weight between hands
+					//	leftLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
+					//}
+     //               rightLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
+     //           }
 			}
             else
             {
@@ -68,16 +68,16 @@ public class Hands : MonoBehaviour
                 else leftAmmoCount.enabled = false;
 
 				if (leftItem != null) leftLumbering = Utils.MapWeightToRange(leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-				else if (leftObstacle != null)
-				{
-					float weight = leftObstacle.weight;
-					if (rightObstacle != null && rightObstacle == leftObstacle)
-					{
-						weight *= 0.5f; // split weight between hands
-						rightLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
-					}
-					leftLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
-				}
+				//else if (leftObstacle != null)
+				//{
+				//	float weight = leftObstacle.weight;
+				//	if (rightObstacle != null && rightObstacle == leftObstacle)
+				//	{
+				//		weight *= 0.5f; // split weight between hands
+				//		rightLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
+				//	}
+				//	leftLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
+				//}
 			}
             else
             {

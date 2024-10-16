@@ -206,9 +206,19 @@ public class Interactor : MonoBehaviour
         {
             IInteractable thisInteractable = collider.transform.gameObject.GetComponent<IInteractable>();
 
+            if (thisInteractable is Obstacle obstacle)
+            {
+                if(playerController.hands.leftObstacle && playerController.hands.leftObstacle == obstacle){}
+                else if (playerController.hands.rightObstacle && playerController.hands.rightObstacle == obstacle){}
+                else if (((Vector2)transform.position - collider.ClosestPoint(transform.position)).magnitude > obstacle.grabRange)
+                {
+                    continue;
+                }
+            }
+
             float dist;
-            if (mouseToInteractorDist <= _interactRange + 0.5f) dist = (mousePosition - new Vector2(collider.transform.position.x, collider.transform.position.y)).magnitude;
-            else                                         dist = (transform.position - collider.transform.position).magnitude;
+            if (mouseToInteractorDist <= _interactRange + 0.5f) dist = (mousePosition - collider.ClosestPoint(mousePosition)).magnitude;
+            else                                         dist = ((Vector2)transform.position - collider.ClosestPoint(transform.position)).magnitude;
 
             if (thisInteractable is Lootable lootable)
             {
@@ -349,6 +359,11 @@ public class Interactor : MonoBehaviour
                     playerController.hands.UsingLeft = true;
 					playerController.hands.leftObstacle = o;
 				}
+                o.joint.connectedBody = playerController.rb;
+                if(playerController.hands.leftObstacle && playerController.hands.rightObstacle && playerController.hands.leftObstacle == playerController.hands.rightObstacle)
+                {
+                    o.OnTwoHandsOn();
+                }
             }
 
             AvailableInteractable = null;

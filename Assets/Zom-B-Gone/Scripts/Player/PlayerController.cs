@@ -153,6 +153,10 @@ public class PlayerController : MonoBehaviour
         {
             holdingLeft = false;
             if (hands.leftItem != null) hands.leftItem.useHeld = false;
+            else if (hands.leftObstacle != null)
+            {
+                hands.leftObstacle.ChangeMotorSpeed();
+            }
         }
     }
 
@@ -170,6 +174,10 @@ public class PlayerController : MonoBehaviour
 		{
 			holdingRight = false;
             if (hands.rightItem != null) hands.rightItem.useHeld = false;
+            else if (hands.rightObstacle != null)
+            {
+                hands.rightObstacle.ChangeMotorSpeed();
+            }
         }
 	}
 
@@ -179,6 +187,11 @@ public class PlayerController : MonoBehaviour
 
 		holdingLeft = true;
         if (hands.leftItem != null) hands.leftItem.useHeld = true;
+        else if (hands.leftObstacle != null)
+        {
+            if (holdingSneak) hands.leftObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
+            else hands.leftObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
+        }
 
     }
 
@@ -187,14 +200,26 @@ public class PlayerController : MonoBehaviour
 		if (EventSystem.current.IsPointerOverGameObject()) return;
 		holdingRight = true;
         if (hands.rightItem != null) hands.rightItem.useHeld = true;
+        else if (hands.rightObstacle != null)
+        {
+            if (holdingSneak) hands.rightObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
+            else hands.rightObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
+        }
     }
 
     private void OnThrowLeft(InputValue inputValue)
     {
         if (hands.UsingLeft)
         {
-            hands.leftItem.Throw();
-			hands.leftLumbering = 1;
+            if(hands.leftItem != null)
+            {
+                hands.leftItem.Throw();
+                hands.leftLumbering = 1;
+            }
+            else if(hands.leftObstacle != null)
+            {
+                LetGoLeftObstacle();
+            }
 		}
 
 	}
@@ -203,19 +228,28 @@ public class PlayerController : MonoBehaviour
 	{
 		if (hands.UsingRight)
         {
-			hands.rightItem.Throw();
-			hands.rightLumbering = 1;
-		}
+            if (hands.rightItem != null)
+            {
+                hands.rightItem.Throw();
+                hands.rightLumbering = 1;
+            }
+            else if (hands.rightObstacle != null)
+            {
+                LetGoRightObstacle();
+            }
+        }
 	}
 
     private void OnDropLeft(InputValue inputValue)
     {
-        DropLeft();
+        if (hands.leftItem != null) DropLeft();
+        else if (hands.leftObstacle != null) LetGoLeftObstacle();
     }
 
     private void OnDropRight(InputValue inputValue)
     {
-        DropRight();
+        if (hands.rightItem != null) DropRight();
+        else if (hands.rightObstacle != null) LetGoRightObstacle();
     }
 
     // Input for reloading, wont do anything without projectileWeapon
@@ -313,7 +347,11 @@ public class PlayerController : MonoBehaviour
 			hands.leftItem.Drop();
 			hands.leftLumbering = 1;
 		}
-	}
+        else if(hands.leftObstacle != null)
+        {
+            LetGoLeftObstacle();
+        }
+    }
 
 	public void DropRight()
 	{
@@ -322,9 +360,41 @@ public class PlayerController : MonoBehaviour
 			hands.rightItem.Drop();
 			hands.rightLumbering = 1;
 		}
-	}
+        else if (hands.rightObstacle != null)
+        {
+            LetGoRightObstacle();
+        }
+    }
 
-	public void DropHat()
+    public void LetGoLeftObstacle()
+    {
+        if (hands.leftObstacle && hands.rightObstacle && hands.leftObstacle == hands.rightObstacle)
+        {
+            hands.leftObstacle.OnOneHandOn();
+        }
+        else
+        {
+            hands.leftObstacle.BeFreed();
+        }
+        hands.leftObstacle = null;
+        hands.UsingLeft = false;
+    }
+
+    public void LetGoRightObstacle()
+    {
+        if (hands.rightObstacle && hands.leftObstacle && hands.rightObstacle == hands.leftObstacle)
+        {
+            hands.rightObstacle.OnOneHandOn();
+        }
+        else
+        {
+            hands.rightObstacle.BeFreed();
+        }
+        hands.rightObstacle = null;
+        hands.UsingRight = false;
+    }
+
+    public void DropHat()
     {
         head.wornHat.DropHat();
     }
