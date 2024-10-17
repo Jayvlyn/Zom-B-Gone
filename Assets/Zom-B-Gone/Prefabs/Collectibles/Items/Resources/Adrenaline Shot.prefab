@@ -47,11 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f54f823897b3f449adec05ba9f1f2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullCollider: {fileID: 2245973136623882417}
   floorContainer: {fileID: 0}
   currentState: 0
   itemData: {fileID: 11400000, guid: a93ae7062f3743644a7bd49b6d2f70cc, type: 2}
   pivotPoint: {fileID: 0}
-  fullCollider: {fileID: 2245973136623882417}
+  itemRenderer: {fileID: 0}
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -61,7 +62,9 @@ MonoBehaviour:
   aimAtMouse: 1
   gripRotation: 130
   minimumAirborneSpeed: 10
+  rb: {fileID: 0}
   vanBack: {fileID: 0}
+  unitFloor: {fileID: 0}
   inRightHand: 0
   useHeld: 0
   quantity: 1
@@ -105,7 +108,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -21
+  m_SortingLayer: -22
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5c19d5eb246afb44dbd88acf37d2f4f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -181,7 +184,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.44, y: 0.44}
+    oldSize: {x: 0.34375, y: 0.34375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -190,6 +193,6 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.0031969547, y: 0.20172}
-      - {x: -0.038044214, y: -0.2039482}
-      - {x: 0.038044214, y: -0.20394808}
+      - {x: -0.03273519, y: -0.1556361}
+      - {x: 0.027957078, y: -0.15510514}
   m_UseDelaunayMesh: 0

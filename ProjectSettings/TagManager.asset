@@ -87,14 +87,17 @@ TagManager:
   - name: BloodParticles
     uniqueID: 3051746429
     locked: 0
+  - name: TireSmoke
+    uniqueID: 3372290735
+    locked: 0
+  - name: Walls
+    uniqueID: 2660028171
+    locked: 0
   - name: Player
     uniqueID: 3111442741
     locked: 0
   - name: WornHat
     uniqueID: 807454059
-    locked: 0
-  - name: TireSmoke
-    uniqueID: 3372290735
     locked: 0
   - name: Vehicle
     uniqueID: 2319307559
@@ -107,9 +110,6 @@ TagManager:
     locked: 0
   - name: EnemyAttack
     uniqueID: 1323564269
-    locked: 0
-  - name: Walls
-    uniqueID: 2660028171
     locked: 0
   - name: Ceilings
     uniqueID: 1582768971

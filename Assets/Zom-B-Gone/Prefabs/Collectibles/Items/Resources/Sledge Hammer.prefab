@@ -80,11 +80,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7634af11e0d94a8df8dc1126f77eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullCollider: {fileID: 7002657207091252952}
   floorContainer: {fileID: 0}
   currentState: 0
   itemData: {fileID: 11400000, guid: c615ffb9921c717449e87b20cd2b23c0, type: 2}
   pivotPoint: {fileID: 2340822962328068186}
-  fullCollider: {fileID: 7002657207091252952}
+  itemRenderer: {fileID: 0}
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -94,7 +95,9 @@ MonoBehaviour:
   aimAtMouse: 0
   gripRotation: 150
   minimumAirborneSpeed: 10
+  rb: {fileID: 0}
   vanBack: {fileID: 0}
+  unitFloor: {fileID: 0}
   inRightHand: 0
   useHeld: 0
   quantity: 1
@@ -140,7 +143,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -21
+  m_SortingLayer: -22
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 03e84ed322d99314f80ac2d7b9410bfc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -212,18 +215,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00030612946, y: 0.6476202}
+  m_Offset: {x: 0.0007726103, y: 0.49336106}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9, y: 1.9}
+    oldSize: {x: 1.484375, y: 1.484375}
     newSize: {x: 0.44, y: 1.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.44211006, y: 0.5801697}
+  m_Size: {x: 0.35365376, y: 0.46582377}
   m_EdgeRadius: 0
 --- !u!60 &7002657207091252952
 PolygonCollider2D:
@@ -261,7 +264,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9, y: 1.9}
+    oldSize: {x: 1.484375, y: 1.484375}
     newSize: {x: 0.44, y: 1.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -269,12 +272,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.20482922, y: 0.77864456}
-      - {x: 0.20575428, y: 0.914546}
-      - {x: -0.20152861, y: 0.9125602}
-      - {x: -0.20094013, y: 0.77637386}
-      - {x: -0.0607481, y: 0.7584696}
-      - {x: -0.05643028, y: -0.92674243}
-      - {x: 0.046886086, y: -0.9267423}
-      - {x: 0.05167961, y: 0.7595939}
+    - - {x: 0.15997103, y: 0.5968509}
+      - {x: 0.15853515, y: 0.7197671}
+      - {x: -0.16139235, y: 0.7166008}
+      - {x: -0.1643453, y: 0.59339964}
+      - {x: -0.056026176, y: 0.59084165}
+      - {x: -0.045642927, y: -0.7131527}
+      - {x: 0.038256213, y: -0.7109952}
+      - {x: 0.05994293, y: 0.58960503}
   m_UseDelaunayMesh: 0

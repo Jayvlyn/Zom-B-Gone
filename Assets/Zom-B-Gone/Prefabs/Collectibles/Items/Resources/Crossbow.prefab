@@ -111,11 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c42a995e62abb4aa6b0f0f1f138e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullCollider: {fileID: 9007136600030232037}
   floorContainer: {fileID: 0}
   currentState: 0
   itemData: {fileID: 11400000, guid: a72f5dfd4946ff74bb5735e44270b135, type: 2}
   pivotPoint: {fileID: 5319315605918979473}
-  fullCollider: {fileID: 9007136600030232037}
+  itemRenderer: {fileID: 0}
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -127,6 +128,7 @@ MonoBehaviour:
   minimumAirborneSpeed: 10
   rb: {fileID: 0}
   vanBack: {fileID: 0}
+  unitFloor: {fileID: 0}
   inRightHand: 0
   useHeld: 0
   quantity: 1
@@ -179,7 +181,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -21
+  m_SortingLayer: -22
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 461a5fd54e086d349970aa3ee66f3343, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -224,18 +226,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.007947385, y: 0.014305443}
+  m_Offset: {x: 0.0024099573, y: -0.004338011}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.78125, y: 0.78125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13214564, y: 1.4037266}
+  m_Size: {x: 0.11557366, y: 0.69941914}
   m_EdgeRadius: 0
 --- !u!50 &4881143944469047324
 Rigidbody2D:

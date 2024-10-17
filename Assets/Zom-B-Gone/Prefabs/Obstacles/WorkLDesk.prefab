@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  moveable: 1
   rb: {fileID: 8521114047084800116}
   joint: {fileID: 4826773798859923985}
   coll: {fileID: 7396858438035767285}
@@ -118,7 +119,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 2.0934172
+  m_Mass: 191.69856
   m_LinearDrag: 4
   m_AngularDrag: 4
   m_GravityScale: 0
@@ -194,7 +195,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.35, y: 2.35}
+    oldSize: {x: 1.8359375, y: 1.8359375}
     newSize: {x: 7.3, y: 7.3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -202,11 +203,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.095, y: 0.35}
-      - {x: -1.095, y: -0.34}
-      - {x: -1.0749999, y: -0.35999998}
-      - {x: 0.36297226, y: -0.35424328}
-      - {x: 0.369812, y: -1.1006298}
-      - {x: 1.087635, y: -1.1010561}
-      - {x: 1.0814931, y: 0.36670816}
+    - - {x: -0.84591746, y: 0.28688923}
+      - {x: -0.8483325, y: -0.26713023}
+      - {x: 0.28873825, y: -0.27293873}
+      - {x: 0.29204178, y: -0.85318184}
+      - {x: 0.85786057, y: -0.85714245}
+      - {x: 0.8494489, y: 0.2883066}
   m_UseDelaunayMesh: 0

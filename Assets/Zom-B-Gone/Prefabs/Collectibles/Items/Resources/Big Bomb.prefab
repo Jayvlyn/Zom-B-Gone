@@ -47,11 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c73c5c28e4f784883d89fae2091e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullCollider: {fileID: 2918493407247803389}
   floorContainer: {fileID: 0}
   currentState: 0
   itemData: {fileID: 11400000, guid: 4ecdfb1db64201c4ebde9e730b4d2593, type: 2}
   pivotPoint: {fileID: 0}
-  fullCollider: {fileID: 2918493407247803389}
   itemRenderer: {fileID: 0}
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
@@ -64,6 +64,7 @@ MonoBehaviour:
   minimumAirborneSpeed: 10
   rb: {fileID: 0}
   vanBack: {fileID: 0}
+  unitFloor: {fileID: 0}
   inRightHand: 0
   useHeld: 0
   quantity: 1
@@ -185,6 +186,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.038232625, y: -0.04030007}
+  m_Offset: {x: -0.038232625, y: -0.032167435}
   serializedVersion: 2
-  m_Radius: 0.24646729
+  m_Radius: 0.20038414

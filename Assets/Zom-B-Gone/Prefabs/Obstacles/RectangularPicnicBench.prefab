@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  moveable: 1
   rb: {fileID: 8521114047084800116}
   joint: {fileID: 4826773798859923985}
   coll: {fileID: 2479592600775128846}
@@ -118,7 +119,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 963.71014
+  m_Mass: 609.68256
   m_LinearDrag: 4
   m_AngularDrag: 4
   m_GravityScale: 0
@@ -165,18 +166,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.018414497, y: 0.011785984}
+  m_Offset: {x: -0.00984478, y: -0.007493973}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.9, y: 2.9}
+    oldSize: {x: 2.265625, y: 2.265625}
     newSize: {x: 7.3, y: 7.3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.739355, y: 2.3453455}
+  m_Size: {x: 2.1738148, y: 1.8697777}
   m_EdgeRadius: 0
 --- !u!233 &4826773798859923985
 HingeJoint2D:

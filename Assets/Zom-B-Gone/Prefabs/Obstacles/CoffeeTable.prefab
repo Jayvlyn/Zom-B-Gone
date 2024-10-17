@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  moveable: 1
   rb: {fileID: 8521114047084800116}
   joint: {fileID: 4826773798859923985}
   coll: {fileID: 5868680587642173604}
@@ -118,7 +119,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 237.1058
+  m_Mass: 153.03442
   m_LinearDrag: 4
   m_AngularDrag: 4
   m_GravityScale: 0
@@ -190,6 +191,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010470393, y: 0.016556025}
-  m_Size: {x: 1.6330976, y: 1.1381389}
+  m_Offset: {x: 0.0029704587, y: 0.010125638}
+  m_Size: {x: 1.2666175, y: 0.9624046}
   m_Direction: 1

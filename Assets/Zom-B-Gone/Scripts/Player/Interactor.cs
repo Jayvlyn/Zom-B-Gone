@@ -26,6 +26,7 @@ public class Interactor : MonoBehaviour
 
     [SerializeField] Material defaultSpriteMaterial;
     [SerializeField] Material outlineSpriteMaterial;
+    [SerializeField] Material lootOutlineSpriteMaterial;
 
     [SerializeField] VoidEvent[] closeContainerEvents;
 
@@ -52,7 +53,10 @@ public class Interactor : MonoBehaviour
             // if previous value set to interactable, remove highlight first
             if(availableInteractable != null)
             { // remove highlight from old available
-                if(interactableSpriteRenderer != null) interactableSpriteRenderer.material = defaultSpriteMaterial;
+                if (interactableSpriteRenderer != null)
+                {
+                    interactableSpriteRenderer.material = defaultSpriteMaterial;
+                }
             }
 
             availableInteractable = value;
@@ -61,7 +65,8 @@ public class Interactor : MonoBehaviour
             { // new available interactable is not null
                 interactableSpriteRenderer = ((Component)availableInteractable).gameObject.GetComponent<SpriteRenderer>();
                 //set highlight
-                interactableSpriteRenderer.material = outlineSpriteMaterial;
+                if (availableInteractable is Loot) interactableSpriteRenderer.material = lootOutlineSpriteMaterial;
+                else interactableSpriteRenderer.material = outlineSpriteMaterial;
             }
         }
     }

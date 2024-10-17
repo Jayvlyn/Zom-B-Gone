@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183524555
-  m_SortingLayer: -13
+  m_SortingLayer: -11
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 444a5b55dd81a1d498bd42b03bd7da07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -188,6 +188,8 @@ MonoBehaviour:
   lumberingLowerBound: 0.8
   leftItem: {fileID: 0}
   rightItem: {fileID: 0}
+  leftObstacle: {fileID: 0}
+  rightObstacle: {fileID: 0}
 --- !u!114 &404186174974829375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +350,7 @@ MonoBehaviour:
   openContainerDistanceCheckInterval: 0.1
   defaultSpriteMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   outlineSpriteMaterial: {fileID: 2100000, guid: e3a1cdcb82b5de94eb33cdd74f6c98b8, type: 2}
+  lootOutlineSpriteMaterial: {fileID: 2100000, guid: 952987a5c2d46444a9a94f95a664e4bf, type: 2}
   closeContainerEvents:
   - {fileID: 11400000, guid: 5abe13962e7625d4db0b066ade1e162c, type: 2}
   - {fileID: 11400000, guid: e827c2b02aead2b42894a29bd4a840f6, type: 2}
@@ -424,7 +427,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183524555
-  m_SortingLayer: -13
+  m_SortingLayer: -11
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 09fff7c5ce70fdb4091f1f6963157880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -473,7 +476,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -481,14 +484,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.42366427, y: -0.06147068}
-      - {x: -0.26824433, y: -0.23499805}
-      - {x: -0.25334764, y: -0.44372156}
-      - {x: 0.24597335, y: -0.44637927}
-      - {x: 0.26922858, y: -0.23977205}
-      - {x: 0.44139177, y: -0.04818871}
-      - {x: 0.23595797, y: 0.11918973}
-      - {x: -0.22135384, y: 0.116282}
+    - - {x: -0.34764463, y: -0.055881}
+      - {x: -0.2145834, y: -0.15786046}
+      - {x: -0.20192258, y: -0.3296921}
+      - {x: 0.2101994, y: -0.328996}
+      - {x: 0.23233667, y: -0.1436296}
+      - {x: 0.33518782, y: -0.039245225}
+      - {x: 0.19906609, y: 0.076708175}
+      - {x: -0.17663641, y: 0.077154234}
   m_UseDelaunayMesh: 0
 --- !u!114 &1215756169858613352
 MonoBehaviour:
