@@ -605,7 +605,13 @@ TextureImporter:
         - {x: 61, y: -128}
         - {x: 128, y: -128}
         - {x: 128, y: 128}
-      physicsShape: []
+      physicsShape:
+      - - {x: -128, y: 128}
+        - {x: -128, y: 62}
+        - {x: 61, y: 62}
+        - {x: 62, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 128}
       tessellationDetail: 0
       bones: []
       spriteID: e1b756c767a9394419d6c69edd32392a

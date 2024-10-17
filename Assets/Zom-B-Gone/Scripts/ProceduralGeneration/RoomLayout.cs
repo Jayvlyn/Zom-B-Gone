@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class RoomLayout : MonoBehaviour
 {
-    
+    public Vector2Int dimensions; // w,h
 }
