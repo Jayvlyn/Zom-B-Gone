@@ -88,7 +88,10 @@ public class Health : MonoBehaviour
         if(gameObject.TryGetComponent(out Enemy enemy)) 
         {
             enemy.OnDeath();
-            //Destroy(gameObject);
+        }
+        else if (gameObject.CompareTag("Door"))
+        {
+            Destroy(gameObject);
         }
     }
 }

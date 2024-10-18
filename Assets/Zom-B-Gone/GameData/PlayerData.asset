@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   characterName: Splargus
-  walkSpeed: 5
-  runSpeed: 9
-  sneakSpeed: 3
+  walkSpeed: 4
+  runSpeed: 7
+  sneakSpeed: 2
   speedModifier: 1
   maxStamina: 15
   staminaRecoverySpeed: 2

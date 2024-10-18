@@ -17,6 +17,8 @@ TagManager:
   - HatLockerUI
   - LootLockerUI
   - VanFloor
+  - Zombie
+  - Door
   layers:
   - Default
   - TransparentFX
