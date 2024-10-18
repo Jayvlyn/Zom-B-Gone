@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	public List<Enemy> enemies;
 	private PlayerController player;
 
+
 	[Header("Interval Spawning")]
 	[SerializeField] private bool intervalSpawning = false;
 	[SerializeField,Min(0.1f)] private float intervalTime = 5.00f;

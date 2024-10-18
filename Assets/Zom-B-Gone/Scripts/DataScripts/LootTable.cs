@@ -7,8 +7,8 @@ using UnityEngine;
 public class LootTable : ScriptableObject
 {
     public CollectibleData[] table = new CollectibleData[5];
-	public List<float> weights;
     public RarityList rarityList;
+	private List<float> weights;
 	private List<CollectibleData>[] splitTable;
 
     public CollectibleData GetRandomCollectible()

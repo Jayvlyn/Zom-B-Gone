@@ -19,6 +19,7 @@ TagManager:
   - VanFloor
   - Zombie
   - Door
+  - CollectibleSpawn
   layers:
   - Default
   - TransparentFX
