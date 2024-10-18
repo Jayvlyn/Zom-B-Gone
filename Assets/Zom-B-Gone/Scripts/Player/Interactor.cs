@@ -48,6 +48,7 @@ public class Interactor : MonoBehaviour
         
         set
         {
+            
             if (availableInteractable == value) return; // dont set same value
 
             // if previous value set to interactable, remove highlight first
@@ -185,14 +186,16 @@ public class Interactor : MonoBehaviour
         List<Collider2D> validColliders = new List<Collider2D>();
         foreach (Collider2D collider in colliders)
         {
-            Vector2 direction = collider.transform.position - transform.position;
+            //Debug.Log(collider.gameObject.name);
+            Vector2 direction = collider.ClosestPoint(transform.position) - (Vector2)transform.position;
             float dist = direction.magnitude;
             Debug.DrawLine(transform.position, transform.position + (Vector3)direction.normalized * dist, Color.red);  // Ray from the center
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, collider.transform.position - transform.position, dist, InteractionBlockersLm);
-            if(!hit.collider) validColliders.Add(collider);
-
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, dist, InteractionBlockersLm);
+            if (!hit.collider)
+            {
+                validColliders.Add(collider);
+            }
         }
-
         if (validColliders.Count == 0) return null;
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -205,7 +208,7 @@ public class Interactor : MonoBehaviour
         Lootable closestLootable = null;
         IInteractable closestLootableInteractable = null;
         float clostestLootableDist = float.PositiveInfinity;
-        
+
         // loop through hits
         foreach (Collider2D collider in validColliders)
         {
@@ -256,7 +259,6 @@ public class Interactor : MonoBehaviour
                 openedLootable = lootableContainer;
             }
         }
-
         return closestInteractable;
     }
 
@@ -369,6 +371,11 @@ public class Interactor : MonoBehaviour
                 {
                     o.OnTwoHandsOn();
                 }
+            }
+
+            else
+            {
+                AvailableInteractable.Interact(rightHand);
             }
 
             AvailableInteractable = null;
