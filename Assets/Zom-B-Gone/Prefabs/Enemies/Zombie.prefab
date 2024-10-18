@@ -898,6 +898,9 @@ MonoBehaviour:
   _perceptionDistance: 30
   _perceptionRayCount: 7
   _fov: 120
+  AttackBlockersLm:
+    serializedVersion: 2
+    m_Bits: 128
   targetChangeSpeed: 5.04
   fadeSpeed: 5
 --- !u!114 &-8031090298879193519

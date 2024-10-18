@@ -43,7 +43,7 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] private float _perceptionDistance = 30;
 	[SerializeField] int _perceptionRayCount = 7;
 	[SerializeField] float _fov = 120;
-
+    public LayerMask AttackBlockersLm;
 
 
     private void ChangeState(State newState)
@@ -356,7 +356,7 @@ public abstract class Enemy : MonoBehaviour
 
     virtual protected Vector3 Aggro()
     {
-		float playerDistance = Vector3.Distance(playerTarget.transform.position, transform.position);
+		float playerDistance = Vector2.Distance(playerTarget.transform.position, transform.position);
 
         if (playerDistance > _perceptionDistance)
 		{
@@ -366,7 +366,12 @@ public abstract class Enemy : MonoBehaviour
 		}
 		else if(playerDistance <= attackRange && attackTimer <= 0)
 		{
-			TryAttack();
+			Vector2 direction = playerTarget.transform.position - transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, playerDistance, AttackBlockersLm);
+            if (!hit.collider)
+            {
+                TryAttack();
+            }
 		}
 
 		if(attackTimer > 0)
@@ -415,7 +420,9 @@ public abstract class Enemy : MonoBehaviour
 
 	private float limbLaunchMod = .3f;
 	private float limbSpinForce = 100f;
-	public void DismemberLimb(int damage, float dismemberChance)
+
+
+    public void DismemberLimb(int damage, float dismemberChance)
 	{
         if (limbs.Count > 0)
         {
