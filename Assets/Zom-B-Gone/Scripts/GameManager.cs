@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	public List<Enemy> enemies;
 	private PlayerController player;
 
+	[HideInInspector] public static LootTable currentZoneLootTable;
 
 	[Header("Interval Spawning")]
 	[SerializeField] private bool intervalSpawning = false;
@@ -88,5 +89,10 @@ public class GameManager : MonoBehaviour
 	public void Extract()
 	{
 		SceneManager.LoadScene("Unit");
+	}
+
+	public static void SetLootTable(LootTable lootTable)
+	{
+		currentZoneLootTable = lootTable;
 	}
 }

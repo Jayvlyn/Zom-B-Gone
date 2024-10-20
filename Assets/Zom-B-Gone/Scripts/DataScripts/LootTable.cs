@@ -13,9 +13,9 @@ public class LootTable : ScriptableObject
 
     public CollectibleData GetRandomCollectible()
     {
-		CollectibleData chosenCollectible = splitTable[0][0];
-
 		if (splitTable == null) SplitRarityList();
+
+		CollectibleData chosenCollectible = new LootData();
 
 		Rarity chosenRarity = GetRandomRarity();
 
@@ -27,12 +27,23 @@ public class LootTable : ScriptableObject
 			}
 		}
 
-		return chosenCollectible;
+		if (!chosenCollectible.name.Equals("Unnamed")) return chosenCollectible;
+		else return null;
     }
+
+	public int GetRandomQuantity(CollectibleData collectible)
+	{
+		int quantity = Random.Range(1, collectible.MaxStack);
+		return quantity;
+	}
 
 	private void SplitRarityList()
 	{
 		splitTable = new List<CollectibleData>[rarityList.rarities.Length];
+		for (int i = 0; i < splitTable.Length; i++)
+		{
+			splitTable[i] = new List<CollectibleData>();
+		}
 
 		foreach (CollectibleData c in table)
 		{
@@ -79,14 +90,15 @@ public class LootTable : ScriptableObject
 		{
 			if (roll <= weights[i])
 			{
-				return rarityList.rarities[i];
+				if (splitTable[i].Count > 0) return rarityList.rarities[i];
+				else return rarityList.rarities[0];
 			}
 		}
 		return rarityList.rarities[0];
 	}
 
 
-	public Rarity GetRandomRarity(int level)
+	public Rarity GetRandomRarity(int level) // level not implemented yet
 	{
 		float roll = Random.Range(0f, 100f);
 		weights = GenerateRarityWeights();

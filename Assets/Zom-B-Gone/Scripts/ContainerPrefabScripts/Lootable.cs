@@ -5,15 +5,27 @@ using UnityEngine;
 
 public class Lootable : MonoBehaviour, IInteractable
 {
-    public CollectibleSlot[] collectibleSlots = new CollectibleSlot[5];
+    public CollectibleSlot[] collectibleSlots = new CollectibleSlot[5]; // unique to each instance of lootable
     [SerializeField] private VoidEvent lootableOpened;
 
-    public CollectibleContainerData containerData;
+    public CollectibleContainerData containerData; // container data tied to ui for all lootables
 
     private void Awake()
     {
+        float chanceToFill = 100;
+        for(int i = 0; i < collectibleSlots.Length; i++)
+        {
+            if (Random.Range(0f, 100f) <= chanceToFill)
+            {
+                chanceToFill *= 0.5f;
 
-        // do random filling of contents based on loot table
+                CollectibleData coll = GameManager.currentZoneLootTable.GetRandomCollectible();
+
+                collectibleSlots[i].CollectibleName = coll.name;
+                collectibleSlots[i].quantity = GameManager.currentZoneLootTable.GetRandomQuantity(coll);
+            }
+            else break;
+        }
     }
 
     public void Interact(bool rightHand)

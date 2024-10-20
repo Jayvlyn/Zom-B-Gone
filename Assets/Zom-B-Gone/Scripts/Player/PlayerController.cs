@@ -183,9 +183,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnLeftHold(InputValue inputValue)
     {
+		holdingLeft = true;
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
-		holdingLeft = true;
         if (hands.leftItem != null) hands.leftItem.useHeld = true;
         else if (hands.leftObstacle != null)
         {
@@ -197,8 +197,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnRightHold(InputValue inputValue)
     {
-		if (EventSystem.current.IsPointerOverGameObject()) return;
 		holdingRight = true;
+		if (EventSystem.current.IsPointerOverGameObject()) return;
         if (hands.rightItem != null) hands.rightItem.useHeld = true;
         else if (hands.rightObstacle != null)
         {

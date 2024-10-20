@@ -73,31 +73,27 @@ public class Interactor : MonoBehaviour
     }
 
     private void Update()
-    {
-        //if(!hands.UsingLeft || !hands.UsingRight)
-        //{ // at least one hand available for interact, do scan
-
+    { 
         if(playerController.currentState != PlayerController.PlayerState.DRIVING)
         {
-            if (!playerController.hands.UsingLeft || !playerController.hands.UsingRight)
+            // scan must happen even with hands full for lootable scanning
+
+            if (scanTimer <= 0)
             {
-                if (scanTimer <= 0)
+                scanTimer = scanInterval;
+
+                IInteractable selectedInteractable = InteractableScan();
+
+                if(selectedInteractable != null)
                 {
-                    scanTimer = scanInterval;
-
-                    IInteractable selectedInteractable = InteractableScan();
-
-                    if(selectedInteractable != null)
-                    {
-                        AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
-                    }
-                    else if (AvailableInteractable != null) AvailableInteractable = null;
+                    AvailableInteractable = selectedInteractable; // will set available to null when no valid interactable found
+                }
+                else if (AvailableInteractable != null) AvailableInteractable = null;
             
-                }
-                else
-                {
-                    scanTimer -= Time.deltaTime;
-                }
+            }
+            else
+            {
+                scanTimer -= Time.deltaTime;
             }
         }
 
@@ -110,13 +106,14 @@ public class Interactor : MonoBehaviour
 
                 if (interactedContainer)
                 {
-                    float containerToInteractorDist = (transform.position - interactedContainer.transform.position).magnitude;
-                    if(containerToInteractorDist > _interactRange + .5f) CloseOpenedContainer();
+                    float containerToInteractorDist = ((Vector2)transform.position - (Vector2)interactedContainer.transform.position).magnitude;
+                    if (containerToInteractorDist > _interactRange + .5f) CloseOpenedContainer();
+                    
                 }
 
                 if (interactedCrafting)
                 {
-                    float craftingToInteractorDist = (transform.position - interactedCrafting.transform.position).magnitude;
+                    float craftingToInteractorDist = ((Vector2)transform.position - (Vector2)interactedCrafting.transform.position).magnitude;
                     if (craftingToInteractorDist > _interactRange + .5f) CloseOpenedCrafting();
 
                 }
@@ -239,9 +236,12 @@ public class Interactor : MonoBehaviour
             }
             else if (dist < closestColliderDist)
             {
-                closestColliderDist = dist;
-                closestInteractable = thisInteractable;
-                closestCollider = collider;
+                if (!playerController.hands.UsingLeft || !playerController.hands.UsingRight)
+                {
+                    closestColliderDist = dist;
+                    closestInteractable = thisInteractable;
+                    closestCollider = collider;
+                }
             }
 
 
@@ -270,8 +270,7 @@ public class Interactor : MonoBehaviour
             {
                 if (interactedContainer != null)
                 {
-                    Lootable l;
-                    if(!interactedContainer.TryGetComponent(out l)) // dont close other container if it is lootable, lootable slider handles this
+                    if(!(AvailableInteractable is Lootable)) // dont close other container if it is lootable, lootable slider handles this
                     {
                         CloseOpenedContainer();
                     }
