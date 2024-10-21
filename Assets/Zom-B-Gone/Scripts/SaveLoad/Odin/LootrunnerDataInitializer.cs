@@ -14,6 +14,8 @@ public class LootrunnerDataInitializer : MonoBehaviour
         initialized = true;
 
         SaveManager.currentSave = SaveManager.saves.lootrunnerSaves[SaveManager.loadedSave];
+
+        dataRefs.playerData = SaveManager.currentSave.playerData;
         
         if (SaveManager.currentSave.hands != null) dataRefs.handsData.Container = SaveManager.currentSave.hands;
         else ClearContainerSlots(dataRefs.handsData.Container);

@@ -33,8 +33,9 @@ public class LootTable : ScriptableObject
 
 	public int GetRandomQuantity(CollectibleData collectible)
 	{
-		int quantity = Random.Range(1, collectible.MaxStack);
-		return quantity;
+		float randomValue = Random.Range(0f, 1f);
+		int quantity = Mathf.CeilToInt(Mathf.Pow(randomValue, 2) * collectible.MaxStack);
+		return Mathf.Clamp(quantity, 1, collectible.MaxStack);
 	}
 
 	private void SplitRarityList()

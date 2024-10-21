@@ -6,10 +6,11 @@ using UnityEngine;
 [Serializable,CreateAssetMenu(fileName = "New Player", menuName = "New Player")]
 public class PlayerData : ScriptableObject
 {
-    [Header("Info")]
-    public string characterName;
+	public string characterName;
 
-    [Header("Stats")]
+	[Header("Stats")]
+	public int gold = 1000;
+	public int kills = 0;
     public float walkSpeed = 5;
     public float runSpeed = 9;
     public float sneakSpeed = 3;
@@ -20,6 +21,4 @@ public class PlayerData : ScriptableObject
     public float velocityChangeSpeed = 0.17f;
     public float reloadSpeedReduction = 1f;
     public float obstacleTurningSpeed = 20f;
-
-
 }

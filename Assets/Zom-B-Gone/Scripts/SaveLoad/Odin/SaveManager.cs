@@ -60,6 +60,8 @@ public class SaveManager : MonoBehaviour
 
     public static void UpdateCurrentSave(LootrunnerDataRefs dataRefs)
     {
+        currentSave.playerData = dataRefs.playerData;
+
         currentSave.hands = DeepCopyContainer(dataRefs.handsData.Container);
         currentSave.head = DeepCopyContainer(dataRefs.headData.Container);
         currentSave.backpack = DeepCopyContainer(dataRefs.backpackData.Container);

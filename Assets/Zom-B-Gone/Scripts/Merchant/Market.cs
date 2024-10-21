@@ -66,7 +66,7 @@ public class Market : MonoBehaviour
 
     public void UpdatePlayerGoldText()
     {
-		goldCount.text = SaveManager.currentSave.gold.ToString();
+		goldCount.text = SaveManager.currentSave.playerData.gold.ToString();
 	}
 
     public void MerchantSaySomething()

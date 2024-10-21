@@ -75,7 +75,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 		int unitCost = int.Parse(unitPrice.text);
 		int total = currentSelectedAmt * unitCost;
 
-        if(total > SaveManager.currentSave.gold)
+        if(total > SaveManager.currentSave.playerData.gold)
         {
             buyTotal.color = cannotAffordTotalPriceColor;
         }
@@ -87,7 +87,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 
 	public void UpdatePriceTotalTextColor(int total)
 	{
-		if (total > SaveManager.currentSave.gold)
+		if (total > SaveManager.currentSave.playerData.gold)
 		{
 			buyTotal.color = cannotAffordTotalPriceColor;
 		}
@@ -100,7 +100,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 	public void OnBuy()
     {
         int totalCost = int.Parse(buyTotal.text);
-        if(SaveManager.currentSave.gold >= totalCost)
+        if(SaveManager.currentSave.playerData.gold >= totalCost)
         { // CAN BUY
 			int currentSelectedAmt = int.Parse(selectedAmount.text);
 			int maxAmt = int.Parse(maxAmount.text);
@@ -123,7 +123,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
             }
 
 
-            SaveManager.currentSave.gold -= totalCost;
+            SaveManager.currentSave.playerData.gold -= totalCost;
             updatePlayerGold.Raise();
 
             loadedMerchant.vals.GainExp(Mathf.RoundToInt(totalCost * 1.5f));
@@ -301,7 +301,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
         }
 
 
-        SaveManager.currentSave.gold += totalCost;
+        SaveManager.currentSave.playerData.gold += totalCost;
         updatePlayerGold.Raise();
 
         loadedMerchant.vals.GainExp(Mathf.RoundToInt(totalCost * 1.5f));

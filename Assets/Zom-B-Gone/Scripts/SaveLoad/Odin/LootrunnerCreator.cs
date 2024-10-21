@@ -32,13 +32,14 @@ public class LootrunnerCreator : MonoBehaviour
         }
 
         LootrunnerSave newSave = new LootrunnerSave();
-        newSave.name = lootrunnerName;
+        newSave.playerData = new PlayerData();
+        newSave.playerData.characterName = lootrunnerName;
 
         SaveManager.saves.lootrunnerSaves[lootrunnerName] = newSave;
         OdinSaveSystem.Save(SaveManager.saves);
         nameEntryPopup.SetActive(false);
 
-		SaveManager.loadedSave = newSave.name;
+		SaveManager.loadedSave = newSave.playerData.characterName;
 		SceneManager.LoadScene("Unit");
 	}
 }

@@ -917,7 +917,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.693948
+      value: -9.1288395
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734558, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3338,6 +3338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc257874c664ba74aac3539cf055cb48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: f55ec50488d6a194d8af1bb5a1a21097, type: 2}
   handsData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
   headData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
   backpackData: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
@@ -9608,7 +9609,7 @@ Transform:
   m_GameObject: {fileID: 1873980143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.693948, y: -7.92, z: -10}
+  m_LocalPosition: {x: -9.1288395, y: -7.92, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

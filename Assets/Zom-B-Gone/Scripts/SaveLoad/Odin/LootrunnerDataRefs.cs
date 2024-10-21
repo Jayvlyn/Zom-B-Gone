@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LootrunnerDataRefs : MonoBehaviour
 {
+    public PlayerData playerData;
+
     public CollectibleContainerData handsData;
     public CollectibleContainerData headData;
     public CollectibleContainerData backpackData;
