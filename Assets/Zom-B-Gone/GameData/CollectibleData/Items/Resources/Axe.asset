@@ -18,8 +18,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 24a6b614495d24b40b598d8115f499c1, type: 3}
   maxStack: 1
   weight: 3000
-  damage: 40
-  attackSpeed: 1.5
+  damage: 30
+  attackSpeed: 0.8
   knockbackPower: 10
   dismemberChance: 0
   staminaCost: 1
@@ -37,8 +37,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.11358933
     - serializedVersion: 3
-      time: 0.08731111
-      value: 11.559853
+      time: 0.105211444
+      value: 7.3105693
       inSlope: 3.4136145
       outSlope: 3.4136145
       tangentMode: 0
@@ -46,8 +46,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.57657367
     - serializedVersion: 3
-      time: 0.16030723
-      value: 11.566164
+      time: 0.17820756
+      value: 7.3168807
       inSlope: -0.7773687
       outSlope: -0.7773687
       tangentMode: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
       inWeight: 0.18754987
       outWeight: 0.31685624
     - serializedVersion: 3
-      time: 0.28869826
-      value: 3.2631228
+      time: 0.27951247
+      value: 1.1013796
       inSlope: -0.60702884
       outSlope: -0.60702884
       tangentMode: 0
@@ -88,8 +88,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.21325861
-      value: 5.465825
+      time: 0.21083961
+      value: 4.0769444
       inSlope: 1.4070671
       outSlope: 1.4070671
       tangentMode: 0
@@ -97,8 +97,8 @@ MonoBehaviour:
       inWeight: 0.053311493
       outWeight: 0.8106049
     - serializedVersion: 3
-      time: 0.61529756
-      value: 5.4339666
+      time: 0.4667731
+      value: 4.111575
       inSlope: -1.1983343
       outSlope: -1.1983343
       tangentMode: 0
@@ -115,8 +115,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 8.05311
+      time: 0.98791504
+      value: 3.5909634
       inSlope: -12.381104
       outSlope: -12.381104
       tangentMode: 0

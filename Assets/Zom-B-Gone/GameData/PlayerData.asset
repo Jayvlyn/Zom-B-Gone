@@ -18,9 +18,9 @@ MonoBehaviour:
   walkSpeed: 4
   runSpeed: 7
   sneakSpeed: 2
-  speedModifier: 1
-  maxStamina: 15
-  staminaRecoverySpeed: 2
+  speedModifier: 1.3
+  maxStamina: 11.3
+  staminaRecoverySpeed: 5
   staminaRecoveryDelay: 2
   velocityChangeSpeed: 0.17
   reloadSpeedReduction: 1

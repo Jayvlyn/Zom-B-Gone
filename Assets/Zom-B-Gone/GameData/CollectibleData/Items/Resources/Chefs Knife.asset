@@ -18,9 +18,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 80436830bc9206c498b29d76b20f11bd, type: 3}
   maxStack: 1
   weight: 393
-  damage: 10
+  damage: 16
   attackSpeed: 0.4
-  knockbackPower: 10
+  knockbackPower: 5
   dismemberChance: 0
   staminaCost: 1
   prepSpeed: 0.2
@@ -37,8 +37,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.11358933
     - serializedVersion: 3
-      time: 0.08731111
-      value: 11.559853
+      time: 0.09644384
+      value: 23.032383
       inSlope: 3.4136145
       outSlope: 3.4136145
       tangentMode: 0
@@ -46,8 +46,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.57657367
     - serializedVersion: 3
-      time: 0.16030723
-      value: 11.566164
+      time: 0.16943996
+      value: 23.038694
       inSlope: -0.7773687
       outSlope: -0.7773687
       tangentMode: 0

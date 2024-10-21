@@ -18,12 +18,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4024fe55c56c7c04ab3b0e42474078ef, type: 3}
   maxStack: 1
   weight: 450
-  damage: 10
-  attackSpeed: 0.4
+  damage: 25
+  attackSpeed: 0.5
   knockbackPower: 10
   dismemberChance: 0
   staminaCost: 1
-  prepSpeed: 0.2
+  prepSpeed: 0.3
   swingCurve:
     serializedVersion: 2
     m_Curve:
@@ -37,17 +37,17 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.11358933
     - serializedVersion: 3
-      time: 0.08731111
-      value: 11.559853
-      inSlope: 3.4136145
-      outSlope: 3.4136145
+      time: 0.09163212
+      value: 10.153706
+      inSlope: 3.9897258
+      outSlope: 3.9897258
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.57657367
+      outWeight: 0.84447485
     - serializedVersion: 3
-      time: 0.16030723
-      value: 11.566164
+      time: 0.16462824
+      value: 10.160017
       inSlope: -0.7773687
       outSlope: -0.7773687
       tangentMode: 0
@@ -97,8 +97,8 @@ MonoBehaviour:
       inWeight: 0.053311493
       outWeight: 0.8106049
     - serializedVersion: 3
-      time: 0.61529756
-      value: 5.4339666
+      time: 0.67085314
+      value: 7.092963
       inSlope: -1.1983343
       outSlope: -1.1983343
       tangentMode: 0

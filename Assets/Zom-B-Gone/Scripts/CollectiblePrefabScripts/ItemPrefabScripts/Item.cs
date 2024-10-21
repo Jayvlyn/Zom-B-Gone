@@ -320,7 +320,7 @@ public abstract class Item : Collectible
     {
         if (currentState == ItemState.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
-            int damage = Mathf.RoundToInt(Utils.MapWeightToRange(itemData.weight, 5, 100, false) * (rb.velocity.magnitude / 2));
+            int damage = Mathf.RoundToInt(Utils.MapWeightToRange(itemData.weight, 3, 30, false) * (rb.velocity.magnitude / 2));
 
 
             Vector3 popupVector = (collisionHealth.transform.position - playerHead.transform.position).normalized * 20f;
@@ -331,7 +331,7 @@ public abstract class Item : Collectible
             // do knockback if there is rigidbody
             if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))
             {
-                hitRb.AddForce(rb.velocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 10, 70, true)), ForceMode2D.Impulse);
+                hitRb.AddForce(rb.velocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 3, 30, true)), ForceMode2D.Impulse);
             }
         }
     }
