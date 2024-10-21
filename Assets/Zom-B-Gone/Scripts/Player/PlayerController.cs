@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.iOS;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -420,6 +421,8 @@ public class PlayerController : MonoBehaviour
             case PlayerState.IDLE:
                 if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = playerData.walkSpeed;
+                Debug.Log(input != null);
+                Debug.Log(input.currentActionMap != null);
                 if(input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
                 if(rb.bodyType != RigidbodyType2D.Dynamic) rb.bodyType = RigidbodyType2D.Dynamic;
                 break;
