@@ -421,9 +421,7 @@ public class PlayerController : MonoBehaviour
             case PlayerState.IDLE:
                 if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = playerData.walkSpeed;
-                Debug.Log(input != null);
-                Debug.Log(input.currentActionMap != null);
-                if(input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
+                if(input.currentActionMap != null && input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
                 if(rb.bodyType != RigidbodyType2D.Dynamic) rb.bodyType = RigidbodyType2D.Dynamic;
                 break;
             case PlayerState.DRIVING:
