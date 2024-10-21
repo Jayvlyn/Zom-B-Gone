@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
     [Header("Melee Properties")]
+    [SerializeField] protected bool flipOnReturnSwing = true;
     [SerializeField] protected Collider2D damageCollider;
 
     [HideInInspector] public MeleeWeaponData meleeWeaponData;
@@ -132,7 +133,9 @@ public class MeleeWeapon : Weapon
         }
 
         if (returnSwing) returnSwing = false;
-        else returnSwing = true; FlipX();
+        else returnSwing = true; 
+        
+        if (flipOnReturnSwing) FlipX();
 
         if (useHeld && StaminaCheck())
         {

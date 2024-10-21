@@ -197,7 +197,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -128, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: -62}
+        - {x: -128, y: -62}
       tessellationDetail: 0
       bones: []
       spriteID: c937992e2af66764b87206d1ce5751f2
@@ -219,15 +223,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -128, y: -43}
+      - - {x: -128, y: -42}
         - {x: -128, y: -128}
         - {x: 128, y: -128}
         - {x: 128, y: -63}
-        - {x: -43, y: -63}
-        - {x: -43, y: -43}
+        - {x: -42, y: -64}
+        - {x: -43, y: -42}
       tessellationDetail: 0
       bones: []
-      spriteID: 071a14379376bdc49991ab2c18f624e1
+      spriteID: 01d48bfec1e8dc04991986469087f467
       internalID: -357548419
       vertices: []
       indices: 
@@ -248,7 +252,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddd35e009aadff445a6943d046aec659
+      spriteID: e74493b8b30c6db45879f8d98a1cc3f3
       internalID: -1929682411
       vertices: []
       indices: 
@@ -269,13 +273,13 @@ TextureImporter:
       physicsShape:
       - - {x: -128, y: 128}
         - {x: -128, y: 62}
-        - {x: 62, y: 62}
+        - {x: 63, y: 63}
         - {x: 62, y: -128}
         - {x: 128, y: -128}
         - {x: 128, y: 128}
       tessellationDetail: 0
       bones: []
-      spriteID: 0aa4b19029444c34d8c344467bd8649a
+      spriteID: b91de8f38c70a1c47863a3e8d182bfcc
       internalID: 1542017772
       vertices: []
       indices: 
@@ -296,7 +300,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a5d4c1d5ccc2ef478cc70ef8ea3ead0
+      spriteID: 5f2505c9b1afe384082b50f4fc29b7ac
       internalID: 1531221573
       vertices: []
       indices: 
@@ -314,409 +318,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4028bf1409cebb0418345fc138af39aa
-      internalID: -199920174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0eedf36054499034bb4d915b91537b67
-      internalID: 1025428747
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_9
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cccee8165e7b28d4ebc7bc08ee0d09af
-      internalID: 1640945393
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_10
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8b753c1c048248a4e8a61316d70ec446
-      internalID: -1860068029
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_11
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 903ea437a335a8f448e2f97c0cbf1d40
-      internalID: -1876402021
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2916532b69e4e494e8a794346cd0f733
-      internalID: 2373276
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_13
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe74b1f020c0c2a4bbd65e1c8e915d5f
-      internalID: 272697590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_14
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d739b77994767b14ab0c8107c7bec068
-      internalID: -1504911458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_15
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da8be7b2886b8264788f321eca6fc031
-      internalID: 1282995438
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_16
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 768
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -128, y: 128}
-        - {x: -128, y: -128}
-        - {x: -63, y: -128}
-        - {x: -63, y: -109}
-        - {x: -52, y: -109}
-        - {x: -52, y: 109}
-        - {x: -64, y: 109}
-        - {x: -64, y: 128}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f4d0ad489d0e03b459a094a3afa15807
-      internalID: -835176415
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_17
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 768
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 128, y: 127}
-        - {x: -128, y: 128}
-        - {x: -128, y: 64}
-        - {x: -108, y: 64}
-        - {x: -108, y: 53}
-        - {x: 109, y: 52}
-        - {x: 109, y: 64}
-        - {x: 128, y: 64}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0937434fe238c664da4b5df00d88fc44
-      internalID: -1067683297
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_18
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 768
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 64, y: 128}
-        - {x: 64, y: 108}
-        - {x: 52, y: 108}
-        - {x: 52, y: -108}
-        - {x: 63, y: -108}
-        - {x: 63, y: -128}
-        - {x: 128, y: -128}
-        - {x: 128, y: 128}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15f224a3d3985cc42810c6a1dc20f727
-      internalID: 765842935
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_19
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 768
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -108, y: -52}
-        - {x: -108, y: -63}
-        - {x: -128, y: -63}
-        - {x: -128, y: -128}
-        - {x: 128, y: -128}
-        - {x: 128, y: -64}
-        - {x: 108, y: -64}
-        - {x: 108, y: -52}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a18f4b200eee47445a618ef630852f9e
-      internalID: -943520928
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_20
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 512
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -128, y: 128}
-        - {x: -128, y: 61}
-        - {x: 62, y: 62}
-        - {x: 61, y: -128}
-        - {x: 128, y: -128}
-        - {x: 128, y: 128}
       physicsShape:
-      - - {x: -128, y: 128}
-        - {x: -128, y: 62}
-        - {x: 61, y: 62}
-        - {x: 62, y: -128}
-        - {x: 128, y: -128}
-        - {x: 128, y: 128}
+      - - {x: -128, y: -125}
+        - {x: -128, y: -125}
+        - {x: -128, y: -66}
+        - {x: -128, y: -66}
       tessellationDetail: 0
       bones: []
-      spriteID: e1b756c767a9394419d6c69edd32392a
-      internalID: 2098937968
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_21
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 512
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 61, y: 128}
-        - {x: 61, y: -61}
-        - {x: -128, y: -61}
-        - {x: -128, y: -128}
-        - {x: 128, y: -128}
-        - {x: 128, y: 128}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 962fb4c44a8d9d44da58b6e51e483a15
-      internalID: -97764943
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_22
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 512
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -128, y: 128}
-        - {x: -128, y: -128}
-        - {x: 128, y: -128}
-        - {x: 128, y: -61}
-        - {x: -62, y: -62}
-        - {x: -61, y: 128}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fb9c42b9cda52e84bb5819d2bdd57317
-      internalID: -1994157853
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WallTilemap_23
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 512
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -128, y: 128}
-        - {x: -128, y: -128}
-        - {x: -61, y: -128}
-        - {x: -62, y: 61}
-        - {x: 128, y: 61}
-        - {x: 128, y: 128}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f0672257a8e15b04eb3a79f6417df49a
-      internalID: -166730469
+      spriteID: 0c07386b2d94b464b944af17f67352da
+      internalID: -199920174
       vertices: []
       indices: 
       edges: []
@@ -734,28 +344,13 @@ TextureImporter:
     nameFileIdTable:
       WallTilemap_0: 708698683
       WallTilemap_1: -1231383413
-      WallTilemap_10: -1860068029
-      WallTilemap_11: -1876402021
-      WallTilemap_12: 2373276
-      WallTilemap_13: 272697590
-      WallTilemap_14: -1504911458
-      WallTilemap_15: 1282995438
-      WallTilemap_16: -835176415
-      WallTilemap_17: -1067683297
-      WallTilemap_18: 765842935
-      WallTilemap_19: -943520928
       WallTilemap_2: 237432885
-      WallTilemap_20: 2098937968
-      WallTilemap_21: -97764943
-      WallTilemap_22: -1994157853
-      WallTilemap_23: -166730469
       WallTilemap_3: -357548419
       WallTilemap_4: -1929682411
       WallTilemap_5: 1542017772
       WallTilemap_6: 1531221573
       WallTilemap_7: -199920174
-      WallTilemap_8: 1025428747
-      WallTilemap_9: 1640945393
+      WallTilemap_8: -235704401
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,33 +18,159 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 34ad6a225957e2346b16afe837e48e43, type: 3}
   maxStack: 1
   weight: 4000
-  damage: 10
-  attackSpeed: 0.15
+  damage: 20
+  attackSpeed: 0.91
   knockbackPower: 10
   dismemberChance: 0
   staminaCost: 1
-  prepSpeed: 0.2
+  prepSpeed: 0.5
   swingCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.7249804
+      outSlope: 2.7249804
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11358933
+    - serializedVersion: 3
+      time: 0.07530593
+      value: 8.316243
+      inSlope: 3.4136145
+      outSlope: 3.4136145
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.57657367
+    - serializedVersion: 3
+      time: 0.14830205
+      value: 8.322555
+      inSlope: -0.7773687
+      outSlope: -0.7773687
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18754987
+      outWeight: 0.31685624
+    - serializedVersion: 3
+      time: 0.29369828
+      value: 0.54312253
+      inSlope: -0.60702884
+      outSlope: -0.60702884
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.082993306
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.41661876
+      outSlope: -0.41661876
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07847315
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   rotationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.19333358
+      value: 2.3745518
+      inSlope: 1.4070671
+      outSlope: 1.4070671
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.053311493
+      outWeight: 0.8106049
+    - serializedVersion: 3
+      time: 0.59537256
+      value: 2.3426933
+      inSlope: -1.1983343
+      outSlope: -1.1983343
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.36518484
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8427658
+      value: 0.42519855
+      inSlope: 1.0238874
+      outSlope: 1.0238874
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.985
+      value: 4.058799
+      inSlope: -12.381104
+      outSlope: -12.381104
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3929258
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   prepSwingCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.3690758
+      outSlope: 1.3690758
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1.3690758
+      inSlope: 0.051947273
+      outSlope: 0.051947273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08837211
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   prepRotationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.438602
+      outSlope: 0.438602
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.995
+      value: 0.436409
+      inSlope: 0.051947273
+      outSlope: 0.051947273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08837211
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

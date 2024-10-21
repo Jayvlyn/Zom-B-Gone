@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e228718b4db324ea20bdd8257b7464, type: 3}
   m_Name: Zone4
   m_EditorClassIdentifier: 
-  lootTable: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: 7146944c399f84545b89f81f2e8d7435, type: 2}

@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea95481aac880c741bca9591c9ac9985, type: 2}
   - {fileID: 11400000, guid: 872dae0b999e8cd4799dc3de7e3c9e95, type: 2}
   - {fileID: 11400000, guid: 4ecdfb1db64201c4ebde9e730b4d2593, type: 2}
-  - {fileID: 11400000, guid: 09f24022f39fe714fb7d3962c51b07a3, type: 2}
+  - {fileID: 11400000, guid: c93103171e2e951468d88000d49b88c6, type: 2}
   - {fileID: 11400000, guid: 86eab9462e44c534b8914bd9a3662898, type: 2}
   - {fileID: 11400000, guid: 9a1c42d605756224f9c160c6bd759272, type: 2}
   - {fileID: 11400000, guid: 4851f23e779b68946a1cdfa2ded6c340, type: 2}
@@ -53,5 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aafd2747ff2a315488ee4cb58b8ea686, type: 2}
   - {fileID: 11400000, guid: 10f41104de0e3dd4bb594e92d994d5b5, type: 2}
   - {fileID: 11400000, guid: df606d558a613104e9f1e3bd1ee8970f, type: 2}
-  weights: []
   rarityList: {fileID: 11400000, guid: 8a1f6f72015774a4ba99c59d0607b2f0, type: 2}

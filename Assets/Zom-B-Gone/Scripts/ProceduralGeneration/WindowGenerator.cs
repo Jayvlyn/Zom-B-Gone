@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
 public class WindowGenerator : MonoBehaviour
 {
-    [Header("Right click and select Generate Windows to generate")]
+    [Header("Right click and select 'Generate Windows' to generate")]
     public GameObject windowPrefab;
 	public Tilemap tilemap;
 	public TileBase referencedTile;

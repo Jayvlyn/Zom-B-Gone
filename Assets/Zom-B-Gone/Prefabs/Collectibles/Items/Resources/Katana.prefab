@@ -59,7 +59,7 @@ MonoBehaviour:
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
   groundedLinearDrag: 3
-  holdOffset: {x: 0.81, y: 0.23}
+  holdOffset: {x: 0.68, y: 0.17}
   spinThrow: 1
   aimAtMouse: 0
   gripRotation: 130

@@ -59,10 +59,10 @@ MonoBehaviour:
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
   groundedLinearDrag: 3
-  holdOffset: {x: 0.89, y: -0}
+  holdOffset: {x: 0.6, y: -0.2}
   spinThrow: 1
   aimAtMouse: 0
-  gripRotation: 145
+  gripRotation: 150
   minimumAirborneSpeed: 10
   rb: {fileID: 0}
   vanBack: {fileID: 0}
