@@ -11,18 +11,7 @@ public class FloorLayout : MonoBehaviour
     
     public List<Transform> collectibleSpawns = new List<Transform>();
 
-    private void Start()
-    {
-        if(Application.isPlaying)
-        {
-            foreach(Transform t in collectibleSpawns)
-            {
-                // spawn collectible based on loot table for level
-            }
-        }
-    }
-
-    private void OnTransformChildrenChanged()
+	private void OnTransformChildrenChanged()
     {
         collectibleSpawns.Clear();
         foreach (Transform child in transform)

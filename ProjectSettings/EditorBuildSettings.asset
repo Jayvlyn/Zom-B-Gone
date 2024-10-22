@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Zom-B-Gone/Scenes/Unit.unity
     guid: 673fccd1fc290c64483093cdb1684ead
   - enabled: 1
-    path: Assets/Zom-B-Gone/Scenes/ActualGame.unity
+    path: Assets/Zom-B-Gone/Scenes/Game.unity
     guid: 342a93787df38e24bbbb314584e429a3
   - enabled: 1
-    path: Assets/Zom-B-Gone/Scenes/Game.unity
+    path: Assets/Zom-B-Gone/Scenes/SampleScene.unity
     guid: 81f246a8a77f3724289f8c4e4de489a0
   m_configObjects: {}
