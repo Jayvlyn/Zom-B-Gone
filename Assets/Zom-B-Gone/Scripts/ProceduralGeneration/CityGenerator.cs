@@ -6,5 +6,6 @@ public class CityGenerator : MonoBehaviour
 {
 	public Transform playerT;
 
+	public int chunkSize = 11;
 
 }
