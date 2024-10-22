@@ -49,4 +49,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: df606d558a613104e9f1e3bd1ee8970f, type: 2}
   - {fileID: 11400000, guid: 5434687f8e1397a418c45dee7bbfb883, type: 2}
   - {fileID: 11400000, guid: 7691e692af1513443b3aacbfe09906b5, type: 2}
+  - {fileID: 11400000, guid: e33b37bb2db0775408c533d2eb208a14, type: 2}
+  - {fileID: 11400000, guid: 3ea69505795e21d4db643120956aadfa, type: 2}
+  - {fileID: 11400000, guid: a9de3493f5d89db488cf5b063dfe7153, type: 2}
+  - {fileID: 11400000, guid: 5b0e176e8f61588469136e675aca5f24, type: 2}
+  - {fileID: 11400000, guid: 6723e4911033c79428faf0eb14f13513, type: 2}
+  - {fileID: 11400000, guid: 12806186951343d46ba4d605585dd5ae, type: 2}
+  - {fileID: 11400000, guid: 6feea208295e00c4abdac65bc551d1ce, type: 2}
+  - {fileID: 11400000, guid: a0762a981573d554faac50b44adc8f47, type: 2}
+  - {fileID: 11400000, guid: 28daa3c4a9ce9f24aad60c11c392d157, type: 2}
   rarityList: {fileID: 11400000, guid: 8a1f6f72015774a4ba99c59d0607b2f0, type: 2}

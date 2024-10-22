@@ -9,6 +9,7 @@ public class CollectibleSpawn : MonoBehaviour
 		if(Random.Range(0,2) == 1)
 		{
 			CollectibleData coll = GameManager.currentZoneLootTable.GetRandomCollectible();
+			if (coll == null) return;
 			GameObject prefab = Resources.Load<GameObject>(coll.name);
 			GameObject obj = Instantiate(prefab, transform);
 

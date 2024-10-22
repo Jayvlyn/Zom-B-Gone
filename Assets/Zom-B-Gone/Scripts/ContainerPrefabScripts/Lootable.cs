@@ -20,6 +20,7 @@ public class Lootable : MonoBehaviour, IInteractable
                 chanceToFill *= 0.5f;
 
                 CollectibleData coll = GameManager.currentZoneLootTable.GetRandomCollectible();
+                if (coll == null) return;
 
                 collectibleSlots[i].CollectibleName = coll.name;
                 collectibleSlots[i].quantity = GameManager.currentZoneLootTable.GetRandomQuantity(coll);
