@@ -82,7 +82,7 @@ public class LootTable : ScriptableObject
 	public int GetRandomQuantity(CollectibleData collectible)
 	{
 		float randomValue = Random.Range(0f, 1f);
-		int quantity = Mathf.CeilToInt(Mathf.Pow(randomValue, 2) * collectible.MaxStack);
+		int quantity = Mathf.CeilToInt(Mathf.Pow(randomValue, 5) * collectible.MaxStack);
 		return Mathf.Clamp(quantity, 1, collectible.MaxStack);
 	}
 
