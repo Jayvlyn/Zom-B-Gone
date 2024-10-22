@@ -144,6 +144,7 @@ public class VehicleDriver : MonoBehaviour
 
     public IEnumerator ExitVehicle(Vector3 position, Quaternion rotation)
     {
+        Unhold();
         transform.parent = null;
 
         float elapsedTime = 0f;
@@ -185,5 +186,6 @@ public class VehicleDriver : MonoBehaviour
 		brakeHeld = false;
 		driftHeld = false;
 		TravelHeld = false;
-	}
+        if (vehicle) vehicle.drift = driftHeld;
+    }
 }

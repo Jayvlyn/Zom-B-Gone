@@ -426,8 +426,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.DRIVING:
                 if (!recoverStamina) RecoverStamina();
-                rb.bodyType = RigidbodyType2D.Kinematic;
                 input.SwitchCurrentActionMap("Vehicle");
+                rb.bodyType = RigidbodyType2D.Kinematic;
                 break;
         }
 

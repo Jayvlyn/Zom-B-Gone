@@ -8,14 +8,6 @@ public class TilemapToModule : MonoBehaviour
     public int moduleSize = 11;       // Fixed size of the module (e.g., 11x11)
 
 
-    void OnGUI()
-    {
-        if (GUILayout.Button("Capture Tilemap"))
-        {
-            CaptureTilemap();
-        }
-    }
-
     [ContextMenu("Capture Tilemap")]
     public void CaptureTilemap()
     {
@@ -25,7 +17,6 @@ public class TilemapToModule : MonoBehaviour
             return;
         }
 
-        // Initialize the TileModule to the desired fixed size (e.g., 11x11)
         tileModule.Initialize(moduleSize, moduleSize);
 
         // Get the bounds of the tilemap
