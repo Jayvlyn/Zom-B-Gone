@@ -1354,7 +1354,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerT: {fileID: 220420680}
   streetsVisualizer: {fileID: 235199603}
-  chunkSize: 11
 --- !u!114 &235199603
 MonoBehaviour:
   m_ObjectHideFlags: 0

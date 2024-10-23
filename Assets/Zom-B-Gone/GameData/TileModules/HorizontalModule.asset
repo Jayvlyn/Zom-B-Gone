@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 856229540f6653946bdf996df78df121, type: 3}
-  m_Name: HorizontalRoadModule
+  m_Name: HorizontalModule
   m_EditorClassIdentifier: 
   width: 11
   height: 11

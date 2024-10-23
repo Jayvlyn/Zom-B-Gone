@@ -4,9 +4,9 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "New Tile Module", menuName = "New Tile Module")]
 public class TileModule : ScriptableObject
 {
-    public int width = 11;
-    public int height = 11;
-    public TileBase[] tiles; // Flat 1D array to store tile data
+    public int width;
+    public int height;
+    public TileBase[] tiles;
 
     public void Initialize(int w, int h)
     {
