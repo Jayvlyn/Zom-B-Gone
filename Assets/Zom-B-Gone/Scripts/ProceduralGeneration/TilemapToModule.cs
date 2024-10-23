@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -49,6 +50,11 @@ public class TilemapToModule : MonoBehaviour
             }
         }
 
-        Debug.Log("Tilemap captured into fixed 11x11 module!");
+#if UNITY_EDITOR
+		EditorUtility.SetDirty(tileModule); // Mark the ScriptableObject as dirty
+		AssetDatabase.SaveAssets();         // Save changes to disk
+#endif
+
+		Debug.Log("Tilemap captured into module");
     }
 }
