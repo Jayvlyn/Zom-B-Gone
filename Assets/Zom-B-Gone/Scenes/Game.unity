@@ -1352,8 +1352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ba1a3297c3ada4e943fa0cc9b85f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerT: {fileID: 220420680}
   streetsVisualizer: {fileID: 235199603}
+  playerT: {fileID: 220420680}
+  currentChunk: {x: 0, y: 0}
 --- !u!114 &235199603
 MonoBehaviour:
   m_ObjectHideFlags: 0
