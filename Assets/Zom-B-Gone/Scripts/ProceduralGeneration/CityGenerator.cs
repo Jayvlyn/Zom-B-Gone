@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class CityGenerator : MonoBehaviour
 {
@@ -221,7 +222,7 @@ public class CityGenerator : MonoBehaviour
                     possibleModules[6] = ModuleType.INTERSECTION_3_EAST;
                     return PickRandomModule(possibleModules);
                 }
-                else if (aboveModule == ModuleType.GRASS || aboveModule == ModuleType.HORIZONTAL || aboveModule == ModuleType.NORTH_EAST_TURN || aboveModule == ModuleType.NORTH_WEST_TURN || aboveModule == ModuleType.INTERSECTION_3_SOUTH) // modules that cant lead to road below
+                else if (!ModuleLeadsDown(aboveModule))
                 { 
                     return ModuleType.GRASS;
                 }
@@ -244,7 +245,7 @@ public class CityGenerator : MonoBehaviour
                     possibleModules[6] = ModuleType.INTERSECTION_3_EAST;
                     return PickRandomModule(possibleModules);
                 }
-                else if (belowModule == ModuleType.GRASS || belowModule == ModuleType.HORIZONTAL || belowModule == ModuleType.SOUTH_EAST_TURN || belowModule == ModuleType.SOUTH_WEST_TURN || belowModule == ModuleType.INTERSECTION_3_NORTH) // modules that cant lead to road above
+                else if (!ModuleLeadsUp(belowModule))
                 {
                     return ModuleType.GRASS;
                 }
@@ -267,7 +268,7 @@ public class CityGenerator : MonoBehaviour
                     possibleModules[6] = ModuleType.INTERSECTION_3_EAST;
                     return PickRandomModule(possibleModules);
                 }
-                else if (leftModule == ModuleType.GRASS || leftModule == ModuleType.VERTICAL || leftModule == ModuleType.SOUTH_WEST_TURN || leftModule == ModuleType.NORTH_WEST_TURN || leftModule == ModuleType.INTERSECTION_3_EAST) // cant lead to road on right
+                else if (!ModuleLeadsRight(leftModule)) // cant lead to road on right
                 {
                     return ModuleType.GRASS;
                 }
@@ -291,7 +292,7 @@ public class CityGenerator : MonoBehaviour
                     return PickRandomModule(possibleModules);
 
                 }
-                else if (rightModule == ModuleType.GRASS || rightModule == ModuleType.VERTICAL || rightModule == ModuleType.SOUTH_EAST_TURN || rightModule == ModuleType.NORTH_EAST_TURN || rightModule == ModuleType.INTERSECTION_3_WEST) // cant lead to road on left
+                else if (!ModuleLeadsLeft(rightModule)) // cant lead to road on left
                 {
                     return ModuleType.GRASS;
                 }
@@ -309,20 +310,12 @@ public class CityGenerator : MonoBehaviour
                 break;
 
             case 0b1001:  // connection above + right
-                if (aboveModule == ModuleType.VERTICAL)
                 {
-                    if(rightModule == ModuleType.GRASS || rightModule == ModuleType.INTERSECTION_3_WEST || rightModule == ModuleType.SOUTH_EAST_TURN || rightModule == ModuleType.NORTH_EAST_TURN)
+                    bool aboveLeadsDown = ModuleLeadsDown(aboveModule);
+                    bool rightLeadsLeft = ModuleLeadsLeft(rightModule);
+                    if (aboveLeadsDown && rightLeadsLeft)
                     {
-                        // vertical, or intersection that goes up but not right
-                        ModuleType[] possibleModules = new ModuleType[3];
-                        possibleModules[0] = ModuleType.VERTICAL;
-                        possibleModules[1] = ModuleType.NORTH_WEST_TURN;
-                        possibleModules[2] = ModuleType.INTERSECTION_3_EAST;
-                        return PickRandomModule(possibleModules);
-                    }
-                    else
-                    {
-                        // intersection that at least goes up and right
+                        // intersection at least up and right
                         ModuleType[] possibleModules = new ModuleType[4];
                         possibleModules[0] = ModuleType.NORTH_EAST_TURN;
                         possibleModules[1] = ModuleType.INTERSECTION_4;
@@ -330,50 +323,37 @@ public class CityGenerator : MonoBehaviour
                         possibleModules[3] = ModuleType.INTERSECTION_3_WEST;
                         return PickRandomModule(possibleModules);
                     }
-                }
-                else if (aboveModule == ModuleType.GRASS || aboveModule == ModuleType.HORIZONTAL || aboveModule == ModuleType.NORTH_EAST_TURN || aboveModule == ModuleType.NORTH_WEST_TURN || aboveModule == ModuleType.INTERSECTION_3_SOUTH) // modules that cant lead to road below
-                {
-                    if(rightModule == ModuleType.GRASS || rightModule == ModuleType.VERTICAL || rightModule == ModuleType.SOUTH_EAST_TURN || rightModule == ModuleType.NORTH_EAST_TURN || rightModule == ModuleType.INTERSECTION_3_WEST)
+                    else if (aboveLeadsDown)
                     {
-                        return ModuleType.GRASS;
-                    }
-                    else
-                    {
-                        if(rightModule == ModuleType.HORIZONTAL)
-                        {
-                            // horizontal or intersection that goes right but not up
-                            ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.HORIZONTAL;
-                            possibleModules[1] = ModuleType.SOUTH_EAST_TURN;
-                            possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
-                            return PickRandomModule(possibleModules);
-                        }
-                        else
-                        {
-                            return ModuleType.HORIZONTAL;
-                        }
-                    }
-                }
-                else
-                {
-                    return ModuleType.VERTICAL;
-                }
-
-            case 0b0101:  // connection above + left
-                if (aboveModule == ModuleType.VERTICAL)
-                {
-                    if (leftModule == ModuleType.GRASS || leftModule == ModuleType.INTERSECTION_3_EAST || leftModule == ModuleType.NORTH_WEST_TURN || leftModule == ModuleType.SOUTH_WEST_TURN)
-                    {
-                        // vertical, or intersection that goes up but not left
+                        // at least up and not right
                         ModuleType[] possibleModules = new ModuleType[3];
                         possibleModules[0] = ModuleType.VERTICAL;
-                        possibleModules[1] = ModuleType.NORTH_EAST_TURN;
-                        possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
+                        possibleModules[1] = ModuleType.NORTH_WEST_TURN;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_EAST;
+                        return PickRandomModule(possibleModules);
+                    }
+                    else if (rightLeadsLeft)
+                    {
+                        // at least right and not up
+                        ModuleType[] possibleModules = new ModuleType[3];
+                        possibleModules[0] = ModuleType.HORIZONTAL;
+                        possibleModules[1] = ModuleType.SOUTH_EAST_TURN;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
                         return PickRandomModule(possibleModules);
                     }
                     else
                     {
-                        // intersection that at least goes up and left
+                        return ModuleType.GRASS;
+                    }
+                }
+
+            case 0b0101:  // connection above + left
+                {
+                    bool aboveLeadsDown = ModuleLeadsDown(aboveModule);
+                    bool leftLeadsRight = ModuleLeadsRight(leftModule);
+                    if (aboveLeadsDown && leftLeadsRight)
+                    {
+                        // intersection at least up and left
                         ModuleType[] possibleModules = new ModuleType[4];
                         possibleModules[0] = ModuleType.NORTH_WEST_TURN;
                         possibleModules[1] = ModuleType.INTERSECTION_4;
@@ -381,50 +361,37 @@ public class CityGenerator : MonoBehaviour
                         possibleModules[3] = ModuleType.INTERSECTION_3_EAST;
                         return PickRandomModule(possibleModules);
                     }
-                }
-                else if (aboveModule == ModuleType.GRASS || aboveModule == ModuleType.HORIZONTAL || aboveModule == ModuleType.NORTH_EAST_TURN || aboveModule == ModuleType.NORTH_WEST_TURN || aboveModule == ModuleType.INTERSECTION_3_SOUTH) // modules that cant lead to road below
-                {
-                    if (leftModule == ModuleType.GRASS || leftModule == ModuleType.VERTICAL || leftModule == ModuleType.SOUTH_WEST_TURN || leftModule == ModuleType.NORTH_WEST_TURN || leftModule == ModuleType.INTERSECTION_3_EAST)
+                    else if (aboveLeadsDown)
                     {
-                        return ModuleType.GRASS;
-                    }
-                    else
-                    {
-                        if(leftModule == ModuleType.HORIZONTAL)
-                        {
-                            // horizontal or intersection that goes left but not up
-                            ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.HORIZONTAL;
-                            possibleModules[1] = ModuleType.SOUTH_WEST_TURN;
-                            possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
-                            return PickRandomModule(possibleModules);
-                        }
-                        else
-                        {
-                            return ModuleType.HORIZONTAL;
-                        }
-                    }
-                }
-                else
-                {
-                    return ModuleType.VERTICAL;
-                }
-
-            case 0b1010:  // connection below + right
-                if (belowModule == ModuleType.VERTICAL)
-                {
-                    if (rightModule == ModuleType.GRASS || rightModule == ModuleType.INTERSECTION_3_WEST || rightModule == ModuleType.SOUTH_EAST_TURN || rightModule == ModuleType.NORTH_EAST_TURN)
-                    {
-                        // vertical, or intersection that goes down but not right
+                        // at least up and not left
                         ModuleType[] possibleModules = new ModuleType[3];
                         possibleModules[0] = ModuleType.VERTICAL;
+                        possibleModules[1] = ModuleType.NORTH_EAST_TURN;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
+                        return PickRandomModule(possibleModules);
+                    }
+                    else if (leftLeadsRight)
+                    {
+                        // at least left and not up
+                        ModuleType[] possibleModules = new ModuleType[3];
+                        possibleModules[0] = ModuleType.HORIZONTAL;
                         possibleModules[1] = ModuleType.SOUTH_WEST_TURN;
-                        possibleModules[2] = ModuleType.INTERSECTION_3_EAST;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
                         return PickRandomModule(possibleModules);
                     }
                     else
                     {
-                        // intersection that at least goes down and right
+                        return ModuleType.GRASS;
+                    }
+                }
+
+            case 0b1010:  // connection below + right
+                {
+                    bool belowLeadsUp = ModuleLeadsUp(belowModule);
+                    bool rightLeadsLeft = ModuleLeadsLeft(rightModule);
+                    if (belowLeadsUp && rightLeadsLeft)
+                    {
+                        // intersection at least down and right
                         ModuleType[] possibleModules = new ModuleType[4];
                         possibleModules[0] = ModuleType.SOUTH_EAST_TURN;
                         possibleModules[1] = ModuleType.INTERSECTION_4;
@@ -432,50 +399,38 @@ public class CityGenerator : MonoBehaviour
                         possibleModules[3] = ModuleType.INTERSECTION_3_WEST;
                         return PickRandomModule(possibleModules);
                     }
-                }
-                else if (belowModule == ModuleType.GRASS || belowModule == ModuleType.HORIZONTAL || belowModule == ModuleType.SOUTH_EAST_TURN || belowModule == ModuleType.SOUTH_WEST_TURN || belowModule == ModuleType.INTERSECTION_3_NORTH) // modules that cant lead to road above
-                {
-                    if (rightModule == ModuleType.GRASS || rightModule == ModuleType.VERTICAL || rightModule == ModuleType.SOUTH_EAST_TURN || rightModule == ModuleType.NORTH_EAST_TURN || rightModule == ModuleType.INTERSECTION_3_WEST)
+                    else if (belowLeadsUp)
                     {
-                        return ModuleType.GRASS;
-                    }
-                    else
-                    {
-                        if(rightModule == ModuleType.HORIZONTAL)
-                        {
-                            // horizontal or intersection that goes right but not below
-                            ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.HORIZONTAL;
-                            possibleModules[1] = ModuleType.NORTH_EAST_TURN;
-                            possibleModules[2] = ModuleType.INTERSECTION_3_SOUTH;
-                            return PickRandomModule(possibleModules);
-                        }
-                        else
-                        {
-                            return ModuleType.HORIZONTAL;
-                        }
-                    }
-                }
-                else
-                {
-                    return ModuleType.VERTICAL;
-                }
-
-            case 0b0110:  // connection below + left
-                if (belowModule == ModuleType.VERTICAL)
-                {
-                    if (leftModule == ModuleType.GRASS || leftModule == ModuleType.INTERSECTION_3_EAST || leftModule == ModuleType.NORTH_WEST_TURN || leftModule == ModuleType.SOUTH_WEST_TURN)
-                    {
-                        // vertical, or intersection that goes down but not left
+                        // at least down and not right
                         ModuleType[] possibleModules = new ModuleType[3];
                         possibleModules[0] = ModuleType.VERTICAL;
-                        possibleModules[1] = ModuleType.SOUTH_EAST_TURN;
-                        possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
+                        possibleModules[1] = ModuleType.SOUTH_WEST_TURN;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_EAST;
+                        return PickRandomModule(possibleModules);
+                    }
+                    else if (rightLeadsLeft)
+                    {
+                        // at least right and not down
+                        ModuleType[] possibleModules = new ModuleType[3];
+                        possibleModules[0] = ModuleType.HORIZONTAL;
+                        possibleModules[1] = ModuleType.NORTH_EAST_TURN;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_SOUTH;
                         return PickRandomModule(possibleModules);
                     }
                     else
                     {
-                        // intersection that at least goes down and left
+                        return ModuleType.GRASS;
+                    }
+                }
+
+
+            case 0b0110:  // connection below + left
+                {
+                    bool belowLeadsUp = ModuleLeadsUp(belowModule);
+                    bool leftLeadsRight = ModuleLeadsRight(leftModule);
+                    if (belowLeadsUp && leftLeadsRight)
+                    {
+                        // intersection at least down and left
                         ModuleType[] possibleModules = new ModuleType[4];
                         possibleModules[0] = ModuleType.SOUTH_WEST_TURN;
                         possibleModules[1] = ModuleType.INTERSECTION_4;
@@ -483,34 +438,30 @@ public class CityGenerator : MonoBehaviour
                         possibleModules[3] = ModuleType.INTERSECTION_3_EAST;
                         return PickRandomModule(possibleModules);
                     }
-                }
-                else if (belowModule == ModuleType.GRASS || belowModule == ModuleType.HORIZONTAL || belowModule == ModuleType.SOUTH_EAST_TURN || belowModule == ModuleType.SOUTH_WEST_TURN || belowModule == ModuleType.INTERSECTION_3_NORTH) // modules that cant lead to road above
-                {
-                    if (leftModule == ModuleType.GRASS || leftModule == ModuleType.VERTICAL || leftModule == ModuleType.SOUTH_WEST_TURN || leftModule == ModuleType.NORTH_WEST_TURN || leftModule == ModuleType.INTERSECTION_3_EAST)
+                    else if (belowLeadsUp)
                     {
-                        return ModuleType.GRASS;
+                        // at least down and not left
+                        ModuleType[] possibleModules = new ModuleType[3];
+                        possibleModules[0] = ModuleType.VERTICAL;
+                        possibleModules[1] = ModuleType.SOUTH_EAST_TURN;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
+                        return PickRandomModule(possibleModules);
+                    }
+                    else if (leftLeadsRight)
+                    {
+                        // at least left and not down
+                        ModuleType[] possibleModules = new ModuleType[3];
+                        possibleModules[0] = ModuleType.HORIZONTAL;
+                        possibleModules[1] = ModuleType.NORTH_WEST_TURN;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_SOUTH;
+                        return PickRandomModule(possibleModules);
                     }
                     else
                     {
-                        if(leftModule == ModuleType.HORIZONTAL)
-                        {
-                            // horizontal or intersection that goes left but not below
-                            ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.HORIZONTAL;
-                            possibleModules[1] = ModuleType.NORTH_WEST_TURN;
-                            possibleModules[2] = ModuleType.INTERSECTION_3_SOUTH;
-                            return PickRandomModule(possibleModules);
-                        }
-                        else
-                        {
-                            return ModuleType.HORIZONTAL;
-                        }
+                        return ModuleType.GRASS;
                     }
                 }
-                else // an intersection that connects down
-                {
-                    return ModuleType.VERTICAL;
-                }
+
 
             case 0b1111:  // all connected
                 Debug.Log("case shouldn't happen during generation");
@@ -574,21 +525,36 @@ public class CityGenerator : MonoBehaviour
 		else return ModuleType.EMPTY;
 	}
 
+    public bool ModuleLeadsDown(ModuleType module)
+    {
+        return !(module == ModuleType.GRASS || module == ModuleType.HORIZONTAL || module == ModuleType.NORTH_EAST_TURN || module == ModuleType.NORTH_WEST_TURN || module == ModuleType.INTERSECTION_3_SOUTH);
+    }
 
+    public bool ModuleLeadsUp(ModuleType module)
+    {
+        return !(module == ModuleType.GRASS || module == ModuleType.HORIZONTAL || module == ModuleType.SOUTH_EAST_TURN || module == ModuleType.SOUTH_WEST_TURN || module == ModuleType.INTERSECTION_3_NORTH);
+    }
+
+    public bool ModuleLeadsRight(ModuleType module)
+    {
+        return !(module == ModuleType.GRASS || module == ModuleType.VERTICAL || module == ModuleType.SOUTH_WEST_TURN || module == ModuleType.NORTH_WEST_TURN || module == ModuleType.INTERSECTION_3_EAST);
+    }
+
+    public bool ModuleLeadsLeft(ModuleType module)
+    {
+        return !(module == ModuleType.GRASS || module == ModuleType.VERTICAL || module == ModuleType.SOUTH_EAST_TURN || module == ModuleType.NORTH_EAST_TURN || module == ModuleType.INTERSECTION_3_WEST);
+    }
 }
-
 public struct ChunkData
 {
     public TileModule module;
     public ModuleType type;
-
     public ChunkData(TileModule module, ModuleType type)
     {
         this.module = module;
         this.type = type;
     }
 }
-
 public enum ModuleType
 {
     HORIZONTAL,
