@@ -5111,6 +5111,7 @@ GameObject:
   - component: {fileID: 1912164996699627575}
   - component: {fileID: 6346331123052576540}
   - component: {fileID: 5803480785806985951}
+  - component: {fileID: 6242525725862391101}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -5216,6 +5217,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseUI: {fileID: 4766451050649359672}
   settingsUI: {fileID: 5156426404694459911}
+--- !u!114 &6242525725862391101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6473367371489572441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3fea4029014d14db6fc92872b8d13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetIndicatorPrefab: {fileID: 8685292633691740190, guid: 601e4d41934591143801129effecd7d3, type: 3}
+  mainCamera: {fileID: 0}
+  offset: 10
+  targetIndicators:
+  - {fileID: 0}
 --- !u!1 &6562552011181495538
 GameObject:
   m_ObjectHideFlags: 0

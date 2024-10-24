@@ -8,7 +8,7 @@ public class CityGenerator : MonoBehaviour
     public StreetsVisualizer streetsVisualizer;
 	public static int chunkSize = 11;
 
-    private int chunkDistance = 10; // how many chunks loaded in each direction from player
+    private int chunkDistance = 20; // how many chunks loaded in each direction from player
 
     // Player vars
 	public Transform playerT;
