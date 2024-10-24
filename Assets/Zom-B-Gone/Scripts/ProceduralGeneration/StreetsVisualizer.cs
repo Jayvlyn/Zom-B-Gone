@@ -7,7 +7,19 @@ using UnityEngine.U2D;
 public class StreetsVisualizer : MonoBehaviour
 {
     public Tilemap tilemap;
-    public TileModule tileModule;
+
+    public TileModule horizontalModule;
+    public TileModule verticalModule;
+    public TileModule northWestTurnModule;
+    public TileModule northEastTurnModule;
+    public TileModule southWestTurnModule;
+    public TileModule southEastTurnModule;
+    public TileModule intersection4Module;
+    public TileModule intersection3NorthModule;
+    public TileModule intersection3SouthModule;
+    public TileModule intersection3WestModule;
+    public TileModule intersection3EastModule;
+    public TileModule grassModule;
 
     public void DrawModuleToTilemap(Vector2Int chunkCoords, TileModule module)
     {
