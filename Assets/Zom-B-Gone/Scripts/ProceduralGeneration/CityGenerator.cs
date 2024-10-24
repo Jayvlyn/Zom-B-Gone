@@ -5,13 +5,16 @@ using static UnityEngine.ParticleSystem;
 
 public class CityGenerator : MonoBehaviour
 {
+    [Header("References")]
     public StreetsVisualizer streetsVisualizer;
+	public Transform playerT;
+
+    [Header("Adjustable Values")]
+    public int chunkDistance = 10; // how many chunks loaded in each direction from player
+
 	public static int chunkSize = 11;
 
-    private int chunkDistance = 20; // how many chunks loaded in each direction from player
 
-    // Player vars
-	public Transform playerT;
 
     private Vector2Int currentChunk;
     public Vector2Int CurrentChunk
