@@ -8,6 +8,7 @@ public class FloorLayout : MonoBehaviour
 {
 	public Vector2 dimensions; // w, h
 	public Tilemap tilemap;
+    public Transform pivot;
     
     public List<Transform> collectibleSpawns = new List<Transform>();
 
@@ -21,5 +22,10 @@ public class FloorLayout : MonoBehaviour
                 collectibleSpawns.Add(child); 
             }
         }
+    }
+
+    public void RotateLayout(float rotation)
+    {
+        transform.RotateAround(pivot.position, new Vector3(0,0,1), rotation);
     }
 }

@@ -30,7 +30,7 @@ public class VehicleDriver : MonoBehaviour
             if (steering) vehicle.Steer(steerDirection);
             if (accelerateHeld) vehicle.Accelerate();
             if (brakeHeld) vehicle.Brake();
-            //if((accelerateHeld || brakeHeld) && !steering) vehicle.CorrectSteering();
+            if((accelerateHeld || brakeHeld) && !steering) vehicle.CorrectSteering();
         }
     }
 

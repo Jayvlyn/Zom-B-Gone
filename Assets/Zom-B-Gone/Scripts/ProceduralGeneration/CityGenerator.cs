@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -8,13 +9,17 @@ public class CityGenerator : MonoBehaviour
     [Header("References")]
     public StreetsVisualizer streetsVisualizer;
 	public Transform playerT;
+    public FloorLayoutCollection layoutCollection;
 
     [Header("Adjustable Values")]
     public int chunkDistance = 10; // how many chunks loaded in each direction from player
 
+    public int mapBottom;
+    public int mapTop;
+    public int mapLeft;
+    public int mapRight;
+
 	public static int chunkSize = 11;
-
-
 
     private Vector2Int currentChunk;
     public Vector2Int CurrentChunk
@@ -25,15 +30,41 @@ public class CityGenerator : MonoBehaviour
             if (value == currentChunk) return;
             else
             {
+                Vector2Int prevChunk = currentChunk;
                 currentChunk = value;
-                // check for missing chunks in distance from new chunk
+
+                // Horizontal Change
+                int x = 0;
+                if(prevChunk.x > currentChunk.x) // moved left 1 chunk
+                {
+                    x = currentChunk.x - chunkDistance;
+                }
+                else if (prevChunk.x < currentChunk.x) // moved right 1 chunk
+                {
+                    x = currentChunk.x + chunkDistance;
+                }
+
+                // Vertical Change
+                int y = 0;
+                if(prevChunk.y > currentChunk.y) // moved down 1 chunk
+                {
+                    y = currentChunk.y - chunkDistance;
+                }
+                else if (prevChunk.y < currentChunk.y) // moved up 1 chunk
+                {
+                    y = currentChunk.y + chunkDistance;
+                }
+
+                if(!loadedChunks.ContainsKey(new Vector2Int(x, currentChunk.y)) || !loadedChunks.ContainsKey(new Vector2Int(currentChunk.x, y))) GenerateChunkLine(x, y);
+                
             }
         }
     }
 
     public Dictionary<Vector2Int, ChunkData> loadedChunks;
+    public Dictionary<Vector2Int, ChunkData> emptyGrassPlots;
 
-    private void Update()
+    private void FixedUpdate()
     {
         CurrentChunk = new Vector2Int(
             Mathf.FloorToInt(playerT.position.x / chunkSize),
@@ -45,18 +76,79 @@ public class CityGenerator : MonoBehaviour
     private void Start()
     {
         loadedChunks = new Dictionary<Vector2Int, ChunkData>();
+        emptyGrassPlots = new Dictionary<Vector2Int, ChunkData>();
 
         // starting chunk
         GenerateChunk(new Vector2Int(0, 0), ModuleType.VERTICAL);
 
         // surrounding starter chunks
         LoadSurroundingChunks();
+        FillEmptyGrassPlots();
 
     }
 
+    private void FillEmptyGrassPlots()
+    {
+        foreach (Vector2Int key in emptyGrassPlots.Keys)
+        {
+            ModuleType belowModule = CheckModuleBelow(key);
+            if (belowModule != ModuleType.EMPTY)
+            {
+                if (HasNorthSidewalk(belowModule))
+                {
+                    Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize, key.y * chunkSize, 0), Quaternion.identity);
+                    continue;
+                }
+            }
+
+            ModuleType leftModule = CheckModuleLeft(key);
+            if (leftModule != ModuleType.EMPTY)
+            {
+                if (HasEastSidewalk(leftModule))
+                {
+                    GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
+                    FloorLayout layout = floor.GetComponent<FloorLayout>();
+                    layout.RotateLayout(-90);
+                    continue;
+                }
+            }
+
+            ModuleType aboveModule = CheckModuleAbove(key);
+            if (aboveModule != ModuleType.EMPTY)
+            {
+                if (HasSouthSidewalk(aboveModule))
+                {
+                    GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
+                    FloorLayout layout = floor.GetComponent<FloorLayout>();
+                    layout.RotateLayout(180);
+                    continue;
+                }
+            }
+
+            ModuleType rightModule = CheckModuleRight(key);
+            if (rightModule != ModuleType.EMPTY)
+            {
+                if (HasWestSidewalk(rightModule))
+                {
+                    GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), Quaternion.identity);
+                    FloorLayout layout = floor.GetComponent<FloorLayout>();
+                    layout.RotateLayout(90);
+                    continue;
+                }
+            }
+        }
+        emptyGrassPlots.Clear();
+    }
+
+    // Chat GPT-4o helped in the creation of this method
     private void LoadSurroundingChunks()
     {
         int radius = 1; // Start with a 1-chunk radius around (0, 0)
+
+        mapBottom = -chunkDistance;
+        mapTop = chunkDistance;
+        mapLeft = -chunkDistance; 
+        mapRight = chunkDistance;
 
         while (radius <= chunkDistance)
         {
@@ -92,8 +184,33 @@ public class CityGenerator : MonoBehaviour
         }
     }
 
+    private void GenerateChunkLine(int x = 0, int y = 0)
+    {
+        if (x != 0)
+        {
+            int roll = Random.Range(0, 2);
+            if(roll == 0) for(int i = mapBottom; i <= mapTop; i++) GenerateChunk(new Vector2Int(x, i));
+            else          for(int i = mapTop; i >= mapBottom; i--) GenerateChunk(new Vector2Int(x, i));
+            
+            if (x < 0) mapLeft--;
+            else mapRight++;
+        }
+
+        if (y != 0)
+        {
+            int roll = Random.Range(0, 2);
+            if (roll == 0) for (int k = mapLeft; k <= mapRight; k++) GenerateChunk(new Vector2Int(k, y));
+            else           for (int k = mapRight; k >= mapLeft; k--) GenerateChunk(new Vector2Int(k, y));
+            
+            if (y < 0) mapBottom--;
+            else mapTop++;
+        }
+    }
+
     public void GenerateChunk(Vector2Int chunkPos)
     {
+        if (loadedChunks.ContainsKey(chunkPos)) return;
+
         ModuleType modType = DetermineModule(chunkPos);
         TileModule mod = streetsVisualizer.grassModule;
         switch (modType)
@@ -137,6 +254,11 @@ public class CityGenerator : MonoBehaviour
 
         streetsVisualizer.DrawModuleToTilemap(chunkPos, mod);
         loadedChunks.Add(chunkPos, chunkData);
+
+        if(modType == ModuleType.GRASS)
+        {
+            emptyGrassPlots.Add(chunkPos, chunkData);
+        }
     }
 
     public void GenerateChunk(Vector2Int chunkPos, ModuleType modType)
@@ -633,6 +755,27 @@ public class CityGenerator : MonoBehaviour
     {
         return (module == ModuleType.NORTH_WEST_TURN || module == ModuleType.NORTH_EAST_TURN || module == ModuleType.SOUTH_EAST_TURN || module == ModuleType.SOUTH_WEST_TURN || module == ModuleType.INTERSECTION_4 || module == ModuleType.INTERSECTION_3_NORTH || module == ModuleType.INTERSECTION_3_EAST || module == ModuleType.INTERSECTION_3_SOUTH || module == ModuleType.INTERSECTION_3_WEST);
     }
+
+    public bool HasNorthSidewalk(ModuleType module)
+    {
+        return (module == ModuleType.HORIZONTAL || module == ModuleType.SOUTH_WEST_TURN || module == ModuleType.SOUTH_EAST_TURN || module == ModuleType.INTERSECTION_3_NORTH);
+    }
+
+    public bool HasSouthSidewalk(ModuleType module)
+    {
+        return (module == ModuleType.HORIZONTAL || module == ModuleType.NORTH_WEST_TURN || module == ModuleType.NORTH_EAST_TURN || module == ModuleType.INTERSECTION_3_SOUTH);
+    }
+
+    public bool HasWestSidewalk(ModuleType module)
+    {
+        return (module == ModuleType.VERTICAL || module == ModuleType.SOUTH_EAST_TURN || module == ModuleType.NORTH_EAST_TURN || module == ModuleType.INTERSECTION_3_WEST);
+    }
+
+    public bool HasEastSidewalk(ModuleType module)
+    {
+        return (module == ModuleType.VERTICAL || module == ModuleType.SOUTH_WEST_TURN || module == ModuleType.NORTH_WEST_TURN || module == ModuleType.INTERSECTION_3_EAST);
+    }
+
 }
 public struct ChunkData
 {
