@@ -91,49 +91,63 @@ public class CityGenerator : MonoBehaviour
     {
         foreach (Vector2Int key in emptyGrassPlots.Keys)
         {
-            ModuleType belowModule = CheckModuleBelow(key);
-            if (belowModule != ModuleType.EMPTY)
-            {
-                if (HasNorthSidewalk(belowModule))
-                {
-                    Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize, key.y * chunkSize, 0), Quaternion.identity);
-                    continue;
-                }
-            }
 
-            ModuleType leftModule = CheckModuleLeft(key);
-            if (leftModule != ModuleType.EMPTY)
-            {
-                if (HasEastSidewalk(leftModule))
-                {
-                    GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
-                    FloorLayout layout = floor.GetComponent<FloorLayout>();
-                    layout.RotateLayout(-90);
-                    continue;
-                }
-            }
+            int roll = Random.Range(0, 5);
+            if(roll == 0)
+            { // outdoor layout (benches)
 
-            ModuleType aboveModule = CheckModuleAbove(key);
-            if (aboveModule != ModuleType.EMPTY)
-            {
-                if (HasSouthSidewalk(aboveModule))
-                {
-                    GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
-                    FloorLayout layout = floor.GetComponent<FloorLayout>();
-                    layout.RotateLayout(180);
-                    continue;
-                }
             }
-
-            ModuleType rightModule = CheckModuleRight(key);
-            if (rightModule != ModuleType.EMPTY)
+            else if(roll < 4)
             {
-                if (HasWestSidewalk(rightModule))
+                ModuleType belowModule = CheckModuleBelow(key);
+                if (belowModule != ModuleType.EMPTY)
                 {
-                    GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), Quaternion.identity);
-                    FloorLayout layout = floor.GetComponent<FloorLayout>();
-                    layout.RotateLayout(90);
-                    continue;
+                    if (HasNorthSidewalk(belowModule))
+                    {
+                        GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize, key.y * chunkSize, 0), Quaternion.identity);
+                        FloorLayout layout = floor.GetComponent<FloorLayout>();
+                        layout.doorGen.ActivateDoors();
+                        continue;
+                    }
+                }
+
+                ModuleType leftModule = CheckModuleLeft(key);
+                if (leftModule != ModuleType.EMPTY)
+                {
+                    if (HasEastSidewalk(leftModule))
+                    {
+                        GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
+                        FloorLayout layout = floor.GetComponent<FloorLayout>();
+                        layout.RotateLayout(-90);
+                        layout.doorGen.ActivateDoors();
+                        continue;
+                    }
+                }
+
+                ModuleType aboveModule = CheckModuleAbove(key);
+                if (aboveModule != ModuleType.EMPTY)
+                {
+                    if (HasSouthSidewalk(aboveModule))
+                    {
+                        GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
+                        FloorLayout layout = floor.GetComponent<FloorLayout>();
+                        layout.RotateLayout(180);
+                        layout.doorGen.ActivateDoors();
+                        continue;
+                    }
+                }
+
+                ModuleType rightModule = CheckModuleRight(key);
+                if (rightModule != ModuleType.EMPTY)
+                {
+                    if (HasWestSidewalk(rightModule))
+                    {
+                        GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), Quaternion.identity);
+                        FloorLayout layout = floor.GetComponent<FloorLayout>();
+                        layout.RotateLayout(90);
+                        layout.doorGen.ActivateDoors();
+                        continue;
+                    }
                 }
             }
         }
@@ -205,6 +219,7 @@ public class CityGenerator : MonoBehaviour
             if (y < 0) mapBottom--;
             else mapTop++;
         }
+        FillEmptyGrassPlots();
     }
 
     public void GenerateChunk(Vector2Int chunkPos)

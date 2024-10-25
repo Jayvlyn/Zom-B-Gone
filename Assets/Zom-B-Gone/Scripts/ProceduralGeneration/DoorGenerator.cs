@@ -6,14 +6,16 @@ using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
 public class DoorGenerator : MonoBehaviour
 {
-    [Header("Right click and select 'Generate Door' to generate")]
+    [Header("Right click and select 'Generate Doors' to generate")]
     public GameObject windowPrefab;
     public Tilemap tilemap;
     public TileBase referencedTile;
+    [SerializeField] private List<GameObject> doors;
 
     [ContextMenu("Generate Doors")]
-    public void GenerateWindows()
+    public void GenerateDoors()
     {
+        doors = new List<GameObject>();
         BoundsInt bounds = tilemap.cellBounds;
         foreach (Vector3Int pos in bounds.allPositionsWithin)
         {
@@ -31,6 +33,9 @@ public class DoorGenerator : MonoBehaviour
                 thisWindow.transform.localRotation = rotation;
 
                 AdjustDoorPosition(thisWindow, eulerRotation.z);
+
+                doors.Add(thisWindow);
+                thisWindow.SetActive(false);
             }
         }
 
@@ -56,6 +61,14 @@ public class DoorGenerator : MonoBehaviour
         else if (zRot == 180)
         {
             window.transform.localPosition += new Vector3(1f, 0.9f, 0);
+        }
+    }
+
+    public void ActivateDoors()
+    {
+        foreach (GameObject door in doors)
+        {
+            door.SetActive(true);
         }
     }
 }

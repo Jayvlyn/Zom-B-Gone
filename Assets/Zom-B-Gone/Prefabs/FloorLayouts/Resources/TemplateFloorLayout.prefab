@@ -65,6 +65,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dimensions: {x: 0, y: 0}
   tilemap: {fileID: 126425190919159841}
+  pivot: {fileID: 0}
+  doorGen: {fileID: 5977693339656488052}
   collectibleSpawns: []
 --- !u!114 &454341518767052210
 MonoBehaviour:

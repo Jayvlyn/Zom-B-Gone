@@ -9,6 +9,7 @@ public class FloorLayout : MonoBehaviour
 	public Vector2 dimensions; // w, h
 	public Tilemap tilemap;
     public Transform pivot;
+    public DoorGenerator doorGen;
     
     public List<Transform> collectibleSpawns = new List<Transform>();
 
