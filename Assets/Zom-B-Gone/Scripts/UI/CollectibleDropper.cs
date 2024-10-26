@@ -46,8 +46,9 @@ public class CollectibleDropper : MonoBehaviour
                 int quantity = container.Container.collectibleSlots[slotIndex].quantity;
 				GameObject prefab = Resources.Load<GameObject>(droppedCollectibleData.name);
 				GameObject collectibleObject = Instantiate(prefab, playerController.transform.position, playerController.transform.rotation);
+				Optimizer.list.Add(collectibleObject);
 
-                bool invertDrop = false;
+				bool invertDrop = false;
                 Vector2 dropPos;
                 if(Utils.WallInFront(playerController.transform))
                 {

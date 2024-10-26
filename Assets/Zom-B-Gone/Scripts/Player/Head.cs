@@ -43,6 +43,7 @@ public class Head : MonoBehaviour
 			string hatName = headContainerData.Container.collectibleSlots[0].Collectible.name;
 			GameObject prefab = Resources.Load<GameObject>(hatName);
 			hatObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+			Optimizer.list.Add(hatObject);
 			wornHat = hatObject.GetComponent<Hat>();
 			wornHat.Interact(this);
 		}

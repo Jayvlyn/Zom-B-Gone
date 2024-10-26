@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class CityGenerator : MonoBehaviour
 {
@@ -93,8 +91,17 @@ public class CityGenerator : MonoBehaviour
         return layoutCollection.layouts[roll];
     }
 
-    private void FillEmptyGrassPlots()
-    {
+    public void SpawnRandomLayout(Vector2Int chunkPos, Vector3 instancePosition, float rotation = 0)
+	{
+		GameObject floor = Instantiate(GetRandomFloorLayout(), instancePosition, Quaternion.identity);
+		Optimizer.list.Add(floor);
+		FloorLayout layout = floor.GetComponent<FloorLayout>();
+        if(rotation != 0) layout.RotateLayout(rotation);
+		layout.doorGen.ActivateDoors();
+	}
+
+	private void FillEmptyGrassPlots()
+	{
         foreach (Vector2Int key in emptyGrassPlots.Keys)
         {
 
@@ -106,54 +113,31 @@ public class CityGenerator : MonoBehaviour
             else if(roll < 4)
             {
                 ModuleType belowModule = CheckModuleBelow(key);
-                if (belowModule != ModuleType.EMPTY)
+                if (belowModule != ModuleType.EMPTY && HasNorthSidewalk(belowModule))
                 {
-                    if (HasNorthSidewalk(belowModule))
-                    {
-                        GameObject floor = Instantiate(GetRandomFloorLayout(), new Vector3(key.x * chunkSize, key.y * chunkSize, 0), Quaternion.identity);
-                        FloorLayout layout = floor.GetComponent<FloorLayout>();
-                        layout.doorGen.ActivateDoors();
-                        continue;
-                    }
+                    SpawnRandomLayout(key, new Vector3(key.x * chunkSize, key.y * chunkSize, 0));
+                    continue;
                 }
 
                 ModuleType leftModule = CheckModuleLeft(key);
-                if (leftModule != ModuleType.EMPTY)
+                if (leftModule != ModuleType.EMPTY && HasEastSidewalk(leftModule))
                 {
-                    if (HasEastSidewalk(leftModule))
-                    {
-                        GameObject floor = Instantiate(GetRandomFloorLayout(), new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
-                        FloorLayout layout = floor.GetComponent<FloorLayout>();
-                        layout.RotateLayout(-90);
-                        layout.doorGen.ActivateDoors();
-                        continue;
-                    }
+                    SpawnRandomLayout(key, new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), -90);
+                    continue;
                 }
 
                 ModuleType aboveModule = CheckModuleAbove(key);
-                if (aboveModule != ModuleType.EMPTY)
+                if (aboveModule != ModuleType.EMPTY && HasSouthSidewalk(aboveModule))
                 {
-                    if (HasSouthSidewalk(aboveModule))
-                    {
-                        GameObject floor = Instantiate(GetRandomFloorLayout(), new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
-                        FloorLayout layout = floor.GetComponent<FloorLayout>();
-                        layout.RotateLayout(180);
-                        layout.doorGen.ActivateDoors();
-                        continue;
-                    }
+                    SpawnRandomLayout(key, new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), 180);
+                    continue;
                 }
 
                 ModuleType rightModule = CheckModuleRight(key);
-                if (rightModule != ModuleType.EMPTY)
+                if (rightModule != ModuleType.EMPTY && HasWestSidewalk(rightModule))
                 {
-                    if (HasWestSidewalk(rightModule))
-                    {
-                        GameObject floor = Instantiate(GetRandomFloorLayout(), new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), Quaternion.identity);
-                        FloorLayout layout = floor.GetComponent<FloorLayout>();
-                        layout.RotateLayout(90);
-                        layout.doorGen.ActivateDoors();
-                        continue;
-                    }
+                    SpawnRandomLayout(key, new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), 90);
+                    continue;
                 }
             }
         }
@@ -690,34 +674,7 @@ public class CityGenerator : MonoBehaviour
         Debug.Log("return out of case");
         return ModuleType.GRASS;
 	}
-
-    //public ModuleType PickRandomModule(ModuleType[] modules)
-    //{
-    //    // Calculate total weight based on the module's position in the array
-    //    float totalWeight = 0;
-    //    for (int i = 1; i <= modules.Length; i++)
-    //    {
-    //        totalWeight += 1f / i; // Higher index gets lower weight
-    //    }
-
-    //    // Pick a random number between 0 and the total weight
-    //    float randomRoll = Random.Range(0, totalWeight);
-
-    //    // Determine which module corresponds to the random roll
-    //    float cumulativeWeight = 0;
-    //    for (int i = 0; i < modules.Length; i++)
-    //    {
-    //        cumulativeWeight += 1f / (i + 1); // Inverse of index (makes later modules rarer)
-    //        if (randomRoll <= cumulativeWeight)
-    //        {
-    //            return modules[i];
-    //        }
-    //    }
-
-    //    // Fallback return (in case of rounding errors)
-    //    return modules[modules.Length - 1];
-    //}
-
+    
     public ModuleType PickRandomModule(ModuleType[] modules)
     {
         int roll = Random.Range(0, modules.Length);

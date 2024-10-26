@@ -157,7 +157,8 @@ public class Hands : MonoBehaviour
             string itemName = handContainerData.Container.collectibleSlots[0].CollectibleName;
             GameObject prefab = Resources.Load<GameObject>(itemName);
             leftObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
-            leftItem = leftObject.GetComponent<Item>();
+			Optimizer.list.Add(leftObject);
+			leftItem = leftObject.GetComponent<Item>();
             leftItem.PickUp(gameObject.transform, false);
             UsingLeft = true;
             
@@ -166,7 +167,8 @@ public class Hands : MonoBehaviour
         {
             string itemName = handContainerData.Container.collectibleSlots[1].CollectibleName;
             GameObject prefab = Resources.Load<GameObject>(itemName);
-            rightObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+			rightObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+            Optimizer.list.Add(rightObject);
             rightItem = rightObject.GetComponent<Item>();
             rightItem.PickUp(gameObject.transform, true);
             UsingRight = true;

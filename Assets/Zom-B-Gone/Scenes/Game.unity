@@ -1218,6 +1218,7 @@ GameObject:
   - component: {fileID: 235199601}
   - component: {fileID: 235199602}
   - component: {fileID: 235199603}
+  - component: {fileID: 235199604}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1368,6 +1369,20 @@ MonoBehaviour:
   intersection3WestModule: {fileID: 11400000, guid: 13122f4cd9762fa43a9013cf7d7ef49d, type: 2}
   intersection3EastModule: {fileID: 11400000, guid: 2df1afbb19a002e4bb4982b2188361df, type: 2}
   grassModule: {fileID: 11400000, guid: c5592120d4a313f4da4b1f9e6df3f4a8, type: 2}
+--- !u!114 &235199604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235199596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f5920bb9b36434aac42f3df4165591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerT: {fileID: 220420680}
+  cullDistance: 200
 --- !u!1 &251493660
 GameObject:
   m_ObjectHideFlags: 0

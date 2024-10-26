@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public Transform enemyPrefab;
+	public GameObject enemyPrefab;
 	public int numberOfEnemies;
 	public float spawnRadius;
 	public List<Enemy> enemies;
@@ -51,11 +51,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Spawn(Transform prefab, int count)
+    void Spawn(GameObject prefab, int count)
 	{
 		for (int i = 0; i < count; i++)
 		{
-			Instantiate(prefab, new Vector3(Random.Range(-spawnRadius, spawnRadius), Random.Range(-spawnRadius, spawnRadius)), Quaternion.identity);
+			GameObject enemy = Instantiate(prefab, new Vector3(Random.Range(-spawnRadius, spawnRadius), Random.Range(-spawnRadius, spawnRadius)), Quaternion.identity);
+			Optimizer.list.Add(enemy);
 		}
 	}
 
