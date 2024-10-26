@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   moveable: 1
+  variedRotation: 1
   rb: {fileID: 8521114047084800116}
   joint: {fileID: 4826773798859923985}
   coll: {fileID: 2479592600775128846}

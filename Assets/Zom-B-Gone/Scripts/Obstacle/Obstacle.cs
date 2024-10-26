@@ -12,6 +12,7 @@ public class Obstacle : MonoBehaviour, IInteractable
 	public ObstacleState currentState;
 
 	public bool moveable = true;
+	public bool variedRotation = false;
 	public Rigidbody2D rb;
 	public HingeJoint2D joint;
 	public Collider2D coll;
@@ -29,6 +30,12 @@ public class Obstacle : MonoBehaviour, IInteractable
 		}
 
 		baseDensity = coll.density;
+
+		if(variedRotation)
+		{
+			float rotation = Random.Range(-5, 5);
+			transform.Rotate(0,0,rotation);
+		}
     }
 
     public void ChangeState(ObstacleState state)
