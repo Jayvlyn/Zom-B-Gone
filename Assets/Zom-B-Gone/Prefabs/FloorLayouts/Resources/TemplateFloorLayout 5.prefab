@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5977693339656488052}
   - component: {fileID: 515011810085826270}
   m_Layer: 0
-  m_Name: TemplateFloorLayout
+  m_Name: TemplateFloorLayout 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

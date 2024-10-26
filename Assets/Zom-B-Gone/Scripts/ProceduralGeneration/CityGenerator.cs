@@ -87,6 +87,12 @@ public class CityGenerator : MonoBehaviour
 
     }
 
+    private GameObject GetRandomFloorLayout()
+    {
+        int roll = Random.Range(0, layoutCollection.layouts.Length);
+        return layoutCollection.layouts[roll];
+    }
+
     private void FillEmptyGrassPlots()
     {
         foreach (Vector2Int key in emptyGrassPlots.Keys)
@@ -104,7 +110,7 @@ public class CityGenerator : MonoBehaviour
                 {
                     if (HasNorthSidewalk(belowModule))
                     {
-                        GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize, key.y * chunkSize, 0), Quaternion.identity);
+                        GameObject floor = Instantiate(GetRandomFloorLayout(), new Vector3(key.x * chunkSize, key.y * chunkSize, 0), Quaternion.identity);
                         FloorLayout layout = floor.GetComponent<FloorLayout>();
                         layout.doorGen.ActivateDoors();
                         continue;
@@ -116,7 +122,7 @@ public class CityGenerator : MonoBehaviour
                 {
                     if (HasEastSidewalk(leftModule))
                     {
-                        GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
+                        GameObject floor = Instantiate(GetRandomFloorLayout(), new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
                         FloorLayout layout = floor.GetComponent<FloorLayout>();
                         layout.RotateLayout(-90);
                         layout.doorGen.ActivateDoors();
@@ -129,7 +135,7 @@ public class CityGenerator : MonoBehaviour
                 {
                     if (HasSouthSidewalk(aboveModule))
                     {
-                        GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
+                        GameObject floor = Instantiate(GetRandomFloorLayout(), new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), Quaternion.identity);
                         FloorLayout layout = floor.GetComponent<FloorLayout>();
                         layout.RotateLayout(180);
                         layout.doorGen.ActivateDoors();
@@ -142,7 +148,7 @@ public class CityGenerator : MonoBehaviour
                 {
                     if (HasWestSidewalk(rightModule))
                     {
-                        GameObject floor = Instantiate(layoutCollection.layouts[0], new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), Quaternion.identity);
+                        GameObject floor = Instantiate(GetRandomFloorLayout(), new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), Quaternion.identity);
                         FloorLayout layout = floor.GetComponent<FloorLayout>();
                         layout.RotateLayout(90);
                         layout.doorGen.ActivateDoors();
