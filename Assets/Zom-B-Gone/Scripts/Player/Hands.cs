@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Hands : MonoBehaviour
@@ -22,8 +23,43 @@ public class Hands : MonoBehaviour
 	[HideInInspector] public Item leftItem;
 	[HideInInspector] public Item rightItem;
 
-	[HideInInspector] public Obstacle leftObstacle;
-	[HideInInspector] public Obstacle rightObstacle;
+    public Image leftIcon;
+    private Obstacle leftObstacle;
+	public Obstacle LeftObstacle
+    {
+        set { leftObstacle = value;
+            if (leftObstacle)
+            {
+                leftIcon.enabled = true;
+                leftIcon.sprite = leftObstacle.GetComponent<SpriteRenderer>().sprite;
+            }
+            else
+            {
+                leftIcon.enabled = false;
+                leftIcon.sprite = null;
+            }
+        }
+        get { return leftObstacle; }
+    }
+
+    public Image rightIcon;
+    private Obstacle rightObstacle;
+	public Obstacle RightObstacle
+    {
+		set { rightObstacle = value;
+            if (rightObstacle)
+            {
+                rightIcon.enabled = true;
+                rightIcon.sprite = rightObstacle.GetComponent<SpriteRenderer>().sprite;
+            }
+            else
+            {
+                rightIcon.enabled = false;
+                rightIcon.sprite = null;
+            }
+		}
+        get { return rightObstacle; }
+	}
 
 	private bool usingRight;
     public bool UsingRight { get { return usingRight; }
@@ -36,10 +72,10 @@ public class Hands : MonoBehaviour
                 else rightAmmoCount.enabled = false;
 
                 if (rightItem != null) rightLumbering = Utils.MapWeightToRange(rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-     //           else if (rightObstacle != null)
+     //           else if (RightObstacle != null)
      //           {
-     //               float weight = rightObstacle.weight;
-     //               if (leftObstacle != null && leftObstacle == rightObstacle)
+     //               float weight = RightObstacle.weight;
+     //               if (LeftObstacle != null && LeftObstacle == RightObstacle)
      //               {
      //                   weight *= 0.5f; // split weight between hands
 					//	leftLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
@@ -68,10 +104,10 @@ public class Hands : MonoBehaviour
                 else leftAmmoCount.enabled = false;
 
 				if (leftItem != null) leftLumbering = Utils.MapWeightToRange(leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-				//else if (leftObstacle != null)
+				//else if (LeftObstacle != null)
 				//{
-				//	float weight = leftObstacle.weight;
-				//	if (rightObstacle != null && rightObstacle == leftObstacle)
+				//	float weight = LeftObstacle.weight;
+				//	if (RightObstacle != null && RightObstacle == LeftObstacle)
 				//	{
 				//		weight *= 0.5f; // split weight between hands
 				//		rightLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);

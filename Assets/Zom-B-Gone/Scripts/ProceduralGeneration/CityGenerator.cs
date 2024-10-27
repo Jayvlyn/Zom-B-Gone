@@ -416,8 +416,12 @@ public class CityGenerator : MonoBehaviour
             case 0b0001:  // connection above
                 if (aboveModule == ModuleType.VERTICAL)
                 {
-                    // vertical road or intersection that connects up
-                    ModuleType[] possibleModules = new ModuleType[7];
+					if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+					{
+						return ModuleType.HORIZONTAL;
+					}
+					// vertical road or intersection that connects up
+					ModuleType[] possibleModules = new ModuleType[7];
                     possibleModules[0] = ModuleType.VERTICAL;
                     possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
                     possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
@@ -439,8 +443,12 @@ public class CityGenerator : MonoBehaviour
             case 0b0010:  // connection below
                 if (belowModule == ModuleType.VERTICAL)
                 {
-                    // vertical road or intersection that connects down
-                    ModuleType[] possibleModules = new ModuleType[7];
+					if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+					{
+						return ModuleType.VERTICAL;
+					}
+					// vertical road or intersection that connects down
+					ModuleType[] possibleModules = new ModuleType[7];
                     possibleModules[0] = ModuleType.VERTICAL;
                     possibleModules[1] = ModuleType.INTERSECTION_4;
                     possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
@@ -462,8 +470,12 @@ public class CityGenerator : MonoBehaviour
             case 0b0100:  // connection left
                 if (leftModule == ModuleType.HORIZONTAL)
                 {
-                    // horizontal road or intersection that connects left
-                    ModuleType[] possibleModules = new ModuleType[7];
+					if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+					{
+						return ModuleType.HORIZONTAL;
+					}
+					// horizontal road or intersection that connects left
+					ModuleType[] possibleModules = new ModuleType[7];
                     possibleModules[0] = ModuleType.HORIZONTAL;
                     possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
                     possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
@@ -485,8 +497,12 @@ public class CityGenerator : MonoBehaviour
             case 0b1000:  // connection right
                 if (rightModule == ModuleType.HORIZONTAL)
                 {
-                    // horizontal road or intersection that connects right
-                    ModuleType[] possibleModules = new ModuleType[7];
+					if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+					{
+						return ModuleType.HORIZONTAL;
+					}
+					// horizontal road or intersection that connects right
+					ModuleType[] possibleModules = new ModuleType[7];
                     possibleModules[0] = ModuleType.HORIZONTAL;
                     possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
                     possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
@@ -537,7 +553,11 @@ public class CityGenerator : MonoBehaviour
                         }
                         else
                         {
-                            ModuleType[] possibleModules = new ModuleType[3];
+							if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+							{
+								return ModuleType.VERTICAL;
+							}
+							ModuleType[] possibleModules = new ModuleType[3];
                             possibleModules[0] = ModuleType.VERTICAL;
                             possibleModules[1] = ModuleType.INTERSECTION_3_EAST;
                             possibleModules[2] = ModuleType.NORTH_WEST_TURN;
@@ -553,7 +573,11 @@ public class CityGenerator : MonoBehaviour
                         }
                         else
                         {
-                            ModuleType[] possibleModules = new ModuleType[3];
+							if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+							{
+								return ModuleType.HORIZONTAL;
+							}
+							ModuleType[] possibleModules = new ModuleType[3];
                             possibleModules[0] = ModuleType.HORIZONTAL;
                             possibleModules[1] = ModuleType.INTERSECTION_3_NORTH;
                             possibleModules[2] = ModuleType.SOUTH_EAST_TURN;
@@ -589,7 +613,11 @@ public class CityGenerator : MonoBehaviour
                         }
                         else
                         {
-                            ModuleType[] possibleModules = new ModuleType[3];
+							if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+							{
+								return ModuleType.VERTICAL;
+							}
+							ModuleType[] possibleModules = new ModuleType[3];
                             possibleModules[0] = ModuleType.VERTICAL;
                             possibleModules[1] = ModuleType.NORTH_EAST_TURN;
                             possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
@@ -605,7 +633,11 @@ public class CityGenerator : MonoBehaviour
                         }
                         else
                         {
-                            ModuleType[] possibleModules = new ModuleType[3];
+							if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+							{
+								return ModuleType.HORIZONTAL;
+							}
+							ModuleType[] possibleModules = new ModuleType[3];
                             possibleModules[0] = ModuleType.HORIZONTAL;
                             possibleModules[1] = ModuleType.SOUTH_WEST_TURN;
                             possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
@@ -640,8 +672,12 @@ public class CityGenerator : MonoBehaviour
                         }
                         else
                         {
-                            // at least down and not right
-                            ModuleType[] possibleModules = new ModuleType[3];
+							if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+							{
+								return ModuleType.VERTICAL;
+							}
+							// at least down and not right
+							ModuleType[] possibleModules = new ModuleType[3];
                             possibleModules[0] = ModuleType.VERTICAL;
                             possibleModules[1] = ModuleType.INTERSECTION_3_EAST;
                             possibleModules[2] = ModuleType.SOUTH_WEST_TURN;
@@ -656,8 +692,12 @@ public class CityGenerator : MonoBehaviour
                         }
                         else
                         {
-                            // at least right and not down
-                            ModuleType[] possibleModules = new ModuleType[3];
+							if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+							{
+								return ModuleType.HORIZONTAL;
+							}
+							// at least right and not down
+							ModuleType[] possibleModules = new ModuleType[3];
                             possibleModules[0] = ModuleType.HORIZONTAL;
                             possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
                             possibleModules[2] = ModuleType.NORTH_EAST_TURN;
@@ -693,7 +733,11 @@ public class CityGenerator : MonoBehaviour
                         }
                         else
                         {
-                            ModuleType[] possibleModules = new ModuleType[3];
+							if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+							{
+								return ModuleType.VERTICAL;
+							}
+							ModuleType[] possibleModules = new ModuleType[3];
                             possibleModules[0] = ModuleType.VERTICAL;
                             possibleModules[1] = ModuleType.SOUTH_EAST_TURN;
                             possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
@@ -709,6 +753,10 @@ public class CityGenerator : MonoBehaviour
                         }
                         else
                         {
+                            if(chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
+                            {
+                                return ModuleType.HORIZONTAL;
+                            }
                             ModuleType[] possibleModules = new ModuleType[3];
                             possibleModules[0] = ModuleType.HORIZONTAL;
                             possibleModules[1] = ModuleType.NORTH_WEST_TURN;

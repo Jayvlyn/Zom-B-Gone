@@ -213,8 +213,8 @@ public class Interactor : MonoBehaviour
 
             if (thisInteractable is Obstacle obstacle)
             {
-                if(playerController.hands.leftObstacle && playerController.hands.leftObstacle == obstacle){}
-                else if (playerController.hands.rightObstacle && playerController.hands.rightObstacle == obstacle){}
+                if(playerController.hands.LeftObstacle && playerController.hands.LeftObstacle == obstacle){}
+                else if (playerController.hands.RightObstacle && playerController.hands.RightObstacle == obstacle){}
                 else if (((Vector2)transform.position - collider.ClosestPoint(transform.position)).magnitude > obstacle.grabRange)
                 {
                     continue;
@@ -358,15 +358,15 @@ public class Interactor : MonoBehaviour
                 if (rightHand)
                 {
                     playerController.hands.UsingRight = true;
-                    playerController.hands.rightObstacle = o;
+                    playerController.hands.RightObstacle = o;
                 }
                 else
                 {
                     playerController.hands.UsingLeft = true;
-					playerController.hands.leftObstacle = o;
+					playerController.hands.LeftObstacle = o;
 				}
                 o.joint.connectedBody = playerController.rb;
-                if(playerController.hands.leftObstacle && playerController.hands.rightObstacle && playerController.hands.leftObstacle == playerController.hands.rightObstacle)
+                if(playerController.hands.LeftObstacle && playerController.hands.RightObstacle && playerController.hands.LeftObstacle == playerController.hands.RightObstacle)
                 {
                     o.OnTwoHandsOn();
                 }

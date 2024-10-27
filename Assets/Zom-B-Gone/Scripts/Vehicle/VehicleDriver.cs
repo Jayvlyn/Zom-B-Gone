@@ -44,7 +44,6 @@ public class VehicleDriver : MonoBehaviour
 			if (playerController.vc)
 			{
 				float targetLookaheadTime = 1.3f - Mathf.Clamp(Mathf.Abs(vehicle.GetLateralVelocity()), 0, 1.3f);
-                Debug.Log(targetLookaheadTime);
 				playerController.framingTransposer.m_LookaheadTime = Mathf.Lerp(playerController.framingTransposer.m_LookaheadTime, targetLookaheadTime, Time.deltaTime * 5f);
 			}
 		}

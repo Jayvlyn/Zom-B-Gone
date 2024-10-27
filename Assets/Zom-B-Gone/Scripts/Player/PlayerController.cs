@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public CinemachineVirtualCamera vc;
     public Transform groupCam;
 	public CinemachineFramingTransposer framingTransposer;
+    public LookaheadChanger lookaheadChanger;
 
 	[HideInInspector] public static bool holdingRun;
     [HideInInspector] public static bool holdingSneak;
@@ -166,9 +167,9 @@ public class PlayerController : MonoBehaviour
         {
             holdingLeft = false;
             if (hands.leftItem != null) hands.leftItem.useHeld = false;
-            else if (hands.leftObstacle != null)
+            else if (hands.LeftObstacle != null)
             {
-                hands.leftObstacle.ChangeMotorSpeed();
+                hands.LeftObstacle.ChangeMotorSpeed();
             }
         }
     }
@@ -187,9 +188,9 @@ public class PlayerController : MonoBehaviour
 		{
 			holdingRight = false;
             if (hands.rightItem != null) hands.rightItem.useHeld = false;
-            else if (hands.rightObstacle != null)
+            else if (hands.RightObstacle != null)
             {
-                hands.rightObstacle.ChangeMotorSpeed();
+                hands.RightObstacle.ChangeMotorSpeed();
             }
         }
 	}
@@ -200,10 +201,10 @@ public class PlayerController : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         if (hands.leftItem != null) hands.leftItem.useHeld = true;
-        else if (hands.leftObstacle != null)
+        else if (hands.LeftObstacle != null)
         {
-            if (holdingSneak) hands.leftObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
-            else hands.leftObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
+            if (holdingSneak) hands.LeftObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
+            else hands.LeftObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
         }
 
     }
@@ -213,10 +214,10 @@ public class PlayerController : MonoBehaviour
 		holdingRight = true;
 		if (EventSystem.current.IsPointerOverGameObject()) return;
         if (hands.rightItem != null) hands.rightItem.useHeld = true;
-        else if (hands.rightObstacle != null)
+        else if (hands.RightObstacle != null)
         {
-            if (holdingSneak) hands.rightObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
-            else hands.rightObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
+            if (holdingSneak) hands.RightObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
+            else hands.RightObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
         }
     }
 
@@ -229,7 +230,7 @@ public class PlayerController : MonoBehaviour
                 hands.leftItem.Throw();
                 hands.leftLumbering = 1;
             }
-            else if(hands.leftObstacle != null)
+            else if(hands.LeftObstacle != null)
             {
                 LetGoLeftObstacle();
             }
@@ -246,7 +247,7 @@ public class PlayerController : MonoBehaviour
                 hands.rightItem.Throw();
                 hands.rightLumbering = 1;
             }
-            else if (hands.rightObstacle != null)
+            else if (hands.RightObstacle != null)
             {
                 LetGoRightObstacle();
             }
@@ -256,13 +257,13 @@ public class PlayerController : MonoBehaviour
     private void OnDropLeft(InputValue inputValue)
     {
         if (hands.leftItem != null) DropLeft();
-        else if (hands.leftObstacle != null) LetGoLeftObstacle();
+        else if (hands.LeftObstacle != null) LetGoLeftObstacle();
     }
 
     private void OnDropRight(InputValue inputValue)
     {
         if (hands.rightItem != null) DropRight();
-        else if (hands.rightObstacle != null) LetGoRightObstacle();
+        else if (hands.RightObstacle != null) LetGoRightObstacle();
     }
 
     // Input for reloading, wont do anything without projectileWeapon
@@ -351,6 +352,21 @@ public class PlayerController : MonoBehaviour
         onBackpackToggle.Raise();
     }
 
+    private void OnLookahead(InputValue inputValue)
+    {
+        if(lookaheadChanger)
+        {
+		    if (inputValue.isPressed)
+		    {
+			    lookaheadChanger.ActivateLookahead();
+		    }
+		    else
+		    {
+                lookaheadChanger.DeactivateLookahead();
+		    }
+        }
+	}
+
 	#endregion -----------------------------------------
 
 	public void DropLeft()
@@ -360,7 +376,7 @@ public class PlayerController : MonoBehaviour
 			hands.leftItem.Drop();
 			hands.leftLumbering = 1;
 		}
-        else if(hands.leftObstacle != null)
+        else if(hands.LeftObstacle != null)
         {
             LetGoLeftObstacle();
         }
@@ -373,7 +389,7 @@ public class PlayerController : MonoBehaviour
 			hands.rightItem.Drop();
 			hands.rightLumbering = 1;
 		}
-        else if (hands.rightObstacle != null)
+        else if (hands.RightObstacle != null)
         {
             LetGoRightObstacle();
         }
@@ -381,29 +397,29 @@ public class PlayerController : MonoBehaviour
 
     public void LetGoLeftObstacle()
     {
-        if (hands.leftObstacle && hands.rightObstacle && hands.leftObstacle == hands.rightObstacle)
+        if (hands.LeftObstacle && hands.RightObstacle && hands.LeftObstacle == hands.RightObstacle)
         {
-            hands.leftObstacle.OnOneHandOn();
+            hands.LeftObstacle.OnOneHandOn();
         }
         else
         {
-            hands.leftObstacle.BeFreed();
+            hands.LeftObstacle.BeFreed();
         }
-        hands.leftObstacle = null;
+        hands.LeftObstacle = null;
         hands.UsingLeft = false;
     }
 
     public void LetGoRightObstacle()
     {
-        if (hands.rightObstacle && hands.leftObstacle && hands.rightObstacle == hands.leftObstacle)
+        if (hands.RightObstacle && hands.LeftObstacle && hands.RightObstacle == hands.LeftObstacle)
         {
-            hands.rightObstacle.OnOneHandOn();
+            hands.RightObstacle.OnOneHandOn();
         }
         else
         {
-            hands.rightObstacle.BeFreed();
+            hands.RightObstacle.BeFreed();
         }
-        hands.rightObstacle = null;
+        hands.RightObstacle = null;
         hands.UsingRight = false;
     }
 
