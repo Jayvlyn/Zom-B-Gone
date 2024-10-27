@@ -16,9 +16,24 @@ public class Crosshair : MonoBehaviour
     //    //Cursor.SetCursor(cursorTex, hotSpot, CursorMode.ForceSoftware);
     //}
 
+    public Transform worldPoint;
+    public Transform playerT;
+
     void Update()
     {
-        transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20);
-        //transform.position = new Vector3(_gameCamera.ScreenToWorldPoint(Input.mousePosition).x, _gameCamera.ScreenToWorldPoint(Input.mousePosition).y, 20);
-    }
+		transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20);
+		
+        if(worldPoint)
+        {
+		    Vector3 mouseViewportPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            if (mouseViewportPos.x < 0 || mouseViewportPos.x > 1 || mouseViewportPos.y < 0 || mouseViewportPos.y > 1)
+		    { // mouse outside viewport
+			    worldPoint.position = playerT.position;
+		    }
+		    else
+		    { // mouse inside viewport
+                worldPoint.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 20);
+		    }
+        }
+	}
 }

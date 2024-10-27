@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CityGenerator : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class CityGenerator : MonoBehaviour
     public StreetsVisualizer streetsVisualizer;
 	public Transform playerT;
     public FloorLayoutCollection layoutCollection;
+	public GameObject[] grassOutdoorLayouts = new GameObject[0];
+	public GameObject[] roadOutdoorLayouts = new GameObject[0];
+	public GameObject[] forestLayouts = new GameObject[0];
 
     [Header("Adjustable Values")]
     public int chunkDistance = 10; // how many chunks loaded in each direction from player
@@ -91,7 +95,19 @@ public class CityGenerator : MonoBehaviour
         return layoutCollection.layouts[roll];
     }
 
-    public void SpawnRandomLayout(Vector2Int chunkPos, Vector3 instancePosition, float rotation = 0)
+	private GameObject GetRandomOutdoorGrassLayout()
+	{
+		int roll = Random.Range(0, grassOutdoorLayouts.Length);
+		return grassOutdoorLayouts[roll];
+	}
+
+	private GameObject GetRandomOutdoorRoadLayout()
+	{
+		int roll = Random.Range(0, roadOutdoorLayouts.Length);
+		return roadOutdoorLayouts[roll];
+	}
+
+	public void SpawnRandomLayout(Vector2Int chunkPos, Vector3 instancePosition, float rotation = 0)
 	{
 		GameObject floor = Instantiate(GetRandomFloorLayout(), instancePosition, Quaternion.identity);
 		Optimizer.list.Add(floor);
@@ -100,16 +116,57 @@ public class CityGenerator : MonoBehaviour
 		layout.doorGen.ActivateDoors();
 	}
 
+	public void SpawnRandomOutdoorGrassLayout(Vector2Int chunkPos, Vector3 instancePosition, float rotation = 0)
+	{
+		GameObject floor = Instantiate(GetRandomOutdoorGrassLayout(), instancePosition, Quaternion.identity);
+		Optimizer.list.Add(floor);
+		OutdoorLayout layout = floor.GetComponent<OutdoorLayout>();
+		if (rotation != 0) layout.RotateLayout(rotation);
+	}
+
+	public void SpawnRandomOutdoorRoadLayout(Vector2Int chunkPos, Vector3 instancePosition, float rotation = 0)
+	{
+		GameObject floor = Instantiate(GetRandomOutdoorRoadLayout(), instancePosition, Quaternion.identity);
+		Optimizer.list.Add(floor);
+		OutdoorLayout layout = floor.GetComponent<OutdoorLayout>();
+		if (rotation != 0) layout.RotateLayout(rotation);
+	}
+
 	private void FillEmptyGrassPlots()
 	{
         foreach (Vector2Int key in emptyGrassPlots.Keys)
         {
-
-            int roll = Random.Range(0, 5);
+            int roll = Random.Range(0, 4);
             if(roll == 0)
-            { // outdoor layout (benches)
+            { // outdoor grass layout
+				ModuleType belowModule = CheckModuleBelow(key);
+				if (belowModule != ModuleType.EMPTY && HasNorthSidewalk(belowModule))
+				{
+					SpawnRandomOutdoorGrassLayout(key, new Vector3(key.x * chunkSize, key.y * chunkSize, 0));
+					continue;
+				}
 
-            }
+				ModuleType leftModule = CheckModuleLeft(key);
+				if (leftModule != ModuleType.EMPTY && HasEastSidewalk(leftModule))
+				{
+					SpawnRandomOutdoorGrassLayout(key, new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), -90);
+					continue;
+				}
+
+				ModuleType aboveModule = CheckModuleAbove(key);
+				if (aboveModule != ModuleType.EMPTY && HasSouthSidewalk(aboveModule))
+				{
+					SpawnRandomOutdoorGrassLayout(key, new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), 180);
+					continue;
+				}
+
+				ModuleType rightModule = CheckModuleRight(key);
+				if (rightModule != ModuleType.EMPTY && HasWestSidewalk(rightModule))
+				{
+					SpawnRandomOutdoorGrassLayout(key, new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), 90);
+					continue;
+				}
+			}
             else if(roll < 4)
             {
                 ModuleType belowModule = CheckModuleBelow(key);
@@ -264,6 +321,24 @@ public class CityGenerator : MonoBehaviour
         {
             emptyGrassPlots.Add(chunkPos, chunkData);
         }
+        else if (modType == ModuleType.VERTICAL)
+        {
+            int roll = Random.Range(0, 20);
+			if(roll == 0)
+			{
+                SpawnRandomOutdoorRoadLayout(chunkPos, new Vector3(chunkPos.x * chunkSize, chunkPos.y * chunkSize, 0));
+
+			}
+		}
+		else if (modType == ModuleType.HORIZONTAL)
+        {
+			int roll = Random.Range(0, 20);
+			if (roll == 0)
+			{
+				SpawnRandomOutdoorRoadLayout(chunkPos, new Vector3(chunkPos.x * chunkSize + chunkSize, chunkPos.y * chunkSize, 0), 90);
+
+			}
+		}
     }
 
     public void GenerateChunk(Vector2Int chunkPos, ModuleType modType)
@@ -707,6 +782,35 @@ public class CityGenerator : MonoBehaviour
 		Vector2Int rightCoord = new Vector2Int(chunkPos.x + 1, chunkPos.y);
 		if (loadedChunks.ContainsKey(rightCoord)) return loadedChunks[rightCoord].type;
 		else return ModuleType.EMPTY;
+	}
+
+    public bool SurroundedByGrass(Vector2Int chunkPos)
+    {
+        Vector2Int topCoord = new Vector2Int(chunkPos.x, chunkPos.y + 1);
+        if (!loadedChunks.ContainsKey(topCoord) || loadedChunks[topCoord].type != ModuleType.GRASS) return false;
+
+        Vector2Int topRightCoord = new Vector2Int(chunkPos.x + 1, chunkPos.y + 1);
+		if (!loadedChunks.ContainsKey(topRightCoord) || loadedChunks[topRightCoord].type != ModuleType.GRASS) return false;
+
+		Vector2Int topLeftCoord = new Vector2Int(chunkPos.x = 1, chunkPos.y + 1);
+		if (!loadedChunks.ContainsKey(topLeftCoord) || loadedChunks[topLeftCoord].type != ModuleType.GRASS) return false;
+
+		Vector2Int bottomCoord = new Vector2Int(chunkPos.x, chunkPos.y - 1);
+		if (!loadedChunks.ContainsKey(bottomCoord) || loadedChunks[bottomCoord].type != ModuleType.GRASS) return false;
+
+		Vector2Int bottomRightCoord = new Vector2Int(chunkPos.x + 1, chunkPos.y - 1);
+		if (!loadedChunks.ContainsKey(bottomRightCoord) || loadedChunks[bottomRightCoord].type != ModuleType.GRASS) return false;
+
+		Vector2Int bottomLeftCoord = new Vector2Int(chunkPos.x - 1, chunkPos.y - 1);
+		if (!loadedChunks.ContainsKey(bottomLeftCoord) || loadedChunks[bottomLeftCoord].type != ModuleType.GRASS) return false;
+
+		Vector2Int rightCoord = new Vector2Int(chunkPos.x + 1, chunkPos.y);
+		if (!loadedChunks.ContainsKey(rightCoord) || loadedChunks[rightCoord].type != ModuleType.GRASS) return false;
+
+		Vector2Int leftCoord = new Vector2Int(chunkPos.x - 1, chunkPos.y);
+		if (!loadedChunks.ContainsKey(leftCoord) || loadedChunks[leftCoord].type != ModuleType.GRASS) return false;
+
+        return true;
 	}
 
     public bool ModuleLeadsDown(ModuleType module)

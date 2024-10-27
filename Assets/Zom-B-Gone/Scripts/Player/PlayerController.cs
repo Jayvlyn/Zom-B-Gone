@@ -1,9 +1,10 @@
+using Cinemachine;
 using GameEvents;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.iOS;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -21,10 +22,15 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public PlayerInput input;
     private Slider staminaSlider;
-    private Camera gameCamera;
     private Interactor interactor;
-    
-    [HideInInspector] public static bool holdingRun;
+
+    [Header("Camera Refs")]
+    private Camera gameCamera;
+    public CinemachineVirtualCamera vc;
+    public Transform groupCam;
+	public CinemachineFramingTransposer framingTransposer;
+
+	[HideInInspector] public static bool holdingRun;
     [HideInInspector] public static bool holdingSneak;
     [HideInInspector] public static bool holdingLeft;
     [HideInInspector] public static bool holdingRight;
@@ -44,9 +50,15 @@ public class PlayerController : MonoBehaviour
         interactor = GetComponent<Interactor>();
         rb.freezeRotation = true;
         staminaSlider = GameObject.FindGameObjectWithTag("Stamina").GetComponent<Slider>();
+        if (vc != null)
+        {
+            framingTransposer = vc.GetCinemachineComponent<CinemachineFramingTransposer>();
+			vc.Follow = groupCam;
+			framingTransposer.m_LookaheadTime = 0f;
+		}
 
-        // Set currents
-        currentStamina = playerData.maxStamina;
+		// Set currents
+		currentStamina = playerData.maxStamina;
         currentMoveSpeed = playerData.walkSpeed;
     }
 
@@ -404,6 +416,19 @@ public class PlayerController : MonoBehaviour
     {
 		if (currentState == newState) return;
 
+        // previous state check
+        switch(currentState)
+        {
+            case PlayerState.DRIVING: // exiting driving state
+				if (input.currentActionMap != null && input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
+                if(vc)
+                {
+				    vc.Follow = groupCam;
+				    framingTransposer.m_LookaheadTime = 0f;
+                }
+				break;
+        }
+
 		switch (newState)
         {
             case PlayerState.WALKING:
@@ -421,11 +446,17 @@ public class PlayerController : MonoBehaviour
             case PlayerState.IDLE:
                 if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = playerData.walkSpeed;
-                if(input.currentActionMap != null && input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
                 if(rb.bodyType != RigidbodyType2D.Dynamic) rb.bodyType = RigidbodyType2D.Dynamic;
                 break;
             case PlayerState.DRIVING:
                 if (!recoverStamina) RecoverStamina();
+                if(vc)
+                {
+                    vc.Follow = transform;
+                    if(orthoSizeChangeCoroutine != null) StopCoroutine(orthoSizeChangeCoroutine); 
+					orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(5f, 1f));
+					//framingTransposer.m_LookaheadTime = 1.2f; // done in vehicle driver now
+				}
                 input.SwitchCurrentActionMap("Vehicle");
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 break;
@@ -433,6 +464,22 @@ public class PlayerController : MonoBehaviour
 
         currentState = newState;
     }
+
+    private Coroutine orthoSizeChangeCoroutine;
+	private IEnumerator SmoothOrthographicSizeChange(float targetSize, float duration)
+	{
+		float startSize = vc.m_Lens.OrthographicSize;
+		float elapsed = 0f;
+
+		while (elapsed < duration)
+		{
+			vc.m_Lens.OrthographicSize = Mathf.Lerp(startSize, targetSize, elapsed / duration);
+			elapsed += Time.deltaTime;
+			yield return null;
+		}
+
+		vc.m_Lens.OrthographicSize = targetSize;
+	}
 
 	void OnApplicationFocus(bool hasFocus)
 	{

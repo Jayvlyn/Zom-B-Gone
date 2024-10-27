@@ -31,10 +31,26 @@ public class VehicleDriver : MonoBehaviour
             if (accelerateHeld) vehicle.Accelerate();
             if (brakeHeld) vehicle.Brake();
             if((accelerateHeld || brakeHeld) && !steering) vehicle.CorrectSteering();
+
+            //Debug.Log(vehicle.GetLongitudinalVelocity());
+
         }
     }
 
-    private bool accelerateHeld = false;
+	private void Update()
+	{
+		if (vehicle && vehicle.Active)
+		{
+			if (playerController.vc)
+			{
+				float targetLookaheadTime = 1.3f - Mathf.Clamp(Mathf.Abs(vehicle.GetLateralVelocity()), 0, 1.3f);
+                Debug.Log(targetLookaheadTime);
+				playerController.framingTransposer.m_LookaheadTime = Mathf.Lerp(playerController.framingTransposer.m_LookaheadTime, targetLookaheadTime, Time.deltaTime * 5f);
+			}
+		}
+	}
+
+	private bool accelerateHeld = false;
     private void OnAccelerate(InputValue inputValue)
     {
         if (inputValue.isPressed) accelerateHeld = true;

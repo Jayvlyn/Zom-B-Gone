@@ -89,12 +89,12 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         rb.velocity = forwardVelocity + rightVelocity * driftFactor;
     }
 
-    float GetLateralVelocity()
+    public float GetLateralVelocity()
     {
         return Vector2.Dot(transform.right, rb.velocity);
     }
 
-    float GetLogitudinalVelocity()
+    public float GetLongitudinalVelocity()
     {
         return Vector2.Dot(transform.up, rb.velocity);
     }
@@ -104,7 +104,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         lateralVelocity = GetLateralVelocity();
         isBraking = false;
 
-        if(braking && GetLogitudinalVelocity() > 0)
+        if(braking && GetLongitudinalVelocity() > 0)
         {
             isBraking = true;
             return true;
@@ -134,8 +134,8 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     public void Interact(Head head)
     {
-        Active = true;
-        enterEvent.Raise();
+		StartCoroutine(Activate(true));
+		enterEvent.Raise();
     }
 
     public void OnExit()
@@ -154,5 +154,11 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         movedFromExplosion = true;
         yield return new WaitForSeconds(2);
         movedFromExplosion = false;
+    }
+
+    public IEnumerator Activate(bool active)
+    {
+        yield return new WaitForSeconds(1f);
+        Active = active;
     }
 }
