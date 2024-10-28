@@ -5,6 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteractable
 {
     public HingeJoint2D hinge;
+    public SpringJoint2D spring;
     public Rigidbody2D rb;
     public bool locked = false;
 
@@ -44,4 +45,17 @@ public class Door : MonoBehaviour, IInteractable
     {
         throw new System.NotImplementedException();
     }
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if(collision.gameObject.tag == "Enemy")
+        {
+            spring.frequency = 0.01f;
+        }
+	}
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+        spring.frequency = 1;
+	}
 }

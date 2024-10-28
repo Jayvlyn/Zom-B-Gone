@@ -36,8 +36,10 @@ public abstract class Enemy : MonoBehaviour
     public LayerMask AttackBlockersLm;
     public LayerMask FellowEnemyLm;
 
+	private Vector3 target = Vector3.zero;
 
-    private void ChangeState(State newState)
+
+	private void ChangeState(State newState)
 	{
 		if(currentState == newState) return;
 
@@ -111,35 +113,86 @@ public abstract class Enemy : MonoBehaviour
 		}
     }
 
-	private Vector3 target = Vector3.zero;
-    private void FixedUpdate()
+
+	private Coroutine tickCoroutine;
+	private float tickInterval = 0.1f;
+	private void OnEnable()
 	{
-        switch (currentState)
-        {
-            case State.DRONING:
+		// Start the tick coroutine when the enemy is enabled
+		tickCoroutine = StartCoroutine(TickCoroutine());
+	}
+
+	private void OnDisable()
+	{
+		// Stop the tick coroutine when the enemy is disabled to prevent memory leaks
+		if (tickCoroutine != null) StopCoroutine(tickCoroutine);
+	}
+
+	private IEnumerator TickCoroutine()
+	{
+		while (true)
+		{
+			
+			EnemyTick();
+
+			yield return new WaitForSeconds(tickInterval);
+		}
+	}
+
+	public void EnemyTick()
+	{
+		switch (currentState)
+		{
+			case State.DRONING:
 				LerpTarget(Drone());
-                //target = Drone();
-                break;
-            case State.INVESTIGATING:
-                LerpTarget(Investigate());
-                break;
-            case State.AGGRO:
-                LerpTarget(Aggro());
-                break;
+				//target = Drone();
+				break;
+			case State.INVESTIGATING:
+				LerpTarget(Investigate());
+				break;
+			case State.AGGRO:
+				LerpTarget(Aggro());
+				break;
 			case State.DEAD:
 				decayTimer -= Time.deltaTime;
-				if(decayTimer <= 0)
+				if (decayTimer <= 0)
 				{
 					StartCoroutine(FadeOut());
 					decayTimer = 1000;
 				}
-                break;
+				break;
 			default:
 				break;
-        }
+		}
+	}
 
+	private void Update()
+	{
 
-		if(currentState != State.DEAD)
+		switch (currentState)
+		{
+			case State.DRONING:
+				changeDirectionCooldown -= Time.deltaTime;
+				break;
+			case State.INVESTIGATING:
+				break;
+			case State.AGGRO:
+				if (attackTimer > 0)
+				{
+					attackTimer -= Time.deltaTime;
+				}
+				break;
+			case State.DEAD:
+				break;
+			default:
+				break;
+		}
+
+	}
+
+	private void FixedUpdate()
+	{
+		if (currentState != State.DEAD)
 		{
 			rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
 			Rotate(target);
@@ -167,7 +220,6 @@ public abstract class Enemy : MonoBehaviour
 
     protected Vector3 Wander()
 	{
-		changeDirectionCooldown -= Time.deltaTime;
 		if(changeDirectionCooldown <= 0)
 		{
             float minAngle = -90f;
@@ -342,7 +394,6 @@ public abstract class Enemy : MonoBehaviour
     virtual protected Vector3 Aggro()
     {
 		float playerDistance = Vector2.Distance(playerTarget.transform.position, transform.position);
-
         if (playerDistance > enemyData.perceptionDistance)
 		{
 			playerTarget = null;
@@ -358,12 +409,6 @@ public abstract class Enemy : MonoBehaviour
                 TryAttack();
             }
 		}
-
-		if(attackTimer > 0)
-		{
-			attackTimer -= Time.deltaTime;
-		}
-
 		return ((playerTarget.transform.position - transform.position) * 50) + enemyData.avoidancePriority * 2 * Avoidance();
     }
 
@@ -434,4 +479,12 @@ public abstract class Enemy : MonoBehaviour
 			}
         }
     }
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if(collision.gameObject.CompareTag("Door") && attackTimer <= 0 && rigidBody.velocity.magnitude < 0.3)
+		{
+			TryAttack();
+		}
+	}
 }

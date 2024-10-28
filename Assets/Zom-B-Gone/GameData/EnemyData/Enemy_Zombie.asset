@@ -16,7 +16,7 @@ MonoBehaviour:
   investigateSpeed: 4
   aggroSpeed: 7
   attackDamageMultiplier: 1
-  attackRange: 1
+  attackRange: 1.5
   attackCooldown: 1
   obstacleAvoidDistance: 3
   attackSpawnDistance: 0.6

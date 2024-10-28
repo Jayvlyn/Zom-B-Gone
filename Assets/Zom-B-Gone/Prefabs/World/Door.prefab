@@ -288,11 +288,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774366899979179609}
+  - component: {fileID: 2976117889713816544}
   - component: {fileID: 106289134796356729}
   - component: {fileID: 6421253651605996488}
   - component: {fileID: 682555507082063676}
   - component: {fileID: 3836912898538229535}
-  - component: {fileID: 2976117889713816544}
   m_Layer: 6
   m_Name: SwingingComponent
   m_TagString: Door
@@ -315,6 +315,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5041954349426156764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2976117889713816544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8568405413058861014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534cdadd1a6f60b4f869c91302a2f0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hinge: {fileID: 682555507082063676}
+  spring: {fileID: 2835224499329438554}
+  rb: {fileID: 6421253651605996488}
+  locked: 0
 --- !u!212 &106289134796356729
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -464,18 +480,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.19282484}
   m_EdgeRadius: 0
---- !u!114 &2976117889713816544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8568405413058861014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534cdadd1a6f60b4f869c91302a2f0b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hinge: {fileID: 682555507082063676}
-  rb: {fileID: 6421253651605996488}
-  locked: 0
