@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e0cb7bd0cdf884fb88cbd39e5a963e, type: 3}
+  m_Name: Enemy_Zombie
+  m_EditorClassIdentifier: 
+  droneSpeed: 3
+  investigateSpeed: 4
+  aggroSpeed: 7
+  attackDamageMultiplier: 1
+  attackRange: 1
+  attackCooldown: 1
+  obstacleAvoidDistance: 3
+  attackSpawnDistance: 0.6
+  fov: 180
+  perceptionDistance: 30
+  perceptionRayCount: 7
+  doHoarding: 1
+  wanderDistance: 3
+  wanderPriority: 10
+  cohesionRadius: 50
+  cohesionPriority: 20
+  alignmentRadius: 10
+  alignmentPriority: 10
+  separationRadius: 10
+  separationPriority: 10
+  avoidancePriority: 8

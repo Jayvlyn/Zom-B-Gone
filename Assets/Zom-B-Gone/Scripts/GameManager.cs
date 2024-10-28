@@ -60,21 +60,23 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public List<Enemy> GetNeighbors(Enemy enemy, float radius)
-	{
-		List<Enemy> neighborsFound = new List<Enemy>();
-		foreach (var otherEnemy in enemies)
-		{
-			if (otherEnemy == enemy) continue;
 
-			if (Vector3.Distance(enemy.transform.position, otherEnemy.transform.position) <= radius)
-			{
-				neighborsFound.Add(otherEnemy);
-			}
-		}
+	// terrible method from tutorial
+	//public List<Enemy> GetNeighbors(Enemy enemy, float radius)
+	//{
+	//	List<Enemy> neighborsFound = new List<Enemy>();
+	//	foreach (var otherEnemy in enemies)
+	//	{
+	//		if (otherEnemy == enemy) continue;
 
-		return neighborsFound;
-	}
+	//		if (Vector3.Distance(enemy.transform.position, otherEnemy.transform.position) <= radius)
+	//		{
+	//			neighborsFound.Add(otherEnemy);
+	//		}
+	//	}
+
+	//	return neighborsFound;
+	//}
 
 	// Add extra function to these bottom two later
 

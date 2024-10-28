@@ -877,30 +877,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881615510bb0eb146abaa82229789f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _droneSpeed: 3
-  _investigateSpeed: 4
-  _aggroSpeed: 7
-  attackDamageMultiplier: 1
-  attackRange: 1
-  attackCooldown: 1
-  attackSpawnDistance: 0.6
+  enemyData: {fileID: 11400000, guid: ec84b65d01c04e244847e7d2ac497b5e, type: 2}
+  rigidBody: {fileID: 7881680831849007001}
   attacks:
   - {fileID: 8674619653201391516, guid: 29acada643e8c3946a888d829cd78737, type: 3}
-  limbs: []
+  limbs:
+  - {fileID: 465150421360189179}
+  - {fileID: 2134920927128549487}
   bleedingParticles: []
   maxLimbs: 2
-  _turnSmoothing: 3.09
-  _changeDirectionCooldown: 5
-  _wanderTarget: {x: 1, y: 1, z: 1}
-  friction: 0.95
+  turnSmoothing: 5
+  changeDirectionCooldown: 5
   decayTime: 60
-  _obstacleAvoidDistance: 3
-  _perceptionDistance: 30
-  _perceptionRayCount: 7
-  _fov: 120
   AttackBlockersLm:
     serializedVersion: 2
     m_Bits: 128
+  FellowEnemyLm:
+    serializedVersion: 2
+    m_Bits: 1024
   targetChangeSpeed: 5.04
   fadeSpeed: 5
 --- !u!114 &-8031090298879193519
@@ -983,7 +977,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 4
   m_AngularDrag: 0.4
   m_GravityScale: 0
   m_Material: {fileID: 0}

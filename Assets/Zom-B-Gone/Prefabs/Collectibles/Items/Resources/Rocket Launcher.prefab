@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 9007136600030232037}
   - component: {fileID: 4881143944469047324}
   m_Layer: 12
-  m_Name: ShovelLauncher
+  m_Name: Rocket Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   fullCollider: {fileID: 9007136600030232037}
   floorContainer: {fileID: 0}
   currentState: 0
-  itemData: {fileID: 11400000, guid: e6e954849ed41f94b8c8a0cb5e1004cb, type: 2}
+  itemData: {fileID: 11400000, guid: c502b5d412dfe444e98f3919e1b6d96f, type: 2}
   pivotPoint: {fileID: 5319315605918979473}
   itemRenderer: {fileID: 0}
   airborneAngularDrag: 0.4
@@ -140,7 +140,7 @@ MonoBehaviour:
   projectileWeaponData: {fileID: 0}
   reloading: 0
   hasLoadedSprite: 1
-  loadedSprite: {fileID: 21300000, guid: 266ae7c13e2db4647a3dc0cec932e018, type: 3}
+  loadedSprite: {fileID: 21300000, guid: 9ed3e452b2083bc4c9efc0d47cbd7750, type: 3}
   unloadedSprite: {fileID: 0}
 --- !u!212 &1488720925848193886
 SpriteRenderer:

@@ -1282,7 +1282,6 @@ GameObject:
   m_Component:
   - component: {fileID: 235199597}
   - component: {fileID: 235199599}
-  - component: {fileID: 235199598}
   - component: {fileID: 235199600}
   - component: {fileID: 235199601}
   - component: {fileID: 235199602}
@@ -1310,28 +1309,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &235199598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235199596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec56b562f6a81b0408aafa5fc6e90ef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxFOV: 120
-  wanderDistance: 3
-  wanderPriority: 10
-  cohesionRadius: 50
-  cohesionPriority: 20
-  alignmentRadius: 10
-  alignmentPriority: 10
-  separationRadius: 10
-  separationPriority: 10
-  avoidancePriority: 8.7
 --- !u!114 &235199599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,7 +1325,7 @@ MonoBehaviour:
   numberOfEnemies: 0
   spawnRadius: 10
   enemies: []
-  intervalSpawning: 0
+  intervalSpawning: 1
   intervalTime: 5
   intervalSpawnAmount: 2
   marketData: {fileID: 11400000, guid: 1c50df99ec83d07449d49c207a6a96f4, type: 2}

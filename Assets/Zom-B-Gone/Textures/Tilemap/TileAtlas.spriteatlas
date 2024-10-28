@@ -34,10 +34,15 @@ SpriteAtlas:
     packables:
     - {fileID: 2800000, guid: 6aea92eb3b1c7c446854cc479ebf76a3, type: 3}
     - {fileID: 2800000, guid: 6b09b156ed1eadb48b838e7b1cdfb8c8, type: 3}
+    - {fileID: 2800000, guid: 76bb7286ec2b8214592a1c084c32ac17, type: 3}
+    - {fileID: 2800000, guid: 3f26bcd57e55c1b4c8498e857e0a6739, type: 3}
+    - {fileID: 2800000, guid: 536aad86c2b81e24191423380a6406a9, type: 3}
+    - {fileID: 2800000, guid: 0370b80faf63a1142bd7596b8347f94b, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
+    - 3f26bcd57e55c1b4c8498e857e0a6739: 21300000
     - 6b09b156ed1eadb48b838e7b1cdfb8c8: 1531221573
     - 6b09b156ed1eadb48b838e7b1cdfb8c8: -199920174
     - 6b09b156ed1eadb48b838e7b1cdfb8c8: -1929682411
@@ -46,6 +51,8 @@ SpriteAtlas:
     - 6b09b156ed1eadb48b838e7b1cdfb8c8: -357548419
     - 6b09b156ed1eadb48b838e7b1cdfb8c8: 708698683
     - 6b09b156ed1eadb48b838e7b1cdfb8c8: -1231383413
+    - 76bb7286ec2b8214592a1c084c32ac17: 21300000
+    - 536aad86c2b81e24191423380a6406a9: 21300000
     - 6aea92eb3b1c7c446854cc479ebf76a3: -1904151929
     - 6aea92eb3b1c7c446854cc479ebf76a3: -1317245613
     - 6aea92eb3b1c7c446854cc479ebf76a3: 63967266
@@ -95,8 +102,10 @@ SpriteAtlas:
     - 6aea92eb3b1c7c446854cc479ebf76a3: 1703985211
     - 6aea92eb3b1c7c446854cc479ebf76a3: -1065013213
     - 6aea92eb3b1c7c446854cc479ebf76a3: 1867651383
+    - 0370b80faf63a1142bd7596b8347f94b: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 3f26bcd57e55c1b4c8498e857e0a6739, type: 3}
   - {fileID: 1531221573, guid: 6b09b156ed1eadb48b838e7b1cdfb8c8, type: 3}
   - {fileID: -199920174, guid: 6b09b156ed1eadb48b838e7b1cdfb8c8, type: 3}
   - {fileID: -1929682411, guid: 6b09b156ed1eadb48b838e7b1cdfb8c8, type: 3}
@@ -105,6 +114,8 @@ SpriteAtlas:
   - {fileID: -357548419, guid: 6b09b156ed1eadb48b838e7b1cdfb8c8, type: 3}
   - {fileID: 708698683, guid: 6b09b156ed1eadb48b838e7b1cdfb8c8, type: 3}
   - {fileID: -1231383413, guid: 6b09b156ed1eadb48b838e7b1cdfb8c8, type: 3}
+  - {fileID: 21300000, guid: 76bb7286ec2b8214592a1c084c32ac17, type: 3}
+  - {fileID: 21300000, guid: 536aad86c2b81e24191423380a6406a9, type: 3}
   - {fileID: -1904151929, guid: 6aea92eb3b1c7c446854cc479ebf76a3, type: 3}
   - {fileID: -1317245613, guid: 6aea92eb3b1c7c446854cc479ebf76a3, type: 3}
   - {fileID: 63967266, guid: 6aea92eb3b1c7c446854cc479ebf76a3, type: 3}
@@ -154,7 +165,9 @@ SpriteAtlas:
   - {fileID: 1703985211, guid: 6aea92eb3b1c7c446854cc479ebf76a3, type: 3}
   - {fileID: -1065013213, guid: 6aea92eb3b1c7c446854cc479ebf76a3, type: 3}
   - {fileID: 1867651383, guid: 6aea92eb3b1c7c446854cc479ebf76a3, type: 3}
+  - {fileID: 21300000, guid: 0370b80faf63a1142bd7596b8347f94b, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Tile4
   - WallTilemap_6
   - WallTilemap_7
   - WallTilemap_4
@@ -163,6 +176,8 @@ SpriteAtlas:
   - WallTilemap_3
   - WallTilemap_0
   - WallTilemap_1
+  - StoneTile
+  - Tile5
   - FloorTilemap_28
   - FloorTilemap_29
   - FloorTilemap_24
@@ -212,6 +227,7 @@ SpriteAtlas:
   - FloorTilemap_19
   - FloorTilemap_18
   - FloorTilemap_48
+  - Tile6
   m_RenderDataMap: {}
   m_Tag: TileAtlas
   m_IsVariant: 0
