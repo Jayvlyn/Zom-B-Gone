@@ -58,4 +58,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6feea208295e00c4abdac65bc551d1ce, type: 2}
   - {fileID: 11400000, guid: a0762a981573d554faac50b44adc8f47, type: 2}
   - {fileID: 11400000, guid: 28daa3c4a9ce9f24aad60c11c392d157, type: 2}
+  - {fileID: 11400000, guid: e6e954849ed41f94b8c8a0cb5e1004cb, type: 2}
+  - {fileID: 11400000, guid: c502b5d412dfe444e98f3919e1b6d96f, type: 2}
   rarityList: {fileID: 11400000, guid: 8a1f6f72015774a4ba99c59d0607b2f0, type: 2}
