@@ -141,7 +141,6 @@ public abstract class Enemy : MonoBehaviour
 
 		if(currentState != State.DEAD)
 		{
-			target.Normalize();
 			rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
 			Rotate(target);
 		}
@@ -150,7 +149,7 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] private float targetChangeSpeed = 40;
 	private void LerpTarget(Vector3 newTarget)
 	{
-		target = Vector3.Lerp(target, newTarget, targetChangeSpeed * Time.deltaTime);
+		target = Vector3.Lerp(target, newTarget, targetChangeSpeed * Time.deltaTime).normalized;
 	}
 
 	[SerializeField] private float fadeSpeed = 5;
@@ -402,7 +401,6 @@ public abstract class Enemy : MonoBehaviour
 	{
 		float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) - 90;
 		Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
 		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * turnSmoothing);
 	}
 
