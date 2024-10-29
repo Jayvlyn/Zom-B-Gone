@@ -89,7 +89,7 @@ public class Health : MonoBehaviour
         {
             enemy.OnDeath();
         }
-        else if (gameObject.CompareTag("Door"))
+        else if (gameObject.CompareTag("Door") || gameObject.layer == LayerMask.NameToLayer("Window"))
         {
             Destroy(gameObject);
         }

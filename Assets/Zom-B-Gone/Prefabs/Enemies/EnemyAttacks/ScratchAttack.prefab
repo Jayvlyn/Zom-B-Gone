@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  knockback: 1
 --- !u!212 &2949712214512584487
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -86,8 +87,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1797638487
-  m_SortingLayer: 1
+  m_SortingLayerID: 1323564269
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: -1340572102, guid: 7331b25538a3b5946b4a3215031ad164, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

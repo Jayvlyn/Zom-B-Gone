@@ -145,6 +145,10 @@ MonoBehaviour:
   head: {fileID: 2538085723734079734}
   rb: {fileID: 369753046641428115}
   input: {fileID: 8105131813210140982}
+  vc: {fileID: 0}
+  groupCam: {fileID: 0}
+  framingTransposer: {fileID: 0}
+  lookaheadChanger: {fileID: 0}
   currentStamina: 0
   recoverStamina: 0
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
@@ -188,8 +192,8 @@ MonoBehaviour:
   lumberingLowerBound: 0.8
   leftItem: {fileID: 0}
   rightItem: {fileID: 0}
-  leftObstacle: {fileID: 0}
-  rightObstacle: {fileID: 0}
+  leftIcon: {fileID: 0}
+  rightIcon: {fileID: 0}
 --- !u!114 &404186174974829375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +349,7 @@ MonoBehaviour:
     m_Bits: 4160
   InteractionBlockersLm:
     serializedVersion: 2
-    m_Bits: 32896
+    m_Bits: 557184
   scanInterval: 0.1
   openContainerDistanceCheckInterval: 0.1
   defaultSpriteMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}

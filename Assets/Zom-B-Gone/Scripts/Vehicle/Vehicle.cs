@@ -26,7 +26,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     public Transform driveSeat;
     public Rigidbody2D rb;
-    public SpriteRenderer litHeadlights;
+    public GameObject litHeadlights;
 
     public bool movedFromExplosion = false;
 
@@ -37,7 +37,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         set
         {
             active = value;
-            litHeadlights.enabled = value;
+            litHeadlights.SetActive(value);
         }
     }
 

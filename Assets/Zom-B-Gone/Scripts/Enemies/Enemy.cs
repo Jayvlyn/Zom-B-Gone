@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] private int maxLimbs = 2;
 	[SerializeField] private float turnSmoothing = 5;
 	[SerializeField] private float changeDirectionCooldown = 5;
-	private Vector3 wanderTarget = new Vector3(1, 1, 1);
+	private Vector2 wanderTarget = new Vector2(1, 1);
 	private float currentMoveSpeed = 0;
 
 	// Dead enemy removal
@@ -34,9 +34,10 @@ public abstract class Enemy : MonoBehaviour
 	private float decayTimer;
 
     public LayerMask AttackBlockersLm;
+    public LayerMask MovementBlockersLm;
     public LayerMask FellowEnemyLm;
 
-	private Vector3 target = Vector3.zero;
+	private Vector2 target = Vector2.zero;
 
 
 	private void ChangeState(State newState)
@@ -201,9 +202,9 @@ public abstract class Enemy : MonoBehaviour
 	}
 
 	[SerializeField] private float targetChangeSpeed = 40;
-	private void LerpTarget(Vector3 newTarget)
+	private void LerpTarget(Vector2 newTarget)
 	{
-		target = Vector3.Lerp(target, newTarget, targetChangeSpeed * Time.deltaTime).normalized;
+		target = Vector2.Lerp(target, newTarget, targetChangeSpeed * Time.deltaTime).normalized;
 	}
 
 	[SerializeField] private float fadeSpeed = 5;
@@ -211,7 +212,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		while(transform.localScale.x > 0.1)
 		{
-			transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, Time.deltaTime * fadeSpeed);
+			transform.localScale = Vector2.Lerp(transform.localScale, Vector2.zero, Time.deltaTime * fadeSpeed);
 			yield return null;
 		}
 		Destroy(gameObject);
@@ -219,7 +220,7 @@ public abstract class Enemy : MonoBehaviour
 
     #region FLOCKING
 
-    protected Vector3 Wander()
+    protected Vector2 Wander()
 	{
 		if(changeDirectionCooldown <= 0)
 		{
@@ -238,9 +239,9 @@ public abstract class Enemy : MonoBehaviour
 		return wanderTarget.normalized;
 	}
 
-	Vector3 Cohesion()
+	Vector2 Cohesion()
 	{
-		Vector3 cohesionVector = new Vector3();
+		Vector2 cohesionVector = new Vector2();
 		int countEnemies = 0;
 		List<Enemy> neighbors = GetNeighbors(this, enemyData.cohesionRadius);
 		if (neighbors.Count == 0) return cohesionVector;
@@ -248,37 +249,37 @@ public abstract class Enemy : MonoBehaviour
 		{
 			if (isInFOV(enemy.transform.position))
 			{
-				cohesionVector += enemy.transform.position;
+				cohesionVector += (Vector2)enemy.transform.position;
 				countEnemies++;
 			}
 		}
 		if (countEnemies == 0) return cohesionVector;
 
 		cohesionVector /= countEnemies;
-		cohesionVector = cohesionVector - transform.position;
+		cohesionVector = cohesionVector - (Vector2)transform.position;
 
 		return cohesionVector.normalized;
 	}
 
-	Vector3 Alignment()
+	Vector2 Alignment()
 	{
-		Vector3 alignVector = new Vector3();
+		Vector2 alignVector = new Vector2();
 		var enemies = GetNeighbors(this, enemyData.alignmentRadius);
 		if (enemies.Count == 0) return alignVector;
 		foreach (var enemy in enemies)
 		{
 			if (isInFOV(enemy.transform.position) && enemy.rigidBody != null)
 			{
-				alignVector += new Vector3(enemy.rigidBody.velocity.x, enemy.rigidBody.velocity.y, 0);
+				alignVector += new Vector2(enemy.rigidBody.velocity.x, enemy.rigidBody.velocity.y);
 			}
 		}
 
 		return alignVector.normalized;
 	}
 
-	Vector3 Separation()
+	Vector2 Separation()
 	{
-		Vector3 separateVector = new Vector3();
+		Vector2 separateVector = new Vector2();
 		var enemies = GetNeighbors(this, enemyData.separationRadius);
 		if (enemies.Count == 0) return separateVector;
 
@@ -286,7 +287,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			if (isInFOV(enemy.transform.position))
 			{
-				Vector3 movingTowards = transform.position - enemy.transform.position;
+				Vector2 movingTowards = transform.position - enemy.transform.position;
 				if (movingTowards.magnitude > 0)
 				{
 					separateVector += movingTowards.normalized / movingTowards.magnitude;
@@ -297,7 +298,7 @@ public abstract class Enemy : MonoBehaviour
 		return separateVector.normalized;
 	}
 
-    Vector3 Avoidance()
+    Vector2 Avoidance()
     {
         float angleBetweenRays = enemyData.fov / (enemyData.perceptionRayCount - 1);
 
@@ -309,15 +310,15 @@ public abstract class Enemy : MonoBehaviour
         for (int i = 0; i < enemyData.perceptionRayCount; i++)
         {
             float angle = (transform.eulerAngles.z - (enemyData.fov * 0.5f) + (angleBetweenRays * i) + 90) * Mathf.Deg2Rad;
-            Vector3 rayDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+            Vector2 rayDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, enemyData.obstacleAvoidDistance, LayerMask.GetMask("World"));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, enemyData.obstacleAvoidDistance, MovementBlockersLm);
 			if (hit) hitCount++;
             if (!hit)
             {
                 openDirectionsCount++;
 
-                float obstruction = Vector3.Distance(transform.position, transform.position + rayDir * enemyData.obstacleAvoidDistance);
+                float obstruction = Vector2.Distance(transform.position, (Vector2)transform.position + rayDir * enemyData.obstacleAvoidDistance);
                 if (obstruction < minObstruction)
                 {
                     minObstruction = obstruction;
@@ -328,23 +329,23 @@ public abstract class Enemy : MonoBehaviour
 
         if (openDirectionsCount > 0 && hitCount > 0)
         {
-            return (new Vector3(Mathf.Cos(selectedAngle), Mathf.Sin(selectedAngle), 0)).normalized;
+            return new Vector2(Mathf.Cos(selectedAngle), Mathf.Sin(selectedAngle)).normalized;
         }
 
-		return Vector3.zero;
+		return Vector2.zero;
     }
 
     #endregion
 
-    Vector3 Seek()
+    Vector2 Seek()
     {
-		Vector3 seekTarget = Vector3.zero;
+		Vector2 seekTarget = Vector2.zero;
         float angleBetweenRays = enemyData.fov / (enemyData.perceptionRayCount - 1);
 
         for (int i = 0; i < enemyData.perceptionRayCount; i++)
         {
             float angle = (transform.eulerAngles.z - (enemyData.fov * 0.5f) + (angleBetweenRays * i) + 90) * Mathf.Deg2Rad;
-            Vector3 rayDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+            Vector2 rayDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, enemyData.perceptionDistance, LayerMask.GetMask("Player"));
 			if (hit)
@@ -352,7 +353,7 @@ public abstract class Enemy : MonoBehaviour
                 RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, enemyData.perceptionDistance, LayerMask.GetMask("World"));
 				if(worldHit && worldHit.distance < hit.distance)
 				{
-					return Vector3.zero;
+					return Vector2.zero;
 				}
 				else
 				{
@@ -364,17 +365,17 @@ public abstract class Enemy : MonoBehaviour
 			}
         }
 
-        return Vector3.zero;
+        return Vector2.zero;
     }
 
-    Vector3 Flee(Vector3 target)
+    Vector2 Flee(Vector2 target)
 	{
-		Vector3 neededVelocity = (transform.position - target).normalized * currentMoveSpeed;
-		return neededVelocity - new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, 0);
+		Vector2 neededVelocity = ((Vector2)transform.position - target).normalized * currentMoveSpeed;
+		return neededVelocity - new Vector2(rigidBody.velocity.x, rigidBody.velocity.y);
 	}
 
 
-	virtual protected Vector3 Drone()
+	virtual protected Vector2 Drone()
 	{
 		return (enemyData.cohesionPriority * Cohesion() +
 				enemyData.wanderPriority * Wander() + 
@@ -383,7 +384,7 @@ public abstract class Enemy : MonoBehaviour
 				enemyData.avoidancePriority * Avoidance() + Seek());
 	}
 
-    virtual protected Vector3 Investigate()
+    virtual protected Vector2 Investigate()
     {
         return (enemyData.cohesionPriority * Cohesion() +
                 enemyData.wanderPriority * Wander() +
@@ -392,7 +393,7 @@ public abstract class Enemy : MonoBehaviour
                 enemyData.avoidancePriority * Avoidance() + Seek());
     }
 
-    virtual protected Vector3 Aggro()
+    virtual protected Vector2 Aggro()
     {
 		float playerDistance = Vector2.Distance(playerTarget.transform.position, transform.position);
 		Vector2 direction = playerTarget.transform.position - transform.position;
@@ -401,7 +402,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			playerTarget = null;
 			ChangeState(State.DRONING);
-			return Vector3.zero;
+			return Vector2.zero;
 		}
 		else if(playerDistance <= enemyData.attackRange && attackTimer <= 0)
 		{
@@ -413,14 +414,13 @@ public abstract class Enemy : MonoBehaviour
 		}
 
 
-		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, playerDistance, AttackBlockersLm);
+		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, playerDistance, MovementBlockersLm);
 		if(wallHit.collider)
 		{
-			return (Vector3)((direction)) + enemyData.avoidancePriority * 2 * Avoidance();
+			return direction + enemyData.avoidancePriority * 2 * Avoidance();
 		}
 		else // straight shot to player, go for them
 		{
-			Debug.Log("just direction");
 			return direction * 20;
 		}
 
@@ -438,9 +438,9 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    bool isInFOV(Vector3 vec)
+    bool isInFOV(Vector2 vec)
 	{
-		return Vector3.Angle(rigidBody.velocity, vec - transform.position) <= enemyData.fov;
+		return Vector2.Angle(rigidBody.velocity, vec - (Vector2)transform.position) <= enemyData.fov;
 	}
 
 	public List<Enemy> GetNeighbors(Enemy enemy, float radius)
@@ -496,7 +496,7 @@ public abstract class Enemy : MonoBehaviour
 
 	private void OnCollisionStay2D(Collision2D collision)
 	{
-		if(collision.gameObject.CompareTag("Door") && attackTimer <= 0 && rigidBody.velocity.magnitude < 0.3)
+		if((collision.gameObject.CompareTag("Door") || collision.gameObject.layer == LayerMask.NameToLayer("Window")) && attackTimer <= 0 && rigidBody.velocity.magnitude < 0.2) // stopped by door or window
 		{
 			TryAttack();
 		}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -26,20 +27,26 @@ public class WindowGenerator : MonoBehaviour
 
 				Vector3 localPos = tilemap.CellToLocal(pos);
 
-				GameObject thisWindow = Instantiate(windowPrefab, transform);
-				thisWindow.transform.localPosition = localPos;
+#if UNITY_EDITOR
+                GameObject thisWindow = (GameObject)PrefabUtility.InstantiatePrefab(windowPrefab, transform);
+#else
+                GameObject thisWindow = Instantiate(windowPrefab, transform);
+#endif
+                thisWindow.transform.localPosition = localPos;
 				thisWindow.transform.localRotation = rotation;
 
 				AdjustWindowPosition(thisWindow, eulerRotation.z);
 			}
 		}
 
-		#if UNITY_EDITOR
-				UnityEditor.EditorUtility.SetDirty(gameObject);
-		#endif
-	}
+#if UNITY_EDITOR
+        // Mark this GameObject as dirty so changes are saved to the prefab
+        PrefabUtility.RecordPrefabInstancePropertyModifications(this);
+        UnityEditor.EditorUtility.SetDirty(gameObject);
+#endif
+    }
 
-	private void AdjustWindowPosition(GameObject window, float zRot)
+    private void AdjustWindowPosition(GameObject window, float zRot)
 	{
 		if (zRot == 0)
 		{
