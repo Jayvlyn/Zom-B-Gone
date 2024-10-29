@@ -166,6 +166,7 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
+	// use to handle timers only, put computationally heavy things in enemy tick
 	private void Update()
 	{
 
@@ -394,6 +395,8 @@ public abstract class Enemy : MonoBehaviour
     virtual protected Vector3 Aggro()
     {
 		float playerDistance = Vector2.Distance(playerTarget.transform.position, transform.position);
+		Vector2 direction = playerTarget.transform.position - transform.position;
+
         if (playerDistance > enemyData.perceptionDistance)
 		{
 			playerTarget = null;
@@ -402,14 +405,25 @@ public abstract class Enemy : MonoBehaviour
 		}
 		else if(playerDistance <= enemyData.attackRange && attackTimer <= 0)
 		{
-			Vector2 direction = playerTarget.transform.position - transform.position;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, playerDistance, AttackBlockersLm);
             if (!hit.collider)
             {
                 TryAttack();
             }
 		}
-		return ((playerTarget.transform.position - transform.position) * 50) + enemyData.avoidancePriority * 2 * Avoidance();
+
+
+		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, playerDistance, AttackBlockersLm);
+		if(wallHit.collider)
+		{
+			return (Vector3)((direction)) + enemyData.avoidancePriority * 2 * Avoidance();
+		}
+		else // straight shot to player, go for them
+		{
+			Debug.Log("just direction");
+			return direction * 20;
+		}
+
     }
 
 	private void TryAttack()

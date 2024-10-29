@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -25,10 +26,14 @@ public class DoorGenerator : MonoBehaviour
                 Matrix4x4 matrix = tilemap.GetTransformMatrix(pos);
                 Quaternion rotation = matrix.rotation;
                 Vector3 eulerRotation = rotation.eulerAngles;
-
                 Vector3 localPos = tilemap.CellToLocal(pos);
 
+#if UNITY_EDITOR
+                GameObject thisWindow = (GameObject)PrefabUtility.InstantiatePrefab(windowPrefab, transform);
+#else
                 GameObject thisWindow = Instantiate(windowPrefab, transform);
+#endif
+
                 thisWindow.transform.localPosition = localPos;
                 thisWindow.transform.localRotation = rotation;
 
@@ -40,6 +45,8 @@ public class DoorGenerator : MonoBehaviour
         }
 
 #if UNITY_EDITOR
+        // Mark this GameObject as dirty so changes are saved to the prefab
+        PrefabUtility.RecordPrefabInstancePropertyModifications(this);
         UnityEditor.EditorUtility.SetDirty(gameObject);
 #endif
     }
