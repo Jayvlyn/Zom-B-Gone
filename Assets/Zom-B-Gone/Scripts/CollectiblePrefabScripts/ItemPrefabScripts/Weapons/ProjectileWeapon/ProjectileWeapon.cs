@@ -9,6 +9,7 @@ public class ProjectileWeapon : Weapon
     [SerializeField] protected List<Transform> firePoints;
     [SerializeField] protected List<SpriteRenderer> muzzleFlashes;
     [SerializeField] protected Animator flashAnimator;
+    [SerializeField] protected GameObject muzzleLight;
 
     [HideInInspector] public ProjectileWeaponData projectileWeaponData;
     [HideInInspector] public bool reloading = false;
@@ -122,6 +123,13 @@ public class ProjectileWeapon : Weapon
         {
             if(flashAnimator) flashAnimator.SetTrigger("Fire");
 
+            if (muzzleLight)
+            {
+                float flashTime = 0.1f;
+                if (projectileWeaponData.attackSpeed < flashTime) flashTime = projectileWeaponData.attackSpeed;
+                StartCoroutine(DoMuzzleLight(flashTime));
+            }
+
             shotTimer = weaponData.attackSpeed;
             CurrentAmmo -= projectileWeaponData.ammoConsumption;
             foreach (Transform firepoint in firePoints) 
@@ -171,6 +179,13 @@ public class ProjectileWeapon : Weapon
         CurrentAmmo = projectileWeaponData.maxAmmo;
         reloading = false;
         SetReloadIndicator(false);
+    }
+
+    private IEnumerator DoMuzzleLight(float time)
+    {
+        muzzleLight.SetActive(true);
+        yield return new WaitForSeconds(time);
+        muzzleLight.SetActive(false);
     }
 
 	public void UpdateAmmoCount()

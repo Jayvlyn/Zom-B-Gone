@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Health : MonoBehaviour
 {
@@ -76,14 +77,14 @@ public class Health : MonoBehaviour
             {
                 enemyOwner = enemy;
                 enemyOwner.OnHit(incomingDamage, dismemeberChance);
+			}
 
-                if(enemy.rigidBody)
-                {
-                    enemy.rigidBody.AddForce(knockbackVector);
-                }
-            }
+			if (enemyOwner && enemyOwner.rigidBody)
+			{
+				enemyOwner.rigidBody.AddForce(knockbackVector);
+			}
 
-        }
+		}
 
         DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate);
     }

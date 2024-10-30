@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExplodingAmmo : MonoBehaviour
 {
     [SerializeField] private float explosionRadius = 10f;
-    [SerializeField] private float explosionForce = 10f;
+    [SerializeField] private float explosionForce = 100f;
     [SerializeField] private int explosionDamage = 40;
 
     private void OnTriggerEnter2D(Collider2D collision)
