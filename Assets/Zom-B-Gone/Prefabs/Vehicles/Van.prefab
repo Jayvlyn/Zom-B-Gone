@@ -474,6 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6848276586287938272}
+  - component: {fileID: 6433619232216697638}
   - component: {fileID: 6005865312491404119}
   - component: {fileID: 8593038725922826499}
   m_Layer: 15
@@ -509,6 +510,21 @@ Transform:
   - {fileID: 6230607669818033116}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6433619232216697638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823403517316823539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515143cd7fa009f4d85f7b71dbb4791d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 6005865312491404119}
+  v: {fileID: 5343874904298946327}
+  bufferTime: 2
 --- !u!50 &6005865312491404119
 Rigidbody2D:
   serializedVersion: 5
@@ -10907,11 +10923,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enterEvent: {fileID: 11400000, guid: 6ab3e098e4efc03409c1d13c3b8c36aa, type: 2}
   exitEvent: {fileID: 11400000, guid: 6060d3f380aa6f640933cd0b5f3f402b, type: 2}
-  accelerationSpeed: 25000
+  accelerationSpeed: 30000
   brakeSpeed: 10000
   steeringSpeed: 100
   maxTurnAngle: 45
-  maxSpeed: 100
+  maxSpeed: 500
   exitDistance: 1.5
   baseDriftFactor: 0.1
   driftingDriftFactor: 0.99

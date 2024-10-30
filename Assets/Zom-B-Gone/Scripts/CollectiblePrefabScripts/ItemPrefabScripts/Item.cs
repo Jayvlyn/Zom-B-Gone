@@ -326,13 +326,8 @@ public abstract class Item : Collectible
             Vector3 popupVector = (collisionHealth.transform.position - playerHead.transform.position).normalized * 20f;
             bool invertRotate = popupVector.x < 0; // invert when enemy is on left of player
 
-            collisionHealth.TakeDamage(damage, 0, 1, false, popupVector, invertRotate);
-
-            // do knockback if there is rigidbody
-            if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))
-            {
-                hitRb.AddForce(rb.linearVelocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 3, 30, true)), ForceMode2D.Impulse);
-            }
+            Vector2 knockbackVector = rb.linearVelocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 3, 30, true));
+            collisionHealth.TakeDamage(damage, knockbackVector, 0, false, popupVector, invertRotate);
         }
     }
 

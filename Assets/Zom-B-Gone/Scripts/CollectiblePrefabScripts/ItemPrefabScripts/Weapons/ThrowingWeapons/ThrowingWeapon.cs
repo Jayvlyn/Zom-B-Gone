@@ -56,7 +56,8 @@ public class ThrowingWeapon : Weapon
     {
         if (currentState == ItemState.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
-            collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false) + weaponData.damage, weaponData.dismemberChance);
+            Vector2 knockbackVector = (collisionHealth.transform.position - transform.position).normalized * weaponData.knockbackPower;
+            collisionHealth.TakeDamage(Utils.MapWeightToRange(itemData.weight, 5, 100, false) + weaponData.damage, knockbackVector, weaponData.dismemberChance);
         }
     }
 

@@ -20,9 +20,6 @@ public abstract class Weapon : Item
     {
         float damage = weaponData.damage;
         if (inputDamage != -1) damage = inputDamage;
-
-        TryDealKnockback(targetHealth);
-
         #region hat buff
         if (playerHead.wornHat != null)
         {
@@ -34,11 +31,6 @@ public abstract class Weapon : Item
         Vector3 popupVector = (targetHealth.transform.position - playerHead.transform.position).normalized * 20f;
         bool invertRotate = popupVector.x < 0; // invert when enemy is on left of player
 
-        targetHealth.TakeDamage(damage, weaponData.dismemberChance, 1, false, popupVector, invertRotate);
-    }
-
-    public void TryDealKnockback(Health targetHealth)
-    {
-        if (targetHealth && targetHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb)) hitRb.AddForce(transform.parent.up * weaponData.knockbackPower, ForceMode2D.Impulse);
+        targetHealth.TakeDamage(damage, transform.parent.up * weaponData.knockbackPower, weaponData.dismemberChance, false, popupVector, invertRotate);
     }
 }

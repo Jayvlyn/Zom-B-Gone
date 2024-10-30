@@ -15,6 +15,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     [SerializeField] protected float maxSpeed = 100;
     public float exitDistance = 3;
     protected float currentTurnAngle = 0;
+    //public int contactDamage = 50;
 
     [SerializeField] protected float baseDriftFactor = 0.3f;
     [SerializeField] protected float driftingDriftFactor = 0.99f;
@@ -161,4 +162,6 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1f);
         Active = active;
     }
+
+
 }

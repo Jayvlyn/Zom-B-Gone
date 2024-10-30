@@ -55,10 +55,10 @@ public class Health : MonoBehaviour
         }
     }
 
-  
     private Enemy enemyOwner;
-    public void TakeDamage(float damage, float dismemeberChance = 0, float knockback = 1, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default)
+    public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default)
     {
+        if (damage < 0) return;
         int incomingDamage = Mathf.RoundToInt(damage);
         #region hat buff
         if (gameObject.CompareTag("Player") && gameObject.TryGetComponent(out Head head) && head.wornHat != null)
@@ -76,6 +76,11 @@ public class Health : MonoBehaviour
             {
                 enemyOwner = enemy;
                 enemyOwner.OnHit(incomingDamage, dismemeberChance);
+
+                if(enemy.rigidBody)
+                {
+                    enemy.rigidBody.AddForce(knockbackVector);
+                }
             }
 
         }

@@ -14,7 +14,7 @@ public abstract class Enemy : MonoBehaviour
 
 	public EnemyData enemyData;
 
-	[SerializeField] private Rigidbody2D rigidBody;
+	public Rigidbody2D rigidBody;
 	private GameManager gm;
 	private Health health;
 	private GameObject playerTarget;
@@ -501,4 +501,31 @@ public abstract class Enemy : MonoBehaviour
 			TryAttack();
 		}
 	}
+
+	private GameObject collidingVehicle = null;
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+		if (collision.gameObject.layer == LayerMask.NameToLayer("Vehicle"))
+		{
+			collidingVehicle = collision.gameObject;
+		}
+
+        else if(collidingVehicle != null && rigidBody.linearVelocity.magnitude > 0)
+		{
+            int worldObstacleMask = LayerMask.GetMask("World", "Obstacle");
+            if ((worldObstacleMask & (1 << collision.gameObject.layer)) != 0)
+			{
+				Debug.Log(rigidBody.linearVelocity.magnitude);
+				health.TakeDamage(rigidBody.linearVelocity.magnitude * 5, Vector2.zero);
+			}
+		}
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+		if (collision.gameObject == collidingVehicle)
+        {
+			collidingVehicle = null;
+        }
+    }
 }

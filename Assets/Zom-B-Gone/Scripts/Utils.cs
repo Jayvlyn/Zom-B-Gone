@@ -143,7 +143,6 @@ public static class Utils
                     //{
                     //    torque = -torqueAmount;
                     //}
-                    Debug.Log(scaledTorque);
                     rb.AddTorque(scaledTorque * 1000000, ForceMode2D.Impulse);
                 }
 
@@ -154,7 +153,9 @@ public static class Utils
 
             if(collider.TryGetComponent(out Health h))
             {
-                h.TakeDamage(damage, 30, 1, false);
+                Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
+                knockbackVector *= force;
+                h.TakeDamage(damage, knockbackVector, 30, false);
             }
         }
     }
