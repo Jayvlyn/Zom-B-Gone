@@ -32,7 +32,6 @@ public abstract class Weapon : Item
         bool invertRotate = popupVector.x < 0; // invert when enemy is on left of player
 
         Vector2 knockbackVector = (targetHealth.transform.position - playerHead.transform.position).normalized * weaponData.knockbackPower;
-        Debug.Log(knockbackVector.magnitude);
 
 		targetHealth.TakeDamage(damage, knockbackVector, weaponData.dismemberChance, false, popupVector, invertRotate);
     }
