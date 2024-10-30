@@ -5,11 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Hat : Collectible
 {
-    [SerializeField] public HatData hatData;
+    public HatData hatData;
+    public GameObject activateOnWear;
+
     [HideInInspector] public Head head;
     private SpriteRenderer spriteRenderer;
     private float transferTime = .2f;
     public bool useDataIcon = true;
+
+    private bool worn;
+    public bool Worn
+    {
+        get { return worn; }
+        set { worn = value; 
+            if(activateOnWear)
+            {
+                activateOnWear.SetActive(worn);
+            }
+        }
+    }
 
     private void Awake()
 	{
@@ -20,6 +34,7 @@ public class Hat : Collectible
     public override void Interact(Head head)
     {
         base.Interact(head);
+        Worn = true;
 		head.HatObject = gameObject;
 		gameObject.transform.parent = head.gameObject.transform;
 		this.head = head;
@@ -77,6 +92,7 @@ public class Hat : Collectible
     {
         if (head != null)
         {
+            Worn = false;
             head.HatObject = null;
             gameObject.transform.parent = null;
 			gameObject.layer = LayerMask.NameToLayer("Interactable");
