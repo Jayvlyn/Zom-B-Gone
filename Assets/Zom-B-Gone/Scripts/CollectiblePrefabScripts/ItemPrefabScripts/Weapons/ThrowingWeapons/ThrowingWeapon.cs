@@ -36,7 +36,7 @@ public class ThrowingWeapon : Weapon
 
             float throwForce = Utils.MapWeightToRange(lastThrownItem.itemData.weight, 10, 20, true);
 
-            lastThrownItem.rb.velocity = direction * throwForce;
+            lastThrownItem.rb.linearVelocity = direction * throwForce;
 
             if (spinThrow)
             {

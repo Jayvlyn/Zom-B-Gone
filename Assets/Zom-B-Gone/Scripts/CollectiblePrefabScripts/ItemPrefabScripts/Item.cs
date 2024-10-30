@@ -79,13 +79,13 @@ public abstract class Item : Collectible
         {
             case ItemState.GROUNDED:
                 itemRenderer.sortingLayerName = "GroundedItem";
-                rb.drag = groundedLinearDrag;
-                rb.angularDrag = groundedAngularDrag;
+                rb.linearDamping = groundedLinearDrag;
+                rb.angularDamping = groundedAngularDrag;
                 break;
             case ItemState.AIRBORNE:
                 itemRenderer.sortingLayerName = "ActiveItem";
-                rb.drag = airborneLinearDrag;
-                rb.angularDrag = airborneAngularDrag;
+                rb.linearDamping = airborneLinearDrag;
+                rb.angularDamping = airborneAngularDrag;
                 break;
             case ItemState.HELD:
                 itemRenderer.sortingLayerName = "ActiveItem";
@@ -95,7 +95,7 @@ public abstract class Item : Collectible
 
     protected virtual void Update()
     {
-        if (currentState == ItemState.AIRBORNE && rb.velocity.magnitude < minimumAirborneSpeed)
+        if (currentState == ItemState.AIRBORNE && rb.linearVelocity.magnitude < minimumAirborneSpeed)
         {
             ChangeState(ItemState.GROUNDED);
         }
@@ -119,8 +119,8 @@ public abstract class Item : Collectible
         switch (newState)
         {
             case ItemState.GROUNDED:
-                rb.drag = groundedLinearDrag;
-                rb.angularDrag = groundedAngularDrag;
+                rb.linearDamping = groundedLinearDrag;
+                rb.angularDamping = groundedAngularDrag;
 
                 gameObject.layer = LayerMask.NameToLayer("InteractableItem");
 
@@ -134,8 +134,8 @@ public abstract class Item : Collectible
 
                 break;
             case ItemState.AIRBORNE:
-                rb.drag = airborneLinearDrag;
-                rb.angularDrag = airborneAngularDrag;
+                rb.linearDamping = airborneLinearDrag;
+                rb.angularDamping = airborneAngularDrag;
 
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
@@ -201,7 +201,7 @@ public abstract class Item : Collectible
         float throwForce = Utils.MapWeightToRange(itemData.weight, 10, 20, true);
 
         // Velocity change instead because throw is fastest the second it the object leaves contact with the propelling force
-        rb.velocity = direction * throwForce;
+        rb.linearVelocity = direction * throwForce;
         //rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
 
         if (spinThrow)
@@ -214,7 +214,7 @@ public abstract class Item : Collectible
 
     public virtual void PickUp(Transform parent, bool rightHand)
     {
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0;
 
         ChangeState(ItemState.HELD);
@@ -320,7 +320,7 @@ public abstract class Item : Collectible
     {
         if (currentState == ItemState.AIRBORNE && collision.gameObject.TryGetComponent(out Health collisionHealth))
         {
-            int damage = Mathf.RoundToInt(Utils.MapWeightToRange(itemData.weight, 3, 30, false) * (rb.velocity.magnitude / 2));
+            int damage = Mathf.RoundToInt(Utils.MapWeightToRange(itemData.weight, 3, 30, false) * (rb.linearVelocity.magnitude / 2));
 
 
             Vector3 popupVector = (collisionHealth.transform.position - playerHead.transform.position).normalized * 20f;
@@ -331,14 +331,14 @@ public abstract class Item : Collectible
             // do knockback if there is rigidbody
             if (collisionHealth.gameObject.TryGetComponent(out Rigidbody2D hitRb))
             {
-                hitRb.AddForce(rb.velocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 3, 30, true)), ForceMode2D.Impulse);
+                hitRb.AddForce(rb.linearVelocity.normalized * 0.5f * (Utils.MapWeightToRange(itemData.weight, 3, 30, true)), ForceMode2D.Impulse);
             }
         }
     }
 
     public void AddToFloor()
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = 0;
         fullCollider.isTrigger = true;
         rb.bodyType = RigidbodyType2D.Kinematic;

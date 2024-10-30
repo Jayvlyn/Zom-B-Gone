@@ -270,7 +270,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			if (isInFOV(enemy.transform.position) && enemy.rigidBody != null)
 			{
-				alignVector += new Vector2(enemy.rigidBody.velocity.x, enemy.rigidBody.velocity.y);
+				alignVector += new Vector2(enemy.rigidBody.linearVelocity.x, enemy.rigidBody.linearVelocity.y);
 			}
 		}
 
@@ -371,7 +371,7 @@ public abstract class Enemy : MonoBehaviour
     Vector2 Flee(Vector2 target)
 	{
 		Vector2 neededVelocity = ((Vector2)transform.position - target).normalized * currentMoveSpeed;
-		return neededVelocity - new Vector2(rigidBody.velocity.x, rigidBody.velocity.y);
+		return neededVelocity - new Vector2(rigidBody.linearVelocity.x, rigidBody.linearVelocity.y);
 	}
 
 
@@ -440,7 +440,7 @@ public abstract class Enemy : MonoBehaviour
 
     bool isInFOV(Vector2 vec)
 	{
-		return Vector2.Angle(rigidBody.velocity, vec - (Vector2)transform.position) <= enemyData.fov;
+		return Vector2.Angle(rigidBody.linearVelocity, vec - (Vector2)transform.position) <= enemyData.fov;
 	}
 
 	public List<Enemy> GetNeighbors(Enemy enemy, float radius)
@@ -496,7 +496,7 @@ public abstract class Enemy : MonoBehaviour
 
 	private void OnCollisionStay2D(Collision2D collision)
 	{
-		if((collision.gameObject.CompareTag("Door") || collision.gameObject.layer == LayerMask.NameToLayer("Window")) && attackTimer <= 0 && rigidBody.velocity.magnitude < 0.2) // stopped by door or window
+		if((collision.gameObject.CompareTag("Door") || collision.gameObject.layer == LayerMask.NameToLayer("Window")) && attackTimer <= 0 && rigidBody.linearVelocity.magnitude < 0.2) // stopped by door or window
 		{
 			TryAttack();
 		}

@@ -11,9 +11,9 @@ public class FourWheeler : Vehicle
     {
         base.FixedUpdate();
         if(active) KillOrthogonalVelocity();
-        if (rb.velocity.magnitude > 0 && !movedFromExplosion)
+        if (rb.linearVelocity.magnitude > 0 && !movedFromExplosion)
         {
-            float dot = Vector2.Dot(rb.velocity, transform.up);
+            float dot = Vector2.Dot(rb.linearVelocity, transform.up);
 
             if(dot > 0.1)
             {
@@ -29,7 +29,7 @@ public class FourWheeler : Vehicle
 
     public override void Accelerate()
     {
-        if (rb.velocity.magnitude > maxSpeed) return;
+        if (rb.linearVelocity.magnitude > maxSpeed) return;
         rb.AddForce(transform.up * accelerationSpeed);
         
     }
@@ -66,7 +66,7 @@ public class FourWheeler : Vehicle
 
     private void RotateToTurnAngle(bool reverse)
     {
-        if (reverse) rb.MoveRotation(rb.rotation + -currentTurnAngle * rb.velocity.magnitude * 0.005f);
-        else rb.MoveRotation(rb.rotation + currentTurnAngle * rb.velocity.magnitude * 0.005f);
+        if (reverse) rb.MoveRotation(rb.rotation + -currentTurnAngle * rb.linearVelocity.magnitude * 0.005f);
+        else rb.MoveRotation(rb.rotation + currentTurnAngle * rb.linearVelocity.magnitude * 0.005f);
     }
 }

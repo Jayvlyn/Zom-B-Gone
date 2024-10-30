@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
             newVelocity *= head.wornHat.hatData.moveSpeedMod;
         }
         #endregion
-        rb.velocity = newVelocity;
+        rb.linearVelocity = newVelocity;
     }
 
     private void RotateToMouse()
@@ -304,7 +304,7 @@ public class PlayerController : MonoBehaviour
         {
             holdingRun = true;
 
-            if(rb.velocity.magnitude > 0 && movementInput != Vector2.zero && currentStamina > 0)
+            if(rb.linearVelocity.magnitude > 0 && movementInput != Vector2.zero && currentStamina > 0)
             {
                 ChangeState(PlayerState.RUNNING);
             }

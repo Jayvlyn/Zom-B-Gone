@@ -43,20 +43,20 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        rb.drag = driveDrag;
+        rb.linearDamping = driveDrag;
     }
 
     protected void FixedUpdate()
     {
         if (Mathf.Abs(currentTurnAngle) > 30 && drift && !braking)
         {
-            if (rb.drag > driftDrag) rb.drag -= 0.05f;
-            if (rb.drag < driftDrag) rb.drag = driftDrag;
+            if (rb.linearDamping > driftDrag) rb.linearDamping -= 0.05f;
+            if (rb.linearDamping < driftDrag) rb.linearDamping = driftDrag;
         }
         else
         {
-            if (rb.drag < driveDrag) rb.drag += 0.05f;
-            if (rb.drag > driveDrag) rb.drag = driveDrag;
+            if (rb.linearDamping < driveDrag) rb.linearDamping += 0.05f;
+            if (rb.linearDamping > driveDrag) rb.linearDamping = driveDrag;
         }
     }
 
@@ -68,8 +68,8 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     protected void KillOrthogonalVelocity()
     {
-        Vector2 forwardVelocity = transform.up * Vector2.Dot(rb.velocity, transform.up);
-        Vector2 rightVelocity = transform.right * Vector2.Dot(rb.velocity, transform.right);
+        Vector2 forwardVelocity = transform.up * Vector2.Dot(rb.linearVelocity, transform.up);
+        Vector2 rightVelocity = transform.right * Vector2.Dot(rb.linearVelocity, transform.right);
 
         //if (drift) driftFactor = driftingDriftFactor;
         //else driftFactor = baseDriftFactor;
@@ -86,17 +86,17 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         }
 
 
-        rb.velocity = forwardVelocity + rightVelocity * driftFactor;
+        rb.linearVelocity = forwardVelocity + rightVelocity * driftFactor;
     }
 
     public float GetLateralVelocity()
     {
-        return Vector2.Dot(transform.right, rb.velocity);
+        return Vector2.Dot(transform.right, rb.linearVelocity);
     }
 
     public float GetLongitudinalVelocity()
     {
-        return Vector2.Dot(transform.up, rb.velocity);
+        return Vector2.Dot(transform.up, rb.linearVelocity);
     }
 
     public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)

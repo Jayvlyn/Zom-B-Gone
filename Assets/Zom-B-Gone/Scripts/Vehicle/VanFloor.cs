@@ -30,7 +30,7 @@ public class VanFloor : Floor
 				hideRoofCoroutine = StartCoroutine(HideRoof(2));
 			}
 		}
-		else if (vehicle.rb.velocity.magnitude > 0.2)
+		else if (vehicle.rb.linearVelocity.magnitude > 0.2)
 		{
 			return;
 		}
