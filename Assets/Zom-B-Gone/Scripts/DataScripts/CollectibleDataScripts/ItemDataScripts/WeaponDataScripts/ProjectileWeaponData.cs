@@ -15,6 +15,8 @@ public class ProjectileWeaponData : WeaponData
 	public float fireForce = 25; // Basically bullet speed
     public bool isAutomatic; // Semi-Automatic or Automatic Gun?
     public GameObject bulletPrefab;
+	public AudioClip shootSound;
+	public AudioClip reloadSound;
 
     public override string GetInfoDisplayText()
 	{

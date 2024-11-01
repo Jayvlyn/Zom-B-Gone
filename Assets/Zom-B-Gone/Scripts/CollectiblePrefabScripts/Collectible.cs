@@ -4,10 +4,13 @@ using UnityEngine;
 
 public abstract class Collectible : MonoBehaviour, IInteractable
 {
-	public Collider2D fullCollider;
+    public CollectibleData data;
+    public Collider2D fullCollider;
+    public AudioSource audioSource;
 
 	public virtual void Interact(bool rightHand)
     {
+        PlayPickupSound();
 		if (addContainer != null)
 		{
 			StopCoroutine(addContainer);
@@ -22,6 +25,7 @@ public abstract class Collectible : MonoBehaviour, IInteractable
     }
     public virtual void Interact(Head head)
     {
+        PlayPickupSound();
         if (addContainer != null)
         {
             StopCoroutine(addContainer);
@@ -32,6 +36,15 @@ public abstract class Collectible : MonoBehaviour, IInteractable
             PosRot posRot = new PosRot(transform.localPosition, transform.localRotation);
             floorContainer.RemoveFromContainer(posRot);
             floorContainer = null;
+        }
+    }
+
+    public void PlayPickupSound()
+    {
+        if(data.pickupSound)
+        {
+            audioSource.resource = data.pickupSound;
+            audioSource.Play();
         }
     }
 

@@ -17,6 +17,7 @@ MonoBehaviour:
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 21300000, guid: dcbf55a5dff2b8346ba705bf4f9cbe52, type: 3}
   maxStack: 1
+  pickupSound: {fileID: 8300000, guid: d618fad92565a85478fc0705fba55a6b, type: 3}
   weight: 1300
   damage: 10
   attackSpeed: 0.5

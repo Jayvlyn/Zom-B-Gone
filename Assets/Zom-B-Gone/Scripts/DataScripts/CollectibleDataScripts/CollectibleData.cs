@@ -12,6 +12,7 @@ public abstract class CollectibleData : ScriptableObject
 	public Rarity rarity = null;
     public Sprite icon = null;
     [SerializeField, Min(1)] private int maxStack = 64;
+    public AudioClip pickupSound;
 
     public int MaxStack => maxStack;
     public string Name => name;

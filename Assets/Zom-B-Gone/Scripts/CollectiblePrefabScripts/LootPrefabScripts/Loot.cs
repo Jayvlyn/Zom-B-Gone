@@ -5,15 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Loot : Collectible
 {
-	public LootData lootData;
+    [HideInInspector] public LootData lootData;
+
 	public int quantity;
 	[SerializeField] private CollectibleContainerData containerToFill;
 
 	private SpriteRenderer spriteRenderer;
 	private float transferTime = .2f;
 
+
 	private void Awake()
 	{
+        lootData = data as LootData;
 		spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = lootData.icon;
 	}

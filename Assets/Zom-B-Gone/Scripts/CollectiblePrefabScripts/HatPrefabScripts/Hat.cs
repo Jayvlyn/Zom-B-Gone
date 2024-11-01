@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Hat : Collectible
 {
-    public HatData hatData;
+    [HideInInspector] public HatData hatData;
+
     public GameObject activateOnWear;
 
     [HideInInspector] public Head head;
@@ -27,6 +28,7 @@ public class Hat : Collectible
 
     private void Awake()
 	{
+        hatData = data as HatData;
 		spriteRenderer = GetComponent<SpriteRenderer>();
         if (useDataIcon) spriteRenderer.sprite = hatData.icon;
 	}

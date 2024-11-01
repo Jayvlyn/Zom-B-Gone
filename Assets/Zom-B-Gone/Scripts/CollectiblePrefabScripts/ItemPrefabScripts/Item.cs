@@ -11,9 +11,9 @@ public abstract class Item : Collectible
     }
     public ItemState currentState;
 
+    [HideInInspector] public ItemData itemData;
 
     [Header("Item attributes")]
-    public ItemData itemData;
     // Component Refs
     [SerializeField] protected Transform pivotPoint;
     [HideInInspector] public SpriteRenderer itemRenderer;
@@ -65,7 +65,8 @@ public abstract class Item : Collectible
 
     public void Awake()
     {
-        playerController = FindObjectOfType<PlayerController>();
+        itemData = data as ItemData;
+        playerController = FindFirstObjectByType<PlayerController>();
         playerHands = playerController.GetComponentInParent<Hands>();
         playerHead = playerController.GetComponentInParent<Head>();
         playerData = playerController.playerData;

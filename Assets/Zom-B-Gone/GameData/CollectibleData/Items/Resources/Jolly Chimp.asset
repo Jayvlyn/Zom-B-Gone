@@ -16,4 +16,6 @@ MonoBehaviour:
   description: Cymbal-Banging monkey toy, this thing is kinda creepy...
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
   icon: {fileID: 0}
+  maxStack: 64
+  pickupSound: {fileID: 8300000, guid: d618fad92565a85478fc0705fba55a6b, type: 3}
   weight: 1000

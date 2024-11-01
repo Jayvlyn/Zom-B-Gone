@@ -18,6 +18,7 @@ MonoBehaviour:
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 21300000, guid: 18c6cd4643e14614497d55c2a18c9548, type: 3}
   maxStack: 1
+  pickupSound: {fileID: 8300000, guid: ccf9f3c3db3c66b4396f3b60f20c3b89, type: 3}
   showHair: 0
   swingTimeMultiplier: 0.9
   damageMultiplier: 1.1

@@ -121,6 +121,7 @@ public class ProjectileWeapon : Weapon
     {
         if(CurrentAmmo > 0 && !reloading)
         {
+            PlayShootSound();
             if(flashAnimator) flashAnimator.SetTrigger("Fire");
 
             if (muzzleLight)
@@ -172,6 +173,7 @@ public class ProjectileWeapon : Weapon
     private IEnumerator Reload(float mod = 1)
     {
         SetReloadIndicator(true);
+        PlayReloadSound();
         reloading = true;
         CurrentAmmo = 0;
         yield return new WaitForSeconds(projectileWeaponData.reloadTime * mod);
@@ -193,4 +195,22 @@ public class ProjectileWeapon : Weapon
 		if (inRightHand) playerHands.rightAmmoCount.text = currentAmmo + " / " + projectileWeaponData.maxAmmo;
 		else playerHands.leftAmmoCount.text = currentAmmo + " / " + projectileWeaponData.maxAmmo;
 	}
+
+    public void PlayShootSound()
+    {
+        if(projectileWeaponData.shootSound)
+        {
+            audioSource.resource = projectileWeaponData.shootSound;
+            audioSource.Play();
+        }
+    }
+
+    public void PlayReloadSound()
+    {
+        if(projectileWeaponData.reloadSound)
+        {
+            audioSource.resource = projectileWeaponData.reloadSound;
+            audioSource.Play();
+        }
+    }
 }

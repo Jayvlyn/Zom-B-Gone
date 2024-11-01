@@ -17,4 +17,5 @@ MonoBehaviour:
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
   icon: {fileID: 21300000, guid: 23ee7c83039845447a2bee0ac2775d24, type: 3}
   maxStack: 1
+  pickupSound: {fileID: 8300000, guid: 1d8a2c9072f779c4cb86d8a1b67e834a, type: 3}
   weight: 150
