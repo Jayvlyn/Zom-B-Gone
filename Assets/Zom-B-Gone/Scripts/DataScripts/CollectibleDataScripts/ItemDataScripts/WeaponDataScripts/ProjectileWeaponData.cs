@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Projectile Weapon", menuName = "Collectibles/New Projectile Weapon")]
@@ -15,8 +13,8 @@ public class ProjectileWeaponData : WeaponData
 	public float fireForce = 25; // Basically bullet speed
     public bool isAutomatic; // Semi-Automatic or Automatic Gun?
     public GameObject bulletPrefab;
-	public AudioClip shootSound;
-	public AudioClip reloadSound;
+	public List<AudioClip> shootSounds;
+	public AudioClip reloadStart;
 
     public override string GetInfoDisplayText()
 	{

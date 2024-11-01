@@ -173,10 +173,11 @@ public class ProjectileWeapon : Weapon
     private IEnumerator Reload(float mod = 1)
     {
         SetReloadIndicator(true);
-        PlayReloadSound();
+        PlayReloadStart();
         reloading = true;
         CurrentAmmo = 0;
         yield return new WaitForSeconds(projectileWeaponData.reloadTime * mod);
+        PlayPickupSound(); // for projectile weapons should be prime sound
         if(hasLoadedSprite) itemRenderer.sprite = loadedSprite;
         CurrentAmmo = projectileWeaponData.maxAmmo;
         reloading = false;
@@ -198,19 +199,18 @@ public class ProjectileWeapon : Weapon
 
     public void PlayShootSound()
     {
-        if(projectileWeaponData.shootSound)
+        if(projectileWeaponData.shootSounds != null)
         {
-            audioSource.resource = projectileWeaponData.shootSound;
-            audioSource.Play();
+            int roll = Random.Range(0, projectileWeaponData.shootSounds.Count);
+            audioSource.PlayOneShot(projectileWeaponData.shootSounds[roll]);
         }
     }
 
-    public void PlayReloadSound()
+    public void PlayReloadStart()
     {
-        if(projectileWeaponData.reloadSound)
+        if(projectileWeaponData.reloadStart)
         {
-            audioSource.resource = projectileWeaponData.reloadSound;
-            audioSource.Play();
+            audioSource.PlayOneShot(projectileWeaponData.reloadStart);
         }
     }
 }

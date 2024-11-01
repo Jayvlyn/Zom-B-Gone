@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public PlayerInput input;
     private Slider staminaSlider;
     private Interactor interactor;
+
+
 
     [Header("Camera Refs")]
     private Camera gameCamera;
@@ -47,7 +50,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         // Find references
-        gameCamera = FindObjectOfType<Camera>();
+        gameCamera = FindFirstObjectByType<Camera>();
         interactor = GetComponent<Interactor>();
         rb.freezeRotation = true;
         staminaSlider = GameObject.FindGameObjectWithTag("Stamina").GetComponent<Slider>();

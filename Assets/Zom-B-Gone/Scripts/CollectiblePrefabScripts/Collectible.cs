@@ -43,8 +43,7 @@ public abstract class Collectible : MonoBehaviour, IInteractable
     {
         if(data.pickupSound)
         {
-            audioSource.resource = data.pickupSound;
-            audioSource.Play();
+            audioSource.PlayOneShot(data.pickupSound);
         }
     }
 
