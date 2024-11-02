@@ -18,17 +18,19 @@ public class VanFloor : Floor
 		if (collision.CompareTag("Player"))
 		{
 			PlayerController pc = collision.GetComponent<PlayerController>();
+            if (pc.currentState != PlayerController.PlayerState.DRIVING)
+            {
+				if (showRoofCoroutine != null)
+				{
+					StopCoroutine(showRoofCoroutine);
+					showRoofCoroutine = null;
+				}
 
-			if (showRoofCoroutine != null)
-			{
-				StopCoroutine(showRoofCoroutine);
-				showRoofCoroutine = null;
-			}
-
-			if (hideRoofCoroutine == null && gameObject.activeInHierarchy)
-			{
-				hideRoofCoroutine = StartCoroutine(HideRoof(2));
-			}
+				if (hideRoofCoroutine == null && gameObject.activeInHierarchy)
+				{
+					hideRoofCoroutine = StartCoroutine(HideRoof(2));
+				}
+            }
 		}
 		else if (vehicle.rb.linearVelocity.magnitude > 0.2)
 		{

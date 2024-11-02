@@ -77,10 +77,11 @@ public static class Utils
         float random = Random.Range(0f, 260f);
         return new Vector3(Mathf.Cos(random), Mathf.Sin(random), 0);
     }
-    
+
+    private static readonly LayerMask wallInFrontLm = LayerMask.GetMask("World", "Door", "Window", "Vehicle");
     public static bool WallInFront(Transform t, float dist = 1f)
     {
-        RaycastHit2D hit = Physics2D.Raycast(t.position, t.up, dist, LayerMask.GetMask("World","Vehicle"));
+        RaycastHit2D hit = Physics2D.Raycast(t.position, t.up, dist, wallInFrontLm);
         return hit.collider != null;
         //return false;
     }
@@ -96,10 +97,10 @@ public static class Utils
                viewportPos.z >= 0; // z should be >= 0 to ensure the position is in front of the camera
     }
 
-    public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int damage)
+	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem");
+	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int damage)
     {
-        LayerMask lm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem");
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, radius, lm);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, radius, explosionLm);
         foreach (Collider2D collider in colliders)
         {
             if(collider.TryGetComponent(out Rigidbody2D rb))
@@ -158,6 +159,32 @@ public static class Utils
                 h.TakeDamage(damage, knockbackVector, 30, false);
             }
         }
+    }
+
+    private static readonly LayerMask soundDampenersLm = LayerMask.GetMask("World","Door","Window");
+    private static readonly LayerMask enemyLm = LayerMask.GetMask("Enemy");
+    public static void MakeSoundWave(Vector2 sourcePosition, float soundRadius)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(sourcePosition, soundRadius, enemyLm);
+        foreach (Collider2D hit in hits)
+        {
+            if(hit.gameObject.CompareTag("Enemy"))
+            {
+                Vector2 direction = ((Vector2)hit.gameObject.transform.position - sourcePosition).normalized;
+                float distance = Vector2.Distance(hit.gameObject.transform.position, sourcePosition);
+                RaycastHit2D[] hitsToEnemy = Physics2D.RaycastAll(sourcePosition, direction, distance, soundDampenersLm);
+
+                float actualDistance = soundRadius;
+
+                foreach(RaycastHit2D dampener in hitsToEnemy)
+                {
+                    Debug.Log(dampener.collider.gameObject.name);
+                }
+
+            }
+        }
+
+
     }
 
 }

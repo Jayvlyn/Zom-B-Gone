@@ -16,7 +16,7 @@ public class VehicleCollisionHandler : MonoBehaviour
         {
             if(collision.gameObject.CompareTag("Enemy"))
             {
-                if (rb.linearVelocity.magnitude > 5 )
+                if (rb.linearVelocity.magnitude > 4)
                 {
                     if (collision.gameObject.TryGetComponent(out Health health))
                     {
@@ -39,7 +39,7 @@ public class VehicleCollisionHandler : MonoBehaviour
         {
             if (!braking)
             {
-                damage += Mathf.FloorToInt(lateralVel * 5);
+                damage += Mathf.FloorToInt(Mathf.Pow(lateralVel,3f));
             }
         }
 

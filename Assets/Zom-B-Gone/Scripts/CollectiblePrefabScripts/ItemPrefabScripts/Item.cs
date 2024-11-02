@@ -38,8 +38,10 @@ public abstract class Item : Collectible
     [HideInInspector] public VanFloor vanBack;
     [HideInInspector] public UnitFloor unitFloor;
 
-    // Functional vars
-    [HideInInspector] public bool inRightHand;
+    protected LayerMask useBlockersLm;
+
+	// Functional vars
+	[HideInInspector] public bool inRightHand;
     [HideInInspector] public bool useHeld;
     protected bool moveToHand;
     private Vector3 pickupTarget;
@@ -65,7 +67,8 @@ public abstract class Item : Collectible
 
     public void Awake()
     {
-        itemData = data as ItemData;
+		useBlockersLm = LayerMask.GetMask("World");
+		itemData = data as ItemData;
         playerController = FindFirstObjectByType<PlayerController>();
         playerHands = playerController.GetComponentInParent<Hands>();
         playerHead = playerController.GetComponentInParent<Head>();

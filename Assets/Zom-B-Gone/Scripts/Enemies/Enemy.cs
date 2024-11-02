@@ -38,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
     public LayerMask AttackBlockersLm;
     public LayerMask MovementBlockersLm;
     public LayerMask FellowEnemyLm;
+	public LayerMask WorldObstacleLm;
 
 	private Vector2 target = Vector2.zero;
 
@@ -103,9 +104,17 @@ public abstract class Enemy : MonoBehaviour
 		currentState = newState;
 	}
 
+
+	private LayerMask playerLm;
+	private LayerMask worldLm;
+
 	void Start()
     {
-		voice = enemyData.possibleVoices[Random.Range(0, enemyData.possibleVoices.Count)];
+		playerLm = LayerMask.GetMask("Player");
+		worldLm = LayerMask.GetMask("World");
+
+		if(enemyData.possibleVoices.Count > 0)
+			voice = enemyData.possibleVoices[Random.Range(0, enemyData.possibleVoices.Count)];
 
 		health = GetComponent<Health>();
 		gm = FindFirstObjectByType<GameManager>();
@@ -173,7 +182,6 @@ public abstract class Enemy : MonoBehaviour
 	// use to handle timers only, put computationally heavy things in enemy tick
 	private void Update()
 	{
-
 		switch (currentState)
 		{
 			case State.DRONING:
@@ -192,7 +200,6 @@ public abstract class Enemy : MonoBehaviour
 			default:
 				break;
 		}
-
 	}
 
 	private void FixedUpdate()
@@ -343,9 +350,11 @@ public abstract class Enemy : MonoBehaviour
 		return Vector2.zero;
     }
 
-    #endregion
+	#endregion
 
-    Vector2 Seek()
+
+
+	Vector2 Seek()
     {
 		Vector2 seekTarget = Vector2.zero;
         float angleBetweenRays = enemyData.fov / (enemyData.perceptionRayCount - 1);
@@ -355,10 +364,10 @@ public abstract class Enemy : MonoBehaviour
             float angle = (transform.eulerAngles.z - (enemyData.fov * 0.5f) + (angleBetweenRays * i) + 90) * Mathf.Deg2Rad;
             Vector2 rayDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, enemyData.perceptionDistance, LayerMask.GetMask("Player"));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, enemyData.perceptionDistance, playerLm);
 			if (hit)
 			{
-                RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, enemyData.perceptionDistance, LayerMask.GetMask("World"));
+                RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, enemyData.perceptionDistance, worldLm);
 				if(worldHit && worldHit.distance < hit.distance)
 				{
 					return Vector2.zero;
@@ -480,20 +489,29 @@ public abstract class Enemy : MonoBehaviour
 
 	public void PlayDeathSound()
 	{
-		int index = Random.Range(0, voice.deathSounds.Count);
-		audioSource.PlayOneShot(voice.deathSounds[index]);
+		if(voice != null)
+		{
+			int index = Random.Range(0, voice.deathSounds.Count);
+			audioSource.PlayOneShot(voice.deathSounds[index]);
+		}
 	}
 
 	public void PlayPassiveSound()
 	{
-		int index = Random.Range(0, voice.passiveSounds.Count);
-		audioSource.PlayOneShot(voice.passiveSounds[index]);
+		if(voice != null)
+		{
+			int index = Random.Range(0, voice.passiveSounds.Count);
+			audioSource.PlayOneShot(voice.passiveSounds[index]);
+		}
 	}
 
 	public void PlayHurtSound()
 	{
-		int index = Random.Range(0, voice.hurtSounds.Count);
-		audioSource.PlayOneShot(voice.hurtSounds[index]);
+		if (voice != null)
+		{
+			int index = Random.Range(0, voice.hurtSounds.Count);
+			audioSource.PlayOneShot(voice.hurtSounds[index]);
+		}
 	}
 
 	public void OnHit(int damage, float dismemberChance = 0)
@@ -531,7 +549,7 @@ public abstract class Enemy : MonoBehaviour
 	}
 
 	private GameObject collidingVehicle = null;
-    private void OnCollisionEnter2D(Collision2D collision)
+	private void OnCollisionEnter2D(Collision2D collision)
     {
 		if (collision.gameObject.layer == LayerMask.NameToLayer("Vehicle"))
 		{
@@ -540,11 +558,9 @@ public abstract class Enemy : MonoBehaviour
 
         else if(collidingVehicle != null && rigidBody.linearVelocity.magnitude > 0)
 		{
-            int worldObstacleMask = LayerMask.GetMask("World", "Obstacle");
-            if ((worldObstacleMask & (1 << collision.gameObject.layer)) != 0)
+            if ((WorldObstacleLm & (1 << collision.gameObject.layer)) != 0)
 			{
-				Debug.Log(rigidBody.linearVelocity.magnitude);
-				health.TakeDamage(rigidBody.linearVelocity.magnitude * 5, Vector2.zero);
+				health.TakeDamage(rigidBody.linearVelocity.magnitude * 12, Vector2.zero);
 			}
 		}
     }

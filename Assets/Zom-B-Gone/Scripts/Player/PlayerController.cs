@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
     private Slider staminaSlider;
     private Interactor interactor;
 
-
-
     [Header("Camera Refs")]
     private Camera gameCamera;
     public CinemachineVirtualCamera vc;
@@ -44,6 +42,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput;
     private Vector2 smoothedMovementInput;
     private Vector2 movementInputSmoothVelocity;
+
+    public CameraSizer camSizer;
 
     public static ContainerDragHandler mouseHeldIcon = null;
 
@@ -445,6 +445,10 @@ public class PlayerController : MonoBehaviour
 				    vc.Follow = groupCam;
 				    framingTransposer.m_LookaheadTime = 0f;
                 }
+                if(camSizer)
+                {
+                    camSizer.LerpZoomLevel(7);
+                }
 				break;
         }
 
@@ -476,7 +480,11 @@ public class PlayerController : MonoBehaviour
 					orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(5f, 1f));
 					//framingTransposer.m_LookaheadTime = 1.2f; // done in vehicle driver now
 				}
-                input.SwitchCurrentActionMap("Vehicle");
+				if (camSizer)
+				{
+					camSizer.LerpZoomLevel(5);
+				}
+				input.SwitchCurrentActionMap("Vehicle");
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 break;
         }

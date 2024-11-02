@@ -188,21 +188,20 @@ public class MeleeWeapon : Weapon
 		playerController.currentStamina -= meleeWeaponData.staminaCost;
 	}
 
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.transform == transform.parent) return;
         else if (doDamage && !collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Health targetHealth))
         {
-
-            LayerMask useBlockers = LayerMask.GetMask("World");
-
             Vector2 pos = playerController.transform.position;
             if (inRightHand) pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(holdOffset.x, 0));
             else pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(-holdOffset.x, 0));
 
             Vector2 dir = (Vector2)collision.transform.position - pos;
 
-            RaycastHit2D hit = Physics2D.Raycast(pos, dir.normalized, dir.magnitude, useBlockers);
+            RaycastHit2D hit = Physics2D.Raycast(pos, dir.normalized, dir.magnitude, useBlockersLm);
             if (hit.collider != null) return;
             
 
