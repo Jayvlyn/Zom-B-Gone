@@ -7,7 +7,8 @@ public class ItemData : CollectibleData
 {
 	[Header("Item Attributes")]
 	// Value that determines the effect it has on the players movement when held, also determines throw damage and speed
-	[SerializeField, Range(1, 20000), Tooltip("In grams")] public float weight; // grams
+	[Range(1, 20000), Tooltip("In grams")] public float weight; // grams
+	public AudioClip throwSound;
 
 	public override string GetInfoDisplayText()
 	{

@@ -5,25 +5,16 @@ using UnityEngine;
 
 public abstract class Vehicle : MonoBehaviour, IInteractable
 {
-    [SerializeField] private VoidEvent enterEvent;
-    [SerializeField] private VoidEvent exitEvent;
+    public VehicleData vehicleData;
+    public AudioSource tireScreechSource; // should loop
+    public AudioSource engineSource; // should loop
+    public AudioSource mainSource;
 
-    [SerializeField] protected float accelerationSpeed;
-    [SerializeField] protected float brakeSpeed;
-    [SerializeField] protected float steeringSpeed;
-    [SerializeField] protected float maxTurnAngle = 45;
-    [SerializeField] protected float maxSpeed = 100;
-    public float exitDistance = 3;
-    protected float currentTurnAngle = 0;
-    //public int contactDamage = 50;
+	protected float currentTurnAngle = 0;
+	protected float driftFactor;
 
-    [SerializeField] protected float baseDriftFactor = 0.3f;
-    [SerializeField] protected float driftingDriftFactor = 0.99f;
-    [SerializeField] protected float driftDrag = 0.1f;
-    [SerializeField] protected float driveDrag = 1f;
-    protected float driftFactor;
-    public bool drift = false;
-    public bool braking = false;
+	[HideInInspector] public bool drift = false;
+	[HideInInspector] public bool braking = false;
 
     public Transform driveSeat;
     public Rigidbody2D rb;
@@ -39,27 +30,64 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         {
             active = value;
             litHeadlights.SetActive(value);
+            if(active)
+            {
+                engineSource.resource = vehicleData.engineSounds[0];
+                engineSource.Play();
+            }
+            else
+            {
+                engineSource.Stop();
+            }
+
         }
     }
 
     private void Start()
     {
-        rb.linearDamping = driveDrag;
+        rb.linearDamping = vehicleData.driveDrag;
+        if(tireScreechSource && vehicleData.tireScreechSound) tireScreechSource.resource = vehicleData.tireScreechSound;
     }
 
     protected void FixedUpdate()
     {
         if (Mathf.Abs(currentTurnAngle) > 30 && drift && !braking)
         {
-            if (rb.linearDamping > driftDrag) rb.linearDamping -= 0.05f;
-            if (rb.linearDamping < driftDrag) rb.linearDamping = driftDrag;
+            if (rb.linearDamping > vehicleData.driftDrag) rb.linearDamping -= 0.05f;
+            if (rb.linearDamping < vehicleData.driftDrag) rb.linearDamping = vehicleData.driftDrag;
         }
         else
         {
-            if (rb.linearDamping < driveDrag) rb.linearDamping += 0.05f;
-            if (rb.linearDamping > driveDrag) rb.linearDamping = driveDrag;
+            if (rb.linearDamping < vehicleData.driveDrag) rb.linearDamping += 0.05f;
+            if (rb.linearDamping > vehicleData.driveDrag) rb.linearDamping = vehicleData.driveDrag;
         }
-    }
+
+
+        if(rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.9)
+        {
+            engineSource.resource = vehicleData.engineSounds[5];
+        }
+		else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.7)
+		{
+			engineSource.resource = vehicleData.engineSounds[4];
+		}
+		else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.5)
+		{
+			engineSource.resource = vehicleData.engineSounds[3];
+		}
+		else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.3)
+		{
+			engineSource.resource = vehicleData.engineSounds[2];
+		}
+		else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.1)
+		{
+			engineSource.resource = vehicleData.engineSounds[1];
+		}
+		else
+		{
+			engineSource.resource = vehicleData.engineSounds[0];
+		}
+	}
 
     abstract public void Accelerate();
 
@@ -77,13 +105,13 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
         if (drift && !braking)
         {
-            if (driftFactor < driftingDriftFactor) driftFactor += 0.05f;
-            if (driftFactor > driftingDriftFactor) driftFactor = driftingDriftFactor;
+            if (driftFactor < vehicleData.driftingDriftFactor) driftFactor += 0.05f;
+            if (driftFactor > vehicleData.driftingDriftFactor) driftFactor = vehicleData.driftingDriftFactor;
         }
         else
         {
-            if (driftFactor > baseDriftFactor) driftFactor -= 0.005f;
-            if (driftFactor < baseDriftFactor) driftFactor = baseDriftFactor;
+            if (driftFactor > vehicleData.baseDriftFactor) driftFactor -= 0.005f;
+            if (driftFactor < vehicleData.baseDriftFactor) driftFactor = vehicleData.baseDriftFactor;
         }
 
 
@@ -107,13 +135,19 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
         if(braking && GetLongitudinalVelocity() > 0)
         {
-            isBraking = true;
+			if (tireScreechSource) tireScreechSource.Play();
+			isBraking = true;
             return true;
         }
 
         if(Mathf.Abs(GetLateralVelocity()) > 4.0f)
         {
+            if(tireScreechSource) tireScreechSource.Play();
             return true;
+        }
+        else if (tireScreechSource.isPlaying)
+		{
+			if (tireScreechSource) tireScreechSource.Stop();
         }
 
         return false;
@@ -123,12 +157,12 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     {
         if (currentTurnAngle > 0)
         {
-            currentTurnAngle -= Time.deltaTime * steeringSpeed;
+            currentTurnAngle -= Time.deltaTime * vehicleData.steeringSpeed;
             if (currentTurnAngle < 0) currentTurnAngle = 0;
         }
         else
         {
-            currentTurnAngle += Time.deltaTime * steeringSpeed;
+            currentTurnAngle += Time.deltaTime * vehicleData.steeringSpeed;
             if (currentTurnAngle > 0) currentTurnAngle = 0;
         }
     }
@@ -136,13 +170,13 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public void Interact(Head head)
     {
 		StartCoroutine(Activate(true));
-		enterEvent.Raise();
+		vehicleData.enterEvent.Raise();
     }
 
     public void OnExit()
     {
         Active = false;
-        exitEvent.Raise();
+		vehicleData.exitEvent.Raise();
     }
 
     public void Interact(bool rightHand)
@@ -159,6 +193,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     public IEnumerator Activate(bool active)
     {
+        if(vehicleData.enterSound) mainSource.PlayOneShot(vehicleData.enterSound); 
         yield return new WaitForSeconds(1f);
         Active = active;
     }

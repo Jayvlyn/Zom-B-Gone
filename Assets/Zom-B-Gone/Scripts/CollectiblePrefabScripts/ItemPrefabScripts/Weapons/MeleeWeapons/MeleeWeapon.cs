@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeWeapon : Weapon
@@ -16,7 +15,6 @@ public class MeleeWeapon : Weapon
     private bool returnSwing = false;
 
     private bool doDamage = false;
-
 
     private void Awake()
 	{

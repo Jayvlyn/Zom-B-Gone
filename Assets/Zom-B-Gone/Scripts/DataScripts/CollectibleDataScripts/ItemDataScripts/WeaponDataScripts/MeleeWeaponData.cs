@@ -7,12 +7,15 @@ using UnityEngine;
 public class MeleeWeaponData : WeaponData
 {
 	[Header("Melee Properties")]
-	[SerializeField] public float staminaCost = 1;
-	[SerializeField, Tooltip("Time in seconds to prepare swing")] public float prepSpeed = 0.2f;
-	[SerializeField] public AnimationCurve swingCurve;
-	[SerializeField] public AnimationCurve rotationCurve;
-	[SerializeField] public AnimationCurve prepSwingCurve;
-	[SerializeField] public AnimationCurve prepRotationCurve;
+	public float staminaCost = 1;
+	[Tooltip("Time in seconds to prepare swing")] public float prepSpeed = 0.2f;
+	public AnimationCurve swingCurve;
+	public AnimationCurve rotationCurve;
+	public AnimationCurve prepSwingCurve;
+	public AnimationCurve prepRotationCurve;
+	public List<AudioClip> swingSounds;
+	public List<AudioClip> hitSounds;
+
 
 	public override string GetInfoDisplayText()
 	{

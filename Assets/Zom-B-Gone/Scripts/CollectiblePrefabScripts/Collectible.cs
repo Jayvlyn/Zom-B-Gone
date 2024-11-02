@@ -47,6 +47,14 @@ public abstract class Collectible : MonoBehaviour, IInteractable
         }
     }
 
+    public void PlayDropSound()
+    {
+        if(data.dropSound)
+        {
+            audioSource.PlayOneShot(data.dropSound);
+        }
+    }
+
 	public virtual IEnumerator AddToFloorContainer(Floor floor)
 	{
 		yield return new WaitForSeconds(2f);

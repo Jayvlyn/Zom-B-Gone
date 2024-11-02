@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using GameEvents;
@@ -90,7 +88,7 @@ public class VehicleDriver : MonoBehaviour
     {
         vehicle.OnExit();
 
-        Vector2 localExitPosition = new Vector2(-vehicle.exitDistance, 0);
+        Vector2 localExitPosition = new Vector2(-vehicle.vehicleData.exitDistance, 0);
         Vector2 exitPos = (Vector2)vehicle.driveSeat.position + (Vector2)(vehicle.transform.rotation * localExitPosition);
 
         //Vector2 exitPos = new Vector2 (vehicle.driveSeat.position.x - vehicle.exitDistance, vehicle.driveSeat.position.y);

@@ -180,6 +180,7 @@ public abstract class Item : Collectible
 
     public virtual void Drop()
     {
+        PlayDropSound();
         Transform playerT = transform.parent;
         RemoveFromHand();
         ChangeState(ItemState.AIRBORNE);
@@ -191,6 +192,7 @@ public abstract class Item : Collectible
 
     public virtual void Throw()
     {
+        PlayThrowSound();
         Transform playerT = transform.parent;
         RemoveFromHand();
         ChangeState(ItemState.AIRBORNE);
@@ -349,6 +351,14 @@ public abstract class Item : Collectible
             fullCollider.gameObject.transform.parent = floor.floorCollider.transform;
             floor.floorContainer.AddCollectibleToContainer(this);
 
+        }
+    }
+
+    public void PlayThrowSound()
+    {
+        if(itemData.throwSound)
+        {
+            audioSource.PlayOneShot(itemData.throwSound);
         }
     }
 

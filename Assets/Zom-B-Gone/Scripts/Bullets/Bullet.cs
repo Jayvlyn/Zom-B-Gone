@@ -50,8 +50,6 @@ public class Bullet : MonoBehaviour
         if (currentPiercingPower < 0) Destroy(gameObject);
     }
 
-
-
     protected void DealDamage(Health targetHealth)
     {
         float damage = ProjectileWeaponDamage * bulletData.damageMultiplier;

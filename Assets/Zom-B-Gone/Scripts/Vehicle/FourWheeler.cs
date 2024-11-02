@@ -29,24 +29,24 @@ public class FourWheeler : Vehicle
 
     public override void Accelerate()
     {
-        if (rb.linearVelocity.magnitude > maxSpeed) return;
-        rb.AddForce(transform.up * accelerationSpeed);
+        if (rb.linearVelocity.magnitude > vehicleData.maxSpeed) return;
+        rb.AddForce(transform.up * vehicleData.accelerationSpeed);
         
     }
 
     public override void Brake()
     {
-        rb.AddForce(-transform.up * brakeSpeed);
+        rb.AddForce(-transform.up * vehicleData.brakeSpeed);
     }
 
     public override void Steer(float steerDirection)
     {
-        if(Mathf.Abs(currentTurnAngle) <= maxTurnAngle)
+        if(Mathf.Abs(currentTurnAngle) <= vehicleData.maxTurnAngle)
         {
-            currentTurnAngle += (Time.deltaTime * steeringSpeed) * steerDirection;
+            currentTurnAngle += (Time.deltaTime * vehicleData.steeringSpeed) * steerDirection;
 
-            if(currentTurnAngle < -maxTurnAngle) currentTurnAngle = -maxTurnAngle + 0.01f;
-            else if(currentTurnAngle > maxTurnAngle) currentTurnAngle = maxTurnAngle - 0.01f;
+            if(currentTurnAngle < -vehicleData.maxTurnAngle) currentTurnAngle = -vehicleData.maxTurnAngle + 0.01f;
+            else if(currentTurnAngle > vehicleData.maxTurnAngle) currentTurnAngle = vehicleData.maxTurnAngle - 0.01f;
 
             MatchWheelsToTurnAngle();
         }
