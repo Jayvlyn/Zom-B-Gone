@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Enemy Data", menuName = "New Enemy Data")]
+[CreateAssetMenu(fileName = "New Enemy Data", menuName = "Enemies/New Enemy Data")]
 public class EnemyData : ScriptableObject
 {
 	[Header("Stats")]
@@ -37,4 +37,7 @@ public class EnemyData : ScriptableObject
 	[Range(0, 100)] public float separationPriority;
 
 	[Range(0, 100)] public float avoidancePriority;
+
+	[Header("Audio")]
+	public List<EnemyVoice> possibleVoices;
 }

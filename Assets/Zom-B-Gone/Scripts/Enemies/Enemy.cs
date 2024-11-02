@@ -13,6 +13,8 @@ public abstract class Enemy : MonoBehaviour
 	private State currentState = State.IDLE;
 
 	public EnemyData enemyData;
+	private EnemyVoice voice;
+	public AudioSource audioSource;
 
 	public Rigidbody2D rigidBody;
 	private GameManager gm;
@@ -103,8 +105,10 @@ public abstract class Enemy : MonoBehaviour
 
 	void Start()
     {
+		voice = enemyData.possibleVoices[Random.Range(0, enemyData.possibleVoices.Count)];
+
 		health = GetComponent<Health>();
-		gm = FindObjectOfType<GameManager>();
+		gm = FindFirstObjectByType<GameManager>();
 		ChangeState(State.DRONING);
 
 		limbs = new List<Limb>(GetComponentsInChildren<Limb>());
@@ -113,7 +117,6 @@ public abstract class Enemy : MonoBehaviour
 			limb.AddAttacksToOwner();
 		}
     }
-
 
 	private Coroutine tickCoroutine;
 	private float tickInterval = 0.1f;
@@ -198,6 +201,11 @@ public abstract class Enemy : MonoBehaviour
 		{
 			rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
 			Rotate(target);
+
+			if(Random.Range((int)0, (int)5000) == 0)
+			{
+				PlayPassiveSound();
+			}
 		}
 	}
 
@@ -465,12 +473,32 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnDeath()
 	{
+		PlayDeathSound();
 		gm.enemies.Remove(this);
 		ChangeState(State.DEAD);
 	}
 
-    public void OnHit(int damage, float dismemberChance = 0)
+	public void PlayDeathSound()
+	{
+		int index = Random.Range(0, voice.deathSounds.Count);
+		audioSource.PlayOneShot(voice.deathSounds[index]);
+	}
+
+	public void PlayPassiveSound()
+	{
+		int index = Random.Range(0, voice.passiveSounds.Count);
+		audioSource.PlayOneShot(voice.passiveSounds[index]);
+	}
+
+	public void PlayHurtSound()
+	{
+		int index = Random.Range(0, voice.hurtSounds.Count);
+		audioSource.PlayOneShot(voice.hurtSounds[index]);
+	}
+
+	public void OnHit(int damage, float dismemberChance = 0)
     {
+		PlayHurtSound();
 		DismemberLimb(damage, dismemberChance);
     }
 
