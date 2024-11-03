@@ -6,7 +6,8 @@ public class CameraSizer : MonoBehaviour
 {
 	public PixelPerfectCamera pixelPerfectCamera;
 	public int baseZoomLevel = 1;
-	private Coroutine zoomCoroutine; 
+	public Vector2 referenceResolution = new Vector2(1920, 1080); // Set your desired reference resolution
+	private Coroutine zoomCoroutine;
 	public float zoomDuration = 1f;
 
 	void Start()
@@ -16,7 +17,9 @@ public class CameraSizer : MonoBehaviour
 
 	public void SetZoomLevel(int zoomLevel)
 	{
-		pixelPerfectCamera.assetsPPU = 16 * zoomLevel;
+		// Calculate the scaling factor based on the current screen size
+		float scaleFactor = Mathf.Min(Screen.width / referenceResolution.x, Screen.height / referenceResolution.y);
+		pixelPerfectCamera.assetsPPU = Mathf.RoundToInt((16 * zoomLevel) * scaleFactor);
 	}
 
 	public void LerpZoomLevel(int targetZoomLevel)
@@ -31,7 +34,7 @@ public class CameraSizer : MonoBehaviour
 	private IEnumerator LerpZoomCoroutine(int targetZoomLevel)
 	{
 		int startPPU = pixelPerfectCamera.assetsPPU;
-		int targetPPU = 16 * targetZoomLevel;
+		int targetPPU = Mathf.RoundToInt(16 * targetZoomLevel * GetScaleFactor());
 		float elapsedTime = 0f;
 
 		while (elapsedTime < zoomDuration)
@@ -48,5 +51,10 @@ public class CameraSizer : MonoBehaviour
 		// Ensure the final value is set exactly to the target
 		pixelPerfectCamera.assetsPPU = targetPPU;
 		zoomCoroutine = null;
+	}
+
+	private float GetScaleFactor()
+	{
+		return Mathf.Min(Screen.width / referenceResolution.x, Screen.height / referenceResolution.y);
 	}
 }

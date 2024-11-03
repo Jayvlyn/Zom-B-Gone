@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Hands : MonoBehaviour
 {
     public CollectibleContainerData handContainerData;
+    public PlayerController playerController;
 
     [HideInInspector] public TMP_Text leftAmmoCount;
     [HideInInspector] public TMP_Text rightAmmoCount;
@@ -195,8 +196,8 @@ public class Hands : MonoBehaviour
             leftObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
 			Optimizer.list.Add(leftObject);
 			leftItem = leftObject.GetComponent<Item>();
-            leftItem.PickUp(gameObject.transform, false);
-            UsingLeft = true;
+			leftItem.Interact(false, playerController);
+			UsingLeft = true;
             
         }
         if (handContainerData.Container.collectibleSlots[1].Collectible != null && rightItem == null) // Item missing from right hand
@@ -206,7 +207,7 @@ public class Hands : MonoBehaviour
 			rightObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
             Optimizer.list.Add(rightObject);
             rightItem = rightObject.GetComponent<Item>();
-            rightItem.PickUp(gameObject.transform, true);
+            rightItem.Interact(true, playerController);
             UsingRight = true;
         }
 

@@ -6,17 +6,17 @@ public class ItemChanger : MonoBehaviour
 {
 	public CollectibleContainerSlot handSlot;
 	public bool rightHand = false;
-	private Hands playerHands;
+	private PlayerController playerController;
 
 	private void Awake()
 	{
-		playerHands = FindObjectOfType<Hands>();
+		playerController = FindFirstObjectByType<PlayerController>();
 	}
 
 	public void CheckItemChange()
 	{
-		if (rightHand) DoChecks(playerHands.rightItem);
-		else		   DoChecks(playerHands.leftItem);
+		if (rightHand) DoChecks(playerController.hands.rightItem);
+		else		   DoChecks(playerController.hands.leftItem);
 		
 	}
 
@@ -47,25 +47,25 @@ public class ItemChanger : MonoBehaviour
 	{
 		string hatName = handSlot.SlotCollectible.name;
 		GameObject prefab = Resources.Load<GameObject>(hatName);
-		GameObject itemObject = Instantiate(prefab, playerHands.transform.position, playerHands.transform.rotation);
+		GameObject itemObject = Instantiate(prefab, playerController.hands.transform.position, playerController.hands.transform.rotation);
 		Item heldItem = itemObject.GetComponent<Item>();
-		heldItem.Interact(rightHand);
+		heldItem.Interact(rightHand, playerController);
 		if (rightHand)
 		{
-			playerHands.RightObject = itemObject; 
-			playerHands.UsingRight = true;
+			playerController.hands.RightObject = itemObject;
+			playerController.hands.UsingRight = true;
 		}
 		else
 		{
-			playerHands.LeftObject = itemObject; 
-			playerHands.UsingLeft = true;
+			playerController.hands.LeftObject = itemObject;
+			playerController.hands.UsingLeft = true;
 		}
 	}
 
 	private void RemoveItemFromHand(Item heldItem)
 	{
 		Destroy(heldItem.gameObject);
-		if (rightHand) playerHands.UsingRight = false;
-		else playerHands.UsingLeft = false;
+		if (rightHand) playerController.hands.UsingRight = false;
+		else playerController.hands.UsingLeft = false;
 	}
 }

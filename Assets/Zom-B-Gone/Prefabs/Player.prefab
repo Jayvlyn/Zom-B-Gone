@@ -156,6 +156,7 @@ MonoBehaviour:
   lookaheadChanger: {fileID: 0}
   currentStamina: 0
   recoverStamina: 0
+  camSizer: {fileID: 0}
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
 --- !u!114 &2538085723734079734
 MonoBehaviour:
@@ -170,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headContainerData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
+  pc: {fileID: 8105131813210140980}
   hatTransform: {fileID: 5398307496003575394}
   hairRenderer: {fileID: 6924896234494385440}
   wornHat: {fileID: 0}
@@ -188,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handContainerData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  playerController: {fileID: 8105131813210140980}
   leftAmmoCount: {fileID: 0}
   rightAmmoCount: {fileID: 0}
   leftReloadingIndicator: {fileID: 0}

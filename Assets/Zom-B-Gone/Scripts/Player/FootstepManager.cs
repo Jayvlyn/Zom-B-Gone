@@ -90,5 +90,10 @@ public class FootstepManager : MonoBehaviour
 
         // play one shot of chosen sound
         footstepAudioSource.PlayOneShot(chosenAudioCollection[index]);
+
+
+        float footstepSoundRadius = 3;
+        if(playerController.currentState == PlayerController.PlayerState.RUNNING) footstepSoundRadius *= 2;
+        Utils.MakeSoundWave(playerController.transform.position, footstepSoundRadius, playerController.isSneaking);
     }    
 }

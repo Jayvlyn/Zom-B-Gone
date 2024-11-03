@@ -16,7 +16,7 @@ public class Workbench : MonoBehaviour, IInteractable
     private int fullInputSlots;
 
 
-    public void Interact(bool rightHand)
+    public void Interact(bool rightHand, PlayerController playerController)
     {
         OpenCraftingUI();
         gameObject.layer = LayerMask.NameToLayer("World");
@@ -113,10 +113,5 @@ public class Workbench : MonoBehaviour, IInteractable
         }
         craftingTableInput.onContainerCollectibleUpdated.Raise();
         //foundRecipe.resultCollectible = null;
-    }
-
-    public void Interact(Head head)
-    {
-        throw new System.NotImplementedException();
     }
 }

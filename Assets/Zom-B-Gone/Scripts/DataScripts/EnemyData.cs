@@ -38,6 +38,8 @@ public class EnemyData : ScriptableObject
 
 	[Range(0, 100)] public float avoidancePriority;
 
+	[Range(0, 100)] public float investigatePriority;
+
 	[Header("Audio")]
 	public List<EnemyVoice> possibleVoices;
 }

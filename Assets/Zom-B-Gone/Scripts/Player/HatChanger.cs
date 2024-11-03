@@ -5,33 +5,35 @@ using UnityEngine;
 public class HatChanger : MonoBehaviour
 {
     public CollectibleContainerSlot headSlot;
-    private Head playerHead;
+    private PlayerController playerController;
 
     private void Awake()
     {
-        playerHead = FindObjectOfType<Head>();    
+        playerController = FindFirstObjectByType<PlayerController>();  
     }
 
     public void CheckHatChange()
     {
-        if (headSlot.SlotCollectible == null && playerHead.wornHat != null) // remove hat on head from world (data not lost, exists in inventory)
+        if (headSlot.SlotCollectible == null && playerController.head.wornHat != null) // remove hat on head from world (data not lost, exists in inventory)
         {
-            Destroy(playerHead.wornHat.gameObject);
-            playerHead.HatObject = null;
+            Destroy(playerController.head.wornHat.gameObject);
+            if (playerController.head.wornHat.hatData.camo) playerController.gameObject.layer = LayerMask.NameToLayer("Player");
+			playerController.head.HatObject = null;
         }
 
-        else if (headSlot.SlotCollectible != null && playerHead.wornHat == null) // add hat on head
+        else if (headSlot.SlotCollectible != null && playerController.head.wornHat == null) // add hat on head
         {
             SpawnNewHatOnHead();
         }
 
-        else if (headSlot.SlotCollectible != null && playerHead.wornHat != null) // swap hat on head
+        else if (headSlot.SlotCollectible != null && playerController.head.wornHat != null) // swap hat on head
         {
-            if (playerHead.wornHat.hatData.name != headSlot.SlotCollectible.name)
+            if (playerController.head.wornHat.hatData.name != headSlot.SlotCollectible.name)
             {
-                Destroy(playerHead.wornHat.gameObject);
+                Destroy(playerController.head.wornHat.gameObject);
+				if (playerController.head.wornHat.hatData.camo) playerController.gameObject.layer = LayerMask.NameToLayer("Player");
 
-                SpawnNewHatOnHead();
+				SpawnNewHatOnHead();
             }
         }
     }
@@ -40,9 +42,9 @@ public class HatChanger : MonoBehaviour
     {
         string hatName = headSlot.SlotCollectible.name;
         GameObject prefab = Resources.Load<GameObject>(hatName);
-        GameObject hatObject = Instantiate(prefab, playerHead.transform.position, playerHead.transform.rotation);
+        GameObject hatObject = Instantiate(prefab, playerController.head.transform.position, playerController.head.transform.rotation);
         Hat wornHat = hatObject.GetComponent<Hat>();
-        wornHat.Interact(playerHead);
+        wornHat.Interact(false, playerController);
     }
 }
 

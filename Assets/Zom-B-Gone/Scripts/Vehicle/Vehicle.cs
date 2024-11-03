@@ -34,10 +34,13 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
             {
                 engineSource.resource = vehicleData.engineSounds[0];
                 engineSource.Play();
+                if (engineSoundCoroutine == null) engineSoundCoroutine = StartCoroutine(EngineSoundLoop());
             }
             else
             {
                 engineSource.Stop();
+                StopCoroutine(engineSoundCoroutine);
+                engineSoundCoroutine = null;
             }
 
         }
@@ -135,23 +138,42 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
         if(braking && GetLongitudinalVelocity() > 0)
         {
-			if (tireScreechSource) tireScreechSource.Play();
+            StartScreechNoise();
 			isBraking = true;
             return true;
         }
 
-        if(Mathf.Abs(GetLateralVelocity()) > 4.0f)
+
+
+        if(Mathf.Abs(lateralVelocity) > 4.0f)
         {
-            if(tireScreechSource) tireScreechSource.Play();
+            StartScreechNoise();
             return true;
         }
-        else if (tireScreechSource.isPlaying)
+
+
+        
+        if(!braking && Mathf.Abs(lateralVelocity) < 4.0f && tireScreechSource.isPlaying)
 		{
 			if (tireScreechSource) tireScreechSource.Stop();
+            if(tireScreechCoroutine != null)
+            {
+                StopCoroutine(tireScreechCoroutine);
+                tireScreechCoroutine = null;
+            }
         }
 
         return false;
     }
+
+    private void StartScreechNoise()
+    {
+		if (tireScreechSource) tireScreechSource.Play();
+        if(tireScreechCoroutine == null)
+        {
+            tireScreechCoroutine = StartCoroutine(TireScreechLoop());
+        }
+	}
 
     public virtual void CorrectSteering()
     {
@@ -167,22 +189,17 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact(Head head)
-    {
-		StartCoroutine(Activate(true));
-		vehicleData.enterEvent.Raise();
-    }
-
     public void OnExit()
     {
         Active = false;
 		vehicleData.exitEvent.Raise();
     }
 
-    public void Interact(bool rightHand)
+    public void Interact(bool rightHand, PlayerController playerController)
     {
-        throw new System.NotImplementedException();
-    }
+		StartCoroutine(Activate(true));
+		vehicleData.enterEvent.Raise();
+	}
 
     public IEnumerator ExplodedTimer()
     {
@@ -196,7 +213,38 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         if(vehicleData.enterSound) mainSource.PlayOneShot(vehicleData.enterSound); 
         yield return new WaitForSeconds(1f);
         Active = active;
+
+        Utils.MakeSoundWave(transform.position, 8);
     }
 
+    private Coroutine engineSoundCoroutine;
+    private IEnumerator EngineSoundLoop()
+    {
+        int soundRadius = 0;
+        while(true)
+        {
+            if (engineSource.resource == vehicleData.engineSounds[0]) soundRadius = 3;
+            if (engineSource.resource == vehicleData.engineSounds[1]) soundRadius = 5;
+            if (engineSource.resource == vehicleData.engineSounds[2]) soundRadius = 7;
+            if (engineSource.resource == vehicleData.engineSounds[3]) soundRadius = 9;
+            if (engineSource.resource == vehicleData.engineSounds[4]) soundRadius = 11;
+            if (engineSource.resource == vehicleData.engineSounds[5]) soundRadius = 15;
+
+            Utils.MakeSoundWave(transform.position, soundRadius);
+
+            yield return new WaitForSeconds(2.5f);
+        }
+    }
+
+    private Coroutine tireScreechCoroutine;
+    private IEnumerator TireScreechLoop()
+    {
+        while(true)
+        {
+			Utils.MakeSoundWave(transform.position, 10);
+
+			yield return new WaitForSeconds(2.5f);
+		}
+    }
 
 }

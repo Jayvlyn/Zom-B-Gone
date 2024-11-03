@@ -15,12 +15,14 @@ MonoBehaviour:
   name: Zombie Mask
   description: I can blend in with them like this
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7f21c1bf46e4d27498e70a2d0d31f60d, type: 3}
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: 5210a04fc047a624b8570dd7c4379648, type: 3}
-  showHair: 1
+  dropSound: {fileID: 0}
+  showHair: 0
   swingTimeMultiplier: 1
   damageMultiplier: 1
   damageIncrease: 0
   moveSpeedMod: 1
   defense: 0
+  camo: 1

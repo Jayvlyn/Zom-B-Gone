@@ -97,13 +97,19 @@ public static class Utils
                viewportPos.z >= 0; // z should be >= 0 to ensure the position is in front of the camera
     }
 
-	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem");
+	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle");
 	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int damage)
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, radius, explosionLm);
         foreach (Collider2D collider in colliders)
         {
-            if(collider.TryGetComponent(out Rigidbody2D rb))
+			if (collider.TryGetComponent(out Health h))
+			{
+				Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
+				knockbackVector *= force;
+				h.TakeDamage(damage, knockbackVector, 30, false);
+			}
+			else if (collider.TryGetComponent(out Rigidbody2D rb))
             {
                 float finalForce = force;
                 if(collider.gameObject.layer == LayerMask.NameToLayer("Vehicle"))
@@ -151,20 +157,14 @@ public static class Utils
                 Vector2 dir = ((Vector2)collider.transform.position - sourcePosition).normalized;
                 rb.AddForce(dir * finalForce);
             }
-
-            if(collider.TryGetComponent(out Health h))
-            {
-                Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
-                knockbackVector *= force;
-                h.TakeDamage(damage, knockbackVector, 30, false);
-            }
         }
     }
 
     private static readonly LayerMask soundDampenersLm = LayerMask.GetMask("World","Door","Window");
     private static readonly LayerMask enemyLm = LayerMask.GetMask("Enemy");
-    public static void MakeSoundWave(Vector2 sourcePosition, float soundRadius)
+    public static void MakeSoundWave(Vector2 sourcePosition, float soundRadius, bool sneaking = false)
     {
+        if (sneaking) soundRadius *= 0.5f;
         Collider2D[] hits = Physics2D.OverlapCircleAll(sourcePosition, soundRadius, enemyLm);
         foreach (Collider2D hit in hits)
         {
@@ -174,11 +174,20 @@ public static class Utils
                 float distance = Vector2.Distance(hit.gameObject.transform.position, sourcePosition);
                 RaycastHit2D[] hitsToEnemy = Physics2D.RaycastAll(sourcePosition, direction, distance, soundDampenersLm);
 
-                float actualDistance = soundRadius;
+                float soundDistance = soundRadius;
 
-                foreach(RaycastHit2D dampener in hitsToEnemy)
+                foreach (var soundHit in hitsToEnemy)
                 {
-                    Debug.Log(dampener.collider.gameObject.name);
+                    soundDistance *= 0.75f;
+                }
+
+                if(distance <= soundDistance)
+                {
+                    if(hit.gameObject.TryGetComponent(out Enemy e))
+                    {
+                        // alert enemy
+                        Debug.Log("enemy heard");
+                    }
                 }
 
             }

@@ -29,11 +29,7 @@ public abstract class Item : Collectible
     [SerializeField] protected float gripRotation = 130;
     [SerializeField] protected float minimumAirborneSpeed = 10;
 
-    [HideInInspector] public Rigidbody2D rb;
-    protected PlayerController playerController;
-    protected Hands playerHands;
-    protected Head playerHead;
-    protected PlayerData playerData;
+    public Rigidbody2D rb;
 
     [HideInInspector] public VanFloor vanBack;
     [HideInInspector] public UnitFloor unitFloor;
@@ -69,14 +65,10 @@ public abstract class Item : Collectible
     {
 		useBlockersLm = LayerMask.GetMask("World");
 		itemData = data as ItemData;
-        playerController = FindFirstObjectByType<PlayerController>();
-        playerHands = playerController.GetComponentInParent<Hands>();
-        playerHead = playerController.GetComponentInParent<Head>();
-        playerData = playerController.playerData;
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
+        if (rb == null )          rb = GetComponent<Rigidbody2D>();
         if (fullCollider == null) fullCollider = GetComponent<Collider2D>();
         if (itemRenderer == null) itemRenderer = GetComponent<SpriteRenderer>();
+        rb.gravityScale = 0;
 
         // Set sorting order based on awake state
         switch (currentState)
@@ -255,9 +247,9 @@ public abstract class Item : Collectible
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public override void Interact(bool rightHand)
+    public override void Interact(bool rightHand, PlayerController playerController)
     {
-        base.Interact(rightHand);
+        base.Interact(rightHand, playerController);
         PickUp(playerController.transform, rightHand);
     }
 
@@ -363,6 +355,7 @@ public abstract class Item : Collectible
         {
             audioSource.PlayOneShot(itemData.throwSound);
         }
+        Utils.MakeSoundWave(playerController.transform.position, 1.2f, playerController.isSneaking);
     }
 
 }

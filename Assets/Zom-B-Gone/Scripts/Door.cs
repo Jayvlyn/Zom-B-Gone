@@ -18,7 +18,7 @@ public class Door : MonoBehaviour, IInteractable
         baseRot = transform.rotation;
     }
 
-    public void Interact(bool rightHand)
+    public void Interact(bool rightHand, PlayerController playerController)
     {
         ToggleLock();
     }
@@ -39,11 +39,6 @@ public class Door : MonoBehaviour, IInteractable
 
         }
 
-    }
-
-    public void Interact(Head head)
-    {
-        throw new System.NotImplementedException();
     }
 
 	private void OnCollisionStay2D(Collision2D collision)

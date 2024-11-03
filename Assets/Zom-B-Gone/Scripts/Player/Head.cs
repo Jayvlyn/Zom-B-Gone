@@ -5,7 +5,7 @@ using UnityEngine;
 public class Head : MonoBehaviour
 {
     public CollectibleContainerData headContainerData;
-
+    public PlayerController pc;
     public Transform hatTransform;
     public SpriteRenderer hairRenderer;
     [HideInInspector] public Hat wornHat;
@@ -45,7 +45,7 @@ public class Head : MonoBehaviour
 			hatObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
 			Optimizer.list.Add(hatObject);
 			wornHat = hatObject.GetComponent<Hat>();
-			wornHat.Interact(this);
+			wornHat.Interact(false, pc);
 		}
 	}
 }

@@ -29,7 +29,7 @@ public class Lootable : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact(bool rightHand)
+    public void Interact(bool rightHand, PlayerController playerController)
     {
         containerData.Container.collectibleSlots = collectibleSlots;
         containerData.onContainerCollectibleUpdated.Raise();
@@ -40,10 +40,5 @@ public class Lootable : MonoBehaviour, IInteractable
     public void OnLootableClosed()
     {
         //gameObject.layer = LayerMask.NameToLayer("Interactable");
-    }
-
-    public void Interact(Head head)
-    {
-        throw new System.NotImplementedException();
-    }
+    }   
 }

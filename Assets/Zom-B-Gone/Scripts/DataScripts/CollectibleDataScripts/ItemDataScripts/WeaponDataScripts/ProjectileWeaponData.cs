@@ -15,6 +15,7 @@ public class ProjectileWeaponData : WeaponData
     public GameObject bulletPrefab;
 	public List<AudioClip> shootSounds;
 	public AudioClip reloadStart;
+	public float reloadNoiseRadius;
 
     public override string GetInfoDisplayText()
 	{

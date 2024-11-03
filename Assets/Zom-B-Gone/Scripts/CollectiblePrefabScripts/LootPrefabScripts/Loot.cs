@@ -57,11 +57,11 @@ public class Loot : Collectible
         Destroy(gameObject);
     }
 
-    public override void Interact(Head head)
+    public override void Interact(bool rightHand, PlayerController playerController)
 	{
-        base.Interact(head);
-		gameObject.transform.parent = head.gameObject.transform;
+        base.Interact(rightHand, playerController);
+		gameObject.transform.parent = playerController.head.gameObject.transform;
 		gameObject.layer = LayerMask.NameToLayer("Default");
-		StartCoroutine(PickupTransferPosition(head.hatTransform));
+		StartCoroutine(PickupTransferPosition(playerController.head.hatTransform));
 	}
 }

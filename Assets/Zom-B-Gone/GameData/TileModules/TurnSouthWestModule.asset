@@ -15,7 +15,7 @@ MonoBehaviour:
   width: 11
   height: 11
   tiles:
-  - {fileID: 11400000, guid: fd03327700e10bc42807ebbb2b2be7c2, type: 2}
+  - {fileID: 11400000, guid: 0cb8dd2aad4a5724da1bc04ede361154, type: 2}
   - {fileID: 11400000, guid: b6e7244bb57600a4cb1175d37709d19a, type: 2}
   - {fileID: 11400000, guid: 090f65c64570f7d40b2a386b64ceafff, type: 2}
   - {fileID: 11400000, guid: 090f65c64570f7d40b2a386b64ceafff, type: 2}

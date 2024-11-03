@@ -111,7 +111,7 @@ public class ProjectileWeapon : Weapon
     {
         if(parent.gameObject.TryGetComponent(out PlayerController pc)) playerController = pc;
         base.PickUp(parent, rightHand);
-        CurrentAmmo = CurrentAmmo; // update count text
+        CurrentAmmo = CurrentAmmo; // to update count text when property changes
         shotTimer = 0.2f;
     }
 
@@ -197,11 +197,12 @@ public class ProjectileWeapon : Weapon
 
     public void PlayShootSound()
     {
-        if(projectileWeaponData.shootSounds != null)
+        if(projectileWeaponData.shootSounds.Count > 0)
         {
             int roll = Random.Range(0, projectileWeaponData.shootSounds.Count);
             audioSource.PlayOneShot(projectileWeaponData.shootSounds[roll]);
         }
+        Utils.MakeSoundWave(transform.position, projectileWeaponData.noiseRadius);
     }
 
     public void PlayReloadStart()
@@ -210,5 +211,6 @@ public class ProjectileWeapon : Weapon
         {
             audioSource.PlayOneShot(projectileWeaponData.reloadStart);
         }
+        Utils.MakeSoundWave(transform.position, projectileWeaponData.reloadNoiseRadius, playerController.isSneaking);
     }
 }

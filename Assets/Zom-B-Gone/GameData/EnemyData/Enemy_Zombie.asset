@@ -33,3 +33,5 @@ MonoBehaviour:
   separationRadius: 10
   separationPriority: 10
   avoidancePriority: 8
+  investigatePriority: 30
+  possibleVoices: []

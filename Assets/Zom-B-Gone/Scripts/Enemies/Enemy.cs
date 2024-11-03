@@ -41,6 +41,7 @@ public abstract class Enemy : MonoBehaviour
 	public LayerMask WorldObstacleLm;
 
 	private Vector2 target = Vector2.zero;
+	private Vector2 investigaitonPoint = Vector2.zero;
 
 
 	private void ChangeState(State newState)
@@ -108,16 +109,19 @@ public abstract class Enemy : MonoBehaviour
 	private LayerMask playerLm;
 	private LayerMask worldLm;
 
-	void Start()
-    {
+	private void Awake()
+	{
 		playerLm = LayerMask.GetMask("Player");
 		worldLm = LayerMask.GetMask("World");
+		health = GetComponent<Health>();
+		gm = FindFirstObjectByType<GameManager>();
+	}
 
+	void Start()
+    {
 		if(enemyData.possibleVoices.Count > 0)
 			voice = enemyData.possibleVoices[Random.Range(0, enemyData.possibleVoices.Count)];
 
-		health = GetComponent<Health>();
-		gm = FindFirstObjectByType<GameManager>();
 		ChangeState(State.DRONING);
 
 		limbs = new List<Limb>(GetComponentsInChildren<Limb>());
@@ -157,13 +161,16 @@ public abstract class Enemy : MonoBehaviour
 		switch (currentState)
 		{
 			case State.DRONING:
+				if (Random.Range(0, 2000) == 0) PlayDroneSound();
 				LerpTarget(Drone());
 				//target = Drone();
 				break;
 			case State.INVESTIGATING:
+				if (Random.Range(0, 2000) == 0) PlayDroneSound();
 				LerpTarget(Investigate());
 				break;
 			case State.AGGRO:
+				if (Random.Range(0, 1000) == 0) PlayAggroSound();
 				LerpTarget(Aggro());
 				break;
 			case State.DEAD:
@@ -208,11 +215,6 @@ public abstract class Enemy : MonoBehaviour
 		{
 			rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
 			Rotate(target);
-
-			if(Random.Range((int)0, (int)5000) == 0)
-			{
-				PlayPassiveSound();
-			}
 		}
 	}
 
@@ -352,7 +354,10 @@ public abstract class Enemy : MonoBehaviour
 
 	#endregion
 
-
+	Vector2 InvestigateTarget()
+	{
+		return (investigaitonPoint - (Vector2)transform.position).normalized;
+	}
 
 	Vector2 Seek()
     {
@@ -395,19 +400,21 @@ public abstract class Enemy : MonoBehaviour
 	virtual protected Vector2 Drone()
 	{
 		return (enemyData.cohesionPriority * Cohesion() +
-				enemyData.wanderPriority * Wander() + 
 				enemyData.alignmentPriority * Alignment() + 
 				enemyData.separationPriority * Separation() +
-				enemyData.avoidancePriority * Avoidance() + Seek());
+				enemyData.avoidancePriority * Avoidance() +
+				enemyData.wanderPriority * Wander() + // Wander for droning
+				Seek());
 	}
 
     virtual protected Vector2 Investigate()
     {
         return (enemyData.cohesionPriority * Cohesion() +
-                enemyData.wanderPriority * Wander() +
 				enemyData.alignmentPriority * Alignment() +
                 enemyData.separationPriority * Separation() +
-                enemyData.avoidancePriority * Avoidance() + Seek());
+                enemyData.avoidancePriority * Avoidance() +
+				enemyData.investigatePriority * InvestigateTarget() + // Get target for investigation
+				Seek());
     }
 
     virtual protected Vector2 Aggro()
@@ -482,26 +489,25 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnDeath()
 	{
-		PlayDeathSound();
 		gm.enemies.Remove(this);
 		ChangeState(State.DEAD);
 	}
 
-	public void PlayDeathSound()
+	public void PlayDroneSound()
 	{
 		if(voice != null)
 		{
-			int index = Random.Range(0, voice.deathSounds.Count);
-			audioSource.PlayOneShot(voice.deathSounds[index]);
+			int index = Random.Range(0, voice.droneSounds.Count);
+			audioSource.PlayOneShot(voice.droneSounds[index]);
 		}
 	}
 
-	public void PlayPassiveSound()
+	public void PlayAggroSound()
 	{
-		if(voice != null)
+		if (voice != null)
 		{
-			int index = Random.Range(0, voice.passiveSounds.Count);
-			audioSource.PlayOneShot(voice.passiveSounds[index]);
+			int index = Random.Range(0, voice.droneSounds.Count);
+			audioSource.PlayOneShot(voice.droneSounds[index]);
 		}
 	}
 

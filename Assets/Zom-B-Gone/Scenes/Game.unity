@@ -256,7 +256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734369, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: orthographic size
-      value: 1.015625
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8481703725698734369, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
       propertyPath: m_OcclusionCulling
@@ -1345,10 +1345,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8339959537163183905, guid: 59be50700a2a7f54f9d77bba2b3d0a5c, type: 3}
-  numberOfEnemies: 0
+  numberOfEnemies: 1
   spawnRadius: 10
   enemies: []
-  intervalSpawning: 1
+  intervalSpawning: 0
   intervalTime: 5
   intervalSpawnAmount: 2
   marketData: {fileID: 11400000, guid: 1c50df99ec83d07449d49c207a6a96f4, type: 2}
@@ -1851,7 +1851,7 @@ MonoBehaviour:
     rid: 411917316408738172
   m_ShadowCastingSource: 2
   m_ShadowMesh:
-    m_Mesh: {fileID: 1267931977}
+    m_Mesh: {fileID: 853201136}
     m_LocalBounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
@@ -1960,17 +1960,7 @@ Transform:
   - {fileID: 52811239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &870150725 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 8481703725698734369, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
-  m_PrefabInstance: {fileID: 75655558}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1146911890 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8035437069155170809, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
-  m_PrefabInstance: {fileID: 205977534}
-  m_PrefabAsset: {fileID: 0}
---- !u!43 &1267931977
+--- !u!43 &853201136
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2135,6 +2125,16 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!20 &870150725 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8481703725698734369, guid: b2a2a2d93e53c424b9e6fe37c290306d, type: 3}
+  m_PrefabInstance: {fileID: 75655558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1146911890 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8035437069155170809, guid: 7dbca5f00cb94994887637635ec40836, type: 3}
+  m_PrefabInstance: {fileID: 205977534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1361081840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,6 +2479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pixelPerfectCamera: {fileID: 1456997038}
   baseZoomLevel: 7
+  referenceResolution: {x: 1920, y: 1080}
   zoomDuration: 1
 --- !u!1 &1531150418
 GameObject:

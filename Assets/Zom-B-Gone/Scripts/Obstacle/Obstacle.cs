@@ -59,7 +59,7 @@ public class Obstacle : MonoBehaviour, IInteractable
 		currentState = state;
 	}
 
-	public void Interact(bool rightHand)
+	public void Interact(bool rightHand, PlayerController playerController)
 	{
 		ChangeState(ObstacleState.GRABBED);
 	}
@@ -88,9 +88,4 @@ public class Obstacle : MonoBehaviour, IInteractable
         motor.motorSpeed = speed;
         joint.motor = motor;
     }
-
-	public void Interact(Head head)
-	{
-		throw new System.NotImplementedException();
-	}
 }

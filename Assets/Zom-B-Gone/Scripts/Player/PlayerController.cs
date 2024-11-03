@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
         IDLE, WALKING, RUNNING, SNEAKING, DRIVING
     }
     public PlayerState currentState;
+    public bool isSneaking => currentState == PlayerState.SNEAKING;
 
-    [Header("References")]
+	[Header("References")]
     public PlayerData playerData;
     public Hands hands;
     public Head head;

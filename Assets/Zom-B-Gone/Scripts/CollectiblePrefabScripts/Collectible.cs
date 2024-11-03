@@ -8,30 +8,27 @@ public abstract class Collectible : MonoBehaviour, IInteractable
     public Collider2D fullCollider;
     public AudioSource audioSource;
 
-	public virtual void Interact(bool rightHand)
+	protected PlayerController playerController;
+	protected Hands playerHands;
+	protected Head playerHead;
+	protected PlayerData playerData;
+
+	public virtual void Interact(bool rightHand, PlayerController playerController)
     {
         PlayPickupSound();
+
+        this.playerController = playerController;
+		playerHands = playerController.gameObject.GetComponent<Hands>();
+		playerHead = playerController.gameObject.GetComponent<Head>();
+		playerData = playerController.playerData;
+
+
 		if (addContainer != null)
 		{
 			StopCoroutine(addContainer);
 			addContainer = null;
 		}
 		if (floorContainer)
-        {
-            PosRot posRot = new PosRot(transform.localPosition, transform.localRotation);
-            floorContainer.RemoveFromContainer(posRot);
-            floorContainer = null;
-        }
-    }
-    public virtual void Interact(Head head)
-    {
-        PlayPickupSound();
-        if (addContainer != null)
-        {
-            StopCoroutine(addContainer);
-            addContainer = null;
-        }
-        if (floorContainer)
         {
             PosRot posRot = new PosRot(transform.localPosition, transform.localRotation);
             floorContainer.RemoveFromContainer(posRot);
@@ -45,6 +42,7 @@ public abstract class Collectible : MonoBehaviour, IInteractable
         {
             audioSource.PlayOneShot(data.pickupSound);
         }
+        Utils.MakeSoundWave(transform.position, 2);
     }
 
     public void PlayDropSound()
@@ -53,7 +51,8 @@ public abstract class Collectible : MonoBehaviour, IInteractable
         {
             audioSource.PlayOneShot(data.dropSound);
         }
-    }
+		Utils.MakeSoundWave(transform.position, 4);
+	}
 
 	public virtual IEnumerator AddToFloorContainer(Floor floor)
 	{

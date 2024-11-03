@@ -9,6 +9,7 @@ public class ItemData : CollectibleData
 	// Value that determines the effect it has on the players movement when held, also determines throw damage and speed
 	[Range(1, 20000), Tooltip("In grams")] public float weight; // grams
 	public AudioClip throwSound;
+	public float noiseRadius;
 
 	public override string GetInfoDisplayText()
 	{

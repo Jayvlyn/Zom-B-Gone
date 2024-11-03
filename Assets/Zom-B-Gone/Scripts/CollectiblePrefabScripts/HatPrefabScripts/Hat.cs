@@ -33,13 +33,13 @@ public class Hat : Collectible
         if (useDataIcon) spriteRenderer.sprite = hatData.icon;
 	}
 
-    public override void Interact(Head head)
+    public override void Interact(bool rightHand, PlayerController playerController)
     {
-        base.Interact(head);
+        base.Interact(rightHand, playerController);
         Worn = true;
-		head.HatObject = gameObject;
-		gameObject.transform.parent = head.gameObject.transform;
-		this.head = head;
+		playerController.head.HatObject = gameObject;
+		gameObject.transform.parent = playerController.head.gameObject.transform;
+		head = playerController.head;
         gameObject.layer = LayerMask.NameToLayer("WornHat");
 
         spriteRenderer.sortingLayerName = "WornHat";
@@ -51,6 +51,11 @@ public class Hat : Collectible
         }
 
         StartCoroutine(TransferPosition(head.hatTransform));
+
+        if(hatData.camo)
+        {
+            playerController.gameObject.layer = LayerMask.NameToLayer("Enemy");
+        }
     }
 
 	public IEnumerator TransferPosition(Vector3 position, Quaternion rotation)
@@ -94,7 +99,12 @@ public class Hat : Collectible
     {
         if (head != null)
         {
-            Worn = false;
+			if (hatData.camo)
+			{
+				playerController.gameObject.layer = LayerMask.NameToLayer("Player");
+			}
+
+			Worn = false;
             head.HatObject = null;
             gameObject.transform.parent = null;
 			gameObject.layer = LayerMask.NameToLayer("Interactable");

@@ -1,14 +1,11 @@
 using GameEvents;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public interface IInteractable
 {
-    public void Interact(bool rightHand);
-    public void Interact(Head head);
+    public void Interact(bool rightHand, PlayerController playerController);
 }
 
 public class Interactor : MonoBehaviour
@@ -277,7 +274,7 @@ public class Interactor : MonoBehaviour
                 }
 
                 if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
-                AvailableInteractable.Interact(rightHand);
+                AvailableInteractable.Interact(rightHand, playerController);
             }
 
             else if (AvailableInteractable is Workbench)
@@ -288,13 +285,13 @@ public class Interactor : MonoBehaviour
                 }
 
                 if (AvailableInteractable is MonoBehaviour mono) interactedCrafting = mono.gameObject;
-                AvailableInteractable.Interact(rightHand);
+                AvailableInteractable.Interact(rightHand, playerController);
             }
 
             // INTERACT WITH ITEM
             else if (AvailableInteractable is Item)
             {
-                AvailableInteractable.Interact(rightHand);
+                AvailableInteractable.Interact(rightHand, playerController);
 
                 if (rightHand)
                 {
@@ -334,14 +331,14 @@ public class Interactor : MonoBehaviour
                 }
 
                 // Wear new hat
-                AvailableInteractable.Interact(playerController.head);
+                AvailableInteractable.Interact(false, playerController);
             }
 
 
             // INTERACT WITH LOOT
             else if (AvailableInteractable is Loot)
             {
-                AvailableInteractable.Interact(playerController.head);
+                AvailableInteractable.Interact(false, playerController);
             }
 
             // INTERACT WITH VEHICLE
@@ -349,12 +346,12 @@ public class Interactor : MonoBehaviour
             {
                 vehicleDriver.vehicle = v;
                 vehicleDriver.Enter(playerCollider, playerController);
-                AvailableInteractable.Interact(playerController.head);
+                AvailableInteractable.Interact(false, playerController);
             }
 
             else if (AvailableInteractable is Obstacle o)
             {
-                AvailableInteractable.Interact(rightHand);
+                AvailableInteractable.Interact(rightHand, playerController);
                 if (rightHand)
                 {
                     playerController.hands.UsingRight = true;
@@ -374,7 +371,7 @@ public class Interactor : MonoBehaviour
 
             else
             {
-                AvailableInteractable.Interact(rightHand);
+                AvailableInteractable.Interact(rightHand, playerController);
             }
 
             AvailableInteractable = null;
