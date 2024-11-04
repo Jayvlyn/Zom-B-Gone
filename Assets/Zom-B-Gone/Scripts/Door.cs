@@ -8,6 +8,8 @@ public class Door : MonoBehaviour, IInteractable
     public SpringJoint2D spring;
     public Rigidbody2D rb;
     public bool locked = false;
+    public AudioClip doorLockSound;
+    public AudioSource audioSource;
 
     private Vector3 basePos;
     private Quaternion baseRot;
@@ -25,6 +27,8 @@ public class Door : MonoBehaviour, IInteractable
 
     public void ToggleLock()
     {
+        audioSource.PlayOneShot(doorLockSound);
+
         if (locked)
         { // unlock
             locked = false;
@@ -36,7 +40,6 @@ public class Door : MonoBehaviour, IInteractable
             rb.bodyType = RigidbodyType2D.Kinematic;
             transform.rotation = baseRot;
             transform.position = basePos;
-
         }
 
     }

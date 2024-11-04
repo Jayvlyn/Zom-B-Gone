@@ -17,8 +17,11 @@ MonoBehaviour:
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 0}
   maxStack: 1
-  pickupSound: {fileID: 8300000, guid: d618fad92565a85478fc0705fba55a6b, type: 3}
+  pickupSound: {fileID: 8300000, guid: e981808a5a555044694f5c65abf7f4d0, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 1100
+  throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
+  noiseRadius: 0
   damage: 60
   attackSpeed: 0.5
   knockbackPower: 10
@@ -30,3 +33,6 @@ MonoBehaviour:
   fireForce: 25
   isAutomatic: 0
   bulletPrefab: {fileID: 0}
+  shootSounds: []
+  reloadStart: {fileID: 0}
+  reloadNoiseRadius: 0

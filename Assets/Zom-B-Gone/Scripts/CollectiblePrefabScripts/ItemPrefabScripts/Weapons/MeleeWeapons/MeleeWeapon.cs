@@ -90,6 +90,8 @@ public class MeleeWeapon : Weapon
     {
         DrainStamina();
 
+        PlaySwingSound();
+        
         float elapsedTime = 0f;
 
         float swingTime = weaponData.attackSpeed;
@@ -188,7 +190,24 @@ public class MeleeWeapon : Weapon
 		playerController.currentStamina -= meleeWeaponData.staminaCost;
 	}
 
+    private void PlaySwingSound()
+    {
+        if (meleeWeaponData.swingSounds.Count > 0)
+        {
+            int roll = Random.Range(0, meleeWeaponData.swingSounds.Count);
+            audioSource.PlayOneShot(meleeWeaponData.swingSounds[roll]);
+        }
+    }
 
+
+    private void PlayHitSound()
+    {
+        if (meleeWeaponData.hitSounds.Count > 0)
+        {
+            int roll = Random.Range(0, meleeWeaponData.hitSounds.Count);
+            audioSource.PlayOneShot(meleeWeaponData.hitSounds[roll]);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -203,9 +222,9 @@ public class MeleeWeapon : Weapon
 
             RaycastHit2D hit = Physics2D.Raycast(pos, dir.normalized, dir.magnitude, useBlockersLm);
             if (hit.collider != null) return;
-            
 
 
+            PlayHitSound();
             DealDamage(targetHealth);
         }
     }

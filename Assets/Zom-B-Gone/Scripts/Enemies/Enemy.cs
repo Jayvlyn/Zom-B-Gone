@@ -161,16 +161,16 @@ public abstract class Enemy : MonoBehaviour
 		switch (currentState)
 		{
 			case State.DRONING:
-				if (Random.Range(0, 2000) == 0) PlayDroneSound();
+				if (Random.Range(0, 200) == 0) PlayDroneSound();
 				LerpTarget(Drone());
 				//target = Drone();
 				break;
 			case State.INVESTIGATING:
-				if (Random.Range(0, 2000) == 0) PlayDroneSound();
+				if (Random.Range(0, 200) == 0) PlayDroneSound();
 				LerpTarget(Investigate());
 				break;
 			case State.AGGRO:
-				if (Random.Range(0, 1000) == 0) PlayAggroSound();
+				if (Random.Range(0, 100) == 0) PlayAggroSound();
 				LerpTarget(Aggro());
 				break;
 			case State.DEAD:
@@ -506,8 +506,8 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if (voice != null)
 		{
-			int index = Random.Range(0, voice.droneSounds.Count);
-			audioSource.PlayOneShot(voice.droneSounds[index]);
+			int index = Random.Range(0, voice.aggroSounds.Count);
+			audioSource.PlayOneShot(voice.aggroSounds[index]);
 		}
 	}
 

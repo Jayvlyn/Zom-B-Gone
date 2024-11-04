@@ -19,11 +19,13 @@ public class FootstepManager : MonoBehaviour
     public List<AudioClip> tileFootsteps;
     public List<AudioClip> asphaultFootsteps;
     public List<AudioClip> woodenFootsteps;
+    public List<AudioClip> carpetFootsteps;
     public List<AudioClip> concreteFootsteps;
 
     public List<TileBase> grassTiles;
     public List<TileBase> tileTiles;
     public List<TileBase> asphaultTiles;
+    public List<TileBase> carpetTiles;
     public List<TileBase> woodenTiles;
 
     private void Start()
@@ -80,6 +82,10 @@ public class FootstepManager : MonoBehaviour
         if (chosenAudioCollection.Count == 0)
             foreach (TileBase t in tileTiles)
                 if (t == tile) chosenAudioCollection = tileFootsteps;
+
+        if (chosenAudioCollection.Count == 0)
+            foreach (TileBase t in carpetTiles)
+                if (t == tile) chosenAudioCollection = carpetFootsteps;
 
         if (chosenAudioCollection.Count == 0)
             chosenAudioCollection = concreteFootsteps;

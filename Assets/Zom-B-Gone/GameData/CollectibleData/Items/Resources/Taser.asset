@@ -17,8 +17,11 @@ MonoBehaviour:
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
   icon: {fileID: 0}
   maxStack: 1
-  pickupSound: {fileID: 8300000, guid: d618fad92565a85478fc0705fba55a6b, type: 3}
+  pickupSound: {fileID: 8300000, guid: d2e8cbb167b35a04d8b055ac966ad86c, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 100
+  throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
+  noiseRadius: 0
   damage: 10
   attackSpeed: 0.15
   knockbackPower: 10
@@ -49,3 +52,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  swingSounds:
+  - {fileID: 8300000, guid: 953176f6d6d63e245b339526501e2ddf, type: 3}
+  - {fileID: 8300000, guid: fac418a8a85acef4d90752a850b073b0, type: 3}
+  - {fileID: 8300000, guid: 058bb92378d44904dbc570ef39dd8451, type: 3}
+  hitSounds:
+  - {fileID: 8300000, guid: 7998ae8ee1cadfa40a2694c75dec41df, type: 3}
+  - {fileID: 8300000, guid: f8690dcdd9632c4459a587498741103c, type: 3}
+  - {fileID: 8300000, guid: 8a82ded4f7c8fe04ca056cd6b96afec2, type: 3}

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b811d149fd096418ff10b091dcc8c1, type: 3}
+  m_Name: EnemyVoice_Zombie1
+  m_EditorClassIdentifier: 
+  droneSounds:
+  - {fileID: 8300000, guid: 9ba420e6ba5f4d547b37a47aff027cb0, type: 3}
+  - {fileID: 8300000, guid: 11d71cf244ce33446afd5f02b0b55f0d, type: 3}
+  - {fileID: 8300000, guid: 81b59fc3888256f42b20e05eef936ce2, type: 3}
+  aggroSounds:
+  - {fileID: 8300000, guid: e6b10e6b9f0c20d4e9745ff2e4052e1f, type: 3}
+  - {fileID: 8300000, guid: 6e762237fd284874fb9a56fbb4f63d0c, type: 3}
+  - {fileID: 8300000, guid: 11ac0b01da744a84ca770b2e0a0a1c85, type: 3}
+  hurtSounds:
+  - {fileID: 8300000, guid: 3372ab159b55b9e4db6d5f70e7d4837a, type: 3}
+  - {fileID: 8300000, guid: 03fefbd6a8bd90f4e952e8570a4cd544, type: 3}
+  - {fileID: 8300000, guid: 77080809a646a514984bab0b23e9f823, type: 3}

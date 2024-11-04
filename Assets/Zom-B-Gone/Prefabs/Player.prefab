@@ -547,13 +547,30 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a09f750c26bbc46409712a51331d1c8c, type: 3}
   - {fileID: 8300000, guid: 27e7513f5a9ebba499bc1bc76f7b607f, type: 3}
   tileFootsteps:
-  - {fileID: 8300000, guid: 42152ba416f34054084fbaf018628c61, type: 3}
+  - {fileID: 8300000, guid: 94bf1feea37346443ab26807376dba2e, type: 3}
+  - {fileID: 8300000, guid: ca410ded73577454fbba8228fbb4932b, type: 3}
+  - {fileID: 8300000, guid: b2351969e6445c445b8217bcbaee3fe6, type: 3}
+  - {fileID: 8300000, guid: ee0f04a12ffc08740b69f0da92cf65ad, type: 3}
   asphaultFootsteps:
-  - {fileID: 8300000, guid: 6528bdc5adf0a56449571b0e6f348268, type: 3}
+  - {fileID: 8300000, guid: 91c39d04389930444821974daa17be58, type: 3}
+  - {fileID: 8300000, guid: a0d0444898bfdac4c91b7a5461ff1f7a, type: 3}
+  - {fileID: 8300000, guid: 0c55a39dd203cc6488670fd9db4df840, type: 3}
+  - {fileID: 8300000, guid: ae6f83763030cc04c862b530d35b1c64, type: 3}
   woodenFootsteps:
-  - {fileID: 8300000, guid: 0c3efc5c3ec22c3458e6100ffb5278bd, type: 3}
+  - {fileID: 8300000, guid: f0c0a83f328d57d41a01f5a0b04e3670, type: 3}
+  - {fileID: 8300000, guid: 39a471dcc7e07a7478fa2a96a1f9d6b6, type: 3}
+  - {fileID: 8300000, guid: 307df92bf5daf2545b09907fe6bd8eae, type: 3}
+  - {fileID: 8300000, guid: c0a53d7e9f66fd54fa69507f3bf9583f, type: 3}
+  carpetFootsteps:
+  - {fileID: 8300000, guid: 4f926971d23b40e4a8b222ec4c0fe95b, type: 3}
+  - {fileID: 8300000, guid: dd3d64186fbea4e45ba3128e52053359, type: 3}
+  - {fileID: 8300000, guid: b7d9a5d5beed8c64f86887a923d6009d, type: 3}
+  - {fileID: 8300000, guid: 8f364fa5d9d925e41bc861b8329ae623, type: 3}
   concreteFootsteps:
-  - {fileID: 8300000, guid: d91cc8cb43ddb2543ad86e340fef62d1, type: 3}
+  - {fileID: 8300000, guid: 0515e886f45f4a744803a571c592df51, type: 3}
+  - {fileID: 8300000, guid: 1fbcc7e301fed0e4ca9a7a6e7fa4bcd0, type: 3}
+  - {fileID: 8300000, guid: cf090832bf4b843439a9f5befbddf8c1, type: 3}
+  - {fileID: 8300000, guid: 0ce9e069d49196a46bc27521f5dd3232, type: 3}
   grassTiles:
   - {fileID: 11400000, guid: 35110f2664c37134aada7a402cf53faa, type: 2}
   tileTiles:
@@ -567,6 +584,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e676d9c80cb4c4947a0ecd5eaa55e965, type: 2}
   - {fileID: 11400000, guid: b36376bf0e74f7a49afce659f26f3e8e, type: 2}
   - {fileID: 11400000, guid: 090f65c64570f7d40b2a386b64ceafff, type: 2}
+  carpetTiles:
+  - {fileID: 11400000, guid: da67be406da188542a1070e155cece0c, type: 2}
+  - {fileID: 11400000, guid: f14b06b726ed47d48aae8605660487ce, type: 2}
+  - {fileID: 11400000, guid: 590f45a9bbce61a448a77fe592fc59c9, type: 2}
+  - {fileID: 11400000, guid: 67152b6ef6cff5c4f95639f171c11e6c, type: 2}
+  - {fileID: 11400000, guid: 523064683617bad4891479c5b4e15437, type: 2}
+  - {fileID: 11400000, guid: b54f6d8713f5a894196497c603a1fca7, type: 2}
   woodenTiles:
   - {fileID: 11400000, guid: b188506b50d16ac439810689abaadb44, type: 2}
   - {fileID: 11400000, guid: 6cf385d9d657568429b3108841718ac7, type: 2}
@@ -628,7 +652,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0

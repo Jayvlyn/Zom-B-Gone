@@ -17,10 +17,12 @@ MonoBehaviour:
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 21300000, guid: 7ba2b535475e4e1408e9ec56e184b655, type: 3}
   maxStack: 1
-  pickupSound: {fileID: 8300000, guid: a63de9ab6ba5315469bc5da78d7dfbca, type: 3}
+  pickupSound: {fileID: 8300000, guid: d2e8cbb167b35a04d8b055ac966ad86c, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   showHair: 1
   swingTimeMultiplier: 1.2
   damageMultiplier: 1
   damageIncrease: 0
   moveSpeedMod: 1.5
   defense: 7
+  camo: 0
