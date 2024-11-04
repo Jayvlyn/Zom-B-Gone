@@ -24,7 +24,7 @@ MonoBehaviour:
   noiseRadius: 0
   damage: 15
   attackSpeed: 0.5
-  knockbackPower: 10
+  knockbackPower: 400
   dismemberChance: 0
   staminaCost: 1
   prepSpeed: 0.35

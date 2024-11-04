@@ -2,6 +2,7 @@ using GameEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public abstract class Vehicle : MonoBehaviour, IInteractable
 {
@@ -65,32 +66,35 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
             if (rb.linearDamping > vehicleData.driveDrag) rb.linearDamping = vehicleData.driveDrag;
         }
 
-
-        if(rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.9)
+        if(active && vehicleData.engineSounds.Length > 0)
         {
-            engineSource.resource = vehicleData.engineSounds[5];
+            if(rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.9)
+            {
+                engineSource.resource = vehicleData.engineSounds[5];
+            }
+		    else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.7)
+		    {
+			    engineSource.resource = vehicleData.engineSounds[4];
+            }
+		    else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.5)
+		    {
+			    engineSource.resource = vehicleData.engineSounds[3];
+            }
+		    else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.3)
+		    {
+			    engineSource.resource = vehicleData.engineSounds[2];
+            }
+		    else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.1)
+		    {
+			    engineSource.resource = vehicleData.engineSounds[1];
+            }
+		    else
+		    {
+			    engineSource.resource = vehicleData.engineSounds[0];
+            }
+            if (!engineSource.isPlaying) engineSource.Play();
         }
-		else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.7)
-		{
-			engineSource.resource = vehicleData.engineSounds[4];
-		}
-		else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.5)
-		{
-			engineSource.resource = vehicleData.engineSounds[3];
-		}
-		else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.3)
-		{
-			engineSource.resource = vehicleData.engineSounds[2];
-		}
-		else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.1)
-		{
-			engineSource.resource = vehicleData.engineSounds[1];
-		}
-		else
-		{
-			engineSource.resource = vehicleData.engineSounds[0];
-		}
-	}
+    }
 
     abstract public void Accelerate();
 
@@ -168,7 +172,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     private void StartScreechNoise()
     {
-		if (tireScreechSource) tireScreechSource.Play();
+		if (tireScreechSource && !tireScreechSource.isPlaying) tireScreechSource.Play();
         if(tireScreechCoroutine == null)
         {
             tireScreechCoroutine = StartCoroutine(TireScreechLoop());
