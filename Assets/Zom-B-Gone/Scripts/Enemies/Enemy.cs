@@ -18,7 +18,6 @@ public abstract class Enemy : MonoBehaviour
 	public AudioSource audioSource;
 
 	public Rigidbody2D rigidBody;
-	private GameManager gm;
 	private Health health;
 	private GameObject playerTarget;
 
@@ -121,7 +120,6 @@ public abstract class Enemy : MonoBehaviour
 		windowLm = LayerMask.GetMask("Window");
 		interactableLm = LayerMask.GetMask("Interactable");
 		health = GetComponent<Health>();
-		gm = FindFirstObjectByType<GameManager>();
 	}
 
 	ContactFilter2D movementBlockerFilter = new ContactFilter2D();
@@ -526,7 +524,6 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnDeath()
 	{
-		gm.enemies.Remove(this);
 		ChangeState(State.DEAD);
 	}
 

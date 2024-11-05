@@ -25,7 +25,7 @@ MonoBehaviour:
   perceptionRayCount: 7
   doHoarding: 1
   wanderDistance: 10
-  wanderPriority: 10.4
+  wanderPriority: 11.3
   cohesionRadius: 13.9
   cohesionPriority: 53.1
   alignmentRadius: 9.8
