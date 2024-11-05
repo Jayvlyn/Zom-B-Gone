@@ -23,6 +23,4 @@ public class VehicleData : ScriptableObject
 	[Header("Audio Refs")]
 	public AudioClip enterSound;
 	public AudioClip exitSound;
-	public AudioClip tireScreechSound;
-	public AudioClip[] engineSounds = new AudioClip[6]; // 0 - 5 depending on speed
 }

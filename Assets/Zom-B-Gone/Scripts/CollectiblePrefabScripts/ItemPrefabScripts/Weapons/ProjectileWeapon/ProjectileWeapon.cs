@@ -202,7 +202,9 @@ public class ProjectileWeapon : Weapon
             int roll = Random.Range(0, projectileWeaponData.shootSounds.Count);
             audioSource.PlayOneShot(projectileWeaponData.shootSounds[roll]);
         }
-        Utils.MakeSoundWave(transform.position, projectileWeaponData.noiseRadius);
+        float noise = projectileWeaponData.noiseRadius;
+        if (projectileWeaponData.suppressed) noise *= 0.5f;
+        Utils.MakeSoundWave(transform.position, noise);
     }
 
     public void PlayReloadStart()
@@ -211,6 +213,6 @@ public class ProjectileWeapon : Weapon
         {
             audioSource.PlayOneShot(projectileWeaponData.reloadStart);
         }
-        Utils.MakeSoundWave(transform.position, projectileWeaponData.reloadNoiseRadius, playerController.isSneaking);
+        Utils.MakeSoundWave(transform.position, projectileWeaponData.reloadNoiseRadius, PlayerController.isSneaking);
     }
 }

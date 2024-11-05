@@ -25,11 +25,6 @@ public class DragHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-	private void Update()
-	{
-		
-	}
-
     private IEnumerator LerpToMouse()
     {
         lerpToMouse = true;

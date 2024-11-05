@@ -39,6 +39,7 @@ public abstract class Enemy : MonoBehaviour
     public LayerMask MovementBlockersLm;
     public LayerMask FellowEnemyLm;
 	public LayerMask WorldObstacleLm;
+	public LayerMask SightBlockersLm;
 
 	private Vector2 target = Vector2.zero;
 	private Vector2 investigaitonPoint = Vector2.zero;
@@ -108,17 +109,26 @@ public abstract class Enemy : MonoBehaviour
 
 	private LayerMask playerLm;
 	private LayerMask worldLm;
+	private LayerMask windowLm;
+	private LayerMask interactableLm;
 
 	private void Awake()
 	{
 		playerLm = LayerMask.GetMask("Player");
 		worldLm = LayerMask.GetMask("World");
+		windowLm = LayerMask.GetMask("Window");
+		interactableLm = LayerMask.GetMask("Interactable");
 		health = GetComponent<Health>();
 		gm = FindFirstObjectByType<GameManager>();
 	}
 
+	ContactFilter2D movementBlockerFilter = new ContactFilter2D();
+
 	void Start()
     {
+		movementBlockerFilter.SetLayerMask(~LayerMask.GetMask("Interactable"));// for doors, dont(~) include interactables like doors so they still want to walk through them
+		movementBlockerFilter.useLayerMask = true;
+
 		if(enemyData.possibleVoices.Count > 0)
 			voice = enemyData.possibleVoices[Random.Range(0, enemyData.possibleVoices.Count)];
 
@@ -163,7 +173,6 @@ public abstract class Enemy : MonoBehaviour
 			case State.DRONING:
 				if (Random.Range(0, 200) == 0) PlayDroneSound();
 				LerpTarget(Drone());
-				//target = Drone();
 				break;
 			case State.INVESTIGATING:
 				if (Random.Range(0, 200) == 0) PlayDroneSound();
@@ -197,10 +206,7 @@ public abstract class Enemy : MonoBehaviour
 			case State.INVESTIGATING:
 				break;
 			case State.AGGRO:
-				if (attackTimer > 0)
-				{
-					attackTimer -= Time.deltaTime;
-				}
+				if (attackTimer > 0) attackTimer -= Time.deltaTime;
 				break;
 			case State.DEAD:
 				break;
@@ -213,8 +219,24 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if (currentState != State.DEAD)
 		{
-			rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
 			Rotate(target);
+
+			if(rigidBody.linearVelocity.magnitude < 0.4f) // if not moving much see if something is in the way
+			{
+                int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
+				if (hitCount > 0) return;       
+            }
+			
+			rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
+		}
+	}
+
+	public void StartInvestigating(Vector2 investigationPoint)
+	{
+		if (currentState != State.DEAD || currentState != State.AGGRO)
+		{
+			this.investigaitonPoint = investigationPoint;
+			ChangeState(State.INVESTIGATING);
 		}
 	}
 
@@ -424,8 +446,9 @@ public abstract class Enemy : MonoBehaviour
 
         if (playerDistance > enemyData.perceptionDistance)
 		{
+			Vector2 lastSeenPosition = playerTarget.transform.position;
 			playerTarget = null;
-			ChangeState(State.DRONING);
+			StartInvestigating(lastSeenPosition);
 			return Vector2.zero;
 		}
 		else if(playerDistance <= enemyData.attackRange && attackTimer <= 0)
@@ -560,6 +583,11 @@ public abstract class Enemy : MonoBehaviour
 		if (collision.gameObject.layer == LayerMask.NameToLayer("Vehicle"))
 		{
 			collidingVehicle = collision.gameObject;
+		}
+		else if(collision.gameObject.CompareTag("Player") && playerTarget == null)
+		{
+			playerTarget = collision.gameObject;
+			ChangeState(State.AGGRO);
 		}
 
         else if(collidingVehicle != null && rigidBody.linearVelocity.magnitude > 0)

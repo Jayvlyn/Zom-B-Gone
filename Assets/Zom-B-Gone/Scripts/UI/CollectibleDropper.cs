@@ -26,7 +26,7 @@ public class CollectibleDropper : MonoBehaviour
 
     public void Drop()
     {
-		if (playerController == null) playerController = FindObjectOfType<PlayerController>();
+		if (playerController == null) playerController = FindFirstObjectByType<PlayerController>();
 
 		switch (container.containerType)
         {

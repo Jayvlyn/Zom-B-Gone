@@ -355,7 +355,7 @@ public abstract class Item : Collectible
         {
             audioSource.PlayOneShot(itemData.throwSound);
         }
-        Utils.MakeSoundWave(playerController.transform.position, 1.2f, playerController.isSneaking);
+        Utils.MakeSoundWave(playerController.transform.position, 1.2f, PlayerController.isSneaking);
     }
 
 }

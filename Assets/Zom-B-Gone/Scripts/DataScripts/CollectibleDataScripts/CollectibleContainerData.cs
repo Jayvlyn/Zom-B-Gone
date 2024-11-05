@@ -7,11 +7,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Container", menuName = "New Container")]
 public class CollectibleContainerData : ScriptableObject
 {
-    [SerializeField] public ContainerType containerType;
-    [SerializeField] public VoidEvent onContainerCollectibleUpdated = null;
-    [SerializeField] public VoidEvent onContainerCollectibleSwapped = null;
+    public ContainerType containerType;
+    public VoidEvent onContainerCollectibleUpdated = null;
+    public VoidEvent onContainerCollectibleSwapped = null;
+    public VoidEvent onContainerSwapped = null;
     [SerializeField] private CollectibleSlot testCollectibleSlot = new CollectibleSlot();
-    [SerializeField] public int size = 42;
+    public int size = 42;
 
     public CollectibleContainer container;
     public CollectibleContainer Container
@@ -42,13 +43,19 @@ public class CollectibleContainerData : ScriptableObject
         Container.OnCollectibleSwapped -= onContainerCollectibleSwapped.Raise;
     }
 
-    [ContextMenu("Test Add")]
-    public void TestAdd()
+    [ContextMenu("Update UI")]
+    public void UpdateUI()
     {
-        Container.AddCollectible(testCollectibleSlot);
+        Container.OnCollectibleUpdated.Invoke();
     }
 
     [ContextMenu("Test Add")]
+    public void TestAdd()
+    {
+        Container.AddCollectible(ref testCollectibleSlot);
+    }
+
+    [ContextMenu("Subscribe to events")]
     public void SubscribeToEvents()
     {
         Container.OnCollectibleUpdated += onContainerCollectibleUpdated.Raise;
@@ -58,8 +65,14 @@ public class CollectibleContainerData : ScriptableObject
     public void AddToContainer(CollectibleData data, int amount)
     {
         CollectibleSlot incomingCollectible = new CollectibleSlot(data, data.name, amount);
-        Container.AddCollectible(incomingCollectible);
+        Container.AddCollectible(ref incomingCollectible);
     }
+
+    public void AddToContainer(ref CollectibleSlot slot)
+    {
+        Container.AddCollectible(ref slot);
+    }
+
 
     public int AddToContainerNSIA(CollectibleData data, int amount)
     {

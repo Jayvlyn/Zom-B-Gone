@@ -98,11 +98,17 @@ public static class Utils
     }
 
 	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle");
+    private static readonly LayerMask coverLm = LayerMask.GetMask("World", "Vehicle");
 	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int damage)
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, radius, explosionLm);
         foreach (Collider2D collider in colliders)
         {
+            Vector2 dir = ((Vector2)collider.transform.position - sourcePosition).normalized;
+            float dist = Vector2.Distance(collider.transform.position, sourcePosition);
+            RaycastHit2D coverHit = Physics2D.Raycast(sourcePosition, dir, dist, coverLm);
+            if (coverHit.collider != null) continue;
+
 			if (collider.TryGetComponent(out Health h))
 			{
 				Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
@@ -154,7 +160,7 @@ public static class Utils
                 }
 
 
-                Vector2 dir = ((Vector2)collider.transform.position - sourcePosition).normalized;
+
                 rb.AddForce(dir * finalForce);
             }
         }
@@ -184,9 +190,20 @@ public static class Utils
                 if(distance <= soundDistance)
                 {
                     if(hit.gameObject.TryGetComponent(out Enemy e))
-                    {
-                        // alert enemy
-                        Debug.Log("enemy heard");
+                    { // GPT helped with random variation based on distance
+                        // Define a maximum random offset factor (tweak this to get desired variation)
+                        float maxOffsetFactor = 0.2f; // For example, 0.2 means up to 20% of the distance
+
+                        // Calculate a random offset based on the distance
+                        float randomOffsetX = Random.Range(-1f, 1f) * distance * maxOffsetFactor;
+                        float randomOffsetY = Random.Range(-1f, 1f) * distance * maxOffsetFactor;
+                        Vector2 randomOffset = new Vector2(randomOffsetX, randomOffsetY);
+
+                        // Apply the offset to the source position
+                        Vector2 variedSourcePosition = sourcePosition + randomOffset;
+
+                        // Alert enemy with the varied source position
+                        e.StartInvestigating(variedSourcePosition);
                     }
                 }
 

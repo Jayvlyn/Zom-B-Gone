@@ -12,8 +12,6 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
     [SerializeField] public CollectibleContainerData containerData = null;
     [SerializeField] private TextMeshProUGUI collectibleQuantityText = null;
 
-    public VoidEvent containerSwappedEvent = null;
-
     public override CollectibleData SlotCollectible
     {
         get { return CollectibleSlot.Collectible; }
@@ -109,7 +107,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
         {
             //if (thisCollectibleSlot.collectible as LootData && !otherSlot.allowLoot) return;
             //if (thisCollectibleSlot.collectible as HatData && !otherSlot.allowHats) return;
-            //if (thisCollectibleSlot.collectible as ItemData && !otherSlot.allowItems) return;
+            //if (thisCollectibleSlot.collectible as ItemData && !otherSlot.allowItems) return; - moved
 
             if (otherSlot.Collectible as LootData && !thisCollectibleSlot.allowLoot) return;
             if (otherSlot.Collectible as HatData && !thisCollectibleSlot.allowHats) return;
@@ -124,8 +122,8 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
             containerData.Container.collectibleSlots[SlotIndex].CollectibleName = otherSlot.CollectibleName;
             containerData.Container.collectibleSlots[SlotIndex].quantity = otherSlot.quantity;
 
-            if(containerSwappedEvent) containerSwappedEvent.Raise();
-            if(otherCollectibleSlot.containerSwappedEvent) otherCollectibleSlot.containerSwappedEvent.Raise();
+            if(containerData.onContainerSwapped) containerData.onContainerSwapped.Raise();
+            if(otherCollectibleSlot.containerData.onContainerSwapped) otherCollectibleSlot.containerData.onContainerSwapped.Raise();
         }
 
         containerData.onContainerCollectibleSwapped.Raise();

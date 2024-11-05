@@ -24,7 +24,7 @@ public class CollectibleContainer : ICollectibleContainer
         else return new CollectibleSlot();
     }
 
-    public CollectibleSlot AddCollectible(CollectibleSlot collectibleSlot)
+    public CollectibleSlot AddCollectible(ref CollectibleSlot collectibleSlot)
     {
         for (int i = 0; i < collectibleSlots.Length; i++)
         {
@@ -37,6 +37,7 @@ public class CollectibleContainer : ICollectibleContainer
                     {
                         collectibleSlots[i].quantity += collectibleSlot.quantity;
                         collectibleSlot.quantity = 0;
+                        collectibleSlot.CollectibleName = null;
                         OnCollectibleUpdated.Invoke();
                         return collectibleSlot;
                     }
@@ -65,6 +66,7 @@ public class CollectibleContainer : ICollectibleContainer
                     collectibleSlots[i].quantity = collectibleSlot.quantity;
 
                     collectibleSlot.quantity = 0;
+                    collectibleSlot.CollectibleName = null;
 
                     OnCollectibleUpdated.Invoke();
 
@@ -78,6 +80,7 @@ public class CollectibleContainer : ICollectibleContainer
                     collectibleSlots[i].quantity = collectibleSlot.Collectible.MaxStack;
 
                     collectibleSlot.quantity -= collectibleSlot.Collectible.MaxStack;
+                    if(collectibleSlot.quantity <= 0) collectibleSlot.CollectibleName = null;
                 }
             }
         }

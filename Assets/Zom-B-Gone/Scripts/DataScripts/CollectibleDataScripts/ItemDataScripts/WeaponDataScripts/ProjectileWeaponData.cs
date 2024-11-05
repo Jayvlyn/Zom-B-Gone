@@ -16,6 +16,7 @@ public class ProjectileWeaponData : WeaponData
 	public List<AudioClip> shootSounds;
 	public AudioClip reloadStart;
 	public float reloadNoiseRadius;
+	public bool suppressed = false;
 
     public override string GetInfoDisplayText()
 	{

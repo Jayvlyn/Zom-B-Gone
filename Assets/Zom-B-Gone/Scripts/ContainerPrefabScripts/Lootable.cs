@@ -10,6 +10,11 @@ public class Lootable : MonoBehaviour, IInteractable
 
     public CollectibleContainerData containerData; // container data tied to ui for all lootables
 
+    public CollectibleContainerData backpackData;
+    public CollectibleContainerData handsData;
+    public CollectibleContainerData headData;
+
+
     private void Awake()
     {
         float chanceToFill = 100;
@@ -37,8 +42,25 @@ public class Lootable : MonoBehaviour, IInteractable
         //gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
-    public void OnLootableClosed()
+    public void LootAll()
     {
-        //gameObject.layer = LayerMask.NameToLayer("Interactable");
-    }   
+        for(int i = 0; i < collectibleSlots.Length; i++)
+        {
+            if (collectibleSlots[i].Collectible is LootData)
+            {
+                backpackData.AddToContainer(ref collectibleSlots[i]);
+                
+            }
+            else if (collectibleSlots[i].Collectible is ItemData)
+            {
+                handsData.AddToContainer(ref collectibleSlots[i]);
+                handsData.onContainerSwapped.Raise();
+            }
+            else if (collectibleSlots[i].Collectible is HatData)
+            {
+                headData.AddToContainer(ref collectibleSlots[i]);
+            }
+        }
+        containerData.onContainerCollectibleUpdated.Raise();
+    }
 }

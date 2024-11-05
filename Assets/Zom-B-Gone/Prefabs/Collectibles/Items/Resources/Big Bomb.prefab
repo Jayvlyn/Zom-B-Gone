@@ -70,7 +70,7 @@ MonoBehaviour:
   unitFloor: {fileID: 0}
   inRightHand: 0
   useHeld: 0
-  quantity: 1
+  quantity: 4
   weaponData: {fileID: 0}
   throwingWeaponData: {fileID: 0}
   fuseTime: 3.5

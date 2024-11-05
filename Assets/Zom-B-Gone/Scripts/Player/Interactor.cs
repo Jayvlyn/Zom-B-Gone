@@ -71,7 +71,7 @@ public class Interactor : MonoBehaviour
 
     private void Update()
     { 
-        if(playerController.currentState != PlayerController.PlayerState.DRIVING)
+        if(PlayerController.currentState != PlayerController.PlayerState.DRIVING)
         {
             // scan must happen even with hands full for lootable scanning
 

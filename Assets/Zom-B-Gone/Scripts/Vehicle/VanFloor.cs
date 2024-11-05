@@ -17,8 +17,8 @@ public class VanFloor : Floor
 
 		if (collision.CompareTag("Player"))
 		{
-			PlayerController pc = collision.GetComponent<PlayerController>();
-            if (pc.currentState != PlayerController.PlayerState.DRIVING)
+			//PlayerController pc = collision.GetComponent<PlayerController>();
+            if (PlayerController.currentState != PlayerController.PlayerState.DRIVING)
             {
 				if (showRoofCoroutine != null)
 				{

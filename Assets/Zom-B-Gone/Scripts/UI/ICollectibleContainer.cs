@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ICollectibleContainer
 {
-    CollectibleSlot AddCollectible(CollectibleSlot collectibleSlot);
+    CollectibleSlot AddCollectible(ref CollectibleSlot collectibleSlot);
 
     void RemoveCollectible(CollectibleSlot collectibleSlot);
     void RemoveAt(int slotIndex);

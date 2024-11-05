@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2241816821901524018}
   - component: {fileID: 8646659623018388919}
   - component: {fileID: 43535050753919016}
-  - component: {fileID: 7809101739499072625}
   - component: {fileID: 622174742749464469}
+  - component: {fileID: 8626501785647431226}
   m_Layer: 6
   m_Name: LootableBackpack2
   m_TagString: Untagged
@@ -52,6 +52,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -132,34 +135,9 @@ MonoBehaviour:
     allowHats: 0
   lootableOpened: {fileID: 11400000, guid: 490ee9c8ae3aced47b6028287c2b91b4, type: 2}
   containerData: {fileID: 11400000, guid: 2497d769de948004d86d7fb9e5801ef0, type: 2}
---- !u!114 &7809101739499072625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6442050968352500423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b663e92038a8fc847b65ab6d544e0e21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 710e9a9ee455f1b4e849f94da7679bf4, type: 2}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 43535050753919016}
-        m_TargetAssemblyTypeName: Lootable, Assembly-CSharp
-        m_MethodName: OnLootableClosed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  backpackData: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
+  handsData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  headData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
 --- !u!61 &622174742749464469
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,6 +146,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6442050968352500423}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -191,7 +170,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0.00035858154, y: -0.004058838}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,6 +182,21 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.33102036, y: 0.20939493}
   m_EdgeRadius: 0
+--- !u!114 &8626501785647431226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442050968352500423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b663e92038a8fc847b65ab6d544e0e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 710e9a9ee455f1b4e849f94da7679bf4, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls: []

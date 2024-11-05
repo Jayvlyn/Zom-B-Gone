@@ -23,6 +23,11 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
     public bool movedFromExplosion = false;
 
+    public float minPitch = 0.8f;
+    public float maxPitch = 1.6f;
+
+    public float CurrentSpeed => rb.linearVelocity.magnitude;
+
     protected bool active = false;
     public bool Active
     {
@@ -33,7 +38,6 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
             litHeadlights.SetActive(value);
             if(active)
             {
-                engineSource.resource = vehicleData.engineSounds[0];
                 engineSource.Play();
                 if (engineSoundCoroutine == null) engineSoundCoroutine = StartCoroutine(EngineSoundLoop());
             }
@@ -50,7 +54,6 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     private void Start()
     {
         rb.linearDamping = vehicleData.driveDrag;
-        if(tireScreechSource && vehicleData.tireScreechSound) tireScreechSource.resource = vehicleData.tireScreechSound;
     }
 
     protected void FixedUpdate()
@@ -65,34 +68,25 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
             if (rb.linearDamping < vehicleData.driveDrag) rb.linearDamping += 0.05f;
             if (rb.linearDamping > vehicleData.driveDrag) rb.linearDamping = vehicleData.driveDrag;
         }
+    }
 
-        if(active && vehicleData.engineSounds.Length > 0)
+    private void Update()
+    {
+        if(active)
         {
-            if(rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.9)
-            {
-                engineSource.resource = vehicleData.engineSounds[5];
-            }
-		    else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.7)
-		    {
-			    engineSource.resource = vehicleData.engineSounds[4];
-            }
-		    else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.5)
-		    {
-			    engineSource.resource = vehicleData.engineSounds[3];
-            }
-		    else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.3)
-		    {
-			    engineSource.resource = vehicleData.engineSounds[2];
-            }
-		    else if (rb.linearVelocity.magnitude > vehicleData.maxSpeed * 0.1)
-		    {
-			    engineSource.resource = vehicleData.engineSounds[1];
-            }
-		    else
-		    {
-			    engineSource.resource = vehicleData.engineSounds[0];
-            }
-            if (!engineSource.isPlaying) engineSource.Play();
+            float pitch = Mathf.Lerp(minPitch, maxPitch, CurrentSpeed / vehicleData.maxSpeed);
+            engineSource.pitch = pitch;
+        }
+
+        if(IsTireScreeching(out float lateralVelocity, out bool isBraking))
+        {
+            if(!tireScreechSource.isPlaying)
+                StartScreechNoise();
+        }
+        else if (tireScreechSource.isPlaying)
+        {
+
+            StopScreechNoise();
         }
     }
 
@@ -142,7 +136,6 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
         if(braking && GetLongitudinalVelocity() > 0)
         {
-            StartScreechNoise();
 			isBraking = true;
             return true;
         }
@@ -151,20 +144,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
 
         if(Mathf.Abs(lateralVelocity) > 4.0f)
         {
-            StartScreechNoise();
             return true;
-        }
-
-
-        
-        if(!braking && Mathf.Abs(lateralVelocity) < 4.0f && tireScreechSource.isPlaying)
-		{
-			if (tireScreechSource) tireScreechSource.Stop();
-            if(tireScreechCoroutine != null)
-            {
-                StopCoroutine(tireScreechCoroutine);
-                tireScreechCoroutine = null;
-            }
         }
 
         return false;
@@ -178,6 +158,16 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
             tireScreechCoroutine = StartCoroutine(TireScreechLoop());
         }
 	}
+
+    private void StopScreechNoise()
+    {
+        if (tireScreechSource && tireScreechSource.isPlaying) tireScreechSource.Stop();
+        if (tireScreechCoroutine != null)
+        {
+            StopCoroutine(tireScreechCoroutine);
+            tireScreechCoroutine = null;
+        }
+    }
 
     public virtual void CorrectSteering()
     {
@@ -224,16 +214,9 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     private Coroutine engineSoundCoroutine;
     private IEnumerator EngineSoundLoop()
     {
-        int soundRadius = 0;
+        int soundRadius = 22;
         while(true)
-        {
-            if (engineSource.resource == vehicleData.engineSounds[0]) soundRadius = 3;
-            if (engineSource.resource == vehicleData.engineSounds[1]) soundRadius = 5;
-            if (engineSource.resource == vehicleData.engineSounds[2]) soundRadius = 7;
-            if (engineSource.resource == vehicleData.engineSounds[3]) soundRadius = 9;
-            if (engineSource.resource == vehicleData.engineSounds[4]) soundRadius = 11;
-            if (engineSource.resource == vehicleData.engineSounds[5]) soundRadius = 15;
-
+        { 
             Utils.MakeSoundWave(transform.position, soundRadius);
 
             yield return new WaitForSeconds(2.5f);

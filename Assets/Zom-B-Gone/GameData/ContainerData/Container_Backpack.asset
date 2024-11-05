@@ -15,6 +15,7 @@ MonoBehaviour:
   containerType: 3
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 983335ffb38ed02479e5d514423e8996, type: 2}
   onContainerCollectibleSwapped: {fileID: 11400000, guid: 79303f4e673ffbe419d0161c75c47375, type: 2}
+  onContainerSwapped: {fileID: 0}
   testCollectibleSlot:
     collectible: {fileID: 11400000, guid: a9de3493f5d89db488cf5b063dfe7153, type: 2}
     collectibleName: 

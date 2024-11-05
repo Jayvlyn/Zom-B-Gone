@@ -28,8 +28,11 @@ public class FootstepManager : MonoBehaviour
     public List<TileBase> carpetTiles;
     public List<TileBase> woodenTiles;
 
+    private int playerLayer;
+
     private void Start()
     {
+        playerLayer = LayerMask.NameToLayer("Player");
         stepTimer = baseStepInterval;
         worldTilemap = GameObject.FindWithTag("WorldTilemap").GetComponent<Tilemap>();
     }
@@ -99,7 +102,14 @@ public class FootstepManager : MonoBehaviour
 
 
         float footstepSoundRadius = 3;
-        if(playerController.currentState == PlayerController.PlayerState.RUNNING) footstepSoundRadius *= 2;
-        Utils.MakeSoundWave(playerController.transform.position, footstepSoundRadius, playerController.isSneaking);
+        if (PlayerController.currentState == PlayerController.PlayerState.RUNNING) 
+        {
+            footstepSoundRadius *= 2;
+            Utils.MakeSoundWave(playerController.transform.position, footstepSoundRadius);
+        }
+        else if(playerController.gameObject.layer == playerLayer) // not running, only alert zombies if not disguised on zombie layer
+        {
+            Utils.MakeSoundWave(playerController.transform.position, footstepSoundRadius, PlayerController.isSneaking);
+        }
     }    
 }

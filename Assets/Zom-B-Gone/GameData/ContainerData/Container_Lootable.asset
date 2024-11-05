@@ -17,6 +17,7 @@ MonoBehaviour:
   onContainerCollectibleSwapped: {fileID: 11400000, guid: d1fdb02f584266640a2e4b9e1e7da53c, type: 2}
   testCollectibleSlot:
     collectible: {fileID: 0}
+    collectibleName: 
     quantity: 0
     allowLoot: 0
     allowItems: 0
@@ -24,28 +25,33 @@ MonoBehaviour:
   size: 5
   container:
     collectibleSlots:
+    - collectible: {fileID: 11400000, guid: 6723e4911033c79428faf0eb14f13513, type: 2}
+      collectibleName: Keychain
+      quantity: 15
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
+    - collectible: {fileID: 11400000, guid: a9de3493f5d89db488cf5b063dfe7153, type: 2}
+      collectibleName: Dice
+      quantity: 5
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
+    - collectible: {fileID: 11400000, guid: cddd4e57ad0bad5438c8613d5a4f8bec, type: 2}
+      collectibleName: Pistol
+      quantity: 1
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 1
       allowItems: 1
       allowHats: 1
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
-      allowLoot: 1
-      allowItems: 1
-      allowHats: 1
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 1
-      allowHats: 1
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 1
-      allowHats: 1
-    - collectible: {fileID: 0}
-      quantity: 0
-      allowLoot: 1
-      allowItems: 1
-      allowHats: 1
+      allowLoot: 0
+      allowItems: 0
+      allowHats: 0
