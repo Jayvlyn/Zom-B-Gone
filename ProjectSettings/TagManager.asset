@@ -21,6 +21,7 @@ TagManager:
   - Door
   - CollectibleSpawn
   - WorldTilemap
+  - GlobalLight
   layers:
   - Default
   - TransparentFX

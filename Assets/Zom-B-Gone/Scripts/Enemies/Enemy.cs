@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -42,6 +43,7 @@ public abstract class Enemy : MonoBehaviour
 	public LayerMask SightBlockersLm;
 
 	private Vector2 target = Vector2.zero;
+	private Vector2 desiredTarget = Vector2.zero;
 	private Vector2 investigaitonPoint = Vector2.zero;
 
 
@@ -172,15 +174,15 @@ public abstract class Enemy : MonoBehaviour
 		{
 			case State.DRONING:
 				if (Random.Range(0, 200) == 0) PlayDroneSound();
-				LerpTarget(Drone());
+				desiredTarget = Drone();
 				break;
 			case State.INVESTIGATING:
 				if (Random.Range(0, 200) == 0) PlayDroneSound();
-				LerpTarget(Investigate());
+                desiredTarget = Investigate();
 				break;
 			case State.AGGRO:
 				if (Random.Range(0, 100) == 0) PlayAggroSound();
-				LerpTarget(Aggro());
+                desiredTarget = Aggro();
 				break;
 			case State.DEAD:
 				decayTimer -= Time.deltaTime;
@@ -198,6 +200,8 @@ public abstract class Enemy : MonoBehaviour
 	// use to handle timers only, put computationally heavy things in enemy tick
 	private void Update()
 	{
+		LerpTarget(desiredTarget);
+
 		switch (currentState)
 		{
 			case State.DRONING:
@@ -240,7 +244,7 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
-	[SerializeField] private float targetChangeSpeed = 40;
+	[SerializeField] private float targetChangeSpeed = 10;
 	private void LerpTarget(Vector2 newTarget)
 	{
 		target = Vector2.Lerp(target, newTarget, targetChangeSpeed * Time.deltaTime).normalized;
@@ -282,7 +286,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		Vector2 cohesionVector = new Vector2();
 		int countEnemies = 0;
-		List<Enemy> neighbors = GetNeighbors(this, enemyData.cohesionRadius);
+		List<Enemy> neighbors = GetNeighbors(enemyData.cohesionRadius);
 		if (neighbors.Count == 0) return cohesionVector;
 		foreach (var enemy in neighbors)
 		{
@@ -292,18 +296,19 @@ public abstract class Enemy : MonoBehaviour
 				countEnemies++;
 			}
 		}
+
 		if (countEnemies == 0) return cohesionVector;
 
 		cohesionVector /= countEnemies;
-		cohesionVector = cohesionVector - (Vector2)transform.position;
 
+		cohesionVector = cohesionVector - (Vector2)transform.position;
 		return cohesionVector.normalized;
 	}
 
 	Vector2 Alignment()
 	{
 		Vector2 alignVector = new Vector2();
-		var enemies = GetNeighbors(this, enemyData.alignmentRadius);
+		var enemies = GetNeighbors(enemyData.alignmentRadius);
 		if (enemies.Count == 0) return alignVector;
 		foreach (var enemy in enemies)
 		{
@@ -319,7 +324,7 @@ public abstract class Enemy : MonoBehaviour
 	Vector2 Separation()
 	{
 		Vector2 separateVector = new Vector2();
-		var enemies = GetNeighbors(this, enemyData.separationRadius);
+		var enemies = GetNeighbors(enemyData.separationRadius);
 		if (enemies.Count == 0) return separateVector;
 
 		foreach (var enemy in enemies)
@@ -386,15 +391,20 @@ public abstract class Enemy : MonoBehaviour
 		Vector2 seekTarget = Vector2.zero;
         float angleBetweenRays = enemyData.fov / (enemyData.perceptionRayCount - 1);
 
+		float sightDistance = enemyData.perceptionDistance * GameManager.globalLight.intensity;
+		float playerSpotDistance = sightDistance;
+		if (PlayerController.isSneaking) playerSpotDistance *= 0.5f;
+
         for (int i = 0; i < enemyData.perceptionRayCount; i++)
         {
             float angle = (transform.eulerAngles.z - (enemyData.fov * 0.5f) + (angleBetweenRays * i) + 90) * Mathf.Deg2Rad;
             Vector2 rayDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, enemyData.perceptionDistance, playerLm);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, playerSpotDistance, playerLm);
 			if (hit)
 			{
-                RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, enemyData.perceptionDistance, worldLm);
+                RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, playerSpotDistance, worldLm);
 				if(worldHit && worldHit.distance < hit.distance)
 				{
 					return Vector2.zero;
@@ -426,7 +436,7 @@ public abstract class Enemy : MonoBehaviour
 				enemyData.separationPriority * Separation() +
 				enemyData.avoidancePriority * Avoidance() +
 				enemyData.wanderPriority * Wander() + // Wander for droning
-				Seek());
+				Seek()).normalized;
 	}
 
     virtual protected Vector2 Investigate()
@@ -436,7 +446,7 @@ public abstract class Enemy : MonoBehaviour
                 enemyData.separationPriority * Separation() +
                 enemyData.avoidancePriority * Avoidance() +
 				enemyData.investigatePriority * InvestigateTarget() + // Get target for investigation
-				Seek());
+				Seek()).normalized;
     }
 
     virtual protected Vector2 Aggro()
@@ -464,11 +474,11 @@ public abstract class Enemy : MonoBehaviour
 		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, playerDistance, MovementBlockersLm);
 		if(wallHit.collider)
 		{
-			return direction + enemyData.avoidancePriority * 2 * Avoidance();
+			return (direction + enemyData.avoidancePriority * 2 * Avoidance()).normalized;
 		}
 		else // straight shot to player, go for them
 		{
-			return direction * 20;
+			return direction;
 		}
 
     }
@@ -487,19 +497,23 @@ public abstract class Enemy : MonoBehaviour
 
     bool isInFOV(Vector2 vec)
 	{
-		return Vector2.Angle(rigidBody.linearVelocity, vec - (Vector2)transform.position) <= enemyData.fov;
-	}
+		float a = Vector2.Angle(transform.up, vec - (Vector2)transform.position);
+        return a <= enemyData.fov;
+    }
 
-	public List<Enemy> GetNeighbors(Enemy enemy, float radius)
+	public List<Enemy> GetNeighbors(float radius)
 	{
 		List<Enemy> neighborsFound = new List<Enemy>();
 
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, FellowEnemyLm);
-		if(TryGetComponent(out Enemy e))
+		foreach (var collider in colliders)
 		{
-			neighborsFound.Add(e);
+			if (collider.gameObject == this.gameObject) continue;
+			if(collider.gameObject.TryGetComponent(out Enemy e))
+			{
+				neighborsFound.Add(e);
+			}
 		}
-
 		return neighborsFound;
 	}
 

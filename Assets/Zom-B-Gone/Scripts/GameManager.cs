@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
 	public float spawnRadius;
 	public List<Enemy> enemies;
 	private PlayerController player;
+	public static Light2D globalLight;
 
 	[HideInInspector] public static LootTable currentZoneLootTable;
 
@@ -25,8 +27,9 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
+		globalLight = GameObject.FindGameObjectWithTag("GlobalLight").GetComponent<Light2D>();
 		enemies = new List<Enemy>();
-		player = FindObjectOfType<PlayerController>();
+		player = FindFirstObjectByType<PlayerController>();
 
 		Spawn(enemyPrefab, numberOfEnemies);
 

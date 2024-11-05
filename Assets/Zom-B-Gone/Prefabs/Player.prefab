@@ -144,7 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66f9a82b5a4c7b47a82be946e7d00cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   playerData: {fileID: 11400000, guid: f55ec50488d6a194d8af1bb5a1a21097, type: 2}
   hands: {fileID: 1034459641233780573}
   head: {fileID: 2538085723734079734}
