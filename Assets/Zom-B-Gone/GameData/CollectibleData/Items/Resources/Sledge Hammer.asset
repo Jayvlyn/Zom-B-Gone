@@ -21,10 +21,10 @@ MonoBehaviour:
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 14000
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
-  noiseRadius: 0
+  noiseRadius: 1
   damage: 50
   attackSpeed: 0.8
-  knockbackPower: 20
+  knockbackPower: 200
   dismemberChance: 0
   staminaCost: 1
   prepSpeed: 0.5

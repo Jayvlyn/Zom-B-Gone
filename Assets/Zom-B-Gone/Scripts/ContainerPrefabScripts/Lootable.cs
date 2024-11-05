@@ -58,7 +58,14 @@ public class Lootable : MonoBehaviour, IInteractable
             }
             else if (collectibleSlots[i].Collectible is HatData)
             {
-                headData.AddToContainer(ref collectibleSlots[i]);
+                if (headData.container.collectibleSlots[0].Collectible != null)
+                {
+                    backpackData.AddToContainer(ref collectibleSlots[i]);
+                }
+                else
+                {
+                    headData.AddToContainer(ref collectibleSlots[i]);
+                }
             }
         }
         containerData.onContainerCollectibleUpdated.Raise();

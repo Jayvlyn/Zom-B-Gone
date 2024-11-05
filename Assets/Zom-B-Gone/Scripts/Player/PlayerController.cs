@@ -450,7 +450,9 @@ public class PlayerController : MonoBehaviour
                 {
                     camSizer.LerpZoomLevel(7);
                 }
-				break;
+                if (head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(true);
+
+                break;
         }
 
 		switch (newState)
@@ -485,7 +487,8 @@ public class PlayerController : MonoBehaviour
 				{
 					camSizer.LerpZoomLevel(5);
 				}
-				input.SwitchCurrentActionMap("Vehicle");
+                if (head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(false);
+                input.SwitchCurrentActionMap("Vehicle");
                 rb.bodyType = RigidbodyType2D.Kinematic;
                 break;
         }
