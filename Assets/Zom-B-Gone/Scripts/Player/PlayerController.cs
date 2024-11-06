@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 smoothedMovementInput;
     private Vector2 movementInputSmoothVelocity;
 
-    public CameraSizer camSizer;
+    //public CameraSizer camSizer;
 
     public static ContainerDragHandler mouseHeldIcon = null;
 
@@ -443,12 +443,9 @@ public class PlayerController : MonoBehaviour
 				if (input.currentActionMap != null && input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
                 if(vc)
                 {
-				    vc.Follow = groupCam;
 				    framingTransposer.m_LookaheadTime = 0f;
-                }
-                if(camSizer)
-                {
-                    camSizer.LerpZoomLevel(7);
+                    if (orthoSizeChangeCoroutine != null) StopCoroutine(orthoSizeChangeCoroutine);
+                    orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(4f, 1f));
                 }
                 if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(true);
 
@@ -480,12 +477,7 @@ public class PlayerController : MonoBehaviour
                 {
                     vc.Follow = transform;
                     if(orthoSizeChangeCoroutine != null) StopCoroutine(orthoSizeChangeCoroutine); 
-					orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(5f, 1f));
-					//framingTransposer.m_LookaheadTime = 1.2f; // done in vehicle driver now
-				}
-				if (camSizer)
-				{
-					camSizer.LerpZoomLevel(5);
+					orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(7f, 1f));
 				}
                 if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(false);
                 input.SwitchCurrentActionMap("Vehicle");
@@ -510,7 +502,11 @@ public class PlayerController : MonoBehaviour
 		}
 
 		vc.m_Lens.OrthographicSize = targetSize;
-	}
+        if (startSize > targetSize)
+        {
+            vc.Follow = groupCam;
+        }
+    }
 
 	void OnApplicationFocus(bool hasFocus)
 	{
