@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2208294227549419385}
   - component: {fileID: 8225873307285844331}
   - component: {fileID: 2141148406229196350}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: Crowbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -23
+  m_SortingLayer: -22
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6e92eaf447a5fd6498d893f89ba79a24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

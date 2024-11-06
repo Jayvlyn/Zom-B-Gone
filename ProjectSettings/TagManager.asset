@@ -32,7 +32,6 @@ TagManager:
   - Interactable
   - World
   - Player
-  - HidingPlayer
   - Attack
   - Enemy
   - AirborneItem
@@ -46,7 +45,8 @@ TagManager:
   - Door
   - Window
   - LayoutFloor
-  - DisguisedPlayer
+  - 
+  - 
   - 
   - 
   - 
@@ -103,9 +103,6 @@ TagManager:
     locked: 0
   - name: WornHat
     uniqueID: 807454059
-    locked: 0
-  - name: HidingSpot
-    uniqueID: 1010168891
     locked: 0
   - name: Vehicle
     uniqueID: 2319307559

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1481152091677389883}
   - component: {fileID: 2918493407247803389}
   - component: {fileID: 7719447614316966907}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: Big Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -23
+  m_SortingLayer: -22
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae24f88d4a742b44aa41cadefb6ca58c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

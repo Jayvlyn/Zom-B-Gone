@@ -71,7 +71,7 @@ public class Interactor : MonoBehaviour
 
     private void Update()
     { 
-        if(PlayerController.currentState != PlayerController.PlayerState.DRIVING || PlayerController.currentState != PlayerController.PlayerState.HIDING)
+        if(PlayerController.currentState != PlayerController.PlayerState.DRIVING)
         {
             // scan must happen even with hands full for lootable scanning
 
@@ -345,14 +345,7 @@ public class Interactor : MonoBehaviour
             else if (AvailableInteractable is Vehicle v)
             {
                 vehicleDriver.vehicle = v;
-                vehicleDriver.Enter();
-                AvailableInteractable.Interact(false, playerController);
-            }
-
-            else if (AvailableInteractable is HidingSpot h)
-            {
-                playerController.currentHidingSpot = h;
-                StartCoroutine(playerController.EnterHidingSpot(playerController.currentHidingSpot.transform.position, playerController.currentHidingSpot.transform.rotation));
+                vehicleDriver.Enter(playerCollider, playerController);
                 AvailableInteractable.Interact(false, playerController);
             }
 

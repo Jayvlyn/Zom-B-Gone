@@ -10,7 +10,8 @@ public class VehicleDriver : MonoBehaviour
     [SerializeField] private float enterExitSpeed = 1;
     [SerializeField] private VoidEvent onTravel;
 
-    public PlayerController playerController;
+    private Collider2D playerCollider;
+    private PlayerController playerController;
 
     private float steerDirection;
     private void FixedUpdate()
@@ -121,9 +122,11 @@ public class VehicleDriver : MonoBehaviour
         else TravelHeld = false;
     }
 
-    public void Enter()
+    public void Enter(Collider2D playerCollider, PlayerController playerController)
     {
         travelPercent = pressTimer / pressTimeRequired;
+        this.playerCollider = playerCollider;
+        this.playerController = playerController;
 
         StartCoroutine(EnterVehicle(vehicle.driveSeat.position, vehicle.transform.rotation));
     }
@@ -132,7 +135,7 @@ public class VehicleDriver : MonoBehaviour
     {
         playerController.ChangeState(PlayerController.PlayerState.DRIVING);
         transform.parent = vehicle.transform.parent;
-        playerController.bodyCollider.isTrigger = true;
+        playerCollider.isTrigger = true;
         if (playerController.hands.LeftObject) playerController.hands.LeftObject.SetActive(false);
         if (playerController.hands.RightObject) playerController.hands.RightObject.SetActive(false);
 
@@ -173,7 +176,7 @@ public class VehicleDriver : MonoBehaviour
         transform.localRotation = rotation;
 
 
-        playerController.bodyCollider.isTrigger = false;
+        playerCollider.isTrigger = false;
         if (playerController.hands.LeftObject) playerController.hands.LeftObject.SetActive(true);
         if (playerController.hands.RightObject) playerController.hands.RightObject.SetActive(true);
 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8494637308942483538}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: DetachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8704600148126898689}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 8471909217041118317}
   - component: {fileID: 3962989364323209911}
   - component: {fileID: 1905998479860386875}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3072358557432829836}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: DetachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 465150421360189179}
   - component: {fileID: 3362905060171268311}
   - component: {fileID: 2872487441285323295}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 569660378723866516}
   - component: {fileID: 2134920927128549487}
   - component: {fileID: 4397759781912065639}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 3990594221328774906}
   - component: {fileID: 1643052146868151425}
   - component: {fileID: 560740431854616033}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: HealthBar
   m_TagString: Health
   m_Icon: {fileID: 0}
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 5459835340971949465}
   - component: {fileID: 8989257645035172622}
   - component: {fileID: 1491985862617645894}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2943871043870995285}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: LeftArmAttachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 3317399549103532034}
   - component: {fileID: 8382259535747164373}
   - component: {fileID: 1951274329254797746}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -809,7 +809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7768140972022506243}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: RightArmAttachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -846,7 +846,7 @@ GameObject:
   - component: {fileID: 7881680831849007001}
   - component: {fileID: 1965297678876468673}
   - component: {fileID: 3376768108525843708}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -900,19 +900,16 @@ MonoBehaviour:
   decayTime: 60
   AttackBlockersLm:
     serializedVersion: 2
-    m_Bits: 3145856
+    m_Bits: 1572992
   MovementBlockersLm:
     serializedVersion: 2
-    m_Bits: 327808
+    m_Bits: 163968
   FellowEnemyLm:
     serializedVersion: 2
-    m_Bits: 8390656
+    m_Bits: 1024
   WorldObstacleLm:
     serializedVersion: 2
-    m_Bits: 128
-  SightBlockersLm:
-    serializedVersion: 2
-    m_Bits: 262272
+    m_Bits: 131200
   targetChangeSpeed: 5.04
   fadeSpeed: 5
 --- !u!114 &-8031090298879193519

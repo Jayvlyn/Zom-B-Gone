@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
 
@@ -30,11 +29,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for(int i = 0; i < enemiesPerWave; i++)
         {
-            if (Optimizer.currentActiveEnemies < Optimizer.maxActiveEnemies)
-            {
-                SpawnRandomEnemy();
-            }
-            else return;
+            SpawnRandomEnemy();
         }
     }
 
@@ -61,8 +56,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-        Optimizer.list.Add(newEnemy);
+        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
 
     private bool IsPositionBlocked(Vector2 position)

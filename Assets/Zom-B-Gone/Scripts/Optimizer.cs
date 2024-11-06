@@ -7,10 +7,7 @@ public class Optimizer : MonoBehaviour
     public static List<GameObject> list = new List<GameObject>();
 	public Transform PlayerT;
 	public float cullDistance = 200f;
-	public static int maxActiveEnemies = 100;
-	public static int currentActiveEnemies = 0;
 
-	public LayerMask enemyLm;
 	private void Start()
 	{
 		StartCoroutine(DistanceCheck());
@@ -26,20 +23,18 @@ public class Optimizer : MonoBehaviour
 
 				if (go == null)
 				{
-                    list.RemoveAt(i);
+					list.RemoveAt(i);
 					continue;
 				}
 
 				float dist = Vector2.Distance(go.transform.position, PlayerT.transform.position);
 				if (dist >= cullDistance)
 				{
-					if ((enemyLm.value & (1 << go.layer)) != 0) currentActiveEnemies--;
 					go.SetActive(false);
 				}
 				else
 				{
-                    if ((enemyLm.value & (1 << go.layer)) != 0) currentActiveEnemies++;
-                    go.SetActive(true);
+					go.SetActive(true);
 				}
 			}
 

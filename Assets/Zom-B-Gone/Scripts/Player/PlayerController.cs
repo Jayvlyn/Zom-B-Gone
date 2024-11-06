@@ -6,12 +6,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
     public enum PlayerState
     {
-        IDLE, WALKING, RUNNING, SNEAKING, DRIVING, HIDING
+        IDLE, WALKING, RUNNING, SNEAKING, DRIVING
     }
     public static PlayerState currentState;
     public static bool isSneaking => currentState == PlayerState.SNEAKING;
@@ -21,7 +22,6 @@ public class PlayerController : MonoBehaviour
     public Hands hands;
     public Head head;
     public Rigidbody2D rb;
-    public Collider2D bodyCollider;
     public PlayerInput input;
     private Slider staminaSlider;
     private Interactor interactor;
@@ -65,8 +65,6 @@ public class PlayerController : MonoBehaviour
 		// Set currents
 		currentStamina = playerData.maxStamina;
         currentMoveSpeed = playerData.walkSpeed;
-
-        ChangeState(PlayerState.IDLE);
     }
 
     private float recoverTimer;
@@ -120,22 +118,15 @@ public class PlayerController : MonoBehaviour
 
     private void SetPlayerVelocity()
     {
-        if (currentState != PlayerState.HIDING)
+        smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, playerData.velocityChangeSpeed * Time.deltaTime * 100);
+        Vector3 newVelocity = (smoothedMovementInput) * currentMoveSpeed * playerData.speedModifier * hands.leftLumbering * hands.rightLumbering;
+        #region hat buff
+        if(head.wornHat != null)
         {
-            smoothedMovementInput = Vector2.SmoothDamp(smoothedMovementInput, movementInput, ref movementInputSmoothVelocity, playerData.velocityChangeSpeed * Time.deltaTime * 100);
-            Vector3 newVelocity = (smoothedMovementInput) * currentMoveSpeed * playerData.speedModifier * hands.leftLumbering * hands.rightLumbering;
-            #region hat buff
-            if(head.wornHat != null)
-            {
-                newVelocity *= head.wornHat.hatData.moveSpeedMod;
-            }
-            #endregion
-            rb.linearVelocity = newVelocity;
+            newVelocity *= head.wornHat.hatData.moveSpeedMod;
         }
-        else
-        {
-            rb.linearVelocity = Vector3.zero;
-        }
+        #endregion
+        rb.linearVelocity = newVelocity;
     }
 
     private void RotateToMouse()
@@ -155,260 +146,206 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         movementInput = inputValue.Get<Vector2>();
-        if (currentState != PlayerState.HIDING)
+        if(currentState != PlayerState.SNEAKING)
         {
-            if(currentState != PlayerState.SNEAKING)
+            if(movementInput != Vector2.zero && currentState == PlayerState.IDLE) 
             {
-                if(movementInput != Vector2.zero && currentState == PlayerState.IDLE) 
-                {
-                    if (holdingRun) ChangeState(PlayerState.RUNNING);
-                    else ChangeState(PlayerState.WALKING);
-                }
-                else if(movementInput == Vector2.zero) { ChangeState(PlayerState.IDLE); }
+                if (holdingRun) ChangeState(PlayerState.RUNNING);
+                else ChangeState(PlayerState.WALKING);
             }
+            else if(movementInput == Vector2.zero) { ChangeState(PlayerState.IDLE); }
         }
     }
 
     private void OnLeftHand(InputValue inputValue)
     {
-        if (currentState != PlayerState.HIDING)
+		if (inputValue.isPressed)
         {
-            if (inputValue.isPressed)
-            {
-		        if (EventSystem.current.IsPointerOverGameObject()) return;
+		    if (EventSystem.current.IsPointerOverGameObject()) return;
 
-		        if (!hands.UsingLeft) interactor.Interact(false);
+		    if (!hands.UsingLeft) interactor.Interact(false);
             
-			    else if (hands.leftItem != null) hands.leftItem.Use();
-		    }
-            else
+			else if (hands.leftItem != null) hands.leftItem.Use();
+		}
+        else
+        {
+            holdingLeft = false;
+            if (hands.leftItem != null) hands.leftItem.useHeld = false;
+            else if (hands.LeftObstacle != null)
             {
-                holdingLeft = false;
-                if (hands.leftItem != null) hands.leftItem.useHeld = false;
-                else if (hands.LeftObstacle != null)
-                {
-                    hands.LeftObstacle.ChangeMotorSpeed();
-                }
+                hands.LeftObstacle.ChangeMotorSpeed();
             }
         }
     }
 
     private void OnRightHand(InputValue inputValue)
     {
-        if (currentState != PlayerState.HIDING)
-        {
-            if (inputValue.isPressed)
-		    {
-		        if (EventSystem.current.IsPointerOverGameObject()) return;
+		if (inputValue.isPressed)
+		{
+		    if (EventSystem.current.IsPointerOverGameObject()) return;
 
-			    if (!hands.UsingRight) interactor.Interact(true);
+			if (!hands.UsingRight) interactor.Interact(true);
 			
-			    else if (hands.rightItem != null) hands.rightItem.Use();
-		    }
-		    else
-		    {
-			    holdingRight = false;
-                if (hands.rightItem != null) hands.rightItem.useHeld = false;
-                else if (hands.RightObstacle != null)
-                {
-                    hands.RightObstacle.ChangeMotorSpeed();
-                }
+			else if (hands.rightItem != null) hands.rightItem.Use();
+		}
+		else
+		{
+			holdingRight = false;
+            if (hands.rightItem != null) hands.rightItem.useHeld = false;
+            else if (hands.RightObstacle != null)
+            {
+                hands.RightObstacle.ChangeMotorSpeed();
             }
-
         }
 	}
 
     private void OnLeftHold(InputValue inputValue)
     {
-        if (currentState != PlayerState.HIDING)
-        {
-		    holdingLeft = true;
-            if (EventSystem.current.IsPointerOverGameObject()) return;
+		holdingLeft = true;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
 
-            if (hands.leftItem != null) hands.leftItem.useHeld = true;
-            else if (hands.LeftObstacle != null)
-            {
-                if (holdingSneak) hands.LeftObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
-                else hands.LeftObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
-            }
+        if (hands.leftItem != null) hands.leftItem.useHeld = true;
+        else if (hands.LeftObstacle != null)
+        {
+            if (holdingSneak) hands.LeftObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
+            else hands.LeftObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
         }
 
     }
 
     private void OnRightHold(InputValue inputValue)
     {
-        if (currentState != PlayerState.HIDING)
+		holdingRight = true;
+		if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (hands.rightItem != null) hands.rightItem.useHeld = true;
+        else if (hands.RightObstacle != null)
         {
-            holdingRight = true;
-		    if (EventSystem.current.IsPointerOverGameObject()) return;
-            if (hands.rightItem != null) hands.rightItem.useHeld = true;
-            else if (hands.RightObstacle != null)
-            {
-                if (holdingSneak) hands.RightObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
-                else hands.RightObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
-            }
-
+            if (holdingSneak) hands.RightObstacle.ChangeMotorSpeed(-playerData.obstacleTurningSpeed);
+            else hands.RightObstacle.ChangeMotorSpeed(playerData.obstacleTurningSpeed);
         }
     }
 
     private void OnThrowLeft(InputValue inputValue)
     {
-        if (currentState == PlayerState.HIDING)
+        if (hands.UsingLeft)
         {
-            StartCoroutine(ExitHidingSpot(transform.position + transform.up, transform.rotation));
-        }
-        else
-        {
-            if (hands.UsingLeft)
+            if(hands.leftItem != null)
             {
-                if(hands.leftItem != null)
-                {
-                    hands.leftItem.Throw();
-                    hands.leftLumbering = 1;
-                }
-                else if(hands.LeftObstacle != null)
-                {
-                    LetGoLeftObstacle();
-                }
-		    }
-        }
+                hands.leftItem.Throw();
+                hands.leftLumbering = 1;
+            }
+            else if(hands.LeftObstacle != null)
+            {
+                LetGoLeftObstacle();
+            }
+		}
+
 	}
 
 	private void OnThrowRight(InputValue inputValue)
 	{
-        if(currentState == PlayerState.HIDING)
+		if (hands.UsingRight)
         {
-            StartCoroutine(ExitHidingSpot(transform.position + transform.up, transform.rotation));
-        }
-        else
-        {
-		    if (hands.UsingRight)
+            if (hands.rightItem != null)
             {
-                if (hands.rightItem != null)
-                {
-                    hands.rightItem.Throw();
-                    hands.rightLumbering = 1;
-                }
-                else if (hands.RightObstacle != null)
-                {
-                    LetGoRightObstacle();
-                }
+                hands.rightItem.Throw();
+                hands.rightLumbering = 1;
+            }
+            else if (hands.RightObstacle != null)
+            {
+                LetGoRightObstacle();
             }
         }
 	}
 
     private void OnDropLeft(InputValue inputValue)
     {
-        if (currentState == PlayerState.HIDING)
-        {
-            StartCoroutine(ExitHidingSpot(transform.position + transform.up, transform.rotation));
-        }
-        else
-        {
-            if (hands.leftItem != null) DropLeft();
-            else if (hands.LeftObstacle != null) LetGoLeftObstacle();
-        }
+        if (hands.leftItem != null) DropLeft();
+        else if (hands.LeftObstacle != null) LetGoLeftObstacle();
     }
 
     private void OnDropRight(InputValue inputValue)
     {
-        if (currentState == PlayerState.HIDING)
-        {
-            StartCoroutine(ExitHidingSpot(transform.position + transform.up, transform.rotation));
-        }
-        else
-        {
-            if (hands.rightItem != null) DropRight();
-            else if (hands.RightObstacle != null) LetGoRightObstacle();
-        }
+        if (hands.rightItem != null) DropRight();
+        else if (hands.RightObstacle != null) LetGoRightObstacle();
     }
 
     // Input for reloading, wont do anything without projectileWeapon
     private void OnReload(InputValue inputValue)
     {
-        if (currentState != PlayerState.HIDING)
+		if (hands.UsingLeft && hands.LeftObject.TryGetComponent(out ProjectileWeapon leftProjectileWeapon))
         {
-            if (hands.UsingLeft && hands.LeftObject.TryGetComponent(out ProjectileWeapon leftProjectileWeapon))
+			if (hands.UsingRight && hands.RightObject.TryGetComponent(out ProjectileWeapon rightProjectileWeapon))
             {
-			    if (hands.UsingRight && hands.RightObject.TryGetComponent(out ProjectileWeapon rightProjectileWeapon))
-                {
-				    if (!leftProjectileWeapon.reloading && !rightProjectileWeapon.reloading)
-                    { // Neither gun reloading yet
-                        float leftRatio = leftProjectileWeapon.CurrentAmmo / (float)leftProjectileWeapon.projectileWeaponData.maxAmmo;
-                        float rightRatio = rightProjectileWeapon.CurrentAmmo / (float)rightProjectileWeapon.projectileWeaponData.maxAmmo;
-                        if (leftRatio <= rightRatio)
-                        {
-                            leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
-                        }
-                        else
-                        {
-                            rightProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
-                        }
+				if (!leftProjectileWeapon.reloading && !rightProjectileWeapon.reloading)
+                { // Neither gun reloading yet
+                    float leftRatio = leftProjectileWeapon.CurrentAmmo / (float)leftProjectileWeapon.projectileWeaponData.maxAmmo;
+                    float rightRatio = rightProjectileWeapon.CurrentAmmo / (float)rightProjectileWeapon.projectileWeaponData.maxAmmo;
+                    if (leftRatio <= rightRatio)
+                    {
+                        leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
                     }
-                    else if (leftProjectileWeapon.reloading && !rightProjectileWeapon.reloading) rightProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
-                    else if (!leftProjectileWeapon.reloading && rightProjectileWeapon.reloading) leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
+                    else
+                    {
+                        rightProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
+                    }
                 }
-                else if(!leftProjectileWeapon.reloading) leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
-            
-		    }
-            else if(hands.UsingRight && hands.RightObject.TryGetComponent(out ProjectileWeapon rightprojectileWeapon) && !rightprojectileWeapon.reloading)
-            {
-                rightprojectileWeapon.StartReload(playerData.reloadSpeedReduction);
+                else if (leftProjectileWeapon.reloading && !rightProjectileWeapon.reloading) rightProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
+                else if (!leftProjectileWeapon.reloading && rightProjectileWeapon.reloading) leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
             }
+            else if(!leftProjectileWeapon.reloading) leftProjectileWeapon.StartReload(playerData.reloadSpeedReduction);
+            
+		}
+        else if(hands.UsingRight && hands.RightObject.TryGetComponent(out ProjectileWeapon rightprojectileWeapon) && !rightprojectileWeapon.reloading)
+        {
+            rightprojectileWeapon.StartReload(playerData.reloadSpeedReduction);
         }
 	}
 
     private void OnRun(InputValue inputValue)
     {
-        if (currentState != PlayerState.HIDING)
+        if (inputValue.isPressed) // Run Key Pressed
         {
-            if (inputValue.isPressed) // Run Key Pressed
-            {
-                holdingRun = true;
+            holdingRun = true;
 
-                if(rb.linearVelocity.magnitude > 0 && movementInput != Vector2.zero && currentStamina > 0)
-                {
-                    ChangeState(PlayerState.RUNNING);
-                }
+            if(rb.linearVelocity.magnitude > 0 && movementInput != Vector2.zero && currentStamina > 0)
+            {
+                ChangeState(PlayerState.RUNNING);
             }
+        }
 
-            else // Run Key Released
-            {
+        else // Run Key Released
+        {
             
-                holdingRun = false;
+            holdingRun = false;
 
-                if(currentState == PlayerState.RUNNING) // Letting go of run key only matters if running
-                {
-                    if (movementInput != Vector2.zero) { ChangeState(PlayerState.WALKING); }
-                    else { ChangeState(PlayerState.IDLE); }
-                }
+            if(currentState == PlayerState.RUNNING) // Letting go of run key only matters if running
+            {
+                if (movementInput != Vector2.zero) { ChangeState(PlayerState.WALKING); }
+                else { ChangeState(PlayerState.IDLE); }
             }
-
         }
     }
 
     // Called when sneak button changes input value
     private void OnSneak(InputValue inputValue)
     {
-        if(currentState != PlayerState.HIDING)
+        bool sneakPressed = Convert.ToBoolean(inputValue.Get<float>());
+
+        if (sneakPressed) // Sneak Key Pressed
         {
-            bool sneakPressed = Convert.ToBoolean(inputValue.Get<float>());
+            ChangeState(PlayerState.SNEAKING);
+            holdingSneak = true;
+        }
 
-            if (sneakPressed) // Sneak Key Pressed
+        else // Sneak Key Released
+        {
+            holdingSneak = false;
+            if(currentState == PlayerState.SNEAKING) // Letting go of sneak key only matters if sneaking
             {
-                ChangeState(PlayerState.SNEAKING);
-                holdingSneak = true;
-            }
-
-            else // Sneak Key Released
-            {
-                holdingSneak = false;
-                if(currentState == PlayerState.SNEAKING) // Letting go of sneak key only matters if sneaking
-                {
-                    if (holdingRun) { ChangeState(PlayerState.RUNNING);}
-                    else if (smoothedMovementInput != Vector2.zero) { ChangeState(PlayerState.WALKING); }
-                    else { ChangeState(PlayerState.IDLE); }
-                }
+                if (holdingRun) { ChangeState(PlayerState.RUNNING);}
+                else if (smoothedMovementInput != Vector2.zero) { ChangeState(PlayerState.WALKING); }
+                else { ChangeState(PlayerState.IDLE); }
             }
         }
     }
@@ -511,14 +448,8 @@ public class PlayerController : MonoBehaviour
                     orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(4f, 1f));
                 }
                 if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(true);
-                rb.bodyType = RigidbodyType2D.Dynamic;
-                break;
-            case PlayerState.HIDING: // exiting hiding state
-                rb.bodyType = RigidbodyType2D.Dynamic;
-                gameObject.layer = LayerMask.NameToLayer("Player");
-                if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(true);
-                break;
 
+                break;
         }
 
 		switch (newState)
@@ -538,6 +469,7 @@ public class PlayerController : MonoBehaviour
             case PlayerState.IDLE:
                 if (!recoverStamina) RecoverStamina();
                 currentMoveSpeed = playerData.walkSpeed;
+                if(rb.bodyType != RigidbodyType2D.Dynamic) rb.bodyType = RigidbodyType2D.Dynamic;
                 break;
             case PlayerState.DRIVING:
                 if (!recoverStamina) RecoverStamina();
@@ -550,12 +482,6 @@ public class PlayerController : MonoBehaviour
                 if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(false);
                 input.SwitchCurrentActionMap("Vehicle");
                 rb.bodyType = RigidbodyType2D.Kinematic;
-                break;
-            case PlayerState.HIDING:
-                if (!recoverStamina) RecoverStamina();
-                if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(false);
-                rb.bodyType = RigidbodyType2D.Kinematic;
-                gameObject.layer = LayerMask.NameToLayer("HidingPlayer");
                 break;
         }
 
@@ -599,58 +525,6 @@ public class PlayerController : MonoBehaviour
         holdingRight = false;
         holdingLeft = false;
 	}
-
-    [HideInInspector] public HidingSpot currentHidingSpot = null;
-    public float enterExitHidingSpeed = 1f;
-    public IEnumerator EnterHidingSpot(Vector3 position, Quaternion rotation)
-    {
-        ChangeState(PlayerState.HIDING);
-        transform.parent = currentHidingSpot.transform.parent;
-        bodyCollider.isTrigger = true;
-        if (hands.LeftObject) hands.LeftObject.SetActive(false);
-        if (hands.RightObject) hands.RightObject.SetActive(false);
-
-        float elapsedTime = 0f;
-        Vector3 startPosition = transform.position;
-        Quaternion startRotation = transform.localRotation;
-
-        while (elapsedTime < enterExitHidingSpeed)
-        {
-            transform.position = Vector3.Lerp(startPosition, position, elapsedTime / enterExitHidingSpeed);
-            transform.localRotation = Quaternion.Lerp(startRotation, rotation, elapsedTime / enterExitHidingSpeed);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = position;
-        transform.localRotation = rotation;
-    }
-
-    public IEnumerator ExitHidingSpot(Vector3 position, Quaternion rotation)
-    {
-        transform.parent = null;
-
-        float elapsedTime = 0f;
-        Vector3 startPosition = transform.position;
-        Quaternion startRotation = transform.localRotation;
-
-        while (elapsedTime < enterExitHidingSpeed)
-        {
-            transform.position = Vector3.Lerp(startPosition, position, elapsedTime / enterExitHidingSpeed);
-            transform.localRotation = Quaternion.Lerp(startRotation, rotation, elapsedTime / enterExitHidingSpeed);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = position;
-        transform.localRotation = rotation;
-
-        bodyCollider.isTrigger = false;
-        if (hands.LeftObject) hands.LeftObject.SetActive(true);
-        if (hands.RightObject) hands.RightObject.SetActive(true);
-
-        ChangeState(PlayerState.IDLE);
-    }
 }
 
 

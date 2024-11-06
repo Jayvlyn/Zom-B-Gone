@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 9007136600030232037}
   - component: {fileID: 4881143944469047324}
   - component: {fileID: -9186138201303233981}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: Shovel Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -23
+  m_SortingLayer: -22
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bb730ff1be044814e90801ae59f10ad9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

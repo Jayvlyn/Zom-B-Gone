@@ -54,7 +54,7 @@ public class Hat : Collectible
 
         if(hatData.camo)
         {
-            playerController.gameObject.layer = LayerMask.NameToLayer("DisguisedPlayer");
+            playerController.gameObject.layer = LayerMask.NameToLayer("Enemy");
         }
     }
 
