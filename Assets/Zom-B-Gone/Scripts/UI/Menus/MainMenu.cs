@@ -6,9 +6,21 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject settingsUI;
+    public GameObject title;
 
-    #region BUTTON EVENTS
-    public void OnPlay()
+	private void Start()
+	{
+        StartCoroutine(TitleDelay());
+	}
+
+    private IEnumerator TitleDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        title.SetActive(true);
+    }
+
+	#region BUTTON EVENTS
+	public void OnPlay()
     {
         SceneManager.LoadScene("Game");
     }

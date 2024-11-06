@@ -58,7 +58,7 @@ MonoBehaviour:
         outWeight: 0.33333334
       m_PreInfinity: 1
       m_PostInfinity: 1
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     curveY:
       serializedVersion: 2
       m_Curve:
@@ -91,7 +91,7 @@ MonoBehaviour:
         outWeight: 0.33333334
       m_PreInfinity: 1
       m_PostInfinity: 1
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     curveZ:
       serializedVersion: 2
       m_Curve:
@@ -795,10 +795,10 @@ MonoBehaviour:
         outWeight: 0.33333334
       m_PreInfinity: 1
       m_PostInfinity: 1
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     phase: 0
     speed: 0.5
-    strength: 30
+    strength: 10
     density: 0.1
     pivot: {x: 0.5, y: 0.2}
   scaleControl: 1
@@ -817,8 +817,8 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
-        value: 2
+        time: 0.50307333
+        value: 1.1798418
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -836,7 +836,7 @@ MonoBehaviour:
         outWeight: 0.33333334
       m_PreInfinity: 1
       m_PostInfinity: 1
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     curveY:
       serializedVersion: 2
       m_Curve:
@@ -851,7 +851,7 @@ MonoBehaviour:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.5
-        value: 2
+        value: 1.2566223
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -869,9 +869,9 @@ MonoBehaviour:
         outWeight: 0.33333334
       m_PreInfinity: 1
       m_PostInfinity: 1
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     phase: 0
     speed: {x: 1.33, y: 1}
-    strength: {x: 0.6, y: 0.6}
+    strength: {x: 0.9, y: 0.9}
     density: {x: 0.1, y: 0.1}
     pivot: {x: 0.5, y: 0.2}

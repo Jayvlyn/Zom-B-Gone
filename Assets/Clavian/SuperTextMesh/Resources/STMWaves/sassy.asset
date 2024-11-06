@@ -58,7 +58,7 @@ MonoBehaviour:
         outWeight: 0.33333334
       m_PreInfinity: 1
       m_PostInfinity: 1
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     curveY:
       serializedVersion: 2
       m_Curve:
@@ -91,7 +91,7 @@ MonoBehaviour:
         outWeight: 0.33333334
       m_PreInfinity: 1
       m_PostInfinity: 1
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     curveZ:
       serializedVersion: 2
       m_Curve:
@@ -133,7 +133,7 @@ MonoBehaviour:
         outWeight: 0.33333334
       m_PreInfinity: 1
       m_PostInfinity: 1
-      m_RotationOrder: 0
+      m_RotationOrder: 4
     multiOverTime:
       serializedVersion: 2
       m_Curve:

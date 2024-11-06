@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: b1ffdc675c9a6c245b67483b66103565
+guid: 1bc057eca0ae2c549964ed2dbf7c921a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5538235104315658434
-    second: ZombieBlast_Explosion_0
-  - first:
-      213: 9155197521283412027
-    second: ZombieBlast_Explosion_1
-  - first:
-      213: -2840434085077841650
-    second: ZombieBlast_Explosion_2
-  - first:
-      213: 3250246531641905296
-    second: ZombieBlast_Explosion_3
+      213: 1624981369042153295
+    second: MainMenuBackround_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ZombieBlast_Explosion_0
+      name: MainMenuBackround_0
       rect:
         serializedVersion: 2
-        x: 79
-        y: 175
-        width: 461
-        height: 421
+        x: 0
+        y: 0
+        width: 2470
+        height: 1221
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,74 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e3faaa4f38c3423b0800000000000000
-      internalID: -5538235104315658434
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ZombieBlast_Explosion_1
-      rect:
-        serializedVersion: 2
-        x: 304
-        y: 588
-        width: 8
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b3072a8a3abcd0f70800000000000000
-      internalID: 9155197521283412027
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ZombieBlast_Explosion_2
-      rect:
-        serializedVersion: 2
-        x: 557
-        y: 387
-        width: 31
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e090607bf30c498d0800000000000000
-      internalID: -2840434085077841650
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ZombieBlast_Explosion_3
-      rect:
-        serializedVersion: 2
-        x: 78
-        y: 160
-        width: 21
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 09016fefff13b1d20800000000000000
-      internalID: 3250246531641905296
+      spriteID: f4fa26412f71d8610800000000000000
+      internalID: 1624981369042153295
       vertices: []
       indices: 
       edges: []
@@ -210,10 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ZombieBlast_Explosion_0: -5538235104315658434
-      ZombieBlast_Explosion_1: 9155197521283412027
-      ZombieBlast_Explosion_2: -2840434085077841650
-      ZombieBlast_Explosion_3: 3250246531641905296
+      MainMenuBackround_0: 1624981369042153295
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

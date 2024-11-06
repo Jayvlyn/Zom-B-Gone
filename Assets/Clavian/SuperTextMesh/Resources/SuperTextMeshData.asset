@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showEffectsFoldout: 1
   showWavesFoldout: 1
-  showJittersFoldout: 0
+  showJittersFoldout: 1
   showDrawAnimsFoldout: 0
   showTextColorFoldout: 0
   showColorsFoldout: 0

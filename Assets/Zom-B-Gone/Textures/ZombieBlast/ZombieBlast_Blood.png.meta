@@ -61,7 +61,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ZombieBlast_Blood_0: -5551469597900594474
+      ZombieBlast_Blood_1: -1684021148498342087
+      ZombieBlast_Blood_2: 6609379860148881424
+      ZombieBlast_Blood_3: 4412243774260614486
+      ZombieBlast_Blood_4: 7547954404192907937
+      ZombieBlast_Blood_5: 6594188121448384646
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
