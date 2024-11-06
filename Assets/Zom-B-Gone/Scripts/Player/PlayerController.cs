@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 			vc.Follow = groupCam;
 			framingTransposer.m_LookaheadTime = 0f;
 		}
+        ChangeState(PlayerState.IDLE);
 
 		// Set currents
 		currentStamina = playerData.maxStamina;
