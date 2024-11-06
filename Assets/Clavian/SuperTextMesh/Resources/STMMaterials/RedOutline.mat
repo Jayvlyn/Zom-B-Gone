@@ -93,6 +93,7 @@ Material:
     - _ShadowDistance: 0.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SquareOutline: 0
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseVector3: 0

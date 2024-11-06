@@ -90,6 +90,11 @@ Material:
     - _ShadowDistance: 4
     - _SquareOutline: 0
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _UVSec: 0
     - _UseVector3: 0
     - _Vector3Dropshadow: 0

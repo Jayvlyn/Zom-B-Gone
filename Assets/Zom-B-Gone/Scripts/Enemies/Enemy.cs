@@ -524,6 +524,7 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnDeath()
 	{
+		Optimizer.currentActiveEnemies--;
 		ChangeState(State.DEAD);
 	}
 

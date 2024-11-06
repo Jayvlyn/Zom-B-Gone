@@ -68,6 +68,7 @@ Material:
     - PixelSnap: 0
     - _Blend: 0.05
     - _BumpScale: 1
+    - _ColorMask: 15
     - _CullMode: 0
     - _Cutoff: 0.0001
     - _DetailNormalMapScale: 1
@@ -85,7 +86,13 @@ Material:
     - _ShadowDistance: 0.14
     - _SquareOutline: 0
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _UVSec: 0
+    - _UseUIAlphaClip: 0
     - _UseVector3: 0
     - _Vector3Dropshadow: 0
     - _ZTestMode: 2
@@ -97,3 +104,4 @@ Material:
     - _ShadowAngle3: {r: 1, g: -1, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

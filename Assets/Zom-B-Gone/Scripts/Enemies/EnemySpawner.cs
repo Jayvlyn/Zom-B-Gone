@@ -29,7 +29,10 @@ public class EnemySpawner : MonoBehaviour
     {
         for(int i = 0; i < enemiesPerWave; i++)
         {
-            SpawnRandomEnemy();
+            if (Optimizer.currentActiveEnemies < Optimizer.maxActiveEnemies)
+                SpawnRandomEnemy();
+            else
+                return;
         }
     }
 
@@ -57,6 +60,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        Optimizer.currentActiveEnemies++;
     }
 
     private bool IsPositionBlocked(Vector2 position)

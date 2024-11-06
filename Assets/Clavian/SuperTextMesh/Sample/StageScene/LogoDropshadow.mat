@@ -88,9 +88,11 @@ Material:
     - _ShadowDistance: 0.55
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SquareOutline: 0
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseVector3: 0
+    - _Vector3Dropshadow: 0
     - _ZTestMode: 2
     - _ZWrite: 1
     m_Colors:
