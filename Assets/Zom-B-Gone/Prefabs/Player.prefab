@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5398307496003575394}
   - component: {fileID: 6924896234494385440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HatTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183524555
-  m_SortingLayer: -11
+  m_SortingLayer: -12
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 444a5b55dd81a1d498bd42b03bd7da07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 1215756169858613352}
   - component: {fileID: 1764412875231998742}
   - component: {fileID: 1181291375352080221}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +148,7 @@ MonoBehaviour:
   hands: {fileID: 1034459641233780573}
   head: {fileID: 2538085723734079734}
   rb: {fileID: 369753046641428115}
+  bodyCollider: {fileID: 4474808106738882516}
   input: {fileID: 8105131813210140982}
   vc: {fileID: 0}
   groupCam: {fileID: 0}
@@ -155,8 +156,9 @@ MonoBehaviour:
   lookaheadChanger: {fileID: 0}
   currentStamina: 0
   recoverStamina: 0
-  camSizer: {fileID: 0}
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
+  currentHidingSpot: {fileID: 0}
+  enterExitHidingSpeed: 0.4
 --- !u!114 &2538085723734079734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,10 +355,10 @@ MonoBehaviour:
   _interactRange: 2
   InteractionLm:
     serializedVersion: 2
-    m_Bits: 4160
+    m_Bits: 8256
   InteractionBlockersLm:
     serializedVersion: 2
-    m_Bits: 557184
+    m_Bits: 3211392
   scanInterval: 0.1
   openContainerDistanceCheckInterval: 0.1
   defaultSpriteMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -441,7 +443,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183524555
-  m_SortingLayer: -11
+  m_SortingLayer: -12
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 09fff7c5ce70fdb4091f1f6963157880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -524,6 +526,7 @@ MonoBehaviour:
   vehicle: {fileID: 0}
   enterExitSpeed: 0.4
   onTravel: {fileID: 11400000, guid: 622a6d47909437141af504ecbffdb8f3, type: 2}
+  playerController: {fileID: 8105131813210140980}
 --- !u!114 &1764412875231998742
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 6433619232216697638}
   - component: {fileID: 6005865312491404119}
   - component: {fileID: 8593038725922826499}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Van
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -777,7 +777,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -935469541
-  m_SortingLayer: -25
+  m_SortingLayer: -26
   m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 8462f1bad0fc413408aefb440ffe7cca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -861,7 +861,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -177558871
-  m_SortingLayer: -24
+  m_SortingLayer: -25
   m_SortingOrder: 0
   m_Time: 50
   m_PreviewTimeScale: 1
@@ -5909,7 +5909,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -935469541
-  m_SortingLayer: -25
+  m_SortingLayer: -26
   m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 8462f1bad0fc413408aefb440ffe7cca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5993,7 +5993,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -177558871
-  m_SortingLayer: -24
+  m_SortingLayer: -25
   m_SortingOrder: 0
   m_Time: 50
   m_PreviewTimeScale: 1
@@ -10934,6 +10934,8 @@ MonoBehaviour:
   rb: {fileID: 6005865312491404119}
   litHeadlights: {fileID: 2016885947193980671}
   movedFromExplosion: 0
+  minPitch: 0.8
+  maxPitch: 1.6
   frontLeftWheel: {fileID: 7074339657479065321}
   frontRightWheel: {fileID: 6200463288551043748}
 --- !u!212 &7865919876815733851
@@ -10978,7 +10980,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -935469541
-  m_SortingLayer: -25
+  m_SortingLayer: -26
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 2153b7171e799a84cbd5d9dcde895b95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11342,7 +11344,7 @@ GameObject:
   - component: {fileID: 7963152559279586361}
   - component: {fileID: 6150787739262144366}
   - component: {fileID: 4007668367297085467}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: VanBack
   m_TagString: VanFloor
   m_Icon: {fileID: 0}
@@ -11482,7 +11484,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -935469541
-  m_SortingLayer: -25
+  m_SortingLayer: -26
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 86d84d74c74883f4580d742d13a53802, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

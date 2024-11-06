@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2208294227549419385}
   - component: {fileID: 8225873307285844331}
   - component: {fileID: 1492257516330468340}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: The Bachete Prime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -22
+  m_SortingLayer: -23
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 63bb078aa529fa745b6fa35fa1cd61fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

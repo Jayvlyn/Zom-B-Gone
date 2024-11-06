@@ -109,13 +109,15 @@ public abstract class Enemy : MonoBehaviour
 
 
 	private LayerMask playerLm;
+	private LayerMask disguisedPlayerLm;
 	private LayerMask worldLm;
 	private LayerMask windowLm;
 	private LayerMask interactableLm;
 
 	private void Awake()
 	{
-		playerLm = LayerMask.GetMask("Player");
+		playerLm = LayerMask.GetMask("Player, DisguisedPlayer");
+		disguisedPlayerLm = LayerMask.GetMask("DisguisedPlayer");
 		worldLm = LayerMask.GetMask("World");
 		windowLm = LayerMask.GetMask("Window");
 		interactableLm = LayerMask.GetMask("Interactable");
@@ -223,7 +225,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			Rotate(target);
 
-			if(rigidBody.linearVelocity.magnitude < 0.4f) // if not moving much see if something is in the way
+			if(rigidBody.linearVelocity.magnitude < 0.1f) // if not moving much see if something is in the way
 			{
                 int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
 				if (hitCount > 0) return;       
@@ -409,6 +411,12 @@ public abstract class Enemy : MonoBehaviour
 				}
 				else
 				{
+					Debug.Log("is");
+					if((disguisedPlayerLm.value & (1 << hit.collider.gameObject.layer)) != 0)
+					{
+						Debug.Log("help");
+					}
+
 					playerTarget = hit.collider.gameObject;
 					ChangeState(State.AGGRO);
 					seekTarget += rayDir.normalized * 100;
@@ -472,7 +480,7 @@ public abstract class Enemy : MonoBehaviour
 		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, playerDistance, MovementBlockersLm);
 		if(wallHit.collider)
 		{
-			return (direction + enemyData.avoidancePriority * 2 * Avoidance()).normalized;
+			return (direction + enemyData.avoidancePriority * 10 * Avoidance()).normalized;
 		}
 		else // straight shot to player, go for them
 		{
@@ -524,6 +532,7 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnDeath()
 	{
+		Optimizer.currentActiveEnemies--;
 		ChangeState(State.DEAD);
 	}
 

@@ -32,8 +32,8 @@ MonoBehaviour:
   alignmentPriority: 35.8
   separationRadius: 2.03
   separationPriority: 74.4
-  avoidancePriority: 54
-  investigatePriority: 54
+  avoidancePriority: 50.2
+  investigatePriority: 40.7
   possibleVoices:
   - {fileID: 11400000, guid: bcfda1de500017143961ff9522ad74de, type: 2}
   - {fileID: 11400000, guid: 0582667dc74eaa9419ac8a0a9685ddf9, type: 2}

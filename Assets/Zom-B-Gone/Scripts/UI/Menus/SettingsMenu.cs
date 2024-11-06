@@ -1,15 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public GameObject redirectUI;
+    public MainMenu mainMenu;
     public AudioMixer sfxMixer;
     public AudioMixer musicMixer;
     public TMPro.TMP_Dropdown resolutionDropdown;
@@ -31,8 +29,14 @@ public class SettingsMenu : MonoBehaviour
         SettingsData settingsData = SaveSystem.LoadSettings();
         if (settingsData != null)
         {
-            if(sfxVolumeSlider!=null)sfxVolumeSlider.value = settingsData.sfxVolume;
-            if(musicVolumeSlider!=null)musicVolumeSlider.value = settingsData.musicVolume;
+            if (sfxVolumeSlider != null)
+            {
+                sfxVolumeSlider.value = settingsData.sfxVolume;
+            }
+            if (musicVolumeSlider != null)
+            {
+                musicVolumeSlider.value = settingsData.musicVolume;
+            }
         }
 
         fullscreenToggle.isOn = Screen.fullScreen;
@@ -56,7 +60,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetRes(int index)
     {
-        if(!settingsJustOpened)
+        if (!settingsJustOpened)
         {
             Resolution resolution = _resolutions[index];
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
@@ -64,7 +68,6 @@ public class SettingsMenu : MonoBehaviour
     }
     public void OnBack()
     {
-        if (redirectUI != null) redirectUI.SetActive(true);
         gameObject.SetActive(false);
     }
 
@@ -79,7 +82,7 @@ public class SettingsMenu : MonoBehaviour
     public void SetMusicVolume(float value)
     {
         musicVolume = value;
-        if(value == musicVolumeSlider.minValue) musicMixer.SetFloat("Volume", -80);
+        if (value == musicVolumeSlider.minValue) musicMixer.SetFloat("Volume", -80);
         else musicMixer.SetFloat("Volume", value);
         SaveSystem.SaveSettings(this);
     }
@@ -96,3 +99,4 @@ public class SettingsMenu : MonoBehaviour
         settingsJustOpened = false;
     }
 }
+

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2208294227549419385}
   - component: {fileID: 8225873307285844331}
   - component: {fileID: 4892750397159343982}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Stopaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -22
+  m_SortingLayer: -23
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 50f85a7f8d85ed844a24f601ff05ab64, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
