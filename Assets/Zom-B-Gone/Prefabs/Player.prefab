@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5398307496003575394}
   - component: {fileID: 6924896234494385440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HatTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183524555
-  m_SortingLayer: -11
+  m_SortingLayer: -9
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 444a5b55dd81a1d498bd42b03bd7da07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,17 +99,18 @@ GameObject:
   - component: {fileID: 8105131813210140980}
   - component: {fileID: 2538085723734079734}
   - component: {fileID: 1034459641233780573}
-  - component: {fileID: 404186174974829375}
-  - component: {fileID: 998744478070939707}
-  - component: {fileID: 8105131813210140982}
   - component: {fileID: 4277460431732484000}
-  - component: {fileID: 369753046641428115}
-  - component: {fileID: 8105131813210140983}
-  - component: {fileID: 4474808106738882516}
+  - component: {fileID: 998744478070939707}
   - component: {fileID: 1215756169858613352}
   - component: {fileID: 1764412875231998742}
+  - component: {fileID: 8225537271819853896}
+  - component: {fileID: 404186174974829375}
+  - component: {fileID: 8105131813210140982}
+  - component: {fileID: 369753046641428115}
+  - component: {fileID: 4474808106738882516}
+  - component: {fileID: 8105131813210140983}
   - component: {fileID: 1181291375352080221}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,13 +150,15 @@ MonoBehaviour:
   head: {fileID: 2538085723734079734}
   rb: {fileID: 369753046641428115}
   input: {fileID: 8105131813210140982}
+  vehicleDriver: {fileID: 1215756169858613352}
+  playerCollider: {fileID: 4474808106738882516}
+  playerSprite: {fileID: 8105131813210140983}
   vc: {fileID: 0}
   groupCam: {fileID: 0}
   framingTransposer: {fileID: 0}
   lookaheadChanger: {fileID: 0}
   currentStamina: 0
   recoverStamina: 0
-  camSizer: {fileID: 0}
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
 --- !u!114 &2538085723734079734
 MonoBehaviour:
@@ -196,11 +199,155 @@ MonoBehaviour:
   rightReloadingIndicator: {fileID: 0}
   leftLumbering: 1
   rightLumbering: 1
-  lumberingLowerBound: 0.8
+  lumberingLowerBound: 0.7
   leftItem: {fileID: 0}
   rightItem: {fileID: 0}
   leftIcon: {fileID: 0}
   rightIcon: {fileID: 0}
+--- !u!114 &4277460431732484000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105131813210141130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e8784615d391f41b9317b9575e7647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactRange: 2
+  InteractionLm:
+    serializedVersion: 2
+    m_Bits: 4160
+  InteractionBlockersLm:
+    serializedVersion: 2
+    m_Bits: 557184
+  scanInterval: 0.1
+  openContainerDistanceCheckInterval: 0.1
+  defaultSpriteMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  outlineSpriteMaterial: {fileID: 2100000, guid: f33b1a8a73348f948b03d79be184d8bd, type: 2}
+  lootOutlineSpriteMaterial: {fileID: 2100000, guid: 952987a5c2d46444a9a94f95a664e4bf, type: 2}
+  closeContainerEvents:
+  - {fileID: 11400000, guid: 5abe13962e7625d4db0b066ade1e162c, type: 2}
+  - {fileID: 11400000, guid: e827c2b02aead2b42894a29bd4a840f6, type: 2}
+  - {fileID: 11400000, guid: b40db612806cdce4fa58882bf1d149e0, type: 2}
+  - {fileID: 11400000, guid: 710e9a9ee455f1b4e849f94da7679bf4, type: 2}
+  - {fileID: 11400000, guid: 1074ef9a6659406408f5c2583c6d7f76, type: 2}
+  playerController: {fileID: 8105131813210140980}
+--- !u!114 &998744478070939707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105131813210141130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7ee753bdcc5fc4f9db0001cf00a6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  _maxHealth: 100
+  _currentHealth: 100
+--- !u!114 &1215756169858613352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105131813210141130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e5b1f71903ed842be82009495d422a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vehicle: {fileID: 0}
+  enterExitSpeed: 0.4
+  onTravel: {fileID: 11400000, guid: 622a6d47909437141af504ecbffdb8f3, type: 2}
+--- !u!114 &1764412875231998742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105131813210141130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4141fce9ab9f874e802f230703669ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStepInterval: 0.8
+  speedMultiplier: 0.5
+  playerController: {fileID: 8105131813210140980}
+  footstepAudioSource: {fileID: 1181291375352080221}
+  grassFootsteps:
+  - {fileID: 8300000, guid: 12410a03f3ab1e145a771dedae89baac, type: 3}
+  - {fileID: 8300000, guid: 5e57d626e639ebe439eeb7a8a12e1bc1, type: 3}
+  - {fileID: 8300000, guid: a09f750c26bbc46409712a51331d1c8c, type: 3}
+  - {fileID: 8300000, guid: 27e7513f5a9ebba499bc1bc76f7b607f, type: 3}
+  tileFootsteps:
+  - {fileID: 8300000, guid: 94bf1feea37346443ab26807376dba2e, type: 3}
+  - {fileID: 8300000, guid: ca410ded73577454fbba8228fbb4932b, type: 3}
+  - {fileID: 8300000, guid: b2351969e6445c445b8217bcbaee3fe6, type: 3}
+  - {fileID: 8300000, guid: ee0f04a12ffc08740b69f0da92cf65ad, type: 3}
+  asphaultFootsteps:
+  - {fileID: 8300000, guid: 91c39d04389930444821974daa17be58, type: 3}
+  - {fileID: 8300000, guid: a0d0444898bfdac4c91b7a5461ff1f7a, type: 3}
+  - {fileID: 8300000, guid: 0c55a39dd203cc6488670fd9db4df840, type: 3}
+  - {fileID: 8300000, guid: ae6f83763030cc04c862b530d35b1c64, type: 3}
+  woodenFootsteps:
+  - {fileID: 8300000, guid: f0c0a83f328d57d41a01f5a0b04e3670, type: 3}
+  - {fileID: 8300000, guid: 39a471dcc7e07a7478fa2a96a1f9d6b6, type: 3}
+  - {fileID: 8300000, guid: 307df92bf5daf2545b09907fe6bd8eae, type: 3}
+  - {fileID: 8300000, guid: c0a53d7e9f66fd54fa69507f3bf9583f, type: 3}
+  carpetFootsteps:
+  - {fileID: 8300000, guid: 4f926971d23b40e4a8b222ec4c0fe95b, type: 3}
+  - {fileID: 8300000, guid: dd3d64186fbea4e45ba3128e52053359, type: 3}
+  - {fileID: 8300000, guid: b7d9a5d5beed8c64f86887a923d6009d, type: 3}
+  - {fileID: 8300000, guid: 8f364fa5d9d925e41bc861b8329ae623, type: 3}
+  concreteFootsteps:
+  - {fileID: 8300000, guid: 0515e886f45f4a744803a571c592df51, type: 3}
+  - {fileID: 8300000, guid: 1fbcc7e301fed0e4ca9a7a6e7fa4bcd0, type: 3}
+  - {fileID: 8300000, guid: cf090832bf4b843439a9f5befbddf8c1, type: 3}
+  - {fileID: 8300000, guid: 0ce9e069d49196a46bc27521f5dd3232, type: 3}
+  grassTiles:
+  - {fileID: 11400000, guid: 35110f2664c37134aada7a402cf53faa, type: 2}
+  tileTiles:
+  - {fileID: 11400000, guid: 77212bc81d9193342b9ecd5021d12d02, type: 2}
+  - {fileID: 11400000, guid: 5ec74c772dd099c4c858697278e70808, type: 2}
+  - {fileID: 11400000, guid: d4c9ee3a2ee7935418b8525cd2539622, type: 2}
+  - {fileID: 11400000, guid: b4639047dbf5fa54587b8a88c2d6dd0e, type: 2}
+  - {fileID: 11400000, guid: f6b0d54604c3e574792760f29e0543fe, type: 2}
+  - {fileID: 11400000, guid: e147d0efe17920a468b60f15eb2fc7d2, type: 2}
+  asphaultTiles:
+  - {fileID: 11400000, guid: e676d9c80cb4c4947a0ecd5eaa55e965, type: 2}
+  - {fileID: 11400000, guid: b36376bf0e74f7a49afce659f26f3e8e, type: 2}
+  - {fileID: 11400000, guid: 090f65c64570f7d40b2a386b64ceafff, type: 2}
+  carpetTiles:
+  - {fileID: 11400000, guid: da67be406da188542a1070e155cece0c, type: 2}
+  - {fileID: 11400000, guid: f14b06b726ed47d48aae8605660487ce, type: 2}
+  - {fileID: 11400000, guid: 590f45a9bbce61a448a77fe592fc59c9, type: 2}
+  - {fileID: 11400000, guid: 67152b6ef6cff5c4f95639f171c11e6c, type: 2}
+  - {fileID: 11400000, guid: 523064683617bad4891479c5b4e15437, type: 2}
+  - {fileID: 11400000, guid: b54f6d8713f5a894196497c603a1fca7, type: 2}
+  woodenTiles:
+  - {fileID: 11400000, guid: b188506b50d16ac439810689abaadb44, type: 2}
+  - {fileID: 11400000, guid: 6cf385d9d657568429b3108841718ac7, type: 2}
+  - {fileID: 11400000, guid: 6a8fce72e5a478943b4255aa32f0ea71, type: 2}
+--- !u!114 &8225537271819853896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105131813210141130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441df1813e4baba48ab3236e397bc8fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 8105131813210140980}
 --- !u!114 &404186174974829375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,21 +376,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &998744478070939707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105131813210141130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec7ee753bdcc5fc4f9db0001cf00a6d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  _maxHealth: 100
-  _currentHealth: 100
 --- !u!114 &8105131813210140982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,40 +470,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4277460431732484000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105131813210141130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48e8784615d391f41b9317b9575e7647, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactRange: 2
-  InteractionLm:
-    serializedVersion: 2
-    m_Bits: 4160
-  InteractionBlockersLm:
-    serializedVersion: 2
-    m_Bits: 557184
-  scanInterval: 0.1
-  openContainerDistanceCheckInterval: 0.1
-  defaultSpriteMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  outlineSpriteMaterial: {fileID: 2100000, guid: f33b1a8a73348f948b03d79be184d8bd, type: 2}
-  lootOutlineSpriteMaterial: {fileID: 2100000, guid: 952987a5c2d46444a9a94f95a664e4bf, type: 2}
-  closeContainerEvents:
-  - {fileID: 11400000, guid: 5abe13962e7625d4db0b066ade1e162c, type: 2}
-  - {fileID: 11400000, guid: e827c2b02aead2b42894a29bd4a840f6, type: 2}
-  - {fileID: 11400000, guid: b40db612806cdce4fa58882bf1d149e0, type: 2}
-  - {fileID: 11400000, guid: 710e9a9ee455f1b4e849f94da7679bf4, type: 2}
-  - {fileID: 11400000, guid: 1074ef9a6659406408f5c2583c6d7f76, type: 2}
-  playerController: {fileID: 8105131813210140980}
-  vehicleDriver: {fileID: 1215756169858613352}
-  playerCollider: {fileID: 4474808106738882516}
-  playerSprite: {fileID: 8105131813210140983}
 --- !u!50 &369753046641428115
 Rigidbody2D:
   serializedVersion: 5
@@ -399,61 +497,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!212 &8105131813210140983
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105131813210141130}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1183524555
-  m_SortingLayer: -11
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 09fff7c5ce70fdb4091f1f6963157880, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!60 &4474808106738882516
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -509,91 +552,61 @@ PolygonCollider2D:
       - {x: 0.19906609, y: 0.076708175}
       - {x: -0.17663641, y: 0.077154234}
   m_UseDelaunayMesh: 0
---- !u!114 &1215756169858613352
-MonoBehaviour:
+--- !u!212 &8105131813210140983
+SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8105131813210141130}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7e5b1f71903ed842be82009495d422a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vehicle: {fileID: 0}
-  enterExitSpeed: 0.4
-  onTravel: {fileID: 11400000, guid: 622a6d47909437141af504ecbffdb8f3, type: 2}
---- !u!114 &1764412875231998742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105131813210141130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4141fce9ab9f874e802f230703669ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseStepInterval: 0.8
-  speedMultiplier: 0.5
-  playerController: {fileID: 8105131813210140980}
-  footstepAudioSource: {fileID: 1181291375352080221}
-  grassFootsteps:
-  - {fileID: 8300000, guid: 12410a03f3ab1e145a771dedae89baac, type: 3}
-  - {fileID: 8300000, guid: 5e57d626e639ebe439eeb7a8a12e1bc1, type: 3}
-  - {fileID: 8300000, guid: a09f750c26bbc46409712a51331d1c8c, type: 3}
-  - {fileID: 8300000, guid: 27e7513f5a9ebba499bc1bc76f7b607f, type: 3}
-  tileFootsteps:
-  - {fileID: 8300000, guid: 94bf1feea37346443ab26807376dba2e, type: 3}
-  - {fileID: 8300000, guid: ca410ded73577454fbba8228fbb4932b, type: 3}
-  - {fileID: 8300000, guid: b2351969e6445c445b8217bcbaee3fe6, type: 3}
-  - {fileID: 8300000, guid: ee0f04a12ffc08740b69f0da92cf65ad, type: 3}
-  asphaultFootsteps:
-  - {fileID: 8300000, guid: 91c39d04389930444821974daa17be58, type: 3}
-  - {fileID: 8300000, guid: a0d0444898bfdac4c91b7a5461ff1f7a, type: 3}
-  - {fileID: 8300000, guid: 0c55a39dd203cc6488670fd9db4df840, type: 3}
-  - {fileID: 8300000, guid: ae6f83763030cc04c862b530d35b1c64, type: 3}
-  woodenFootsteps:
-  - {fileID: 8300000, guid: f0c0a83f328d57d41a01f5a0b04e3670, type: 3}
-  - {fileID: 8300000, guid: 39a471dcc7e07a7478fa2a96a1f9d6b6, type: 3}
-  - {fileID: 8300000, guid: 307df92bf5daf2545b09907fe6bd8eae, type: 3}
-  - {fileID: 8300000, guid: c0a53d7e9f66fd54fa69507f3bf9583f, type: 3}
-  carpetFootsteps:
-  - {fileID: 8300000, guid: 4f926971d23b40e4a8b222ec4c0fe95b, type: 3}
-  - {fileID: 8300000, guid: dd3d64186fbea4e45ba3128e52053359, type: 3}
-  - {fileID: 8300000, guid: b7d9a5d5beed8c64f86887a923d6009d, type: 3}
-  - {fileID: 8300000, guid: 8f364fa5d9d925e41bc861b8329ae623, type: 3}
-  concreteFootsteps:
-  - {fileID: 8300000, guid: 0515e886f45f4a744803a571c592df51, type: 3}
-  - {fileID: 8300000, guid: 1fbcc7e301fed0e4ca9a7a6e7fa4bcd0, type: 3}
-  - {fileID: 8300000, guid: cf090832bf4b843439a9f5befbddf8c1, type: 3}
-  - {fileID: 8300000, guid: 0ce9e069d49196a46bc27521f5dd3232, type: 3}
-  grassTiles:
-  - {fileID: 11400000, guid: 35110f2664c37134aada7a402cf53faa, type: 2}
-  tileTiles:
-  - {fileID: 11400000, guid: 77212bc81d9193342b9ecd5021d12d02, type: 2}
-  - {fileID: 11400000, guid: 5ec74c772dd099c4c858697278e70808, type: 2}
-  - {fileID: 11400000, guid: d4c9ee3a2ee7935418b8525cd2539622, type: 2}
-  - {fileID: 11400000, guid: b4639047dbf5fa54587b8a88c2d6dd0e, type: 2}
-  - {fileID: 11400000, guid: f6b0d54604c3e574792760f29e0543fe, type: 2}
-  - {fileID: 11400000, guid: e147d0efe17920a468b60f15eb2fc7d2, type: 2}
-  asphaultTiles:
-  - {fileID: 11400000, guid: e676d9c80cb4c4947a0ecd5eaa55e965, type: 2}
-  - {fileID: 11400000, guid: b36376bf0e74f7a49afce659f26f3e8e, type: 2}
-  - {fileID: 11400000, guid: 090f65c64570f7d40b2a386b64ceafff, type: 2}
-  carpetTiles:
-  - {fileID: 11400000, guid: da67be406da188542a1070e155cece0c, type: 2}
-  - {fileID: 11400000, guid: f14b06b726ed47d48aae8605660487ce, type: 2}
-  - {fileID: 11400000, guid: 590f45a9bbce61a448a77fe592fc59c9, type: 2}
-  - {fileID: 11400000, guid: 67152b6ef6cff5c4f95639f171c11e6c, type: 2}
-  - {fileID: 11400000, guid: 523064683617bad4891479c5b4e15437, type: 2}
-  - {fileID: 11400000, guid: b54f6d8713f5a894196497c603a1fca7, type: 2}
-  woodenTiles:
-  - {fileID: 11400000, guid: b188506b50d16ac439810689abaadb44, type: 2}
-  - {fileID: 11400000, guid: 6cf385d9d657568429b3108841718ac7, type: 2}
-  - {fileID: 11400000, guid: 6a8fce72e5a478943b4255aa32f0ea71, type: 2}
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1183524555
+  m_SortingLayer: -9
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 09fff7c5ce70fdb4091f1f6963157880, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.56, y: 2.56}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!82 &1181291375352080221
 AudioSource:
   m_ObjectHideFlags: 0

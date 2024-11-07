@@ -56,6 +56,9 @@ MonoBehaviour:
   hatData: {fileID: 11400000, guid: 3fa6666eb782f1948bb4e0c759ca8df1, type: 2}
   activateOnWear: {fileID: 0}
   head: {fileID: 0}
+  lowerSortingLayerID: 0
+  wornSortingLayerID: 0
+  spriteRenderer: {fileID: 8510947219786376494}
   useDataIcon: 0
 --- !u!212 &8510947219786376494
 SpriteRenderer:
@@ -99,7 +102,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1157261609
-  m_SortingLayer: -20
+  m_SortingLayer: -21
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad011f06ec9a20f4abdac8f7f31ae872, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -319,7 +322,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1157261609
-  m_SortingLayer: -20
+  m_SortingLayer: -21
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c0f1ad51e1de5a445ab0d393d047f695, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -407,7 +410,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1157261609
-  m_SortingLayer: -20
+  m_SortingLayer: -21
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8b3a0310207a63542a8ed294778d54f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

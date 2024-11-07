@@ -28,9 +28,6 @@ public class Interactor : MonoBehaviour
     [SerializeField] VoidEvent[] closeContainerEvents;
 
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private VehicleDriver vehicleDriver;
-    [SerializeField] private Collider2D playerCollider;
-    [SerializeField] private SpriteRenderer playerSprite;
 
     // when a container is interacted with, it will use this to track the distance, and close the container when you get out of interact range
     [HideInInspector] public static GameObject interactedContainer;
@@ -316,13 +313,8 @@ public class Interactor : MonoBehaviour
                     Hat h = playerController.head.wornHat;
                     playerController.head.hairRenderer.enabled = true;
                     playerController.head.HatObject.transform.parent = null;
-                    playerController.head.HatObject.GetComponent<SpriteRenderer>().sortingLayerName = "GroundedHat";
                     playerController.head.HatObject.layer = LayerMask.NameToLayer("Interactable");
-                    if (playerController.head.HatObject.transform.childCount > 0)
-                    {
-                        SpriteRenderer[] childRenderers = playerController.head.HatObject.GetComponentsInChildren<SpriteRenderer>();
-                        foreach (SpriteRenderer childRenderer in childRenderers) childRenderer.sortingLayerName = "GroundedHat";
-                    }
+                    h.ChangeSortingLayer(h.wornSortingLayerID);
                     h.StartCoroutine(h.TransferPosition(newHat.transform.position, newHat.transform.rotation));
                     h.head = null;
 
@@ -344,8 +336,8 @@ public class Interactor : MonoBehaviour
             // INTERACT WITH VEHICLE
             else if (AvailableInteractable is Vehicle v)
             {
-                vehicleDriver.vehicle = v;
-                vehicleDriver.Enter(playerCollider, playerController);
+                playerController.vehicleDriver.vehicle = v;
+                playerController.vehicleDriver.Enter(playerController.playerCollider, playerController);
                 AvailableInteractable.Interact(false, playerController);
             }
 

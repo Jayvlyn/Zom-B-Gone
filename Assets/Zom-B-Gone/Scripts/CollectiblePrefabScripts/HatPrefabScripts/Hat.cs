@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -7,12 +6,17 @@ public class Hat : Collectible
 {
     [HideInInspector] public HatData hatData;
 
-    public GameObject activateOnWear;
+
+    public SpriteRenderer spriteRenderer;
+    public bool useDataIcon = true;
+
+    [Header("Optional:")]
+    [Tooltip("Game Object that will get activated on wear, and deactivate for hiding and driving")] public GameObject activateOnWear;
 
     [HideInInspector] public Head head;
-    private SpriteRenderer spriteRenderer;
+    [HideInInspector] public int lowerSortingLayerID;
+    [HideInInspector] public int wornSortingLayerID;
     private float transferTime = .2f;
-    public bool useDataIcon = true;
 
     private bool worn;
     public bool Worn
@@ -28,8 +32,9 @@ public class Hat : Collectible
 
     private void Awake()
 	{
+        lowerSortingLayerID = SortingLayer.NameToID("LowerHat");
+        wornSortingLayerID = SortingLayer.NameToID("WornHat");
         hatData = data as HatData;
-		spriteRenderer = GetComponent<SpriteRenderer>();
         if (useDataIcon) spriteRenderer.sprite = hatData.icon;
 	}
 
@@ -42,13 +47,7 @@ public class Hat : Collectible
 		head = playerController.head;
         gameObject.layer = LayerMask.NameToLayer("WornHat");
 
-        spriteRenderer.sortingLayerName = "WornHat";
-
-        if (transform.childCount > 0)
-        {
-            SpriteRenderer[] childRenderers = GetComponentsInChildren<SpriteRenderer>();
-            foreach (SpriteRenderer childRenderer in childRenderers) childRenderer.sortingLayerName = "WornHat";
-        }
+        ChangeSortingLayer(wornSortingLayerID);
 
         StartCoroutine(TransferPosition(head.hatTransform));
 
@@ -108,13 +107,7 @@ public class Hat : Collectible
             head.HatObject = null;
             gameObject.transform.parent = null;
 			gameObject.layer = LayerMask.NameToLayer("Interactable");
-			spriteRenderer.sortingLayerName = "GroundedHat";
-
-            if(transform.childCount > 0)
-            {
-                SpriteRenderer[] childRenderers = GetComponentsInChildren<SpriteRenderer>();
-                foreach (SpriteRenderer childRenderer in childRenderers) childRenderer.sortingLayerName = "GroundedHat";
-            }
+            ChangeSortingLayer(lowerSortingLayerID);
 
             Vector2 dropPos;
 
@@ -132,5 +125,16 @@ public class Hat : Collectible
 
             head = null;
 		}
+    }
+
+    public void ChangeSortingLayer(int id)
+    {
+        spriteRenderer.sortingLayerID = id;
+
+        if (transform.childCount > 0)
+        {
+            SpriteRenderer[] childRenderers = GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer childRenderer in childRenderers) childRenderer.sortingLayerID = id;
+        }
     }
 }

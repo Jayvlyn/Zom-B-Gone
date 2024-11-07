@@ -54,6 +54,9 @@ MonoBehaviour:
   hatData: {fileID: 11400000, guid: 87abeb40489f2894a88d2f42a31cc413, type: 2}
   activateOnWear: {fileID: 0}
   head: {fileID: 0}
+  lowerSortingLayerID: 0
+  wornSortingLayerID: 0
+  spriteRenderer: {fileID: 8510947219786376494}
   useDataIcon: 1
 --- !u!212 &8510947219786376494
 SpriteRenderer:
@@ -97,7 +100,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1157261609
-  m_SortingLayer: -20
+  m_SortingLayer: -21
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a40c5bb623614f74b9727a3410f334bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

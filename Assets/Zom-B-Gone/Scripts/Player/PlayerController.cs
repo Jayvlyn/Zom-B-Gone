@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,15 +22,17 @@ public class PlayerController : MonoBehaviour
     public Head head;
     public Rigidbody2D rb;
     public PlayerInput input;
+    public VehicleDriver vehicleDriver;
+    public Collider2D playerCollider;
+    public SpriteRenderer playerSprite;
     private Slider staminaSlider;
     private Interactor interactor;
 
-    [Header("Camera Refs")]
     private Camera gameCamera;
-    public CinemachineVirtualCamera vc;
-    public Transform groupCam;
-	public CinemachineFramingTransposer framingTransposer;
-    public LookaheadChanger lookaheadChanger;
+    [HideInInspector] public CinemachineVirtualCamera vc;
+    [HideInInspector] public Transform groupCam;
+    [HideInInspector] public CinemachineFramingTransposer framingTransposer;
+    [HideInInspector] public LookaheadChanger lookaheadChanger;
 
 	[HideInInspector] public static bool holdingRun;
     [HideInInspector] public static bool holdingSneak;

@@ -21,7 +21,7 @@ public class Head : MonoBehaviour
             if (hatObject != null && hatObject.TryGetComponent(out Hat hat)) // Hat added or swapped
             {
                 wornHat = hat;
-				//headContainerData.Container.collectibleSlots[0].Collectible = wornHat.hatData;
+
 				headContainerData.Container.collectibleSlots[0].CollectibleName = wornHat.hatData.name;
 				headContainerData.Container.collectibleSlots[0].quantity = 1;
 			}
