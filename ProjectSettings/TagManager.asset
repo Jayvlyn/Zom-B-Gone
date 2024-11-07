@@ -45,8 +45,8 @@ TagManager:
   - Door
   - Window
   - LayoutFloor
-  - 
-  - 
+  - HidingPlayer
+  - DisguisedPlayer
   - 
   - 
   - 

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     public enum PlayerState
     {
-        IDLE, WALKING, RUNNING, SNEAKING, DRIVING
+        IDLE, WALKING, RUNNING, SNEAKING, DRIVING, HIDING
     }
     public static PlayerState currentState;
     public static bool isSneaking => currentState == PlayerState.SNEAKING;
@@ -45,9 +45,74 @@ public class PlayerController : MonoBehaviour
     private Vector2 smoothedMovementInput;
     private Vector2 movementInputSmoothVelocity;
 
-    //public CameraSizer camSizer;
-
     public static ContainerDragHandler mouseHeldIcon = null;
+
+    public void ChangeState(PlayerState newState)
+    {
+        if (currentState == newState) return;
+
+        // previous state check
+        switch (currentState)
+        {
+            case PlayerState.DRIVING: // exiting driving state
+                if (input.currentActionMap != null && input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
+                if (vc)
+                {
+                    framingTransposer.m_LookaheadTime = 0f;
+                    if (orthoSizeChangeCoroutine != null) StopCoroutine(orthoSizeChangeCoroutine);
+                    orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(4f, 1f));
+                }
+                if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(true);
+                break;
+
+            case PlayerState.HIDING:
+
+                break;
+        }
+
+        switch (newState)
+        {
+            case PlayerState.WALKING:
+                if (!recoverStamina) RecoverStamina();
+                currentMoveSpeed = playerData.walkSpeed;
+                break;
+
+            case PlayerState.RUNNING:
+                currentMoveSpeed = playerData.runSpeed;
+                recoverStamina = false;
+                break;
+
+            case PlayerState.SNEAKING:
+                if (!recoverStamina) RecoverStamina();
+                currentMoveSpeed = playerData.sneakSpeed;
+                break;
+
+            case PlayerState.IDLE:
+                if (!recoverStamina) RecoverStamina();
+                currentMoveSpeed = playerData.walkSpeed;
+                if (rb.bodyType != RigidbodyType2D.Dynamic) rb.bodyType = RigidbodyType2D.Dynamic;
+                break;
+
+            case PlayerState.DRIVING:
+                if (!recoverStamina) RecoverStamina();
+                if (vc)
+                {
+                    vc.Follow = transform;
+                    if (orthoSizeChangeCoroutine != null) StopCoroutine(orthoSizeChangeCoroutine);
+                    orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(7f, 1f));
+                }
+                if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(false);
+                input.SwitchCurrentActionMap("Vehicle");
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                break;
+
+            case PlayerState.HIDING:
+
+                break;
+        }
+
+        currentState = newState;
+    }
 
     private void Awake()
     {
@@ -432,62 +497,6 @@ public class PlayerController : MonoBehaviour
     public void DropHat()
     {
         head.wornHat.DropHat();
-    }
-
-    public void ChangeState(PlayerState newState)
-    {
-		if (currentState == newState) return;
-
-        // previous state check
-        switch(currentState)
-        {
-            case PlayerState.DRIVING: // exiting driving state
-				if (input.currentActionMap != null && input.currentActionMap.name != "Player") input.SwitchCurrentActionMap("Player");
-                if(vc)
-                {
-				    framingTransposer.m_LookaheadTime = 0f;
-                    if (orthoSizeChangeCoroutine != null) StopCoroutine(orthoSizeChangeCoroutine);
-                    orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(4f, 1f));
-                }
-                if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(true);
-
-                break;
-        }
-
-		switch (newState)
-        {
-            case PlayerState.WALKING:
-                if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = playerData.walkSpeed;
-                break;
-            case PlayerState.RUNNING:
-                currentMoveSpeed = playerData.runSpeed;
-                recoverStamina = false;
-                break;
-            case PlayerState.SNEAKING:
-                if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = playerData.sneakSpeed;
-                break;
-            case PlayerState.IDLE:
-                if (!recoverStamina) RecoverStamina();
-                currentMoveSpeed = playerData.walkSpeed;
-                if(rb.bodyType != RigidbodyType2D.Dynamic) rb.bodyType = RigidbodyType2D.Dynamic;
-                break;
-            case PlayerState.DRIVING:
-                if (!recoverStamina) RecoverStamina();
-                if(vc)
-                {
-                    vc.Follow = transform;
-                    if(orthoSizeChangeCoroutine != null) StopCoroutine(orthoSizeChangeCoroutine); 
-					orthoSizeChangeCoroutine = StartCoroutine(SmoothOrthographicSizeChange(7f, 1f));
-				}
-                if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(false);
-                input.SwitchCurrentActionMap("Vehicle");
-                rb.bodyType = RigidbodyType2D.Kinematic;
-                break;
-        }
-
-        currentState = newState;
     }
 
     private Coroutine orthoSizeChangeCoroutine;
