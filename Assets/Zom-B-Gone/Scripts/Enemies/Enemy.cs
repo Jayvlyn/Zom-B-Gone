@@ -223,11 +223,11 @@ public abstract class Enemy : MonoBehaviour
 		{
 			Rotate(target);
 
-			if(rigidBody.linearVelocity.magnitude < 0.4f) // if not moving much see if something is in the way
-			{
-                int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
-				if (hitCount > 0) return;       
-            }
+			//if(rigidBody.linearVelocity.magnitude < 0.4f) // if not moving much see if something is in the way
+			//{
+   //             int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
+			//	if (hitCount > 0) return;       
+   //         }
 			
 			rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
 		}
