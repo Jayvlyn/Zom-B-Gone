@@ -25,15 +25,15 @@ MonoBehaviour:
   perceptionRayCount: 7
   doHoarding: 1
   wanderDistance: 10
-  wanderPriority: 11.3
+  wanderPriority: 2.2
   cohesionRadius: 13.9
-  cohesionPriority: 53.1
+  cohesionPriority: 38.2
   alignmentRadius: 9.8
-  alignmentPriority: 35.8
+  alignmentPriority: 12.1
   separationRadius: 2.03
-  separationPriority: 74.4
-  avoidancePriority: 54
-  investigatePriority: 25.9
+  separationPriority: 40.7
+  avoidancePriority: 56.8
+  investigatePriority: 13.4
   possibleVoices:
   - {fileID: 11400000, guid: bcfda1de500017143961ff9522ad74de, type: 2}
   - {fileID: 11400000, guid: 0582667dc74eaa9419ac8a0a9685ddf9, type: 2}

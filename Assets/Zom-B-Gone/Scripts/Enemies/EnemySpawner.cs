@@ -59,8 +59,9 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        Optimizer.list.Add(Instantiate(enemyPrefab, spawnPosition, Quaternion.identity));
         Optimizer.currentActiveEnemies++;
+        
     }
 
     private bool IsPositionBlocked(Vector2 position)

@@ -153,6 +153,7 @@ MonoBehaviour:
   vehicleDriver: {fileID: 1215756169858613352}
   playerCollider: {fileID: 4474808106738882516}
   playerSprite: {fileID: 8105131813210140983}
+  renderingChanger: {fileID: 8225537271819853896}
   vc: {fileID: 0}
   groupCam: {fileID: 0}
   framingTransposer: {fileID: 0}
@@ -160,6 +161,7 @@ MonoBehaviour:
   currentStamina: 0
   recoverStamina: 0
   onBackpackToggle: {fileID: 11400000, guid: 33a1b9210afbbb241938549e05fcc84b, type: 2}
+  currentHidingSpot: {fileID: 0}
 --- !u!114 &2538085723734079734
 MonoBehaviour:
   m_ObjectHideFlags: 0

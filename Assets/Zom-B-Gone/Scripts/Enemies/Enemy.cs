@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -11,7 +9,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		IDLE, DRONING, INVESTIGATING, AGGRO, DEAD
 	}
-	private State currentState = State.IDLE;
+	[SerializeField] private State currentState = State.IDLE;
 
 	public EnemyData enemyData;
 	private EnemyVoice voice;
@@ -235,7 +233,7 @@ public abstract class Enemy : MonoBehaviour
 
 	public void StartInvestigating(Vector2 investigationPoint)
 	{
-		if (currentState != State.DEAD || currentState != State.AGGRO)
+		if (currentState != State.DEAD && currentState != State.AGGRO)
 		{
 			this.investigaitonPoint = investigationPoint;
 			ChangeState(State.INVESTIGATING);
@@ -342,7 +340,10 @@ public abstract class Enemy : MonoBehaviour
 
     Vector2 Avoidance()
     {
-        float angleBetweenRays = enemyData.fov / (enemyData.perceptionRayCount - 1);
+		float fov = enemyData.fov;
+		if (fov < 180) fov += 90;
+
+        float angleBetweenRays = fov / (enemyData.perceptionRayCount - 1);
 
         int openDirectionsCount = 0;
 		int hitCount = 0;
@@ -351,11 +352,12 @@ public abstract class Enemy : MonoBehaviour
 
         for (int i = 0; i < enemyData.perceptionRayCount; i++)
         {
-            float angle = (transform.eulerAngles.z - (enemyData.fov * 0.5f) + (angleBetweenRays * i) + 90) * Mathf.Deg2Rad;
+            float angle = (transform.eulerAngles.z - (fov * 0.5f) + (angleBetweenRays * i) + 90) * Mathf.Deg2Rad;
             Vector2 rayDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, enemyData.obstacleAvoidDistance, MovementBlockersLm);
-			if (hit) hitCount++;
+            Debug.DrawLine(transform.position, (Vector2)transform.position + rayDir * enemyData.obstacleAvoidDistance, Color.red);
+            if (hit) hitCount++;
             if (!hit)
             {
                 openDirectionsCount++;
@@ -381,17 +383,43 @@ public abstract class Enemy : MonoBehaviour
 
 	Vector2 InvestigateTarget()
 	{
+		float dist = Vector2.Distance(investigaitonPoint, transform.position);
+		if (dist < 1)
+		{
+			if (loseInterestRoutine == null)
+				loseInterestRoutine = StartCoroutine(LoseInterestTimer());
+		}
+
 		return (investigaitonPoint - (Vector2)transform.position).normalized;
 	}
+
+	private Coroutine loseInterestRoutine;
+	private IEnumerator LoseInterestTimer()
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			investigaitonPoint.x += Random.Range(-2, 3);
+			investigaitonPoint.y += Random.Range(-2, 3);
+			yield return new WaitForSeconds(3);
+		}
+		loseInterestRoutine = null;
+		ChangeState(State.DRONING);
+	}
+
+	private float GetPlayerSpotDistance()
+	{
+        float sightDistance = enemyData.perceptionDistance * GameManager.globalLight.intensity;
+        float playerSpotDistance = sightDistance;
+        if (PlayerController.isSneaking) playerSpotDistance *= 0.5f;
+		return playerSpotDistance;
+    }
 
 	Vector2 Seek()
     {
 		Vector2 seekTarget = Vector2.zero;
         float angleBetweenRays = enemyData.fov / (enemyData.perceptionRayCount - 1);
 
-		float sightDistance = enemyData.perceptionDistance * GameManager.globalLight.intensity;
-		float playerSpotDistance = sightDistance;
-		if (PlayerController.isSneaking) playerSpotDistance *= 0.5f;
+		float playerSpotDistance = GetPlayerSpotDistance();
 
         for (int i = 0; i < enemyData.perceptionRayCount; i++)
         {
@@ -452,12 +480,15 @@ public abstract class Enemy : MonoBehaviour
 		float playerDistance = Vector2.Distance(playerTarget.transform.position, transform.position);
 		Vector2 direction = playerTarget.transform.position - transform.position;
 
-        if (playerDistance > enemyData.perceptionDistance)
+		float playerSpotDistance = GetPlayerSpotDistance();
+
+        if (playerDistance > playerSpotDistance || PlayerController.hiding)
 		{
 			Vector2 lastSeenPosition = playerTarget.transform.position;
 			playerTarget = null;
-			StartInvestigating(lastSeenPosition);
-			return Vector2.zero;
+			this.investigaitonPoint = lastSeenPosition;
+            ChangeState(State.INVESTIGATING);
+            return Vector2.zero;
 		}
 		else if(playerDistance <= enemyData.attackRange && attackTimer <= 0)
 		{

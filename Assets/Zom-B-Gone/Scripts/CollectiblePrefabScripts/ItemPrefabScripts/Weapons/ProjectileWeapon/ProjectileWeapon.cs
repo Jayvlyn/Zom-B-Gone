@@ -62,6 +62,14 @@ public class ProjectileWeapon : Weapon
         base.Update();
     }
 
+    private void OnDisable()
+    {
+        if (reloading)
+        {
+            CancelReload();
+        }
+    }
+
     public override void Use()
     {
         if(shotTimer <= 0)
@@ -170,14 +178,30 @@ public class ProjectileWeapon : Weapon
 
     private IEnumerator Reload(float mod = 1)
     {
+        StartReload();
+        yield return new WaitForSeconds(projectileWeaponData.reloadTime * mod);
+        FinishReload();
+    }
+
+    private void StartReload()
+    {
         SetReloadIndicator(true);
         PlayReloadStart();
         reloading = true;
         CurrentAmmo = 0;
-        yield return new WaitForSeconds(projectileWeaponData.reloadTime * mod);
+    }
+
+    private void FinishReload()
+    {
         PlayPickupSound(); // for projectile weapons should be prime sound
-        if(hasLoadedSprite) itemRenderer.sprite = loadedSprite;
+        if (hasLoadedSprite) itemRenderer.sprite = loadedSprite;
         CurrentAmmo = projectileWeaponData.maxAmmo;
+        reloading = false;
+        SetReloadIndicator(false);
+    }
+
+    private void CancelReload()
+    {
         reloading = false;
         SetReloadIndicator(false);
     }

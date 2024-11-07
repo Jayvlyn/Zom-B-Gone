@@ -19,11 +19,6 @@ public class Optimizer : MonoBehaviour
 		StartCoroutine(DistanceCheck());
 	}
 
-	private void Update()
-	{
-		Debug.Log(currentActiveEnemies);
-	}
-
 	private IEnumerator DistanceCheck()
 	{
 		while (true)

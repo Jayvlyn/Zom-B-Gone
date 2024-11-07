@@ -1,15 +1,10 @@
 using UnityEngine;
 
-public class HidingSpot : MonoBehaviour
+public class HidingSpot : MonoBehaviour, IInteractable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Transform hidingT;
 
-    // Update is called once per frame
-    void Update()
+    public void Interact(bool rightHand, PlayerController playerController)
     {
         
     }

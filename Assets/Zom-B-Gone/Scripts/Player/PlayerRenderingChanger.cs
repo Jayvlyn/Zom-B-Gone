@@ -16,13 +16,15 @@ public class PlayerRenderingChanger : MonoBehaviour
     public void DoLowerSorting()
     {
         controller.playerSprite.sortingLayerID = lowerPlayerSortingLayerID;
-        controller.head.wornHat.ChangeSortingLayer(controller.head.wornHat.lowerSortingLayerID);
+        controller.head.hairRenderer.sortingLayerID = lowerPlayerSortingLayerID;
+        if(controller.head.wornHat != null) controller.head.wornHat.ChangeSortingLayer(controller.head.wornHat.lowerSortingLayerID);
     }
 
 
     public void DoDefaultSorting()
     {
         controller.playerSprite.sortingLayerID = defaultPlayerSortingLayerID;
-        controller.head.wornHat.ChangeSortingLayer(controller.head.wornHat.wornSortingLayerID);
+        controller.head.hairRenderer.sortingLayerID = defaultPlayerSortingLayerID;
+        if (controller.head.wornHat != null) controller.head.wornHat.ChangeSortingLayer(controller.head.wornHat.wornSortingLayerID);
     }
 }

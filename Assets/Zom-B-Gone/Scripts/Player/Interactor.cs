@@ -68,7 +68,7 @@ public class Interactor : MonoBehaviour
 
     private void Update()
     { 
-        if(PlayerController.currentState != PlayerController.PlayerState.DRIVING)
+        if(PlayerController.currentState != PlayerController.PlayerState.DRIVING && PlayerController.currentState != PlayerController.PlayerState.HIDING)
         {
             // scan must happen even with hands full for lootable scanning
 
@@ -264,7 +264,7 @@ public class Interactor : MonoBehaviour
             {
                 if (interactedContainer != null)
                 {
-                    if(!(AvailableInteractable is Lootable)) // dont close other container if it is lootable, lootable slider handles this
+                    if (!(AvailableInteractable is Lootable)) // dont close other container if it is lootable, lootable slider handles this
                     {
                         CloseOpenedContainer();
                     }
@@ -292,12 +292,12 @@ public class Interactor : MonoBehaviour
 
                 if (rightHand)
                 {
-                    playerController.hands.RightObject = ((Component)AvailableInteractable).gameObject; 
+                    playerController.hands.RightObject = ((Component)AvailableInteractable).gameObject;
                     playerController.hands.UsingRight = true;
                 }
                 else
                 {
-                    playerController.hands.LeftObject = ((Component)AvailableInteractable).gameObject; 
+                    playerController.hands.LeftObject = ((Component)AvailableInteractable).gameObject;
                     playerController.hands.UsingLeft = true;
                 }
             }
@@ -333,14 +333,7 @@ public class Interactor : MonoBehaviour
                 AvailableInteractable.Interact(false, playerController);
             }
 
-            // INTERACT WITH VEHICLE
-            else if (AvailableInteractable is Vehicle v)
-            {
-                playerController.vehicleDriver.vehicle = v;
-                playerController.vehicleDriver.Enter(playerController.playerCollider, playerController);
-                AvailableInteractable.Interact(false, playerController);
-            }
-
+            // INTERACT WITH OBSTACLE
             else if (AvailableInteractable is Obstacle o)
             {
                 AvailableInteractable.Interact(rightHand, playerController);
@@ -352,13 +345,28 @@ public class Interactor : MonoBehaviour
                 else
                 {
                     playerController.hands.UsingLeft = true;
-					playerController.hands.LeftObstacle = o;
-				}
+                    playerController.hands.LeftObstacle = o;
+                }
                 o.joint.connectedBody = playerController.rb;
-                if(playerController.hands.LeftObstacle && playerController.hands.RightObstacle && playerController.hands.LeftObstacle == playerController.hands.RightObstacle)
+                if (playerController.hands.LeftObstacle && playerController.hands.RightObstacle && playerController.hands.LeftObstacle == playerController.hands.RightObstacle)
                 {
                     o.OnTwoHandsOn();
                 }
+            }
+
+            else if (AvailableInteractable is HidingSpot h)
+            {
+                playerController.currentHidingSpot = h;
+                playerController.StartCoroutine(playerController.EnterHidingSpot(h.hidingT.position, h.hidingT.rotation));
+                AvailableInteractable.Interact(rightHand, playerController);
+            }
+
+            // INTERACT WITH VEHICLE
+            else if (AvailableInteractable is Vehicle v)
+            {
+                playerController.vehicleDriver.vehicle = v;
+                playerController.vehicleDriver.Enter(playerController.playerCollider, playerController);
+                AvailableInteractable.Interact(false, playerController);
             }
 
             else

@@ -71,23 +71,26 @@ TagManager:
   - name: Loot
     uniqueID: 3541973225
     locked: 0
+  - name: HidingSpotLower
+    uniqueID: 131365537
+    locked: 0
   - name: LowerPlayer
     uniqueID: 29270861
     locked: 0
   - name: LowerHat
     uniqueID: 1157261609
     locked: 0
-  - name: Bullet
-    uniqueID: 4153176839
+  - name: HidingSpot
+    uniqueID: 2233945719
     locked: 0
   - name: Walls
     uniqueID: 2660028171
     locked: 0
-  - name: HidingSpot
-    uniqueID: 2233945719
-    locked: 0
   - name: Obstacle
     uniqueID: 97008305
+    locked: 0
+  - name: Bullet
+    uniqueID: 4153176839
     locked: 0
   - name: MuzzleFlash
     uniqueID: 1944429129
