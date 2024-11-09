@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -14,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
 	public EnemyData enemyData;
 	private EnemyVoice voice;
 	public AudioSource audioSource;
+	public SpriteRenderer spriteRenderer;
 
 	public Rigidbody2D rigidBody;
 	private Health health;
@@ -43,6 +45,7 @@ public abstract class Enemy : MonoBehaviour
 	private Vector2 desiredTarget = Vector2.zero;
 	private Vector2 investigaitonPoint = Vector2.zero;
 
+	public static int sortOrder = 0;
 
 	private void ChangeState(State newState)
 	{
@@ -113,6 +116,8 @@ public abstract class Enemy : MonoBehaviour
 
 	private void Awake()
 	{
+		SetSortOrder();
+
 		playerLm = LayerMask.GetMask("Player");
 		worldLm = LayerMask.GetMask("World");
 		windowLm = LayerMask.GetMask("Window");
@@ -151,6 +156,16 @@ public abstract class Enemy : MonoBehaviour
 	{
 		// Stop the tick coroutine when the enemy is disabled to prevent memory leaks
 		if (tickCoroutine != null) StopCoroutine(tickCoroutine);
+	}
+
+	private void SetSortOrder()
+	{
+		spriteRenderer.sortingOrder = sortOrder;
+		foreach (var limb in limbs)
+		{
+			limb.spriteRenderer.sortingOrder = sortOrder + 1;
+		}
+		sortOrder += 2;
 	}
 
 	private IEnumerator TickCoroutine()
@@ -503,11 +518,15 @@ public abstract class Enemy : MonoBehaviour
 		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, playerDistance, MovementBlockersLm);
 		if(wallHit.collider)
 		{
-			return (direction + enemyData.avoidancePriority * 2 * Avoidance()).normalized;
+			return (direction + enemyData.avoidancePriority * 2 * Avoidance() * Separation()).normalized;
 		}
 		else // straight shot to player, go for them
 		{
-			return direction;
+			if(playerDistance < 3)
+			{
+				return direction;
+			}
+			return (direction + Separation() * 3.5f).normalized;
 		}
 
     }

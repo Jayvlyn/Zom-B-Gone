@@ -11,6 +11,8 @@ public class PlayerRenderingChanger : MonoBehaviour
     {
         defaultPlayerSortingLayerID = SortingLayer.NameToID("Player");
         lowerPlayerSortingLayerID = SortingLayer.NameToID("LowerPlayer");
+
+        DoDefaultSorting();
     }
 
     public void DoLowerSorting()

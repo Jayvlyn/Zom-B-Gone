@@ -19,6 +19,11 @@ public class Optimizer : MonoBehaviour
 		StartCoroutine(DistanceCheck());
 	}
 
+	//private void Update()
+	//{
+	//	Debug.Log(currentActiveEnemies);
+	//}
+
 	private IEnumerator DistanceCheck()
 	{
 		while (true)
@@ -39,7 +44,7 @@ public class Optimizer : MonoBehaviour
 					if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies--;
 					go.SetActive(false);
 				}
-				else
+				else if (!go.activeSelf)
 				{
 					if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies++;
 					go.SetActive(true);

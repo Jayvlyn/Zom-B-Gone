@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
     private float recoverTimer;
     private void Update()
     {
-        UpdateStaminaBar();
+		UpdateStaminaBar();
 
         if (currentState == PlayerState.RUNNING) 
         {

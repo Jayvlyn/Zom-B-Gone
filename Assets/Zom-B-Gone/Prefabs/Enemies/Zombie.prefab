@@ -281,6 +281,7 @@ MonoBehaviour:
   detachPoint: {fileID: 3072358557432829836}
   attachPoint: {fileID: 2943871043870995285}
   bleedParticles: {fileID: 7654700310716529146, guid: 90171f8a9712e264c9cc835bc1cab96a, type: 3}
+  spriteRenderer: {fileID: 8376667347104636734}
 --- !u!50 &3362905060171268311
 Rigidbody2D:
   serializedVersion: 5
@@ -461,6 +462,7 @@ MonoBehaviour:
   detachPoint: {fileID: 8494637308942483538}
   attachPoint: {fileID: 7768140972022506243}
   bleedParticles: {fileID: 7654700310716529146, guid: 90171f8a9712e264c9cc835bc1cab96a, type: 3}
+  spriteRenderer: {fileID: 569660378723866516}
 --- !u!50 &4397759781912065639
 Rigidbody2D:
   serializedVersion: 5
@@ -845,7 +847,7 @@ GameObject:
   - component: {fileID: 190890871166965350}
   - component: {fileID: 7881680831849007001}
   - component: {fileID: 3376768108525843708}
-  - component: {fileID: 8928187144889629759}
+  - component: {fileID: 8482114164808748981}
   m_Layer: 10
   m_Name: Zombie
   m_TagString: Enemy
@@ -888,6 +890,7 @@ MonoBehaviour:
   currentState: 0
   enemyData: {fileID: 11400000, guid: ec84b65d01c04e244847e7d2ac497b5e, type: 2}
   audioSource: {fileID: 3376768108525843708}
+  spriteRenderer: {fileID: 190890871166965350}
   rigidBody: {fileID: 7881680831849007001}
   attacks:
   - {fileID: 8674619653201391516, guid: 29acada643e8c3946a888d829cd78737, type: 3}
@@ -1110,8 +1113,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!70 &8928187144889629759
-CapsuleCollider2D:
+--- !u!58 &8482114164808748981
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1144,6 +1147,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0077294945, y: -0.05851955}
-  m_Size: {x: 0.6533035, y: 0.3088141}
-  m_Direction: 1
+  m_Offset: {x: 0, y: -0.01781103}
+  m_Radius: 0.21288607

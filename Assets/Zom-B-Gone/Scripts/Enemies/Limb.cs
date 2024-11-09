@@ -12,6 +12,7 @@ public class Limb : MonoBehaviour
     [SerializeField] private Transform detachPoint;
     [SerializeField] private Transform attachPoint;
     [SerializeField] private GameObject bleedParticles;
+    public SpriteRenderer spriteRenderer;
 
     [NonSerialized] public Enemy owner;
     [NonSerialized] public Rigidbody2D rb;

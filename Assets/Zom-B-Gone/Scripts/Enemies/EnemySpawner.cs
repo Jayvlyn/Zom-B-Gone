@@ -30,9 +30,13 @@ public class EnemySpawner : MonoBehaviour
         for(int i = 0; i < enemiesPerWave; i++)
         {
             if (Optimizer.currentActiveEnemies < Optimizer.maxActiveEnemies)
+            {
                 SpawnRandomEnemy();
+            }
             else
+            {
                 return;
+            }
         }
     }
 
@@ -61,6 +65,7 @@ public class EnemySpawner : MonoBehaviour
 
         Optimizer.list.Add(Instantiate(enemyPrefab, spawnPosition, Quaternion.identity));
         Optimizer.currentActiveEnemies++;
+
         
     }
 
