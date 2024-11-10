@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -26,6 +25,7 @@ public abstract class Enemy : MonoBehaviour
 	private float attackTimer;
 	public List<GameObject> attacks; // attacks from head/base
 	public List<Limb> limbs; // will hold attacks performed by arms, those attacks are lost when limb is removed
+	public List<Sprite> possibleSprites; // will hold attacks performed by arms, those attacks are lost when limb is removed
 	public List<GameObject> bleedingParticles;
 	[SerializeField] private int maxLimbs = 2;
 	[SerializeField] private float turnSmoothing = 5;
@@ -92,9 +92,9 @@ public abstract class Enemy : MonoBehaviour
 				Limb[] attachedLimbs = GetComponentsInChildren<Limb>();
 				foreach(var limb in attachedLimbs)
 				{
-					var limbRenderer = limb.gameObject.GetComponent<SpriteRenderer>();
-					limbRenderer.sortingLayerName = "DeadEnemy";
-                    limbRenderer.color = new Color(limbRenderer.color.r * 0.5f, limbRenderer.color.r * 0.5f, limbRenderer.color.r * 0.5f, limbRenderer.color.a);
+					
+					limb.spriteRenderer.sortingLayerName = "DeadEnemy";
+                    limb.spriteRenderer.color = new Color(limb.spriteRenderer.color.r * 0.5f, limb.spriteRenderer.color.r * 0.5f, limb.spriteRenderer.color.r * 0.5f, limb.spriteRenderer.color.a);
                 }
 				foreach(var bloodParticle in bleedingParticles)
 				{
@@ -102,37 +102,39 @@ public abstract class Enemy : MonoBehaviour
 					particleRenderer.sortingLayerName = "DeadEnemy";
 					particleRenderer.sortingOrder = -1;
 				}
-				break;
-			default:
-				
-				break;
-		}
 
-		currentState = newState;
-	}
+				if(head)
+				{
+					head.spriteRenderer.sortingLayerName = "DeadEnemy";
+					head.spriteRenderer.color = new Color(head.spriteRenderer.color.r * 0.5f, head.spriteRenderer.color.r * 0.5f, head.spriteRenderer.color.r * 0.5f, head.spriteRenderer.color.a);
+				}
 
+                break;
+            default:
+                break;
+        }
+        currentState = newState;
+    }
 
-	private LayerMask playerLm;
-	private LayerMask worldLm;
-	private LayerMask windowLm;
-	private LayerMask interactableLm;
-
-	private void Awake()
-	{
-		SetSortOrder();
-
-		playerLm = LayerMask.GetMask("Player");
-		worldLm = LayerMask.GetMask("World");
-		windowLm = LayerMask.GetMask("Window");
-		interactableLm = LayerMask.GetMask("Interactable");
-		health = GetComponent<Health>();
-	}
-
-	ContactFilter2D movementBlockerFilter = new ContactFilter2D();
-
-	void Start()
+    private LayerMask playerLm;
+    private LayerMask worldLm;
+    private LayerMask windowLm;
+    private LayerMask interactableLm;
+    private void Awake()
     {
-		movementBlockerFilter.SetLayerMask(~LayerMask.GetMask("Interactable"));// for doors, dont(~) include interactables like doors so they still want to walk through them
+        SetSortOrder();
+        spriteRenderer.sprite = possibleSprites[UnityEngine.Random.Range(0, possibleSprites.Count)];
+
+        playerLm = LayerMask.GetMask("Player");
+        worldLm = LayerMask.GetMask("World");
+        windowLm = LayerMask.GetMask("Window");
+        interactableLm = LayerMask.GetMask("Interactable");
+        health = GetComponent<Health>();
+    }
+    ContactFilter2D movementBlockerFilter = new ContactFilter2D();
+    void Start()
+    {
+        movementBlockerFilter.SetLayerMask(~LayerMask.GetMask("Interactable"));// for doors, dont(~) include interactables like doors so they still want to walk through them
 		movementBlockerFilter.useLayerMask = true;
 
 		if(enemyData.possibleVoices.Count > 0)
@@ -164,6 +166,7 @@ public abstract class Enemy : MonoBehaviour
 	private void SetSortOrder()
 	{
 		spriteRenderer.sortingOrder = sortOrder;
+		if (head) head.spriteRenderer.sortingOrder = sortOrder + 1;
 		foreach (var limb in limbs)
 		{
 			limb.spriteRenderer.sortingOrder = sortOrder + 1;
@@ -592,7 +595,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		Optimizer.list.Remove(gameObject);
 		Optimizer.currentActiveEnemies--;
-		head.RemoveHat();
+		if(head) head.RemoveHat();
 		ChangeState(State.DEAD);
 	}
 
@@ -623,14 +626,15 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
-	public void OnHit(int damage, float dismemberChance = 0)
+	public void OnHit(int damage, float dismemberChance = 0, float decapitateChance = 0)
     {
 		PlayHurtSound();
 		DismemberLimb(damage, dismemberChance);
+		Decapitate(damage, decapitateChance);
     }
 
-	private float limbLaunchMod = .3f;
-	private float limbSpinForce = 100f;
+	private float limbLaunchMod = .1f;
+	private float limbSpinForce = 80f;
 
 
     public void DismemberLimb(int damage, float dismemberChance)
@@ -649,7 +653,34 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-	private void OnCollisionStay2D(Collision2D collision)
+
+    public void Decapitate(int damage, float decapitateChance)
+    {
+        if (head != null)
+        {
+            float num = Random.Range(0f, 100f);
+            if (num < decapitateChance)
+            {
+                head.DetachFromOwner();
+                head.rb.bodyType = RigidbodyType2D.Dynamic;
+                head.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
+                head.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+				head = null;
+
+
+				OnDeath();
+				//StartCoroutine(DeathTimer(Random.Range(0.2f, 1f)));
+            }
+        }
+    }
+
+	public IEnumerator DeathTimer(float time)
+	{
+		yield return new WaitForSeconds(time);
+		OnDeath();
+	}
+
+    private void OnCollisionStay2D(Collision2D collision)
 	{
 		if((AttackableMovementBlockersLm.value & (1 << collision.gameObject.layer)) != 0 && attackTimer <= 0 && rigidBody.linearVelocity.magnitude < 0.2) // stopped by door or window
 		{

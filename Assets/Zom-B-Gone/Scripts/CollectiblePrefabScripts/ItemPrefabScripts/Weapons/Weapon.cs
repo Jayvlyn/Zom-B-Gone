@@ -33,6 +33,6 @@ public abstract class Weapon : Item
 
         Vector2 knockbackVector = (targetHealth.transform.position - playerHead.transform.position).normalized * weaponData.knockbackPower;
 
-		targetHealth.TakeDamage(damage, knockbackVector, weaponData.dismemberChance, false, popupVector, invertRotate);
+		targetHealth.TakeDamage(damage, knockbackVector, weaponData.dismemberChance, false, popupVector, invertRotate, weaponData.dismemberChance/3);
     }
 }

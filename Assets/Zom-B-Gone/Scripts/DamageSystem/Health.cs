@@ -54,7 +54,7 @@ public class Health : MonoBehaviour
     }
 
     private Enemy enemyOwner;
-    public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default)
+    public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default, float decapitateChance = 0)
     {
         if (damage < 0) return;
         int incomingDamage = Mathf.RoundToInt(damage);
@@ -69,11 +69,11 @@ public class Health : MonoBehaviour
 
         if (gameObject.CompareTag("Enemy"))
         {
-            if (enemyOwner != null) enemyOwner.OnHit(incomingDamage, dismemeberChance);
+            if (enemyOwner != null) enemyOwner.OnHit(incomingDamage, dismemeberChance, decapitateChance);
             else if (gameObject.TryGetComponent(out Enemy enemy))
             {
                 enemyOwner = enemy;
-                enemyOwner.OnHit(incomingDamage, dismemeberChance);
+                enemyOwner.OnHit(incomingDamage, dismemeberChance, decapitateChance);
 			}
 
 			if (enemyOwner && enemyOwner.rigidBody)

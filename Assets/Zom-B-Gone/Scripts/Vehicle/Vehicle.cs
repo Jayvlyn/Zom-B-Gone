@@ -44,7 +44,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
             else
             {
                 engineSource.Stop();
-                StopCoroutine(engineSoundCoroutine);
+                if(engineSoundCoroutine != null) StopCoroutine(engineSoundCoroutine);
                 engineSoundCoroutine = null;
             }
 

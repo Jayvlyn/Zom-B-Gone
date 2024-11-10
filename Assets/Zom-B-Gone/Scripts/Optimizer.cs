@@ -54,7 +54,7 @@ public class Optimizer : MonoBehaviour
 				}
 			}
 
-			yield return new WaitForSeconds(5);
+			yield return new WaitForSeconds(2.5f);
 		}
 	}
 }

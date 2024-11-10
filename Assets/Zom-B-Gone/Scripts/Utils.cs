@@ -113,7 +113,7 @@ public static class Utils
 			{
 				Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
 				knockbackVector *= force;
-				h.TakeDamage(damage, knockbackVector, 30, false);
+				h.TakeDamage(damage, knockbackVector, 30, false, default, false, 10);
 			}
 			else if (collider.TryGetComponent(out Rigidbody2D rb))
             {

@@ -1,21 +1,19 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Limb : MonoBehaviour
 {
     [SerializeField] private List<GameObject> attacks;
+    [SerializeField] private List<Sprite> possibleSprites;
     [SerializeField] private Transform detachPoint;
     [SerializeField] private Transform attachPoint;
     [SerializeField] private GameObject bleedParticles;
     public SpriteRenderer spriteRenderer;
 
-    [NonSerialized] public Enemy owner;
-    [NonSerialized] public Rigidbody2D rb;
+    [HideInInspector] public Enemy owner;
+    [HideInInspector] public Rigidbody2D rb;
 
     private float detachedLifetime = 1.0f;
     private float disappearSpeed = 8.0f;
@@ -29,7 +27,10 @@ public class Limb : MonoBehaviour
         if(transform.parent.gameObject.TryGetComponent(out Enemy owner))
         {
             this.owner = owner;
-        }   
+        }
+
+
+        spriteRenderer.sprite = possibleSprites[UnityEngine.Random.Range(0, possibleSprites.Count)];
     }
 
     private void Update()
