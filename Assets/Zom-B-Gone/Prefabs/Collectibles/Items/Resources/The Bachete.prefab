@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2774193381391502917}
   - component: {fileID: 2596300008556408185}
   - component: {fileID: 8298971315238355472}
-  - component: {fileID: 8589298506778409595}
   - component: {fileID: 2208294227549419385}
   - component: {fileID: 8225873307285844331}
   - component: {fileID: -2473851961944671762}
+  - component: {fileID: 8324858073123142727}
   m_Layer: 12
   m_Name: The Bachete
   m_TagString: Untagged
@@ -75,7 +75,7 @@ MonoBehaviour:
   quantity: 1
   weaponData: {fileID: 0}
   flipOnReturnSwing: 1
-  damageCollider: {fileID: 8589298506778409595}
+  damageCollider: {fileID: 8324858073123142727}
   meleeWeaponData: {fileID: 0}
 --- !u!50 &8298971315238355472
 Rigidbody2D:
@@ -104,60 +104,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &8589298506778409595
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490104715815667538}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 1024
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 16384
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5625, y: 1.5625}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.051114157, y: 0.59734386}
-      - {x: -0.004246831, y: 0.61492693}
-      - {x: 0.013925852, y: 0.70435524}
-      - {x: -0.11275859, y: 0.640443}
-      - {x: -0.12537944, y: 0.025842637}
-      - {x: -0.027498636, y: -0.11046311}
-      - {x: 0.044932492, y: -0.10973303}
-  m_UseDelaunayMesh: 0
 --- !u!60 &2208294227549419385
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -171,7 +117,7 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -205,7 +151,7 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.074811354, y: 0.050631836}
-      - {x: 0.051369365, y: 0.5953445}
+      - {x: 0.041013416, y: 0.5849885}
       - {x: 0.004721405, y: 0.62283087}
       - {x: 0.008835398, y: 0.694176}
       - {x: -0.11085051, y: 0.6093275}
@@ -260,7 +206,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -22
+  m_SortingLayer: -25
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dcbf55a5dff2b8346ba705bf4f9cbe52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -370,6 +316,52 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!61 &8324858073123142727
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490104715815667538}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.03894967, y: 0.259665}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5625, y: 1.5625}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.24469984, y: 1.2703769}
+  m_EdgeRadius: 0
 --- !u!1 &1093850455457573653
 GameObject:
   m_ObjectHideFlags: 0

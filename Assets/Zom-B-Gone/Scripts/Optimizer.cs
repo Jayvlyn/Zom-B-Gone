@@ -41,15 +41,21 @@ public class Optimizer : MonoBehaviour
 				float dist = Vector2.Distance(go.transform.position, PlayerT.transform.position);
 				if (dist >= cullDistance)
 				{
-					if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies--;
-					go.SetActive(false);
+					if(go.activeSelf)
+					{
+						if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies--;
+						go.SetActive(false);
+					}
 				}
 				else if (!go.activeSelf)
 				{
 					if (currentActiveEnemies < maxActiveEnemies);
 					{
-						if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies++;
-						go.SetActive(true);
+						if(!go.activeSelf)
+						{
+							if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies++;
+							go.SetActive(true);
+						}
 					}
 				}
 			}

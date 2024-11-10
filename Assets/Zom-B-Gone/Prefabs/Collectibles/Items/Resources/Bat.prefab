@@ -62,7 +62,7 @@ MonoBehaviour:
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
   groundedLinearDrag: 3
-  holdOffset: {x: 0.6, y: -0.2}
+  holdOffset: {x: 0.86, y: -0.2}
   spinThrow: 1
   aimAtMouse: 0
   gripRotation: 150
@@ -150,10 +150,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.056357607, y: 0.6392913}
-      - {x: -0.05038908, y: 0.63799804}
-      - {x: -0.027498636, y: -0.11046311}
-      - {x: 0.044932492, y: -0.10973303}
+    - - {x: 0.15711834, y: 0.80274755}
+      - {x: -0.12908232, y: 0.80084336}
+      - {x: -0.16174293, y: -0.39695808}
+      - {x: 0.16069013, y: -0.39244848}
   m_UseDelaunayMesh: 0
 --- !u!60 &2208294227549419385
 PolygonCollider2D:
@@ -254,7 +254,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -22
+  m_SortingLayer: -25
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f3f32b0fe3189c047951c55f5cd82f5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

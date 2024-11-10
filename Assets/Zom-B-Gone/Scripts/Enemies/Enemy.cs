@@ -661,10 +661,23 @@ public abstract class Enemy : MonoBehaviour
             float num = Random.Range(0f, 100f);
             if (num < decapitateChance)
             {
-                head.DetachFromOwner();
-                head.rb.bodyType = RigidbodyType2D.Dynamic;
-                head.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
-                head.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+				head.DetachFromOwner();
+				if (Random.Range((int)0, (int)10) != 0)
+				{
+					head.rb.bodyType = RigidbodyType2D.Dynamic;
+					head.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
+					head.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+
+				}
+				else // 1 in 10 to get zombie head
+				{
+					Destroy(head.gameObject);
+					Object zombieHeadPrefab =  Resources.Load("Zombie Head");
+					GameObject zombieHead = Instantiate(zombieHeadPrefab, head.transform.position, head.transform.rotation) as GameObject;
+					ThrowingWeapon tw = zombieHead.GetComponent<ThrowingWeapon>();
+					tw.throwingWeaponData.icon = head.spriteRenderer.sprite;
+					tw.itemRenderer.sprite = head.spriteRenderer.sprite;
+				}
 				head = null;
 
 

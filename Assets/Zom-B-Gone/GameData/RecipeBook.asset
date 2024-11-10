@@ -13,17 +13,38 @@ MonoBehaviour:
   m_Name: RecipeBook
   m_EditorClassIdentifier: 
   recipes:
-  - resultCollectible: {fileID: 11400000, guid: 3ea69505795e21d4db643120956aadfa, type: 2}
-    resultAmount: 4
+  - resultCollectible: {fileID: 11400000, guid: b3a39575a2a9c564b8eedfa38822c180, type: 2}
+    resultAmount: 1
     recipeItems:
-    - collectible: {fileID: 11400000, guid: 33dbac28ed08d424d9ef06917a075fb0, type: 2}
+    - collectible: {fileID: 11400000, guid: 1561274a96f853e439bc93867d6a9361, type: 2}
       requiredAmount: 1
-    - collectible: {fileID: 11400000, guid: 6ddf5a9b7f0f1564287e32f82510541d, type: 2}
+    - collectible: {fileID: 11400000, guid: 872dae0b999e8cd4799dc3de7e3c9e95, type: 2}
       requiredAmount: 1
-  - resultCollectible: {fileID: 11400000, guid: a9de3493f5d89db488cf5b063dfe7153, type: 2}
-    resultAmount: 16
+  - resultCollectible: {fileID: 11400000, guid: df606d558a613104e9f1e3bd1ee8970f, type: 2}
+    resultAmount: 1
     recipeItems:
-    - collectible: {fileID: 11400000, guid: 3ea69505795e21d4db643120956aadfa, type: 2}
-      requiredAmount: 2
-    - collectible: {fileID: 11400000, guid: c615ffb9921c717449e87b20cd2b23c0, type: 2}
+    - collectible: {fileID: 11400000, guid: 1561274a96f853e439bc93867d6a9361, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: 354f233717b1e0145b60e9bb1dbf33ba, type: 2}
+      requiredAmount: 1
+  - resultCollectible: {fileID: 11400000, guid: eb63e57a614ad8a499e2fd82e9f02ee0, type: 2}
+    resultAmount: 1
+    recipeItems:
+    - collectible: {fileID: 11400000, guid: 72cebd3efa1571647abd015753bb5e49, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: 126470432a8b256479b4c1f555686e72, type: 2}
+      requiredAmount: 1
+  - resultCollectible: {fileID: 11400000, guid: df606d558a613104e9f1e3bd1ee8970f, type: 2}
+    resultAmount: 1
+    recipeItems:
+    - collectible: {fileID: 11400000, guid: 1561274a96f853e439bc93867d6a9361, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: 354f233717b1e0145b60e9bb1dbf33ba, type: 2}
+      requiredAmount: 1
+  - resultCollectible: {fileID: 11400000, guid: 126470432a8b256479b4c1f555686e72, type: 2}
+    resultAmount: 1
+    recipeItems:
+    - collectible: {fileID: 11400000, guid: aa622a055e9e69243b7fef165293e648, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: b8b25198ce861514a947be557a3c74a4, type: 2}
       requiredAmount: 1

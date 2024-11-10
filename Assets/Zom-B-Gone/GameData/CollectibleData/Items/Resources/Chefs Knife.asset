@@ -22,11 +22,11 @@ MonoBehaviour:
   weight: 393
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0
-  damage: 16
+  damage: 25
   attackSpeed: 0.4
   knockbackPower: 5
   dismemberChance: 0
-  staminaCost: 1
+  staminaCost: 0.3
   prepSpeed: 0.2
   swingCurve:
     serializedVersion: 2
