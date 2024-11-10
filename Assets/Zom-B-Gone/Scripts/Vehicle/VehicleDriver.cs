@@ -86,16 +86,19 @@ public class VehicleDriver : MonoBehaviour
 
     private void OnExit(InputValue inputValue)
     {
-        vehicle.OnExit();
+        if(vehicle && vehicle.Active)
+        {
+            vehicle.OnExit();
 
-        Vector2 localExitPosition = new Vector2(-vehicle.vehicleData.exitDistance, 0);
-        Vector2 exitPos = (Vector2)vehicle.driveSeat.position + (Vector2)(vehicle.transform.rotation * localExitPosition);
+            Vector2 localExitPosition = new Vector2(-vehicle.vehicleData.exitDistance, 0);
+            Vector2 exitPos = (Vector2)vehicle.driveSeat.position + (Vector2)(vehicle.transform.rotation * localExitPosition);
 
-        //Vector2 exitPos = new Vector2 (vehicle.driveSeat.position.x - vehicle.exitDistance, vehicle.driveSeat.position.y);
-        Quaternion exitRot = vehicle.transform.rotation * Quaternion.Euler(0, 0, 90);
-        StartCoroutine(ExitVehicle(exitPos, exitRot));
+            //Vector2 exitPos = new Vector2 (vehicle.driveSeat.position.x - vehicle.exitDistance, vehicle.driveSeat.position.y);
+            Quaternion exitRot = vehicle.transform.rotation * Quaternion.Euler(0, 0, 90);
+            StartCoroutine(ExitVehicle(exitPos, exitRot));
 
-        vehicle = null;
+            vehicle = null;
+        }
     }
 
     private bool travelHeld = false;

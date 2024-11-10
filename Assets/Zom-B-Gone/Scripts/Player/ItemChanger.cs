@@ -49,6 +49,7 @@ public class ItemChanger : MonoBehaviour
 		GameObject prefab = Resources.Load<GameObject>(itemName);
 		GameObject itemObject = Instantiate(prefab, playerController.hands.transform.position, playerController.hands.transform.rotation);
 		Item heldItem = itemObject.GetComponent<Item>();
+		heldItem.Quantity = handSlot.CollectibleSlot.quantity;
 		heldItem.Interact(rightHand, playerController);
 		if (rightHand)
 		{

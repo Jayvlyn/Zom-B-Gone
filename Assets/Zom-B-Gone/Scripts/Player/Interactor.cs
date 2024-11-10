@@ -283,7 +283,7 @@ public class Interactor : MonoBehaviour
     private IEnumerator OpenNewLootable()
     {
         yield return new WaitForSeconds(0.05f);
-        openedLootable.OpenLootable();
+        if(openedLootable) openedLootable.OpenLootable();
     }
 
     public void Interact(bool rightHand)

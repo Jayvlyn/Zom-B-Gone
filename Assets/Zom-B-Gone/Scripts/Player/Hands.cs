@@ -26,19 +26,21 @@ public class Hands : MonoBehaviour
 
     public Image leftIcon;
     private Obstacle leftObstacle;
-	public Obstacle LeftObstacle
+    private SpriteRenderer leftObstacleSpriteRenderer;
+    public Obstacle LeftObstacle
     {
         set { leftObstacle = value;
             if (leftObstacle)
             {
                 leftIcon.enabled = true;
-                leftIcon.sprite = leftObstacle.GetComponent<SpriteRenderer>().sprite;
+                SetHandIconToObstacle(false);
             }
             else
             {
                 leftIcon.enabled = false;
                 leftIcon.sprite = null;
                 usingLeft = false;
+                leftObstacleSpriteRenderer = null;
             }
         }
         get { return leftObstacle; }
@@ -46,19 +48,21 @@ public class Hands : MonoBehaviour
 
     public Image rightIcon;
     private Obstacle rightObstacle;
+    private SpriteRenderer rightObstacleSpriteRenderer;
 	public Obstacle RightObstacle
     {
 		set { rightObstacle = value;
             if (rightObstacle)
             {
                 rightIcon.enabled = true;
-                rightIcon.sprite = rightObstacle.GetComponent<SpriteRenderer>().sprite;
+                SetHandIconToObstacle(true);
             }
             else
             {
                 rightIcon.enabled = false;
                 rightIcon.sprite = null;
                 usingRight = false;
+                rightObstacleSpriteRenderer = null;
             }
 		}
         get { return rightObstacle; }
@@ -213,6 +217,28 @@ public class Hands : MonoBehaviour
             UsingRight = true;
         }
 
+    }
+
+    public void SetHandIconToObstacle(bool rightHand)
+    {
+        if(rightHand)
+        {
+            if(rightObstacle)
+            {
+                if (rightObstacleSpriteRenderer == null) rightObstacleSpriteRenderer = rightObstacle.GetComponent<SpriteRenderer>();
+                rightIcon.sprite = rightObstacleSpriteRenderer.sprite;
+            }
+        }
+
+        else
+        {
+            if (leftObstacle)
+            {
+                if(leftObstacleSpriteRenderer == null) leftObstacleSpriteRenderer = leftObstacle.GetComponent<SpriteRenderer>();
+                
+                leftIcon.sprite = leftObstacleSpriteRenderer.sprite;
+            }
+        }
     }
 
     public void OnHandItemSwapped()

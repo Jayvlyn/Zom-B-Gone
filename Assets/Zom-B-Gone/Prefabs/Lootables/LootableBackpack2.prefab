@@ -151,7 +151,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6442050968352500423}
   m_Enabled: 1
   serializedVersion: 3
-  m_Density: 1
+  m_Density: 150
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -216,7 +216,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.06931399
+  m_Mass: 10.397099
   m_LinearDamping: 4
   m_AngularDamping: 4
   m_GravityScale: 0
