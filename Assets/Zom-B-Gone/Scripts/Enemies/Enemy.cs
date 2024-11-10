@@ -116,6 +116,90 @@ public abstract class Enemy : MonoBehaviour
         currentState = newState;
     }
 
+    // use to handle timers only, put computationally heavy things in enemy tick
+    private void Update()
+    {
+        LerpTarget(desiredTarget);
+
+        switch (currentState)
+        {
+            case State.DRONING:
+                changeDirectionCooldown -= Time.deltaTime;
+                break;
+            case State.INVESTIGATING:
+                break;
+            case State.AGGRO:
+                if (attackTimer > 0) attackTimer -= Time.deltaTime;
+                break;
+            case State.DEAD:
+                decayTimer -= Time.deltaTime;
+                if (decayTimer <= 0)
+                {
+                    StartCoroutine(FadeOut());
+                    decayTimer = 1000;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentState != State.DEAD)
+        {
+            Rotate(target);
+
+            //if(rigidBody.linearVelocity.magnitude < 0.4f) // if not moving much see if something is in the way
+            //{
+            //             int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
+            //	if (hitCount > 0) return;       
+            //         }
+
+            float dist = Vector2.Distance(target, transform.position);
+            if (dist > 1)
+            {
+                rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
+            }
+            else if (dist > 0.2)
+            {
+                rigidBody.AddForce(target * currentMoveSpeed * dist, ForceMode2D.Force);
+            }
+        }
+    }
+
+    private IEnumerator TickCoroutine()
+    {
+        while (true)
+        {
+            EnemyTick();
+
+            yield return new WaitForSeconds(tickInterval);
+        }
+    }
+
+    public void EnemyTick()
+    {
+        switch (currentState)
+        {
+            case State.DRONING:
+                if (Random.Range(0, 200) == 0) PlayDroneSound();
+                desiredTarget = Drone();
+                break;
+            case State.INVESTIGATING:
+                if (Random.Range(0, 200) == 0) PlayDroneSound();
+                desiredTarget = Investigate();
+                break;
+            case State.AGGRO:
+                if (Random.Range(0, 100) == 0) PlayAggroSound();
+                desiredTarget = Aggro();
+                break;
+
+            default:
+                break;
+        }
+    }
+
     private LayerMask playerLm;
     private LayerMask worldLm;
     private LayerMask windowLm;
@@ -172,91 +256,6 @@ public abstract class Enemy : MonoBehaviour
 			limb.spriteRenderer.sortingOrder = sortOrder + 1;
 		}
 		sortOrder += 2;
-	}
-
-	private IEnumerator TickCoroutine()
-	{
-		while (true)
-		{
-			
-			EnemyTick();
-
-			yield return new WaitForSeconds(tickInterval);
-		}
-	}
-
-	public void EnemyTick()
-	{
-		switch (currentState)
-		{
-			case State.DRONING:
-				if (Random.Range(0, 200) == 0) PlayDroneSound();
-				desiredTarget = Drone();
-				break;
-			case State.INVESTIGATING:
-				if (Random.Range(0, 200) == 0) PlayDroneSound();
-                desiredTarget = Investigate();
-				break;
-			case State.AGGRO:
-				if (Random.Range(0, 100) == 0) PlayAggroSound();
-                desiredTarget = Aggro();
-				break;
-
-			default:
-				break;
-		}
-	}
-
-	// use to handle timers only, put computationally heavy things in enemy tick
-	private void Update()
-	{
-		LerpTarget(desiredTarget);
-
-		switch (currentState)
-		{
-			case State.DRONING:
-				changeDirectionCooldown -= Time.deltaTime;
-				break;
-			case State.INVESTIGATING:
-				break;
-			case State.AGGRO:
-				if (attackTimer > 0) attackTimer -= Time.deltaTime;
-				break;
-            case State.DEAD:
-                decayTimer -= Time.deltaTime;
-                if (decayTimer <= 0)
-                {
-                    StartCoroutine(FadeOut());
-                    decayTimer = 1000;
-                }
-                break;
-            default:
-				break;
-		}
-	}
-
-	private void FixedUpdate()
-	{
-		if (currentState != State.DEAD)
-		{
-			Rotate(target);
-
-			//if(rigidBody.linearVelocity.magnitude < 0.4f) // if not moving much see if something is in the way
-			//{
-			//             int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
-			//	if (hitCount > 0) return;       
-			//         }
-
-			float dist = Vector2.Distance(target, transform.position);
-			if (dist > 1)
-			{
-				rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
-			}
-			else if (dist > 0.2)
-			{
-                rigidBody.AddForce(target * currentMoveSpeed * dist, ForceMode2D.Force);
-            }
-		}
 	}
 
 	public void StartInvestigating(Vector2 investigationPoint)

@@ -55,6 +55,10 @@ public class Hat : Collectible
         {
             playerController.gameObject.layer = LayerMask.NameToLayer("DisguisedPlayer");
         }
+        else
+        {
+            playerController.gameObject.layer = LayerMask.NameToLayer("Player");
+        }
     }
 
 	public IEnumerator TransferPosition(Vector3 position, Quaternion rotation)
@@ -91,7 +95,7 @@ public class Hat : Collectible
 
         transform.position = target.position;
         transform.rotation = target.rotation;
-        head.hairRenderer.enabled = hatData.showHair;
+        if(head) head.hairRenderer.enabled = hatData.showHair;
     }
 
     public void DropHat(Vector2? inputDropPosition = null)

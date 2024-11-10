@@ -227,6 +227,7 @@ public class Hands : MonoBehaviour
             {
                 if (rightObstacleSpriteRenderer == null) rightObstacleSpriteRenderer = rightObstacle.GetComponent<SpriteRenderer>();
                 rightIcon.sprite = rightObstacleSpriteRenderer.sprite;
+                rightIcon.enabled = true;
             }
         }
 
@@ -237,6 +238,7 @@ public class Hands : MonoBehaviour
                 if(leftObstacleSpriteRenderer == null) leftObstacleSpriteRenderer = leftObstacle.GetComponent<SpriteRenderer>();
                 
                 leftIcon.sprite = leftObstacleSpriteRenderer.sprite;
+                leftIcon.enabled = true;
             }
         }
     }

@@ -60,7 +60,7 @@ public class CollectibleContainerSlot : SlotUI, IDropHandler
 
     public override void UpdateSlotUI()
     {
-        if(CollectibleSlot.Collectible == null) // causes out of bounds error on storage shrink
+        if(CollectibleSlot.Collectible == null)
         {
             EnableSlotUI(false);
             return;
