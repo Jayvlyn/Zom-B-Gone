@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lootable : MonoBehaviour, IInteractable
+public class Lootable : MonoBehaviour
 {
     public CollectibleSlot[] collectibleSlots = new CollectibleSlot[5]; // unique to each instance of lootable
     [SerializeField] private VoidEvent lootableOpened;
@@ -34,12 +34,11 @@ public class Lootable : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact(bool rightHand, PlayerController playerController)
+    public void OpenLootable()
     {
         containerData.Container.collectibleSlots = collectibleSlots;
         containerData.onContainerCollectibleUpdated.Raise();
         lootableOpened.Raise();
-        //gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     public void LootAll()

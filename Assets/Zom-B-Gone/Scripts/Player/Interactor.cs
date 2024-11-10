@@ -1,4 +1,5 @@
 using GameEvents;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -92,7 +93,7 @@ public class Interactor : MonoBehaviour
         }
 
 
-        if ((interactedContainer != null || interactedCrafting != null) && SceneManager.GetActiveScene().name != "Unit")
+        if ((interactedContainer != null || interactedCrafting != null || openedLootable != null) && SceneManager.GetActiveScene().name != "Unit")
         {
             if (distanceCheckTimer <= 0)
             {
@@ -109,7 +110,12 @@ public class Interactor : MonoBehaviour
                 {
                     float craftingToInteractorDist = ((Vector2)transform.position - (Vector2)interactedCrafting.transform.position).magnitude;
                     if (craftingToInteractorDist > _interactRange + .5f) CloseOpenedCrafting();
+                }
 
+                if (openedLootable)
+                {
+                    float lootableToInteractorDist = ((Vector2)transform.position - (Vector2)openedLootable.transform.position).magnitude;
+                    if (lootableToInteractorDist > _interactRange + .5f) CloseOpenedLootable();
                 }
             }
             else
@@ -139,8 +145,27 @@ public class Interactor : MonoBehaviour
             }
         }
         interactedContainer = null;
+    }
+
+    public void CloseOpenedLootable()
+    {
+        if (PlayerController.mouseHeldIcon != null)
+        {
+            PlayerController.mouseHeldIcon.sendBackToSlot();
+            PlayerController.mouseHeldIcon = null;
+        }
+        string containersCloseEventName = openedLootable.GetComponent<VoidListener>().GameEvent.name;
+        foreach (VoidEvent e in closeContainerEvents)
+        {
+            if (e.name.Equals(containersCloseEventName))
+            {
+                e.Raise();
+                break;
+            }
+        }
         openedLootable = null;
     }
+
 
     private void CloseOpenedCrafting()
     {
@@ -197,7 +222,6 @@ public class Interactor : MonoBehaviour
         float closestColliderDist = float.PositiveInfinity;
         
         Lootable closestLootable = null;
-        IInteractable closestLootableInteractable = null;
         float clostestLootableDist = float.PositiveInfinity;
 
         // loop through hits
@@ -205,9 +229,22 @@ public class Interactor : MonoBehaviour
         {
             IInteractable thisInteractable = collider.transform.gameObject.GetComponent<IInteractable>();
 
+            float dist;
+            if (mouseToInteractorDist <= _interactRange + 0.5f) dist = (mousePosition - collider.ClosestPoint(mousePosition)).magnitude;
+            else                                         dist = ((Vector2)transform.position - collider.ClosestPoint(transform.position)).magnitude;
+
             if (thisInteractable is Obstacle obstacle)
             {
-                if(playerController.hands.LeftObstacle && playerController.hands.LeftObstacle == obstacle){}
+                if (obstacle.lootable != null)
+                {
+                    if (dist < clostestLootableDist)
+                    {
+                        clostestLootableDist = dist;
+                        closestLootable = obstacle.lootable;
+                    }
+                }
+
+                if (playerController.hands.LeftObstacle && playerController.hands.LeftObstacle == obstacle){}
                 else if (playerController.hands.RightObstacle && playerController.hands.RightObstacle == obstacle){}
                 else if (((Vector2)transform.position - collider.ClosestPoint(transform.position)).magnitude > obstacle.grabRange)
                 {
@@ -215,20 +252,7 @@ public class Interactor : MonoBehaviour
                 }
             }
 
-            float dist;
-            if (mouseToInteractorDist <= _interactRange + 0.5f) dist = (mousePosition - collider.ClosestPoint(mousePosition)).magnitude;
-            else                                         dist = ((Vector2)transform.position - collider.ClosestPoint(transform.position)).magnitude;
-
-            if (thisInteractable is Lootable lootable)
-            {
-                if (dist < clostestLootableDist)
-                {
-                    clostestLootableDist = dist;
-                    closestLootableInteractable = thisInteractable;
-                    closestLootable = lootable;
-                }
-            }
-            else if (dist < closestColliderDist)
+            if (dist < closestColliderDist)
             {
                 if (!playerController.hands.UsingLeft || !playerController.hands.UsingRight)
                 {
@@ -237,37 +261,40 @@ public class Interactor : MonoBehaviour
                     closestCollider = collider;
                 }
             }
-
-
         }
 
-        if(closestLootable != null && closestLootableInteractable is Lootable lootableContainer)
+
+        if(closestLootable != null)
         {
-            if(openedLootable == null || (openedLootable != null && lootableContainer != openedLootable) && !PlayerController.holdingLeft && !PlayerController.holdingSneak)
+            if (openedLootable == null || (openedLootable != closestLootable && !PlayerController.holdingSneak && !PlayerController.holdingLeft))
             {
-                // Manually auto interacts with lootable, but leaves availableInteractable how it was before
-                IInteractable lastAvailable = availableInteractable;
-                availableInteractable = closestLootableInteractable;
-                Interact(false);
-                availableInteractable = lastAvailable;
-                openedLootable = lootableContainer;
+                if (openedLootable) CloseOpenedLootable();
+                openedLootable = closestLootable;
+
+                if (openLootableRoutine != null) StopCoroutine(openLootableRoutine); 
+                openLootableRoutine = StartCoroutine(OpenNewLootable());
             }
         }
+
         return closestInteractable;
+    }
+
+    private Coroutine openLootableRoutine;
+    private IEnumerator OpenNewLootable()
+    {
+        yield return new WaitForSeconds(0.05f);
+        openedLootable.OpenLootable();
     }
 
     public void Interact(bool rightHand)
     {
         if (AvailableInteractable != null)
         {
-            if (AvailableInteractable is Locker || AvailableInteractable is Lootable)
+            if (AvailableInteractable is Locker)
             {
                 if (interactedContainer != null)
                 {
-                    if (!(AvailableInteractable is Lootable)) // dont close other container if it is lootable, lootable slider handles this
-                    {
-                        CloseOpenedContainer();
-                    }
+                    CloseOpenedContainer();
                 }
 
                 if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;

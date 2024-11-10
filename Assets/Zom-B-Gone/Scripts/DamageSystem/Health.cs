@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class Health : MonoBehaviour
 {
@@ -95,7 +92,7 @@ public class Health : MonoBehaviour
         {
             enemy.OnDeath();
         }
-        else if (gameObject.CompareTag("Door") || gameObject.layer == LayerMask.NameToLayer("Window"))
+        else if (!gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
         }

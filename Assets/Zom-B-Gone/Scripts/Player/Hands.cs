@@ -38,6 +38,7 @@ public class Hands : MonoBehaviour
             {
                 leftIcon.enabled = false;
                 leftIcon.sprite = null;
+                usingLeft = false;
             }
         }
         get { return leftObstacle; }
@@ -57,6 +58,7 @@ public class Hands : MonoBehaviour
             {
                 rightIcon.enabled = false;
                 rightIcon.sprite = null;
+                usingRight = false;
             }
 		}
         get { return rightObstacle; }

@@ -727,6 +727,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3844372379676118279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6223091030550289658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7599410528004795161}
+  m_Layer: 10
+  m_Name: HatTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7599410528004795161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6223091030550289658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3844372379676118279}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6596989458045192596
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,6 +874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3844372379676118279}
   - component: {fileID: -7628486375137169298}
+  - component: {fileID: 4465705911711169946}
   - component: {fileID: -8031090298879193519}
   - component: {fileID: 190890871166965350}
   - component: {fileID: 7881680831849007001}
@@ -873,6 +905,7 @@ Transform:
   - {fileID: 1862626897388486104}
   - {fileID: 2943871043870995285}
   - {fileID: 7768140972022506243}
+  - {fileID: 7599410528004795161}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7628486375137169298
@@ -892,6 +925,7 @@ MonoBehaviour:
   audioSource: {fileID: 3376768108525843708}
   spriteRenderer: {fileID: 190890871166965350}
   rigidBody: {fileID: 7881680831849007001}
+  head: {fileID: 4465705911711169946}
   attacks:
   - {fileID: 8674619653201391516, guid: 29acada643e8c3946a888d829cd78737, type: 3}
   limbs:
@@ -901,7 +935,7 @@ MonoBehaviour:
   maxLimbs: 2
   turnSmoothing: 5
   changeDirectionCooldown: 5
-  decayTime: 60
+  decayTime: 30
   AttackBlockersLm:
     serializedVersion: 2
     m_Bits: 1572992
@@ -917,8 +951,26 @@ MonoBehaviour:
   SightBlockersLm:
     serializedVersion: 2
     m_Bits: 32896
+  AttackableMovementBlockersLm:
+    serializedVersion: 2
+    m_Bits: 1572928
   targetChangeSpeed: 5.04
   fadeSpeed: 5
+--- !u!114 &4465705911711169946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339959537163183905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d26eda3049d8c408156cb8c549c2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatTransform: {fileID: 7599410528004795161}
+  wornHat: {fileID: 0}
+  hatObject: {fileID: 0}
 --- !u!114 &-8031090298879193519
 MonoBehaviour:
   m_ObjectHideFlags: 0

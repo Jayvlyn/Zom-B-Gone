@@ -17,16 +17,20 @@ public class Obstacle : MonoBehaviour, IInteractable
 	public HingeJoint2D joint;
 	public Collider2D coll;
 	public float grabRange = 0.6f;
+	[Header("Optional Lootable Component")]
+	public Lootable lootable;
 
-	public bool twoHandsOn;
+	[HideInInspector] public bool twoHandsOn;
 	private float baseDensity;
+
+	private Hands playerHands;
 
     private void Awake()
     {
 		if (!moveable)
 		{
-			gameObject.layer = LayerMask.NameToLayer("Obstacle");
 			rb.bodyType = RigidbodyType2D.Static;
+			if(lootable == null)gameObject.layer = LayerMask.NameToLayer("Obstacle");
 		}
 
 		baseDensity = coll.density;
@@ -48,6 +52,7 @@ public class Obstacle : MonoBehaviour, IInteractable
 				joint.enabled = false;
 				coll.density = baseDensity;
                 twoHandsOn = false;
+				playerHands = null;
                 break;
 
 			case ObstacleState.GRABBED:
@@ -62,6 +67,7 @@ public class Obstacle : MonoBehaviour, IInteractable
 	public void Interact(bool rightHand, PlayerController playerController)
 	{
 		ChangeState(ObstacleState.GRABBED);
+		playerHands = playerController.hands;
 	}
 
 	public void BeFreed()
@@ -87,5 +93,21 @@ public class Obstacle : MonoBehaviour, IInteractable
 		JointMotor2D motor = joint.motor;
         motor.motorSpeed = speed;
         joint.motor = motor;
+    }
+
+    private void OnDestroy()
+    {
+		if(playerHands)
+		{
+			// could be both
+			if(playerHands.RightObstacle == this)
+			{
+				playerHands.RightObstacle = null;
+			}
+			if(playerHands.LeftObstacle == this)
+			{
+				playerHands.LeftObstacle = null;
+			}
+		}
     }
 }

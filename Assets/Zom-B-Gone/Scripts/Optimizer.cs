@@ -46,8 +46,11 @@ public class Optimizer : MonoBehaviour
 				}
 				else if (!go.activeSelf)
 				{
-					if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies++;
-					go.SetActive(true);
+					if (currentActiveEnemies < maxActiveEnemies);
+					{
+						if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies++;
+						go.SetActive(true);
+					}
 				}
 			}
 

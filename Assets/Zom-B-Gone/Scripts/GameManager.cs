@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public GameObject enemyPrefab;
-	public int numberOfEnemies;
-	public float spawnRadius;
 	private PlayerController player;
 	public static Light2D globalLight;
 

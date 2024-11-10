@@ -18,6 +18,8 @@ public abstract class Enemy : MonoBehaviour
 	public SpriteRenderer spriteRenderer;
 
 	public Rigidbody2D rigidBody;
+	public EnemyHead head;
+
 	private Health health;
 	private GameObject playerTarget;
 
@@ -40,6 +42,7 @@ public abstract class Enemy : MonoBehaviour
     public LayerMask FellowEnemyLm;
 	public LayerMask WorldObstacleLm;
 	public LayerMask SightBlockersLm;
+	public LayerMask AttackableMovementBlockersLm;
 
 	private Vector2 target = Vector2.zero;
 	private Vector2 desiredTarget = Vector2.zero;
@@ -145,7 +148,7 @@ public abstract class Enemy : MonoBehaviour
     }
 
 	private Coroutine tickCoroutine;
-	private float tickInterval = 0.1f;
+	private float tickInterval = 0.5f;
 	private void OnEnable()
 	{
 		// Start the tick coroutine when the enemy is enabled
@@ -195,14 +198,7 @@ public abstract class Enemy : MonoBehaviour
 				if (Random.Range(0, 100) == 0) PlayAggroSound();
                 desiredTarget = Aggro();
 				break;
-			case State.DEAD:
-				decayTimer -= Time.deltaTime;
-				if (decayTimer <= 0)
-				{
-					StartCoroutine(FadeOut());
-					decayTimer = 1000;
-				}
-				break;
+
 			default:
 				break;
 		}
@@ -223,9 +219,15 @@ public abstract class Enemy : MonoBehaviour
 			case State.AGGRO:
 				if (attackTimer > 0) attackTimer -= Time.deltaTime;
 				break;
-			case State.DEAD:
-				break;
-			default:
+            case State.DEAD:
+                decayTimer -= Time.deltaTime;
+                if (decayTimer <= 0)
+                {
+                    StartCoroutine(FadeOut());
+                    decayTimer = 1000;
+                }
+                break;
+            default:
 				break;
 		}
 	}
@@ -238,11 +240,19 @@ public abstract class Enemy : MonoBehaviour
 
 			//if(rigidBody.linearVelocity.magnitude < 0.4f) // if not moving much see if something is in the way
 			//{
-   //             int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
+			//             int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
 			//	if (hitCount > 0) return;       
-   //         }
-			
-			rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
+			//         }
+
+			float dist = Vector2.Distance(target, transform.position);
+			if (dist > 1)
+			{
+				rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
+			}
+			else if (dist > 0.2)
+			{
+                rigidBody.AddForce(target * currentMoveSpeed * dist, ForceMode2D.Force);
+            }
 		}
 	}
 
@@ -518,16 +528,22 @@ public abstract class Enemy : MonoBehaviour
 		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, playerDistance, MovementBlockersLm);
 		if(wallHit.collider)
 		{
-			return (direction + enemyData.avoidancePriority * 2 * Avoidance() * Separation()).normalized;
+			return (enemyData.blockedTargetPriority * direction + 
+					enemyData.blockedAvoidancePriority * Avoidance() + 
+					enemyData.blockedSeparationPriority * Separation()).normalized;
 		}
 		else // straight shot to player, go for them
 		{
-			if(playerDistance < 3)
+			if(playerDistance < 1)
 			{
 				return direction;
 			}
-			return (direction + Separation() * 3.5f).normalized;
-		}
+
+
+			return (enemyData.straightShotTargetPriority * direction +
+					enemyData.straightShotAvoidancePriority * Avoidance() +
+                    enemyData.straightShotSeparationPriority * Separation()).normalized;
+        }
 
     }
 
@@ -574,7 +590,9 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnDeath()
 	{
+		Optimizer.list.Remove(gameObject);
 		Optimizer.currentActiveEnemies--;
+		head.RemoveHat();
 		ChangeState(State.DEAD);
 	}
 
@@ -633,7 +651,7 @@ public abstract class Enemy : MonoBehaviour
 
 	private void OnCollisionStay2D(Collision2D collision)
 	{
-		if((collision.gameObject.CompareTag("Door") || collision.gameObject.layer == LayerMask.NameToLayer("Window")) && attackTimer <= 0 && rigidBody.linearVelocity.magnitude < 0.2) // stopped by door or window
+		if((AttackableMovementBlockersLm.value & (1 << collision.gameObject.layer)) != 0 && attackTimer <= 0 && rigidBody.linearVelocity.magnitude < 0.2) // stopped by door or window
 		{
 			TryAttack();
 		}

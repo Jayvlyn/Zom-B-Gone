@@ -23,6 +23,37 @@ public class LootTable : ScriptableObject
 	 * [List of Common Loot]	[List of Valuable Loot]		[List of Very Valuable Loot]	[List of Super Valuable Loot]	[List of Super Legendary Loot]
 	 */
 
+	public HatData GetRandomHat()
+	{
+        if (splitTable == null) SplitRarityList();
+
+		HatData chosenHat = new HatData();
+        Rarity chosenRarity = GetRandomRarity();
+
+        for (int i = 0; i < rarityList.rarities.Length; i++)
+        {
+            if (chosenRarity == rarityList.rarities[i])
+            {
+				int j = 0; // hat
+
+                // random collectible of collectible type j, of rarity i
+                int originali = i;
+                while (splitTable[j][i].Count <= 0) // if no collectibles for this type and rarity, lower rarity by one
+                {
+                    i--;
+                    if (i < 0) // no collectibles of type at all;
+                    {
+						return null;
+                    }
+                }
+                chosenHat = splitTable[j][i][Random.Range(0, splitTable[j][i].Count)] as HatData;
+                break;
+            }
+        }
+
+        if (!chosenHat.name.Equals("Unnamed")) return chosenHat;
+        else return null;
+    }
 
     public CollectibleData GetRandomCollectible()
     {

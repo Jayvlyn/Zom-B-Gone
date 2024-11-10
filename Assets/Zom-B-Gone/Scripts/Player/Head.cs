@@ -20,6 +20,11 @@ public class Head : MonoBehaviour
             hatObject = value;
             if (hatObject != null && hatObject.TryGetComponent(out Hat hat)) // Hat added or swapped
             {
+                if(wornHat) // swapped
+                {
+                    wornHat.ChangeSortingLayer(wornHat.lowerSortingLayerID);
+                }
+
                 wornHat = hat;
 
 				headContainerData.Container.collectibleSlots[0].CollectibleName = wornHat.hatData.name;
@@ -27,6 +32,11 @@ public class Head : MonoBehaviour
 			}
             else // Hat taken off
             {
+                if (wornHat)
+                {
+                    wornHat.ChangeSortingLayer(wornHat.lowerSortingLayerID);
+                }
+
                 // Hat can only be removed by dragging off, which will handle setting the slot to null and quantity 0
                 wornHat = null;
                 hairRenderer.enabled = true;
@@ -48,4 +58,6 @@ public class Head : MonoBehaviour
 			wornHat.Interact(false, pc);
 		}
 	}
+
+
 }

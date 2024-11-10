@@ -34,6 +34,12 @@ MonoBehaviour:
   separationPriority: 40.7
   avoidancePriority: 56.8
   investigatePriority: 13.4
+  straightShotTargetPriority: 58.8
+  straightShotAvoidancePriority: 3.6
+  straightShotSeparationPriority: 89.6
+  blockedTargetPriority: 15.4
+  blockedAvoidancePriority: 93.9
+  blockedSeparationPriority: 76.7
   possibleVoices:
   - {fileID: 11400000, guid: bcfda1de500017143961ff9522ad74de, type: 2}
   - {fileID: 11400000, guid: 0582667dc74eaa9419ac8a0a9685ddf9, type: 2}

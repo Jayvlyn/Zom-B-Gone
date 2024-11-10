@@ -40,6 +40,15 @@ public class EnemyData : ScriptableObject
 
 	[Range(0, 100)] public float investigatePriority;
 
-	[Header("Audio")]
+	[Header("Aggro Behavior")]
+    [Range(0, 100)] public float straightShotTargetPriority;
+    [Range(0, 100)] public float straightShotAvoidancePriority;
+    [Range(0, 100)] public float straightShotSeparationPriority;
+
+    [Range(0, 100)] public float blockedTargetPriority;
+    [Range(0, 100)] public float blockedAvoidancePriority;
+    [Range(0, 100)] public float blockedSeparationPriority;
+
+    [Header("Audio")]
 	public List<EnemyVoice> possibleVoices;
 }

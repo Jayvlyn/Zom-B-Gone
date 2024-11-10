@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8521114047084800116}
   - component: {fileID: 2479592600775128846}
   - component: {fileID: 4826773798859923985}
+  - component: {fileID: -8656135692269858201}
   m_Layer: 6
   m_Name: DiningTable
   m_TagString: Untagged
@@ -55,6 +56,7 @@ MonoBehaviour:
   joint: {fileID: 4826773798859923985}
   coll: {fileID: 2479592600775128846}
   grabRange: 0.6
+  lootable: {fileID: 0}
   twoHandsOn: 0
 --- !u!212 &5582919550173276089
 SpriteRenderer:
@@ -98,7 +100,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 97008305
-  m_SortingLayer: -19
+  m_SortingLayer: -18
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7ae307dbd1a23e24eb833590bba97e0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -210,3 +212,18 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &-8656135692269858201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9100218649851940923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7ee753bdcc5fc4f9db0001cf00a6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  _maxHealth: 100
+  _currentHealth: 100

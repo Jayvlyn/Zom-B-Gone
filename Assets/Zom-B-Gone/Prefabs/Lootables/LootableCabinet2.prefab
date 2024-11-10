@@ -10,9 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2241816821901524018}
   - component: {fileID: 8646659623018388919}
+  - component: {fileID: -4832685125672591668}
   - component: {fileID: 43535050753919016}
   - component: {fileID: 622174742749464469}
   - component: {fileID: 1230832833179306862}
+  - component: {fileID: 7868570209696126247}
+  - component: {fileID: -4319441097838608598}
   m_Layer: 6
   m_Name: LootableCabinet2
   m_TagString: Untagged
@@ -90,6 +93,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4832685125672591668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442050968352500423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7537dccf1e614bf4787db3ce83dbce4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  moveable: 0
+  variedRotation: 0
+  rb: {fileID: 7868570209696126247}
+  joint: {fileID: 0}
+  coll: {fileID: 622174742749464469}
+  grabRange: 0.6
+  lootable: {fileID: 43535050753919016}
+  twoHandsOn: 0
 --- !u!114 &43535050753919016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,3 +224,45 @@ MonoBehaviour:
   unityEventResponse:
     m_PersistentCalls:
       m_Calls: []
+--- !u!50 &7868570209696126247
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442050968352500423}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 1
+  m_Mass: 0.20329405
+  m_LinearDamping: 4
+  m_AngularDamping: 4
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!114 &-4319441097838608598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442050968352500423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7ee753bdcc5fc4f9db0001cf00a6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  _maxHealth: 100
+  _currentHealth: 100

@@ -8,20 +8,21 @@ public class VehicleCollisionHandler : MonoBehaviour
     public Vehicle v;
 
     public float bufferTime = 2;
-    private List<Collision2D> damageBuffer = new List<Collision2D>();
+    private List<GameObject> damageBuffer = new List<GameObject>();
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!damageBuffer.Contains(collision))
+        GameObject otherObject = collision.gameObject;
+
+        if(!damageBuffer.Contains(otherObject))
         {
-            if(collision.gameObject.CompareTag("Enemy"))
+            if(otherObject.CompareTag("Enemy"))
             {
-                if (rb.linearVelocity.magnitude > 4)
+                if (rb.linearVelocity.magnitude > 2)
                 {
-                    if (collision.gameObject.TryGetComponent(out Health health))
+                    if (otherObject.TryGetComponent(out Health health))
                     {
-                        damageBuffer.Add(collision);
-                        StartCoroutine(BufferTimer(collision, bufferTime));
+                        StartCoroutine(BufferTimer(otherObject, bufferTime));
                         DealVehicleDamage(health);
                     }
                 }
@@ -39,7 +40,7 @@ public class VehicleCollisionHandler : MonoBehaviour
         {
             if (!braking)
             {
-                damage += Mathf.FloorToInt(Mathf.Pow(lateralVel,3f));
+                damage += Mathf.FloorToInt(Mathf.Pow(lateralVel,2f));
             }
         }
 
@@ -59,9 +60,10 @@ public class VehicleCollisionHandler : MonoBehaviour
         health.TakeDamage(damage, knockbackVector, damage);
     }
 
-    private IEnumerator BufferTimer(Collision2D c, float time)
+    private IEnumerator BufferTimer(GameObject g, float time)
     {
+        damageBuffer.Add(g);
         yield return new WaitForSeconds(time);
-        damageBuffer.Remove(c);
+        damageBuffer.Remove(g);
     }
 }
