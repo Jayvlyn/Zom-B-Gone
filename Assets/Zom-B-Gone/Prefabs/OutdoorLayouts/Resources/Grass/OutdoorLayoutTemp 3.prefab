@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3983638817654751859}
   - component: {fileID: 8625417251092680248}
   m_Layer: 0
-  m_Name: OutdoorRoadLayoutTemp 11
+  m_Name: OutdoorLayoutTemp 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

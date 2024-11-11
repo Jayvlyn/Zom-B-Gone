@@ -15,6 +15,7 @@ public class Optimizer : MonoBehaviour
 
 	private void Start()
 	{
+		currentActiveEnemies = 0;
 		enemyLm = LayerMask.GetMask("Enemy");
 		StartCoroutine(DistanceCheck());
 	}

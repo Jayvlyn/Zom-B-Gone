@@ -14,7 +14,7 @@ public class MerchantVals
 
     public int GetNextLevelRequirement()
     {
-        int baseExp = 1;
+        int baseExp = 100;
         float exponent = 1.5f;
 
         return Mathf.RoundToInt(baseExp * Mathf.Pow(reputationLevel, exponent));

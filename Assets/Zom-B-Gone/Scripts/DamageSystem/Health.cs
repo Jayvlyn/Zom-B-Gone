@@ -65,23 +65,30 @@ public class Health : MonoBehaviour
         }
         #endregion
 
-        CurrentHealth = CurrentHealth - incomingDamage;
 
         if (gameObject.CompareTag("Enemy"))
         {
-            if (enemyOwner != null) enemyOwner.OnHit(incomingDamage, dismemeberChance, decapitateChance);
-            else if (gameObject.TryGetComponent(out Enemy enemy))
-            {
-                enemyOwner = enemy;
-                enemyOwner.OnHit(incomingDamage, dismemeberChance, decapitateChance);
-			}
+            if (enemyOwner == null) {
+                enemyOwner = gameObject.GetComponent<Enemy>();
+            }
 
-			if (enemyOwner && enemyOwner.rigidBody)
+            #region hat buff
+            if(enemyOwner.head.wornHat != null)
+            {
+                incomingDamage -= enemyOwner.head.wornHat.hatData.defense;
+            }
+            #endregion
+
+			if (enemyOwner.rigidBody)
 			{
 				enemyOwner.rigidBody.AddForce(knockbackVector);
 			}
 
+            enemyOwner.OnHit(incomingDamage, dismemeberChance, decapitateChance);
+
 		}
+
+        CurrentHealth = CurrentHealth - incomingDamage;
 
         DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate);
     }

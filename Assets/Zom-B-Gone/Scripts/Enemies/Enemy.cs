@@ -32,6 +32,20 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] private float changeDirectionCooldown = 5;
 	private Vector2 wanderTarget = new Vector2(1, 1);
 	private float currentMoveSpeed = 0;
+	private float CurrentMoveSpeed
+	{
+		get { return currentMoveSpeed; }
+		set {
+			currentMoveSpeed = value;
+            #region hat buff
+            if(head && head.wornHat != null)
+			{
+				currentMoveSpeed *= head.wornHat.hatData.moveSpeedMod;
+			}
+            #endregion
+
+        }
+    }
 
 	// Dead enemy removal
 	[SerializeField] private float decayTime = 60.0f; // how long it takes for corpse to disappear
@@ -69,19 +83,20 @@ public abstract class Enemy : MonoBehaviour
 		switch (newState)
 		{
 			case State.DRONING:
-				currentMoveSpeed = enemyData.droneSpeed;
+				CurrentMoveSpeed = enemyData.droneSpeed;
 				
 				break;
 			case State.INVESTIGATING:
-				currentMoveSpeed = enemyData.investigateSpeed;
+				CurrentMoveSpeed = enemyData.investigateSpeed;
 				
 				break;
 			case State.AGGRO:
-				currentMoveSpeed = enemyData.aggroSpeed;
+				PlayAggroSound();
+				CurrentMoveSpeed = enemyData.aggroSpeed;
 				
 				break;
 			case State.DEAD:
-				currentMoveSpeed = 0;
+				CurrentMoveSpeed = 0;
 				rigidBody.Sleep();
 				GetComponent<Collider2D>().enabled = false;
 				decayTimer = decayTime;
@@ -159,11 +174,11 @@ public abstract class Enemy : MonoBehaviour
             float dist = Vector2.Distance(target, transform.position);
             if (dist > 1)
             {
-                rigidBody.AddForce(target * currentMoveSpeed, ForceMode2D.Force);
+                rigidBody.AddForce(target * CurrentMoveSpeed, ForceMode2D.Force);
             }
             else if (dist > 0.2)
             {
-                rigidBody.AddForce(target * currentMoveSpeed * dist, ForceMode2D.Force);
+                rigidBody.AddForce(target * CurrentMoveSpeed * dist, ForceMode2D.Force);
             }
         }
     }
@@ -305,24 +320,34 @@ public abstract class Enemy : MonoBehaviour
 		return wanderTarget.normalized;
 	}
 
+	GameObject[] cohesionNeighbors; // for outside use in finding disguised player
+	GameObject disguisedPlayer;
 	Vector2 Cohesion()
 	{
+		bool foundPlayerNeighbor = false;
 		Vector2 cohesionVector = new Vector2();
-		int countEnemies = 0;
-		List<Enemy> neighbors = GetNeighbors(enemyData.cohesionRadius);
-		if (neighbors.Count == 0) return cohesionVector;
-		foreach (var enemy in neighbors)
+		int neighborCount = 0;
+		cohesionNeighbors = GetNeighbors(enemyData.cohesionRadius);
+		if (cohesionNeighbors.Length == 0) return cohesionVector;
+		foreach (var neighbor in cohesionNeighbors)
 		{
-			if (isInFOV(enemy.transform.position))
+			if (isInFOV(neighbor.transform.position))
 			{
-				cohesionVector += (Vector2)enemy.transform.position;
-				countEnemies++;
+				cohesionVector += (Vector2)neighbor.transform.position;
+				neighborCount++;
+				if(neighbor.CompareTag("Player"))
+				{
+					disguisedPlayer = neighbor;
+					foundPlayerNeighbor = true;
+				}
 			}
 		}
 
-		if (countEnemies == 0) return cohesionVector;
+		if (!foundPlayerNeighbor) disguisedPlayer = null;
 
-		cohesionVector /= countEnemies;
+		if (neighborCount == 0) return cohesionVector;
+
+		cohesionVector /= neighborCount;
 
 		cohesionVector = cohesionVector - (Vector2)transform.position;
 		return cohesionVector.normalized;
@@ -331,13 +356,14 @@ public abstract class Enemy : MonoBehaviour
 	Vector2 Alignment()
 	{
 		Vector2 alignVector = new Vector2();
-		var enemies = GetNeighbors(enemyData.alignmentRadius);
-		if (enemies.Count == 0) return alignVector;
-		foreach (var enemy in enemies)
+        GameObject[] neighbors = GetNeighbors(enemyData.alignmentRadius);
+		if (neighbors.Length == 0) return alignVector;
+		foreach (var neighbor in neighbors)
 		{
-			if (isInFOV(enemy.transform.position) && enemy.rigidBody != null)
+			if (isInFOV(neighbor.transform.position))
 			{
-				alignVector += new Vector2(enemy.rigidBody.linearVelocity.x, enemy.rigidBody.linearVelocity.y);
+				Rigidbody2D neighborRb = neighbor.GetComponent<Rigidbody2D>();
+				alignVector += new Vector2(neighborRb.linearVelocity.x, neighborRb.linearVelocity.y);
 			}
 		}
 
@@ -347,14 +373,14 @@ public abstract class Enemy : MonoBehaviour
 	Vector2 Separation()
 	{
 		Vector2 separateVector = new Vector2();
-		var enemies = GetNeighbors(enemyData.separationRadius);
-		if (enemies.Count == 0) return separateVector;
+        GameObject[] neighbors = GetNeighbors(enemyData.separationRadius);
+		if (neighbors.Length == 0) return separateVector;
 
-		foreach (var enemy in enemies)
+		foreach (var neighbor in neighbors)
 		{
-			if (isInFOV(enemy.transform.position))
+			if (isInFOV(neighbor.transform.position))
 			{
-				Vector2 movingTowards = transform.position - enemy.transform.position;
+				Vector2 movingTowards = transform.position - neighbor.transform.position;
 				if (movingTowards.magnitude > 0)
 				{
 					separateVector += movingTowards.normalized / movingTowards.magnitude;
@@ -411,7 +437,18 @@ public abstract class Enemy : MonoBehaviour
 	Vector2 InvestigateTarget()
 	{
 		float dist = Vector2.Distance(investigaitonPoint, transform.position);
-		if (dist < 1)
+
+        if (disguisedPlayer)
+        {
+			float playerToInvestigation = Vector2.Distance(disguisedPlayer.transform.position, investigaitonPoint);
+			if (playerToInvestigation < 3)
+			{
+				playerTarget = disguisedPlayer;
+				ChangeState(State.AGGRO);
+			}
+        }
+
+        if (dist < 1)
 		{
 			if (loseInterestRoutine == null)
 				loseInterestRoutine = StartCoroutine(LoseInterestTimer());
@@ -436,9 +473,8 @@ public abstract class Enemy : MonoBehaviour
 	private float GetPlayerSpotDistance()
 	{
         float sightDistance = enemyData.perceptionDistance * GameManager.globalLight.intensity;
-        float playerSpotDistance = sightDistance;
-        if (PlayerController.isSneaking) playerSpotDistance *= 0.5f;
-		return playerSpotDistance;
+        if (PlayerController.isSneaking) sightDistance *= 0.5f;
+		return sightDistance;
     }
 
 	Vector2 Seek()
@@ -477,7 +513,7 @@ public abstract class Enemy : MonoBehaviour
 
     Vector2 Flee(Vector2 target)
 	{
-		Vector2 neededVelocity = ((Vector2)transform.position - target).normalized * currentMoveSpeed;
+		Vector2 neededVelocity = ((Vector2)transform.position - target).normalized * CurrentMoveSpeed;
 		return neededVelocity - new Vector2(rigidBody.linearVelocity.x, rigidBody.linearVelocity.y);
 	}
 
@@ -519,11 +555,15 @@ public abstract class Enemy : MonoBehaviour
 		}
 		else if(playerDistance <= enemyData.attackRange && attackTimer <= 0)
 		{
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, playerDistance, AttackBlockersLm);
-            if (!hit.collider)
-            {
-                TryAttack();
-            }
+            float angleToPlayer = Vector2.Angle(transform.up, direction);
+			if(angleToPlayer <= 30f)
+			{
+				RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, playerDistance, AttackBlockersLm);
+				if (!hit.collider)
+				{
+					TryAttack();
+				}
+			}
 		}
 
 
@@ -567,19 +607,22 @@ public abstract class Enemy : MonoBehaviour
         return a <= enemyData.fov;
     }
 
-	public List<Enemy> GetNeighbors(float radius)
+	public GameObject[] GetNeighbors(float radius)
 	{
-		List<Enemy> neighborsFound = new List<Enemy>();
-
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, FellowEnemyLm);
-		foreach (var collider in colliders)
+		GameObject[] neighborsFound = new GameObject[colliders.Length-1];
+
+		int neighborsIndex = 0;
+		for(int i = 0; i < colliders.Length; i++) 
 		{
-			if (collider.gameObject == this.gameObject) continue;
-			if(collider.gameObject.TryGetComponent(out Enemy e))
+			if (colliders[i].gameObject != this.gameObject)
 			{
-				neighborsFound.Add(e);
+				neighborsFound[neighborsIndex] = colliders[i].gameObject;
+				neighborsIndex++;
+
 			}
 		}
+
 		return neighborsFound;
 	}
 
@@ -623,6 +666,7 @@ public abstract class Enemy : MonoBehaviour
 			int index = Random.Range(0, voice.hurtSounds.Count);
 			audioSource.PlayOneShot(voice.hurtSounds[index]);
 		}
+		Utils.MakeSoundWave(transform.position, 5);
 	}
 
 	public void OnHit(int damage, float dismemberChance = 0, float decapitateChance = 0)
@@ -709,15 +753,22 @@ public abstract class Enemy : MonoBehaviour
 		}
 		else if(collision.gameObject.CompareTag("Player") && playerTarget == null)
 		{
-			playerTarget = collision.gameObject;
-			ChangeState(State.AGGRO);
+			if(PlayerController.currentState != PlayerController.PlayerState.SNEAKING)
+			{
+				playerTarget = collision.gameObject;
+				ChangeState(State.AGGRO);
+			}
 		}
 
         else if(collidingVehicle != null && rigidBody.linearVelocity.magnitude > 0)
 		{
             if ((WorldObstacleLm & (1 << collision.gameObject.layer)) != 0)
 			{
-				health.TakeDamage(rigidBody.linearVelocity.magnitude * 12, Vector2.zero);
+				float damage = rigidBody.linearVelocity.magnitude * 12;
+
+				OnHit((int)damage, 40, 10);
+				health.TakeDamage(damage, Vector2.zero);
+
 			}
 		}
     }
