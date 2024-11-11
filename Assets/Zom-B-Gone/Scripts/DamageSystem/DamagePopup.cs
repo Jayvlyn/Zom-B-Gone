@@ -94,15 +94,26 @@ public class DamagePopup : MonoBehaviour
         }
     }
 
-    public static DamagePopup Create(Vector3 position, int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, bool incoming = false)
+    public static DamagePopup Create(Vector3 position, int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, PopupType type = PopupType.DEFAULT)
     {
-        Transform popupPrefab;
-        if (incoming) popupPrefab = Assets.i.incomingDamagePopup;
-        else popupPrefab = Assets.i.damagePopup;
+        Transform popupPrefab = Assets.i.damagePopup;
+
+        switch(type)
+        {
+            case PopupType.PLAYER:
+                popupPrefab = Assets.i.playerDamagePopup;
+                break;
+
+            case PopupType.ENEMY:
+                popupPrefab = Assets.i.zombieDamagePopup;
+                break;
+        }
 
         float overrideFontSize = -1;
         if(!Utils.IsPositionInCameraBounds(position))
         {
+            if (type == PopupType.DEFAULT) return null;
+
             // handle position in viewport context (0 to 1)
             Vector3 viewportPos = Camera.main.WorldToViewportPoint(position);
 
@@ -126,9 +137,16 @@ public class DamagePopup : MonoBehaviour
         return damagePopup;
     }
 
-    public static DamagePopup Create(Vector3 position, float damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, bool incoming = false)
+    public static DamagePopup Create(Vector3 position, float damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, PopupType type = PopupType.DEFAULT)
     {
-        return Create(position,Mathf.RoundToInt(damageAmount), inputMoveVec, isCriticalHit, invertRotate, incoming);
+        return Create(position,Mathf.RoundToInt(damageAmount), inputMoveVec, isCriticalHit, invertRotate, type);
+    }
+
+    public enum PopupType
+    {
+        DEFAULT,
+        PLAYER,
+        ENEMY
     }
 
     public void Setup(int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, float overrideFontSize = -1)

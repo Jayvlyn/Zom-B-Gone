@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     public static ContainerDragHandler mouseHeldIcon = null;
 
+    private bool playerSwinging = false;
     public void ChangeState(PlayerState newState)
     {
         if (currentState == newState) return;
@@ -80,10 +81,15 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
+        if (hands.rightItem is MeleeWeapon m && m.IsSwinging) playerSwinging = true;
+        else if (hands.leftItem is MeleeWeapon m2 && m2.IsSwinging) playerSwinging = true;
+        else playerSwinging = false;
+        
+
         switch (newState)
         {
             case PlayerState.WALKING:
-                if (!recoverStamina) RecoverStamina();
+                if (!recoverStamina && !playerSwinging) RecoverStamina();
                 currentMoveSpeed = playerData.walkSpeed;
                 break;
 
@@ -93,17 +99,17 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.SNEAKING:
-                if (!recoverStamina) RecoverStamina();
+                if (!recoverStamina && !playerSwinging) RecoverStamina();
                 currentMoveSpeed = playerData.sneakSpeed;
                 break;
 
             case PlayerState.IDLE:
-                if (!recoverStamina) RecoverStamina();
+                if (!recoverStamina && !playerSwinging) RecoverStamina();
                 currentMoveSpeed = playerData.walkSpeed;
                 break;
 
             case PlayerState.DRIVING:
-                if (!recoverStamina) RecoverStamina();
+                if (!recoverStamina && !playerSwinging) RecoverStamina();
                 if (vc)
                 {
                     vc.Follow = transform;
@@ -162,12 +168,15 @@ public class PlayerController : MonoBehaviour
             {
                 currentStamina = 0;
                 ChangeState(PlayerState.WALKING);
-                RecoverStamina();
+                if(!recoverStamina && !playerSwinging)RecoverStamina();
             }
         }
         else
         {
-            if(recoverStamina)
+            //if (currentStamina < playerData.maxStamina) currentStamina += Time.deltaTime * playerData.staminaRecoverySpeed;
+
+
+            if (recoverStamina)
             {
                 if (currentStamina < playerData.maxStamina) currentStamina += Time.deltaTime * playerData.staminaRecoverySpeed;
                 else recoverStamina = false;

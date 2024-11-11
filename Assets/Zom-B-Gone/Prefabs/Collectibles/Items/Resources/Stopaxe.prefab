@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2774193381391502917}
   - component: {fileID: 2596300008556408185}
   - component: {fileID: 8298971315238355472}
-  - component: {fileID: 8589298506778409595}
   - component: {fileID: 2208294227549419385}
   - component: {fileID: 8225873307285844331}
   - component: {fileID: 4892750397159343982}
+  - component: {fileID: 484367392195126858}
   m_Layer: 12
   m_Name: Stopaxe
   m_TagString: Untagged
@@ -75,7 +75,7 @@ MonoBehaviour:
   quantity: 1
   weaponData: {fileID: 0}
   flipOnReturnSwing: 1
-  damageCollider: {fileID: 8589298506778409595}
+  damageCollider: {fileID: 484367392195126858}
   meleeWeaponData: {fileID: 0}
 --- !u!50 &8298971315238355472
 Rigidbody2D:
@@ -104,57 +104,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &8589298506778409595
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490104715815667538}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 1024
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 16384
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.875, y: 1.875}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.25361526, y: 0.8680894}
-      - {x: -0.20159176, y: 0.8722721}
-      - {x: -0.21210772, y: 0.10639575}
-      - {x: 0.2627215, y: 0.11603013}
-  m_UseDelaunayMesh: 0
 --- !u!60 &2208294227549419385
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -185,7 +134,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -254,7 +203,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -22
+  m_SortingLayer: -25
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 50f85a7f8d85ed844a24f601ff05ab64, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -364,6 +313,52 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!61 &484367392195126858
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490104715815667538}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.017100632, y: 0.4726274}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.875, y: 1.875}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.50959, y: 1.1628213}
+  m_EdgeRadius: 0
 --- !u!1 &1093850455457573653
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2774193381391502917}
   - component: {fileID: 2596300008556408185}
   - component: {fileID: 8298971315238355472}
-  - component: {fileID: 8589298506778409595}
+  - component: {fileID: 6238980441367266463}
   - component: {fileID: 2208294227549419385}
   - component: {fileID: 8225873307285844331}
   - component: {fileID: 8982661617835342938}
@@ -62,7 +62,7 @@ MonoBehaviour:
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
   groundedLinearDrag: 3
-  holdOffset: {x: 0.6, y: -0.2}
+  holdOffset: {x: 0.75, y: -0.2}
   spinThrow: 1
   aimAtMouse: 0
   gripRotation: 150
@@ -75,7 +75,7 @@ MonoBehaviour:
   quantity: 1
   weaponData: {fileID: 0}
   flipOnReturnSwing: 1
-  damageCollider: {fileID: 8589298506778409595}
+  damageCollider: {fileID: 6238980441367266463}
   meleeWeaponData: {fileID: 0}
 --- !u!50 &8298971315238355472
 Rigidbody2D:
@@ -104,8 +104,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &8589298506778409595
-PolygonCollider2D:
+--- !u!61 &6238980441367266463
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,10 +117,10 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -138,7 +138,7 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.010298103, y: 0.3449859}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -148,13 +148,8 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.25679892, y: 0.92563695}
-      - {x: -0.23404445, y: 0.9259515}
-      - {x: -0.23883815, y: -0.39355576}
-      - {x: 0.23827913, y: -0.39403245}
-  m_UseDelaunayMesh: 0
+  m_Size: {x: 0.4044941, y: 1.3828129}
+  m_EdgeRadius: 0
 --- !u!60 &2208294227549419385
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -185,7 +180,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

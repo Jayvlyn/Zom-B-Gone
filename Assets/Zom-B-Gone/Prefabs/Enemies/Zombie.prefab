@@ -69,7 +69,7 @@ MonoBehaviour:
   hatObject: {fileID: 0}
   detachPoint: {fileID: 4521511401847401087}
   attachPoint: {fileID: 6433467891432641666}
-  bleedParticles: {fileID: 7654700310716529146, guid: 90171f8a9712e264c9cc835bc1cab96a, type: 3}
+  bleedParticles: {fileID: 7654700310716529146, guid: f2557b4aa6ffbd74493ba5f385ecdc19, type: 3}
 --- !u!212 &4048730274440862918
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1390,7 +1390,7 @@ Transform:
   m_GameObject: {fileID: 9042900231582204215}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.104, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -216,6 +216,7 @@ public abstract class Enemy : MonoBehaviour
     }
 
     private LayerMask playerLm;
+    private LayerMask allPlayerLm;
     private LayerMask worldLm;
     private LayerMask windowLm;
     private LayerMask interactableLm;
@@ -224,6 +225,7 @@ public abstract class Enemy : MonoBehaviour
         SetSortOrder();
         spriteRenderer.sprite = possibleSprites[UnityEngine.Random.Range(0, possibleSprites.Count)];
 
+        allPlayerLm = LayerMask.GetMask("Player", "DisguisedPlayer");
         playerLm = LayerMask.GetMask("Player");
         worldLm = LayerMask.GetMask("World");
         windowLm = LayerMask.GetMask("Window");
@@ -547,10 +549,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (playerDistance > playerSpotDistance || PlayerController.hiding)
 		{
-			Vector2 lastSeenPosition = playerTarget.transform.position;
-			playerTarget = null;
-			this.investigaitonPoint = lastSeenPosition;
-            ChangeState(State.INVESTIGATING);
+			loseSightOfPlayer();
             return Vector2.zero;
 		}
 		else if(playerDistance <= enemyData.attackRange && attackTimer <= 0)
@@ -566,10 +565,17 @@ public abstract class Enemy : MonoBehaviour
 			}
 		}
 
-
-		RaycastHit2D wallHit = Physics2D.Raycast(transform.position, direction, playerDistance, MovementBlockersLm);
-		if(wallHit.collider)
+        RaycastHit2D sightHit = Physics2D.Raycast(transform.position, direction, playerDistance, SightBlockersLm);
+        if (sightHit.collider)
 		{
+			loseSightOfPlayer();
+            return Vector2.zero;
+        }
+
+        RaycastHit2D movementHit = Physics2D.Raycast(transform.position, direction, playerDistance, MovementBlockersLm);
+		if(movementHit.collider)
+		{
+			
 			return (enemyData.blockedTargetPriority * direction + 
 					enemyData.blockedAvoidancePriority * Avoidance() + 
 					enemyData.blockedSeparationPriority * Separation()).normalized;
@@ -587,6 +593,14 @@ public abstract class Enemy : MonoBehaviour
                     enemyData.straightShotSeparationPriority * Separation()).normalized;
         }
 
+    }
+
+	private void loseSightOfPlayer()
+	{
+        Vector2 lastSeenPosition = playerTarget.transform.position;
+        playerTarget = null;
+        this.investigaitonPoint = lastSeenPosition;
+        ChangeState(State.INVESTIGATING);
     }
 
 	private void TryAttack()
@@ -671,6 +685,16 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnHit(int damage, float dismemberChance = 0, float decapitateChance = 0)
     {
+		if (currentState != State.AGGRO)
+		{
+            Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, GetPlayerSpotDistance(), allPlayerLm);
+			if (playerCollider != null)
+			{
+				playerTarget = playerCollider.gameObject;
+				ChangeState(State.AGGRO);
+			}
+		}
+
 		PlayHurtSound();
 		DismemberLimb(damage, dismemberChance);
 		Decapitate(damage, decapitateChance);
@@ -766,8 +790,7 @@ public abstract class Enemy : MonoBehaviour
 			{
 				float damage = rigidBody.linearVelocity.magnitude * 12;
 
-				OnHit((int)damage, 40, 10);
-				health.TakeDamage(damage, Vector2.zero);
+				health.TakeDamage(damage, Vector2.zero, 40, false, default, false, 10);
 
 			}
 		}

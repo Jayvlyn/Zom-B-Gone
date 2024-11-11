@@ -42,7 +42,8 @@ namespace CodeMonkey {
         public Material m_White;
 
         public Transform damagePopup;
-        public Transform incomingDamagePopup;
+        public Transform playerDamagePopup;
+        public Transform zombieDamagePopup;
 
     }
 

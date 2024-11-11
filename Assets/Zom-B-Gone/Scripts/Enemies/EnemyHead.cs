@@ -120,7 +120,7 @@ public class EnemyHead : MonoBehaviour
         detachBleeding.transform.position = detachPoint.position;
         GameObject attachBleeding = Instantiate(bleedParticles, attachPoint);
         attachBleeding.transform.position = attachPoint.position;
-        owner.bleedingParticles.Add(attachBleeding);
+        //owner.bleedingParticles.Add(attachBleeding);
         if (transform.parent) transform.parent = null;
 
         detachedTimer = detachedLifetime;

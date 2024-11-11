@@ -22,9 +22,9 @@ MonoBehaviour:
   weight: 1000
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0
-  damage: 10
-  attackSpeed: 0.5
-  knockbackPower: 10
+  damage: 19
+  attackSpeed: 0.9
+  knockbackPower: 250
   dismemberChance: 0
   staminaCost: 1
   prepSpeed: 0.2
@@ -41,8 +41,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.11358933
     - serializedVersion: 3
-      time: 0.08731111
-      value: 11.559853
+      time: 0.076164074
+      value: 6.694266
       inSlope: 3.4136145
       outSlope: 3.4136145
       tangentMode: 0
@@ -50,8 +50,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.57657367
     - serializedVersion: 3
-      time: 0.16030723
-      value: 11.566164
+      time: 0.14916019
+      value: 6.7005773
       inSlope: -0.7773687
       outSlope: -0.7773687
       tangentMode: 0
@@ -59,8 +59,8 @@ MonoBehaviour:
       inWeight: 0.18754987
       outWeight: 0.31685624
     - serializedVersion: 3
-      time: 0.28869826
-      value: 3.2631228
+      time: 0.2831288
+      value: 0.9051821
       inSlope: -0.60702884
       outSlope: -0.60702884
       tangentMode: 0
@@ -92,8 +92,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.21325861
-      value: 5.465825
+      time: 0.22495861
+      value: 4.645164
       inSlope: 1.4070671
       outSlope: 1.4070671
       tangentMode: 0
@@ -101,14 +101,23 @@ MonoBehaviour:
       inWeight: 0.053311493
       outWeight: 0.8106049
     - serializedVersion: 3
-      time: 0.61529756
-      value: 5.4339666
-      inSlope: -1.1983343
-      outSlope: -1.1983343
+      time: 0.39144522
+      value: 4.6265087
+      inSlope: -5.160526
+      outSlope: -5.160526
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.36518484
-      outWeight: 0.33333334
+      outWeight: 0.31295437
+    - serializedVersion: 3
+      time: 0.47806114
+      value: 0.7039218
+      inSlope: -2.3635273
+      outSlope: -2.3635273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.3846459
     - serializedVersion: 3
       time: 0.8427658
       value: 0.42519855
@@ -119,8 +128,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 8.05311
+      time: 0.9933504
+      value: 6.9941697
       inSlope: -12.381104
       outSlope: -12.381104
       tangentMode: 0

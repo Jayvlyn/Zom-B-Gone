@@ -234,8 +234,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5abe13962e7625d4db0b066ade1e162c, type: 2}
   - {fileID: 11400000, guid: e827c2b02aead2b42894a29bd4a840f6, type: 2}
   - {fileID: 11400000, guid: b40db612806cdce4fa58882bf1d149e0, type: 2}
-  - {fileID: 11400000, guid: 710e9a9ee455f1b4e849f94da7679bf4, type: 2}
-  - {fileID: 11400000, guid: 1074ef9a6659406408f5c2583c6d7f76, type: 2}
+  closeLootableEvent: {fileID: 11400000, guid: 710e9a9ee455f1b4e849f94da7679bf4, type: 2}
+  closeCraftingEvent: {fileID: 11400000, guid: 1074ef9a6659406408f5c2583c6d7f76, type: 2}
   playerController: {fileID: 8105131813210140980}
 --- !u!114 &998744478070939707
 MonoBehaviour:

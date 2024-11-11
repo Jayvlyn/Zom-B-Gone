@@ -27,6 +27,8 @@ public class Interactor : MonoBehaviour
     [SerializeField] Material lootOutlineSpriteMaterial;
 
     [SerializeField] VoidEvent[] closeContainerEvents;
+    [SerializeField] VoidEvent closeLootableEvent;
+    [SerializeField] VoidEvent closeCraftingEvent;
 
     [SerializeField] private PlayerController playerController;
 
@@ -34,6 +36,7 @@ public class Interactor : MonoBehaviour
     [HideInInspector] public static GameObject interactedContainer;
 	[HideInInspector] public static GameObject interactedCrafting;
 	[HideInInspector] public static Lootable openedLootable;
+    private bool lootableMenuOpen = false;
 
     private SpriteRenderer interactableSpriteRenderer;
     private IInteractable availableInteractable;
@@ -123,6 +126,10 @@ public class Interactor : MonoBehaviour
                 distanceCheckTimer -= Time.deltaTime;
             }
         }
+        else if (openedLootable == null && lootableMenuOpen)
+        {
+            CloseOpenedLootable();
+        }
 
 
     }
@@ -149,20 +156,16 @@ public class Interactor : MonoBehaviour
 
     public void CloseOpenedLootable()
     {
+        lootableMenuOpen = false;
+
         if (PlayerController.mouseHeldIcon != null)
         {
             PlayerController.mouseHeldIcon.sendBackToSlot();
             PlayerController.mouseHeldIcon = null;
         }
-        string containersCloseEventName = openedLootable.GetComponent<VoidListener>().GameEvent.name;
-        foreach (VoidEvent e in closeContainerEvents)
-        {
-            if (e.name.Equals(containersCloseEventName))
-            {
-                e.Raise();
-                break;
-            }
-        }
+
+        closeLootableEvent.Raise();
+
         openedLootable = null;
     }
 
@@ -175,15 +178,8 @@ public class Interactor : MonoBehaviour
             PlayerController.mouseHeldIcon = null;
         }
 
-        string craftingCloseEventName = interactedCrafting.GetComponent<VoidListener>().GameEvent.name;
-        foreach (VoidEvent e in closeContainerEvents)
-        {
-            if (e.name.Equals(craftingCloseEventName))
-            {
-                e.Raise();
-                break;
-            }
-        }
+        closeCraftingEvent.Raise();
+
         interactedCrafting = null;
     }
 
@@ -283,7 +279,11 @@ public class Interactor : MonoBehaviour
     private IEnumerator OpenNewLootable()
     {
         yield return new WaitForSeconds(0.05f);
-        if(openedLootable) openedLootable.OpenLootable();
+        if (openedLootable)
+        {
+            openedLootable.OpenLootable();
+            lootableMenuOpen = true;
+        }
     }
 
     public void Interact(bool rightHand)

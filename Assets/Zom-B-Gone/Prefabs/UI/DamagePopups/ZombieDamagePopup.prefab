@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6184317471720133942}
   - component: {fileID: 324675659194052198}
   m_Layer: 0
-  m_Name: DamagePopup
+  m_Name: ZombieDamagePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

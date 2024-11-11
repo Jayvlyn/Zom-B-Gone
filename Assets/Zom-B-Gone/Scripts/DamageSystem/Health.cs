@@ -56,18 +56,25 @@ public class Health : MonoBehaviour
     private Enemy enemyOwner;
     public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default, float decapitateChance = 0)
     {
+        DamagePopup.PopupType popupType = DamagePopup.PopupType.DEFAULT;
+
         if (damage < 0) return;
         int incomingDamage = Mathf.RoundToInt(damage);
         #region hat buff
-        if (gameObject.CompareTag("Player") && gameObject.TryGetComponent(out Head head) && head.wornHat != null)
+        if (gameObject.CompareTag("Player"))
         {
-            incomingDamage -= head.wornHat.hatData.defense;
+            popupType = DamagePopup.PopupType.PLAYER;
+
+            if(gameObject.TryGetComponent(out Head head) && head.wornHat != null)
+            {
+                incomingDamage -= head.wornHat.hatData.defense;
+            }
         }
         #endregion
-
-
-        if (gameObject.CompareTag("Enemy"))
+        else if (gameObject.CompareTag("Enemy"))
         {
+            popupType = DamagePopup.PopupType.ENEMY;
+
             if (enemyOwner == null) {
                 enemyOwner = gameObject.GetComponent<Enemy>();
             }
@@ -90,7 +97,7 @@ public class Health : MonoBehaviour
 
         CurrentHealth = CurrentHealth - incomingDamage;
 
-        DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate);
+        DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate, popupType);
     }
 
     public void OnDeath()

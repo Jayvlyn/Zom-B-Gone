@@ -47,5 +47,6 @@ MonoBehaviour:
   s_White: {fileID: 21300000, guid: 170577bce7cbda144b82578f81308d23, type: 3}
   s_Circle: {fileID: 21300000, guid: a0e35f6b808bb7447826cc6c69ffe448, type: 3}
   m_White: {fileID: 2100000, guid: 7d5e8e2c082a4c44a9abd7d650cf0a15, type: 2}
-  damagePopup: {fileID: 7745624955051515570, guid: 3bb5b7fb0e468e747a969e145183e897, type: 3}
-  incomingDamagePopup: {fileID: 7745624955051515570, guid: fec75f9bc839e1441b8eefceb354b033, type: 3}
+  damagePopup: {fileID: 7745624955051515570, guid: cbc15b6ed85cdd14dacc20f62d31f5c1, type: 3}
+  playerDamagePopup: {fileID: 7745624955051515570, guid: fec75f9bc839e1441b8eefceb354b033, type: 3}
+  zombieDamagePopup: {fileID: 7745624955051515570, guid: 3bb5b7fb0e468e747a969e145183e897, type: 3}

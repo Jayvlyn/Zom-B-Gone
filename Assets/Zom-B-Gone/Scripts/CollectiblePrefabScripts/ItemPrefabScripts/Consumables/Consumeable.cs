@@ -21,7 +21,10 @@ public abstract class Consumeable : Item
 
     public override void Use()
     {
-        CacheOriginalPlayerData();
+        if(restoreRoutine == null)
+        {
+            CacheOriginalPlayerData();
+        }
 
         #region bonus method calls --------
 
@@ -62,6 +65,14 @@ public abstract class Consumeable : Item
                 Destroy(gameObject);
             }
         }
+        else
+        {
+            if (consumableData.effectTime > 0)
+            {
+                if(restoreRoutine != null) StopCoroutine(restoreRoutine);
+                restoreRoutine = StartCoroutine(RestoreTimer());
+            }
+        }
 
     }
 
@@ -78,6 +89,13 @@ public abstract class Consumeable : Item
     {
         playerData.staminaRecoverySpeed = cachedPlayerRecoverySpeed;
         playerData.speedModifier = cahcedPlayerSpeedMod;
+    }
+
+    private Coroutine restoreRoutine = null;
+    private IEnumerator RestoreTimer()
+    {
+        yield return new WaitForSeconds(consumableData.effectTime);
+        RestorePlayer();
     }
 
     private IEnumerator DestroyTimer()
