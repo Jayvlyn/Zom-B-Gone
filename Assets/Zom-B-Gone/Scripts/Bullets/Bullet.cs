@@ -34,10 +34,15 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-	private void OnTriggerEnter2D(Collider2D collider)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        if (collider.gameObject.TryGetComponent(out Health targetHealth))
+        if (collision.CompareTag("Enemy"))
+        {
+            bulletData.enterEvent.Raise(transform);
+            if (currentPiercingPower > 0) bulletData.exitEvent.Raise(transform);
+        }
+
+        if (collision.gameObject.TryGetComponent(out Health targetHealth))
         {
             currentPiercingPower--;
             DealDamage(targetHealth);

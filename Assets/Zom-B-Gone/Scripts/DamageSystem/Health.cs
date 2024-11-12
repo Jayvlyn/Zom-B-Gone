@@ -54,8 +54,10 @@ public class Health : MonoBehaviour
     }
 
     private Enemy enemyOwner;
+    private Vector2 mostRecentPopupVec;
     public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default, float decapitateChance = 0)
     {
+        mostRecentPopupVec = popupVector;
         DamagePopup.PopupType popupType = DamagePopup.PopupType.DEFAULT;
 
         if (damage < 0) return;
@@ -105,6 +107,14 @@ public class Health : MonoBehaviour
         if(gameObject.TryGetComponent(out Enemy enemy)) 
         {
             enemy.OnDeath();
+        }
+        else if(gameObject.TryGetComponent(out Glass glass))
+        {
+            Vector2 upDir = gameObject.transform.parent.up.normalized;
+            float dot = Vector2.Dot(mostRecentPopupVec.normalized, upDir);
+
+            if (dot > 0) glass.window.ShatterGlass(false);
+            else glass.window.ShatterGlass(true);
         }
         else if (!gameObject.CompareTag("Player"))
         {

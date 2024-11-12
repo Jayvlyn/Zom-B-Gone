@@ -19,6 +19,7 @@ public class Attack : MonoBehaviour
             Vector3 popupVector = (collisionHealth.transform.position - transform.position).normalized * 20f;
             bool invertRotate = popupVector.x < 0;
 
+
             collisionHealth.TakeDamage(damage * damageMultiplier, Vector2.zero, 0, false, popupVector, invertRotate);
 
         }

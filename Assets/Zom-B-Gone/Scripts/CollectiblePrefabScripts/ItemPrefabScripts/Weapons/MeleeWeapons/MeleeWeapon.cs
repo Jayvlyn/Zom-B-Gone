@@ -6,6 +6,7 @@ public class MeleeWeapon : Weapon
     [Header("Melee Properties")]
     [SerializeField] protected bool flipOnReturnSwing = true;
     [SerializeField] protected Collider2D damageCollider;
+    [SerializeField] protected ParticleSystem bloodTrail;
 
     [HideInInspector] public MeleeWeaponData meleeWeaponData;
 
@@ -26,7 +27,7 @@ public class MeleeWeapon : Weapon
 		else Debug.Log("Invalid Data & Class Matchup");
 	}
 
-	public override void Use()
+    public override void Use()
     {
         if (!isSwinging && !moveToHand && StaminaCheck())
         {
@@ -214,6 +215,11 @@ public class MeleeWeapon : Weapon
         if (collision.gameObject.transform == transform.parent) return;
         else if (doDamage && !collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Health targetHealth))
         {
+            if ((!bloodTrail.isPlaying || bloodTrail.time > bloodTrail.totalTime*0.5f) && collision.gameObject.CompareTag("Enemy"))
+            {
+                bloodTrail.Play();
+            }
+            
             Vector2 pos = playerController.transform.position;
             if (inRightHand) pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(holdOffset.x, 0));
             else pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(-holdOffset.x, 0));

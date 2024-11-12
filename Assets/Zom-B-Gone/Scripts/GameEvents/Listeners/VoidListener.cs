@@ -1,4 +1,4 @@
 namespace GameEvents
 {
-    public class VoidListener : BaseGameEventListener<Void, VoidEvent, UnityVoidEvent> { }
+    public class TransformListener : BaseGameEventListener<Void, VoidEvent, UnityVoidEvent> { }
 }

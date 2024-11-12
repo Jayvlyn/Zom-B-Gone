@@ -113,7 +113,8 @@ public static class Utils
 			{
 				Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
 				knockbackVector *= force;
-				h.TakeDamage(damage, knockbackVector, 30, false, default, false, 10);
+				Vector2 popupVector = ((Vector2)h.transform.position - sourcePosition).normalized * 20;
+				h.TakeDamage(damage, knockbackVector, 30, false, popupVector, false, 10);
 			}
 			else if (collider.TryGetComponent(out Rigidbody2D rb))
             {

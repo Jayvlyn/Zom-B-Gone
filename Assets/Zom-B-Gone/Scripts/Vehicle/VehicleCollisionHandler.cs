@@ -52,12 +52,13 @@ public class VehicleCollisionHandler : MonoBehaviour
         //damage = Mathf.RoundToInt(fDamage);
 
         Vector2 knockbackVector = ((Vector2)health.transform.position - rb.ClosestPoint(health.transform.position)).normalized;
+        Vector2 popupVector = knockbackVector * 20;
         knockbackVector *= 50;
 
         float dismemberChance = 0;
         if (damage > 20) dismemberChance = damage;
 
-        health.TakeDamage(damage, knockbackVector, damage, false, default, false, 3);
+        health.TakeDamage(damage, knockbackVector, damage, false, popupVector, false, 3);
     }
 
     private IEnumerator BufferTimer(GameObject g, float time)

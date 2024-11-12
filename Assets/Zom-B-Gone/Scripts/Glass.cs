@@ -7,9 +7,14 @@ public class Glass : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Rigidbody2D rb))
+        if (collision.relativeVelocity.magnitude > breakRequirement)
         {
-            if (collision.relativeVelocity.magnitude > breakRequirement) window.ShatterGlass();
+            Vector2 velDir = collision.relativeVelocity.normalized;
+            Vector2 upDir = transform.parent.up.normalized;
+            float dot = Vector2.Dot(velDir, upDir);
+            if(dot>0) window.ShatterGlass(false);
+            else window.ShatterGlass(true);
+            
         }
     }
 }

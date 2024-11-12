@@ -790,7 +790,8 @@ public abstract class Enemy : MonoBehaviour
 			{
 				float damage = rigidBody.linearVelocity.magnitude * 12;
 
-				health.TakeDamage(damage, Vector2.zero, 40, false, default, false, 10);
+				Vector2 popupVec = (collision.transform.position - transform.position).normalized;
+				health.TakeDamage(damage, Vector2.zero, 40, false, popupVec, false, 10);
 
 			}
 		}

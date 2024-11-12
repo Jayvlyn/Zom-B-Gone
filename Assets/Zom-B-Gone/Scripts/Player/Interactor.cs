@@ -142,7 +142,7 @@ public class Interactor : MonoBehaviour
             PlayerController.mouseHeldIcon.sendBackToSlot();
             PlayerController.mouseHeldIcon = null;
         }
-        string containersCloseEventName = interactedContainer.GetComponent<VoidListener>().GameEvent.name;
+        string containersCloseEventName = interactedContainer.GetComponent<TransformListener>().GameEvent.name;
         foreach(VoidEvent e in closeContainerEvents)
         {
             if(e.name.Equals(containersCloseEventName))
