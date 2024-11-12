@@ -29,11 +29,6 @@ public class MerchantBuyOptionRefs : MonoBehaviour
     public CollectibleContainerData itemLocker;
     public CollectibleContainerData hatLocker;
 
-	private void Awake()
-	{
-        if (!sellOption) UpdatePriceTotalTextColor();
-	}
-
 	public void OnMinusClick()
     {
         // button should be disabled if val is 1 so it will only be clicked if greater than 1

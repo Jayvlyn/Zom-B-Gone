@@ -41,6 +41,7 @@ public class Market : MonoBehaviour
             if (merchant.name == name)
             {
                 loadedMerchant = merchant;
+                break;
             }
         }
 
@@ -109,7 +110,9 @@ public class Market : MonoBehaviour
 
             refs.buyTotal.text = refs.unitPrice.text; // starts at one selected
 
-            int maxAmt = loadedMerchant.vals.inventory[collectible];
+			refs.UpdatePriceTotalTextColor();
+
+			int maxAmt = loadedMerchant.vals.inventory[collectible];
 
 			refs.maxAmount.text = maxAmt.ToString();
             if (maxAmt == 1) refs.plusButton.interactable = false;

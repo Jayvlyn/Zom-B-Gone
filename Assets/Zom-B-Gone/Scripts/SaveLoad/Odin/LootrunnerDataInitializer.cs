@@ -23,16 +23,32 @@ public class LootrunnerDataInitializer : MonoBehaviour
         if (SaveManager.currentSave.head != null) dataRefs.headData.Container = SaveManager.currentSave.head;
         else ClearContainerSlots(dataRefs.headData.Container);
 
-        if (SaveManager.currentSave.backpack != null) dataRefs.backpackData.Container = SaveManager.currentSave.backpack;
+        if (SaveManager.currentSave.backpack != null)
+        {
+			dataRefs.backpackData.size = SaveManager.currentSave.backpack.collectibleSlots.Length;
+			dataRefs.backpackData.Container = SaveManager.currentSave.backpack;
+        }
         else ClearContainerSlots(dataRefs.backpackData.Container);
 
-        if (SaveManager.currentSave.hatLocker != null) dataRefs.hatLockerData.Container = SaveManager.currentSave.hatLocker;
+        if (SaveManager.currentSave.hatLocker != null)
+        {
+			dataRefs.hatLockerData.size = SaveManager.currentSave.hatLocker.collectibleSlots.Length;
+			dataRefs.hatLockerData.Container = SaveManager.currentSave.hatLocker;
+        }
         else ClearContainerSlots(dataRefs.hatLockerData.Container);
 
-        if (SaveManager.currentSave.itemLocker != null) dataRefs.itemLockerData.Container = SaveManager.currentSave.itemLocker;
+        if (SaveManager.currentSave.itemLocker != null)
+        {
+            dataRefs.itemLockerData.size = SaveManager.currentSave.itemLocker.collectibleSlots.Length;
+            dataRefs.itemLockerData.Container = SaveManager.currentSave.itemLocker;
+        }
         else ClearContainerSlots(dataRefs.itemLockerData.Container);
 
-        if (SaveManager.currentSave.lootLocker != null) dataRefs.lootLockerData.Container = SaveManager.currentSave.lootLocker;
+        if (SaveManager.currentSave.lootLocker != null)
+        {
+			dataRefs.lootLockerData.size = SaveManager.currentSave.lootLocker.collectibleSlots.Length;
+			dataRefs.lootLockerData.Container = SaveManager.currentSave.lootLocker;
+        }
         else ClearContainerSlots(dataRefs.lootLockerData.Container);
 
         if (SaveManager.currentSave.vanFloor != null)

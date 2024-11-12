@@ -15,6 +15,7 @@ MonoBehaviour:
   containerType: 2
   onContainerCollectibleUpdated: {fileID: 11400000, guid: 4a3feeb494210744b8a9b38208a8ed0a, type: 2}
   onContainerCollectibleSwapped: {fileID: 11400000, guid: 4a3feeb494210744b8a9b38208a8ed0a, type: 2}
+  onContainerSwapped: {fileID: 0}
   testCollectibleSlot:
     collectible: {fileID: 0}
     collectibleName: 
@@ -22,9 +23,39 @@ MonoBehaviour:
     allowLoot: 0
     allowItems: 0
     allowHats: 0
-  size: 5
+  size: 10
   container:
     collectibleSlots:
+    - collectible: {fileID: 0}
+      collectibleName: Chefs Knife
+      quantity: 1
+      allowLoot: 0
+      allowItems: 1
+      allowHats: 0
+    - collectible: {fileID: 0}
+      collectibleName: Rocket Launcher
+      quantity: 1
+      allowLoot: 0
+      allowItems: 1
+      allowHats: 0
+    - collectible: {fileID: 0}
+      collectibleName: Zombie Head
+      quantity: 1
+      allowLoot: 0
+      allowItems: 1
+      allowHats: 0
+    - collectible: {fileID: 11400000, guid: 872dae0b999e8cd4799dc3de7e3c9e95, type: 2}
+      collectibleName: Bat
+      quantity: 1
+      allowLoot: 0
+      allowItems: 1
+      allowHats: 0
+    - collectible: {fileID: 11400000, guid: 1561274a96f853e439bc93867d6a9361, type: 2}
+      collectibleName: Machete
+      quantity: 1
+      allowLoot: 0
+      allowItems: 1
+      allowHats: 0
     - collectible: {fileID: 0}
       collectibleName: 
       quantity: 0

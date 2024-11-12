@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   characterName: Splargus
-  gold: 1000
+  gold: 50
   kills: 0
   walkSpeed: 2.5
   runSpeed: 4

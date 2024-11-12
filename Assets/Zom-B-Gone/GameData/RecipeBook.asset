@@ -32,14 +32,14 @@ MonoBehaviour:
     recipeItems:
     - collectible: {fileID: 11400000, guid: 72cebd3efa1571647abd015753bb5e49, type: 2}
       requiredAmount: 1
-    - collectible: {fileID: 11400000, guid: 126470432a8b256479b4c1f555686e72, type: 2}
+    - collectible: {fileID: 11400000, guid: 86eab9462e44c534b8914bd9a3662898, type: 2}
       requiredAmount: 1
-  - resultCollectible: {fileID: 11400000, guid: df606d558a613104e9f1e3bd1ee8970f, type: 2}
+  - resultCollectible: {fileID: 11400000, guid: e6e954849ed41f94b8c8a0cb5e1004cb, type: 2}
     resultAmount: 1
     recipeItems:
-    - collectible: {fileID: 11400000, guid: 1561274a96f853e439bc93867d6a9361, type: 2}
+    - collectible: {fileID: 11400000, guid: b85baa7e1f85c714290c0f837dccec69, type: 2}
       requiredAmount: 1
-    - collectible: {fileID: 11400000, guid: 354f233717b1e0145b60e9bb1dbf33ba, type: 2}
+    - collectible: {fileID: 11400000, guid: c502b5d412dfe444e98f3919e1b6d96f, type: 2}
       requiredAmount: 1
   - resultCollectible: {fileID: 11400000, guid: 126470432a8b256479b4c1f555686e72, type: 2}
     resultAmount: 1
@@ -48,7 +48,7 @@ MonoBehaviour:
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: b8b25198ce861514a947be557a3c74a4, type: 2}
       requiredAmount: 1
-  - resultCollectible: {fileID: 11400000, guid: 126470432a8b256479b4c1f555686e72, type: 2}
+  - resultCollectible: {fileID: 11400000, guid: c4a73594f5942134fb9d95e47a8847cf, type: 2}
     resultAmount: 1
     recipeItems:
     - collectible: {fileID: 11400000, guid: 2a4f6a5ed61757f418bd95998534a099, type: 2}

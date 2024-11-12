@@ -9,7 +9,7 @@ public class PlayerData : ScriptableObject
 	public string characterName;
 
 	[Header("Stats")]
-	public int gold = 1000;
+	public int gold = 10;
 	public int kills = 0;
     public float walkSpeed = 5;
     public float runSpeed = 9;
