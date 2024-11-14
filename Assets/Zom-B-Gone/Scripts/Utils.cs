@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using CodeMonkey;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -97,10 +99,35 @@ public static class Utils
                viewportPos.z >= 0; // z should be >= 0 to ensure the position is in front of the camera
     }
 
-	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle");
+	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle", "Interactable");
     private static readonly LayerMask coverLm = LayerMask.GetMask("World", "Vehicle");
-	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int damage)
+	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int damage, bool big = true)
     {
+        // Visual
+        Transform explosionPrefab = Assets.i.explosion;
+        Transform e = Object.Instantiate(explosionPrefab, sourcePosition, Quaternion.identity);
+
+
+        ScreenShakeProfile explosionSSP;
+        if (big)
+        {
+            explosionSSP = Assets.i.bigExplosionSSP;
+        }
+        else
+        {
+            explosionSSP = Assets.i.smallExplosionSSP;
+            e.localScale = new Vector3(0.7f, 0.7f, 1);
+        }
+        
+
+        CinemachineImpulseSource cis = e.gameObject.GetComponent<CinemachineImpulseSource>();
+
+        Vector2 randomDirection = Random.insideUnitCircle.normalized;
+
+
+        CameraShakeManager.instance.CameraShake(cis, explosionSSP, randomDirection);
+
+        // Function
         Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, radius, explosionLm);
         foreach (Collider2D collider in colliders)
         {

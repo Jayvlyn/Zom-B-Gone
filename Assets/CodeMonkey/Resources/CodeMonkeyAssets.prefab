@@ -50,3 +50,6 @@ MonoBehaviour:
   damagePopup: {fileID: 7745624955051515570, guid: cbc15b6ed85cdd14dacc20f62d31f5c1, type: 3}
   playerDamagePopup: {fileID: 7745624955051515570, guid: fec75f9bc839e1441b8eefceb354b033, type: 3}
   zombieDamagePopup: {fileID: 7745624955051515570, guid: 3bb5b7fb0e468e747a969e145183e897, type: 3}
+  explosion: {fileID: 382512744098820012, guid: 52144dada41ca8841a18bdd63888b169, type: 3}
+  bigExplosionSSP: {fileID: 11400000, guid: 2f36bc6c2c4d5654aa90096b2ad521b0, type: 2}
+  smallExplosionSSP: {fileID: 11400000, guid: 31312a603de83ab46918caafe98b7525, type: 2}

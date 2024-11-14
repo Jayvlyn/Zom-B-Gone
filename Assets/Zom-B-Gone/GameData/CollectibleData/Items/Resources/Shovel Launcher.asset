@@ -37,3 +37,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40610c7aadbbb964ba6f6ae131dbbed2, type: 3}
   reloadStart: {fileID: 8300000, guid: 0c3efc5c3ec22c3458e6100ffb5278bd, type: 3}
   reloadNoiseRadius: 2
+  suppressed: 0
+  ssp: {fileID: 11400000, guid: 1e2956a405e5a23408db8e25e8e06ecc, type: 2}

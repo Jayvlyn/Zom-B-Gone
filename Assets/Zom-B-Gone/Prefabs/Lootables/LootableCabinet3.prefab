@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -9126095298944883014}
   m_Layer: 6
   m_Name: LootableCabinet3
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

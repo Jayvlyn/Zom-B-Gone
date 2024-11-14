@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -3027500056030840506}
   m_Layer: 6
   m_Name: LootableBackpack3
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

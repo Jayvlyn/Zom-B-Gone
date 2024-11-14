@@ -9,7 +9,7 @@ public class Bomb : ThrowingWeapon
     [SerializeField] private float explosionForce = 10f;
     [SerializeField,Tooltip("If this is checked, will change bomb to sprite below when lit")] private bool hasLitSprite;
     [SerializeField] private Sprite litSprite;
-
+    [SerializeField] bool bigExplosion = true;
 
     public override void Use()
     {
@@ -30,7 +30,7 @@ public class Bomb : ThrowingWeapon
     private IEnumerator CountdownExplosion(Bomb bomb)
     {
         yield return new WaitForSeconds(bomb.fuseTime);
-        Utils.CreateExplosion(bomb.transform.position, bomb.explosionRadius, bomb.explosionForce, bomb.throwingWeaponData.damage);
+        Utils.CreateExplosion(bomb.transform.position, bomb.explosionRadius, bomb.explosionForce, bomb.throwingWeaponData.damage, bigExplosion);
         Destroy(bomb.gameObject);
     }
 

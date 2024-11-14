@@ -96,6 +96,13 @@ public class Health : MonoBehaviour
             enemyOwner.OnHit(incomingDamage, dismemeberChance, decapitateChance);
 
 		}
+        else if(knockbackVector != Vector2.zero && gameObject.CompareTag("Obstacle"))
+        {
+            if(gameObject.TryGetComponent(out Rigidbody2D rb))
+            {
+                rb.AddForce(knockbackVector * 100);
+            }
+        }
 
         CurrentHealth = CurrentHealth - incomingDamage;
 

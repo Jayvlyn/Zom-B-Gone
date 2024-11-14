@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4505183329115906304}
   m_Layer: 6
   m_Name: TwinBed10
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

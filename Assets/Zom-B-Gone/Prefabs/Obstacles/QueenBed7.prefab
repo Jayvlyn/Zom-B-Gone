@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -3623773113215785041}
   m_Layer: 6
   m_Name: QueenBed7
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

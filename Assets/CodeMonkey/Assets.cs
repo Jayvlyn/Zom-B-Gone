@@ -44,6 +44,10 @@ namespace CodeMonkey {
         public Transform damagePopup;
         public Transform playerDamagePopup;
         public Transform zombieDamagePopup;
+        public Transform explosion;
+
+        public ScreenShakeProfile bigExplosionSSP;
+        public ScreenShakeProfile smallExplosionSSP;
 
     }
 

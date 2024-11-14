@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5505911312722400332}
   m_Layer: 6
   m_Name: LootableBarrel
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
