@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,6 +16,8 @@ public class ProjectileWeapon : Weapon
     [HideInInspector] public bool reloading = false;
     private float shotTimer = 0;
     protected int currentAmmo;
+
+    private CinemachineImpulseSource impulseSource;
 
     [SerializeField,Tooltip("Will use the sprites below when checked to display a loaded version of the weapon")] bool hasLoadedSprite;
     [SerializeField, Tooltip("Secondary sprite that shows the weapon in a loaded state.")] protected Sprite loadedSprite;
@@ -44,6 +47,11 @@ public class ProjectileWeapon : Weapon
             
 		}
 		else Debug.Log("Invalid Data & Class Matchup");
+
+        if(impulseSource == null)
+        {
+            impulseSource = GetComponent<CinemachineImpulseSource>();
+        }
 	}
 
 	protected override void Update()
@@ -128,6 +136,13 @@ public class ProjectileWeapon : Weapon
         if(CurrentAmmo > 0 && !reloading)
         {
             PlayShootSound();
+
+            float angle = transform.eulerAngles.z;
+            Vector2 direction = new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));
+            Vector3 shakeVelocity = new Vector3(direction.x, -direction.y, 0);
+
+            CameraShakeManager.instance.CameraShake(impulseSource, projectileWeaponData.ssp, shakeVelocity);
+
             if(flashAnimator) flashAnimator.SetTrigger("Fire");
 
             if (muzzleLight)

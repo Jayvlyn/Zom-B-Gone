@@ -91,6 +91,25 @@ public abstract class Item : Collectible
 
     protected virtual void Update()
     {
+        //if (useHeld)
+        //{
+        //    if (inRightHand)
+        //    {
+        //        if (!Input.GetKey(KeyCode.Mouse1))
+        //        {
+        //            useHeld = false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if(!Input.GetKey(KeyCode.Mouse0))
+        //        {
+        //            useHeld = false;
+        //        }
+        //    }
+
+        //}
+
         if (currentState == ItemState.AIRBORNE && rb.linearVelocity.magnitude < minimumAirborneSpeed)
         {
             ChangeState(ItemState.GROUNDED);

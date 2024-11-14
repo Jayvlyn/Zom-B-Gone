@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Assault Rifle
   m_EditorClassIdentifier: 
   name: Assault Rifle
-  description: 
+  description: BOW BOW BOW
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 21300000, guid: 970eaa911f8829147ab89b2828c92c15, type: 3}
   maxStack: 1
@@ -39,3 +39,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 893d34440253d73419d5536003c9dbbc, type: 3}
   reloadStart: {fileID: 8300000, guid: 8cb3964e2e85418439af0d0b8337c64e, type: 3}
   reloadNoiseRadius: 0
+  suppressed: 0
+  ssp: {fileID: 11400000, guid: f6d5146b730cea6479e090dd7be01345, type: 2}

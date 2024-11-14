@@ -17,6 +17,7 @@ public class ProjectileWeaponData : WeaponData
 	public AudioClip reloadStart;
 	public float reloadNoiseRadius;
 	public bool suppressed = false;
+	public ScreenShakeProfile ssp;
 
     public override string GetInfoDisplayText()
 	{
