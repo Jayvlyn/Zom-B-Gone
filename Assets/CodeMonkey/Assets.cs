@@ -49,6 +49,9 @@ namespace CodeMonkey {
         public ScreenShakeProfile bigExplosionSSP;
         public ScreenShakeProfile smallExplosionSSP;
 
+        public AudioClip bigExplosionSound;
+        public AudioClip smallExplosionSound;
+
     }
 
 }

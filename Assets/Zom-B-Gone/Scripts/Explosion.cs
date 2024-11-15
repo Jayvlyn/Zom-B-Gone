@@ -1,11 +1,15 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class Explosion : MonoBehaviour
 {
     public Light2D light;
+    public CinemachineImpulseSource cis;
+    public AudioSource audioSource;
 
-    public void OnAnimEnd()
+
+	public void OnAnimEnd()
     {
         Destroy(gameObject);
     }

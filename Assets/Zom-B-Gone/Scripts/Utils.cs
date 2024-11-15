@@ -106,21 +106,26 @@ public static class Utils
         // Visual
         Transform explosionPrefab = Assets.i.explosion;
         Transform e = Object.Instantiate(explosionPrefab, sourcePosition, Quaternion.identity);
+        Explosion ex = e.GetComponent<Explosion>();
+
+        CinemachineImpulseSource cis = ex.cis;
+        AudioSource audioSource = ex.audioSource;
 
 
         ScreenShakeProfile explosionSSP;
         if (big)
         {
             explosionSSP = Assets.i.bigExplosionSSP;
+            //audioSource.clip = Assets.i.bigExplosionSound;
         }
         else
         {
             explosionSSP = Assets.i.smallExplosionSSP;
+            //audioSource.clip = Assets.i.smallExplosionSound;
             e.localScale = new Vector3(0.7f, 0.7f, 1);
         }
+        //audioSource.Play();
         
-
-        CinemachineImpulseSource cis = e.gameObject.GetComponent<CinemachineImpulseSource>();
 
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
 

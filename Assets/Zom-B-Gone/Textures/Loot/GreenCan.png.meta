@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 556c36877699029488bfbabc040765bd
+guid: 2c3eb1e5826802f48b604c75b6ae968e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3788435401329257841
-    second: Nails_0
+      213: 807611525855706570
+    second: GreenCan_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Nails_0
+      name: GreenCan_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 103
-        width: 432
-        height: 317
+        x: 85
+        y: 31
+        width: 323
+        height: 430
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17daebeece9339430800000000000000
-      internalID: 3788435401329257841
+      spriteID: acdf3236766353b00800000000000000
+      internalID: 807611525855706570
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Nails_0: 3788435401329257841
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

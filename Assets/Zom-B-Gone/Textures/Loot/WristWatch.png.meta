@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WristWatch_0: 6004751045269334414
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

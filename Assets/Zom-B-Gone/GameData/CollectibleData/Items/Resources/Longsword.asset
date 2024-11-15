@@ -20,6 +20,7 @@ MonoBehaviour:
   pickupSound: {fileID: 8300000, guid: 73070c47821affd4faac709399248781, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 1
+  throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0
   damage: 42

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Toothbrush_0: 3931841821354262424
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

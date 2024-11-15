@@ -232,7 +232,6 @@ public abstract class Item : Collectible
         // Velocity change instead because throw is fastest the second it the object leaves contact with the propelling force
         rb.linearVelocity = direction * throwForce;
         //rb.AddForce(direction * throwForce, ForceMode2D.Impulse);
-        `
         if (spinThrow)
         {
             float spinForce = Utils.MapWeightToRange(itemData.weight, 60, 500, true);
