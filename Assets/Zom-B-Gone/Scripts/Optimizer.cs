@@ -8,7 +8,7 @@ public class Optimizer : MonoBehaviour
 	public Transform PlayerT;
 	public float cullDistance = 200f;
 
-	public static int maxActiveEnemies = 100;
+	public static int maxActiveEnemies = 50;
 	public static int currentActiveEnemies = 0;
 
 	public LayerMask enemyLm;
@@ -16,7 +16,7 @@ public class Optimizer : MonoBehaviour
 	private void Start()
 	{
 		currentActiveEnemies = 0;
-		enemyLm = LayerMask.GetMask("Enemy");
+		//enemyLm = LayerMask.GetMask("Enemy");
 		StartCoroutine(DistanceCheck());
 	}
 

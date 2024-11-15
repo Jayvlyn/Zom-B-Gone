@@ -56,15 +56,16 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 2476b44565e470249902587af857d6c0, type: 2}
   pivotPoint: {fileID: 0}
   itemRenderer: {fileID: 0}
+  childrenRenderers: []
   airborneAngularDrag: 0.4
-  airborneLinearDrag: 0.4
+  airborneLinearDrag: 0.63
   groundedAngularDrag: 3
   groundedLinearDrag: 3
   holdOffset: {x: 0.5, y: 0.5}
   spinThrow: 1
   aimAtMouse: 1
   gripRotation: 130
-  minimumAirborneSpeed: 10
+  minimumAirborneSpeed: 10.03
   rb: {fileID: 0}
   vanBack: {fileID: 0}
   unitFloor: {fileID: 0}

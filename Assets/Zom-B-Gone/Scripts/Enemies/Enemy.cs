@@ -97,6 +97,7 @@ public abstract class Enemy : MonoBehaviour
 				
 				break;
 			case State.DEAD:
+				StopCoroutine(tickCoroutine);
 				CurrentMoveSpeed = 0;
 				rigidBody.Sleep();
 				GetComponent<Collider2D>().enabled = false;
@@ -470,7 +471,11 @@ public abstract class Enemy : MonoBehaviour
 			yield return new WaitForSeconds(3);
 		}
 		loseInterestRoutine = null;
-		ChangeState(State.DRONING);
+		if(currentState != State.DEAD && currentState != State.AGGRO)
+		{
+			ChangeState(State.DRONING);
+
+		}
 	}
 
 	private float GetPlayerSpotDistance()
@@ -601,7 +606,7 @@ public abstract class Enemy : MonoBehaviour
         Vector2 lastSeenPosition = playerTarget.transform.position;
         playerTarget = null;
         this.investigaitonPoint = lastSeenPosition;
-        ChangeState(State.INVESTIGATING);
+        if(currentState != State.DEAD) ChangeState(State.INVESTIGATING);
     }
 
 	private void TryAttack()
@@ -638,6 +643,7 @@ public abstract class Enemy : MonoBehaviour
 				}
 				catch (Exception e)
 				{
+					Debug.Log("----");
 					Debug.Log(neighborsFound.Length);
 					Debug.Log(neighborsIndex);
 					Debug.Log(i);

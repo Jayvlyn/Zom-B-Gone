@@ -215,6 +215,7 @@ public abstract class Item : Collectible
         rb.AddForce(direction * dropForwardForce, ForceMode2D.Impulse);
     }
 
+    
     public virtual void Throw()
     {
         PlayThrowSound();
@@ -226,7 +227,7 @@ public abstract class Item : Collectible
         Vector2 direction = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
         //if (Utils.WallInFront(playerT)) direction = -direction;
 
-        float throwForce = Utils.MapWeightToRange(itemData.weight, 10, 20, true);
+        float throwForce = Utils.MapWeightToRange(itemData.weight, 10, 20, true) * itemData.throwForceMult;
 
         // Velocity change instead because throw is fastest the second it the object leaves contact with the propelling force
         rb.linearVelocity = direction * throwForce;
@@ -234,7 +235,7 @@ public abstract class Item : Collectible
 
         if (spinThrow)
         {
-            float spinForce = Utils.MapWeightToRange(itemData.weight, 100, 700, true);
+            float spinForce = Utils.MapWeightToRange(itemData.weight, 60, 500, true);
             if (!inRightHand) spinForce *= -1;
             rb.angularVelocity = spinForce;
         }

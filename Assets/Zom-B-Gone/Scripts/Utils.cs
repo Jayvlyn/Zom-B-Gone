@@ -131,8 +131,14 @@ public static class Utils
         Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, radius, explosionLm);
         foreach (Collider2D collider in colliders)
         {
-            Vector2 dir = ((Vector2)collider.transform.position - sourcePosition).normalized;
             float dist = Vector2.Distance(collider.transform.position, sourcePosition);
+
+            if(collider.gameObject.CompareTag("Player"))
+            {
+                if (radius < dist * 4) continue;
+            }
+
+            Vector2 dir = ((Vector2)collider.transform.position - sourcePosition).normalized;
             RaycastHit2D coverHit = Physics2D.Raycast(sourcePosition, dir, dist, coverLm);
             if (coverHit.collider != null) continue;
 
