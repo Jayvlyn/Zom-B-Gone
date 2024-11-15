@@ -36,23 +36,29 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        if (collision.CompareTag("Enemy"))
+        if(rigidBody.linearVelocity.magnitude > 3)
         {
-            bulletData.enterEvent.Raise(transform);
-            if (currentPiercingPower > 0) bulletData.exitEvent.Raise(transform);
-        }
+            if (collision.CompareTag("Enemy"))
+            {
+                bulletData.enterEvent.Raise(transform);
+                if (currentPiercingPower > 0) bulletData.exitEvent.Raise(transform);
+            }
 
-        if (collision.gameObject.TryGetComponent(out Health targetHealth))
-        {
-            currentPiercingPower--;
-            DealDamage(targetHealth);
+            if (collision.gameObject.TryGetComponent(out Health targetHealth))
+            {
+                currentPiercingPower--;
+                DealDamage(targetHealth);
+            }
+            else
+            {
+                if (bulletData.wallPiercing) currentPiercingPower--;
+                else if(!bulletData.residual)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            if (currentPiercingPower < 0 && !bulletData.residual) Destroy(gameObject);
         }
-        else
-        {
-            if (bulletData.wallPiercing) currentPiercingPower--;
-            else Destroy(gameObject);
-        }
-        if (currentPiercingPower < 0) Destroy(gameObject);
     }
 
     protected void DealDamage(Health targetHealth)

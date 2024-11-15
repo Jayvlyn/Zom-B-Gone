@@ -30,7 +30,7 @@ public class Bomb : ThrowingWeapon
     private IEnumerator CountdownExplosion(Bomb bomb)
     {
         yield return new WaitForSeconds(bomb.fuseTime);
-        Utils.CreateExplosion(bomb.transform.position, bomb.explosionRadius, bomb.explosionForce, bomb.throwingWeaponData.damage, bigExplosion);
+        Utils.CreateExplosion(bomb.transform.position, bomb.explosionRadius, bomb.explosionForce, bomb.throwingWeaponData.damage * 10, bigExplosion);
         Destroy(bomb.gameObject);
     }
 

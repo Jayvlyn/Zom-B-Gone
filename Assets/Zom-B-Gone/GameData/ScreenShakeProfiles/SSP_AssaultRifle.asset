@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3e6258479cde548918c3e376cb417d, type: 3}
   m_Name: SSP_AssaultRifle
   m_EditorClassIdentifier: 
-  impactTime: 0.2
+  impactTime: 0.11
   impactForce: 0.16
   defaultVelocity: {x: 0, y: -1, z: 0}
   impulseCurve:

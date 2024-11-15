@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -198,15 +199,15 @@ public abstract class Enemy : MonoBehaviour
         switch (currentState)
         {
             case State.DRONING:
-                if (Random.Range(0, 200) == 0) PlayDroneSound();
+                if (UnityEngine.Random.Range(0, 200) == 0) PlayDroneSound();
                 desiredTarget = Drone();
                 break;
             case State.INVESTIGATING:
-                if (Random.Range(0, 200) == 0) PlayDroneSound();
+                if (UnityEngine.Random.Range(0, 200) == 0) PlayDroneSound();
                 desiredTarget = Investigate();
                 break;
             case State.AGGRO:
-                if (Random.Range(0, 100) == 0) PlayAggroSound();
+                if (UnityEngine.Random.Range(0, 100) == 0) PlayAggroSound();
                 desiredTarget = Aggro();
                 break;
 
@@ -239,7 +240,7 @@ public abstract class Enemy : MonoBehaviour
 		movementBlockerFilter.useLayerMask = true;
 
 		if(enemyData.possibleVoices.Count > 0)
-			voice = enemyData.possibleVoices[Random.Range(0, enemyData.possibleVoices.Count)];
+			voice = enemyData.possibleVoices[UnityEngine.Random.Range(0, enemyData.possibleVoices.Count)];
 
 		ChangeState(State.DRONING);
 
@@ -310,13 +311,13 @@ public abstract class Enemy : MonoBehaviour
             float minAngle = -90f;
             float maxAngle = 90f;
 
-            float randomAngle = Random.Range(minAngle, maxAngle);
+            float randomAngle = UnityEngine.Random.Range(minAngle, maxAngle);
 
             Quaternion rotation = Quaternion.AngleAxis(randomAngle, Vector3.forward);
 
             wanderTarget = rotation * wanderTarget;
 			wanderTarget *= enemyData.wanderDistance;
-            changeDirectionCooldown = Random.Range(1.0f, 5.0f);
+            changeDirectionCooldown = UnityEngine.Random.Range(1.0f, 5.0f);
 		}
 
 		return wanderTarget.normalized;
@@ -464,8 +465,8 @@ public abstract class Enemy : MonoBehaviour
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			investigaitonPoint.x += Random.Range(-2, 3);
-			investigaitonPoint.y += Random.Range(-2, 3);
+			investigaitonPoint.x += UnityEngine.Random.Range(-2, 3);
+			investigaitonPoint.y += UnityEngine.Random.Range(-2, 3);
 			yield return new WaitForSeconds(3);
 		}
 		loseInterestRoutine = null;
@@ -609,7 +610,7 @@ public abstract class Enemy : MonoBehaviour
         {
             attackTimer = enemyData.attackCooldown;
 			Vector3 randomVariation = Utils.RandomUnitVector3() * 0.2f;
-            GameObject attackObject = Instantiate(attacks[Random.Range(0, attacks.Count)], transform.position + (transform.up * enemyData.attackSpawnDistance) + randomVariation, Quaternion.identity);
+            GameObject attackObject = Instantiate(attacks[UnityEngine.Random.Range(0, attacks.Count)], transform.position + (transform.up * enemyData.attackSpawnDistance) + randomVariation, Quaternion.identity);
             Attack attack = attackObject.GetComponent<Attack>();
             attack.damageMultiplier = enemyData.attackDamageMultiplier;
         }
@@ -631,7 +632,16 @@ public abstract class Enemy : MonoBehaviour
 		{
 			if (colliders[i].gameObject != this.gameObject)
 			{
-				neighborsFound[neighborsIndex] = colliders[i].gameObject;
+				try
+				{
+					neighborsFound[neighborsIndex] = colliders[i].gameObject;
+				}
+				catch (Exception e)
+				{
+					Debug.Log(neighborsFound.Length);
+					Debug.Log(neighborsIndex);
+					Debug.Log(i);
+				}
 				neighborsIndex++;
 
 			}
@@ -659,7 +669,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if(voice != null)
 		{
-			int index = Random.Range(0, voice.droneSounds.Count);
+			int index = UnityEngine.Random.Range(0, voice.droneSounds.Count);
 			audioSource.PlayOneShot(voice.droneSounds[index]);
 		}
 	}
@@ -668,7 +678,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if (voice != null)
 		{
-			int index = Random.Range(0, voice.aggroSounds.Count);
+			int index = UnityEngine.Random.Range(0, voice.aggroSounds.Count);
 			audioSource.PlayOneShot(voice.aggroSounds[index]);
 		}
 	}
@@ -677,7 +687,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if (voice != null)
 		{
-			int index = Random.Range(0, voice.hurtSounds.Count);
+			int index = UnityEngine.Random.Range(0, voice.hurtSounds.Count);
 			audioSource.PlayOneShot(voice.hurtSounds[index]);
 		}
 		Utils.MakeSoundWave(transform.position, 5);
@@ -708,14 +718,14 @@ public abstract class Enemy : MonoBehaviour
 	{
         if (limbs.Count > 0)
         {
-			float num = Random.Range(0f, 100f);
+			float num = UnityEngine.Random.Range(0f, 100f);
 			if (num < dismemberChance)
 			{
-				Limb victimLimb = limbs[Random.Range(0, limbs.Count)];
+				Limb victimLimb = limbs[UnityEngine.Random.Range(0, limbs.Count)];
 				victimLimb.DetachFromOwner();
 				victimLimb.rb.bodyType = RigidbodyType2D.Dynamic;
 				victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
-				victimLimb.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+				victimLimb.rb.angularVelocity = limbSpinForce * damage * UnityEngine.Random.Range(0.7f, 1);
 			}
         }
     }
@@ -725,21 +735,21 @@ public abstract class Enemy : MonoBehaviour
     {
         if (head != null)
         {
-            float num = Random.Range(0f, 100f);
+            float num = UnityEngine.Random.Range(0f, 100f);
             if (num < decapitateChance)
             {
 				head.DetachFromOwner();
-				if (Random.Range((int)0, (int)10) != 0)
+				if (UnityEngine.Random.Range((int)0, (int)10) != 0)
 				{
 					head.rb.bodyType = RigidbodyType2D.Dynamic;
 					head.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
-					head.rb.angularVelocity = limbSpinForce * damage * Random.Range(0.7f, 1);
+					head.rb.angularVelocity = limbSpinForce * damage * UnityEngine.Random.Range(0.7f, 1);
 
 				}
 				else // 1 in 10 to get zombie head
 				{
 					Destroy(head.gameObject);
-					Object zombieHeadPrefab =  Resources.Load("Zombie Head");
+					UnityEngine.Object zombieHeadPrefab =  Resources.Load("Zombie Head");
 					GameObject zombieHead = Instantiate(zombieHeadPrefab, head.transform.position, head.transform.rotation) as GameObject;
 					ThrowingWeapon tw = zombieHead.GetComponent<ThrowingWeapon>();
 					tw.throwingWeaponData.icon = head.spriteRenderer.sprite;

@@ -74,8 +74,8 @@ MonoBehaviour:
   weaponData: {fileID: 0}
   throwingWeaponData: {fileID: 0}
   fuseTime: 3.5
-  explosionRadius: 10
-  explosionForce: 1000
+  explosionRadius: 8
+  explosionForce: 900
   hasLitSprite: 1
   litSprite: {fileID: 21300000, guid: 3f1f30eb97b7e464198c00ea301fa2eb, type: 3}
   bigExplosion: 1

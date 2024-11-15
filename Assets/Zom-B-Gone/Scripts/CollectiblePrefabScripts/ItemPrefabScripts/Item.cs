@@ -17,6 +17,7 @@ public abstract class Item : Collectible
     // Component Refs
     [SerializeField] protected Transform pivotPoint;
     [HideInInspector] public SpriteRenderer itemRenderer;
+    public SpriteRenderer[] childrenRenderers;
     // Drag
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneAngularDrag = 0.4f;
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneLinearDrag = 0.4f;
@@ -74,20 +75,30 @@ public abstract class Item : Collectible
         switch (currentState)
         {
             case ItemState.GROUNDED:
-                itemRenderer.sortingLayerName = "GroundedItem";
+                ChangeSorting("GroundedItem");
                 rb.linearDamping = groundedLinearDrag;
                 rb.angularDamping = groundedAngularDrag;
                 break;
             case ItemState.AIRBORNE:
-                itemRenderer.sortingLayerName = "ActiveItem";
+                ChangeSorting("ActiveItem");
                 rb.linearDamping = airborneLinearDrag;
                 rb.angularDamping = airborneAngularDrag;
                 break;
             case ItemState.HELD:
-                itemRenderer.sortingLayerName = "ActiveItem";
+                ChangeSorting("ActiveItem");
                 break;
         }
     }
+
+    private void ChangeSorting(string sortingLayerName)
+    {
+        itemRenderer.sortingLayerName = sortingLayerName;
+        foreach (SpriteRenderer sr in childrenRenderers)
+        {
+            sr.sortingLayerName = sortingLayerName;
+        }
+    }
+
 
     protected virtual void Update()
     {
@@ -139,7 +150,7 @@ public abstract class Item : Collectible
 
                 gameObject.layer = LayerMask.NameToLayer("InteractableItem");
 
-                itemRenderer.sortingLayerName = "GroundedItem";
+                ChangeSorting("GroundedItem");
 
                 if (currentState == ItemState.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
@@ -154,7 +165,7 @@ public abstract class Item : Collectible
 
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
-                itemRenderer.sortingLayerName = "ActiveItem";
+                ChangeSorting("ActiveItem");
 
                 if (currentState == ItemState.HELD) rb.bodyType = RigidbodyType2D.Dynamic;
 
@@ -167,7 +178,7 @@ public abstract class Item : Collectible
             case ItemState.HELD:
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
-                itemRenderer.sortingLayerName = "ActiveItem";
+                ChangeSorting("ActiveItem");
 
                 rb.bodyType = RigidbodyType2D.Kinematic;
 

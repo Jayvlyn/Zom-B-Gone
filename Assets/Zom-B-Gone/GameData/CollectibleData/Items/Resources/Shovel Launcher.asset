@@ -26,7 +26,7 @@ MonoBehaviour:
   attackSpeed: 1
   knockbackPower: 400
   dismemberChance: 0
-  range: 100
+  range: 50
   maxAmmo: 1
   ammoConsumption: 1
   reloadTime: 3

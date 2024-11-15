@@ -1,0 +1,198 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0daed25ccdb3ca44fb9626e86bfd5ce4, type: 3}
+  m_Name: Aluminum Sawbat
+  m_EditorClassIdentifier: 
+  name: Aluminum Sawbat
+  description: A nice aluminum bat with a circular saw blade integrated into the
+    end. It spins
+  rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
+  icon: {fileID: 21300000, guid: 606d4dd0abc4d8a4584439c955baad39, type: 3}
+  maxStack: 1
+  pickupSound: {fileID: 8300000, guid: d2e8cbb167b35a04d8b055ac966ad86c, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
+  weight: 1600
+  throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
+  noiseRadius: 0
+  damage: 39
+  attackSpeed: 1
+  knockbackPower: 650
+  dismemberChance: 0
+  staminaCost: 1
+  prepSpeed: 0.61
+  swingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.7249804
+      outSlope: 2.7249804
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11358933
+    - serializedVersion: 3
+      time: 0.057311222
+      value: 11.509858
+      inSlope: 3.4136145
+      outSlope: 3.4136145
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.57657367
+    - serializedVersion: 3
+      time: 0.13528907
+      value: 11.435793
+      inSlope: -11.000855
+      outSlope: -11.000855
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.80373144
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.22224946
+      value: 0.30917698
+      inSlope: -0.60702884
+      outSlope: -0.60702884
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.082993306
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.41661876
+      outSlope: -0.41661876
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07847315
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1697521
+      value: 3.411607
+      inSlope: 2.200863
+      outSlope: 2.200863
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.62974536
+      outWeight: 0.8106049
+    - serializedVersion: 3
+      time: 0.5234968
+      value: 3.3853638
+      inSlope: -1.1983343
+      outSlope: -1.1983343
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.36518484
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75910246
+      value: 0.010885477
+      inSlope: 1.0238874
+      outSlope: 1.0238874
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8113492
+      value: 3.2129743
+      inSlope: 1.9651939
+      outSlope: 1.9651939
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3929258
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.96382666
+      value: 3.0563438
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  prepSwingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.5191611
+      outSlope: 1.5191611
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9799999
+      value: 1.4887778
+      inSlope: 0.051947273
+      outSlope: 0.051947273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08837211
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  prepRotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.0564437
+      outSlope: 1.0564437
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9842224
+      value: 1.0397756
+      inSlope: 0.051947273
+      outSlope: 0.051947273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08837211
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  swingSounds:
+  - {fileID: 8300000, guid: c7ddecd6ab9e3504386e031a3392bef4, type: 3}
+  - {fileID: 8300000, guid: 9c2efd53c15cf954dbe24b3db6593c15, type: 3}
+  - {fileID: 8300000, guid: 4647c9a548e7f4443bbabad4bc6430d6, type: 3}
+  hitSounds:
+  - {fileID: 8300000, guid: 7998ae8ee1cadfa40a2694c75dec41df, type: 3}
+  - {fileID: 8300000, guid: f8690dcdd9632c4459a587498741103c, type: 3}
+  - {fileID: 8300000, guid: 8a82ded4f7c8fe04ca056cd6b96afec2, type: 3}

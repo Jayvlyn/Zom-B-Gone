@@ -6,7 +6,7 @@ public class ExplodingAmmo : MonoBehaviour
 {
     [SerializeField] private float explosionRadius = 10f;
     [SerializeField] private float explosionForce = 100f;
-    [SerializeField] private int explosionDamage = 40;
+    [SerializeField] private int explosionDamage = 120;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

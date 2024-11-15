@@ -101,7 +101,7 @@ public static class Utils
 
 	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle", "Interactable");
     private static readonly LayerMask coverLm = LayerMask.GetMask("World", "Vehicle");
-	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int damage, bool big = true)
+	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int baseDamage, bool big = true)
     {
         // Visual
         Transform explosionPrefab = Assets.i.explosion;
@@ -140,8 +140,9 @@ public static class Utils
 			{
 				Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
 				knockbackVector *= force;
-				Vector2 popupVector = ((Vector2)h.transform.position - sourcePosition).normalized * 20;
-				h.TakeDamage(damage, knockbackVector, 30, false, popupVector, false, 10);
+				Vector2 popupVector = ((Vector2)h.transform.position - sourcePosition).normalized * 3;
+                float damage = baseDamage - dist;
+                h.TakeDamage(damage, knockbackVector, damage, false, popupVector, false, damage*0.33f);
 			}
 			else if (collider.TryGetComponent(out Rigidbody2D rb))
             {
@@ -156,7 +157,7 @@ public static class Utils
                     float distance = explosionToVehicle.magnitude;
 
                     float torque = 0f;
-                    float torqueAmount = 10000f;
+                    float torqueAmount = 1000000f;
 
                     float inverseDistance = 1f / distance;
 
@@ -166,25 +167,7 @@ public static class Utils
 
                     // Scale torque by inverse distance
                     float scaledTorque = torque * inverseDistance;
-
-
-                    //if (explosionToVehicle.x > 0 && explosionToVehicle.y > 0)
-                    //{
-                    //    torque = torqueAmount;
-                    //}
-                    //else if (explosionToVehicle.x < 0 && explosionToVehicle.y > 0)
-                    //{
-                    //    torque = -torqueAmount;
-                    //}
-                    //else if (explosionToVehicle.x < 0 && explosionToVehicle.y < 0)
-                    //{
-                    //    torque = torqueAmount;
-                    //}
-                    //else if (explosionToVehicle.x > 0 && explosionToVehicle.y < 0)
-                    //{
-                    //    torque = -torqueAmount;
-                    //}
-                    rb.AddTorque(scaledTorque * 1000000, ForceMode2D.Impulse);
+                    rb.AddTorque(scaledTorque * torqueAmount, ForceMode2D.Impulse);
                 }
 
 

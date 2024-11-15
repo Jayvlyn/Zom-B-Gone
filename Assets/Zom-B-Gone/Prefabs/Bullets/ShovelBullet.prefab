@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4631466901030604047}
   - component: {fileID: 8158062357509613602}
   - component: {fileID: 7744378673628910957}
+  - component: {fileID: 6862215691726568811}
   m_Layer: 3
   m_Name: ShovelBullet
   m_TagString: Bullet
@@ -167,7 +168,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.021931827, y: 0.38234892}
+  m_Offset: {x: 0.001153253, y: 0.28804567}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -177,5 +178,18 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.30085373, y: 1.1678159}
+  m_Size: {x: 0.2592966, y: 0.9792096}
   m_EdgeRadius: 0
+--- !u!114 &6862215691726568811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198095510141801857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0055472c00c70643afa55b1d85d1210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8158062357509613602}
