@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8158062357509613602}
   - component: {fileID: 4833438511622884727}
   m_Layer: 3
-  m_Name: SawBladeBullet
+  m_Name: ElectricSawBladeBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SortingLayerID: 1471518513
   m_SortingLayer: -14
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0e9abf0d409939349ad32c54dd8f9e11, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6234c8582f5c01e47b9ca58d969ed955, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

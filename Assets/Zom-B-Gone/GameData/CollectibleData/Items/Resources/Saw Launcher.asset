@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Saw Launcher
   description: Watch your head!
-  rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
+  rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 21300000, guid: 1cd5405d8bae706478bda0d208664ee8, type: 3}
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: e981808a5a555044694f5c65abf7f4d0, type: 3}

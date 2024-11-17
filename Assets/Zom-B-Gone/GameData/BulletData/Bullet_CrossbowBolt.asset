@@ -16,5 +16,6 @@ MonoBehaviour:
   piercingPower: 0
   wallPiercing: 0
   residual: 1
+  spin: 0
   enterEvent: {fileID: 11400000, guid: 18336d268877ba949b8112e3fe6b629e, type: 2}
   exitEvent: {fileID: 11400000, guid: ed5dcd0b709ea5c46a30a6a444aa5cf5, type: 2}

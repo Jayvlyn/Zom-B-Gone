@@ -25,6 +25,10 @@ public class Bullet : MonoBehaviour
         playerController = FindFirstObjectByType<PlayerController>();
         playerHead = playerController.gameObject.GetComponent<Head>();
 
+        if(bulletData.spin > 0)
+        {
+            rigidBody.angularVelocity = bulletData.spin;
+        }
     }
 
     private IEnumerator lifeStart()

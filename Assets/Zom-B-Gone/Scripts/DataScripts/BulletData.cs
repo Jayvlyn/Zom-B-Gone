@@ -10,6 +10,7 @@ public class BulletData : ScriptableObject
     [Tooltip("How many enemies can the bullet pierce through?")] public int piercingPower = 0;
     public bool wallPiercing = false;
     public bool residual = false;
+    public float spin = 0;
 
     public TransformEvent enterEvent;
     public TransformEvent exitEvent;
