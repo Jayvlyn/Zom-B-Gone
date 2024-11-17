@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0c78431c766fd8d41b6f7c6fe2541b54
+guid: eda5de7e44ba55348bbce12669dbf4c4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3931841821354262424
-    second: Toothbrush_0
+      213: 867799825521658163
+    second: BacheteForZombgone_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Toothbrush_0
+      name: BacheteForZombgone_0
       rect:
         serializedVersion: 2
-        x: 61
-        y: 48
-        width: 388
-        height: 430
+        x: 181
+        y: 15
+        width: 51
+        height: 361
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 89f78d20e45b09630800000000000000
-      internalID: 3931841821354262424
+      spriteID: 3394d50f75b0b0c00800000000000000
+      internalID: 867799825521658163
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Toothbrush_0: 3931841821354262424
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
