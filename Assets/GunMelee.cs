@@ -9,10 +9,10 @@ public class GunMelee : MonoBehaviour
 		{
 			if(collision.gameObject.TryGetComponent(out Health h))
 			{
-				Vector2 knockbackVec = (collision.gameObject.transform.position - gameObject.transform.parent.position).normalized * 10;
+				Vector2 popupVec = (collision.gameObject.transform.position - gameObject.transform.parent.position).normalized * 10;
 				bool invert = false;
-				if (knockbackVec.x < 0) invert = true;
-				h.TakeDamage(damage, knockbackVec, 20, false, knockbackVec, invert, 0);
+				if (popupVec.x < 0) invert = true;
+				h.TakeDamage(damage, popupVec * 50, 20, false, popupVec, invert, 0);
 			}
 		}
 	}
