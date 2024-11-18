@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   merchantName: Victor Von Vellini
   nameColor: {r: 0.6865419, g: 0.38823533, b: 0.8509804, a: 1}
-  merchantSprite: {fileID: 21300000, guid: 5e07e271138a6fa4a91da4698c58791d, type: 3}
+  merchantSprite: {fileID: 21300000, guid: e52a57c1edb61fa42aef0b1ea168d147, type: 3}
   talkSpeed: 0.06
   dialogueOptions:
   - Try not to look in my general direction if you can help it.
@@ -27,10 +27,10 @@ MonoBehaviour:
     plan to buy. These hands aren't accustomed to dusting off peasantry."
   - "Ah, another customer. How... expected. Well, let\u2019s make this quick, I have
     more distinguished clientele awaiting my services."
-  - Yes, yes, I do have helmets, dear, but they aren't just helmets. They are headwear
+  - Yes, yes, I do have helmets, but they aren't just helmets. They are headwear
     of exceptional taste. Even that football helmet has a certain... rustic charm.
-  - I assure you, each piece here has been curated with care. That armet? Impeccable
-    for keeping the undead claws away... and quite the conversation starter!
+  - I assure you, each piece here has been carefully curated. That armet? Impeccable
+    for keeping the undead claws away.
   - "Well, well, here for protection or presentation? It\u2019s all the same to me,
     as long as you can afford it."
   - A head is a terrible thing to waste... fortunately, I have just the solution
