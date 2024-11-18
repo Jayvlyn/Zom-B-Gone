@@ -10,6 +10,7 @@
     --------------------------------------------------
  */
 
+using GameEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,6 +53,12 @@ namespace CodeMonkey {
         public AudioClip bigExplosionSound;
         public AudioClip smallExplosionSound;
 
+        public AudioClip buttonDown;
+        public AudioClip buttonUp;
+        public AudioClip openLocker;
+        public AudioClip openBackpack;
+
+        public VoidEvent onPlayerDied;
     }
 
 }

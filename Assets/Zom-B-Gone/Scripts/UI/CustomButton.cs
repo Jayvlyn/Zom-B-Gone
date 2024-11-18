@@ -18,6 +18,7 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 	public void OnPointerDown(PointerEventData eventData)
     {
         rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, buttonPressedOffset);
+        AudioManager.Instance.Play(CodeMonkey.Assets.i.buttonDown);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -29,7 +30,7 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             OnClick?.Invoke();
         }
-
-    }
+		AudioManager.Instance.Play(CodeMonkey.Assets.i.buttonUp);
+	}
 }
 

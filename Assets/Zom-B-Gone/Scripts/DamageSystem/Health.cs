@@ -123,7 +123,11 @@ public class Health : MonoBehaviour
             if (dot > 0) glass.window.ShatterGlass(false);
             else glass.window.ShatterGlass(true);
         }
-        else if (!gameObject.CompareTag("Player"))
+        else if (gameObject.CompareTag("Player"))
+        {
+            CodeMonkey.Assets.i.onPlayerDied.Raise();
+        }
+        else
         {
             Destroy(gameObject);
         }

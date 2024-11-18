@@ -53,3 +53,10 @@ MonoBehaviour:
   explosion: {fileID: 382512744098820012, guid: 52144dada41ca8841a18bdd63888b169, type: 3}
   bigExplosionSSP: {fileID: 11400000, guid: 2f36bc6c2c4d5654aa90096b2ad521b0, type: 2}
   smallExplosionSSP: {fileID: 11400000, guid: 31312a603de83ab46918caafe98b7525, type: 2}
+  bigExplosionSound: {fileID: 8300000, guid: 3861197442758584eb36856a5df946d7, type: 3}
+  smallExplosionSound: {fileID: 8300000, guid: 7c580b56b9b3c9542bdd3cda0d5eec6b, type: 3}
+  buttonDown: {fileID: 8300000, guid: ca347218181d44f758cfc46c3bb2a999, type: 3}
+  buttonUp: {fileID: 8300000, guid: ca347218181d44f758cfc46c3bb2a999, type: 3}
+  openLocker: {fileID: 8300000, guid: ca347218181d44f758cfc46c3bb2a999, type: 3}
+  openBackpack: {fileID: 8300000, guid: ca347218181d44f758cfc46c3bb2a999, type: 3}
+  onPlayerDied: {fileID: 11400000, guid: 4899ce293ac01f740a19576b0a4cacbc, type: 2}

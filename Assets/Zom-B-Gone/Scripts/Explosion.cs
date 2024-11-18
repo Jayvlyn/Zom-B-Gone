@@ -1,4 +1,5 @@
 using Cinemachine;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -11,8 +12,14 @@ public class Explosion : MonoBehaviour
 
 	public void OnAnimEnd()
     {
-        Destroy(gameObject);
+        StartCoroutine(DestroyCoroutine());
     }
+
+    public IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitUntil(() => !audioSource.isPlaying);
+		Destroy(gameObject);
+	}
 
     public void ShrinkRadius()
     {

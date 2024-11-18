@@ -16,6 +16,8 @@ public class LockerOpener : MonoBehaviour
 		Interactor.interactedContainer = worldCounterpart;
 		
 		StartCoroutine(PreSlideUp(-30, .1f));
+
+		AudioManager.Instance.Play(CodeMonkey.Assets.i.openLocker);
 	}
 
 	public void OnLockerClosed()

@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -195,7 +196,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (currentState != PlayerState.HIDING) SetPlayerVelocity();
-        if (currentState != PlayerState.DRIVING && currentState != PlayerState.HIDING) RotateToMouse();
+        if (currentState != PlayerState.DRIVING && currentState != PlayerState.HIDING && !dead) RotateToMouse();
     }
 
     private void UpdateStaminaBar()
@@ -647,6 +648,21 @@ public class PlayerController : MonoBehaviour
         if (hands.RightObject) hands.RightObject.SetActive(true);
 
         ChangeState(PlayerState.IDLE);
+    }
+
+    bool dead = false;
+    public void Die()
+    {
+        dead = true;
+		input.SwitchCurrentActionMap("Vehicle");
+		rb.bodyType = RigidbodyType2D.Kinematic;
+        StartCoroutine(DeathTimer());
+	}
+
+    private IEnumerator DeathTimer()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Unit");
     }
 }
 
