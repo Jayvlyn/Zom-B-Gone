@@ -653,6 +653,8 @@ public class PlayerController : MonoBehaviour
     bool dead = false;
     public void Die()
     {
+        if (holdingLeft) DropLeft();
+        if (holdingRight) DropRight();
         dead = true;
 		input.SwitchCurrentActionMap("Vehicle");
 		rb.bodyType = RigidbodyType2D.Kinematic;

@@ -57,6 +57,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 2a4f6a5ed61757f418bd95998534a099, type: 2}
   pivotPoint: {fileID: 0}
   itemRenderer: {fileID: 0}
+  childrenRenderers: []
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -356,7 +357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 24
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
       propertyPath: 'm_ApplyToSortingLayers.Array.data[16]'
@@ -392,7 +393,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
       propertyPath: 'm_ApplyToSortingLayers.Array.data[24]'
-      value: 0
+      value: 131365537
+      objectReference: {fileID: 0}
+    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
+      propertyPath: 'm_ApplyToSortingLayers.Array.data[25]'
+      value: -2061021577
+      objectReference: {fileID: 0}
+    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
+      propertyPath: 'm_ApplyToSortingLayers.Array.data[26]'
+      value: -1975659737
+      objectReference: {fileID: 0}
+    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
+      propertyPath: 'm_ApplyToSortingLayers.Array.data[27]'
+      value: 1164583589
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
