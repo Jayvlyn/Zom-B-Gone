@@ -500,6 +500,14 @@ public class PlayerController : MonoBehaviour
         }
 	}
 
+    private void OnGodMode(InputValue inputValue)
+    {
+        if(inputValue.isPressed)
+        {
+            godMode = !godMode;
+        }
+    }
+
 	#endregion -----------------------------------------
 
 	public void DropLeft()
@@ -651,14 +659,17 @@ public class PlayerController : MonoBehaviour
     }
 
     bool dead = false;
+    public static bool godMode = false;
     public void Die()
     {
-        if (holdingLeft) DropLeft();
-        if (holdingRight) DropRight();
+        DropLeft();
+        DropRight();
         dead = true;
 		input.SwitchCurrentActionMap("Vehicle");
 		rb.bodyType = RigidbodyType2D.Kinematic;
+        Utils.ClearPlayerTemporaryContainers();
         StartCoroutine(DeathTimer());
+        
 	}
 
     private IEnumerator DeathTimer()

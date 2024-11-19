@@ -105,7 +105,7 @@ public class Interactor : MonoBehaviour
                 if (interactedContainer)
                 {
                     float containerToInteractorDist = ((Vector2)transform.position - (Vector2)interactedContainer.transform.position).magnitude;
-                    if (containerToInteractorDist > _interactRange + .5f) CloseOpenedContainer();
+                    if (containerToInteractorDist > _interactRange + .5f) { Debug.Log("Close open 2"); CloseOpenedContainer(); }
                     
                 }
 
@@ -142,7 +142,10 @@ public class Interactor : MonoBehaviour
             PlayerController.mouseHeldIcon.sendBackToSlot();
             PlayerController.mouseHeldIcon = null;
         }
-        string containersCloseEventName = interactedContainer.GetComponent<TransformListener>().GameEvent.name;
+
+        GameEvents.TransformListener tl = interactedContainer.GetComponent<GameEvents.TransformListener>();
+		string containersCloseEventName = tl.GameEvent.name; 
+        
         foreach(VoidEvent e in closeContainerEvents)
         {
             if(e.name.Equals(containersCloseEventName))
@@ -297,8 +300,8 @@ public class Interactor : MonoBehaviour
                     CloseOpenedContainer();
                 }
 
-                if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
                 AvailableInteractable.Interact(rightHand, playerController);
+                if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
             }
 
             else if (AvailableInteractable is Workbench)

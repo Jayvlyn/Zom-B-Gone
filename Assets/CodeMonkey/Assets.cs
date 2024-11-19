@@ -59,6 +59,11 @@ namespace CodeMonkey {
         public AudioClip openBackpack;
 
         public VoidEvent onPlayerDied;
+
+        public CollectibleContainerData handsData;
+        public CollectibleContainerData headData;
+        public CollectibleContainerData backpackData;
+        public FloorContainerData vanFloorData;
     }
 
 }

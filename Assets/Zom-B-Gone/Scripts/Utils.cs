@@ -235,4 +235,22 @@ public static class Utils
 
     }
 
+    public static void ClearPlayerTemporaryContainers()
+    {
+        ClearContainerSlots(Assets.i.handsData.container);
+        ClearContainerSlots(Assets.i.headData.container);
+        ClearContainerSlots(Assets.i.backpackData.container);
+        ClearContainerSlots(Assets.i.vanFloorData.container);
+        Assets.i.vanFloorData.ClearFloorSpecificVals();
+    }
+
+	public static void ClearContainerSlots(CollectibleContainer container)
+	{
+		for (int i = 0; i < container.collectibleSlots.Length; i++)
+		{
+			container.collectibleSlots[i].CollectibleName = null;
+			container.collectibleSlots[i].quantity = 0;
+		}
+	}
+
 }

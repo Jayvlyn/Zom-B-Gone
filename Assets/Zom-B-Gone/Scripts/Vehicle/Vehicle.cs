@@ -192,7 +192,6 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public void Interact(bool rightHand, PlayerController playerController)
     {
 		StartCoroutine(Activate(true));
-		vehicleData.enterEvent.Raise();
 	}
 
     public IEnumerator ExplodedTimer()
@@ -207,8 +206,9 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         if(vehicleData.enterSound) mainSource.PlayOneShot(vehicleData.enterSound); 
         yield return new WaitForSeconds(1f);
         Active = active;
+		vehicleData.enterEvent.Raise();
 
-        Utils.MakeSoundWave(transform.position, 8);
+		Utils.MakeSoundWave(transform.position, 8);
     }
 
     private Coroutine engineSoundCoroutine;

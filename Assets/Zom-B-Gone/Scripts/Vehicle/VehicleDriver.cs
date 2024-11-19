@@ -18,12 +18,7 @@ public class VehicleDriver : MonoBehaviour
     {
         if(vehicle && vehicle.Active)
         {
-            if (TravelHeld && vehicle.transform.parent.name == "Van")
-            {
-                pressTimer += Time.deltaTime;
-                if (pressTimer >= pressTimeRequired) onTravel.Raise();
-                travelPercent = pressTimer / pressTimeRequired;
-            }
+
 
             if (steering) vehicle.Steer(steerDirection);
             if (accelerateHeld) vehicle.Accelerate();
@@ -39,6 +34,13 @@ public class VehicleDriver : MonoBehaviour
 	{
 		if (vehicle && vehicle.Active)
 		{
+			if (TravelHeld && vehicle.transform.parent.name == "Van")
+			{
+				pressTimer += Time.deltaTime;
+				if (pressTimer >= pressTimeRequired) onTravel.Raise();
+				travelPercent = pressTimer / pressTimeRequired;
+			}
+
 			if (playerController.vc)
 			{
 				float targetLookaheadTime = 1.3f - Mathf.Clamp(Mathf.Abs(vehicle.GetLateralVelocity()), 0, 1.3f);

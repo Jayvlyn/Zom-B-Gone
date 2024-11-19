@@ -125,7 +125,7 @@ public class Health : MonoBehaviour
         }
         else if (gameObject.CompareTag("Player"))
         {
-            CodeMonkey.Assets.i.onPlayerDied.Raise();
+            if(!PlayerController.godMode) CodeMonkey.Assets.i.onPlayerDied.Raise();
         }
         else
         {
