@@ -94,7 +94,7 @@ public class DamagePopup : MonoBehaviour
         }
     }
 
-    public static DamagePopup Create(Vector3 position, int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, PopupType type = PopupType.DEFAULT)
+    public static DamagePopup Create(Vector3 position, int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, PopupType type = PopupType.DEFAULT, Color color = default)
     {
         Transform popupPrefab = Assets.i.damagePopup;
 
@@ -132,14 +132,14 @@ public class DamagePopup : MonoBehaviour
 
         Transform damagePopupT = Instantiate(popupPrefab, position, Quaternion.identity);
         DamagePopup damagePopup = damagePopupT.GetComponent<DamagePopup>();
-        damagePopup.Setup(damageAmount, inputMoveVec, isCriticalHit, invertRotate, overrideFontSize);
+        damagePopup.Setup(damageAmount, inputMoveVec, isCriticalHit, invertRotate, overrideFontSize, color);
 
         return damagePopup;
     }
 
-    public static DamagePopup Create(Vector3 position, float damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, PopupType type = PopupType.DEFAULT)
+    public static DamagePopup Create(Vector3 position, float damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, PopupType type = PopupType.DEFAULT, Color color = default)
     {
-        return Create(position,Mathf.RoundToInt(damageAmount), inputMoveVec, isCriticalHit, invertRotate, type);
+        return Create(position,Mathf.RoundToInt(damageAmount), inputMoveVec, isCriticalHit, invertRotate, type, color);
     }
 
     public enum PopupType
@@ -149,7 +149,8 @@ public class DamagePopup : MonoBehaviour
         ENEMY
     }
 
-    public void Setup(int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, float overrideFontSize = -1)
+
+	public void Setup(int damageAmount, Vector3 inputMoveVec = default, bool isCriticalHit = false, bool invertRotate = false, float overrideFontSize = -1, Color overrideColor = default)
     {
         textMesh.SetText(damageAmount.ToString());
 
@@ -159,10 +160,17 @@ public class DamagePopup : MonoBehaviour
             // crit font size
             textMesh.fontSize = criticalFontSize;
 
-            // crit color
-            if (overrideCriticalColor) textColor = newCriticalColor;
-            else textColor = UtilsClass.GetColorFromString(critColorHex);
-        }
+			// crit color
+			if (overrideColor == default)
+			{
+				if (overrideCriticalColor) textColor = newCriticalColor;
+				else textColor = UtilsClass.GetColorFromString(critColorHex);
+			}
+			else
+			{
+				textColor = overrideColor;
+			}
+		}
         else
         { // Regular Hit
 
@@ -170,8 +178,15 @@ public class DamagePopup : MonoBehaviour
             textMesh.fontSize = regularFontSize;
 
             // reg color
-            if (overrideRegularColor) textColor = newRegularColor;
-            else textColor = UtilsClass.GetColorFromString(regularColorHex);
+            if(overrideColor ==default)
+            {
+                if (overrideRegularColor) textColor = newRegularColor;
+                else textColor = UtilsClass.GetColorFromString(regularColorHex);
+            }
+            else
+            {
+                textColor = overrideColor;
+            }
         }
 
         if(overrideFontSize != -1) textMesh.fontSize = overrideFontSize;

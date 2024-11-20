@@ -1,9 +1,7 @@
 ﻿using Cinemachine;
 using CodeMonkey;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 public static class Utils
@@ -251,6 +249,23 @@ public static class Utils
 			container.collectibleSlots[i].CollectibleName = null;
 			container.collectibleSlots[i].quantity = 0;
 		}
+	}
+
+    public static void ApplyEffect(EffectData effectData, Enemy enemy)
+    {
+		if (enemy.activeEffect != null)
+		{
+            if (enemy.activeEffect.effectData = effectData) return;
+        
+            // Overrides if a different effect is applied
+            GameObject obj = enemy.activeEffect.gameObject;
+            enemy.activeEffect = null;
+            GameObject.Destroy(obj);
+		}
+
+		GameObject effectObject = Object.Instantiate(Assets.i.effectPrefab, enemy.transform);
+        Effect e = effectObject.GetComponent<Effect>();
+		e.Initialize(effectData, enemy);
 	}
 
 }

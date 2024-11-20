@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c7d660678a0b97489f8456ab58a7eb1, type: 3}
+  m_Name: Shock
+  m_EditorClassIdentifier: 
+  effectSprite: {fileID: 21300000, guid: ab62f681c059aa34f8fb2673ff83e24a, type: 3}
+  effectDuration: 5
+  spreadDistance: 2
+  spreadDuration: 0.4
+  spreadChance: 50
+  speedMult: 0.5
+  onSpreadDamage: 10
+  passiveDamage: 5
+  passiveDamageTick: 2
+  spreadTick: 0.2
+  damageColor: {r: 0.9685534, g: 0.937799, b: 0.3137137, a: 1}

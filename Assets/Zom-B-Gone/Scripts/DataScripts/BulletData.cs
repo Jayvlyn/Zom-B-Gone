@@ -14,4 +14,6 @@ public class BulletData : ScriptableObject
 
     public TransformEvent enterEvent;
     public TransformEvent exitEvent;
+
+    [Header("Optional Effect")] public EffectData effectData;
 }

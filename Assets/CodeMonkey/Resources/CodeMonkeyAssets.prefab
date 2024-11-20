@@ -64,3 +64,4 @@ MonoBehaviour:
   headData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
   backpackData: {fileID: 11400000, guid: d7c32df43c43e844f8b3d81e08af708d, type: 2}
   vanFloorData: {fileID: 11400000, guid: aba0a36980fe9be42bc037db00a96398, type: 2}
+  effectPrefab: {fileID: 2190981042130493795, guid: 8fbce951d205eb44db272d8b125615a4, type: 3}

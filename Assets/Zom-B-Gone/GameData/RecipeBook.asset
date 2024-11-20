@@ -69,3 +69,23 @@ MonoBehaviour:
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: 872dae0b999e8cd4799dc3de7e3c9e95, type: 2}
       requiredAmount: 1
+  - resultCollectible: {fileID: 11400000, guid: 1df59dec7c44bab4e9860dc3341de708, type: 2}
+    resultAmount: 1
+    recipeItems:
+    - collectible: {fileID: 11400000, guid: 9091cd6d247b3fe4882a4b111d47f91e, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: a72f5dfd4946ff74bb5735e44270b135, type: 2}
+      requiredAmount: 1
+  - resultCollectible: {fileID: 11400000, guid: 69a254fb2ecaa234a98d606a734ed027, type: 2}
+    resultAmount: 1
+    recipeItems:
+    - collectible: {fileID: 11400000, guid: c9012a2342604ac4fb9674baf2f006f7, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: 1df59dec7c44bab4e9860dc3341de708, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: b3a39575a2a9c564b8eedfa38822c180, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: 0d34fa0cc3927fe46b859bd81ea64bc2, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: c46c742fa36355a4aa7f874952e5f154, type: 2}
+      requiredAmount: 1

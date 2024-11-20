@@ -34,11 +34,11 @@ MonoBehaviour:
   reloadTime: 2
   fireForce: 30
   isAutomatic: 1
-  bulletPrefab: {fileID: 2198095510141801857, guid: 6890ec1dcfc67304a94e9a3783021af0, type: 3}
+  bulletPrefab: {fileID: 2198095510141801857, guid: e805f6fbdd832ba458ff22ac1a8a48ea, type: 3}
   shootSounds:
-  - {fileID: 8300000, guid: 3fe96f748d33f274e84e63cf77de45f2, type: 3}
-  - {fileID: 8300000, guid: 2c723f93aa873ca4d92082e649316b98, type: 3}
-  - {fileID: 8300000, guid: c67f58101aa339a4f9fe68c8bb3e38ed, type: 3}
+  - {fileID: 8300000, guid: 9be2f1855b10b9b428d72dccffc0cdc0, type: 3}
+  - {fileID: 8300000, guid: bcc8f042b7a16f24eb9b219765fa2cb3, type: 3}
+  - {fileID: 8300000, guid: 893d34440253d73419d5536003c9dbbc, type: 3}
   reloadStart: {fileID: 8300000, guid: 8cb3964e2e85418439af0d0b8337c64e, type: 3}
   reloadNoiseRadius: 0
   suppressed: 0

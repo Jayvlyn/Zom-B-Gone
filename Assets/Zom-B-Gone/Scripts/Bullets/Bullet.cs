@@ -1,3 +1,4 @@
+using CodeMonkey;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -42,18 +43,30 @@ public class Bullet : MonoBehaviour
 	{
         if(rigidBody.linearVelocity.magnitude > 3)
         {
-            if (collision.CompareTag("Enemy"))
+			if (collision.CompareTag("Enemy"))
             {
                 bulletData.enterEvent.Raise(transform);
                 if (currentPiercingPower > 0) bulletData.exitEvent.Raise(transform);
-            }
 
-            if (collision.gameObject.TryGetComponent(out Health targetHealth))
+                if (collision.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    currentPiercingPower--;
+                    DealDamage(enemy.health);
+
+                    if(bulletData.effectData)
+                    {
+                        Utils.ApplyEffect(bulletData.effectData, enemy);
+					}
+                }
+                
+            }
+            else if (collision.gameObject.TryGetComponent(out Health targetHealth))
             {
                 currentPiercingPower--;
                 DealDamage(targetHealth);
-            }
-            else
+				
+			}
+            else // hit surface
             {
                 if (bulletData.wallPiercing) currentPiercingPower--;
                 else if(!bulletData.residual)
@@ -61,6 +74,8 @@ public class Bullet : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
+
+
             if (currentPiercingPower < 0 && !bulletData.residual) Destroy(gameObject);
         }
     }

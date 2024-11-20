@@ -55,7 +55,7 @@ public class Health : MonoBehaviour
 
     private Enemy enemyOwner;
     private Vector2 mostRecentPopupVec;
-    public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default, float decapitateChance = 0)
+    public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default, float decapitateChance = 0, Color popupColor = default)
     {
         mostRecentPopupVec = popupVector;
         DamagePopup.PopupType popupType = DamagePopup.PopupType.DEFAULT;
@@ -106,7 +106,7 @@ public class Health : MonoBehaviour
 
         CurrentHealth = CurrentHealth - incomingDamage;
 
-        DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate, popupType);
+        DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate, popupType, popupColor);
     }
 
     public void OnDeath()

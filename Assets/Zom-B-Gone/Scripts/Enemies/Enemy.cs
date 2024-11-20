@@ -20,7 +20,7 @@ public abstract class Enemy : MonoBehaviour
 	public Rigidbody2D rigidBody;
 	public EnemyHead head;
 
-	private Health health;
+	public Health health;
 	private GameObject playerTarget;
 
 	private float attackTimer;
@@ -64,6 +64,8 @@ public abstract class Enemy : MonoBehaviour
 	private Vector2 investigaitonPoint = Vector2.zero;
 
 	public static int sortOrder = 0;
+
+	public Effect activeEffect = null;
 
 	private void ChangeState(State newState)
 	{
@@ -174,14 +176,23 @@ public abstract class Enemy : MonoBehaviour
             //         }
 
             float dist = Vector2.Distance(target, transform.position);
-            if (dist > 1)
-            {
-                rigidBody.AddForce(target * CurrentMoveSpeed, ForceMode2D.Force);
-            }
-            else if (dist > 0.2)
-            {
-                rigidBody.AddForce(target * CurrentMoveSpeed * dist, ForceMode2D.Force);
-            }
+
+			float speed = CurrentMoveSpeed;
+
+			if(activeEffect != null) speed *= activeEffect.effectData.speedMult;
+
+			Vector2 movementForce = Vector2.zero;
+
+			if (dist > 1)
+			{
+				movementForce = target * speed;
+				rigidBody.AddForce(movementForce, ForceMode2D.Force);
+			}
+			else if (dist > 0.2)
+			{
+				movementForce *= dist;
+				rigidBody.AddForce(movementForce, ForceMode2D.Force);
+			}
         }
     }
 

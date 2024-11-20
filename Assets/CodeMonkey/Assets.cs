@@ -64,6 +64,8 @@ namespace CodeMonkey {
         public CollectibleContainerData headData;
         public CollectibleContainerData backpackData;
         public FloorContainerData vanFloorData;
+
+        public GameObject effectPrefab;
     }
 
 }
