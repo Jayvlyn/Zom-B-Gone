@@ -62,17 +62,19 @@ public class Health : MonoBehaviour
 
         if (damage < 0) return;
         int incomingDamage = Mathf.RoundToInt(damage);
-        #region hat buff
-        if (gameObject.CompareTag("Player"))
+        if (gameObject.TryGetComponent(out PlayerController pc))
         {
             popupType = DamagePopup.PopupType.PLAYER;
 
-            if(gameObject.TryGetComponent(out Head head) && head.wornHat != null)
+            CameraShakeManager.instance.CameraShake(pc.impulseSource, CodeMonkey.Assets.i.playerDamagedSSP, popupVector.normalized);
+
+            #region hat buff
+            if(pc.head.wornHat != null)
             {
-                incomingDamage -= head.wornHat.hatData.defense;
+                incomingDamage -= pc.head.wornHat.hatData.defense;
             }
+            #endregion
         }
-        #endregion
         else if (gameObject.CompareTag("Enemy"))
         {
             popupType = DamagePopup.PopupType.ENEMY;

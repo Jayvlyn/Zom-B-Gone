@@ -49,6 +49,7 @@ namespace CodeMonkey {
 
         public ScreenShakeProfile bigExplosionSSP;
         public ScreenShakeProfile smallExplosionSSP;
+        public ScreenShakeProfile playerDamagedSSP;
 
         public AudioClip bigExplosionSound;
         public AudioClip smallExplosionSound;
@@ -66,6 +67,7 @@ namespace CodeMonkey {
         public FloorContainerData vanFloorData;
 
         public GameObject effectPrefab;
+
     }
 
 }

@@ -28,8 +28,10 @@ public class PlayerController : MonoBehaviour
     public Collider2D playerCollider;
     public SpriteRenderer playerSprite;
     public PlayerRenderingChanger renderingChanger;
+    public CinemachineImpulseSource impulseSource;
     private Slider staminaSlider;
     private Interactor interactor;
+
 
     private Camera gameCamera;
     [HideInInspector] public CinemachineVirtualCamera vc;
