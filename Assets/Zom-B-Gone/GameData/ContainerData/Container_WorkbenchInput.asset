@@ -15,8 +15,10 @@ MonoBehaviour:
   containerType: 5
   onContainerCollectibleUpdated: {fileID: 11400000, guid: f146ac8739db0354ba63f8169e8e5236, type: 2}
   onContainerCollectibleSwapped: {fileID: 11400000, guid: 9a01ed7d367e2b649a9a49a0b3fca109, type: 2}
+  onContainerSwapped: {fileID: 0}
   testCollectibleSlot:
     collectible: {fileID: 0}
+    collectibleName: 
     quantity: 0
     allowLoot: 0
     allowItems: 0
@@ -25,26 +27,31 @@ MonoBehaviour:
   container:
     collectibleSlots:
     - collectible: {fileID: 0}
+      collectibleName: Machete
       quantity: 0
       allowLoot: 1
       allowItems: 1
       allowHats: 1
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 1
       allowItems: 1
       allowHats: 1
     - collectible: {fileID: 0}
+      collectibleName: Aluminum Bat
       quantity: 0
       allowLoot: 1
       allowItems: 1
       allowHats: 1
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 1
       allowItems: 1
       allowHats: 1
     - collectible: {fileID: 0}
+      collectibleName: 
       quantity: 0
       allowLoot: 1
       allowItems: 1
