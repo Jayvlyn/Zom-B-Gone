@@ -148,8 +148,12 @@ public class ProjectileWeapon : Weapon
             if (muzzleLight)
             {
                 float flashTime = 0.1f;
-                if (projectileWeaponData.attackSpeed < flashTime) flashTime = projectileWeaponData.attackSpeed;
-                StartCoroutine(DoMuzzleLight(flashTime));
+                if (projectileWeaponData.attackSpeed <= flashTime) flashTime = projectileWeaponData.attackSpeed * 0.5f;
+
+                if(muzzleLightRoutine == null)
+                {
+                    muzzleLightRoutine = StartCoroutine(DoMuzzleLight(flashTime));
+                }
             }
 
             shotTimer = weaponData.attackSpeed;
@@ -221,11 +225,13 @@ public class ProjectileWeapon : Weapon
         SetReloadIndicator(false);
     }
 
+    private Coroutine muzzleLightRoutine;
     private IEnumerator DoMuzzleLight(float time)
     {
         muzzleLight.SetActive(true);
         yield return new WaitForSeconds(time);
         muzzleLight.SetActive(false);
+        muzzleLightRoutine = null;
     }
 
 	public void UpdateAmmoCount()
