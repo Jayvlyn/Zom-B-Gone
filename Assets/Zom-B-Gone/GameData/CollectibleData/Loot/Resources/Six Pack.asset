@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
-  m_Name: Suppressor
+  m_Name: Six Pack
   m_EditorClassIdentifier: 
-  name: Suppressor
-  description: Shhhhhh!
+  name: Six Pack
+  description: I wish I some friends to crack this open with. Maybe Brutus would
+    want one.
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
-  icon: {fileID: 21300000, guid: 04dc0bfde63b8b241aacd5deb0fa6287, type: 3}
-  maxStack: 4
+  icon: {fileID: 21300000, guid: 88f1a6a374ab01447983218f76e91d1b, type: 3}
+  maxStack: 8
   pickupSound: {fileID: 8300000, guid: d91cc8cb43ddb2543ad86e340fef62d1, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}

@@ -14,5 +14,6 @@ public class EffectData : ScriptableObject
     public float passiveDamage = 0;
     public float passiveDamageTick = 1; // in seconds
     public float spreadTick = .5f; // in seconds
+    public bool initialSpread = false;
     public Color damageColor = new Color(0,1,1,1);
 }

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
-  m_Name: Suppressor
+  m_Name: Wrist Watch
   m_EditorClassIdentifier: 
-  name: Suppressor
-  description: Shhhhhh!
-  rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
-  icon: {fileID: 21300000, guid: 04dc0bfde63b8b241aacd5deb0fa6287, type: 3}
-  maxStack: 4
+  name: Wrist Watch
+  description: This thing still works? Nope nevermind the second hand would've moved
+    by now.
+  rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
+  icon: {fileID: 21300000, guid: d06a02789cdecdc40a5bf9804ed717b5, type: 3}
+  maxStack: 16
   pickupSound: {fileID: 8300000, guid: d91cc8cb43ddb2543ad86e340fef62d1, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}

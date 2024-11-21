@@ -34,6 +34,8 @@ public class Effect : MonoBehaviour
 
 		effectedEnemyHealth.TakeDamage(effectData.onSpreadDamage, Vector2.zero, 0, false, new Vector2(10, 10), false, 0, effectData.damageColor);
 
+		if (effectData.initialSpread) StartCoroutine(Spread());
+
 		StartCoroutine(DestroyRoutine());
 		StartCoroutine(SpreadTimer());
 	}
@@ -59,20 +61,7 @@ public class Effect : MonoBehaviour
 		{
 			if(spreadTimer <= 0)
 			{
-				// spread logic
-				Collider2D[] spreadingToEnemies = Physics2D.OverlapCircleAll(transform.position, effectData.spreadDistance, enemyLm);
-				foreach(Collider2D c in spreadingToEnemies)
-				{
-					int roll = Random.Range(0, 100);
-					if(roll <= effectData.spreadChance)
-					{
-						if(c.TryGetComponent(out Enemy e))
-						{
-							Utils.ApplyEffect(effectData, e);
-						}
-					}
-				}
-
+				StartCoroutine(Spread());
 				spreadTimer = effectData.spreadTick;
 			}
 			else
@@ -81,6 +70,7 @@ public class Effect : MonoBehaviour
 			}
 		}
 	}
+
 
 	private IEnumerator DestroyRoutine()
 	{
@@ -93,5 +83,22 @@ public class Effect : MonoBehaviour
 	{
 		yield return new WaitForSeconds(effectData.spreadDuration);
 		spreadTimer = -10;
+	}
+
+	private IEnumerator Spread()
+	{
+		Collider2D[] spreadingToEnemies = Physics2D.OverlapCircleAll(transform.position, effectData.spreadDistance, enemyLm);
+		foreach (Collider2D c in spreadingToEnemies)
+		{
+			yield return new WaitForSeconds(0.02f);
+			int roll = Random.Range(0, 100);
+			if (roll <= effectData.spreadChance)
+			{
+				if (c.TryGetComponent(out Enemy e))
+				{
+					Utils.ApplyEffect(effectData, e);
+				}
+			}
+		}
 	}
 }

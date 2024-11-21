@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
-  m_Name: Suppressor
+  m_Name: Potato Chips
   m_EditorClassIdentifier: 
-  name: Suppressor
-  description: Shhhhhh!
-  rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
-  icon: {fileID: 21300000, guid: 04dc0bfde63b8b241aacd5deb0fa6287, type: 3}
-  maxStack: 4
+  name: Potato Chips
+  description: I wonder if these are better than the generic nacho cheese tortilla
+    chips
+  rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
+  icon: {fileID: 21300000, guid: ef83382198ba38647b714e9114275e09, type: 3}
+  maxStack: 16
   pickupSound: {fileID: 8300000, guid: d91cc8cb43ddb2543ad86e340fef62d1, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
