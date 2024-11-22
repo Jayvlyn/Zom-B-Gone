@@ -17,19 +17,31 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
         dataRefs.playerData = SaveManager.currentSave.playerData;
         
+        // Hands
         if (SaveManager.currentSave.hands != null) dataRefs.handsData.Container = SaveManager.currentSave.hands;
         else Utils.ClearContainerSlots(dataRefs.handsData.Container);
 
+        // Head
         if (SaveManager.currentSave.head != null) dataRefs.headData.Container = SaveManager.currentSave.head;
         else Utils.ClearContainerSlots(dataRefs.headData.Container);
 
-        if (SaveManager.currentSave.backpack != null)
+		// Workbench Input
+		if (SaveManager.currentSave.workbenchInput != null) dataRefs.worbenchInputData.Container = SaveManager.currentSave.workbenchInput;
+		else Utils.ClearContainerSlots(dataRefs.worbenchInputData.Container);
+
+		// Workbench Output
+		if (SaveManager.currentSave.workbenchOutput != null) dataRefs.worbenchOutputData.Container = SaveManager.currentSave.workbenchOutput;
+		else Utils.ClearContainerSlots(dataRefs.worbenchOutputData.Container);
+
+		// Backpack
+		if (SaveManager.currentSave.backpack != null)
         {
 			dataRefs.backpackData.size = SaveManager.currentSave.backpack.collectibleSlots.Length;
 			dataRefs.backpackData.Container = SaveManager.currentSave.backpack;
         }
         else Utils.ClearContainerSlots(dataRefs.backpackData.Container);
 
+        // Hat locker
         if (SaveManager.currentSave.hatLocker != null)
         {
 			dataRefs.hatLockerData.size = SaveManager.currentSave.hatLocker.collectibleSlots.Length;
@@ -37,6 +49,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
         }
         else Utils.ClearContainerSlots(dataRefs.hatLockerData.Container);
 
+        // Item locker
         if (SaveManager.currentSave.itemLocker != null)
         {
             dataRefs.itemLockerData.size = SaveManager.currentSave.itemLocker.collectibleSlots.Length;
@@ -44,6 +57,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
         }
         else Utils.ClearContainerSlots(dataRefs.itemLockerData.Container);
 
+        // Loot locker
         if (SaveManager.currentSave.lootLocker != null)
         {
 			dataRefs.lootLockerData.size = SaveManager.currentSave.lootLocker.collectibleSlots.Length;
@@ -51,7 +65,8 @@ public class LootrunnerDataInitializer : MonoBehaviour
         }
         else Utils.ClearContainerSlots(dataRefs.lootLockerData.Container);
 
-        if (SaveManager.currentSave.vanFloor != null)
+		// Van 
+		if (SaveManager.currentSave.vanFloor != null)
         {
             dataRefs.vanFloor.floorContainer.Container = SaveManager.currentSave.vanFloor.floorContainer;
             dataRefs.vanFloor.floorContainer.collectibleDict = SaveManager.currentSave.vanFloor.collectibleDict;
@@ -61,6 +76,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
             Utils.ClearContainerSlots(dataRefs.vanFloor.floorContainer.Container);
             dataRefs.vanFloor.floorContainer.ClearFloorSpecificVals();
         }
+
 
         if (SaveManager.currentSave.unitFloor != null)
         {

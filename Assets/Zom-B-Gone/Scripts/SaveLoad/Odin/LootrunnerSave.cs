@@ -16,6 +16,9 @@ public class LootrunnerSave
     public CollectibleContainer itemLocker;
     public CollectibleContainer lootLocker;
 
+    public CollectibleContainer workbenchInput;
+    public CollectibleContainer workbenchOutput;
+
     public SaveableFloor vanFloor;
     public SaveableFloor unitFloor;
 

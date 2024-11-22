@@ -13,6 +13,9 @@ public class LootrunnerDataRefs : MonoBehaviour
     public CollectibleContainerData itemLockerData;
     public CollectibleContainerData lootLockerData;
 
+    public CollectibleContainerData worbenchInputData;
+    public CollectibleContainerData worbenchOutputData;
+
     public FloorContainer vanFloor;
     public FloorContainer unitFloor;
 

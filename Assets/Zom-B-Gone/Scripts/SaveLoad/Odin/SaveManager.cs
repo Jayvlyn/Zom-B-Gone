@@ -69,6 +69,9 @@ public class SaveManager : MonoBehaviour
         currentSave.itemLocker = DeepCopyContainer(dataRefs.itemLockerData.Container);
         currentSave.lootLocker = DeepCopyContainer(dataRefs.lootLockerData.Container);
 
+        currentSave.workbenchInput = DeepCopyContainer(dataRefs.worbenchInputData.Container);
+        currentSave.workbenchOutput = DeepCopyContainer(dataRefs.worbenchOutputData.Container);
+
         SaveableFloor vanFloor = new SaveableFloor();
         vanFloor.collectibleDict = dataRefs.vanFloor.floorContainer.collectibleDict;
         vanFloor.floorContainer = DeepCopyContainer(dataRefs.vanFloor.floorContainer.Container);
