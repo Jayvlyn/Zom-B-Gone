@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private Slider staminaSlider;
     private Interactor interactor;
 
+    public static PlayerController instance;
+
 
     private Camera gameCamera;
     [HideInInspector] public CinemachineVirtualCamera vc;
@@ -141,6 +143,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         // Find references
         gameCamera = FindFirstObjectByType<Camera>();
         interactor = GetComponent<Interactor>();

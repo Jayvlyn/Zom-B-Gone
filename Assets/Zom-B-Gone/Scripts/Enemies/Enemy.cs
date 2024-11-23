@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -101,7 +102,7 @@ public abstract class Enemy : MonoBehaviour
 			case State.DEAD:
 				StopCoroutine(tickCoroutine);
 				CurrentMoveSpeed = 0;
-				rigidBody.Sleep();
+				//rigidBody.Sleep();
 				GetComponent<Collider2D>().enabled = false;
 				decayTimer = decayTime;
 				transform.localScale = new Vector3(transform.localScale.x * 0.9f, transform.localScale.y * 0.9f, transform.localScale.z);
@@ -135,10 +136,23 @@ public abstract class Enemy : MonoBehaviour
         currentState = newState;
     }
 
+
+	float playerDistance;
     // use to handle timers only, put computationally heavy things in enemy tick
     private void Update()
     {
-        LerpTarget(desiredTarget);
+		if (PlayerController.instance != null)
+		{
+			playerDistance = Vector2.Distance(transform.position, PlayerController.instance.transform.position);
+		}
+		else
+		{
+			playerDistance = 11f;
+		}
+		float clampedDistance = Mathf.Clamp(playerDistance, 0, 11);
+		tickInterval =  Mathf.Lerp(0.05f, 1f, clampedDistance / 11f);
+
+		LerpTarget(desiredTarget);
 
         switch (currentState)
         {
@@ -175,23 +189,33 @@ public abstract class Enemy : MonoBehaviour
             //	if (hitCount > 0) return;       
             //         }
 
-            float dist = Vector2.Distance(target, transform.position);
-
 			float speed = CurrentMoveSpeed;
 
 			if(activeEffect != null) speed *= activeEffect.effectData.speedMult;
 
-			Vector2 movementForce = Vector2.zero;
 
-			if (dist > 1)
+			if (currentState == State.INVESTIGATING)
 			{
-				movementForce = target * speed;
-				rigidBody.AddForce(movementForce, ForceMode2D.Force);
+				float investPointDist = Vector2.Distance(investigaitonPoint, transform.position);
+				if(investPointDist > 1)
+				{
+					rigidBody.AddForce(target * speed, ForceMode2D.Force);
+				}
 			}
-			else if (dist > 0.2)
+			else if (currentState == State.AGGRO)
 			{
-				movementForce *= dist;
-				rigidBody.AddForce(movementForce, ForceMode2D.Force);
+				if(playerDistance > 1)
+				{
+					rigidBody.AddForce(target * speed, ForceMode2D.Force);
+				}
+				else if (playerDistance > 0.2)
+				{
+					rigidBody.AddForce(target * speed * playerDistance, ForceMode2D.Force); // move slower as they get closer
+				}
+			}
+			else
+			{
+				rigidBody.AddForce(target * speed, ForceMode2D.Force);
 			}
         }
     }
@@ -248,7 +272,9 @@ public abstract class Enemy : MonoBehaviour
     ContactFilter2D movementBlockerFilter = new ContactFilter2D();
     void Start()
     {
-        movementBlockerFilter.SetLayerMask(~LayerMask.GetMask("Interactable"));// for doors, dont(~) include interactables like doors so they still want to walk through them
+		maxNeighborRadius = Mathf.Max(enemyData.cohesionRadius, enemyData.alignmentRadius, enemyData.separationRadius);
+
+		movementBlockerFilter.SetLayerMask(~LayerMask.GetMask("Interactable"));// for doors, dont(~) include interactables like doors so they still want to walk through them
 		movementBlockerFilter.useLayerMask = true;
 
 		if(enemyData.possibleVoices.Count > 0)
@@ -261,6 +287,10 @@ public abstract class Enemy : MonoBehaviour
 		{
 			limb.AddAttacksToOwner();
 		}
+
+		alignmentNeighbors = new List<GameObject>();
+		separationNeighbors = new List<GameObject>();
+		cohesionNeighbors = new List<GameObject>();
     }
 
 	private Coroutine tickCoroutine;
@@ -335,15 +365,14 @@ public abstract class Enemy : MonoBehaviour
 		return wanderTarget.normalized;
 	}
 
-	GameObject[] cohesionNeighbors; // for outside use in finding disguised player
+	List<GameObject> cohesionNeighbors; // for outside use in finding disguised player
 	GameObject disguisedPlayer;
 	Vector2 Cohesion()
 	{
 		bool foundPlayerNeighbor = false;
 		Vector2 cohesionVector = new Vector2();
 		int neighborCount = 0;
-		cohesionNeighbors = GetNeighbors(enemyData.cohesionRadius);
-		if (cohesionNeighbors.Length == 0) return cohesionVector;
+		if (cohesionNeighbors.Count == 0) return cohesionVector;
 		foreach (var neighbor in cohesionNeighbors)
 		{
 			if (isInFOV(neighbor.transform.position))
@@ -368,12 +397,12 @@ public abstract class Enemy : MonoBehaviour
 		return cohesionVector.normalized;
 	}
 
+	List<GameObject> alignmentNeighbors;
 	Vector2 Alignment()
 	{
 		Vector2 alignVector = new Vector2();
-        GameObject[] neighbors = GetNeighbors(enemyData.alignmentRadius);
-		if (neighbors.Length == 0) return alignVector;
-		foreach (var neighbor in neighbors)
+		if (alignmentNeighbors.Count == 0) return alignVector;
+		foreach (var neighbor in alignmentNeighbors)
 		{
 			if (isInFOV(neighbor.transform.position))
 			{
@@ -385,13 +414,13 @@ public abstract class Enemy : MonoBehaviour
 		return alignVector.normalized;
 	}
 
+	List<GameObject> separationNeighbors;
 	Vector2 Separation()
 	{
 		Vector2 separateVector = new Vector2();
-        GameObject[] neighbors = GetNeighbors(enemyData.separationRadius);
-		if (neighbors.Length == 0) return separateVector;
+		if (separationNeighbors.Count == 0) return separateVector;
 
-		foreach (var neighbor in neighbors)
+		foreach (var neighbor in separationNeighbors)
 		{
 			if (isInFOV(neighbor.transform.position))
 			{
@@ -424,7 +453,7 @@ public abstract class Enemy : MonoBehaviour
             Vector2 rayDir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, enemyData.obstacleAvoidDistance, MovementBlockersLm);
-            Debug.DrawLine(transform.position, (Vector2)transform.position + rayDir * enemyData.obstacleAvoidDistance, Color.red);
+            //Debug.DrawLine(transform.position, (Vector2)transform.position + rayDir * enemyData.obstacleAvoidDistance, Color.red);
             if (hit) hitCount++;
             if (!hit)
             {
@@ -536,9 +565,12 @@ public abstract class Enemy : MonoBehaviour
 		return neededVelocity - new Vector2(rigidBody.linearVelocity.x, rigidBody.linearVelocity.y);
 	}
 
+	GameObject[] allNeighbors;
 
+	float maxNeighborRadius;
 	virtual protected Vector2 Drone()
 	{
+		allNeighbors = GetNeighbors(maxNeighborRadius);
 		return (enemyData.cohesionPriority * Cohesion() +
 				enemyData.alignmentPriority * Alignment() + 
 				enemyData.separationPriority * Separation() +
@@ -549,7 +581,8 @@ public abstract class Enemy : MonoBehaviour
 
     virtual protected Vector2 Investigate()
     {
-        return (enemyData.cohesionPriority * Cohesion() +
+		allNeighbors = GetNeighbors(maxNeighborRadius);
+		return (enemyData.cohesionPriority * Cohesion() +
 				enemyData.alignmentPriority * Alignment() +
                 enemyData.separationPriority * Separation() +
                 enemyData.avoidancePriority * Avoidance() +
@@ -559,6 +592,7 @@ public abstract class Enemy : MonoBehaviour
 
     virtual protected Vector2 Aggro()
     {
+		allNeighbors = GetNeighbors(maxNeighborRadius);
 		float playerDistance = Vector2.Distance(playerTarget.transform.position, transform.position);
 		Vector2 direction = playerTarget.transform.position - transform.position;
 
@@ -641,7 +675,11 @@ public abstract class Enemy : MonoBehaviour
 	public GameObject[] GetNeighbors(float radius)
 	{
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, FellowEnemyLm);
-		GameObject[] neighborsFound = new GameObject[colliders.Length-1];
+		GameObject[] neighborsFound = new GameObject[colliders.Length-1]; // -1 to account for self
+		cohesionNeighbors.Clear();
+		separationNeighbors.Clear();
+		alignmentNeighbors.Clear();
+
 
 		int neighborsIndex = 0;
 		for(int i = 0; i < colliders.Length; i++) 
@@ -651,6 +689,10 @@ public abstract class Enemy : MonoBehaviour
 				try
 				{
 					neighborsFound[neighborsIndex] = colliders[i].gameObject;
+					float distance = Vector2.Distance(transform.position, colliders[i].gameObject.transform.position);
+					if (distance <= enemyData.cohesionRadius)   cohesionNeighbors.Add(colliders[i].gameObject);
+					if (distance <= enemyData.separationRadius) separationNeighbors.Add(colliders[i].gameObject);
+					if (distance <= enemyData.alignmentRadius)  alignmentNeighbors.Add(colliders[i].gameObject);
 				}
 				catch (Exception e)
 				{

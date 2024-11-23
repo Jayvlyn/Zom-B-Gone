@@ -66,7 +66,6 @@ public class Health : MonoBehaviour
         {
             popupType = DamagePopup.PopupType.PLAYER;
 
-            CameraShakeManager.instance.CameraShake(pc.impulseSource, CodeMonkey.Assets.i.playerDamagedSSP, popupVector.normalized);
 
             #region hat buff
             if(pc.head.wornHat != null)
@@ -75,8 +74,15 @@ public class Health : MonoBehaviour
             }
             #endregion
 
-            float damageEffectIntensity = (incomingDamage - 5) / (50 - 5) * (1 - 0.1f) + 0.1f;
-			ScreenDamageEffectController.DamageEffect.DoDamageEffect(damageEffectIntensity);
+            if(incomingDamage > 0)
+            {
+                // Camera Shake
+                CameraShakeManager.instance.CameraShake(pc.impulseSource, CodeMonkey.Assets.i.playerDamagedSSP, popupVector.normalized);
+
+                // Blood Vignette
+                float damageEffectIntensity = Mathf.Clamp01((float)incomingDamage / 50);
+			    ScreenDamageEffectController.DamageEffect.DoDamageEffect(damageEffectIntensity);
+            }
 		}
         else if (gameObject.CompareTag("Enemy"))
         {
@@ -87,7 +93,7 @@ public class Health : MonoBehaviour
             }
 
             #region hat buff
-            if(enemyOwner.head.wornHat != null)
+            if(enemyOwner.head != null && enemyOwner.head.wornHat != null)
             {
                 incomingDamage -= enemyOwner.head.wornHat.hatData.defense;
             }

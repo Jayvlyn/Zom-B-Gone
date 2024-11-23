@@ -8,7 +8,7 @@ public class Optimizer : MonoBehaviour
 	public Transform PlayerT;
 	public float cullDistance = 200f;
 
-	public static int maxActiveEnemies = 50;
+	public static int maxActiveEnemies = 200;
 	public static int currentActiveEnemies = 0;
 
 	public LayerMask enemyLm;
@@ -20,10 +20,10 @@ public class Optimizer : MonoBehaviour
 		StartCoroutine(DistanceCheck());
 	}
 
-	//private void Update()
-	//{
-	//	Debug.Log(currentActiveEnemies);
-	//}
+	private void Update()
+	{
+		Debug.Log(currentActiveEnemies);
+	}
 
 	private IEnumerator DistanceCheck()
 	{
@@ -50,14 +50,19 @@ public class Optimizer : MonoBehaviour
 				}
 				else if (!go.activeSelf)
 				{
-					if (currentActiveEnemies < maxActiveEnemies);
+					if ((enemyLm.value & (1 << go.gameObject.layer)) != 0)
 					{
-						if(!go.activeSelf)
+						if (currentActiveEnemies < maxActiveEnemies) ;
 						{
-							if ((enemyLm.value & (1 << go.gameObject.layer)) != 0) currentActiveEnemies++;
+							currentActiveEnemies++;
 							go.SetActive(true);
 						}
 					}
+					else
+					{
+						go.SetActive(true);
+					}
+
 				}
 			}
 

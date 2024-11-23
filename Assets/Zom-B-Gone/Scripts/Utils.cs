@@ -1,6 +1,7 @@
 ﻿using Cinemachine;
 using CodeMonkey;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 
@@ -150,8 +151,9 @@ public static class Utils
 				Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
 				knockbackVector *= force;
 				Vector2 popupVector = ((Vector2)h.transform.position - sourcePosition).normalized * 3;
-                float damage = baseDamage - dist;
-                h.TakeDamage(damage, knockbackVector, damage, false, popupVector, false, damage*0.33f);
+                float damage = baseDamage - (dist * 6);
+                bool invert = (sourcePosition.x > h.transform.position.x);
+                h.TakeDamage(damage, knockbackVector, damage, false, popupVector, invert, damage*0.33f);
 			}
 			else if (collider.TryGetComponent(out Rigidbody2D rb))
             {
