@@ -164,7 +164,7 @@ public class ProjectileWeapon : Weapon
                 
                 if(bullet.TryGetComponent(out Rigidbody2D bulletRb))
                 {
-                    bulletRb.AddForce(transform.up * projectileWeaponData.fireForce, ForceMode2D.Impulse);
+                    bulletRb.AddForce(bullet.transform.up * projectileWeaponData.fireForce, ForceMode2D.Impulse);
                 }
                 if(bullet.TryGetComponent(out Bullet bulletScript))
                 {

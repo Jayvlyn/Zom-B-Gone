@@ -74,7 +74,10 @@ public class Health : MonoBehaviour
                 incomingDamage -= pc.head.wornHat.hatData.defense;
             }
             #endregion
-        }
+
+            float damageEffectIntensity = (incomingDamage - 5) / (50 - 5) * (1 - 0.1f) + 0.1f;
+			ScreenDamageEffectController.DamageEffect.DoDamageEffect(damageEffectIntensity);
+		}
         else if (gameObject.CompareTag("Enemy"))
         {
             popupType = DamagePopup.PopupType.ENEMY;
@@ -105,6 +108,8 @@ public class Health : MonoBehaviour
                 rb.AddForce(knockbackVector * 100);
             }
         }
+
+        if (incomingDamage < 0) return;
 
         CurrentHealth = CurrentHealth - incomingDamage;
 

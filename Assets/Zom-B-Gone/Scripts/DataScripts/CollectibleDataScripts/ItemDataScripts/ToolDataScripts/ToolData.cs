@@ -7,6 +7,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Tool", menuName = "Collectibles/New Tool")]
 public class ToolData : ItemData
 {
+	[Header("Tool Attributes")]
+	public float activateDelay = 3;
+	public float timeActivated = 10;
+
 
 	public override string GetInfoDisplayText()
 	{
