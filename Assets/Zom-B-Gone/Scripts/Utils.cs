@@ -98,8 +98,8 @@ public static class Utils
                viewportPos.z >= 0; // z should be >= 0 to ensure the position is in front of the camera
     }
 
-	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle", "Interactable");
-    private static readonly LayerMask coverLm = LayerMask.GetMask("World", "Vehicle");
+	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle", "Interactable", "Window");
+    private static readonly LayerMask coverLm = LayerMask.GetMask("World", "Vehicle", "Door");
 	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int baseDamage, bool big = true)
     {
         // Visual
@@ -144,7 +144,11 @@ public static class Utils
 
             Vector2 dir = ((Vector2)collider.transform.position - sourcePosition).normalized;
             RaycastHit2D coverHit = Physics2D.Raycast(sourcePosition, dir, dist, coverLm);
-            if (coverHit.collider != null) continue;
+
+            bool isVehicle = collider.gameObject.layer == LayerMask.NameToLayer("Vehicle");
+
+
+			if (!isVehicle && coverHit.collider != null) continue;
 
 			if (collider.TryGetComponent(out Health h))
 			{
@@ -153,12 +157,14 @@ public static class Utils
 				Vector2 popupVector = ((Vector2)h.transform.position - sourcePosition).normalized * 3;
                 float damage = baseDamage - (dist * 6);
                 bool invert = (sourcePosition.x > h.transform.position.x);
-                h.TakeDamage(damage, knockbackVector, damage, false, popupVector, invert, damage*0.33f);
+				bool crit = false;
+				if (Random.Range(0, 20) == 0) crit = true;
+				h.TakeDamage(damage, knockbackVector, damage, crit, popupVector, invert, damage*0.33f);
 			}
 			else if (collider.TryGetComponent(out Rigidbody2D rb))
             {
                 float finalForce = force;
-                if(collider.gameObject.layer == LayerMask.NameToLayer("Vehicle"))
+                if(isVehicle)
                 {
                     Vehicle v = collider.gameObject.GetComponentInChildren<Vehicle>();
                     v.StartCoroutine(v.ExplodedTimer());
@@ -179,6 +185,8 @@ public static class Utils
                     // Scale torque by inverse distance
                     float scaledTorque = torque * inverseDistance;
                     rb.AddTorque(scaledTorque * torqueAmount, ForceMode2D.Impulse);
+
+                    Debug.Log("torque added");
                 }
 
 

@@ -19,7 +19,7 @@ MonoBehaviour:
   attackRange: 0.8
   attackCooldown: 1
   obstacleAvoidDistance: 3
-  attackSpawnDistance: 0.2
+  attackSpawnDistance: 0.1
   fov: 60.4
   perceptionDistance: 30
   perceptionRayCount: 7

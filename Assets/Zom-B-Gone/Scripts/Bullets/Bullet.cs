@@ -83,6 +83,12 @@ public class Bullet : MonoBehaviour
     protected void DealDamage(Health targetHealth)
     {
         float damage = ProjectileWeaponDamage * bulletData.damageMultiplier;
-        shooter.DealDamage(targetHealth, damage);
+
+        bool crit = false;
+        if(bulletData.piercingPower <= currentPiercingPower + 1)
+        {
+			if (Random.Range(0, 3) == 0) crit = true;
+		}
+        shooter.DealDamage(targetHealth, damage, crit);
     }
 }

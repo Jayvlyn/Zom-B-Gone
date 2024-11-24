@@ -17,6 +17,8 @@ public class MeleeWeapon : Weapon
 
     private bool doDamage = false;
 
+    private int currentHitCount = 0;
+
     private void Awake()
 	{
         base.Awake();
@@ -90,6 +92,7 @@ public class MeleeWeapon : Weapon
 	private IEnumerator Swing()
     {
         DrainStamina();
+        currentHitCount = 0;
 
         PlaySwingSound();
         
@@ -215,6 +218,10 @@ public class MeleeWeapon : Weapon
         if (collision.gameObject.transform == transform.parent) return;
         else if (doDamage && !collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Health targetHealth))
         {
+
+            // sound
+            PlayHitSound();
+            // blood particles
             if ((!bloodTrail.isPlaying || bloodTrail.time > bloodTrail.totalTime*0.5f) && collision.gameObject.CompareTag("Enemy"))
             {
                 bloodTrail.Play();
@@ -229,9 +236,14 @@ public class MeleeWeapon : Weapon
             RaycastHit2D hit = Physics2D.Raycast(pos, dir.normalized, dir.magnitude, useBlockersLm);
             if (hit.collider != null) return;
 
+            currentHitCount++;
+			bool crit = Random.Range(0, currentHitCount + 2) == 0; // less likely to crit the more hits in you are
 
-            PlayHitSound();
-            DealDamage(targetHealth);
+            float denominator = (currentHitCount + 1) * 0.5f;
+            if(denominator < 1) denominator = 1;
+
+            float damage = (weaponData.damage * 0.25f) + ((weaponData.damage * 0.75f) / denominator);
+            DealDamage(targetHealth, damage, crit);
         }
     }
 }

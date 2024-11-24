@@ -517,7 +517,7 @@ public class PlayerController : MonoBehaviour
 
 	public void DropLeft()
 	{
-		if (hands.UsingLeft)
+		if (hands.leftItem)
 		{
 			hands.leftItem.Drop();
 			hands.leftLumbering = 1;
@@ -530,7 +530,7 @@ public class PlayerController : MonoBehaviour
 
 	public void DropRight()
 	{
-		if (hands.UsingRight)
+		if (hands.rightItem)
 		{
 			hands.rightItem.Drop();
 			hands.rightLumbering = 1;

@@ -16,7 +16,7 @@ public abstract class Weapon : Item
         else Debug.Log("Invalid Data & Class Matchup");
 	}
 
-	public void DealDamage(Health targetHealth, float inputDamage = -1)
+	public void DealDamage(Health targetHealth, float inputDamage = -1, bool crit = false)
     {
         float damage = weaponData.damage;
         if (inputDamage != -1) damage = inputDamage;
@@ -33,6 +33,6 @@ public abstract class Weapon : Item
 
         Vector2 knockbackVector = (targetHealth.transform.position - playerHead.transform.position).normalized * weaponData.knockbackPower;
 
-		targetHealth.TakeDamage(damage, knockbackVector, weaponData.dismemberChance, false, popupVector, invertRotate, weaponData.dismemberChance/3);
+		targetHealth.TakeDamage(damage, knockbackVector, weaponData.dismemberChance, crit, popupVector, invertRotate, weaponData.dismemberChance/3);
     }
 }

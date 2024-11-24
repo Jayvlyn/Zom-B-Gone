@@ -23,6 +23,7 @@ TagManager:
   - WorldTilemap
   - GlobalLight
   - Obstacle
+  - HidingSpot
   layers:
   - Default
   - TransparentFX

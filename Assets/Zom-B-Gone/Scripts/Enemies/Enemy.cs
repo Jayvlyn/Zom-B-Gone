@@ -102,7 +102,7 @@ public abstract class Enemy : MonoBehaviour
 			case State.DEAD:
 				StopCoroutine(tickCoroutine);
 				CurrentMoveSpeed = 0;
-				//rigidBody.Sleep();
+				StartCoroutine(SleepRb());
 				GetComponent<Collider2D>().enabled = false;
 				decayTimer = decayTime;
 				transform.localScale = new Vector3(transform.localScale.x * 0.9f, transform.localScale.y * 0.9f, transform.localScale.z);
@@ -135,6 +135,7 @@ public abstract class Enemy : MonoBehaviour
         }
         currentState = newState;
     }
+
 
 
 	float playerDistance;
@@ -659,8 +660,8 @@ public abstract class Enemy : MonoBehaviour
         if (attacks.Count > 0)
         {
             attackTimer = enemyData.attackCooldown;
-			Vector3 randomVariation = Utils.RandomUnitVector3() * 0.2f;
-            GameObject attackObject = Instantiate(attacks[UnityEngine.Random.Range(0, attacks.Count)], transform.position + (transform.up * enemyData.attackSpawnDistance) + randomVariation, Quaternion.identity);
+			Vector2 randomVariation = Utils.RandomUnitVector2() * 0.2f;
+            GameObject attackObject = Instantiate(attacks[UnityEngine.Random.Range(0, attacks.Count)], (Vector2)transform.position + ((Vector2)transform.up * enemyData.attackSpawnDistance) + randomVariation, Quaternion.identity);
             Attack attack = attackObject.GetComponent<Attack>();
             attack.damageMultiplier = enemyData.attackDamageMultiplier;
         }
@@ -831,7 +832,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
 	{
-		if((AttackableMovementBlockersLm.value & (1 << collision.gameObject.layer)) != 0 && attackTimer <= 0 && rigidBody.linearVelocity.magnitude < 0.2) // stopped by door or window
+		if((AttackableMovementBlockersLm.value & (1 << collision.gameObject.layer)) != 0 && attackTimer <= 0 && rigidBody.linearVelocity.magnitude < 0.2 && !collision.gameObject.CompareTag("HidingSpot")) // stopped by door or window
 		{
 			TryAttack();
 		}
@@ -860,7 +861,10 @@ public abstract class Enemy : MonoBehaviour
 				float damage = rigidBody.linearVelocity.magnitude * 12;
 
 				Vector2 popupVec = (collision.transform.position - transform.position).normalized;
-				health.TakeDamage(damage, Vector2.zero, 40, false, popupVec, false, 10);
+
+				bool crit = false;
+				if (UnityEngine.Random.Range(0, 20) == 0) crit = true;
+				health.TakeDamage(damage, Vector2.zero, 40, crit, popupVec, false, 10);
 
 			}
 		}
@@ -873,4 +877,10 @@ public abstract class Enemy : MonoBehaviour
 			collidingVehicle = null;
         }
     }
+
+	private IEnumerator SleepRb()
+	{
+		yield return new WaitForSeconds(3);
+		rigidBody.Sleep();
+	}
 }

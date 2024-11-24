@@ -60,8 +60,10 @@ public class Health : MonoBehaviour
         mostRecentPopupVec = popupVector;
         DamagePopup.PopupType popupType = DamagePopup.PopupType.DEFAULT;
 
-        if (damage < 0) return;
-        int incomingDamage = Mathf.RoundToInt(damage);
+        if (damage <= 0) return;
+        float cr = damage;
+        if (isCritical) cr *= 1.6f;
+        int incomingDamage = Mathf.RoundToInt(cr);
         if (gameObject.TryGetComponent(out PlayerController pc))
         {
             popupType = DamagePopup.PopupType.PLAYER;
