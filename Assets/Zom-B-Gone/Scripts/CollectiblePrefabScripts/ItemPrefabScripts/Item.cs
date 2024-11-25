@@ -102,33 +102,9 @@ public abstract class Item : Collectible
 
     protected virtual void Update()
     {
-        //if (useHeld)
-        //{
-        //    if (inRightHand)
-        //    {
-        //        if (!Input.GetKey(KeyCode.Mouse1))
-        //        {
-        //            useHeld = false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if(!Input.GetKey(KeyCode.Mouse0))
-        //        {
-        //            useHeld = false;
-        //        }
-        //    }
-
-        //}
-
         if (currentState == ItemState.AIRBORNE && rb.linearVelocity.magnitude < minimumAirborneSpeed)
         {
             ChangeState(ItemState.GROUNDED);
-        }
-
-        if (moveToHand)
-        {
-            ReturnToGrip();
         }
     }
 
@@ -240,7 +216,7 @@ public abstract class Item : Collectible
         }
     }
 
-    public virtual void PickUp(Transform parent, bool rightHand)
+    public virtual void PickUp(Transform parent, bool rightHand, bool adding = false)
     {
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0;
@@ -253,7 +229,7 @@ public abstract class Item : Collectible
 
 
         transform.SetParent(parent);
-        PositionInHand();
+        PositionInHand(adding);
     }
 
     protected void CheckFlip()
@@ -283,34 +259,60 @@ public abstract class Item : Collectible
         PickUp(playerController.transform, rightHand);
     }
 
-    public void PositionInHand()
+    public void AddToHand(bool rightHand, PlayerController playerController)
+    {
+        base.Interact(rightHand, playerController);
+        PickUp(playerController.transform, rightHand, true);
+    }
+
+    public void PositionInHand(bool destroy = false)
     {
         if (inRightHand) rotationTarget = Quaternion.Euler(0, 0, -gripRotation);
         else rotationTarget = Quaternion.Euler(0, 0, gripRotation);
 
         CheckFlip();
 
-        moveToHand = true; // see update()
+        StartCoroutine(ReturnToGrip(destroy));
     }
 
-    protected void ReturnToGrip()
+    protected IEnumerator ReturnToGrip(bool destroy = false)
     {
-        if (inRightHand)
+
+        moveToHand = true;
+		while (moveToHand)
         {
-            pickupTarget = transform.parent.position + (transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
+		    if (inRightHand)
+		    {
+			    pickupTarget = transform.parent.position + (transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
+		    }
+		    else
+		    {
+			    pickupTarget = transform.parent.position + (-transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
+		    }
+            transform.position = Vector2.Lerp(transform.position, pickupTarget, Time.deltaTime * pickupSpeed);
+            if (!aimAtMouse) transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationTarget, pickupSpeed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, pickupTarget) < 0.02f)
+            {
+                transform.position = pickupTarget;
+                moveToHand = false;
+            }
+            yield return null;
         }
-        else
+
+        if(destroy)
         {
-            pickupTarget = transform.parent.position + (-transform.parent.right * holdOffset.x + transform.parent.up * holdOffset.y);
+            if(inRightHand)
+            {
+                playerHands.rightItem.Quantity += Quantity;
+            }
+            else
+            {
+                playerHands.leftItem.Quantity += Quantity;
+            }
+            playerHands.handContainerData.UpdateUI();
+            Destroy(gameObject);
         }
-        if (Vector3.Distance(transform.position, pickupTarget) < 0.02f)
-        {
-            transform.position = pickupTarget;
-            moveToHand = false;
-            return;
-        }
-        transform.position = Vector2.Lerp(transform.position, pickupTarget, Time.deltaTime * pickupSpeed);
-        if (!aimAtMouse) transform.localRotation = Quaternion.Lerp(transform.localRotation, rotationTarget, pickupSpeed * Time.deltaTime);
     }
 
     protected virtual void RemoveFromHand()

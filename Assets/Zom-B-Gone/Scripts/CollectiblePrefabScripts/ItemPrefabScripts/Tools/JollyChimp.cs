@@ -17,7 +17,7 @@ public class JollyChimp : Tool
 		regularSprite = itemRenderer.sprite;
 	}
 
-	public override void PickUp(Transform parent, bool rightHand)
+	public override void PickUp(Transform parent, bool rightHand, bool adding = false)
 	{
 		base.PickUp(parent, rightHand);
 

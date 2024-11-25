@@ -18,8 +18,8 @@ public abstract class Collectible : MonoBehaviour, IInteractable
         PlayPickupSound();
 
         this.playerController = playerController;
-		playerHands = playerController.gameObject.GetComponent<Hands>();
-		playerHead = playerController.gameObject.GetComponent<Head>();
+        playerHands = playerController.hands;
+        playerHead = playerController.head;
 		playerData = playerController.playerData;
 
 

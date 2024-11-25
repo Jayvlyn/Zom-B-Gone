@@ -123,7 +123,7 @@ public class ProjectileWeapon : Weapon
     }
 
 
-    public override void PickUp(Transform parent, bool rightHand)
+    public override void PickUp(Transform parent, bool rightHand, bool adding = false)
     {
         if(parent.gameObject.TryGetComponent(out PlayerController pc)) playerController = pc;
         base.PickUp(parent, rightHand);
