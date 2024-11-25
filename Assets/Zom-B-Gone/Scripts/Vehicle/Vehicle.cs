@@ -90,11 +90,11 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         }
     }
 
-    abstract public void Accelerate();
+    abstract public void Accelerate(float speedMod = 1);
 
     abstract public void Steer(float steerDirection);
 
-    abstract public void Brake();
+    abstract public void Brake(float speedMod = 1);
 
     protected void KillOrthogonalVelocity()
     {
@@ -127,6 +127,11 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public float GetLongitudinalVelocity()
     {
         return Vector2.Dot(transform.up, rb.linearVelocity);
+    }
+
+    public bool IsMovingFoward()
+    {
+        return Vector2.Dot(transform.up, rb.linearVelocity.normalized) > 0;
     }
 
     public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)

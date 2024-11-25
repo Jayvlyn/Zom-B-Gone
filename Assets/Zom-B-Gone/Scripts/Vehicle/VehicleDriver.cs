@@ -18,15 +18,18 @@ public class VehicleDriver : MonoBehaviour
     {
         if(vehicle && vehicle.Active)
         {
+            float speedMod = 1;
+			#region hat buff
+			if (playerController.head.wornHat != null)
+            {
+                speedMod = playerController.head.wornHat.hatData.driveSpeedMod;
+            }
+			#endregion
 
-
-            if (steering) vehicle.Steer(steerDirection);
-            if (accelerateHeld) vehicle.Accelerate();
-            if (brakeHeld) vehicle.Brake();
+			if (steering) vehicle.Steer(steerDirection);
+            if (accelerateHeld) vehicle.Accelerate(speedMod);
+            if (brakeHeld) vehicle.Brake(speedMod);
             if((accelerateHeld || brakeHeld) && !steering) vehicle.CorrectSteering();
-
-            //Debug.Log(vehicle.GetLongitudinalVelocity());
-
         }
     }
 

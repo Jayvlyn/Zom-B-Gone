@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Katana
   m_EditorClassIdentifier: 
   name: Katana
-  description: 
+  description: Kuso o kue, andeddo!
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 21300000, guid: c15a0fe5c1cd5e144b1ebf8174567a3f, type: 3}
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: aa73e2eddd5a2aa49ba217219dc89dc0, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
-  weight: 2000
+  weight: 3400
   throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0

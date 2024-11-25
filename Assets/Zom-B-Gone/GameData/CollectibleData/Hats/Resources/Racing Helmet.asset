@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3f1ff768cef6e42b111a3830f6ad74, type: 3}
+  m_Name: Racing Helmet
+  m_EditorClassIdentifier: 
+  name: Racing Helmet
+  description: I'll drive faster with this, also covers my face from bites.
+  rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
+  icon: {fileID: 21300000, guid: 206273f3cee2d8748ac878a49339cfa9, type: 3}
+  maxStack: 1
+  pickupSound: {fileID: 8300000, guid: 6f2e97f75ccef5845b992396739953a0, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
+  showHair: 0
+  swingTimeMultiplier: 1
+  damageMultiplier: 1
+  damageIncrease: 0
+  moveSpeedMod: 1
+  driveSpeedMod: 1.5
+  defense: 6
+  camo: 0

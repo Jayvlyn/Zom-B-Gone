@@ -101,6 +101,11 @@ public abstract class Enemy : MonoBehaviour
 				break;
 			case State.DEAD:
 				StopCoroutine(tickCoroutine);
+				if(activeEffect != null)
+				{
+					Destroy(activeEffect.gameObject);
+					activeEffect = null;
+				}
 				CurrentMoveSpeed = 0;
 				StartCoroutine(SleepRb());
 				GetComponent<Collider2D>().enabled = false;

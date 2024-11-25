@@ -218,15 +218,6 @@ public class MeleeWeapon : Weapon
         if (collision.gameObject.transform == transform.parent) return;
         else if (doDamage && !collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Health targetHealth))
         {
-
-            // sound
-            PlayHitSound();
-            // blood particles
-            if ((!bloodTrail.isPlaying || bloodTrail.time > bloodTrail.totalTime*0.5f) && collision.gameObject.CompareTag("Enemy"))
-            {
-                bloodTrail.Play();
-            }
-            
             Vector2 pos = playerController.transform.position;
             if (inRightHand) pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(holdOffset.x, 0));
             else pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(-holdOffset.x, 0));
@@ -235,6 +226,25 @@ public class MeleeWeapon : Weapon
 
             RaycastHit2D hit = Physics2D.Raycast(pos, dir.normalized, dir.magnitude, useBlockersLm);
             if (hit.collider != null) return;
+
+
+            bool hitIsEnemy = collision.gameObject.CompareTag("Enemy");
+
+			// sound
+			PlayHitSound();
+            // blood particles
+            if(bloodTrail)
+            {
+                if ((!bloodTrail.isPlaying || bloodTrail.time > bloodTrail.totalTime*0.5f) && hitIsEnemy)
+                {
+                    bloodTrail.Play();
+                }
+            }
+            // effect
+            if(hitIsEnemy && meleeWeaponData.effect != null)
+            {
+                Utils.ApplyEffect(meleeWeaponData.effect, collision.gameObject.GetComponent<Enemy>());
+            }
 
             currentHitCount++;
 			bool crit = Random.Range(0, currentHitCount + 2) == 0; // less likely to crit the more hits in you are

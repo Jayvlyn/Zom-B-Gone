@@ -23,7 +23,8 @@ MonoBehaviour:
   showHair: 0
   swingTimeMultiplier: 0.9
   damageMultiplier: 1.1
-  damageIncrease: 0
+  damageIncrease: 3
   moveSpeedMod: 1
-  defense: 4
+  driveSpeedMod: 1
+  defense: 9
   camo: 0

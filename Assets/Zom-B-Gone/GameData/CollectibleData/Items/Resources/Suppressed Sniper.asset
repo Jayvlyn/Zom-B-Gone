@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a8624d8178e844f89fe8ff666ab683, type: 3}
+  m_Name: Suppressed Sniper
+  m_EditorClassIdentifier: 
+  name: Suppressed Sniper
+  description: Pierce through an entire horde, and less likely to draw in more
+  rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
+  icon: {fileID: 21300000, guid: 3f187e9822ca30c4cb2e9762e3e34311, type: 3}
+  maxStack: 1
+  pickupSound: {fileID: 8300000, guid: c8206db393358144bab42eebc0c6e797, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
+  weight: 4000
+  throwForceMult: 1
+  throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
+  noiseRadius: 70
+  damage: 100
+  attackSpeed: 1.57
+  knockbackPower: 690
+  dismemberChance: 35
+  range: 10
+  maxAmmo: 7
+  ammoConsumption: 1
+  reloadTime: 4
+  fireForce: 35
+  isAutomatic: 0
+  bulletPrefab: {fileID: 2198095510141801857, guid: 77f8966729b80f2418bc755689eba9dd, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: cbe202a33029cb74ab76aaa6f8fc440b, type: 3}
+  - {fileID: 8300000, guid: e5bdf04e964ec63439752e9e234dc474, type: 3}
+  - {fileID: 8300000, guid: 4d5bdebcb8ce0d4428a2f131899f5e18, type: 3}
+  reloadStart: {fileID: 8300000, guid: 0fdd99ef88e810d4785e0f330b7b1828, type: 3}
+  reloadNoiseRadius: 5
+  suppressed: 1
+  suppressionPercentage: 50
+  ssp: {fileID: 11400000, guid: 29b77d0764bf99e43bc502fa91c08711, type: 2}

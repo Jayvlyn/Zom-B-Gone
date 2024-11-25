@@ -19,15 +19,15 @@ MonoBehaviour:
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: 82202cf26ad183847aff13caa5fb1e4c, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
-  weight: 800
+  weight: 2000
   throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 44
-  damage: 35
+  damage: 45
   attackSpeed: 0.15
   knockbackPower: 400
   dismemberChance: 0
-  range: 20
+  range: 5
   maxAmmo: 30
   ammoConsumption: 1
   reloadTime: 2
@@ -41,4 +41,5 @@ MonoBehaviour:
   reloadStart: {fileID: 8300000, guid: 8cb3964e2e85418439af0d0b8337c64e, type: 3}
   reloadNoiseRadius: 0
   suppressed: 0
+  suppressionPercentage: 0
   ssp: {fileID: 11400000, guid: f6d5146b730cea6479e090dd7be01345, type: 2}

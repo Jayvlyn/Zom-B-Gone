@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3f1ff768cef6e42b111a3830f6ad74, type: 3}
+  m_Name: Blue Beanie
+  m_EditorClassIdentifier: 
+  name: Blue Beanie
+  description: Its blue :) Maybe gives a little protection?
+  rarity: {fileID: 11400000, guid: 705c066aaed3d914fa8be279498b3421, type: 2}
+  icon: {fileID: 21300000, guid: 780057a97b863cc42b56ef3bf3971887, type: 3}
+  maxStack: 1
+  pickupSound: {fileID: 8300000, guid: 6f2e97f75ccef5845b992396739953a0, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
+  showHair: 1
+  swingTimeMultiplier: 1
+  damageMultiplier: 1
+  damageIncrease: 0
+  moveSpeedMod: 1
+  driveSpeedMod: 1
+  defense: 1
+  camo: 0

@@ -248,7 +248,11 @@ public class ProjectileWeapon : Weapon
             audioSource.PlayOneShot(projectileWeaponData.shootSounds[roll]);
         }
         float noise = projectileWeaponData.noiseRadius;
-        if (projectileWeaponData.suppressed) noise *= 0.5f;
+        if (projectileWeaponData.suppressed)
+        {
+            float dec = (100-projectileWeaponData.suppressionPercentage) * 0.01f;
+            noise *= dec;
+        }
         Utils.MakeSoundWave(transform.position, noise);
     }
 
