@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8521114047084800116}
   - component: {fileID: 2479592600775128846}
   - component: {fileID: 4826773798859923985}
-  m_Layer: 6
+  m_Layer: 24
   m_Name: KitchenCounter
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1634939125
-  m_SortingLayer: -19
+  m_SortingLayer: -20
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: a22915781ea8f2641bfb71f7bb66e422, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

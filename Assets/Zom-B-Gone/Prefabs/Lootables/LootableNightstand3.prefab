@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -1729490757471638695}
   - component: {fileID: 1452034127571074432}
   - component: {fileID: -7892405201351840366}
-  m_Layer: 6
+  m_Layer: 25
   m_Name: LootableNightstand3
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 97008305
-  m_SortingLayer: -18
+  m_SortingLayer: -19
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8f3b3e744f2b47949b8c485f61968fee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

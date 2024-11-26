@@ -49,9 +49,9 @@ TagManager:
   - LayoutFloor
   - HidingPlayer
   - DisguisedPlayer
-  - 
-  - 
-  - 
+  - InteractableObstacle
+  - InteractableLootable
+  - InteractableDoor
   - 
   - 
   - 

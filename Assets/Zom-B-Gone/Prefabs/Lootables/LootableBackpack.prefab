@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8850377167297307327}
   - component: {fileID: -2275125784240948835}
   - component: {fileID: 8662862426587573862}
-  m_Layer: 6
+  m_Layer: 25
   m_Name: LootableBackpack
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 97008305
-  m_SortingLayer: -18
+  m_SortingLayer: -19
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 19a4dba680d1d814c969a70f38b24eab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

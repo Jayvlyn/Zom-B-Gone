@@ -51,6 +51,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   _maxHealth: 40
   _currentHealth: 40
+  glass: {fileID: 6044445472803695012}
 --- !u!212 &1045473919173139345
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -391,6 +392,18 @@ PrefabInstance:
     - target: {fileID: 255845113380040983, guid: b3ef8bb61a325e64e8d8fcedded0dc76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847106163883761828, guid: b3ef8bb61a325e64e8d8fcedded0dc76, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847106163883761828, guid: b3ef8bb61a325e64e8d8fcedded0dc76, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847106163883761828, guid: b3ef8bb61a325e64e8d8fcedded0dc76, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2.52
       objectReference: {fileID: 0}
     - target: {fileID: 5847106163883761828, guid: b3ef8bb61a325e64e8d8fcedded0dc76, type: 3}
       propertyPath: InitialModule.startSpeed.scalar

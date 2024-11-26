@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7561956238243992909}
   - component: {fileID: 2548121107735859367}
   - component: {fileID: -3689212837199098848}
-  m_Layer: 6
+  m_Layer: 25
   m_Name: LootableDresser3
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 97008305
-  m_SortingLayer: -18
+  m_SortingLayer: -19
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4149bc561cf1d9647889fcfd2b950f60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

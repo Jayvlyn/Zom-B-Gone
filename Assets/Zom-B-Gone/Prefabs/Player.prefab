@@ -312,7 +312,7 @@ MonoBehaviour:
   _interactRange: 2
   InteractionLm:
     serializedVersion: 2
-    m_Bits: 4160
+    m_Bits: 117444672
   InteractionBlockersLm:
     serializedVersion: 2
     m_Bits: 557184

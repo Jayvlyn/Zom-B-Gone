@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1230832833179306862}
   - component: {fileID: 7868570209696126247}
   - component: {fileID: -4319441097838608598}
-  m_Layer: 6
+  m_Layer: 25
   m_Name: LootableCabinet2
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1634939125
-  m_SortingLayer: -19
+  m_SortingLayer: -20
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 34a2c9d075fba594e8dd6c2ab6a68b1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

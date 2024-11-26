@@ -8,6 +8,9 @@ public class Health : MonoBehaviour
     [SerializeField,Range(1,1000)] int _maxHealth = 100;
     [SerializeField,Range(0,1000)] int _currentHealth = 100;
 
+    [Header("Only fill for window's health")]
+    public Glass glass;
+
     private void Start()
     {
         if(gameObject.CompareTag("Player"))
