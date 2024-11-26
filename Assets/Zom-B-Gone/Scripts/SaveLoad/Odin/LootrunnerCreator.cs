@@ -1,3 +1,4 @@
+using GameEvents;
 using OdinSerializer.Utilities;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ public class LootrunnerCreator : MonoBehaviour
     public GameObject nameEntryPopup;
     public TMP_InputField nameField;
     public PlayerData defaultPlayerData;
+    public VoidEvent startGameEvent;
 
     public void TryCreateLootrunner()
     {
@@ -41,6 +43,8 @@ public class LootrunnerCreator : MonoBehaviour
         nameEntryPopup.SetActive(false);
 
 		SaveManager.loadedSave = newSave.playerData.characterName;
-		SceneManager.LoadScene("Unit");
+
+        startGameEvent.Raise();
+		//SceneManager.LoadScene("Unit");
 	}
 }
