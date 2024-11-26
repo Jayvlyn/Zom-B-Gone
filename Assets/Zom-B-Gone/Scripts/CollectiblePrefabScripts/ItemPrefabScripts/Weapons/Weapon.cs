@@ -1,5 +1,3 @@
-
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public abstract class Weapon : Item
