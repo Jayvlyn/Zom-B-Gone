@@ -4,12 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 /*
 Preparse STM, insert events at specific characters (H becomes <e=rt,aytch>H)
-If auto parse is off, manually type ruby text like "<e=rt,aytch>H" ("rt" means ruby text event, "aytch" is the ruby text to be shown.)
+If auto parse is off, manually type ruby text like "<e=rt,aytch>H" ("rt" means ruby text buttonEvent, "aytch" is the ruby text to be shown.)
 these new events spawn temporary STM objects
 
 to do: additional mode that allows ruby text to be spread over multiple characters
 to improve readability. The issue is... getting info from an upcoming letter is difficult, and it won't work if it ends up on the next row.
-also, i don't think it will be possible to use an event to *insert* text.
+also, i don't think it will be possible to use an buttonEvent to *insert* text.
  */
 [RequireComponent(typeof(SuperTextMesh))]
 public class STMRubyText : MonoBehaviour {

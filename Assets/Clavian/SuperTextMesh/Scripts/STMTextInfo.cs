@@ -49,8 +49,8 @@ public class STMTextInfo
 	//public Color32 color = Color.white; //the actual color it will render at, not the color data!
 	//public int delayCount; //the delay count...
 
-	public List<string> ev = new List<string>(); //event strings.
-	public List<string> ev2 = new List<string>(); //repeating event strings.
+	public List<string> ev = new List<string>(); //buttonEvent strings.
+	public List<string> ev2 = new List<string>(); //repeating buttonEvent strings.
 	public STMColorData colorData; //reference or store...
 	public STMGradientData gradientData; //reference stuff??
 	public STMTextureData textureData;

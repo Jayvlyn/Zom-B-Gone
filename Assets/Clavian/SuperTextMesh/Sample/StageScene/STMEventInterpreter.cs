@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 /*
-Make SURE!!!!!! that this is added as a DYNAMIC event!!!
+Make SURE!!!!!! that this is added as a DYNAMIC buttonEvent!!!
 When adding events, it'll give you two lists to choose from, with a divider in the middle.
 Dynamic events are ABOVE static events in the menu!
 */
@@ -31,7 +31,7 @@ public class STMEventInterpreter : MonoBehaviour {
 		Debug.Log("Saying message!");
 	}
 
-	public void DoEvent(string s, STMTextInfo info){ //the string from the event, index of the letter in the string, world position of this letter, position of bottom-left corner
+	public void DoEvent(string s, STMTextInfo info){ //the string from the buttonEvent, index of the letter in the string, world position of this letter, position of bottom-left corner
 		//To get specific parts of a letter, if this script is on the same gameObject as the text mesh. (for position)
 		//Vector3 myPos = info.pos + transform.position;
 		//Vector3 centerPos = info.Middle + transform.position;
@@ -45,7 +45,7 @@ public class STMEventInterpreter : MonoBehaviour {
 			if(myTag.Length + playString.Length <= s.Length && s.Substring(audioTag.Length + seperator.Length, playString.Length) == playString){
 				Debug.Log("Playing sound!");
 			}else{
-				Debug.Log("Unknown audio event!");
+				Debug.Log("Unknown audio buttonEvent!");
 			}
 		*/
 		if(s.Contains("printpos")){
