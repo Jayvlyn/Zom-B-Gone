@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 	private PlayerController player;
 	public static Light2D globalLight;
 	public static bool checkZoneUnlock;
+	public Animator circleAnimator;
 
 	public static ZoneData currentZone;
 
@@ -33,17 +34,25 @@ public class GameManager : MonoBehaviour
 		{
 			marketData.Day++;
 		}
-		SceneManager.LoadScene(run);
+		circleAnimator.SetTrigger("CloseCircle");
+		StartCoroutine(sceneChangeDelay(run));	
 	}
 
 	public void Extract()
 	{
+		circleAnimator.SetTrigger("CloseCircle");
+		StartCoroutine(sceneChangeDelay("Unit"));
 		checkZoneUnlock = true;
-		SceneManager.LoadScene("Unit");
 	}
 
 	public static void SetZone(ZoneData zoneData)
 	{
 		currentZone = zoneData;
+	}
+
+	public IEnumerator sceneChangeDelay(string scene)
+	{
+		yield return new WaitForSeconds(1f);
+		SceneManager.LoadScene(scene);
 	}
 }
