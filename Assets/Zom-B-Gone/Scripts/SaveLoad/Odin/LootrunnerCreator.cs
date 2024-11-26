@@ -13,6 +13,7 @@ public class LootrunnerCreator : MonoBehaviour
     public GameObject noEmptyPrompt;
     public GameObject nameEntryPopup;
     public TMP_InputField nameField;
+    public PlayerData defaultPlayerData;
 
     public void TryCreateLootrunner()
     {
@@ -32,7 +33,7 @@ public class LootrunnerCreator : MonoBehaviour
         }
 
         LootrunnerSave newSave = new LootrunnerSave();
-        newSave.playerData = new PlayerData();
+        newSave.playerData = SaveManager.DeepCopyPlayerData(defaultPlayerData);
         newSave.playerData.characterName = lootrunnerName;
 
         SaveManager.saves.lootrunnerSaves[lootrunnerName] = newSave;

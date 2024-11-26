@@ -10,12 +10,18 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
     private void Awake()
     {
-        if (initialized) return;
+        if (initialized)
+        {
+            if (GameManager.checkZoneUnlock) CheckZoneUnlock();
+            SetUnlockedZones();
+            return;
+        }
+
         initialized = true;
 
         SaveManager.currentSave = SaveManager.saves.lootrunnerSaves[SaveManager.loadedSave];
 
-        dataRefs.playerData = SaveManager.currentSave.playerData;
+        SaveManager.SetPlayerData(dataRefs.playerData, SaveManager.currentSave.playerData);
         
         // Hands
         if (SaveManager.currentSave.hands != null) dataRefs.handsData.Container = SaveManager.currentSave.hands;
@@ -107,7 +113,49 @@ public class LootrunnerDataInitializer : MonoBehaviour
                 dataRefs.marketData.RefreshBuyOffers(merchant);
             }
         }
+
+        SetUnlockedZones();
+
     }
 
+    public void SetUnlockedZones()
+    {
+		for (int i = 0; i < dataRefs.playerData.unlockedZones.Length; i++)
+		{
+			dataRefs.zoneButtons[i].interactable = dataRefs.playerData.unlockedZones[i];
+		}
+	}
 
+	public void CheckZoneUnlock()
+	{
+		int lockedIndex = -1;
+		for (int i = 0; i < dataRefs.playerData.unlockedZones.Length; i++)
+		{
+			if (!dataRefs.playerData.unlockedZones[i])
+			{
+				lockedIndex = i;
+				break;
+			}
+		}
+        if(lockedIndex == -1) return; // all unlocked
+
+		ItemData checkingForThisItem = CodeMonkey.Assets.i.zoneUnlockItems[lockedIndex - 1]; // -1 because zoneUnlockItems index 0 is zone 2 unlock
+
+        if(CheckItemInHandsVan(checkingForThisItem))
+        {
+            dataRefs.playerData.unlockedZones[lockedIndex] = true;
+        }
+
+	}
+
+    public bool CheckItemInHandsVan(ItemData item)
+    {
+        if (dataRefs.handsData.container.collectibleSlots[0].Collectible == item) return true;
+        if (dataRefs.handsData.container.collectibleSlots[1].Collectible == item) return true;
+        foreach(CollectibleSlot cs in dataRefs.vanFloor.floorContainer.container.collectibleSlots)
+        {
+            if (cs.Collectible == item) return true;
+        }
+        return false;
+    }
 }

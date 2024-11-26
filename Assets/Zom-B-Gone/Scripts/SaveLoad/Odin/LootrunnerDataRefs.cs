@@ -1,6 +1,8 @@
+using CodeMonkey;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LootrunnerDataRefs : MonoBehaviour
 {
@@ -20,4 +22,6 @@ public class LootrunnerDataRefs : MonoBehaviour
     public FloorContainer unitFloor;
 
     public MarketData marketData;
+
+    public Button[] zoneButtons;
 }

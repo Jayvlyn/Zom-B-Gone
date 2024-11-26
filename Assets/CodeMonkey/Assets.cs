@@ -68,6 +68,7 @@ namespace CodeMonkey {
 
         public GameObject effectPrefab;
 
+        public ItemData[] zoneUnlockItems;
     }
 
 }

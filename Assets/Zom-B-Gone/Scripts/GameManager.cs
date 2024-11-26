@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -8,17 +9,21 @@ public class GameManager : MonoBehaviour
 {
 	private PlayerController player;
 	public static Light2D globalLight;
+	public static bool checkZoneUnlock;
 
-	[HideInInspector] public static LootTable currentZoneLootTable;
+	[HideInInspector] public static ZoneData currentZone;
 
 	[Header("MUST REFERENCE TO PRESERVE DATA")]
 	public MarketData marketData;
 	public FloorContainerData floorData;
+	public PlayerData activePlayerData;
 
 	private void Start()
 	{
 		globalLight = GameObject.FindGameObjectWithTag("GlobalLight").GetComponent<Light2D>();
 		player = FindFirstObjectByType<PlayerController>();
+		Time.timeScale = 1f;
+		PauseMenu.paused = false;
 	}
 
 
@@ -33,11 +38,12 @@ public class GameManager : MonoBehaviour
 
 	public void Extract()
 	{
+		checkZoneUnlock = true;
 		SceneManager.LoadScene("Unit");
 	}
 
-	public static void SetLootTable(LootTable lootTable)
+	public static void SetZone(ZoneData zoneData)
 	{
-		currentZoneLootTable = lootTable;
+		currentZone = zoneData;
 	}
 }

@@ -8,7 +8,7 @@ public class CollectibleSpawn : MonoBehaviour
     {
 		if(Random.Range(0,2) == 1)
 		{
-			CollectibleData coll = GameManager.currentZoneLootTable.GetRandomCollectible();
+			CollectibleData coll = GameManager.currentZone.lootTable.GetRandomCollectible();
 			if (coll == null) return;
 
 			GameObject prefab = Resources.Load<GameObject>(coll.name);
@@ -21,12 +21,12 @@ public class CollectibleSpawn : MonoBehaviour
 
 			if(coll is LootData l)
 			{
-				int quantity = GameManager.currentZoneLootTable.GetRandomQuantity(coll);
+				int quantity = GameManager.currentZone.lootTable.GetRandomQuantity(coll);
 				obj.GetComponent<Loot>().quantity = quantity;
 			}
 			else if (coll is ItemData i)
 			{
-				int quantity = GameManager.currentZoneLootTable.GetRandomQuantity(coll);
+				int quantity = GameManager.currentZone.lootTable.GetRandomQuantity(coll);
 				obj.GetComponent<Item>().Quantity = quantity;
 			}
 		}

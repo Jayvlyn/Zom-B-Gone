@@ -58,9 +58,52 @@ public class SaveManager : MonoBehaviour
 		return copy;
 	}
 
+    public static PlayerData DeepCopyPlayerData(PlayerData original)
+    {
+        PlayerData copy = new PlayerData();
+
+		copy.characterName = string.Copy(original.characterName); // Use string.Copy for strings
+		copy.gold = original.gold;
+		copy.kills = original.kills;
+		copy.walkSpeed = original.walkSpeed;
+		copy.runSpeed = original.runSpeed;
+		copy.sneakSpeed = original.sneakSpeed;
+		copy.speedModifier = original.speedModifier;
+		copy.maxStamina = original.maxStamina;
+		copy.staminaRecoverySpeed = original.staminaRecoverySpeed;
+		copy.staminaRecoveryDelay = original.staminaRecoveryDelay;
+		copy.velocityChangeSpeed = original.velocityChangeSpeed;
+		copy.reloadSpeedReduction = original.reloadSpeedReduction;
+		copy.obstacleTurningSpeed = original.obstacleTurningSpeed;
+
+		// Deep copy of the array
+		copy.unlockedZones = (bool[])original.unlockedZones.Clone();
+
+		return copy;
+	}
+
+    public static void SetPlayerData(PlayerData writeTo, PlayerData readFrom)
+    {
+		writeTo.characterName = string.Copy(readFrom.characterName); // Use string.writeTo for strings
+		writeTo.gold = readFrom.gold;
+		writeTo.kills = readFrom.kills;
+		writeTo.walkSpeed = readFrom.walkSpeed;
+		writeTo.runSpeed = readFrom.runSpeed;
+		writeTo.sneakSpeed = readFrom.sneakSpeed;
+		writeTo.speedModifier = readFrom.speedModifier;
+		writeTo.maxStamina = readFrom.maxStamina;
+		writeTo.staminaRecoverySpeed = readFrom.staminaRecoverySpeed;
+		writeTo.staminaRecoveryDelay = readFrom.staminaRecoveryDelay;
+		writeTo.velocityChangeSpeed = readFrom.velocityChangeSpeed;
+		writeTo.reloadSpeedReduction = readFrom.reloadSpeedReduction;
+		writeTo.obstacleTurningSpeed = readFrom.obstacleTurningSpeed;
+
+		writeTo.unlockedZones = (bool[])readFrom.unlockedZones.Clone();
+	}
+
     public static void UpdateCurrentSave(LootrunnerDataRefs dataRefs)
     {
-        currentSave.playerData = dataRefs.playerData;
+        currentSave.playerData = DeepCopyPlayerData(dataRefs.playerData);
 
         currentSave.hands = DeepCopyContainer(dataRefs.handsData.Container);
         currentSave.head = DeepCopyContainer(dataRefs.headData.Container);

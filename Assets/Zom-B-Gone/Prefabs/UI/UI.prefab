@@ -1362,25 +1362,25 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: e988eb74dfa8f684aa2a01f4062a9b66, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 760accda047bfd848a13cb1a6c3cc8dc, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 760accda047bfd848a13cb1a6c3cc8dc, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 760accda047bfd848a13cb1a6c3cc8dc, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 69fed2e286db87c47b834774f662431d, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 536873157112723089}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetLootTable
+        m_MethodName: SetZone
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 7146944c399f84545b89f81f2e8d7435, type: 2}
-          m_ObjectArgumentAssemblyTypeName: LootTable, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: 9d8e084f3f50fe04282a7fcdf61b7635, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ZoneData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Game
@@ -3184,25 +3184,25 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 09dfc7f32b7cae34fab4f2d9d1f96d24, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 380f9e70ac1888748b0a34fdfb7a98ba, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 380f9e70ac1888748b0a34fdfb7a98ba, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 380f9e70ac1888748b0a34fdfb7a98ba, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 71f8337370b64b0499d241c17ddf26b4, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2693546416105857261}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetLootTable
+        m_MethodName: SetZone
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: e2a50d7cadb10d84db7af10692f3c0ec, type: 2}
-          m_ObjectArgumentAssemblyTypeName: LootTable, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: 8ac4ccde7f089a14694c639ee1340b52, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ZoneData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Game
@@ -3672,25 +3672,25 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 3dc247ff3bdc96246877e278495ab007, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 325118a823d7dcd4aa64b6de88d426a3, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 325118a823d7dcd4aa64b6de88d426a3, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 325118a823d7dcd4aa64b6de88d426a3, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: d153ad78fcbd5764b95a92b11bde615e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2646918591319459276}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetLootTable
+        m_MethodName: SetZone
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 449a7a5b665cb9147939ae30e535bbdc, type: 2}
-          m_ObjectArgumentAssemblyTypeName: LootTable, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: daa5a7d876153a84caf0a139ca0aa8c1, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ZoneData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Game
@@ -4842,25 +4842,25 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: cb76a461049250e4faf5657c0ff01f76, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 7277f45aec481cd4896e26fa45794196, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 7277f45aec481cd4896e26fa45794196, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 7277f45aec481cd4896e26fa45794196, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 3fc51ec9834555d429a9dcca86f722ef, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 8943585264746438668}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetLootTable
+        m_MethodName: SetZone
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 7e50036ba94149d4d883cbe4a621c6c7, type: 2}
-          m_ObjectArgumentAssemblyTypeName: LootTable, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: 7d157a77e37d8354e888e7a007356cca, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ZoneData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Game
@@ -5658,11 +5658,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetLootTable
+        m_MethodName: SetZone
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 4f173e2fe97108b4ca0e14242ab290f8, type: 2}
-          m_ObjectArgumentAssemblyTypeName: LootTable, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: 4076174191382d5488b4109138b56477, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ZoneData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Game
@@ -5860,7 +5860,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3188966433476544893}
-  - {fileID: 9013060785910056136}
   - {fileID: 6993860720753308535}
   - {fileID: 7722773394869360961}
   - {fileID: 7827241544040940838}
@@ -5872,6 +5871,7 @@ RectTransform:
   - {fileID: 3917654440765351569}
   - {fileID: 4181299583876576950}
   - {fileID: 3324391840202336183}
+  - {fileID: 9013060785910056136}
   - {fileID: 348411738425272316}
   - {fileID: 4923805677614475638}
   - {fileID: 1542198921876490428}

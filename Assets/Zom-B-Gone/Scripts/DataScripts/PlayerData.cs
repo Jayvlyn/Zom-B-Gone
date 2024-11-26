@@ -21,4 +21,6 @@ public class PlayerData : ScriptableObject
     public float velocityChangeSpeed = 0.17f;
     public float reloadSpeedReduction = 1f;
     public float obstacleTurningSpeed = 20f;
+
+	public bool[] unlockedZones = new bool[5];
 }
