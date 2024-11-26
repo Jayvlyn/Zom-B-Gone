@@ -5,6 +5,7 @@ using UnityEngine;
 public class LootrunnerDataInitializer : MonoBehaviour
 {
     public LootrunnerDataRefs dataRefs;
+    public SuperTextMesh crucialAquireText;
 
     public static bool initialized = false;
 
@@ -126,8 +127,8 @@ public class LootrunnerDataInitializer : MonoBehaviour
 		}
 	}
 
-	public void CheckZoneUnlock()
-	{
+    public int GetLockedIndex()
+    {
 		int lockedIndex = -1;
 		for (int i = 0; i < dataRefs.playerData.unlockedZones.Length; i++)
 		{
@@ -137,15 +138,18 @@ public class LootrunnerDataInitializer : MonoBehaviour
 				break;
 			}
 		}
+		
+        return lockedIndex;
+	}
+
+	public void CheckZoneUnlock()
+	{
+        int lockedIndex = GetLockedIndex();
         if(lockedIndex == -1) return; // all unlocked
 
-		ItemData checkingForThisItem = CodeMonkey.Assets.i.zoneUnlockItems[lockedIndex - 1]; // -1 because zoneUnlockItems index 0 is zone 2 unlock
+		ItemData checkingForThisItem = GetNextRequiredItem(lockedIndex);
 
-        if(CheckItemInHandsVan(checkingForThisItem))
-        {
-            dataRefs.playerData.unlockedZones[lockedIndex] = true;
-        }
-
+        if (CheckItemInHandsVan(checkingForThisItem)) UnlockZone(lockedIndex, 1f);
 	}
 
     public bool CheckItemInHandsVan(ItemData item)
@@ -157,5 +161,44 @@ public class LootrunnerDataInitializer : MonoBehaviour
             if (cs.Collectible == item) return true;
         }
         return false;
+    }
+
+    public void CheckZoneUnlockFromCollectible(CollectibleData collectible)
+    {
+		int lockedIndex = GetLockedIndex();
+		if (lockedIndex == -1) return; // all unlocked
+
+        ItemData checkingForThisItem = GetNextRequiredItem(lockedIndex);
+        if (collectible == checkingForThisItem)
+        {
+            UnlockZone(lockedIndex);
+            SetUnlockedZones();
+        }
+	}
+
+    public void UnlockZone(int index, float textDelay = 0)
+    {
+		dataRefs.playerData.unlockedZones[index] = true;
+        StartCoroutine(ShowItemAquiredText());
+	}
+
+    public ItemData GetNextRequiredItem(int lockedIndex)
+    {
+        return CodeMonkey.Assets.i.zoneUnlockItems[lockedIndex - 1];  // -1 because zoneUnlockItems index 0 is zone 2 unlock
+	}
+
+    public IEnumerator ShowItemAquiredText(float initialDelay = 0)
+    {
+        if(initialDelay > 0)
+        {
+            yield return new WaitForSeconds(initialDelay);
+        }
+        crucialAquireText.gameObject.SetActive(true);
+        crucialAquireText.Read();
+        yield return new WaitForSeconds(3f);
+        crucialAquireText.UnRead();
+        yield return new WaitForSeconds(3f);
+        crucialAquireText.gameObject.SetActive(false);
+
     }
 }

@@ -13,3 +13,54 @@ MonoBehaviour:
   m_Name: Zone5
   m_EditorClassIdentifier: 
   lootTable: {fileID: 11400000, guid: e2a50d7cadb10d84db7af10692f3c0ec, type: 2}
+  spawnRate:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.01935196
+      value: 4.949768
+      inSlope: 20.764359
+      outSlope: 20.764359
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.081155546
+    - serializedVersion: 3
+      time: 1.5302591
+      value: 36.933266
+      inSlope: 1.3003342
+      outSlope: 1.3003342
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17599034
+      outWeight: 0.15531226
+    - serializedVersion: 3
+      time: 3.9744415
+      value: 47.490837
+      inSlope: 1.6599509
+      outSlope: 0.30355817
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.14984563
+      outWeight: 0.07995207
+    - serializedVersion: 3
+      time: 5.896261
+      value: 57.102238
+      inSlope: 1.7792245
+      outSlope: 0.21294409
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2802769
+    - serializedVersion: 3
+      time: 10
+      value: 60
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

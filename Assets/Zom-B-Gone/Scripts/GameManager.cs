@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 	public static Light2D globalLight;
 	public static bool checkZoneUnlock;
 
-	[HideInInspector] public static ZoneData currentZone;
+	public static ZoneData currentZone;
 
 	[Header("MUST REFERENCE TO PRESERVE DATA")]
 	public MarketData marketData;
