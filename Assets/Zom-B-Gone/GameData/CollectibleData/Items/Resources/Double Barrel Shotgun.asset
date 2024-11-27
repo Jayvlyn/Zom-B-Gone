@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a8624d8178e844f89fe8ff666ab683, type: 3}
+  m_Name: Double Barrel Shotgun
+  m_EditorClassIdentifier: 
+  name: Double Barrel Shotgun
+  description: They dont stand a chance.
+  rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
+  icon: {fileID: 21300000, guid: 70950386731862d4b8d946875327029b, type: 3}
+  maxStack: 1
+  pickupSound: {fileID: 8300000, guid: c8206db393358144bab42eebc0c6e797, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
+  weight: 3000
+  throwForceMult: 1
+  throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
+  noiseRadius: 70
+  damage: 11
+  attackSpeed: 0.1
+  knockbackPower: 700
+  dismemberChance: 42
+  range: 0.3
+  maxAmmo: 2
+  ammoConsumption: 1
+  reloadTime: 1.8
+  fireForce: 30
+  isAutomatic: 0
+  bulletPrefab: {fileID: 2198095510141801857, guid: 6890ec1dcfc67304a94e9a3783021af0, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: 3fe96f748d33f274e84e63cf77de45f2, type: 3}
+  - {fileID: 8300000, guid: 2c723f93aa873ca4d92082e649316b98, type: 3}
+  - {fileID: 8300000, guid: c67f58101aa339a4f9fe68c8bb3e38ed, type: 3}
+  reloadStart: {fileID: 8300000, guid: 0fdd99ef88e810d4785e0f330b7b1828, type: 3}
+  reloadNoiseRadius: 5
+  suppressed: 0
+  ssp: {fileID: 11400000, guid: 29b77d0764bf99e43bc502fa91c08711, type: 2}

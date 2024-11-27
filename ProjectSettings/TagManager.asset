@@ -23,6 +23,7 @@ TagManager:
   - WorldTilemap
   - GlobalLight
   - Obstacle
+  - HidingSpot
   layers:
   - Default
   - TransparentFX
@@ -48,9 +49,9 @@ TagManager:
   - LayoutFloor
   - HidingPlayer
   - DisguisedPlayer
-  - 
-  - 
-  - 
+  - InteractableObstacle
+  - InteractableLootable
+  - InteractableDoor
   - 
   - 
   - 
@@ -122,6 +123,9 @@ TagManager:
     locked: 0
   - name: WornHat
     uniqueID: 807454059
+    locked: 0
+  - name: Effect
+    uniqueID: 746509743
     locked: 0
   - name: EnemyAttack
     uniqueID: 1323564269

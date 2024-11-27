@@ -109,11 +109,11 @@ public class MerchantBuyOptionRefs : MonoBehaviour
                 if(maxAmt > 1) plusButton.interactable = true; 
                 else plusButton.interactable = false;
 
-                loadedMerchant.vals.inventory[hoverableCollectible.CollectibleData] = maxAmt;
+                loadedMerchant.vals.inventory[hoverableCollectible.CollectibleData.Name] = maxAmt;
 			}
             else
             { // none left to buy
-                loadedMerchant.vals.inventory.Remove(hoverableCollectible.CollectibleData);
+                loadedMerchant.vals.inventory.Remove(hoverableCollectible.CollectibleData.Name);
                 Destroy(gameObject);
             }
 
@@ -303,17 +303,17 @@ public class MerchantBuyOptionRefs : MonoBehaviour
         updateReputation.Raise();
 
         // Add collectible to merchant inventory
-        if (loadedMerchant.vals.inventory.ContainsKey(hoverableCollectible.CollectibleData))
+        if (loadedMerchant.vals.inventory.ContainsKey(hoverableCollectible.CollectibleData.Name))
         {
-            loadedMerchant.vals.inventory[hoverableCollectible.CollectibleData] += currentSelectedAmt;
+            loadedMerchant.vals.inventory[hoverableCollectible.CollectibleData.Name] += currentSelectedAmt;
         }
         else // when not already in merchant inventory, add to inventory and upcharge from bought price
         {
             int unitCost = int.Parse(unitPrice.text);
             int merchantsPrice = Mathf.RoundToInt(unitCost * Random.Range(1.1f, 1.7f));
 
-            loadedMerchant.vals.inventory.Add(hoverableCollectible.CollectibleData, currentSelectedAmt);
-            loadedMerchant.vals.prices.Add(hoverableCollectible.CollectibleData, merchantsPrice);
+            loadedMerchant.vals.inventory.Add(hoverableCollectible.CollectibleData.Name, currentSelectedAmt);
+            loadedMerchant.vals.prices.Add(hoverableCollectible.CollectibleData.Name, merchantsPrice);
         }
 
     }

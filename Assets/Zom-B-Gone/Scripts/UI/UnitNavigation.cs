@@ -6,11 +6,19 @@ using UnityEngine.SceneManagement;
 public class UnitNavigation : MonoBehaviour
 {
     public LootrunnerDataRefs dataRefs;
+    public Animator circleAnimator;
 
     public void OpenMainMenu()
     {
-        SaveManager.UpdateCurrentSave(dataRefs);
-        OdinSaveSystem.Save(SaveManager.saves);
-        SceneManager.LoadScene("MainMenu");
+        circleAnimator.SetTrigger("CloseCircle");
+        StartCoroutine(DelayedMainMenu());
     }
+
+    public IEnumerator DelayedMainMenu()
+    {
+        yield return new WaitForSeconds(2.5f);
+		SaveManager.UpdateCurrentSave(dataRefs);
+		OdinSaveSystem.Save(SaveManager.saves);
+		SceneManager.LoadScene("MainMenu");
+	}
 }

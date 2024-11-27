@@ -1,9 +1,8 @@
 ﻿using Cinemachine;
 using CodeMonkey;
-using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 public static class Utils
@@ -99,28 +98,33 @@ public static class Utils
                viewportPos.z >= 0; // z should be >= 0 to ensure the position is in front of the camera
     }
 
-	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle", "Interactable");
-    private static readonly LayerMask coverLm = LayerMask.GetMask("World", "Vehicle");
+	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle", "Interactable", "Window");
+    private static readonly LayerMask coverLm = LayerMask.GetMask("World", "Vehicle", "Door");
 	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int baseDamage, bool big = true)
     {
         // Visual
         Transform explosionPrefab = Assets.i.explosion;
         Transform e = Object.Instantiate(explosionPrefab, sourcePosition, Quaternion.identity);
+        Explosion ex = e.GetComponent<Explosion>();
+
+        CinemachineImpulseSource cis = ex.cis;
+        AudioSource audioSource = ex.audioSource;
 
 
         ScreenShakeProfile explosionSSP;
         if (big)
         {
             explosionSSP = Assets.i.bigExplosionSSP;
+            audioSource.clip = Assets.i.bigExplosionSound;
         }
         else
         {
             explosionSSP = Assets.i.smallExplosionSSP;
+            audioSource.clip = Assets.i.smallExplosionSound;
             e.localScale = new Vector3(0.7f, 0.7f, 1);
         }
+        audioSource.Play();
         
-
-        CinemachineImpulseSource cis = e.gameObject.GetComponent<CinemachineImpulseSource>();
 
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
 
@@ -140,20 +144,27 @@ public static class Utils
 
             Vector2 dir = ((Vector2)collider.transform.position - sourcePosition).normalized;
             RaycastHit2D coverHit = Physics2D.Raycast(sourcePosition, dir, dist, coverLm);
-            if (coverHit.collider != null) continue;
+
+            bool isVehicle = collider.gameObject.layer == LayerMask.NameToLayer("Vehicle");
+
+
+			if (!isVehicle && coverHit.collider != null) continue;
 
 			if (collider.TryGetComponent(out Health h))
 			{
 				Vector2 knockbackVector = ((Vector2)h.transform.position - sourcePosition).normalized;
 				knockbackVector *= force;
 				Vector2 popupVector = ((Vector2)h.transform.position - sourcePosition).normalized * 3;
-                float damage = baseDamage - dist;
-                h.TakeDamage(damage, knockbackVector, damage, false, popupVector, false, damage*0.33f);
+                float damage = baseDamage - (dist * 6);
+                bool invert = (sourcePosition.x > h.transform.position.x);
+				bool crit = false;
+				if (Random.Range(0, 20) == 0) crit = true;
+				h.TakeDamage(damage, knockbackVector, damage, crit, popupVector, invert, damage*0.33f);
 			}
 			else if (collider.TryGetComponent(out Rigidbody2D rb))
             {
                 float finalForce = force;
-                if(collider.gameObject.layer == LayerMask.NameToLayer("Vehicle"))
+                if(isVehicle)
                 {
                     Vehicle v = collider.gameObject.GetComponentInChildren<Vehicle>();
                     v.StartCoroutine(v.ExplodedTimer());
@@ -174,6 +185,8 @@ public static class Utils
                     // Scale torque by inverse distance
                     float scaledTorque = torque * inverseDistance;
                     rb.AddTorque(scaledTorque * torqueAmount, ForceMode2D.Impulse);
+
+                    Debug.Log("torque added");
                 }
 
 
@@ -229,5 +242,45 @@ public static class Utils
 
 
     }
+
+    public static void ClearPlayerTemporaryContainers()
+    {
+        ClearContainerSlots(Assets.i.handsData.container);
+        ClearContainerSlots(Assets.i.headData.container);
+        ClearContainerSlots(Assets.i.backpackData.container);
+        ClearContainerSlots(Assets.i.vanFloorData.container);
+        Assets.i.vanFloorData.ClearFloorSpecificVals();
+    }
+
+	public static void ClearContainerSlots(CollectibleContainer container)
+	{
+		for (int i = 0; i < container.collectibleSlots.Length; i++)
+		{
+			container.collectibleSlots[i].CollectibleName = null;
+			container.collectibleSlots[i].quantity = 0;
+		}
+	}
+
+    public static void ApplyEffect(EffectData effectData, Enemy enemy)
+    {
+		if (enemy.activeEffect != null)
+		{
+            if (enemy.activeEffect.effectData = effectData) return;
+        
+            // Overrides if a different effect is applied
+            GameObject obj = enemy.activeEffect.gameObject;
+            enemy.activeEffect = null;
+            GameObject.Destroy(obj);
+		}
+
+		GameObject effectObject = Object.Instantiate(Assets.i.effectPrefab, enemy.transform);
+        Effect e = effectObject.GetComponent<Effect>();
+		e.Initialize(effectData, enemy);
+	}
+
+    public static CollectibleData GetCollectibleFromName(string name)
+    {
+        return Resources.Load<CollectibleData>(name);
+	}
 
 }

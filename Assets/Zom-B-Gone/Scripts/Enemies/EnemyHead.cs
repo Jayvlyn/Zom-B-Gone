@@ -42,9 +42,9 @@ public class EnemyHead : MonoBehaviour
 
         spriteRenderer.sprite = possibleSprites[UnityEngine.Random.Range(0, possibleSprites.Count)];
 
-        if (GameManager.currentZoneLootTable != null && UnityEngine.Random.Range(0,20) == 0)
+        if (GameManager.currentZone && GameManager.currentZone.lootTable != null && UnityEngine.Random.Range(0,20) == 0)
         {
-            HatData hatData = GameManager.currentZoneLootTable.GetRandomHat();
+            HatData hatData = GameManager.currentZone.lootTable.GetRandomHat();
             if(hatData != null)
             {
                 GameObject prefab = Resources.Load<GameObject>(hatData.name);

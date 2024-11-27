@@ -123,7 +123,7 @@ public class ProjectileWeapon : Weapon
     }
 
 
-    public override void PickUp(Transform parent, bool rightHand)
+    public override void PickUp(Transform parent, bool rightHand, bool adding = false)
     {
         if(parent.gameObject.TryGetComponent(out PlayerController pc)) playerController = pc;
         base.PickUp(parent, rightHand);
@@ -148,8 +148,12 @@ public class ProjectileWeapon : Weapon
             if (muzzleLight)
             {
                 float flashTime = 0.1f;
-                if (projectileWeaponData.attackSpeed < flashTime) flashTime = projectileWeaponData.attackSpeed;
-                StartCoroutine(DoMuzzleLight(flashTime));
+                if (projectileWeaponData.attackSpeed <= flashTime) flashTime = projectileWeaponData.attackSpeed * 0.5f;
+
+                if(muzzleLightRoutine == null)
+                {
+                    muzzleLightRoutine = StartCoroutine(DoMuzzleLight(flashTime));
+                }
             }
 
             shotTimer = weaponData.attackSpeed;
@@ -160,7 +164,7 @@ public class ProjectileWeapon : Weapon
                 
                 if(bullet.TryGetComponent(out Rigidbody2D bulletRb))
                 {
-                    bulletRb.AddForce(transform.up * projectileWeaponData.fireForce, ForceMode2D.Impulse);
+                    bulletRb.AddForce(bullet.transform.up * projectileWeaponData.fireForce, ForceMode2D.Impulse);
                 }
                 if(bullet.TryGetComponent(out Bullet bulletScript))
                 {
@@ -221,11 +225,13 @@ public class ProjectileWeapon : Weapon
         SetReloadIndicator(false);
     }
 
+    private Coroutine muzzleLightRoutine;
     private IEnumerator DoMuzzleLight(float time)
     {
         muzzleLight.SetActive(true);
         yield return new WaitForSeconds(time);
         muzzleLight.SetActive(false);
+        muzzleLightRoutine = null;
     }
 
 	public void UpdateAmmoCount()
@@ -242,7 +248,11 @@ public class ProjectileWeapon : Weapon
             audioSource.PlayOneShot(projectileWeaponData.shootSounds[roll]);
         }
         float noise = projectileWeaponData.noiseRadius;
-        if (projectileWeaponData.suppressed) noise *= 0.5f;
+        if (projectileWeaponData.suppressed)
+        {
+            float dec = (100-projectileWeaponData.suppressionPercentage) * 0.01f;
+            noise *= dec;
+        }
         Utils.MakeSoundWave(transform.position, noise);
     }
 

@@ -17,6 +17,8 @@ public class MeleeWeapon : Weapon
 
     private bool doDamage = false;
 
+    private int currentHitCount = 0;
+
     private void Awake()
 	{
         base.Awake();
@@ -35,7 +37,7 @@ public class MeleeWeapon : Weapon
         }
     }
 
-	public override void PickUp(Transform parent, bool rightHand)
+	public override void PickUp(Transform parent, bool rightHand, bool adding = false)
 	{
 		base.PickUp(parent, rightHand);
     }
@@ -90,6 +92,7 @@ public class MeleeWeapon : Weapon
 	private IEnumerator Swing()
     {
         DrainStamina();
+        currentHitCount = 0;
 
         PlaySwingSound();
         
@@ -215,11 +218,6 @@ public class MeleeWeapon : Weapon
         if (collision.gameObject.transform == transform.parent) return;
         else if (doDamage && !collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Health targetHealth))
         {
-            if ((!bloodTrail.isPlaying || bloodTrail.time > bloodTrail.totalTime*0.5f) && collision.gameObject.CompareTag("Enemy"))
-            {
-                bloodTrail.Play();
-            }
-            
             Vector2 pos = playerController.transform.position;
             if (inRightHand) pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(holdOffset.x, 0));
             else pos = pos + (Vector2)(playerController.transform.rotation * new Vector2(-holdOffset.x, 0));
@@ -230,8 +228,32 @@ public class MeleeWeapon : Weapon
             if (hit.collider != null) return;
 
 
-            PlayHitSound();
-            DealDamage(targetHealth);
+            bool hitIsEnemy = collision.gameObject.CompareTag("Enemy");
+
+			// sound
+			PlayHitSound();
+            // blood particles
+            if(bloodTrail)
+            {
+                if ((!bloodTrail.isPlaying || bloodTrail.time > bloodTrail.totalTime*0.5f) && hitIsEnemy)
+                {
+                    bloodTrail.Play();
+                }
+            }
+            // effect
+            if(hitIsEnemy && meleeWeaponData.effect != null)
+            {
+                Utils.ApplyEffect(meleeWeaponData.effect, collision.gameObject.GetComponent<Enemy>());
+            }
+
+            currentHitCount++;
+			bool crit = Random.Range(0, currentHitCount + 2) == 0; // less likely to crit the more hits in you are
+
+            float denominator = (currentHitCount + 1) * 0.5f;
+            if(denominator < 1) denominator = 1;
+
+            float damage = (weaponData.damage * 0.25f) + ((weaponData.damage * 0.75f) / denominator);
+            DealDamage(targetHealth, damage, crit);
         }
     }
 }

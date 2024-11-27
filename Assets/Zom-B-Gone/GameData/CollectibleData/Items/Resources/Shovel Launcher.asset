@@ -19,7 +19,8 @@ MonoBehaviour:
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: e7a9604aac6e28b43b703601b0120a62, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
-  weight: 1
+  weight: 1612
+  throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 3
   damage: 999

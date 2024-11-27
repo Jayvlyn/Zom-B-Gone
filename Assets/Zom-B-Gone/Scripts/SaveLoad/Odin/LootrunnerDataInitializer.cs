@@ -5,62 +5,85 @@ using UnityEngine;
 public class LootrunnerDataInitializer : MonoBehaviour
 {
     public LootrunnerDataRefs dataRefs;
+    public SuperTextMesh crucialAquireText;
 
     public static bool initialized = false;
 
     private void Awake()
     {
-        if (initialized) return;
+        if (initialized)
+        {
+            if (GameManager.checkZoneUnlock) CheckZoneUnlock();
+            SetUnlockedZones();
+            return;
+        }
+
         initialized = true;
 
         SaveManager.currentSave = SaveManager.saves.lootrunnerSaves[SaveManager.loadedSave];
 
-        dataRefs.playerData = SaveManager.currentSave.playerData;
+        SaveManager.SetPlayerData(dataRefs.playerData, SaveManager.currentSave.playerData);
         
+        // Hands
         if (SaveManager.currentSave.hands != null) dataRefs.handsData.Container = SaveManager.currentSave.hands;
-        else ClearContainerSlots(dataRefs.handsData.Container);
+        else Utils.ClearContainerSlots(dataRefs.handsData.Container);
 
+        // Head
         if (SaveManager.currentSave.head != null) dataRefs.headData.Container = SaveManager.currentSave.head;
-        else ClearContainerSlots(dataRefs.headData.Container);
+        else Utils.ClearContainerSlots(dataRefs.headData.Container);
 
-        if (SaveManager.currentSave.backpack != null)
+		// Workbench Input
+		if (SaveManager.currentSave.workbenchInput != null) dataRefs.worbenchInputData.Container = SaveManager.currentSave.workbenchInput;
+		else Utils.ClearContainerSlots(dataRefs.worbenchInputData.Container);
+
+		// Workbench Output
+		if (SaveManager.currentSave.workbenchOutput != null) dataRefs.worbenchOutputData.Container = SaveManager.currentSave.workbenchOutput;
+		else Utils.ClearContainerSlots(dataRefs.worbenchOutputData.Container);
+
+		// Backpack
+		if (SaveManager.currentSave.backpack != null)
         {
 			dataRefs.backpackData.size = SaveManager.currentSave.backpack.collectibleSlots.Length;
 			dataRefs.backpackData.Container = SaveManager.currentSave.backpack;
         }
-        else ClearContainerSlots(dataRefs.backpackData.Container);
+        else Utils.ClearContainerSlots(dataRefs.backpackData.Container);
 
+        // Hat locker
         if (SaveManager.currentSave.hatLocker != null)
         {
 			dataRefs.hatLockerData.size = SaveManager.currentSave.hatLocker.collectibleSlots.Length;
 			dataRefs.hatLockerData.Container = SaveManager.currentSave.hatLocker;
         }
-        else ClearContainerSlots(dataRefs.hatLockerData.Container);
+        else Utils.ClearContainerSlots(dataRefs.hatLockerData.Container);
 
+        // Item locker
         if (SaveManager.currentSave.itemLocker != null)
         {
             dataRefs.itemLockerData.size = SaveManager.currentSave.itemLocker.collectibleSlots.Length;
             dataRefs.itemLockerData.Container = SaveManager.currentSave.itemLocker;
         }
-        else ClearContainerSlots(dataRefs.itemLockerData.Container);
+        else Utils.ClearContainerSlots(dataRefs.itemLockerData.Container);
 
+        // Loot locker
         if (SaveManager.currentSave.lootLocker != null)
         {
 			dataRefs.lootLockerData.size = SaveManager.currentSave.lootLocker.collectibleSlots.Length;
 			dataRefs.lootLockerData.Container = SaveManager.currentSave.lootLocker;
         }
-        else ClearContainerSlots(dataRefs.lootLockerData.Container);
+        else Utils.ClearContainerSlots(dataRefs.lootLockerData.Container);
 
-        if (SaveManager.currentSave.vanFloor != null)
+		// Van 
+		if (SaveManager.currentSave.vanFloor != null)
         {
             dataRefs.vanFloor.floorContainer.Container = SaveManager.currentSave.vanFloor.floorContainer;
             dataRefs.vanFloor.floorContainer.collectibleDict = SaveManager.currentSave.vanFloor.collectibleDict;
         }
         else
         {
-            ClearContainerSlots(dataRefs.vanFloor.floorContainer.Container);
+            Utils.ClearContainerSlots(dataRefs.vanFloor.floorContainer.Container);
             dataRefs.vanFloor.floorContainer.ClearFloorSpecificVals();
         }
+
 
         if (SaveManager.currentSave.unitFloor != null)
         {
@@ -69,7 +92,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
         }
         else
         {
-            ClearContainerSlots(dataRefs.unitFloor.floorContainer.Container);
+            Utils.ClearContainerSlots(dataRefs.unitFloor.floorContainer.Container);
             dataRefs.unitFloor.floorContainer.ClearFloorSpecificVals();
         }
 
@@ -79,6 +102,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
             {
                 dataRefs.marketData.merchants[i].vals = SaveManager.currentSave.merchantVals[i];
             }
+            dataRefs.marketData.Day = SaveManager.currentSave.marketDay;
         }
         else
         {
@@ -91,15 +115,91 @@ public class LootrunnerDataInitializer : MonoBehaviour
                 dataRefs.marketData.RefreshBuyOffers(merchant);
             }
         }
+
+        SetUnlockedZones();
+
     }
 
-    private void ClearContainerSlots(CollectibleContainer container)
+    public void SetUnlockedZones()
     {
-        for (int i = 0; i < container.collectibleSlots.Length; i++)
+		for (int i = 0; i < dataRefs.playerData.unlockedZones.Length; i++)
+		{
+			dataRefs.zoneButtons[i].interactable = dataRefs.playerData.unlockedZones[i];
+		}
+	}
+
+    public int GetLockedIndex()
+    {
+		int lockedIndex = -1;
+		for (int i = 0; i < dataRefs.playerData.unlockedZones.Length; i++)
+		{
+			if (!dataRefs.playerData.unlockedZones[i])
+			{
+				lockedIndex = i;
+				break;
+			}
+		}
+		
+        return lockedIndex;
+	}
+
+	public void CheckZoneUnlock()
+	{
+        int lockedIndex = GetLockedIndex();
+        if(lockedIndex == -1) return; // all unlocked
+
+		ItemData checkingForThisItem = GetNextRequiredItem(lockedIndex);
+
+        if (CheckItemInHandsVan(checkingForThisItem)) UnlockZone(lockedIndex, 1f);
+	}
+
+    public bool CheckItemInHandsVan(ItemData item)
+    {
+        if (dataRefs.handsData.container.collectibleSlots[0].Collectible == item) return true;
+        if (dataRefs.handsData.container.collectibleSlots[1].Collectible == item) return true;
+        foreach(CollectibleSlot cs in dataRefs.vanFloor.floorContainer.container.collectibleSlots)
         {
-            //container.collectibleSlots[i].Collectible = null;
-            container.collectibleSlots[i].CollectibleName = null;
-            container.collectibleSlots[i].quantity = 0;
+            if (cs.Collectible == item) return true;
         }
+        return false;
+    }
+
+    public void CheckZoneUnlockFromCollectible(CollectibleData collectible)
+    {
+		int lockedIndex = GetLockedIndex();
+		if (lockedIndex == -1) return; // all unlocked
+
+        ItemData checkingForThisItem = GetNextRequiredItem(lockedIndex);
+        if (collectible == checkingForThisItem)
+        {
+            UnlockZone(lockedIndex);
+            SetUnlockedZones();
+        }
+	}
+
+    public void UnlockZone(int index, float textDelay = 0)
+    {
+		dataRefs.playerData.unlockedZones[index] = true;
+        StartCoroutine(ShowItemAquiredText());
+	}
+
+    public ItemData GetNextRequiredItem(int lockedIndex)
+    {
+        return CodeMonkey.Assets.i.zoneUnlockItems[lockedIndex - 1];  // -1 because zoneUnlockItems index 0 is zone 2 unlock
+	}
+
+    public IEnumerator ShowItemAquiredText(float initialDelay = 0)
+    {
+        if(initialDelay > 0)
+        {
+            yield return new WaitForSeconds(initialDelay);
+        }
+        crucialAquireText.gameObject.SetActive(true);
+        crucialAquireText.Read();
+        yield return new WaitForSeconds(3f);
+        crucialAquireText.UnRead();
+        yield return new WaitForSeconds(3f);
+        crucialAquireText.gameObject.SetActive(false);
+
     }
 }

@@ -23,6 +23,7 @@ public class DayNightCycle : MonoBehaviour
 	public float DawnIntensity => (middayIntensity + midnightIntensity) * 0.5f;
 
     [HideInInspector] public float currentTime;
+	public static bool isNight;
 
 	private void Start()
 	{
@@ -51,16 +52,20 @@ public class DayNightCycle : MonoBehaviour
 		{
 			t = CurrentHour / NoonHour; // Ranges from 0 to 1 as time progresses from dawn to noon
 			globalLight.intensity = Mathf.Lerp(DawnIntensity, middayIntensity, t);
+			isNight = false;
 		}
 		else if (CurrentHour < MidnightHour) // Noon to Midnight
 		{
 			t = (CurrentHour - NoonHour) / (MidnightHour - NoonHour); // Ranges from 0 to 1 from noon to midnight
 			globalLight.intensity = Mathf.Lerp(middayIntensity, midnightIntensity, t);
+			if (t >= 0.5) isNight = true;
+			else isNight = false;
 		}
 		else // Midnight to Dawn
 		{
 			t = (CurrentHour - MidnightHour) / (TotalHours - MidnightHour); // Ranges from 0 to 1 from midnight to dawn
 			globalLight.intensity = Mathf.Lerp(midnightIntensity, DawnIntensity, t);
+			isNight = true;
 		}
 	}
 }

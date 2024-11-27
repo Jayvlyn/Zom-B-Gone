@@ -12,9 +12,4 @@ public class ExplodingAmmo : MonoBehaviour
     {
         Utils.CreateExplosion(transform.position, explosionRadius, explosionForce, explosionDamage);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Utils.CreateExplosion(transform.position, explosionRadius, explosionForce, explosionDamage);
-    }
 }

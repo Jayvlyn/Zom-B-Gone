@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1306789430689718398}
   m_Layer: 6
   m_Name: Dumpster
-  m_TagString: Untagged
+  m_TagString: HidingSpot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 131365537
-  m_SortingLayer: -23
+  m_SortingLayer: -24
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 19dbc67b844e35d48a53f6f7e2698ec9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -224,7 +224,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2061021577
-  m_SortingLayer: -20
+  m_SortingLayer: -21
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad3e59b7d49a5324f9efaa32d6d9fe16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

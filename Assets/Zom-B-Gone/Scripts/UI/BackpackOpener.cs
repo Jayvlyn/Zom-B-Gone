@@ -34,6 +34,8 @@ public class BackpackOpener : MonoBehaviour
 
             StopAllCoroutines();
             StartCoroutine(PreSlideUp(-30f, .1f));
+
+            AudioManager.Instance.Play(CodeMonkey.Assets.i.openBackpack);
         }
     }
 

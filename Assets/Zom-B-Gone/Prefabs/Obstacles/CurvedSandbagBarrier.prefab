@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4826773798859923985}
   - component: {fileID: 7396858438035767285}
   - component: {fileID: 5034025276542954275}
-  m_Layer: 6
+  m_Layer: 24
   m_Name: CurvedSandbagBarrier
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 97008305
-  m_SortingLayer: -18
+  m_SortingLayer: -19
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9cc34e8e80d1e5149b1790b9c563d6f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -8,6 +8,9 @@ public class Health : MonoBehaviour
     [SerializeField,Range(1,1000)] int _maxHealth = 100;
     [SerializeField,Range(0,1000)] int _currentHealth = 100;
 
+    [Header("Only fill for window's health")]
+    public Glass glass;
+
     private void Start()
     {
         if(gameObject.CompareTag("Player"))
@@ -55,24 +58,37 @@ public class Health : MonoBehaviour
 
     private Enemy enemyOwner;
     private Vector2 mostRecentPopupVec;
-    public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default, float decapitateChance = 0)
+    public void TakeDamage(float damage, Vector2 knockbackVector, float dismemeberChance = 0, bool isCritical = false, Vector3 popupVector = default, bool invertPopupRotate = default, float decapitateChance = 0, Color popupColor = default)
     {
         mostRecentPopupVec = popupVector;
         DamagePopup.PopupType popupType = DamagePopup.PopupType.DEFAULT;
 
-        if (damage < 0) return;
-        int incomingDamage = Mathf.RoundToInt(damage);
-        #region hat buff
-        if (gameObject.CompareTag("Player"))
+        if (damage <= 0) return;
+        float cr = damage;
+        if (isCritical) cr *= 1.6f;
+        int incomingDamage = Mathf.RoundToInt(cr);
+        if (gameObject.TryGetComponent(out PlayerController pc))
         {
             popupType = DamagePopup.PopupType.PLAYER;
 
-            if(gameObject.TryGetComponent(out Head head) && head.wornHat != null)
+
+            #region hat buff
+            if(pc.head.wornHat != null)
             {
-                incomingDamage -= head.wornHat.hatData.defense;
+                incomingDamage -= pc.head.wornHat.hatData.defense;
             }
-        }
-        #endregion
+            #endregion
+
+            if(incomingDamage > 0)
+            {
+                // Camera Shake
+                CameraShakeManager.instance.CameraShake(pc.impulseSource, CodeMonkey.Assets.i.playerDamagedSSP, popupVector.normalized);
+
+                // Blood Vignette
+                float damageEffectIntensity = Mathf.Clamp01((float)incomingDamage / 50);
+			    ScreenDamageEffectController.DamageEffect.DoDamageEffect(damageEffectIntensity);
+            }
+		}
         else if (gameObject.CompareTag("Enemy"))
         {
             popupType = DamagePopup.PopupType.ENEMY;
@@ -82,7 +98,7 @@ public class Health : MonoBehaviour
             }
 
             #region hat buff
-            if(enemyOwner.head.wornHat != null)
+            if(enemyOwner.head != null && enemyOwner.head.wornHat != null)
             {
                 incomingDamage -= enemyOwner.head.wornHat.hatData.defense;
             }
@@ -104,9 +120,11 @@ public class Health : MonoBehaviour
             }
         }
 
+        if (incomingDamage < 0) return;
+
         CurrentHealth = CurrentHealth - incomingDamage;
 
-        DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate, popupType);
+        DamagePopup.Create(transform.position, incomingDamage, popupVector, isCritical, invertPopupRotate, popupType, popupColor);
     }
 
     public void OnDeath()
@@ -123,7 +141,11 @@ public class Health : MonoBehaviour
             if (dot > 0) glass.window.ShatterGlass(false);
             else glass.window.ShatterGlass(true);
         }
-        else if (!gameObject.CompareTag("Player"))
+        else if (gameObject.CompareTag("Player"))
+        {
+            if(!PlayerController.godMode) CodeMonkey.Assets.i.onPlayerDied.Raise();
+        }
+        else
         {
             Destroy(gameObject);
         }

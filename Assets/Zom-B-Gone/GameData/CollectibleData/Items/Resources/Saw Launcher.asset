@@ -14,25 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Saw Launcher
   description: Watch your head!
-  rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
-  icon: {fileID: 0}
+  rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
+  icon: {fileID: 21300000, guid: 1cd5405d8bae706478bda0d208664ee8, type: 3}
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: e981808a5a555044694f5c65abf7f4d0, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 1100
+  throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0
   damage: 60
-  attackSpeed: 0.5
-  knockbackPower: 10
-  dismemberChance: 0
+  attackSpeed: 1
+  knockbackPower: 500
+  dismemberChance: 40
   range: 50
-  maxAmmo: 5
+  maxAmmo: 1
   ammoConsumption: 1
   reloadTime: 2
   fireForce: 25
   isAutomatic: 0
-  bulletPrefab: {fileID: 0}
-  shootSounds: []
-  reloadStart: {fileID: 0}
+  bulletPrefab: {fileID: 2198095510141801857, guid: cf8dbc1af0fa53a47af6b09efdbb67d7, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: 23683988dade91548bd2d6e5db7948e7, type: 3}
+  reloadStart: {fileID: 8300000, guid: 1433f0af8194fd94c94e24f34b0a91f0, type: 3}
   reloadNoiseRadius: 0
+  suppressed: 0
+  suppressionPercentage: 0
+  ssp: {fileID: 11400000, guid: dfe019d6ae4b3654e9e29df06614cd54, type: 2}

@@ -35,8 +35,8 @@ namespace STMTools.Links
 	{
 		public string label = string.Empty; //label used for this <link=TAG>
 
-		public UnityEvent onClick; //unity event, if any, to be called when this link's generated colliders are clicked.
-		//delegate event possible?
+		public UnityEvent onClick; //unity buttonEvent, if any, to be called when this link's generated colliders are clicked.
+		//delegate buttonEvent possible?
 	}
 
 	[ExecuteInEditMode]

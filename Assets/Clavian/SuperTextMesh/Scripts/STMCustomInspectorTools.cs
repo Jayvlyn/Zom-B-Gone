@@ -84,7 +84,7 @@ static class STMCustomInspectorTools {
 			ScriptableObject newData = NewData(typeName);
 			if(newData != null){
 				AssetDatabase.CreateAsset(newData,AssetDatabase.GenerateUniqueAssetPath(ClavianPath + "Resources/" + folderName)); //save to file
-				//Undo.undoRedoPerformed += OnUndoRedo; //subscribe to event
+				//Undo.undoRedoPerformed += OnUndoRedo; //subscribe to buttonEvent
 				//Undo.RegisterCreatedObjectUndo(newData, buttonText);
 				AssetDatabase.Refresh();
 				stm.data = null;

@@ -105,7 +105,7 @@ public class Interactor : MonoBehaviour
                 if (interactedContainer)
                 {
                     float containerToInteractorDist = ((Vector2)transform.position - (Vector2)interactedContainer.transform.position).magnitude;
-                    if (containerToInteractorDist > _interactRange + .5f) CloseOpenedContainer();
+                    if (containerToInteractorDist > _interactRange + .5f) { Debug.Log("Close open 2"); CloseOpenedContainer(); }
                     
                 }
 
@@ -142,7 +142,10 @@ public class Interactor : MonoBehaviour
             PlayerController.mouseHeldIcon.sendBackToSlot();
             PlayerController.mouseHeldIcon = null;
         }
-        string containersCloseEventName = interactedContainer.GetComponent<TransformListener>().GameEvent.name;
+
+        GameEvents.TransformListener tl = interactedContainer.GetComponent<GameEvents.TransformListener>();
+		string containersCloseEventName = tl.GameEvent.name; 
+        
         foreach(VoidEvent e in closeContainerEvents)
         {
             if(e.name.Equals(containersCloseEventName))
@@ -297,8 +300,8 @@ public class Interactor : MonoBehaviour
                     CloseOpenedContainer();
                 }
 
-                if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
                 AvailableInteractable.Interact(rightHand, playerController);
+                if (AvailableInteractable is MonoBehaviour mono) interactedContainer = mono.gameObject;
             }
 
             else if (AvailableInteractable is Workbench)
@@ -315,18 +318,34 @@ public class Interactor : MonoBehaviour
             // INTERACT WITH ITEM
             else if (AvailableInteractable is Item)
             {
-                AvailableInteractable.Interact(rightHand, playerController);
+                Item thisItem = (Item)AvailableInteractable;
 
-                if (rightHand)
+                // use right hand to add dupe items to left hand
+                if(rightHand && playerController.hands.leftItem != null && playerController.hands.leftItem.itemData == thisItem.itemData && playerController.hands.leftItem.Quantity + thisItem.Quantity <= thisItem.itemData.MaxStack)
                 {
-                    playerController.hands.RightObject = ((Component)AvailableInteractable).gameObject;
-                    playerController.hands.UsingRight = true;
+                    thisItem.AddToHand(false, playerController); // add to left hand
                 }
+				// use left hand to add dupe items to right hand
+				else if (!rightHand && playerController.hands.rightItem != null && playerController.hands.rightItem.itemData == thisItem.itemData && playerController.hands.rightItem.Quantity + thisItem.Quantity <= thisItem.itemData.MaxStack)
+				{
+					thisItem.AddToHand(true, playerController); // add to right hand
+				}
                 else
                 {
-                    playerController.hands.LeftObject = ((Component)AvailableInteractable).gameObject;
-                    playerController.hands.UsingLeft = true;
+				    AvailableInteractable.Interact(rightHand, playerController);
+
+                    if (rightHand)
+                    {
+                        playerController.hands.RightObject = ((Component)AvailableInteractable).gameObject;
+                        playerController.hands.UsingRight = true;
+                    }
+                    else
+                    {
+                        playerController.hands.LeftObject = ((Component)AvailableInteractable).gameObject;
+                        playerController.hands.UsingLeft = true;
+                    }
                 }
+
             }
 
 

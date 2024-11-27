@@ -1,4 +1,5 @@
 using GameEvents;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer)), RequireComponent(typeof(BoxCollider2D))]
@@ -8,6 +9,7 @@ public class Workbench : MonoBehaviour, IInteractable
     [SerializeField] private CollectibleContainerData craftingTableInput;
     [SerializeField] private RecipeBook recipeBook;
     [SerializeField] private VoidEvent craftingTableOpened;
+    [SerializeField] private CollectibleEvent craftAccepted;
 
     private bool activeCraftingTable = false;
 
@@ -49,7 +51,10 @@ public class Workbench : MonoBehaviour, IInteractable
             }
         }
 
-        if (foundRecipe.resultCollectible != null) { foundRecipe = new Recipe(); return; }
+        //if (foundRecipe.resultCollectible != null) { 
+        //    foundRecipe = new Recipe(); 
+        //    return; 
+        //}
 
         // Find crafting recipe to match
         foundRecipe = new Recipe();
@@ -86,12 +91,20 @@ public class Workbench : MonoBehaviour, IInteractable
         else // no recipe match, clear result slot
         {
             //craftingTableOutput.Container.collectibleSlots[0].Collectible = null;
-            craftingTableOutput.Container.collectibleSlots[0].CollectibleName = null;
-            craftingTableOutput.Container.collectibleSlots[0].quantity = 0;
+            if(!craftJustAccepted)
+            {
+                craftingTableOutput.Container.collectibleSlots[0].CollectibleName = null;
+                craftingTableOutput.Container.collectibleSlots[0].quantity = 0;
+            }
+            else
+            {
+                craftJustAccepted = false;
+            }
         }
         craftingTableOutput.onContainerCollectibleUpdated.Raise();
     }
 
+    bool craftJustAccepted = false;
     public void OnCraftAccepted()
     {
         if (!activeCraftingTable) return;
@@ -99,19 +112,22 @@ public class Workbench : MonoBehaviour, IInteractable
         {
             for (int i = 0; i < craftingTableInput.size; i++) // loop through each slot in crafting table input
             {
-                if(ri.collectible == craftingTableInput.Container.collectibleSlots[i].Collectible) // see if this recipie item collectible matches this slot's
+                if(ri.collectible == craftingTableInput.Container.collectibleSlots[i].Collectible) // see if this recipe item collectible matches this slot's
                 {
                     // deduct amount from inputted collectible
                     craftingTableInput.Container.collectibleSlots[i].quantity -= ri.requiredAmount;
 
                     // if amount deducted reduces the inputted collectible to nothing, remove it from slot completely
-                    //if (craftingTableInput.Container.collectibleSlots[i].quantity == 0) craftingTableInput.Container.collectibleSlots[i].Collectible = null;
                     if (craftingTableInput.Container.collectibleSlots[i].quantity == 0) craftingTableInput.Container.collectibleSlots[i].CollectibleName = null;
                     break;
                 }
             }
         }
+        craftJustAccepted = true;
         craftingTableInput.onContainerCollectibleUpdated.Raise();
+        craftAccepted.Raise(craftingTableOutput.Container.collectibleSlots[0].Collectible);
         //foundRecipe.resultCollectible = null;
     }
+
+   
 }

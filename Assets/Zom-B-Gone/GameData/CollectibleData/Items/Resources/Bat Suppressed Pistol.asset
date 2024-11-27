@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a8624d8178e844f89fe8ff666ab683, type: 3}
+  m_Name: Bat Suppressed Pistol
+  m_EditorClassIdentifier: 
+  name: Bat Suppressed Pistol
+  description: Quiet and reliable option in a pinch
+  rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
+  icon: {fileID: 21300000, guid: ffa657332ead8a446ac7d88f2cde9894, type: 3}
+  maxStack: 1
+  pickupSound: {fileID: 8300000, guid: 8df96ccdf3ad9954d900e1fa542f150f, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
+  weight: 900
+  throwForceMult: 1
+  throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
+  noiseRadius: 33
+  damage: 33
+  attackSpeed: 0.1
+  knockbackPower: 200
+  dismemberChance: 0
+  range: 4
+  maxAmmo: 12
+  ammoConsumption: 1
+  reloadTime: 2
+  fireForce: 23
+  isAutomatic: 0
+  bulletPrefab: {fileID: 2198095510141801857, guid: 6890ec1dcfc67304a94e9a3783021af0, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: 2035de5da2150c842a6269a66d3a28a6, type: 3}
+  - {fileID: 8300000, guid: 9c9c5b29ce633434aab08061da86978c, type: 3}
+  - {fileID: 8300000, guid: abaad8f594fc3a947a02cdca9b74bd20, type: 3}
+  reloadStart: {fileID: 8300000, guid: aefa81d88863e00419146cd313a1f1b9, type: 3}
+  reloadNoiseRadius: 0
+  suppressed: 1
+  suppressionPercentage: 30
+  ssp: {fileID: 11400000, guid: 48ef439216634f54392763e3c3b6d879, type: 2}

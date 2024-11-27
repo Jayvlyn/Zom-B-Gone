@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8405490265757120072}
   m_Layer: 6
   m_Name: Manhole
-  m_TagString: Untagged
+  m_TagString: HidingSpot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2061021577
-  m_SortingLayer: -20
+  m_SortingLayer: -21
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 060a36703cd1b6f4bba3c2209bd2478e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

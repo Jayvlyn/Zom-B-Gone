@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62801acddb8e8534c8ca79b4e34e0642, type: 3}
+  m_Name: Bullet_SawBlade
+  m_EditorClassIdentifier: 
+  damageMultiplier: 1
+  piercingPower: 3
+  wallPiercing: 0
+  residual: 1
+  spin: 20
+  enterEvent: {fileID: 11400000, guid: 18336d268877ba949b8112e3fe6b629e, type: 2}
+  exitEvent: {fileID: 11400000, guid: ed5dcd0b709ea5c46a30a6a444aa5cf5, type: 2}

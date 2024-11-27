@@ -12,10 +12,14 @@ public class LockerOpener : MonoBehaviour
 	public void OnLockerOpened()
     {
 		if (Interactor.interactedContainer != null)
+		{
 			interactor.CloseOpenedContainer();
+		}
 		Interactor.interactedContainer = worldCounterpart;
 		
 		StartCoroutine(PreSlideUp(-30, .1f));
+
+		AudioManager.Instance.Play(CodeMonkey.Assets.i.openLocker);
 	}
 
 	public void OnLockerClosed()

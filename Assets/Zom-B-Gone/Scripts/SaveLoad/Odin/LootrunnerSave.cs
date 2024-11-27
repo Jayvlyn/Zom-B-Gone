@@ -16,8 +16,12 @@ public class LootrunnerSave
     public CollectibleContainer itemLocker;
     public CollectibleContainer lootLocker;
 
+    public CollectibleContainer workbenchInput;
+    public CollectibleContainer workbenchOutput;
+
     public SaveableFloor vanFloor;
     public SaveableFloor unitFloor;
 
     public List<MerchantVals> merchantVals;
+    public int marketDay;
 }

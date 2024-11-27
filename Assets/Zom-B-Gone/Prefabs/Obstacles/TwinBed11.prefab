@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2479592600775128846}
   - component: {fileID: 4826773798859923985}
   - component: {fileID: -4937498520700376061}
-  m_Layer: 6
+  m_Layer: 24
   m_Name: TwinBed11
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 97008305
-  m_SortingLayer: -18
+  m_SortingLayer: -19
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d59768dd3d8055f4f8d1fb23021541e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

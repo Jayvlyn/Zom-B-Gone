@@ -15,40 +15,140 @@ MonoBehaviour:
   name: Taser
   description: Harness a little electricity and stun your foes!
   rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8c3192e848177ef4b9d9ff921a3b65ab, type: 3}
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: d2e8cbb167b35a04d8b055ac966ad86c, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
-  weight: 100
+  weight: 200
+  throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0
   damage: 10
-  attackSpeed: 0.15
+  attackSpeed: 0.4
   knockbackPower: 10
   dismemberChance: 0
-  staminaCost: 1
+  staminaCost: 0.3
   prepSpeed: 0.2
   swingCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.7249804
+      outSlope: 2.7249804
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11358933
+    - serializedVersion: 3
+      time: 0.044554427
+      value: 7.3114853
+      inSlope: 3.4136145
+      outSlope: 3.4136145
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.57657367
+    - serializedVersion: 3
+      time: 0.08936141
+      value: 7.3449965
+      inSlope: -0.7773687
+      outSlope: -0.7773687
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18754987
+      outWeight: 0.31685624
+    - serializedVersion: 3
+      time: 0.13745399
+      value: 1.1267421
+      inSlope: -0.60702884
+      outSlope: -0.60702884
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.082993306
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.41661876
+      outSlope: -0.41661876
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07847315
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   rotationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.024726868
+      value: 0
+      inSlope: -2.0507076
+      outSlope: -2.0507076
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: -2
+      inSlope: -2.0507076
+      outSlope: -2.0507076
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   prepSwingCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   prepRotationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -60,3 +160,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7998ae8ee1cadfa40a2694c75dec41df, type: 3}
   - {fileID: 8300000, guid: f8690dcdd9632c4459a587498741103c, type: 3}
   - {fileID: 8300000, guid: 8a82ded4f7c8fe04ca056cd6b96afec2, type: 3}
+  effect: {fileID: 11400000, guid: 7e0819958d41220469c30f0b9997be67, type: 2}

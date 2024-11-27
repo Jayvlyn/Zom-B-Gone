@@ -1,12 +1,13 @@
 using System.Collections;
+using System.Drawing.Text;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     public Transform player;
     public GameObject[] enemyPrefabs;
-    public float spawnIntervalTime = 5;
-    public float enemiesPerWave = 3;
+    private float currentEnemiesPerMinute = 1;
+    private float spawnInterval;
     public float spawnDistance = 16;
     public float spawnRange = 30;
 
@@ -15,19 +16,39 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnTick());
     }
 
-    private IEnumerator SpawnTick()
+	private IEnumerator SpawnTick()
     {
         while (true)
         {
-            SpawnWave();
-
-            yield return new WaitForSeconds(spawnIntervalTime);
+            TrySpawnEnemy();
+            CalculateInterval();
+			yield return new WaitForSeconds(spawnInterval);
         }
     }
 
+    private void CalculateInterval()
+    {
+		float gameTimeInMinutes = Time.timeSinceLevelLoad / 60;
+		if (gameTimeInMinutes <= 10)
+		{
+            currentEnemiesPerMinute = GameManager.currentZone.spawnRate.Evaluate(gameTimeInMinutes);
+			spawnInterval = 60 / currentEnemiesPerMinute;
+            if (DayNightCycle.isNight) spawnInterval *= 2;
+		}
+	}
+
+    private void TrySpawnEnemy()
+    {
+		if (Optimizer.currentActiveEnemies < Optimizer.maxActiveEnemies)
+		{
+			SpawnRandomEnemy();
+		}
+	}
+
     private void SpawnWave()
     {
-        for(int i = 0; i < enemiesPerWave; i++)
+        int enemiesPerWave = 4;
+        for (int i = 0; i < enemiesPerWave; i++)
         {
             if (Optimizer.currentActiveEnemies < Optimizer.maxActiveEnemies)
             {

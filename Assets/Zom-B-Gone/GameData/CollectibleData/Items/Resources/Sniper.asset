@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sniper
   description: Pierce through an entire horde.
-  rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
+  rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
   icon: {fileID: 21300000, guid: 00fb7356aca6870438cf597c00e07c03, type: 3}
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: c8206db393358144bab42eebc0c6e797, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 4000
+  throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 70
   damage: 100
@@ -40,4 +41,5 @@ MonoBehaviour:
   reloadStart: {fileID: 8300000, guid: 0fdd99ef88e810d4785e0f330b7b1828, type: 3}
   reloadNoiseRadius: 5
   suppressed: 0
+  suppressionPercentage: 0
   ssp: {fileID: 11400000, guid: 29b77d0764bf99e43bc502fa91c08711, type: 2}

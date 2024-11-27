@@ -28,7 +28,7 @@ MonoBehaviour:
   showAudioClipsFoldout: 1
   showQuadsFoldout: 0
   showMaterialsFoldout: 0
-  showAutomaticFoldout: 1
+  showAutomaticFoldout: 0
   showAutoClipsFoldout: 1
   showAutoDelaysFoldout: 0
   showMasterFoldout: 0

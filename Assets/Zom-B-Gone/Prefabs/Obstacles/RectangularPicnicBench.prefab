@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2479592600775128846}
   - component: {fileID: 4826773798859923985}
   - component: {fileID: -6864193525262206506}
-  m_Layer: 6
+  m_Layer: 24
   m_Name: RectangularPicnicBench
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 97008305
-  m_SortingLayer: -18
+  m_SortingLayer: -19
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ff42c715232c75640b23eaa8dd2f9f84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

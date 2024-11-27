@@ -1,6 +1,8 @@
+using CodeMonkey;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LootrunnerDataRefs : MonoBehaviour
 {
@@ -13,8 +15,13 @@ public class LootrunnerDataRefs : MonoBehaviour
     public CollectibleContainerData itemLockerData;
     public CollectibleContainerData lootLockerData;
 
+    public CollectibleContainerData worbenchInputData;
+    public CollectibleContainerData worbenchOutputData;
+
     public FloorContainer vanFloor;
     public FloorContainer unitFloor;
 
     public MarketData marketData;
+
+    public Button[] zoneButtons;
 }

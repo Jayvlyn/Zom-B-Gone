@@ -9,8 +9,8 @@ public class LootTable : ScriptableObject
 {
     public CollectibleData[] table = new CollectibleData[5];
     public RarityList rarityList;
-	private List<float> weights;
-	private List<CollectibleData>[][] splitTable; // 2d array of collectibles
+	public static List<float> weights;
+	public static List<CollectibleData>[][] splitTable; // 2d array of collectibles
 
     //[0][x] Hats of rarity x
     //[1][x] Items of rarity x
@@ -151,7 +151,7 @@ public class LootTable : ScriptableObject
 		}
 	}
 
-	private List<float> GenerateRarityWeights(float decayFactor = 0.5f)
+	private List<float> GenerateRarityWeights(float decayFactor = 0.3f)
 	{
 		List<float> weights = new List<float>();
 		float totalWeight = 0f;
@@ -168,7 +168,6 @@ public class LootTable : ScriptableObject
 		{
 			float weight = (Mathf.Pow(decayFactor, i) / totalWeight) * 100f;
 			cumulativeWeight += weight;
-			
 			weights.Add(cumulativeWeight);
 		}
 		return weights;

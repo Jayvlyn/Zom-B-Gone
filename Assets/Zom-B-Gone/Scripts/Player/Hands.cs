@@ -79,16 +79,6 @@ public class Hands : MonoBehaviour
                 else rightAmmoCount.enabled = false;
 
                 if (rightItem != null) rightLumbering = Utils.MapWeightToRange(rightItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-     //           else if (RightObstacle != null)
-     //           {
-     //               float weight = RightObstacle.weight;
-     //               if (LeftObstacle != null && LeftObstacle == RightObstacle)
-     //               {
-     //                   weight *= 0.5f; // split weight between hands
-					//	leftLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
-					//}
-     //               rightLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
-     //           }
 			}
             else
             {
@@ -111,16 +101,6 @@ public class Hands : MonoBehaviour
                 else leftAmmoCount.enabled = false;
 
 				if (leftItem != null) leftLumbering = Utils.MapWeightToRange(leftItem.itemData.weight, lumberingLowerBound, 1.0f, true);
-				//else if (LeftObstacle != null)
-				//{
-				//	float weight = LeftObstacle.weight;
-				//	if (RightObstacle != null && RightObstacle == LeftObstacle)
-				//	{
-				//		weight *= 0.5f; // split weight between hands
-				//		rightLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
-				//	}
-				//	leftLumbering = Utils.MapWeightToRange(weight, lumberingLowerBound, 1.0f, true, true);
-				//}
 			}
             else
             {
@@ -142,14 +122,12 @@ public class Hands : MonoBehaviour
                 if (value.TryGetComponent(out Item leftItem))
                 {
                     this.leftItem = leftItem;
-                    //handContainerData.Container.collectibleSlots[0].Collectible = leftItem.itemData;
                     handContainerData.Container.collectibleSlots[0].CollectibleName = leftItem.itemData.name;
                     handContainerData.Container.collectibleSlots[0].quantity = leftItem.Quantity;
                 }
             }
             else
             {
-                //handContainerData.Container.collectibleSlots[0].Collectible = null;
                 handContainerData.Container.collectibleSlots[0].CollectibleName = null;
                 handContainerData.Container.collectibleSlots[0].quantity = 0;
                 leftItem = null;
@@ -168,14 +146,12 @@ public class Hands : MonoBehaviour
                 if (value.TryGetComponent(out Item rightItem))
                 {
                     this.rightItem = rightItem;
-                    //handContainerData.Container.collectibleSlots[1].Collectible = rightItem.itemData;
                     handContainerData.Container.collectibleSlots[1].CollectibleName = rightItem.itemData.name;
                     handContainerData.Container.collectibleSlots[1].quantity = rightItem.Quantity;
                 }
             }
             else
             {
-                //handContainerData.Container.collectibleSlots[1].Collectible = null;
                 handContainerData.Container.collectibleSlots[1].CollectibleName = null;
                 handContainerData.Container.collectibleSlots[1].quantity = 0;
                 rightItem = null;
@@ -202,6 +178,7 @@ public class Hands : MonoBehaviour
             leftObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
 			Optimizer.list.Add(leftObject);
 			leftItem = leftObject.GetComponent<Item>();
+            leftItem.Quantity = handContainerData.Container.collectibleSlots[0].quantity;
 			leftItem.Interact(false, playerController);
 			UsingLeft = true;
             
@@ -213,7 +190,8 @@ public class Hands : MonoBehaviour
 			rightObject = Instantiate(prefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
             Optimizer.list.Add(rightObject);
             rightItem = rightObject.GetComponent<Item>();
-            rightItem.Interact(true, playerController);
+			rightItem.Quantity = handContainerData.Container.collectibleSlots[1].quantity;
+			rightItem.Interact(true, playerController);
             UsingRight = true;
         }
 

@@ -15,6 +15,7 @@ public class MeleeWeaponData : WeaponData
 	public AnimationCurve prepRotationCurve;
 	public List<AudioClip> swingSounds;
 	public List<AudioClip> hitSounds;
+	public EffectData effect;
 
 
 	public override string GetInfoDisplayText()

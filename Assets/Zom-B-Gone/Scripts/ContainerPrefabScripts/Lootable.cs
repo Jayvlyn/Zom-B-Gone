@@ -24,11 +24,11 @@ public class Lootable : MonoBehaviour
             {
                 chanceToFill *= 0.5f;
 
-                CollectibleData coll = GameManager.currentZoneLootTable.GetRandomCollectible();
+                CollectibleData coll = GameManager.currentZone.lootTable.GetRandomCollectible();
                 if (coll == null) return;
 
                 collectibleSlots[i].CollectibleName = coll.name;
-                collectibleSlots[i].quantity = GameManager.currentZoneLootTable.GetRandomQuantity(coll);
+                collectibleSlots[i].quantity = GameManager.currentZone.lootTable.GetRandomQuantity(coll);
             }
             else break;
         }

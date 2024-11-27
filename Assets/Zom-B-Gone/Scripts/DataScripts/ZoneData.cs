@@ -7,4 +7,6 @@ public class ZoneData : ScriptableObject
 {
     public LootTable lootTable;
 
+    public AnimationCurve spawnRate;
+
 }

@@ -24,5 +24,6 @@ MonoBehaviour:
   damageMultiplier: 1
   damageIncrease: 0
   moveSpeedMod: 1
-  defense: 1
+  driveSpeedMod: 1
+  defense: 2
   camo: 0

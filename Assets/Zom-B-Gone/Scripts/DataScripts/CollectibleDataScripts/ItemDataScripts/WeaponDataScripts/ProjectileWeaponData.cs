@@ -17,6 +17,7 @@ public class ProjectileWeaponData : WeaponData
 	public AudioClip reloadStart;
 	public float reloadNoiseRadius;
 	public bool suppressed = false;
+	[Range(0,100),Tooltip("If suppressed, reduce shoot noise by this percentage")] public float suppressionPercentage = 0;
 	public ScreenShakeProfile ssp;
 
     public override string GetInfoDisplayText()

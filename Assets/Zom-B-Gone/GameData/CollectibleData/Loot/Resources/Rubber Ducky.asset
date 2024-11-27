@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
+  m_Name: Rubber Ducky
+  m_EditorClassIdentifier: 
+  name: Rubber Ducky
+  description: '*squeak*'
+  rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
+  icon: {fileID: 21300000, guid: 598fbf4993e82624ca89038530eeec9a, type: 3}
+  maxStack: 64
+  pickupSound: {fileID: 8300000, guid: d91cc8cb43ddb2543ad86e340fef62d1, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}

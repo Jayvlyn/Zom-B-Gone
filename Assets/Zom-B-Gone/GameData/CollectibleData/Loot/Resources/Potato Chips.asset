@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de8be6744f8e8a43a4fb722172c6d15, type: 3}
+  m_Name: Potato Chips
+  m_EditorClassIdentifier: 
+  name: Potato Chips
+  description: I wonder if these are better than the generic nacho cheese tortilla
+    chips
+  rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
+  icon: {fileID: 21300000, guid: ef83382198ba38647b714e9114275e09, type: 3}
+  maxStack: 16
+  pickupSound: {fileID: 8300000, guid: d91cc8cb43ddb2543ad86e340fef62d1, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}

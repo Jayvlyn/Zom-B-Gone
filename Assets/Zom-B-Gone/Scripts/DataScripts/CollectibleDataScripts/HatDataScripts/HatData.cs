@@ -13,6 +13,7 @@ public class HatData : CollectibleData
 	public float damageMultiplier = 1;
 	public float damageIncrease = 0;
 	public float moveSpeedMod = 1;
+	public float driveSpeedMod = 1;
 	public int defense = 0;
 	public bool camo = false;
 

@@ -1,3 +1,4 @@
+using CodeMonkey;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -25,6 +26,10 @@ public class Bullet : MonoBehaviour
         playerController = FindFirstObjectByType<PlayerController>();
         playerHead = playerController.gameObject.GetComponent<Head>();
 
+        if(bulletData.spin > 0)
+        {
+            rigidBody.angularVelocity = bulletData.spin;
+        }
     }
 
     private IEnumerator lifeStart()
@@ -38,18 +43,30 @@ public class Bullet : MonoBehaviour
 	{
         if(rigidBody.linearVelocity.magnitude > 3)
         {
-            if (collision.CompareTag("Enemy"))
+			if (collision.CompareTag("Enemy"))
             {
                 bulletData.enterEvent.Raise(transform);
                 if (currentPiercingPower > 0) bulletData.exitEvent.Raise(transform);
-            }
 
-            if (collision.gameObject.TryGetComponent(out Health targetHealth))
+                if (collision.gameObject.TryGetComponent(out Enemy enemy))
+                {
+                    currentPiercingPower--;
+                    DealDamage(enemy.health);
+
+                    if(bulletData.effectData)
+                    {
+                        Utils.ApplyEffect(bulletData.effectData, enemy);
+					}
+                }
+                
+            }
+            else if (collision.gameObject.TryGetComponent(out Health targetHealth))
             {
                 currentPiercingPower--;
                 DealDamage(targetHealth);
-            }
-            else
+				
+			}
+            else // hit surface
             {
                 if (bulletData.wallPiercing) currentPiercingPower--;
                 else if(!bulletData.residual)
@@ -57,6 +74,8 @@ public class Bullet : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
+
+
             if (currentPiercingPower < 0 && !bulletData.residual) Destroy(gameObject);
         }
     }
@@ -64,6 +83,12 @@ public class Bullet : MonoBehaviour
     protected void DealDamage(Health targetHealth)
     {
         float damage = ProjectileWeaponDamage * bulletData.damageMultiplier;
-        shooter.DealDamage(targetHealth, damage);
+
+        bool crit = false;
+        if(bulletData.piercingPower <= currentPiercingPower + 1)
+        {
+			if (Random.Range(0, 3) == 0) crit = true;
+		}
+        shooter.DealDamage(targetHealth, damage, crit);
     }
 }

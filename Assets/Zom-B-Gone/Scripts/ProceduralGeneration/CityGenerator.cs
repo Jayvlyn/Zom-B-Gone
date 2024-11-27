@@ -418,21 +418,39 @@ public class CityGenerator : MonoBehaviour
                 {
 					if (chunkPos.x % 2 == 1 || chunkPos.y % 2 == 1)
 					{
-						return ModuleType.HORIZONTAL;
+						return ModuleType.VERTICAL;
 					}
 					// vertical road or intersection that connects up
-					ModuleType[] possibleModules = new ModuleType[7];
-                    possibleModules[0] = ModuleType.VERTICAL;
-                    possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
-                    possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
-                    possibleModules[3] = ModuleType.INTERSECTION_3_EAST;
-                    possibleModules[4] = ModuleType.INTERSECTION_4;
-                    possibleModules[5] = ModuleType.NORTH_WEST_TURN;
-                    possibleModules[6] = ModuleType.NORTH_EAST_TURN;
-                    return PickRandomModule(possibleModules);
+
+                    if(Random.Range(0,3) == 0)
+                    {
+					    ModuleType[] possibleModules = new ModuleType[6];
+                        possibleModules[0] = ModuleType.INTERSECTION_3_SOUTH;
+                        possibleModules[1] = ModuleType.INTERSECTION_3_WEST;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_EAST;
+                        possibleModules[3] = ModuleType.INTERSECTION_4;
+                        possibleModules[4] = ModuleType.NORTH_WEST_TURN;
+                        possibleModules[5] = ModuleType.NORTH_EAST_TURN;
+                        return PickRandomModule(possibleModules);
+                    }
+
+                    return ModuleType.VERTICAL;
+
                 }
                 else if (!ModuleLeadsDown(aboveModule))
                 { 
+                    if(aboveModule == ModuleType.GRASS)
+                    { // chance to start new root to branch from, that doesnt connect up
+                        if(Random.Range(0,40) == 0)
+                        {
+							ModuleType[] possibleModules = new ModuleType[4];
+							possibleModules[0] = ModuleType.HORIZONTAL;
+							possibleModules[1] = ModuleType.INTERSECTION_3_NORTH;
+							possibleModules[2] = ModuleType.SOUTH_WEST_TURN;
+							possibleModules[3] = ModuleType.SOUTH_EAST_TURN;
+							return PickRandomModule(possibleModules);
+						}
+                    }
                     return ModuleType.GRASS;
                 }
                 else
@@ -448,19 +466,34 @@ public class CityGenerator : MonoBehaviour
 						return ModuleType.VERTICAL;
 					}
 					// vertical road or intersection that connects down
-					ModuleType[] possibleModules = new ModuleType[7];
-                    possibleModules[0] = ModuleType.VERTICAL;
-                    possibleModules[1] = ModuleType.INTERSECTION_4;
-                    possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
-                    possibleModules[3] = ModuleType.INTERSECTION_3_WEST;
-                    possibleModules[4] = ModuleType.INTERSECTION_3_EAST;
-                    possibleModules[5] = ModuleType.SOUTH_EAST_TURN;
-                    possibleModules[6] = ModuleType.SOUTH_WEST_TURN;
-                    return PickRandomModule(possibleModules);
+					if (Random.Range(0, 3) == 0)
+					{
+					    ModuleType[] possibleModules = new ModuleType[6];
+                        possibleModules[0] = ModuleType.INTERSECTION_4;
+                        possibleModules[1] = ModuleType.INTERSECTION_3_NORTH;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
+                        possibleModules[3] = ModuleType.INTERSECTION_3_EAST;
+                        possibleModules[4] = ModuleType.SOUTH_EAST_TURN;
+                        possibleModules[5] = ModuleType.SOUTH_WEST_TURN;
+                        return PickRandomModule(possibleModules);
+					}
+                    return ModuleType.VERTICAL;
                 }
                 else if (!ModuleLeadsUp(belowModule))
                 {
-                    return ModuleType.GRASS;
+					if (belowModule == ModuleType.GRASS)
+					{ // chance to start new root to branch from, that doesnt connect down
+						if (Random.Range(0, 40) == 0)
+						{
+							ModuleType[] possibleModules = new ModuleType[4];
+							possibleModules[0] = ModuleType.HORIZONTAL;
+							possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
+							possibleModules[2] = ModuleType.NORTH_WEST_TURN;
+							possibleModules[3] = ModuleType.NORTH_EAST_TURN;
+							return PickRandomModule(possibleModules);
+						}
+					}
+					return ModuleType.GRASS;
                 }
                 else
                 {
@@ -475,19 +508,35 @@ public class CityGenerator : MonoBehaviour
 						return ModuleType.HORIZONTAL;
 					}
 					// horizontal road or intersection that connects left
-					ModuleType[] possibleModules = new ModuleType[7];
-                    possibleModules[0] = ModuleType.HORIZONTAL;
-                    possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
-                    possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
-                    possibleModules[3] = ModuleType.INTERSECTION_3_EAST;
-                    possibleModules[4] = ModuleType.INTERSECTION_4;
-                    possibleModules[5] = ModuleType.SOUTH_WEST_TURN;
-                    possibleModules[6] = ModuleType.NORTH_WEST_TURN;
-                    return PickRandomModule(possibleModules);
+					if (Random.Range(0, 3) == 0)
+					{
+					    ModuleType[] possibleModules = new ModuleType[6];
+                        possibleModules[0] = ModuleType.INTERSECTION_3_SOUTH;
+                        possibleModules[1] = ModuleType.INTERSECTION_3_NORTH;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_EAST;
+                        possibleModules[3] = ModuleType.INTERSECTION_4;
+                        possibleModules[4] = ModuleType.SOUTH_WEST_TURN;
+                        possibleModules[5] = ModuleType.NORTH_WEST_TURN;
+                        return PickRandomModule(possibleModules);
+					}
+
+                    return ModuleType.HORIZONTAL;
                 }
                 else if (!ModuleLeadsRight(leftModule)) // cant lead to road on right
                 {
-                    return ModuleType.GRASS;
+					if (leftModule == ModuleType.GRASS)
+					{ // chance to start new root to branch from, that doesnt connect left
+						if (Random.Range(0, 40) == 0)
+						{
+							ModuleType[] possibleModules = new ModuleType[4];
+							possibleModules[0] = ModuleType.VERTICAL;
+							possibleModules[1] = ModuleType.INTERSECTION_3_WEST;
+							possibleModules[2] = ModuleType.NORTH_EAST_TURN;
+							possibleModules[3] = ModuleType.SOUTH_EAST_TURN;
+							return PickRandomModule(possibleModules);
+						}
+					}
+					return ModuleType.GRASS;
                 }
                 else 
                 {
@@ -502,20 +551,35 @@ public class CityGenerator : MonoBehaviour
 						return ModuleType.HORIZONTAL;
 					}
 					// horizontal road or intersection that connects right
-					ModuleType[] possibleModules = new ModuleType[7];
-                    possibleModules[0] = ModuleType.HORIZONTAL;
-                    possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
-                    possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
-                    possibleModules[3] = ModuleType.INTERSECTION_3_WEST;
-                    possibleModules[4] = ModuleType.INTERSECTION_4;
-                    possibleModules[5] = ModuleType.SOUTH_EAST_TURN;
-                    possibleModules[6] = ModuleType.NORTH_EAST_TURN;
-                    return PickRandomModule(possibleModules);
+					if (Random.Range(0, 3) == 0)
+					{
+					    ModuleType[] possibleModules = new ModuleType[6];
+                        possibleModules[0] = ModuleType.INTERSECTION_3_SOUTH;
+                        possibleModules[1] = ModuleType.INTERSECTION_3_NORTH;
+                        possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
+                        possibleModules[3] = ModuleType.INTERSECTION_4;
+                        possibleModules[4] = ModuleType.SOUTH_EAST_TURN;
+                        possibleModules[5] = ModuleType.NORTH_EAST_TURN;
+                        return PickRandomModule(possibleModules);
+					}
 
+                    return ModuleType.HORIZONTAL;
                 }
                 else if (!ModuleLeadsLeft(rightModule)) // cant lead to road on left
                 {
-                    return ModuleType.GRASS;
+					if (rightModule == ModuleType.GRASS)
+					{ // chance to start new root to branch from, that doesnt connect right
+						if (Random.Range(0, 40) == 0)
+						{
+							ModuleType[] possibleModules = new ModuleType[4];
+							possibleModules[0] = ModuleType.HORIZONTAL;
+							possibleModules[1] = ModuleType.INTERSECTION_3_EAST;
+							possibleModules[2] = ModuleType.NORTH_WEST_TURN;
+							possibleModules[3] = ModuleType.SOUTH_WEST_TURN;
+							return PickRandomModule(possibleModules);
+						}
+					}
+					return ModuleType.GRASS;
                 }
                 else
                 {
@@ -557,11 +621,16 @@ public class CityGenerator : MonoBehaviour
 							{
 								return ModuleType.VERTICAL;
 							}
-							ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.VERTICAL;
-                            possibleModules[1] = ModuleType.INTERSECTION_3_EAST;
-                            possibleModules[2] = ModuleType.NORTH_WEST_TURN;
-                            return PickRandomModule(possibleModules);
+
+							if (Random.Range(0, 3) == 0)
+							{
+							    ModuleType[] possibleModules = new ModuleType[2];
+                                possibleModules[0] = ModuleType.INTERSECTION_3_EAST;
+                                possibleModules[1] = ModuleType.NORTH_WEST_TURN;
+                                return PickRandomModule(possibleModules);
+							}
+
+                            return ModuleType.VERTICAL;
                         }
                     }
                     else if (rightLeadsLeft)
@@ -577,16 +646,28 @@ public class CityGenerator : MonoBehaviour
 							{
 								return ModuleType.HORIZONTAL;
 							}
-							ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.HORIZONTAL;
-                            possibleModules[1] = ModuleType.INTERSECTION_3_NORTH;
-                            possibleModules[2] = ModuleType.SOUTH_EAST_TURN;
-                            return PickRandomModule(possibleModules);
+
+							if (Random.Range(0, 3) == 0)
+							{
+							    ModuleType[] possibleModules = new ModuleType[2];
+                                possibleModules[0] = ModuleType.INTERSECTION_3_NORTH;
+                                possibleModules[1] = ModuleType.SOUTH_EAST_TURN;
+                                return PickRandomModule(possibleModules);
+							}
+
+                            return ModuleType.HORIZONTAL;
                         }
                     }
                     else
                     {
-                        return ModuleType.GRASS;
+						if (aboveModule == ModuleType.GRASS && rightModule == ModuleType.GRASS)
+						{ // chance to start new root to branch from, that doesnt connect up or right
+							if (Random.Range(0, 40) == 0)
+                            {
+								return ModuleType.SOUTH_WEST_TURN;
+							}
+						}
+						return ModuleType.GRASS;
                     }
                 }
 
@@ -617,11 +698,16 @@ public class CityGenerator : MonoBehaviour
 							{
 								return ModuleType.VERTICAL;
 							}
-							ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.VERTICAL;
-                            possibleModules[1] = ModuleType.NORTH_EAST_TURN;
-                            possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
-                            return PickRandomModule(possibleModules);
+
+							if (Random.Range(0, 3) == 0)
+							{
+							    ModuleType[] possibleModules = new ModuleType[2];
+                                possibleModules[0] = ModuleType.NORTH_EAST_TURN;
+                                possibleModules[1] = ModuleType.INTERSECTION_3_WEST;
+                                return PickRandomModule(possibleModules);
+							}
+
+                            return  ModuleType.VERTICAL;
                         }
                     }
                     else if (leftLeadsRight)
@@ -637,16 +723,27 @@ public class CityGenerator : MonoBehaviour
 							{
 								return ModuleType.HORIZONTAL;
 							}
-							ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.HORIZONTAL;
-                            possibleModules[1] = ModuleType.SOUTH_WEST_TURN;
-                            possibleModules[2] = ModuleType.INTERSECTION_3_NORTH;
-                            return PickRandomModule(possibleModules);
+							if (Random.Range(0, 3) == 0)
+							{
+							    ModuleType[] possibleModules = new ModuleType[2];
+                                possibleModules[0] = ModuleType.SOUTH_WEST_TURN;
+                                possibleModules[1] = ModuleType.INTERSECTION_3_NORTH;
+                                return PickRandomModule(possibleModules);
+							}
+
+                            return ModuleType.HORIZONTAL;
                         }
                     }
                     else
                     {
-                        return ModuleType.GRASS;
+						if (aboveModule == ModuleType.GRASS && leftModule == ModuleType.GRASS)
+						{ // chance to start new root to branch from, that doesnt connect up or left
+							if (Random.Range(0, 40) == 0)
+							{
+								return ModuleType.SOUTH_EAST_TURN;
+							}
+						}
+						return ModuleType.GRASS;
                     }
                 }
 
@@ -677,11 +774,15 @@ public class CityGenerator : MonoBehaviour
 								return ModuleType.VERTICAL;
 							}
 							// at least down and not right
-							ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.VERTICAL;
-                            possibleModules[1] = ModuleType.INTERSECTION_3_EAST;
-                            possibleModules[2] = ModuleType.SOUTH_WEST_TURN;
-                            return PickRandomModule(possibleModules);
+							if (Random.Range(0, 3) == 0)
+							{
+							    ModuleType[] possibleModules = new ModuleType[2];
+                                possibleModules[0] = ModuleType.INTERSECTION_3_EAST;
+                                possibleModules[1] = ModuleType.SOUTH_WEST_TURN;
+                                return PickRandomModule(possibleModules);
+							}
+
+                            return ModuleType.VERTICAL;
                         }
                     }
                     else if (rightLeadsLeft)
@@ -697,16 +798,29 @@ public class CityGenerator : MonoBehaviour
 								return ModuleType.HORIZONTAL;
 							}
 							// at least right and not down
-							ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.HORIZONTAL;
-                            possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
-                            possibleModules[2] = ModuleType.NORTH_EAST_TURN;
-                            return PickRandomModule(possibleModules);
+
+							if (Random.Range(0, 3) == 0)
+							{
+							    ModuleType[] possibleModules = new ModuleType[2];
+                                possibleModules[0] = ModuleType.INTERSECTION_3_SOUTH;
+                                possibleModules[1] = ModuleType.NORTH_EAST_TURN;
+                                return PickRandomModule(possibleModules);
+							}
+
+                            return ModuleType.HORIZONTAL;
+
                         }
                     }
                     else
                     {
-                        return ModuleType.GRASS;
+						if (belowModule == ModuleType.GRASS && rightModule == ModuleType.GRASS)
+						{ // chance to start new root to branch from, that doesnt connect below or right
+							if (Random.Range(0, 40) == 0)
+							{
+								return ModuleType.NORTH_WEST_TURN;
+							}
+						}
+						return ModuleType.GRASS;
                     }
                 }
 
@@ -737,11 +851,15 @@ public class CityGenerator : MonoBehaviour
 							{
 								return ModuleType.VERTICAL;
 							}
-							ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.VERTICAL;
-                            possibleModules[1] = ModuleType.SOUTH_EAST_TURN;
-                            possibleModules[2] = ModuleType.INTERSECTION_3_WEST;
-                            return PickRandomModule(possibleModules);
+
+							if (Random.Range(0, 3) == 0)
+							{
+							    ModuleType[] possibleModules = new ModuleType[2];
+                                possibleModules[0] = ModuleType.SOUTH_EAST_TURN;
+                                possibleModules[1] = ModuleType.INTERSECTION_3_WEST;
+                                return PickRandomModule(possibleModules);
+							}
+                            return ModuleType.VERTICAL;
                         }
                     }
                     else if (leftLeadsRight)
@@ -757,16 +875,27 @@ public class CityGenerator : MonoBehaviour
                             {
                                 return ModuleType.HORIZONTAL;
                             }
-                            ModuleType[] possibleModules = new ModuleType[3];
-                            possibleModules[0] = ModuleType.HORIZONTAL;
-                            possibleModules[1] = ModuleType.NORTH_WEST_TURN;
-                            possibleModules[2] = ModuleType.INTERSECTION_3_SOUTH;
-                            return PickRandomModule(possibleModules);
-                        }
-                    }
+
+							if (Random.Range(0, 3) == 0)
+							{
+                                ModuleType[] possibleModules = new ModuleType[2];
+                                possibleModules[0] = ModuleType.NORTH_WEST_TURN;
+                                possibleModules[1] = ModuleType.INTERSECTION_3_SOUTH;
+                                return PickRandomModule(possibleModules);
+							}
+                            return ModuleType.HORIZONTAL;
+						}
+					}
                     else
                     {
-                        return ModuleType.GRASS;
+						if (belowModule == ModuleType.GRASS && leftModule == ModuleType.GRASS)
+						{ // chance to start new root to branch from, that doesnt connect below or left
+							if (Random.Range(0, 40) == 0)
+							{
+								return ModuleType.NORTH_EAST_TURN;
+							}
+						}
+						return ModuleType.GRASS;
                     }
                 }
 
@@ -832,31 +961,31 @@ public class CityGenerator : MonoBehaviour
 		else return ModuleType.EMPTY;
 	}
 
-    public bool SurroundedByGrass(Vector2Int chunkPos)
+    public bool OnlyGrassConnections(Vector2Int chunkPos)
     {
         Vector2Int topCoord = new Vector2Int(chunkPos.x, chunkPos.y + 1);
-        if (!loadedChunks.ContainsKey(topCoord) || loadedChunks[topCoord].type != ModuleType.GRASS) return false;
+        if (loadedChunks.ContainsKey(topCoord) && loadedChunks[topCoord].type != ModuleType.GRASS) return false;
 
         Vector2Int topRightCoord = new Vector2Int(chunkPos.x + 1, chunkPos.y + 1);
-		if (!loadedChunks.ContainsKey(topRightCoord) || loadedChunks[topRightCoord].type != ModuleType.GRASS) return false;
+		if (loadedChunks.ContainsKey(topRightCoord) && loadedChunks[topRightCoord].type != ModuleType.GRASS) return false;
 
 		Vector2Int topLeftCoord = new Vector2Int(chunkPos.x = 1, chunkPos.y + 1);
-		if (!loadedChunks.ContainsKey(topLeftCoord) || loadedChunks[topLeftCoord].type != ModuleType.GRASS) return false;
+		if (loadedChunks.ContainsKey(topLeftCoord) && loadedChunks[topLeftCoord].type != ModuleType.GRASS) return false;
 
 		Vector2Int bottomCoord = new Vector2Int(chunkPos.x, chunkPos.y - 1);
-		if (!loadedChunks.ContainsKey(bottomCoord) || loadedChunks[bottomCoord].type != ModuleType.GRASS) return false;
+		if (loadedChunks.ContainsKey(bottomCoord) && loadedChunks[bottomCoord].type != ModuleType.GRASS) return false;
 
 		Vector2Int bottomRightCoord = new Vector2Int(chunkPos.x + 1, chunkPos.y - 1);
-		if (!loadedChunks.ContainsKey(bottomRightCoord) || loadedChunks[bottomRightCoord].type != ModuleType.GRASS) return false;
+		if (loadedChunks.ContainsKey(bottomRightCoord) && loadedChunks[bottomRightCoord].type != ModuleType.GRASS) return false;
 
 		Vector2Int bottomLeftCoord = new Vector2Int(chunkPos.x - 1, chunkPos.y - 1);
-		if (!loadedChunks.ContainsKey(bottomLeftCoord) || loadedChunks[bottomLeftCoord].type != ModuleType.GRASS) return false;
+		if (loadedChunks.ContainsKey(bottomLeftCoord) && loadedChunks[bottomLeftCoord].type != ModuleType.GRASS) return false;
 
 		Vector2Int rightCoord = new Vector2Int(chunkPos.x + 1, chunkPos.y);
-		if (!loadedChunks.ContainsKey(rightCoord) || loadedChunks[rightCoord].type != ModuleType.GRASS) return false;
+		if (loadedChunks.ContainsKey(rightCoord) && loadedChunks[rightCoord].type != ModuleType.GRASS) return false;
 
 		Vector2Int leftCoord = new Vector2Int(chunkPos.x - 1, chunkPos.y);
-		if (!loadedChunks.ContainsKey(leftCoord) || loadedChunks[leftCoord].type != ModuleType.GRASS) return false;
+		if (loadedChunks.ContainsKey(leftCoord) && loadedChunks[leftCoord].type != ModuleType.GRASS) return false;
 
         return true;
 	}

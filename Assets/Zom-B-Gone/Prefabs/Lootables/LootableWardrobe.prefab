@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -8858856387709096793}
   - component: {fileID: 5165170856118941306}
   - component: {fileID: -138099233863303479}
-  m_Layer: 6
+  m_Layer: 25
   m_Name: LootableWardrobe
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 97008305
-  m_SortingLayer: -18
+  m_SortingLayer: -19
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5f40f74b848bd9744ac005986c50b18e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

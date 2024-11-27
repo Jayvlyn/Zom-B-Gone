@@ -58,7 +58,9 @@ public class VehicleCollisionHandler : MonoBehaviour
         float dismemberChance = 0;
         if (damage > 20) dismemberChance = damage;
 
-        health.TakeDamage(damage, knockbackVector, damage, false, popupVector, false, 3);
+		bool crit = false;
+		if (Random.Range(0, 20) == 0) crit = true;
+		health.TakeDamage(damage, knockbackVector, damage, crit, popupVector, false, 3);
     }
 
     private IEnumerator BufferTimer(GameObject g, float time)

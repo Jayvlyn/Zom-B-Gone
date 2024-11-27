@@ -1,7 +1,7 @@
 //Copyright (c) 2016-2022 Kai Clavier [kaiclavier.com] Do Not Distribute
 //Super Text Mesh v1.12.3
 using UnityEngine;
-using UnityEngine.Events; //for the OnComplete event
+using UnityEngine.Events; //for the OnComplete buttonEvent
 #if UNITY_EDITOR
 using UnityEditor; //for loading default stuff and menu thing
 #endif
@@ -1943,7 +1943,7 @@ public class SuperTextMesh : MonoBehaviour, ILayoutElement, IMaskable { //Maskab
 		//furthestDrawnPosition = rawBottomRightTextBounds.x;
 		//lowestLine = lineBreaks.Count-1;
 		wasReadingBefore = reading;
-		//make sure reading is true before this is called or else it will read every event
+		//make sure reading is true before this is called or else it will read every buttonEvent
 		SetMesh(unreadingMesh ? totalUnreadTime : totalReadTime, unreadingMesh);
 		StopReadRoutine();
 		//Invoke complete events:
@@ -2081,7 +2081,7 @@ public class SuperTextMesh : MonoBehaviour, ILayoutElement, IMaskable { //Maskab
 		if(startTime.Equals(0f)){ //for append()
 //			alreadyInvoked.Clear();
 			//lastNum = -1;
-			latestNumber = -1; //reset to -1, not 0. This would stop first character from making a sound/playing an event (2018-05-29)
+			latestNumber = -1; //reset to -1, not 0. This would stop first character from making a sound/playing an buttonEvent (2018-05-29)
 			lowestDrawnPosition = 0f;
 			lowestDrawnPositionRaw = 0f;
 			furthestDrawnPosition = 0f;
@@ -2099,7 +2099,7 @@ public class SuperTextMesh : MonoBehaviour, ILayoutElement, IMaskable { //Maskab
 		}
 		/*
 		else if(startTime.Equals(-1f)){
-			DoEvent(0);	//so 1st event doesn't get skipped
+			DoEvent(0);	//so 1st buttonEvent doesn't get skipped
 			2018-05-29 this shouldn't be a problem anymore because of the above
 		}
 		*/
@@ -2156,14 +2156,14 @@ public class SuperTextMesh : MonoBehaviour, ILayoutElement, IMaskable { //Maskab
 			DoEvent_info = info[i];
 			if(DoEvent_info.ev.Count > 0){ //invoke events...
 				for(int j=0, jL=DoEvent_info.ev.Count; j<jL; j++){
-					if(onCustomEvent != null) onCustomEvent.Invoke(DoEvent_info.ev[j], DoEvent_info); //call the event!
+					if(onCustomEvent != null) onCustomEvent.Invoke(DoEvent_info.ev[j], DoEvent_info); //call the buttonEvent!
 					if(OnCustomEvent != null) OnCustomEvent.Invoke(DoEvent_info.ev[j], DoEvent_info);
 				}
 				DoEvent_info.ev.Clear(); //since you only want events to be invoked once, I don't see the harm in clearing them this way instead of keeping track
 			}
 			if(DoEvent_info.ev2.Count > 0){ //end repeating events!
 				for(int j=0, jL=DoEvent_info.ev2.Count; j<jL; j++){
-					if(onCustomEvent != null) onCustomEvent.Invoke(DoEvent_info.ev2[j], DoEvent_info); //call the event!
+					if(onCustomEvent != null) onCustomEvent.Invoke(DoEvent_info.ev2[j], DoEvent_info); //call the buttonEvent!
 					if(OnCustomEvent != null) OnCustomEvent.Invoke(DoEvent_info.ev2[j], DoEvent_info);
 				}
 				DoEvent_info.ev2.Clear();
@@ -2729,11 +2729,11 @@ public class SuperTextMesh : MonoBehaviour, ILayoutElement, IMaskable { //Maskab
 							break;
 					//Event
 						case "<e=":
-							ParseText_info.ev.Add(ParseText_myString); //remember the event!
+							ParseText_info.ev.Add(ParseText_myString); //remember the buttonEvent!
 							break;
 					//Repeating Event
 						case "<e2=":
-							ParseText_info.ev2.Add(ParseText_myString); //remember the event!
+							ParseText_info.ev2.Add(ParseText_myString); //remember the buttonEvent!
 							break;
 						case "</e>":
 						case "</e2>":
@@ -3002,7 +3002,7 @@ public class SuperTextMesh : MonoBehaviour, ILayoutElement, IMaskable { //Maskab
 							//tell mesh to pause here
 							_currentPauseCount++;
 							if(Application.isPlaying && currentPauseCount > pauseCount) exitLoopAfter = true; //only during playmode for display purposes and cause it can break text
-							else if(Application.isPlaying) insertAfter = "\u200B"; //2018-09-23 do this to prevent a bug where <e><pause><e> wouldn't play the second event
+							else if(Application.isPlaying) insertAfter = "\u200B"; //2018-09-23 do this to prevent a bug where <e><pause><e> wouldn't play the second buttonEvent
 							break;
 						case "<clear>":
 							//call all cancel tags
@@ -3155,7 +3155,7 @@ public class SuperTextMesh : MonoBehaviour, ILayoutElement, IMaskable { //Maskab
 			
 		}
 		if(infoCount > myText.Length){
-			//add extra char to myText for tacked-on event
+			//add extra char to myText for tacked-on buttonEvent
 			myText += "\u200B";
 		}
 		return myText;
@@ -4844,7 +4844,7 @@ Vector3 JitterValue_MyJit = Vector3.zero;
 
 			if(readDelay == 0f)
 			{
-				//do every event
+				//do every buttonEvent
 				DoEvent(i);
 			}
 
@@ -4902,7 +4902,7 @@ Vector3 JitterValue_MyJit = Vector3.zero;
 			RecalculateTextBounds();
 			if(doEventAfter)
 			{
-				DoEvent(i); //do every event up to this integer
+				DoEvent(i); //do every buttonEvent up to this integer
 			}
 			if(doPrintEventAfter)
 			{

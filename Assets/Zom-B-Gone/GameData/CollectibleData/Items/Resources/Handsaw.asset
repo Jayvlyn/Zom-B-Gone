@@ -1,0 +1,200 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0daed25ccdb3ca44fb9626e86bfd5ce4, type: 3}
+  m_Name: Handsaw
+  m_EditorClassIdentifier: 
+  name: Handsaw
+  description: Not the best weapon, but it'll do. Has more practical usees for crafting
+    I'd say.
+  rarity: {fileID: 11400000, guid: 53abd21624551694bb7914be866f5967, type: 2}
+  icon: {fileID: 21300000, guid: 54db61cd3a22e0b44b373afa372c0fe5, type: 3}
+  maxStack: 1
+  pickupSound: {fileID: 8300000, guid: e981808a5a555044694f5c65abf7f4d0, type: 3}
+  dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
+  weight: 1200
+  throwForceMult: 1
+  throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
+  noiseRadius: 0
+  damage: 25
+  attackSpeed: 0.8
+  knockbackPower: 260
+  dismemberChance: 30
+  staminaCost: 0.8
+  prepSpeed: 0.4
+  swingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.7249804
+      outSlope: 2.7249804
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11358933
+    - serializedVersion: 3
+      time: 0.08141137
+      value: 9.72165
+      inSlope: 3.4136145
+      outSlope: 3.4136145
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.57657367
+    - serializedVersion: 3
+      time: 0.19415477
+      value: 9.787646
+      inSlope: -0.7773687
+      outSlope: -0.7773687
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18754987
+      outWeight: 0.31685624
+    - serializedVersion: 3
+      time: 0.24879466
+      value: 0.43666863
+      inSlope: -0.60702884
+      outSlope: -0.60702884
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.082993306
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.41661876
+      outSlope: -0.41661876
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07847315
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.19336124
+      value: 5.9761744
+      inSlope: 1.4070671
+      outSlope: 1.4070671
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.053311493
+      outWeight: 0.8106049
+    - serializedVersion: 3
+      time: 0.35984784
+      value: 5.957519
+      inSlope: -5.160526
+      outSlope: -5.160526
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.36518484
+      outWeight: 0.31295437
+    - serializedVersion: 3
+      time: 0.47806114
+      value: 0.7039218
+      inSlope: -2.3635273
+      outSlope: -2.3635273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.3846459
+    - serializedVersion: 3
+      time: 0.8427658
+      value: 0.42519855
+      inSlope: 1.0238874
+      outSlope: 1.0238874
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9957318
+      value: 5.140375
+      inSlope: -12.381104
+      outSlope: -12.381104
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3929258
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  prepSwingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3
+      outSlope: 3
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 3
+      inSlope: 0.051947273
+      outSlope: 0.051947273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08837211
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  prepRotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.051947273
+      outSlope: 0.051947273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08837211
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  swingSounds:
+  - {fileID: 8300000, guid: 12bc96730b6d87b45bfe833290087be4, type: 3}
+  - {fileID: 8300000, guid: 772b3b88743fef44db2946b40c4312d3, type: 3}
+  - {fileID: 8300000, guid: 5e2af4afd575acf4b94a9b77a17e4788, type: 3}
+  hitSounds:
+  - {fileID: 8300000, guid: c92de5028a3f74a4bb339fa25bc37b2f, type: 3}
+  - {fileID: 8300000, guid: 9ce063efb30e9a74a9a9bf9084388fdb, type: 3}
+  - {fileID: 8300000, guid: fead9bc58ddd3cd4cb3524e1638594b2, type: 3}
+  effect: {fileID: 0}

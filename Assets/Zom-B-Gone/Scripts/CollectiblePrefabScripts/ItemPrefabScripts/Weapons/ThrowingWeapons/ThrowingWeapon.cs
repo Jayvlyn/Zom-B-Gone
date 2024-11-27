@@ -62,7 +62,9 @@ public class ThrowingWeapon : Weapon
 
             float damage = Utils.MapWeightToRange(itemData.weight, 5, 100, false) + weaponData.damage;
 
-            collisionHealth.TakeDamage(damage, knockbackVector, weaponData.dismemberChance,false,popupVector,false, weaponData.dismemberChance/3);
+            bool crit = false;
+            if (Random.Range(0, 20) == 0) crit = true;
+            collisionHealth.TakeDamage(damage, knockbackVector, weaponData.dismemberChance, crit,popupVector,false, weaponData.dismemberChance/3);
         }
     }
 

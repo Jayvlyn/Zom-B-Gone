@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Text;
+using System.Security.AccessControl;
 using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Market", menuName = "New Market")]
 public class MarketData : ScriptableObject
 {
-    private int day = 1;
+    [SerializeField] private int day = 1;
     public int Day
     {
         get { return day; }
@@ -23,7 +25,6 @@ public class MarketData : ScriptableObject
                     RefreshBuyOffers(merchant);
                 }
             }
-
             else day = value;
         }
     }
@@ -85,13 +86,13 @@ public class MarketData : ScriptableObject
 
             int chosenAmount = Random.Range(1, maxAmount + 1);
 
-            merchant.vals.inventory.Add(chosenCollectible, chosenAmount);
+            merchant.vals.inventory.Add(chosenCollectible.Name, chosenAmount);
             dealingCollectibles.Remove(chosenCollectible); // no duplicate keys
 
             int price = DeterminePrice(chosenCollectible);
 			price = DiscountPriceWithRep(price, merchant);
 
-			merchant.vals.prices.Add(chosenCollectible, price);
+			merchant.vals.prices.Add(chosenCollectible.Name, price);
 
         }
     }
@@ -119,7 +120,7 @@ public class MarketData : ScriptableObject
             int price = DeterminePrice(chosenCollectible);
             price = IncreaseOfferWithRep(price, merchant);
 
-            merchant.vals.buyOffers.Add(chosenCollectible, price);
+            merchant.vals.buyOffers.Add(chosenCollectible.Name, price);
         }
     }
 
@@ -127,13 +128,21 @@ public class MarketData : ScriptableObject
     {
         // Determine price
         int price = 10;
+        if(c is ItemData)
+        {
+            price += 500;
+        }
+        else if (c is HatData)
+        {
+            price += 100;
+        }
         float preRandomMult = Random.Range(0.8f, 1.5f);
         price = Mathf.RoundToInt(price * preRandomMult);
-             if (c.rarity.Name == "Common")          price = Mathf.RoundToInt(price * 0.8f);
-        else if (c.rarity.Name == "Valuable")        price = Mathf.RoundToInt(price * 1.1f);
-        else if (c.rarity.Name == "Very Valuable")   price = Mathf.RoundToInt(price * 1.3f);
+             if (c.rarity.Name == "Common")          price = Mathf.RoundToInt(price * 0.3f);
+        else if (c.rarity.Name == "Valuable")        price = Mathf.RoundToInt(price * 0.6f);
+        //else if (c.rarity.Name == "Very Valuable")   price = Mathf.RoundToInt(price * 1.3f);
         else if (c.rarity.Name == "Super Valuable")  price = Mathf.RoundToInt(price * 1.6f);
-        else if (c.rarity.Name == "Super Legendary") price = Mathf.RoundToInt(price * 2f);
+        else if (c.rarity.Name == "Super Legendary") price = Mathf.RoundToInt(price * 2.5f);
 
         float postRandomMult = Random.Range(0.9f, 1.1f);
         price = Mathf.RoundToInt(price * postRandomMult);

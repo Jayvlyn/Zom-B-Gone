@@ -90,11 +90,11 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         }
     }
 
-    abstract public void Accelerate();
+    abstract public void Accelerate(float speedMod = 1);
 
     abstract public void Steer(float steerDirection);
 
-    abstract public void Brake();
+    abstract public void Brake(float speedMod = 1);
 
     protected void KillOrthogonalVelocity()
     {
@@ -127,6 +127,11 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public float GetLongitudinalVelocity()
     {
         return Vector2.Dot(transform.up, rb.linearVelocity);
+    }
+
+    public bool IsMovingFoward()
+    {
+        return Vector2.Dot(transform.up, rb.linearVelocity.normalized) > 0;
     }
 
     public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)
@@ -192,7 +197,6 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public void Interact(bool rightHand, PlayerController playerController)
     {
 		StartCoroutine(Activate(true));
-		vehicleData.enterEvent.Raise();
 	}
 
     public IEnumerator ExplodedTimer()
@@ -207,8 +211,9 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         if(vehicleData.enterSound) mainSource.PlayOneShot(vehicleData.enterSound); 
         yield return new WaitForSeconds(1f);
         Active = active;
+		vehicleData.enterEvent.Raise();
 
-        Utils.MakeSoundWave(transform.position, 8);
+		Utils.MakeSoundWave(transform.position, 8);
     }
 
     private Coroutine engineSoundCoroutine;

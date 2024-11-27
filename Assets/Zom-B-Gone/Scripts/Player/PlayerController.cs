@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -27,8 +28,13 @@ public class PlayerController : MonoBehaviour
     public Collider2D playerCollider;
     public SpriteRenderer playerSprite;
     public PlayerRenderingChanger renderingChanger;
+    public CinemachineImpulseSource impulseSource;
+    public Health health;
     private Slider staminaSlider;
     private Interactor interactor;
+
+    public static PlayerController instance;
+
 
     private Camera gameCamera;
     [HideInInspector] public CinemachineVirtualCamera vc;
@@ -138,6 +144,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         // Find references
         gameCamera = FindFirstObjectByType<Camera>();
         interactor = GetComponent<Interactor>();
@@ -195,7 +202,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (currentState != PlayerState.HIDING) SetPlayerVelocity();
-        if (currentState != PlayerState.DRIVING && currentState != PlayerState.HIDING) RotateToMouse();
+        if (currentState != PlayerState.DRIVING && currentState != PlayerState.HIDING && !dead) RotateToMouse();
     }
 
     private void UpdateStaminaBar()
@@ -499,11 +506,19 @@ public class PlayerController : MonoBehaviour
         }
 	}
 
+    private void OnGodMode(InputValue inputValue)
+    {
+        if(inputValue.isPressed)
+        {
+            godMode = !godMode;
+        }
+    }
+
 	#endregion -----------------------------------------
 
 	public void DropLeft()
 	{
-		if (hands.UsingLeft)
+		if (hands.leftItem)
 		{
 			hands.leftItem.Drop();
 			hands.leftLumbering = 1;
@@ -516,7 +531,7 @@ public class PlayerController : MonoBehaviour
 
 	public void DropRight()
 	{
-		if (hands.UsingRight)
+		if (hands.rightItem)
 		{
 			hands.rightItem.Drop();
 			hands.rightLumbering = 1;
@@ -647,6 +662,26 @@ public class PlayerController : MonoBehaviour
         if (hands.RightObject) hands.RightObject.SetActive(true);
 
         ChangeState(PlayerState.IDLE);
+    }
+
+    bool dead = false;
+    public static bool godMode = false;
+    public void Die()
+    {
+        DropLeft();
+        DropRight();
+        dead = true;
+		input.SwitchCurrentActionMap("Vehicle");
+		rb.bodyType = RigidbodyType2D.Kinematic;
+        Utils.ClearPlayerTemporaryContainers();
+        StartCoroutine(DeathTimer());
+        
+	}
+
+    private IEnumerator DeathTimer()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Unit");
     }
 }
 

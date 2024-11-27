@@ -27,16 +27,23 @@ public class FourWheeler : Vehicle
 
     }
 
-    public override void Accelerate()
+    public override void Accelerate(float speedMod = 1)
     {
         if (rb.linearVelocity.magnitude > vehicleData.maxSpeed) return;
-        rb.AddForce(transform.up * vehicleData.accelerationSpeed);
+        rb.AddForce(transform.up * vehicleData.accelerationSpeed * speedMod);
         
     }
 
-    public override void Brake()
+    public override void Brake(float speedMod = 1)
     {
-        rb.AddForce(-transform.up * vehicleData.brakeSpeed);
+        if(IsMovingFoward())
+        {
+            rb.AddForce(-transform.up * vehicleData.brakeSpeed * speedMod);
+        }
+        else
+        {
+            Accelerate(speedMod * -1); // use accelerate speed but backwards
+        }
     }
 
     public override void Steer(float steerDirection)

@@ -14,6 +14,8 @@ public class ConsumableData : ItemData
     public float instantStaminaRecovery = 0;
     public float staminaRecoverySpeed = 0;
     public float moveSpeedMod = 0;
+	public int instantHealing = 0;
+	public int regenPerSecond = 0;
 
     public override string GetInfoDisplayText()
 	{

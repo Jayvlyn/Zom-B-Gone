@@ -10,6 +10,7 @@
     --------------------------------------------------
  */
 
+using GameEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +49,26 @@ namespace CodeMonkey {
 
         public ScreenShakeProfile bigExplosionSSP;
         public ScreenShakeProfile smallExplosionSSP;
+        public ScreenShakeProfile playerDamagedSSP;
 
+        public AudioClip bigExplosionSound;
+        public AudioClip smallExplosionSound;
+
+        public AudioClip buttonDown;
+        public AudioClip buttonUp;
+        public AudioClip openLocker;
+        public AudioClip openBackpack;
+
+        public VoidEvent onPlayerDied;
+
+        public CollectibleContainerData handsData;
+        public CollectibleContainerData headData;
+        public CollectibleContainerData backpackData;
+        public FloorContainerData vanFloorData;
+
+        public GameObject effectPrefab;
+
+        public ItemData[] zoneUnlockItems;
     }
 
 }
