@@ -83,12 +83,12 @@ public class Market : MonoBehaviour
         for (int i = buyingItemHolder.childCount - 1; i >= 0; i--) Destroy(buyingItemHolder.GetChild(i).gameObject);
         sellScrollingBackground.sizeDelta = new Vector2(sellScrollingBackground.sizeDelta.x, 1080);
 
-        foreach (CollectibleData collectible in loadedMerchant.vals.buyOffers.Keys)
+        foreach (string collectible in loadedMerchant.vals.buyOffers.Keys)
         {
             GameObject interest = Instantiate(merchantInterestPrefab, interestItemHolder);
             MerchantInterestRefs refs = interest.GetComponent<MerchantInterestRefs>();
             refs.offeredPrice.text = loadedMerchant.vals.buyOffers[collectible].ToString();
-            refs.hoverableCollectible.CollectibleData = collectible;
+            refs.hoverableCollectible.CollectibleData = Utils.GetCollectibleFromName(collectible);
         }
     }
 
@@ -97,14 +97,14 @@ public class Market : MonoBehaviour
         for (int i = sellingItemHolder.childCount - 1; i >= 0; i--) Destroy(sellingItemHolder.GetChild(i).gameObject);
         scrollingBackground.sizeDelta = new Vector2(scrollingBackground.sizeDelta.x, 0);
 
-        foreach (CollectibleData collectible in loadedMerchant.vals.inventory.Keys)
+        foreach (string collectible in loadedMerchant.vals.inventory.Keys)
         {
             scrollingBackground.sizeDelta = new Vector2(scrollingBackground.sizeDelta.x, scrollingBackground.sizeDelta.y + backgroundIncrementPerItem);
             GameObject option = Instantiate(buyOptionPrefab, sellingItemHolder);
             MerchantBuyOptionRefs refs = option.GetComponent<MerchantBuyOptionRefs>();
             refs.loadedMerchant = loadedMerchant;
 
-            refs.hoverableCollectible.CollectibleData = collectible;
+            refs.hoverableCollectible.CollectibleData = Utils.GetCollectibleFromName(collectible);
 
 			refs.unitPrice.text = loadedMerchant.vals.prices[collectible].ToString();
 
@@ -129,9 +129,11 @@ public class Market : MonoBehaviour
         sellScrollingBackground.sizeDelta = new Vector2(sellScrollingBackground.sizeDelta.x, 0);
 
 
-        foreach (CollectibleData collectible in loadedMerchant.vals.buyOffers.Keys)
+        foreach (string collectibleName in loadedMerchant.vals.buyOffers.Keys)
         {
             int maxAmt = 0;
+
+            CollectibleData collectible = Utils.GetCollectibleFromName(collectibleName);
 
             if(collectible is LootData)
             {
@@ -181,7 +183,7 @@ public class Market : MonoBehaviour
 
                 refs.hoverableCollectible.CollectibleData = collectible;
 
-                refs.unitPrice.text = loadedMerchant.vals.buyOffers[collectible].ToString();
+                refs.unitPrice.text = loadedMerchant.vals.buyOffers[collectible.name].ToString();
 
                 refs.buyTotal.text = refs.unitPrice.text; // starts at one selected
 

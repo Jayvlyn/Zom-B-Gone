@@ -245,6 +245,7 @@ MonoBehaviour:
   playerSprite: {fileID: 8105131813210140983}
   renderingChanger: {fileID: 8225537271819853896}
   impulseSource: {fileID: 1529835107715400660}
+  health: {fileID: 998744478070939707}
   vc: {fileID: 0}
   groupCam: {fileID: 0}
   framingTransposer: {fileID: 0}
@@ -343,6 +344,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   _maxHealth: 100
   _currentHealth: 100
+  glass: {fileID: 0}
 --- !u!114 &1215756169858613352
 MonoBehaviour:
   m_ObjectHideFlags: 0

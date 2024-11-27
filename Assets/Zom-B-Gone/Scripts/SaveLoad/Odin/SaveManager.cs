@@ -126,6 +126,8 @@ public class SaveManager : MonoBehaviour
         currentSave.vanFloor = vanFloor;
         currentSave.unitFloor = unitFloor;
 
+        currentSave.marketDay = dataRefs.marketData.Day;
+
 
         if(currentSave.merchantVals.Count != dataRefs.marketData.merchants.Length)
         {

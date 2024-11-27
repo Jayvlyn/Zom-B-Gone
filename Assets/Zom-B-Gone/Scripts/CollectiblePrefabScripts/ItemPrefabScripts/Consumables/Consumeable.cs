@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class Consumeable : Item
+public class Consumeable : Item
 {
     [HideInInspector] public ConsumableData consumableData;
 
@@ -33,6 +33,13 @@ public abstract class Consumeable : Item
         StaminaRecoveryChange();
 
         MoveSpeedIncrease();
+
+        InstantHealing();
+
+        if(consumableData.regenPerSecond > 0)
+        {
+            StartCoroutine(HealthRegen());
+        }
 
         #endregion ------------------------
 
@@ -105,7 +112,6 @@ public abstract class Consumeable : Item
         Destroy(gameObject);
     }
 
-
     #region bonus methods ----------------------------------------
 
     public void InstantStaminaRecovery()
@@ -124,6 +130,20 @@ public abstract class Consumeable : Item
     public void MoveSpeedIncrease()
     {
         playerData.speedModifier = consumableData.moveSpeedMod;
+    }
+
+    public void InstantHealing()
+    {
+        playerController.health.CurrentHealth += consumableData.instantHealing;
+    }
+
+    public IEnumerator HealthRegen()
+    {
+        while(true)
+        {
+            playerController.health.CurrentHealth += consumableData.regenPerSecond;
+            yield return new WaitForSeconds(1);
+        }
     }
 
     #endregion -------------------------------------------------------

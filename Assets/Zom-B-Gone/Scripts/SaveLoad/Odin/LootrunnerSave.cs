@@ -23,4 +23,5 @@ public class LootrunnerSave
     public SaveableFloor unitFloor;
 
     public List<MerchantVals> merchantVals;
+    public int marketDay;
 }

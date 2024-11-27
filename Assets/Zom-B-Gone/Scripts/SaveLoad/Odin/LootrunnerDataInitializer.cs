@@ -102,6 +102,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
             {
                 dataRefs.marketData.merchants[i].vals = SaveManager.currentSave.merchantVals[i];
             }
+            dataRefs.marketData.Day = SaveManager.currentSave.marketDay;
         }
         else
         {

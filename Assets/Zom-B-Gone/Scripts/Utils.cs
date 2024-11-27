@@ -278,4 +278,9 @@ public static class Utils
 		e.Initialize(effectData, enemy);
 	}
 
+    public static CollectibleData GetCollectibleFromName(string name)
+    {
+        return Resources.Load<CollectibleData>(name);
+	}
+
 }

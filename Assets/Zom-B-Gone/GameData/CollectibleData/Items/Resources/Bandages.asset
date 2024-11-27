@@ -26,6 +26,6 @@ MonoBehaviour:
   effectTime: 0
   instantStaminaRecovery: 0
   staminaRecoverySpeed: 0
-  moveSpeedMod: 0
+  moveSpeedMod: 1
   instantHealing: 20
   regenPerSecond: 0

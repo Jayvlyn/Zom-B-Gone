@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer playerSprite;
     public PlayerRenderingChanger renderingChanger;
     public CinemachineImpulseSource impulseSource;
+    public Health health;
     private Slider staminaSlider;
     private Interactor interactor;
 
