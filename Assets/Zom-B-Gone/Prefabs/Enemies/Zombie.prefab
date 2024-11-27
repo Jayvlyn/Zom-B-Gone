@@ -1180,6 +1180,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: ec84b65d01c04e244847e7d2ac497b5e, type: 2}
   audioSource: {fileID: 3376768108525843708}
   spriteRenderer: {fileID: 190890871166965350}
+  shadow: {fileID: 5311247383603001044}
   rigidBody: {fileID: 7881680831849007001}
   head: {fileID: 8292835943818908013}
   health: {fileID: 0}
@@ -1240,6 +1241,7 @@ MonoBehaviour:
   healthBar: {fileID: 560740431854616033}
   _maxHealth: 100
   _currentHealth: 100
+  glass: {fileID: 0}
 --- !u!212 &190890871166965350
 SpriteRenderer:
   m_ObjectHideFlags: 0

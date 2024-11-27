@@ -17,6 +17,7 @@ public abstract class Enemy : MonoBehaviour
 	private EnemyVoice voice;
 	public AudioSource audioSource;
 	public SpriteRenderer spriteRenderer;
+	public GameObject shadow;
 
 	public Rigidbody2D rigidBody;
 	public EnemyHead head;
@@ -100,6 +101,7 @@ public abstract class Enemy : MonoBehaviour
 				
 				break;
 			case State.DEAD:
+				if(shadow)shadow.SetActive(false);
 				StopCoroutine(tickCoroutine);
 				if(activeEffect != null)
 				{
@@ -770,6 +772,13 @@ public abstract class Enemy : MonoBehaviour
 			}
 		}
 
+		
+		if (UnityEngine.Random.Range(0, 2) == 0)
+		{
+			Vector2 playerDirection = (PlayerController.instance.transform.position - transform.position ).normalized;
+			BloodPoolSpawner.SpawnBloodPool((Vector2)transform.position + playerDirection, BloodPoolSpawner.BloodPoolSize.SMALL);
+		}
+
 		PlayHurtSound();
 		DismemberLimb(damage, dismemberChance);
 		Decapitate(damage, decapitateChance);
@@ -787,6 +796,7 @@ public abstract class Enemy : MonoBehaviour
 			if (num < dismemberChance)
 			{
 				Limb victimLimb = limbs[UnityEngine.Random.Range(0, limbs.Count)];
+				if(UnityEngine.Random.Range(0,2) == 0) BloodPoolSpawner.SpawnBloodPool(victimLimb.transform.position, BloodPoolSpawner.BloodPoolSize.MEDIUM);
 				victimLimb.DetachFromOwner();
 				victimLimb.rb.bodyType = RigidbodyType2D.Dynamic;
 				victimLimb.rb.AddForce(Utils.RandomUnitVector2() * damage * limbLaunchMod, ForceMode2D.Impulse);
@@ -803,6 +813,8 @@ public abstract class Enemy : MonoBehaviour
             float num = UnityEngine.Random.Range(0f, 100f);
             if (num < decapitateChance)
             {
+				BloodPoolSpawner.SpawnBloodPool(transform.position, BloodPoolSpawner.BloodPoolSize.LARGE);
+
 				head.DetachFromOwner();
 				if (UnityEngine.Random.Range((int)0, (int)10) != 0)
 				{

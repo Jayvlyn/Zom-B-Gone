@@ -71,3 +71,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1df59dec7c44bab4e9860dc3341de708, type: 2}
   - {fileID: 11400000, guid: c46c742fa36355a4aa7f874952e5f154, type: 2}
   - {fileID: 11400000, guid: 0d34fa0cc3927fe46b859bd81ea64bc2, type: 2}
+  smallBloodPools:
+  - {fileID: 1351823175076043995, guid: 4a93b62164217b646a7acb748c56b71b, type: 3}
+  - {fileID: 1351823175076043995, guid: 697eab8a60ffb9640baf94004ab316bf, type: 3}
+  - {fileID: 1351823175076043995, guid: 0b04a6707816c5142a2cde44962a0e20, type: 3}
+  mediumBloodPools:
+  - {fileID: 1351823175076043995, guid: 7ccf66272ef072341b8561c11dc33d3e, type: 3}
+  - {fileID: 1351823175076043995, guid: 749c6911b65de6f45a6266bc36dbf2a5, type: 3}
+  - {fileID: 1351823175076043995, guid: 79b464e425ea56f4fbf6779f33d4dc62, type: 3}
+  largeBloodPools:
+  - {fileID: 1351823175076043995, guid: d0d690ca952c9e948867ca4b2368523b, type: 3}
+  - {fileID: 1351823175076043995, guid: b53f206d5baf4194f80ab70399430c0c, type: 3}
+  - {fileID: 1351823175076043995, guid: 52c5e1ea7f7d87643843bda011b35335, type: 3}
+  enemyPrefabs:
+  - {fileID: 8339959537163183905, guid: 59be50700a2a7f54f9d77bba2b3d0a5c, type: 3}

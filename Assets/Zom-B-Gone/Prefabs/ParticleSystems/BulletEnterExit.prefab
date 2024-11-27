@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 255845113380040983}
   - component: {fileID: 5847106163883761828}
   - component: {fileID: 4769091462657337329}
+  - component: {fileID: -4524587254789926332}
   m_Layer: 0
   m_Name: BulletEnterExit
   m_TagString: Untagged
@@ -4886,7 +4887,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1243220867
-  m_SortingLayer: -13
+  m_SortingLayer: -14
   m_SortingOrder: 0
   m_RenderMode: 1
   m_MeshDistribution: 0
@@ -4920,3 +4921,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-4524587254789926332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654700310716529146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd825211867996249af99950d2ff0750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decalSpawnChance: 0.5

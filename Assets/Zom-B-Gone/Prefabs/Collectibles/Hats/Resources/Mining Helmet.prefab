@@ -101,7 +101,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1157261609
-  m_SortingLayer: -21
+  m_SortingLayer: -22
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6ceba0e7fc9cfe146a7c600a6dc1e434, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -302,118 +302,6 @@ PrefabInstance:
     - target: {fileID: 1508185618606179923, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 29
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[1]'
-      value: -177558871
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[2]'
-      value: 2024805571
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[3]'
-      value: -466657575
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[4]'
-      value: -752994071
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[5]'
-      value: 131365537
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[6]'
-      value: 29270861
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[7]'
-      value: 1157261609
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[8]'
-      value: -2061021577
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[9]'
-      value: -1634939125
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[10]'
-      value: 97008305
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[11]'
-      value: -141790457
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[12]'
-      value: 1944429129
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[13]'
-      value: 1868784149
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[14]'
-      value: 1471518513
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[15]'
-      value: -1243220867
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[16]'
-      value: -922676561
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[17]'
-      value: -1975659737
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[18]'
-      value: 1164583589
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[19]'
-      value: -1183524555
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[20]'
-      value: -1959437801
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[21]'
-      value: 807454059
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[22]'
-      value: 1323564269
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[23]'
-      value: 1582768971
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[24]'
-      value: -407071545
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[25]'
-      value: 6073127
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[26]'
-      value: -204061765
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571886882270191552, guid: d1933bf34a13e5f4c8efb6d40dc920b6, type: 3}
-      propertyPath: 'm_ApplyToSortingLayers.Array.data[27]'
-      value: -814502471
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

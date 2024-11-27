@@ -1,15 +1,13 @@
 using System.Collections;
-using System.Drawing.Text;
 using UnityEngine;
+using CodeMonkey;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public Transform player;
-    public GameObject[] enemyPrefabs;
     private float currentEnemiesPerMinute = 1;
     private float spawnInterval;
-    public float spawnDistance = 16;
-    public float spawnRange = 30;
+    public static float spawnDistance = 16;
+    public static float spawnRange = 30;
 
     private void Start()
     {
@@ -37,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-    private void TrySpawnEnemy()
+    public static void TrySpawnEnemy()
     {
 		if (Optimizer.currentActiveEnemies < Optimizer.maxActiveEnemies)
 		{
@@ -61,15 +59,15 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnRandomEnemy()
+    private static void SpawnRandomEnemy()
     {
-        GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        GameObject enemyPrefab = Assets.i.enemyPrefabs[Random.Range(0, Assets.i.enemyPrefabs.Length)];
 
         float randomDistance = Random.Range(spawnDistance, spawnRange);
 
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
 
-        Vector2 spawnPosition = (Vector2)player.position + new Vector2(randomDirection.x, randomDirection.y) * randomDistance;
+        Vector2 spawnPosition = (Vector2)PlayerController.instance.transform.position + new Vector2(randomDirection.x, randomDirection.y) * randomDistance;
         if (IsPositionBlocked(spawnPosition))
         {
             for (int i = 0; i < 11; i++)
@@ -90,7 +88,7 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    private bool IsPositionBlocked(Vector2 position)
+    private static bool IsPositionBlocked(Vector2 position)
     {
         Collider2D hit = Physics2D.OverlapCircle(position, 0.5f);
 

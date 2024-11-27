@@ -69,6 +69,12 @@ namespace CodeMonkey {
         public GameObject effectPrefab;
 
         public ItemData[] zoneUnlockItems;
+
+        public GameObject[] smallBloodPools;
+        public GameObject[] mediumBloodPools;
+        public GameObject[] largeBloodPools;
+
+        public GameObject[] enemyPrefabs;
     }
 
 }

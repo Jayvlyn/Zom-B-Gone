@@ -61,6 +61,9 @@ TagManager:
   - name: Ground
     uniqueID: 3359497755
     locked: 0
+  - name: BloodPool
+    uniqueID: 4174745219
+    locked: 0
   - name: Skidmarks
     uniqueID: 4117408425
     locked: 0

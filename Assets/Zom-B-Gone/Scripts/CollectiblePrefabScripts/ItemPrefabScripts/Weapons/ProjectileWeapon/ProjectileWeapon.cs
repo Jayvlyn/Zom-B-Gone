@@ -136,6 +136,10 @@ public class ProjectileWeapon : Weapon
         if(CurrentAmmo > 0 && !reloading)
         {
             PlayShootSound();
+            if(projectileWeaponData.noiseRadius > 16 && spawnTimerRoutine == null)
+            {
+                spawnTimerRoutine = StartCoroutine(ArtificalSpawnTimer());
+            }
 
             float angle = transform.eulerAngles.z;
             Vector2 direction = new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));
@@ -263,5 +267,14 @@ public class ProjectileWeapon : Weapon
             audioSource.PlayOneShot(projectileWeaponData.reloadStart);
         }
         Utils.MakeSoundWave(transform.position, projectileWeaponData.reloadNoiseRadius, PlayerController.isSneaking);
+    }
+
+    private Coroutine spawnTimerRoutine;
+    private float artificalSpawnTimer = 3;
+    private IEnumerator ArtificalSpawnTimer()
+    {
+        EnemySpawner.TrySpawnEnemy();
+        yield return new WaitForSeconds(artificalSpawnTimer);
+        spawnTimerRoutine = null;
     }
 }
