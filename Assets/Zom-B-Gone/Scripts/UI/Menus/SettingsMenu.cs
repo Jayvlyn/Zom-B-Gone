@@ -47,10 +47,14 @@ public class SettingsMenu : MonoBehaviour
         List<string> stringRes = new List<string>();
         for (int i = 0; i < _resolutions.Length; i++)
         {
-            stringRes.Add($"{_resolutions[i].width} X {_resolutions[i].height} {(int)(_resolutions[i].refreshRateRatio.value)}hz");
-            if (_resolutions[i].width == Screen.currentResolution.width && _resolutions[i].height == Screen.currentResolution.height)
+            // Check if the resolution has a 16:9 aspect ratio
+            if (Mathf.Approximately((float)_resolutions[i].width / _resolutions[i].height, 16f / 9f))
             {
-                currentResIndex = i;
+                stringRes.Add($"{_resolutions[i].width} X {_resolutions[i].height} {(int)(_resolutions[i].refreshRateRatio.value)}hz");
+                if (_resolutions[i].width == Screen.currentResolution.width && _resolutions[i].height == Screen.currentResolution.height)
+                {
+                    currentResIndex = i;
+                }
             }
         }
         resolutionDropdown.AddOptions(stringRes);
