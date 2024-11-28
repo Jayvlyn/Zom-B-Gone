@@ -175,17 +175,22 @@ public class PlayerController : MonoBehaviour
             {
                 currentStamina = 0;
                 ChangeState(PlayerState.WALKING);
-                if(!recoverStamina && !playerSwinging)RecoverStamina();
+                
             }
         }
         else
         {
-            //if (currentStamina < playerData.maxStamina) currentStamina += Time.deltaTime * playerData.staminaRecoverySpeed;
-
-
             if (recoverStamina)
             {
-                if (currentStamina < playerData.maxStamina) currentStamina += Time.deltaTime * playerData.staminaRecoverySpeed;
+                //Debug.Log("recover stam tru");
+                //Debug.Log(currentStamina);
+                //Debug.Log(playerData.maxStamina);
+                if (currentStamina < playerData.maxStamina)
+                {
+                    //Debug.Log("adding to stamina");
+                    currentStamina += Time.deltaTime * playerData.staminaRecoverySpeed;
+                    if (currentStamina > playerData.maxStamina) currentStamina = playerData.maxStamina;
+                }
                 else recoverStamina = false;
             }
             else if(recoverTimer > 0)

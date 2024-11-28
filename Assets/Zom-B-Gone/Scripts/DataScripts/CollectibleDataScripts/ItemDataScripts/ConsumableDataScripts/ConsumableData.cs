@@ -12,8 +12,8 @@ public class ConsumableData : ItemData
 	public float effectTime;
 
     public float instantStaminaRecovery = 0;
-    public float staminaRecoverySpeed = 0;
-    public float moveSpeedMod = 0;
+    [Range(1, 20)]public float staminaRecoverySpeed = 1;
+	[Range(1, 10)] public float moveSpeedMod = 1;
 	public int instantHealing = 0;
 	public int regenPerSecond = 0;
 

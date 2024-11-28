@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39668c512bbdc804ab53b9569cd3ddac, type: 3}
   m_Name: PlayerData_Active
   m_EditorClassIdentifier: 
-  characterName: 5
+  characterName: jacob
   gold: 10
   kills: 0
   walkSpeed: 2.5
