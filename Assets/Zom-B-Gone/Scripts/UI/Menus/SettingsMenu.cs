@@ -53,7 +53,7 @@ public class SettingsMenu : MonoBehaviour
 			if (Mathf.Abs(aspectRatio - (16f / 9f)) < 0.002f) // Tolerance for aspect ratio comparison
 			{
                 _selectedResolutions.Add(_resolutions[i]);
-                Debug.Log("i" + _resolutions[i].width);
+                //Debug.Log("i" + _resolutions[i].width);
 				stringRes.Add($"{_resolutions[i].width} X {_resolutions[i].height} {(int)(_resolutions[i].refreshRateRatio.value)}hz");
 				if (_resolutions[i].width == Screen.currentResolution.width && _resolutions[i].height == Screen.currentResolution.height)
 				{
