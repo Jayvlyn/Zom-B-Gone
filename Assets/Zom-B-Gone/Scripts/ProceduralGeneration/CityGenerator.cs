@@ -132,6 +132,18 @@ public class CityGenerator : MonoBehaviour
 		if (rotation != 0) layout.RotateLayout(rotation);
 	}
 
+    private void SpawnEnemyClustersInChunk(Vector2Int chunkPos)
+    {
+        int clusterCount = Random.Range(1, 3);
+        for(int i = 0; i < clusterCount; i++)
+        {
+            Vector2 position = chunkPos * chunkSize;
+            position.y += Random.Range(0, 11);
+            position.x += Random.Range(0, 11);
+            EnemySpawner.SpawnEnemiesAtPosition(position);
+        }
+    }
+
 	private void FillEmptyGrassPlots()
 	{
         foreach (Vector2Int key in emptyGrassPlots.Keys)
@@ -197,6 +209,8 @@ public class CityGenerator : MonoBehaviour
                     continue;
                 }
             }
+
+            SpawnEnemyClustersInChunk(key);
         }
         emptyGrassPlots.Clear();
     }
@@ -321,24 +335,29 @@ public class CityGenerator : MonoBehaviour
         {
             emptyGrassPlots.Add(chunkPos, chunkData);
         }
-        else if (modType == ModuleType.VERTICAL)
+        else
         {
-            int roll = Random.Range(0, 20);
-			if(roll == 0)
-			{
-                SpawnRandomOutdoorRoadLayout(chunkPos, new Vector3(chunkPos.x * chunkSize, chunkPos.y * chunkSize, 0));
+            if (modType == ModuleType.VERTICAL)
+            {
+                int roll = Random.Range(0, 10);
+			    if(roll == 0)
+			    {
+                    SpawnRandomOutdoorRoadLayout(chunkPos, new Vector3(chunkPos.x * chunkSize, chunkPos.y * chunkSize, 0));
 
-			}
-		}
-		else if (modType == ModuleType.HORIZONTAL)
-        {
-			int roll = Random.Range(0, 20);
-			if (roll == 0)
-			{
-				SpawnRandomOutdoorRoadLayout(chunkPos, new Vector3(chunkPos.x * chunkSize + chunkSize, chunkPos.y * chunkSize, 0), 90);
+			    }
+		    }
+		    else if (modType == ModuleType.HORIZONTAL)
+            {
+			    int roll = Random.Range(0, 10);
+			    if (roll == 0)
+			    {
+				    SpawnRandomOutdoorRoadLayout(chunkPos, new Vector3(chunkPos.x * chunkSize + chunkSize, chunkPos.y * chunkSize, 0), 90);
 
-			}
-		}
+			    }
+		    }
+
+            SpawnEnemyClustersInChunk(chunkPos);
+        }
     }
 
     public void GenerateChunk(Vector2Int chunkPos, ModuleType modType)

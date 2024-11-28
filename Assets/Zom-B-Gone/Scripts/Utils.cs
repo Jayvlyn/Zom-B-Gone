@@ -283,4 +283,17 @@ public static class Utils
         return Resources.Load<CollectibleData>(name);
 	}
 
+    // GPT generated
+	public static int GetWeightedRandomNumber(int min, int max)
+	{
+		// Generate a random value in the range [min, max]
+		float randomValue = Random.Range(0f, 1f);
+
+		// Invert the random value to favor smaller numbers
+		float scaledValue = 1f - Mathf.Sqrt(randomValue);
+
+		// Scale to the desired range
+		return Mathf.FloorToInt(scaledValue * (max - min + 1)) + min;
+	}
+
 }

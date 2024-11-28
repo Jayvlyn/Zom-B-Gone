@@ -15,11 +15,12 @@ MonoBehaviour:
   name: Shuriken
   description: How many have I thrown? Am I out yet?
   rarity: {fileID: 11400000, guid: e5945e652e7417d4caa1adaf8eb3b2b4, type: 2}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fdf07719a3ee4fc4aa8822eaf9de9d43, type: 3}
   maxStack: 1
   pickupSound: {fileID: 8300000, guid: d2e8cbb167b35a04d8b055ac966ad86c, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 1
+  throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0.5
   damage: 25
@@ -37,3 +38,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   reloadStart: {fileID: 8300000, guid: 6f2e97f75ccef5845b992396739953a0, type: 3}
   reloadNoiseRadius: 0.1
+  suppressed: 0
+  suppressionPercentage: 0
+  ssp: {fileID: 0}

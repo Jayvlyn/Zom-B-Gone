@@ -219,11 +219,9 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     private Coroutine engineSoundCoroutine;
     private IEnumerator EngineSoundLoop()
     {
-        int soundRadius = 22;
         while(true)
         { 
-            Utils.MakeSoundWave(transform.position, soundRadius);
-
+            Utils.MakeSoundWave(transform.position, 22);
             yield return new WaitForSeconds(2.5f);
         }
     }
@@ -233,7 +231,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     {
         while(true)
         {
-			Utils.MakeSoundWave(transform.position, 10);
+			Utils.MakeSoundWave(transform.position, 33);
 
 			yield return new WaitForSeconds(2.5f);
 		}

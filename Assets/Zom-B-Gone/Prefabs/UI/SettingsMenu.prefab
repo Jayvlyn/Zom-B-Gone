@@ -2429,8 +2429,8 @@ MonoBehaviour:
   musicMixer: {fileID: 24100000, guid: 4669f61767569074a8e9f1e5e6888440, type: 2}
   resolutionDropdown: {fileID: 1795301217253946982}
   fullscreenToggle: {fileID: 2401802612190405708}
-  sfxVolumeSlider: {fileID: 0}
-  musicVolumeSlider: {fileID: 0}
+  sfxVolumeSlider: {fileID: 6762418085390454322}
+  musicVolumeSlider: {fileID: 1187707913564561363}
 --- !u!222 &8269702193896161087
 CanvasRenderer:
   m_ObjectHideFlags: 0
