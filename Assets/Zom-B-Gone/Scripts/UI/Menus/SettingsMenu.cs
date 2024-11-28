@@ -13,6 +13,7 @@ public class SettingsMenu : MonoBehaviour
     public TMPro.TMP_Dropdown resolutionDropdown;
     public Toggle fullscreenToggle;
     private Resolution[] _resolutions;
+    private List<Resolution> _selectedResolutions = new List<Resolution>();
     public Slider sfxVolumeSlider;
     public Slider musicVolumeSlider;
 
@@ -43,32 +44,36 @@ public class SettingsMenu : MonoBehaviour
 
         int currentResIndex = 0;
         _resolutions = Screen.resolutions;
+        _selectedResolutions.Clear();
         resolutionDropdown.ClearOptions();
         List<string> stringRes = new List<string>();
-        for (int i = 0; i < _resolutions.Length; i++)
-        {
-            // Check if the resolution has a 16:9 aspect ratio
-            if (Mathf.Approximately((float)_resolutions[i].width / _resolutions[i].height, 16f / 9f))
-            {
-                stringRes.Add($"{_resolutions[i].width} X {_resolutions[i].height} {(int)(_resolutions[i].refreshRateRatio.value)}hz");
-                if (_resolutions[i].width == Screen.currentResolution.width && _resolutions[i].height == Screen.currentResolution.height)
-                {
-                    currentResIndex = i;
-                }
-            }
-        }
-        resolutionDropdown.AddOptions(stringRes);
+		for (int i = 0; i < _resolutions.Length; i++)
+		{
+			float aspectRatio = (float)_resolutions[i].width / _resolutions[i].height;
+			if (Mathf.Abs(aspectRatio - (16f / 9f)) < 0.002f) // Tolerance for aspect ratio comparison
+			{
+                _selectedResolutions.Add(_resolutions[i]);
+                Debug.Log("i" + _resolutions[i].width);
+				stringRes.Add($"{_resolutions[i].width} X {_resolutions[i].height} {(int)(_resolutions[i].refreshRateRatio.value)}hz");
+				if (_resolutions[i].width == Screen.currentResolution.width && _resolutions[i].height == Screen.currentResolution.height)
+				{
+					currentResIndex = i;
+				}
+			}
+		}
+		resolutionDropdown.AddOptions(stringRes);
         resolutionDropdown.value = currentResIndex;
         resolutionDropdown.RefreshShownValue();
     }
 
-    public void SetRes(int index)
+	public void SetRes(int index)
     {
         if (!settingsJustOpened)
         {
-            Resolution resolution = _resolutions[index];
+            Resolution resolution = _selectedResolutions[index];
+            Debug.Log(resolution.ToString());
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        }
+		}
     }
     public void OnBack()
     {
