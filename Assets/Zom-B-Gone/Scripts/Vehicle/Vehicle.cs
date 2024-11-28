@@ -10,6 +10,7 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
     public AudioSource tireScreechSource; // should loop
     public AudioSource engineSource; // should loop
     public AudioSource mainSource;
+    public Collider2D enableColliderOnActive;
 
 	protected float currentTurnAngle = 0;
 	protected float driftFactor;
@@ -35,9 +36,14 @@ public abstract class Vehicle : MonoBehaviour, IInteractable
         set
         {
             active = value;
+            if(enableColliderOnActive != null)
+            {
+                enableColliderOnActive.enabled = value;
+            }
             litHeadlights.SetActive(value);
             if(active)
             {
+                
                 engineSource.Play();
                 if (engineSoundCoroutine == null) engineSoundCoroutine = StartCoroutine(EngineSoundLoop());
             }

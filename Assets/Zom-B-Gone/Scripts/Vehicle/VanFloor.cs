@@ -10,14 +10,16 @@ public class VanFloor : Floor
 	private Coroutine hideRoofCoroutine;
 	private Coroutine showRoofCoroutine;
 
+	private int creaturesInside = 0;
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(timeSinceAwake < .1) return; // dont re-add initialized collectibles
 		if (vehicle.Active) return;
 
-		if (collision.CompareTag("Player"))
+		if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
 		{
-			//PlayerController pc = collision.GetComponent<PlayerController>();
+			creaturesInside++;
             if (PlayerController.currentState != PlayerController.PlayerState.DRIVING)
             {
 				if (showRoofCoroutine != null)
@@ -68,18 +70,22 @@ public class VanFloor : Floor
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.CompareTag("Player"))
+		if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
 		{
-			if (hideRoofCoroutine != null)
-			{
-				StopCoroutine(hideRoofCoroutine);
-				hideRoofCoroutine = null;
-			}
+			creaturesInside--;
+            if (creaturesInside <= 0)
+            {
+				if (hideRoofCoroutine != null)
+				{
+					StopCoroutine(hideRoofCoroutine);
+					hideRoofCoroutine = null;
+				}
 
-			if (showRoofCoroutine == null && gameObject.activeInHierarchy)
-			{
-				showRoofCoroutine = StartCoroutine(ShowRoof(2));
-			}
+				if (showRoofCoroutine == null && gameObject.activeInHierarchy)
+				{
+					showRoofCoroutine = StartCoroutine(ShowRoof(2));
+				}
+            }
 		}
 	}
 
