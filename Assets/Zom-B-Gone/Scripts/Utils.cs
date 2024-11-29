@@ -98,7 +98,7 @@ public static class Utils
                viewportPos.z >= 0; // z should be >= 0 to ensure the position is in front of the camera
     }
 
-	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle", "Interactable", "Window");
+	private static readonly LayerMask explosionLm = LayerMask.GetMask("Player", "Enemy", "Vehicle", "AirborneItem", "GroundedItem", "Obstacle", "Interactable", "Window", "InteractableObstacle", "InteractableLootable");
     private static readonly LayerMask coverLm = LayerMask.GetMask("World", "Vehicle", "Door");
 	public static void CreateExplosion(Vector2 sourcePosition, float radius, float force, int baseDamage, bool big = true)
     {
@@ -129,7 +129,10 @@ public static class Utils
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
 
 
-        CameraShakeManager.instance.CameraShake(cis, explosionSSP, randomDirection);
+        if(CameraShakeManager.instance)
+        {
+            CameraShakeManager.instance.CameraShake(cis, explosionSSP, randomDirection);
+        }
 
         // Function
         Collider2D[] colliders = Physics2D.OverlapCircleAll(sourcePosition, radius, explosionLm);

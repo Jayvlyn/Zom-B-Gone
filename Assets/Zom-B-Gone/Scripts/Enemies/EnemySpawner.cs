@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
     public static float spawnDistance = 16;
     public static float spawnRange = 30;
 
+    public bool mainMenu = false;
+
     private void Start()
     {
         StartCoroutine(SpawnTick());
@@ -18,17 +20,29 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            if(Random.Range(0,8) == 0)
+            if(!mainMenu)
             {
-                TrySpawnHorde(Utils.GetWeightedRandomNumber(3, 10));
+                if(Random.Range(0,8) == 0)
+                {
+                    TrySpawnHorde(Utils.GetWeightedRandomNumber(3, 10));
+                }
+                else
+                {
+                    TrySpawnEnemy();
+                }
+
+                CalculateInterval();
+			    yield return new WaitForSeconds(spawnInterval);
             }
             else
             {
-                TrySpawnEnemy();
+                if(Optimizer.currentActiveEnemies < Optimizer.maxActiveEnemies)
+                {
+                    Instantiate(Assets.i.miniZombie, (Vector2)transform.position, Quaternion.identity);
+                    Optimizer.currentActiveEnemies++;
+                    yield return new WaitForSeconds(2);
+                }
             }
-
-            CalculateInterval();
-			yield return new WaitForSeconds(spawnInterval);
         }
     }
 
@@ -76,9 +90,9 @@ public class EnemySpawner : MonoBehaviour
 
     public static Vector2 FindRandomSpawnPosition()
     {
-		float randomDistance = Random.Range(spawnDistance, spawnRange);
-		Vector2 randomDirection = Random.insideUnitCircle.normalized;
-		return (Vector2)PlayerController.instance.transform.position + new Vector2(randomDirection.x, randomDirection.y) * randomDistance;
+		    float randomDistance = Random.Range(spawnDistance, spawnRange);
+		    Vector2 randomDirection = Random.insideUnitCircle.normalized;
+		    return (Vector2)PlayerController.instance.transform.position + new Vector2(randomDirection.x, randomDirection.y) * randomDistance;
 	}
 
     public static void TrySpawnHorde(int count, Vector2 spawnPos = default)

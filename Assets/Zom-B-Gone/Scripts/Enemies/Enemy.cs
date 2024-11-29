@@ -19,6 +19,8 @@ public abstract class Enemy : MonoBehaviour
 	public SpriteRenderer spriteRenderer;
 	public GameObject shadow;
 
+	public bool mainMenu = false;
+
 	public Rigidbody2D rigidBody;
 	public EnemyHead head;
 
@@ -323,7 +325,10 @@ public abstract class Enemy : MonoBehaviour
 		{
 			limb.spriteRenderer.sortingOrder = sortOrder + 1;
 		}
-		sortOrder += 2;
+		if(!mainMenu)
+		{
+			sortOrder += 2;
+		}
 	}
 
 	public void StartInvestigating(Vector2 investigationPoint)
@@ -775,7 +780,11 @@ public abstract class Enemy : MonoBehaviour
 		
 		if (UnityEngine.Random.Range(0, 2) == 0)
 		{
-			Vector2 playerDirection = (PlayerController.instance.transform.position - transform.position ).normalized;
+			Vector2 playerDirection = Vector2.zero;
+			if(PlayerController.instance != null)
+			{
+				playerDirection = (PlayerController.instance.transform.position - transform.position ).normalized;
+			}
 			BloodPoolSpawner.SpawnBloodPool((Vector2)transform.position + playerDirection, BloodPoolSpawner.BloodPoolSize.SMALL);
 		}
 

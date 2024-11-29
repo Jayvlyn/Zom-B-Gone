@@ -75,6 +75,8 @@ namespace CodeMonkey {
         public GameObject[] largeBloodPools;
 
         public GameObject[] enemyPrefabs;
+
+        public GameObject miniZombie;
     }
 
 }

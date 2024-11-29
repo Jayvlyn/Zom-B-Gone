@@ -85,3 +85,4 @@ MonoBehaviour:
   - {fileID: 1351823175076043995, guid: 52c5e1ea7f7d87643843bda011b35335, type: 3}
   enemyPrefabs:
   - {fileID: 8339959537163183905, guid: 59be50700a2a7f54f9d77bba2b3d0a5c, type: 3}
+  miniZombie: {fileID: 6866930804346105677, guid: bc0e5ee542523f44c9ae41d4a75a1fe9, type: 3}
