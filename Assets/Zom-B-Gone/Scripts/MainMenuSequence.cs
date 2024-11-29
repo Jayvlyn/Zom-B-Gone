@@ -5,7 +5,10 @@ public class MainMenuSequence : MonoBehaviour
 {
 	public Transform explosionSource;
 	public GameObject victimZombie;
+
 	public GameObject zombieObject;
+	public GameObject armObject;
+	public GameObject blood;
 
 	private void Start()
 	{
@@ -21,6 +24,7 @@ public class MainMenuSequence : MonoBehaviour
 		Destroy(victimZombie);
 
 		zombieObject.SetActive(true);
-
+		armObject.SetActive(true);
+		blood.SetActive(true);
     }
 }

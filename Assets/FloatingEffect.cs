@@ -11,7 +11,7 @@ public class FloatingEffect : MonoBehaviour
 	public float manualRotationOffset = 0f;
 
 
-	private Vector2 originalPosition;
+	public Vector2 originalPosition = Vector2.zero;
 	private float timeOffsetX;
 	private float timeOffsetY;
 	private float rotationOffset;
@@ -19,7 +19,10 @@ public class FloatingEffect : MonoBehaviour
 	void Start()
 	{
 		// Save the original position to offset from it
-		originalPosition = rectTransform.anchoredPosition;
+		if(originalPosition == Vector2.zero)
+		{
+			originalPosition = rectTransform.anchoredPosition;
+		}
 
 		// Generate random time offsets to make the movement unique
 		timeOffsetX = Random.Range(0f, 100f);

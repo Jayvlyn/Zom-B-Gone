@@ -10,6 +10,7 @@ public class MainMenuTransitioner : MonoBehaviour
 
 	public void StartAnim()
 	{
+		zombieAnimator.enabled = true;
 		floatingEffect.enabled = false;
 		zombieAnimator.SetTrigger("ScreenTransition");
 	}
