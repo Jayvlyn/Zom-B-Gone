@@ -16,25 +16,28 @@ public class BloodParticleDecalSpawner : MonoBehaviour
 
 	void LateUpdate()
 	{
-		int particleCount = ps.GetParticles(particles);
-
-		for (int i = 0; i < particleCount; i++)
+		if(ps != null && particles != null)
 		{
-			// Check if the particle is near the end of its lifetime
-			if (particles[i].remainingLifetime <= Time.deltaTime)
-			{
-				// Decide to spawn a decal based on chance
-				if (Random.value <= decalSpawnChance)
-				{
-					Vector3 spawnPosition = particles[i].position;
+			int particleCount = ps.GetParticles(particles);
 
-					// Spawn the blood decal
-					BloodPoolSpawner.SpawnBloodPool(spawnPosition, BloodPoolSpawner.BloodPoolSize.SMALL);
+			for (int i = 0; i < particleCount; i++)
+			{
+				// Check if the particle is near the end of its lifetime
+				if (particles[i].remainingLifetime <= Time.deltaTime)
+				{
+					// Decide to spawn a decal based on chance
+					if (Random.value <= decalSpawnChance)
+					{
+						Vector3 spawnPosition = particles[i].position;
+
+						// Spawn the blood decal
+						BloodPoolSpawner.SpawnBloodPool(spawnPosition, BloodPoolSpawner.BloodPoolSize.SMALL);
+					}
 				}
 			}
-		}
 
-		// Update particles back into the system (required after modifying particle data)
-		ps.SetParticles(particles, particleCount);
+			// Update particles back into the system (required after modifying particle data)
+			ps.SetParticles(particles, particleCount);
+		}
 	}
 }

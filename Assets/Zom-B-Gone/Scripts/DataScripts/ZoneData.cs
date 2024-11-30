@@ -6,6 +6,7 @@ using UnityEngine;
 public class ZoneData : ScriptableObject
 {
     public LootTable lootTable;
+    public ZoneTrack track;
 
     public AnimationCurve spawnRate;
 

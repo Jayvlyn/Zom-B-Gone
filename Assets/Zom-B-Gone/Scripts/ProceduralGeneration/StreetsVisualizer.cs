@@ -50,7 +50,7 @@ public class StreetsVisualizer : MonoBehaviour
 		if (tilemap == null)
 		{
 			Debug.LogWarning("Tilemap not assigned");
-			yield return null;
+            yield break;
 		}
 
 		for (int y = 0; y < module.height; y++)

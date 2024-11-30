@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Zone1
   m_EditorClassIdentifier: 
   lootTable: {fileID: 11400000, guid: 4f173e2fe97108b4ca0e14242ab290f8, type: 2}
+  track: {fileID: 11400000, guid: 254007b934ee842408f11499e636aa4c, type: 2}
   spawnRate:
     serializedVersion: 2
     m_Curve:

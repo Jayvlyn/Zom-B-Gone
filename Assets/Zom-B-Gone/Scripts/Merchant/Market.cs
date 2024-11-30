@@ -41,6 +41,23 @@ public class Market : MonoBehaviour
             if (merchant.name == name)
             {
                 loadedMerchant = merchant;
+
+                switch(merchant.name)
+                {
+                    case "Bombastic Brutus":
+                        UnitMusicSetter.instance.SwapTrack(UnitMusicSetter.Tracks.BRUTUS);
+                        break;
+
+                    case "Pack Rat":
+						UnitMusicSetter.instance.SwapTrack(UnitMusicSetter.Tracks.RAT);
+						break;
+
+                    case "Victor Von Vellini":
+						UnitMusicSetter.instance.SwapTrack(UnitMusicSetter.Tracks.VICTOR);
+						break;
+
+				}
+
                 break;
             }
         }

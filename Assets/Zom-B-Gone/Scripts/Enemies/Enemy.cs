@@ -75,17 +75,18 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if(currentState == newState) return;
 
-		//switch (currentState) // ON EXITS
-  //      {
-  //          case State.DRONING:
-  //              break;
-  //          case State.INVESTIGATING:
-  //              break;
-  //          case State.AGGRO:
-  //              break;
-  //          default:
-  //              break;
-  //      }
+		switch (currentState) // ON EXITS
+		{
+			case State.DRONING:
+				break;
+			case State.INVESTIGATING:
+				break;
+			case State.AGGRO:
+				MusicManager.instance.AggroEnemies--;
+				break;
+			default:
+				break;
+		}
 
 		switch (newState)
 		{
@@ -98,6 +99,7 @@ public abstract class Enemy : MonoBehaviour
 				
 				break;
 			case State.AGGRO:
+				MusicManager.instance.AggroEnemies++;
 				PlayAggroSound();
 				CurrentMoveSpeed = enemyData.aggroSpeed;
 				

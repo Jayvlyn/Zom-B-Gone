@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02bc6c2a2f084943a8b011ec54553e9, type: 3}
+  m_Name: Zone2Track
+  m_EditorClassIdentifier: 
+  melodyIntensity1: {fileID: 8300000, guid: aba1f668a651b3448a4c250494b746be, type: 3}
+  melodyIntensity2: {fileID: 8300000, guid: 2813aadff3eb436468229eabc6a61504, type: 3}
+  melodyIntensity3: {fileID: 8300000, guid: bc4f5ebdebefd504da7bdc00149902fb, type: 3}
+  drumsIntensity1: {fileID: 8300000, guid: 86e39281366114b40806a93b904b8307, type: 3}
+  drumsIntensity2: {fileID: 8300000, guid: 9258305a34735894eb7a8f62a4b89be4, type: 3}
+  drumsIntensity3: {fileID: 8300000, guid: 9258305a34735894eb7a8f62a4b89be4, type: 3}
