@@ -552,6 +552,8 @@ public abstract class Enemy : MonoBehaviour
 
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, playerSpotDistance, playerLm);
+
+			//Debug.DrawLine(transform.position, (Vector2)transform.position + rayDir * 10, Color.red, 1f);
 			if (hit)
 			{
                 RaycastHit2D worldHit = Physics2D.Raycast(transform.position, rayDir, playerSpotDistance, worldLm);

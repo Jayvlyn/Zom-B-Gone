@@ -85,11 +85,13 @@ public class CityGenerator : MonoBehaviour
 
         // surrounding starter chunks
         LoadSurroundingChunks();
-        FillEmptyGrassPlots();
+		FillEmptyGrassPlots();
 
-    }
+		//StartCoroutine(LoadSurroundingChunks(0.3f)); // delayed version for visualization 
+		//StartCoroutine(FillEmptyGrassPlots(0.3f)); // delayed version for visualization 
+	}
 
-    private GameObject GetRandomFloorLayout()
+	private GameObject GetRandomFloorLayout()
     {
         int roll = Random.Range(0, layoutCollection.layouts.Length);
         return layoutCollection.layouts[roll];
@@ -215,8 +217,82 @@ public class CityGenerator : MonoBehaviour
         emptyGrassPlots.Clear();
     }
 
-    // Chat GPT-4o helped in the creation of this method
-    private void LoadSurroundingChunks()
+	private IEnumerator FillEmptyGrassPlots(float delay)
+	{
+        yield return new WaitForSeconds(4);
+		foreach (Vector2Int key in emptyGrassPlots.Keys)
+		{
+            yield return new WaitForSeconds(delay);
+            Debug.Log(key);
+			int roll = Random.Range(0, 4);
+			if (roll == 0)
+			{ // outdoor grass layout
+				ModuleType belowModule = CheckModuleBelow(key);
+				if (belowModule != ModuleType.EMPTY && HasNorthSidewalk(belowModule))
+				{
+					SpawnRandomOutdoorGrassLayout(key, new Vector3(key.x * chunkSize, key.y * chunkSize, 0));
+					continue;
+				}
+
+				ModuleType leftModule = CheckModuleLeft(key);
+				if (leftModule != ModuleType.EMPTY && HasEastSidewalk(leftModule))
+				{
+					SpawnRandomOutdoorGrassLayout(key, new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), -90);
+					continue;
+				}
+
+				ModuleType aboveModule = CheckModuleAbove(key);
+				if (aboveModule != ModuleType.EMPTY && HasSouthSidewalk(aboveModule))
+				{
+					SpawnRandomOutdoorGrassLayout(key, new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), 180);
+					continue;
+				}
+
+				ModuleType rightModule = CheckModuleRight(key);
+				if (rightModule != ModuleType.EMPTY && HasWestSidewalk(rightModule))
+				{
+					SpawnRandomOutdoorGrassLayout(key, new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), 90);
+					continue;
+				}
+			}
+			else if (roll < 4)
+			{
+				ModuleType belowModule = CheckModuleBelow(key);
+				if (belowModule != ModuleType.EMPTY && HasNorthSidewalk(belowModule))
+				{
+					SpawnRandomLayout(key, new Vector3(key.x * chunkSize, key.y * chunkSize, 0));
+					continue;
+				}
+
+				ModuleType leftModule = CheckModuleLeft(key);
+				if (leftModule != ModuleType.EMPTY && HasEastSidewalk(leftModule))
+				{
+					SpawnRandomLayout(key, new Vector3(key.x * chunkSize, key.y * chunkSize + chunkSize, 0), -90);
+					continue;
+				}
+
+				ModuleType aboveModule = CheckModuleAbove(key);
+				if (aboveModule != ModuleType.EMPTY && HasSouthSidewalk(aboveModule))
+				{
+					SpawnRandomLayout(key, new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize + chunkSize, 0), 180);
+					continue;
+				}
+
+				ModuleType rightModule = CheckModuleRight(key);
+				if (rightModule != ModuleType.EMPTY && HasWestSidewalk(rightModule))
+				{
+					SpawnRandomLayout(key, new Vector3(key.x * chunkSize + chunkSize, key.y * chunkSize, 0), 90);
+					continue;
+				}
+			}
+
+			SpawnEnemyClustersInChunk(key);
+		}
+		emptyGrassPlots.Clear();
+	}
+
+	// Chat GPT-4o helped in the creation of this method
+	private void LoadSurroundingChunks()
     {
         int radius = 1; // Start with a 1-chunk radius around (0, 0)
 
@@ -259,7 +335,58 @@ public class CityGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateChunkLine(int x = 0, int y = 0)
+	private IEnumerator LoadSurroundingChunks(float delayBetweenChunk)
+	{
+		int radius = 1; // Start with a 1-chunk radius around (0, 0)
+
+		mapBottom = -chunkDistance;
+		mapTop = chunkDistance;
+		mapLeft = -chunkDistance;
+		mapRight = chunkDistance;
+		yield return new WaitForSeconds(5);
+		while (radius <= chunkDistance)
+		{
+			// Step 1: Top and Bottom edges (excluding corners)
+			for (int x = -radius + 1; x <= radius - 1; x++)
+			{
+				GenerateChunk(new Vector2Int(x, radius));  // Top edge (excluding corners)
+														   //Debug.Log("Generating at " + x + ", " + radius);
+                yield return new WaitForSeconds(delayBetweenChunk);
+				GenerateChunk(new Vector2Int(x, -radius)); // Bottom edge (excluding corners)
+														   //Debug.Log("Generating at " + x + ", " + -radius);
+				yield return new WaitForSeconds(delayBetweenChunk);
+			}
+
+			// Step 2: Left and Right edges (excluding corners)
+			for (int y = -radius + 1; y <= radius - 1; y++)
+			{
+				GenerateChunk(new Vector2Int(-radius, y)); // Left edge (excluding corners)
+				yield return new WaitForSeconds(delayBetweenChunk);
+				//Debug.Log("Generating at " + -radius + ", " + y);
+				GenerateChunk(new Vector2Int(radius, y));  // Right edge (excluding corners)
+				yield return new WaitForSeconds(delayBetweenChunk);
+				//Debug.Log("Generating at " + radius + ", " + y);
+			}
+
+			// Step 3: Generate the four corners last
+			GenerateChunk(new Vector2Int(-radius, radius));   // Top-left corner
+			yield return new WaitForSeconds(delayBetweenChunk);
+			//Debug.Log("Generating at " + -radius + ", " + radius);
+			GenerateChunk(new Vector2Int(radius, radius));    // Top-right corner
+			yield return new WaitForSeconds(delayBetweenChunk);
+			//Debug.Log("Generating at " + radius + ", " + radius);
+			GenerateChunk(new Vector2Int(-radius, -radius));  // Bottom-left corner
+			yield return new WaitForSeconds(delayBetweenChunk);
+			//Debug.Log("Generating at " + -radius + ", " + -radius);
+			GenerateChunk(new Vector2Int(radius, -radius));   // Bottom-right corner
+			yield return new WaitForSeconds(delayBetweenChunk);
+			//Debug.Log("Generating at " + radius + ", " + -radius);
+
+			radius++; // Increase the radius to load the next layer of chunks
+		}
+	}
+
+	private void GenerateChunkLine(int x = 0, int y = 0)
     {
         if (x != 0)
         {
@@ -329,6 +456,7 @@ public class CityGenerator : MonoBehaviour
         ChunkData chunkData = new ChunkData(mod, modType);
 
         streetsVisualizer.DrawModuleToTilemap(chunkPos, mod);
+        //streetsVisualizer.StartCoroutine(streetsVisualizer.DrawModuleToTilemap(chunkPos, mod, .1f));
         loadedChunks.Add(chunkPos, chunkData);
 
         if(modType == ModuleType.GRASS)
@@ -402,8 +530,9 @@ public class CityGenerator : MonoBehaviour
 
         ChunkData chunkData = new ChunkData(mod, modType);
 
-        streetsVisualizer.DrawModuleToTilemap(chunkPos, mod);
-        loadedChunks.Add(chunkPos, chunkData);
+		streetsVisualizer.DrawModuleToTilemap(chunkPos, mod);
+		//streetsVisualizer.StartCoroutine(streetsVisualizer.DrawModuleToTilemap(chunkPos, mod, .1f));
+		loadedChunks.Add(chunkPos, chunkData);
     }
 
     /// <summary>

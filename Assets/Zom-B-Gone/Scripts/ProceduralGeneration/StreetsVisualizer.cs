@@ -44,4 +44,29 @@ public class StreetsVisualizer : MonoBehaviour
             }
         }
     }
+
+	public IEnumerator DrawModuleToTilemap(Vector2Int chunkCoords, TileModule module, float delay)
+	{
+		if (tilemap == null)
+		{
+			Debug.LogWarning("Tilemap not assigned");
+			yield return null;
+		}
+
+		for (int y = 0; y < module.height; y++)
+		{
+			for (int x = 0; x < module.width; x++)
+			{
+				TileBase tile = module.GetTile(x, y);
+
+				if (tile != null)
+				{
+                    yield return new WaitForSeconds(delay);
+					int xOffset = chunkCoords.x * CityGenerator.chunkSize;
+					int yOffset = chunkCoords.y * CityGenerator.chunkSize;
+					tilemap.SetTile(new Vector3Int(xOffset + x, yOffset + y, 0), tile);
+				}
+			}
+		}
+	}
 }
