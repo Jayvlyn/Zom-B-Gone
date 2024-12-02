@@ -46,7 +46,15 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public static void SpawnEnemiesAtPosition(Vector2 position)
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.H))
+        {
+            TrySpawnHorde(Utils.GetWeightedRandomNumber(3, 10));
+		}
+	}
+
+	public static void SpawnEnemiesAtPosition(Vector2 position)
     {
         float hordeRoll = 8;
         if(DayNightCycle.isNight)
