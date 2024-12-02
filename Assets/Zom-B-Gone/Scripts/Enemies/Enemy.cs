@@ -1,3 +1,4 @@
+using CodeMonkey;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -311,12 +312,22 @@ public abstract class Enemy : MonoBehaviour
 	{
 		// Start the tick coroutine when the enemy is enabled
 		tickCoroutine = StartCoroutine(TickCoroutine());
+
+		if(currentState == State.AGGRO)
+		{
+			MusicManager.instance.AggroEnemies++;
+		}
 	}
 
 	private void OnDisable()
 	{
 		// Stop the tick coroutine when the enemy is disabled to prevent memory leaks
 		if (tickCoroutine != null) StopCoroutine(tickCoroutine);
+
+		if (currentState == State.AGGRO)
+		{
+			MusicManager.instance.AggroEnemies--;
+		}
 	}
 
 	private void SetSortOrder()
@@ -735,6 +746,7 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnDeath()
 	{
+		Assets.i.activePlayerData.kills++;
 		Optimizer.list.Remove(gameObject);
 		Optimizer.currentActiveEnemies--;
 		if(head) head.RemoveHat();

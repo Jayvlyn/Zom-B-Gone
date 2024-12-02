@@ -23,4 +23,6 @@ public class PlayerData : ScriptableObject
     public float obstacleTurningSpeed = 20f;
 
 	public bool[] unlockedZones = new bool[5];
+
+    public bool zbgUnlocked = false;
 }

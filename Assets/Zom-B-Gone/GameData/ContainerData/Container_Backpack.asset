@@ -23,7 +23,7 @@ MonoBehaviour:
     allowLoot: 0
     allowItems: 0
     allowHats: 0
-  size: 30
+  size: 20
   container:
     collectibleSlots:
     - collectible: {fileID: 0}
@@ -32,105 +32,45 @@ MonoBehaviour:
       allowLoot: 0
       allowItems: 0
       allowHats: 1
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 8f1f8e401748ba94a95ed781fa88b5d7, type: 2}
+      collectibleName: Toothbrush
+      quantity: 9
       allowLoot: 1
       allowItems: 0
       allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 32bdca7c2ae2c274fbb00a3b443a91a2, type: 2}
+      collectibleName: Bottle Opener
+      quantity: 7
       allowLoot: 1
       allowItems: 0
       allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: a1a4c13708a66274d9e9a04f0e34288a, type: 2}
+      collectibleName: Empty Cola Bottle
+      quantity: 6
       allowLoot: 1
       allowItems: 0
       allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 9d9fa8283c2a2d2478e453f1ef8c1270, type: 2}
+      collectibleName: Empty Water Bottle
+      quantity: 60
       allowLoot: 1
       allowItems: 0
       allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 810d4b0793ff53f40a491f0b9e82d4ca, type: 2}
+      collectibleName: Canned Corn
+      quantity: 2
       allowLoot: 1
       allowItems: 0
       allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: fbcad0de725fa914db942fbd7340f9cf, type: 2}
+      collectibleName: Potato Chips
+      quantity: 1
       allowLoot: 1
       allowItems: 0
       allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
-      allowLoot: 1
-      allowItems: 0
-      allowHats: 0
-    - collectible: {fileID: 0}
-      collectibleName: 
-      quantity: 0
+    - collectible: {fileID: 11400000, guid: 29401934b4395ad4389fc570c4a6b57c, type: 2}
+      collectibleName: Canned Peas
+      quantity: 3
       allowLoot: 1
       allowItems: 0
       allowHats: 0

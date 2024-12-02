@@ -97,7 +97,7 @@ public class MusicManager : MonoBehaviour
 	{
 		if(level == currentIntensity)
 		{
-			Debug.Log("Same intensity given");
+			//Debug.Log("Same intensity given");
 			return;
 		}
 		switch(level)
@@ -112,7 +112,7 @@ public class MusicManager : MonoBehaviour
 				StartCoroutine(LerpIntensity(3, changeTime));
 				break;
 			default:
-				Debug.Log("Invalid intesntiy level");
+				//Debug.Log("Invalid intesntiy level");
 				return;
 
 		}

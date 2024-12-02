@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class HoverableCollectible : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-	private CollectibleData collectibleData;
+	public CollectibleData collectibleData;
 	public CollectibleData CollectibleData
 	{
 		get { return collectibleData; }

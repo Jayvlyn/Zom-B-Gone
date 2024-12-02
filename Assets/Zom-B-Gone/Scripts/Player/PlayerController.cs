@@ -166,6 +166,7 @@ public class PlayerController : MonoBehaviour
     private float recoverTimer;
     private void Update()
     {
+        //Debug.Log(MusicManager.instance.AggroEnemies);
 		UpdateStaminaBar();
 
         if (currentState == PlayerState.RUNNING) 

@@ -77,6 +77,10 @@ namespace CodeMonkey {
         public GameObject[] enemyPrefabs;
 
         public GameObject miniZombie;
+
+        public ItemData ZBGData;
+
+        public PlayerData activePlayerData;
     }
 
 }

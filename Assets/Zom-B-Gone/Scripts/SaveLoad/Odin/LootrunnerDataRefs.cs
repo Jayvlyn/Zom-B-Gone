@@ -24,4 +24,6 @@ public class LootrunnerDataRefs : MonoBehaviour
     public MarketData marketData;
 
     public Button[] zoneButtons;
+
+    public Image schematicZBG;
 }

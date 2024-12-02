@@ -6,6 +6,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
 {
     public LootrunnerDataRefs dataRefs;
     public SuperTextMesh crucialAquireText;
+    public SuperTextMesh ZBGAquireText;
 
     public static bool initialized = false;
 
@@ -15,7 +16,8 @@ public class LootrunnerDataInitializer : MonoBehaviour
         {
             if (GameManager.checkZoneUnlock) CheckZoneUnlock();
             SetUnlockedZones();
-            return;
+			if (SaveManager.currentSave.playerData.zbgUnlocked) ShowZomBGoneOnSchematic();
+			return;
         }
 
         initialized = true;
@@ -118,6 +120,8 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
         SetUnlockedZones();
 
+        if (SaveManager.currentSave.playerData.zbgUnlocked) ShowZomBGoneOnSchematic();
+
     }
 
     public void SetUnlockedZones()
@@ -177,7 +181,23 @@ public class LootrunnerDataInitializer : MonoBehaviour
         }
 	}
 
-    public void UnlockZone(int index, float textDelay = 0)
+
+	public void CheckForZBG(CollectibleData collectibleData)
+	{
+		if (collectibleData == CodeMonkey.Assets.i.ZBGData)
+		{
+            dataRefs.playerData.zbgUnlocked = true;
+            ShowZomBGoneOnSchematic();
+		}
+	}
+
+    public void ShowZomBGoneOnSchematic()
+    {
+        dataRefs.schematicZBG.color = Color.white;
+		StartCoroutine(ShowZBGAquiredText());
+	}
+
+	public void UnlockZone(int index, float textDelay = 0)
     {
 		dataRefs.playerData.unlockedZones[index] = true;
         StartCoroutine(ShowItemAquiredText());
@@ -202,4 +222,19 @@ public class LootrunnerDataInitializer : MonoBehaviour
         crucialAquireText.gameObject.SetActive(false);
 
     }
+
+	public IEnumerator ShowZBGAquiredText(float initialDelay = 0)
+	{
+		if (initialDelay > 0)
+		{
+			yield return new WaitForSeconds(initialDelay);
+		}
+		ZBGAquireText.gameObject.SetActive(true);
+		ZBGAquireText.Read();
+		yield return new WaitForSeconds(3f);
+		ZBGAquireText.UnRead();
+		yield return new WaitForSeconds(3f);
+		ZBGAquireText.gameObject.SetActive(false);
+
+	}
 }

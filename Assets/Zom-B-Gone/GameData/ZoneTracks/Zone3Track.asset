@@ -15,6 +15,6 @@ MonoBehaviour:
   melodyIntensity1: {fileID: 8300000, guid: 10f7c1b0cda9dd14f8de9ffd45e6527e, type: 3}
   melodyIntensity2: {fileID: 8300000, guid: aa1b6c92aff5f694498fff4e67d047dc, type: 3}
   melodyIntensity3: {fileID: 8300000, guid: 608b82f9eced73d458ccfc0a9cf455df, type: 3}
-  drumsIntensity1: {fileID: 0}
+  drumsIntensity1: {fileID: 8300000, guid: 3abe915c27fccd8439cdb37c84518f31, type: 3}
   drumsIntensity2: {fileID: 8300000, guid: bc2ff8344b977d948b288902001b7278, type: 3}
   drumsIntensity3: {fileID: 8300000, guid: 9fcab7310d95211499c6c9cb77f86bea, type: 3}
