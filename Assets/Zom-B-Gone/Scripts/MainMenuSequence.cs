@@ -18,7 +18,7 @@ public class MainMenuSequence : MonoBehaviour
 
 	public IEnumerator Sequence()
     {
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(1.5f);
 
 		Utils.CreateExplosion(explosionSource.position, 30, 700, 99, true);
 		Destroy(victimZombie);

@@ -379,15 +379,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce09277f3f9c002479867e7803ed6fdd, type: 2}
-  m_sharedMaterial: {fileID: -6603746673908763384, guid: ce09277f3f9c002479867e7803ed6fdd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 77a647ee402eafc41bf97e465da23c7d, type: 2}
+  m_sharedMaterial: {fileID: 3765903792051794094, guid: 77a647ee402eafc41bf97e465da23c7d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

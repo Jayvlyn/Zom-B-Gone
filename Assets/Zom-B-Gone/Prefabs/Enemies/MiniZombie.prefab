@@ -1397,6 +1397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e6d6eeff6dc33c4eb2b029dea4f1586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attachedEnemy: {fileID: 4573449965787004646}
   enemyHealth: {fileID: 6766331843342768239}
 --- !u!58 &7242136864089493400
 CircleCollider2D:

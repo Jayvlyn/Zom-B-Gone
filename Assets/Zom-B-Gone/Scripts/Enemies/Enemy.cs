@@ -8,11 +8,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Enemy : MonoBehaviour
 {
-	private enum State
+	public enum State
 	{
 		IDLE, DRONING, INVESTIGATING, AGGRO, DEAD
 	}
-	[SerializeField] private State currentState = State.IDLE;
+	public State currentState = State.IDLE;
 
 	public EnemyData enemyData;
 	private EnemyVoice voice;
