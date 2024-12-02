@@ -1,5 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
@@ -12,6 +14,20 @@ public class MusicManager : MonoBehaviour
     public AudioSource drum1Source;
     public AudioSource drum2Source;
     public AudioSource drum3Source;
+
+
+	public TMP_Text text;
+
+	bool gate0 = false;
+	bool gate1 = false;
+	bool gate2 = false;
+	bool gate3 = false;
+	bool gate4 = false;
+
+	private void Update()
+	{
+		if (text) text.text = gate0 + " " + gate1 + " " + gate2 + " " + gate3 + " " + gate4;
+	}
 
 	public int currentIntensity = -1;
 	private int aggroEnemies = 0;
@@ -39,21 +55,31 @@ public class MusicManager : MonoBehaviour
 
 	private void Start()
 	{
+		gate0 = true;
 		instance = this;
 		currentIntensity = -1;
 		aggroEnemies = 0;
-		UpdateAudioSources();
+		if (SceneManager.GetActiveScene().name == "Game")
+		{
+			SetZoneTrack(GameManager.currentZone.track);
+		}
+		else
+		{
+			UpdateAudioSources();
+		}
 	}
 
 
 	public void SetZoneTrack(ZoneTrack track)
 	{
+		gate1 = true;
 		currentZoneTrack = track;
 		UpdateAudioSources();
 	}
 
 	private void PlayAudioSources()
 	{
+		gate3 = true;
 		melody1Source.Play();
 		melody2Source.Play();
 		melody3Source.Play();
@@ -61,11 +87,13 @@ public class MusicManager : MonoBehaviour
 		drum1Source.Play(); 
 		drum2Source.Play();
 		drum3Source.Play();
+		gate4 = true;
 		ChangeIntensity(1, 0.1f);
 	}
 
     private void UpdateAudioSources()
     {
+		gate2 = true;
 		UpdateSource(melody1Source, currentZoneTrack.melodyIntensity1);
 		UpdateSource(melody2Source, currentZoneTrack.melodyIntensity2);
 		UpdateSource(melody3Source, currentZoneTrack.melodyIntensity3);
@@ -98,16 +126,25 @@ public class MusicManager : MonoBehaviour
 			//Debug.Log("Same intensity given");
 			return;
 		}
+
+		if(lerpRoutine != null)
+		{
+			StopCoroutine(lerpRoutine);
+		}
+
 		switch(level)
 		{
 			case 1:
-				StartCoroutine(LerpIntensity(1, changeTime));
+				//lerpRoutine = StartCoroutine(LerpIntensity(1, changeTime));
+				ChangeIntensity(1);
 				break;
 			case 2:
-				StartCoroutine(LerpIntensity(2, changeTime));
+				//lerpRoutine = StartCoroutine(LerpIntensity(2, changeTime));
+				ChangeIntensity(2);
 				break;
 			case 3:
-				StartCoroutine(LerpIntensity(3, changeTime));
+				//lerpRoutine = StartCoroutine(LerpIntensity(3, changeTime));
+				ChangeIntensity(3);
 				break;
 			default:
 				//Debug.Log("Invalid intesntiy level");
@@ -115,6 +152,16 @@ public class MusicManager : MonoBehaviour
 
 		}
 	}
+
+	private void OnDisable()
+	{
+		if (lerpRoutine != null)
+		{
+			StopCoroutine(lerpRoutine);
+		}
+	}
+
+	private Coroutine lerpRoutine;
 
 	private IEnumerator LerpIntensity(int level, float duration)
 	{
@@ -194,6 +241,68 @@ public class MusicManager : MonoBehaviour
 		currentIntensity = level;
 	}
 
+	private void ChangeIntensity(int level)
+	{
+		AudioSource muting1Source = null;
+		AudioSource muting2Source = null;
+		AudioSource unmuting1Source = null;
+		AudioSource unmuting2Source = null;
 
+		// set the sources that will mute
+		switch (currentIntensity)
+		{
+			case 1:
+				muting1Source = melody1Source;
+				muting2Source = drum1Source;
+
+
+				break;
+			case 2:
+				muting1Source = melody2Source;
+				muting2Source = drum2Source;
+
+				break;
+			case 3:
+				muting1Source = melody3Source;
+				muting2Source = drum3Source;
+
+				break;
+			default:
+				break;
+		}
+
+		// set the sources that will unmute
+		switch (level)
+		{
+			case 1:
+				unmuting1Source = melody1Source;
+				unmuting2Source = drum1Source;
+
+
+				break;
+			case 2:
+				unmuting1Source = melody2Source;
+				unmuting2Source = drum2Source;
+
+				break;
+			case 3:
+				unmuting1Source = melody3Source;
+				unmuting2Source = drum3Source;
+
+				break;
+			default:
+				Debug.Log("Invalid intesntiy level");
+				return;
+
+		}
+
+		if (muting1Source != null) muting1Source.volume = 0;
+		if (muting2Source != null) muting2Source.volume = 0;
+
+		if (unmuting1Source != null) unmuting1Source.volume = 1;
+		if (unmuting2Source != null) unmuting2Source.volume = 1;
+
+		currentIntensity = level;
+	}
 
 }

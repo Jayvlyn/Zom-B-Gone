@@ -1,9 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class MusicSetter : MonoBehaviour
 {
-    void Start()
+	void Start()
     {
-        MusicManager.instance.SetZoneTrack(GameManager.currentZone.track);
+        //MusicManager.instance.SetZoneTrack(GameManager.currentZone.track);
     }
 }
