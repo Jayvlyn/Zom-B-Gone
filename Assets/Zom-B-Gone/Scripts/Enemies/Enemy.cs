@@ -110,8 +110,7 @@ public abstract class Enemy : MonoBehaviour
 				StopCoroutine(tickCoroutine);
 				if(activeEffect != null)
 				{
-					Destroy(activeEffect.gameObject);
-					activeEffect = null;
+					StartCoroutine(destroyEffect());
 				}
 				CurrentMoveSpeed = 0;
 				StartCoroutine(SleepRb());
@@ -147,6 +146,16 @@ public abstract class Enemy : MonoBehaviour
         }
         currentState = newState;
     }
+
+	private IEnumerator destroyEffect()
+	{
+		yield return new WaitForSeconds(0.4f);
+		if(activeEffect != null)
+		{
+			Destroy(activeEffect.gameObject);
+			activeEffect = null;
+		}
+	}
 
 
 

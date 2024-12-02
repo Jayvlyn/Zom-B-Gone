@@ -1,6 +1,7 @@
 using CodeMonkey;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,4 +27,6 @@ public class LootrunnerDataRefs : MonoBehaviour
     public Button[] zoneButtons;
 
     public Image schematicZBG;
+
+    public TMP_Text infoText;
 }

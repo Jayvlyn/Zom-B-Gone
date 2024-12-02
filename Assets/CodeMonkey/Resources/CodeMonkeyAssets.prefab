@@ -87,3 +87,4 @@ MonoBehaviour:
   - {fileID: 8339959537163183905, guid: 59be50700a2a7f54f9d77bba2b3d0a5c, type: 3}
   miniZombie: {fileID: 6866930804346105677, guid: bc0e5ee542523f44c9ae41d4a75a1fe9, type: 3}
   ZBGData: {fileID: 11400000, guid: 69a254fb2ecaa234a98d606a734ed027, type: 2}
+  activePlayerData: {fileID: 11400000, guid: f55ec50488d6a194d8af1bb5a1a21097, type: 2}

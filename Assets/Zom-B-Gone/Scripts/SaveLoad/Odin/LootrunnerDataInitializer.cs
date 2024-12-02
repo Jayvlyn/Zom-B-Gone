@@ -17,6 +17,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
             if (GameManager.checkZoneUnlock) CheckZoneUnlock();
             SetUnlockedZones();
 			if (SaveManager.currentSave.playerData.zbgUnlocked) ShowZomBGoneOnSchematic();
+            SetInfoText();
 			return;
         }
 
@@ -123,6 +124,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
         if (SaveManager.currentSave.playerData.zbgUnlocked) 
             ShowZomBGoneOnSchematic();
 
+        SetInfoText();
     }
 
     public void SetUnlockedZones()
@@ -157,6 +159,13 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
         if (CheckItemInHandsVan(checkingForThisItem)) UnlockZone(lockedIndex, 1f);
 	}
+
+    public void SetInfoText()
+    {
+        dataRefs.infoText.text =
+            dataRefs.playerData.characterName + "\n" +
+            "Kills: " + dataRefs.playerData.kills;
+    }
 
     public bool CheckItemInHandsVan(ItemData item)
     {
