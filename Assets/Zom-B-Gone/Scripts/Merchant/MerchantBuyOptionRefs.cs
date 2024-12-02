@@ -141,6 +141,11 @@ public class MerchantBuyOptionRefs : MonoBehaviour
                 itemLocker.onContainerCollectibleUpdated.Raise();
             }
 
+
+            foreach(MerchantBuyOptionRefs refs in Market.buyOptions)
+            {
+                refs.UpdatePriceTotalTextColor();
+            }
 		}
 	}
 

@@ -109,8 +109,11 @@ public class Market : MonoBehaviour
         }
     }
 
+    public static List<MerchantBuyOptionRefs> buyOptions;
     public void OnOpenBuy()
     {
+        buyOptions = new List<MerchantBuyOptionRefs>();
+
         for (int i = sellingItemHolder.childCount - 1; i >= 0; i--) Destroy(sellingItemHolder.GetChild(i).gameObject);
         scrollingBackground.sizeDelta = new Vector2(scrollingBackground.sizeDelta.x, 0);
 
@@ -119,6 +122,7 @@ public class Market : MonoBehaviour
             scrollingBackground.sizeDelta = new Vector2(scrollingBackground.sizeDelta.x, scrollingBackground.sizeDelta.y + backgroundIncrementPerItem);
             GameObject option = Instantiate(buyOptionPrefab, sellingItemHolder);
             MerchantBuyOptionRefs refs = option.GetComponent<MerchantBuyOptionRefs>();
+            buyOptions.Add(refs);
             refs.loadedMerchant = loadedMerchant;
 
             refs.hoverableCollectible.CollectibleData = Utils.GetCollectibleFromName(collectible);
