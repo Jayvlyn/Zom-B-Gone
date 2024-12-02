@@ -120,7 +120,8 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
         SetUnlockedZones();
 
-        if (SaveManager.currentSave.playerData.zbgUnlocked) ShowZomBGoneOnSchematic();
+        if (SaveManager.currentSave.playerData.zbgUnlocked) 
+            ShowZomBGoneOnSchematic();
 
     }
 
@@ -188,13 +189,13 @@ public class LootrunnerDataInitializer : MonoBehaviour
 		{
             dataRefs.playerData.zbgUnlocked = true;
             ShowZomBGoneOnSchematic();
+			StartCoroutine(ShowZBGAquiredText());
 		}
 	}
 
     public void ShowZomBGoneOnSchematic()
     {
         dataRefs.schematicZBG.color = Color.white;
-		StartCoroutine(ShowZBGAquiredText());
 	}
 
 	public void UnlockZone(int index, float textDelay = 0)

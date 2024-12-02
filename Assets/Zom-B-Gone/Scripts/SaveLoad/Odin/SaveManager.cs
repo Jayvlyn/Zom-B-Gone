@@ -79,6 +79,8 @@ public class SaveManager : MonoBehaviour
 		// Deep copy of the array
 		copy.unlockedZones = (bool[])original.unlockedZones.Clone();
 
+        copy.zbgUnlocked = original.zbgUnlocked;
+
 		return copy;
 	}
 
@@ -99,6 +101,8 @@ public class SaveManager : MonoBehaviour
 		writeTo.obstacleTurningSpeed = readFrom.obstacleTurningSpeed;
 
 		writeTo.unlockedZones = (bool[])readFrom.unlockedZones.Clone();
+
+        writeTo.zbgUnlocked = readFrom.zbgUnlocked;
 	}
 
     public static void UpdateCurrentSave(LootrunnerDataRefs dataRefs)

@@ -746,7 +746,10 @@ public abstract class Enemy : MonoBehaviour
 
 	public void OnDeath()
 	{
-		Assets.i.activePlayerData.kills++;
+		if (Assets.i.activePlayerData != null)
+		{
+			Assets.i.activePlayerData.kills++;
+		}
 		Optimizer.list.Remove(gameObject);
 		Optimizer.currentActiveEnemies--;
 		if(head) head.RemoveHat();
