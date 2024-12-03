@@ -20,6 +20,9 @@ public abstract class Enemy : MonoBehaviour
 	public SpriteRenderer spriteRenderer;
 	public GameObject shadow;
 
+	private float damageMod = 1;
+	private float speedMod = 1;
+
 	public bool mainMenu = false;
 
 	public Rigidbody2D rigidBody;
@@ -205,12 +208,6 @@ public abstract class Enemy : MonoBehaviour
         {
             Rotate(target);
 
-            //if(rigidBody.linearVelocity.magnitude < 0.4f) // if not moving much see if something is in the way
-            //{
-            //             int hitCount = rigidBody.Cast(target, movementBlockerFilter, new RaycastHit2D[1], currentMoveSpeed * Time.fixedDeltaTime);
-            //	if (hitCount > 0) return;       
-            //         }
-
 			float speed = CurrentMoveSpeed;
 
 			if(activeEffect != null) speed *= activeEffect.effectData.speedMult;
@@ -218,6 +215,7 @@ public abstract class Enemy : MonoBehaviour
 
 			if (currentState == State.INVESTIGATING)
 			{
+				speed *= speedMod;
 				float investPointDist = Vector2.Distance(investigaitonPoint, transform.position);
 				if(investPointDist > 1)
 				{
@@ -226,6 +224,7 @@ public abstract class Enemy : MonoBehaviour
 			}
 			else if (currentState == State.AGGRO)
 			{
+				speed *= speedMod;
 				if(playerDistance > 1)
 				{
 					rigidBody.AddForce(target * speed, ForceMode2D.Force);
@@ -313,7 +312,34 @@ public abstract class Enemy : MonoBehaviour
 		alignmentNeighbors = new List<GameObject>();
 		separationNeighbors = new List<GameObject>();
 		cohesionNeighbors = new List<GameObject>();
-    }
+
+		DetermineSize();
+	}
+
+	private void DetermineSize()
+	{
+		float sizeRoll = UnityEngine.Random.Range(0, 1f);
+		float sizeEval = enemyData.sizeDistribution.Evaluate(sizeRoll);
+		float sizeMod = 1;
+		if (UnityEngine.Random.Range(0, 2) == 0)
+		{
+			sizeMod -= sizeEval;
+			speedMod += sizeEval * 1.5f;
+			damageMod -= sizeEval * 2.5f;
+		}
+		else
+		{
+			sizeMod += sizeEval;
+			speedMod -= sizeEval * 1.5f;
+			damageMod += sizeEval * 2.5f;
+		}
+
+		
+
+		transform.localScale *= sizeMod;
+		health.MaxHealth = Mathf.RoundToInt(health.MaxHealth * sizeMod);
+		health.CurrentHealth = health.MaxHealth;
+	}
 
 	private Coroutine tickCoroutine;
 	private float tickInterval = 0.5f;
@@ -699,7 +725,7 @@ public abstract class Enemy : MonoBehaviour
 			Vector2 randomVariation = Utils.RandomUnitVector2() * 0.2f;
             GameObject attackObject = Instantiate(attacks[UnityEngine.Random.Range(0, attacks.Count)], (Vector2)transform.position + ((Vector2)transform.up * enemyData.attackSpawnDistance) + randomVariation, Quaternion.identity);
             Attack attack = attackObject.GetComponent<Attack>();
-            attack.damageMultiplier = enemyData.attackDamageMultiplier;
+            attack.damageMultiplier = enemyData.attackDamageMultiplier * damageMod;
         }
     }
 

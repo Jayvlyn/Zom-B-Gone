@@ -51,4 +51,7 @@ public class EnemyData : ScriptableObject
 
     [Header("Audio")]
 	public List<EnemyVoice> possibleVoices;
+
+	[Header("Size")]
+	public AnimationCurve sizeDistribution;
 }

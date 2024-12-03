@@ -115,7 +115,9 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.DRIVING:
-                if (!recoverStamina && !playerSwinging) RecoverStamina();
+				if (hands.RightObstacle != null) LetGoRightObstacle();
+				if (hands.LeftObstacle != null) LetGoLeftObstacle();
+				if (!recoverStamina && !playerSwinging) RecoverStamina();
                 if (vc)
                 {
                     vc.Follow = transform;
@@ -129,6 +131,8 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.HIDING:
+                if (hands.RightObstacle != null) LetGoRightObstacle();
+                if (hands.LeftObstacle != null) LetGoLeftObstacle();
                 hiding = true;
                 playerCollider.isTrigger = true;
                 renderingChanger.DoLowerSorting();
@@ -267,11 +271,14 @@ public class PlayerController : MonoBehaviour
     {
 		if (inputValue.isPressed)
         {
-		    if (EventSystem.current.IsPointerOverGameObject()) return;
+            if (currentState != PlayerState.HIDING)
+            {
+                if (EventSystem.current.IsPointerOverGameObject()) return;
 
-		    if (!hands.UsingLeft) interactor.Interact(false);
-            
-			else if (hands.leftItem != null) hands.leftItem.Use();
+                if (!hands.UsingLeft) interactor.Interact(false);
+
+                else if (hands.leftItem != null) hands.leftItem.Use();
+            }
 		}
         else
         {
@@ -288,11 +295,14 @@ public class PlayerController : MonoBehaviour
     {
 		if (inputValue.isPressed)
 		{
-		    if (EventSystem.current.IsPointerOverGameObject()) return;
+            if (currentState != PlayerState.HIDING)
+            {
+                if (EventSystem.current.IsPointerOverGameObject()) return;
 
-			if (!hands.UsingRight) interactor.Interact(true);
-			
-			else if (hands.rightItem != null) hands.rightItem.Use();
+                if (!hands.UsingRight) interactor.Interact(true);
+
+                else if (hands.rightItem != null) hands.rightItem.Use();
+            }
 		}
 		else
 		{
