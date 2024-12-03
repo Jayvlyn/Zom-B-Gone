@@ -26,7 +26,9 @@ public class MusicManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (text) text.text = gate0 + " " + gate1 + " " + gate2 + " " + gate3 + " " + gate4;
+		//if (text) text.text = gate0 + " " + gate1 + " " + gate2 + " " + gate3 + " " + gate4;
+		Debug.Log(melody1Source.volume + " " + melody2Source.volume + " " + melody3Source.volume);
+
 	}
 
 	public int currentIntensity = -1;
@@ -40,15 +42,15 @@ public class MusicManager : MonoBehaviour
 
 			if(aggroEnemies < 3)
 			{
-				ChangeIntensity(1);
+				ChangeIntensity(1, 3);
 			}
 			else if (aggroEnemies < 10)
 			{
-				ChangeIntensity(2);
+				ChangeIntensity(2, 3);
 			}
 			else
 			{
-				ChangeIntensity(3);
+				ChangeIntensity(3, 3);
 			}
 		}
 	}
@@ -135,16 +137,16 @@ public class MusicManager : MonoBehaviour
 		switch(level)
 		{
 			case 1:
-				//lerpRoutine = StartCoroutine(LerpIntensity(1, changeTime));
-				ChangeIntensity(1);
+				lerpRoutine = StartCoroutine(LerpIntensity(1, changeTime));
+				//InstantChangeIntensity(1);
 				break;
 			case 2:
-				//lerpRoutine = StartCoroutine(LerpIntensity(2, changeTime));
-				ChangeIntensity(2);
+				lerpRoutine = StartCoroutine(LerpIntensity(2, changeTime));
+				//InstantChangeIntensity(2);
 				break;
 			case 3:
-				//lerpRoutine = StartCoroutine(LerpIntensity(3, changeTime));
-				ChangeIntensity(3);
+				lerpRoutine = StartCoroutine(LerpIntensity(3, changeTime));
+				//InstantChangeIntensity(3);
 				break;
 			default:
 				//Debug.Log("Invalid intesntiy level");
@@ -166,32 +168,11 @@ public class MusicManager : MonoBehaviour
 	private IEnumerator LerpIntensity(int level, float duration)
 	{
 		AudioSource muting1Source = null;
-		AudioSource muting2Source = null;
+		AudioSource muting2Source = null;		
+		AudioSource muting3Source = null;
+		AudioSource muting4Source = null;
 		AudioSource unmuting1Source = null;
 		AudioSource unmuting2Source = null;
-
-		// set the sources that will mute
-		switch(currentIntensity)
-		{
-			case 1:
-				muting1Source = melody1Source;
-				muting2Source = drum1Source;
-
-
-				break;
-			case 2:
-				muting1Source = melody2Source;
-				muting2Source = drum2Source;
-
-				break;
-			case 3:
-				muting1Source = melody3Source;
-				muting2Source = drum3Source;
-
-				break;
-			default:
-				break;
-		}
 
 		// set the sources that will unmute
 		switch (level)
@@ -200,16 +181,31 @@ public class MusicManager : MonoBehaviour
 				unmuting1Source = melody1Source;
 				unmuting2Source = drum1Source;
 
+				muting1Source = melody2Source;
+				muting2Source = drum2Source;
+				muting3Source = melody3Source;
+				muting4Source = drum3Source;
+
 
 				break;
 			case 2:
 				unmuting1Source = melody2Source;
 				unmuting2Source = drum2Source;
 
+				muting1Source = melody1Source;
+				muting2Source = drum1Source;
+				muting3Source = melody3Source;
+				muting4Source = drum3Source;
+
 				break;
 			case 3:
 				unmuting1Source = melody3Source;
 				unmuting2Source = drum3Source;
+
+				muting1Source = melody1Source;
+				muting2Source = drum1Source;
+				muting3Source = melody2Source;
+				muting4Source = drum2Source;
 
 				break;
 			default:
@@ -224,6 +220,8 @@ public class MusicManager : MonoBehaviour
 		{
 			if(muting1Source != null) muting1Source.volume = Mathf.Lerp(muting1Source.volume, 0, elapsedTime / duration);
 			if(muting2Source != null) muting2Source.volume = Mathf.Lerp(muting2Source.volume, 0, elapsedTime / duration);
+			if(muting3Source != null) muting3Source.volume = Mathf.Lerp(muting3Source.volume, 0, elapsedTime / duration);
+			if(muting4Source != null) muting4Source.volume = Mathf.Lerp(muting4Source.volume, 0, elapsedTime / duration);
 
 			if(unmuting1Source != null) unmuting1Source.volume = Mathf.Lerp(unmuting1Source.volume, 1, elapsedTime / duration);
 			if(unmuting2Source != null) unmuting2Source.volume = Mathf.Lerp(unmuting2Source.volume, 1, elapsedTime / duration);
@@ -234,6 +232,8 @@ public class MusicManager : MonoBehaviour
 
 		if (muting1Source != null) muting1Source.volume = 0;
 		if (muting2Source != null) muting2Source.volume = 0;
+		if (muting3Source != null) muting3Source.volume = 0;
+		if (muting4Source != null) muting4Source.volume = 0;
 
 		if (unmuting1Source != null) unmuting1Source.volume = 1;
 		if (unmuting2Source != null) unmuting2Source.volume = 1;
@@ -241,35 +241,13 @@ public class MusicManager : MonoBehaviour
 		currentIntensity = level;
 	}
 
-	private void ChangeIntensity(int level)
+	private void InstantChangeIntensity(int level)
 	{
 		AudioSource muting1Source = null;
 		AudioSource muting2Source = null;
 		AudioSource unmuting1Source = null;
 		AudioSource unmuting2Source = null;
 
-		// set the sources that will mute
-		switch (currentIntensity)
-		{
-			case 1:
-				muting1Source = melody1Source;
-				muting2Source = drum1Source;
-
-
-				break;
-			case 2:
-				muting1Source = melody2Source;
-				muting2Source = drum2Source;
-
-				break;
-			case 3:
-				muting1Source = melody3Source;
-				muting2Source = drum3Source;
-
-				break;
-			default:
-				break;
-		}
 
 		// set the sources that will unmute
 		switch (level)
