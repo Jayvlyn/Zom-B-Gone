@@ -1,6 +1,7 @@
 using CodeMonkey;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
 
 	public static ZoneData currentZone;
 
+	public TMP_Text marketDaysText;
+
 	[Header("MUST REFERENCE TO PRESERVE DATA")]
 	public MarketData marketData;
 	public FloorContainerData floorData;
@@ -26,6 +29,8 @@ public class GameManager : MonoBehaviour
 		player = FindFirstObjectByType<PlayerController>();
 		Time.timeScale = 1f;
 		PauseMenu.paused = false;
+
+		UpdateMarketDaysText();
 	}
 
 
@@ -34,9 +39,23 @@ public class GameManager : MonoBehaviour
 		if (marketData)
 		{
 			marketData.Day++;
+			UpdateMarketDaysText();
 		}
 		circleAnimator.SetTrigger("CloseCircle");
 		StartCoroutine(sceneChangeDelay(run));	
+	}
+
+	public void UpdateMarketDaysText()
+	{
+		if (marketDaysText != null)
+		{
+			marketDaysText.text = "Day: " + marketData.TotalDays;
+			if (marketData.Day == marketData.daysPerCycle) marketDaysText.color = marketData.OneDayLeftColor;
+			else if (marketData.Day + 1 == marketData.daysPerCycle) marketDaysText.color = marketData.TwoDaysLeftColor;
+			else if (marketData.Day + 2 == marketData.daysPerCycle) marketDaysText.color = marketData.ThreeDaysLeftColor;
+			else marketDaysText.color = Color.white;
+
+		}
 	}
 
 	public void Extract()

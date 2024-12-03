@@ -13,6 +13,7 @@
 using GameEvents;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace CodeMonkey {
@@ -81,6 +82,8 @@ namespace CodeMonkey {
         public ItemData ZBGData;
 
         public PlayerData activePlayerData;
+
+        public TMP_Text marketDaysText;
     }
 
 }

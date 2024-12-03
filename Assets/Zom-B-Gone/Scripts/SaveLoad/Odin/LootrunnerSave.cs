@@ -24,4 +24,5 @@ public class LootrunnerSave
 
     public List<MerchantVals> merchantVals;
     public int marketDay;
+    public int marketCycles;
 }

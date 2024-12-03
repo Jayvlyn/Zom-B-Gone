@@ -106,6 +106,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
                 dataRefs.marketData.merchants[i].vals = SaveManager.currentSave.merchantVals[i];
             }
             dataRefs.marketData.Day = SaveManager.currentSave.marketDay;
+            dataRefs.marketData.cycleCount = SaveManager.currentSave.marketCycles;
         }
         else
         {
@@ -117,7 +118,9 @@ public class LootrunnerDataInitializer : MonoBehaviour
                 dataRefs.marketData.RefreshMerchantInventory(merchant);
                 dataRefs.marketData.RefreshBuyOffers(merchant);
             }
-        }
+            dataRefs.marketData.Day = 1;
+            dataRefs.marketData.cycleCount = 0;
+		}
 
         SetUnlockedZones();
 

@@ -1,3 +1,4 @@
+using CodeMonkey;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing.Text;
@@ -8,15 +9,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Market", menuName = "New Market")]
 public class MarketData : ScriptableObject
 {
+    public int cycleCount = 0;
+    public int TotalDays => (cycleCount * daysPerCycle) + day;
+    public int daysPerCycle = 4;
     [SerializeField] private int day = 1;
     public int Day
     {
         get { return day; }
         set
         {
-            if (value < 1 || value > 4) return;
-            if (value == 4)
+            if (value < 1 || value > daysPerCycle + 1) return;
+            if (value == daysPerCycle + 1)
             {
+                cycleCount++;
                 day = 1;
                 foreach (var merchant in merchants)
                 {
@@ -28,6 +33,10 @@ public class MarketData : ScriptableObject
             else day = value;
         }
     }
+
+    public Color OneDayLeftColor = Color.red;
+    public Color TwoDaysLeftColor = Color.magenta;
+    public Color ThreeDaysLeftColor = Color.yellow;
 
     public MerchantData[] merchants = new MerchantData[3];
 
