@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LootrunnerDataInitializer : MonoBehaviour
 {
-    public LootrunnerDataRefs dataRefs;
     public SuperTextMesh crucialAquireText;
     public SuperTextMesh ZBGAquireText;
 
@@ -25,101 +24,101 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
         SaveManager.currentSave = SaveManager.saves.lootrunnerSaves[SaveManager.loadedSave];
 
-        SaveManager.SetPlayerData(dataRefs.playerData, SaveManager.currentSave.playerData);
+        SaveManager.SetPlayerData(GameManager.Instance.dataRefs.playerData, SaveManager.currentSave.playerData);
         
         // Hands
-        if (SaveManager.currentSave.hands != null) dataRefs.handsData.Container = SaveManager.currentSave.hands;
-        else Utils.ClearContainerSlots(dataRefs.handsData.Container);
+        if (SaveManager.currentSave.hands != null) GameManager.Instance.dataRefs.handsData.Container = SaveManager.currentSave.hands;
+        else Utils.ClearContainerSlots(GameManager.Instance.dataRefs.handsData.Container);
 
         // Head
-        if (SaveManager.currentSave.head != null) dataRefs.headData.Container = SaveManager.currentSave.head;
-        else Utils.ClearContainerSlots(dataRefs.headData.Container);
+        if (SaveManager.currentSave.head != null) GameManager.Instance.dataRefs.headData.Container = SaveManager.currentSave.head;
+        else Utils.ClearContainerSlots(GameManager.Instance.dataRefs.headData.Container);
 
 		// Workbench Input
-		if (SaveManager.currentSave.workbenchInput != null) dataRefs.worbenchInputData.Container = SaveManager.currentSave.workbenchInput;
-		else Utils.ClearContainerSlots(dataRefs.worbenchInputData.Container);
+		if (SaveManager.currentSave.workbenchInput != null) GameManager.Instance.dataRefs.worbenchInputData.Container = SaveManager.currentSave.workbenchInput;
+		else Utils.ClearContainerSlots(GameManager.Instance.dataRefs.worbenchInputData.Container);
 
 		// Workbench Output
-		if (SaveManager.currentSave.workbenchOutput != null) dataRefs.worbenchOutputData.Container = SaveManager.currentSave.workbenchOutput;
-		else Utils.ClearContainerSlots(dataRefs.worbenchOutputData.Container);
+		if (SaveManager.currentSave.workbenchOutput != null) GameManager.Instance.dataRefs.worbenchOutputData.Container = SaveManager.currentSave.workbenchOutput;
+		else Utils.ClearContainerSlots(GameManager.Instance.dataRefs.worbenchOutputData.Container);
 
 		// Backpack
 		if (SaveManager.currentSave.backpack != null)
         {
-			dataRefs.backpackData.size = SaveManager.currentSave.backpack.collectibleSlots.Length;
-			dataRefs.backpackData.Container = SaveManager.currentSave.backpack;
+			GameManager.Instance.dataRefs.backpackData.size = SaveManager.currentSave.backpack.collectibleSlots.Length;
+			GameManager.Instance.dataRefs.backpackData.Container = SaveManager.currentSave.backpack;
         }
-        else Utils.ClearContainerSlots(dataRefs.backpackData.Container);
+        else Utils.ClearContainerSlots(GameManager.Instance.dataRefs.backpackData.Container);
 
         // Hat locker
         if (SaveManager.currentSave.hatLocker != null)
         {
-			dataRefs.hatLockerData.size = SaveManager.currentSave.hatLocker.collectibleSlots.Length;
-			dataRefs.hatLockerData.Container = SaveManager.currentSave.hatLocker;
+			GameManager.Instance.dataRefs.hatLockerData.size = SaveManager.currentSave.hatLocker.collectibleSlots.Length;
+			GameManager.Instance.dataRefs.hatLockerData.Container = SaveManager.currentSave.hatLocker;
         }
-        else Utils.ClearContainerSlots(dataRefs.hatLockerData.Container);
+        else Utils.ClearContainerSlots(GameManager.Instance.dataRefs.hatLockerData.Container);
 
         // Item locker
         if (SaveManager.currentSave.itemLocker != null)
         {
-            dataRefs.itemLockerData.size = SaveManager.currentSave.itemLocker.collectibleSlots.Length;
-            dataRefs.itemLockerData.Container = SaveManager.currentSave.itemLocker;
+            GameManager.Instance.dataRefs.itemLockerData.size = SaveManager.currentSave.itemLocker.collectibleSlots.Length;
+            GameManager.Instance.dataRefs.itemLockerData.Container = SaveManager.currentSave.itemLocker;
         }
-        else Utils.ClearContainerSlots(dataRefs.itemLockerData.Container);
+        else Utils.ClearContainerSlots(GameManager.Instance.dataRefs.itemLockerData.Container);
 
         // Loot locker
         if (SaveManager.currentSave.lootLocker != null)
         {
-			dataRefs.lootLockerData.size = SaveManager.currentSave.lootLocker.collectibleSlots.Length;
-			dataRefs.lootLockerData.Container = SaveManager.currentSave.lootLocker;
+			GameManager.Instance.dataRefs.lootLockerData.size = SaveManager.currentSave.lootLocker.collectibleSlots.Length;
+			GameManager.Instance.dataRefs.lootLockerData.Container = SaveManager.currentSave.lootLocker;
         }
-        else Utils.ClearContainerSlots(dataRefs.lootLockerData.Container);
+        else Utils.ClearContainerSlots(GameManager.Instance.dataRefs.lootLockerData.Container);
 
 		// Van 
 		if (SaveManager.currentSave.vanFloor != null)
         {
-            dataRefs.vanFloor.floorContainer.Container = SaveManager.currentSave.vanFloor.floorContainer;
-            dataRefs.vanFloor.floorContainer.collectibleDict = SaveManager.currentSave.vanFloor.collectibleDict;
+            GameManager.Instance.dataRefs.vanFloor.floorContainer.Container = SaveManager.currentSave.vanFloor.floorContainer;
+            GameManager.Instance.dataRefs.vanFloor.floorContainer.collectibleDict = SaveManager.currentSave.vanFloor.collectibleDict;
         }
         else
         {
-            Utils.ClearContainerSlots(dataRefs.vanFloor.floorContainer.Container);
-            dataRefs.vanFloor.floorContainer.ClearFloorSpecificVals();
+            Utils.ClearContainerSlots(GameManager.Instance.dataRefs.vanFloor.floorContainer.Container);
+            GameManager.Instance.dataRefs.vanFloor.floorContainer.ClearFloorSpecificVals();
         }
 
 
         if (SaveManager.currentSave.unitFloor != null)
         {
-            dataRefs.unitFloor.floorContainer.Container = SaveManager.currentSave.unitFloor.floorContainer;
-            dataRefs.unitFloor.floorContainer.collectibleDict = SaveManager.currentSave.unitFloor.collectibleDict;
+            GameManager.Instance.dataRefs.unitFloor.floorContainer.Container = SaveManager.currentSave.unitFloor.floorContainer;
+            GameManager.Instance.dataRefs.unitFloor.floorContainer.collectibleDict = SaveManager.currentSave.unitFloor.collectibleDict;
         }
         else
         {
-            Utils.ClearContainerSlots(dataRefs.unitFloor.floorContainer.Container);
-            dataRefs.unitFloor.floorContainer.ClearFloorSpecificVals();
+            Utils.ClearContainerSlots(GameManager.Instance.dataRefs.unitFloor.floorContainer.Container);
+            GameManager.Instance.dataRefs.unitFloor.floorContainer.ClearFloorSpecificVals();
         }
 
         if(SaveManager.currentSave.merchantVals != null)
         {
-            for (int i = 0; i < dataRefs.marketData.merchants.Length; i++)
+            for (int i = 0; i < GameManager.Instance.dataRefs.marketData.merchants.Length; i++)
             {
-                dataRefs.marketData.merchants[i].vals = SaveManager.currentSave.merchantVals[i];
+                GameManager.Instance.dataRefs.marketData.merchants[i].vals = SaveManager.currentSave.merchantVals[i];
             }
-            dataRefs.marketData.Day = SaveManager.currentSave.marketDay;
-            dataRefs.marketData.cycleCount = SaveManager.currentSave.marketCycles;
+            GameManager.Instance.dataRefs.marketData.Day = SaveManager.currentSave.marketDay;
+            GameManager.Instance.dataRefs.marketData.cycleCount = SaveManager.currentSave.marketCycles;
         }
         else
         {
             SaveManager.currentSave.merchantVals = new List<MerchantVals>();
-            foreach (var merchant in dataRefs.marketData.merchants)
+            foreach (var merchant in GameManager.Instance.dataRefs.marketData.merchants)
             {
                 merchant.vals = new MerchantVals();
-                dataRefs.marketData.RefreshDealingCollectibles(merchant);
-                dataRefs.marketData.RefreshMerchantInventory(merchant);
-                dataRefs.marketData.RefreshBuyOffers(merchant);
+                GameManager.Instance.dataRefs.marketData.RefreshDealingCollectibles(merchant);
+                GameManager.Instance.dataRefs.marketData.RefreshMerchantInventory(merchant);
+                GameManager.Instance.dataRefs.marketData.RefreshBuyOffers(merchant);
             }
-            dataRefs.marketData.Day = 1;
-            dataRefs.marketData.cycleCount = 0;
+            GameManager.Instance.dataRefs.marketData.Day = 1;
+            GameManager.Instance.dataRefs.marketData.cycleCount = 0;
 		}
 
         SetUnlockedZones();
@@ -132,18 +131,18 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
     public void SetUnlockedZones()
     {
-		for (int i = 0; i < dataRefs.playerData.unlockedZones.Length; i++)
+		for (int i = 0; i < GameManager.Instance.dataRefs.playerData.unlockedZones.Length; i++)
 		{
-			dataRefs.zoneButtons[i].interactable = dataRefs.playerData.unlockedZones[i];
+			GameManager.Instance.dataRefs.zoneButtons[i].interactable = GameManager.Instance.dataRefs.playerData.unlockedZones[i];
 		}
 	}
 
     public int GetLockedIndex()
     {
 		int lockedIndex = -1;
-		for (int i = 0; i < dataRefs.playerData.unlockedZones.Length; i++)
+		for (int i = 0; i < GameManager.Instance.dataRefs.playerData.unlockedZones.Length; i++)
 		{
-			if (!dataRefs.playerData.unlockedZones[i])
+			if (!GameManager.Instance.dataRefs.playerData.unlockedZones[i])
 			{
 				lockedIndex = i;
 				break;
@@ -165,16 +164,16 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
     public void SetInfoText()
     {
-        dataRefs.infoText.text =
-            dataRefs.playerData.characterName + "\n" +
-            "Kills: " + dataRefs.playerData.kills;
+        GameManager.Instance.dataRefs.infoText.text =
+            GameManager.Instance.dataRefs.playerData.characterName + "\n" +
+            "Kills: " + GameManager.Instance.dataRefs.playerData.kills;
     }
 
     public bool CheckItemInHandsVan(ItemData item)
     {
-        if (dataRefs.handsData.container.collectibleSlots[0].Collectible == item) return true;
-        if (dataRefs.handsData.container.collectibleSlots[1].Collectible == item) return true;
-        foreach(CollectibleSlot cs in dataRefs.vanFloor.floorContainer.container.collectibleSlots)
+        if (GameManager.Instance.dataRefs.handsData.container.collectibleSlots[0].Collectible == item) return true;
+        if (GameManager.Instance.dataRefs.handsData.container.collectibleSlots[1].Collectible == item) return true;
+        foreach(CollectibleSlot cs in GameManager.Instance.dataRefs.vanFloor.floorContainer.container.collectibleSlots)
         {
             if (cs.Collectible == item) return true;
         }
@@ -199,7 +198,7 @@ public class LootrunnerDataInitializer : MonoBehaviour
 	{
 		if (collectibleData == CodeMonkey.Assets.i.ZBGData)
 		{
-            dataRefs.playerData.zbgUnlocked = true;
+            GameManager.Instance.dataRefs.playerData.zbgUnlocked = true;
             ShowZomBGoneOnSchematic();
 			StartCoroutine(ShowZBGAquiredText());
 		}
@@ -207,12 +206,12 @@ public class LootrunnerDataInitializer : MonoBehaviour
 
     public void ShowZomBGoneOnSchematic()
     {
-        dataRefs.schematicZBG.color = Color.white;
+        GameManager.Instance.dataRefs.schematicZBG.color = Color.white;
 	}
 
 	public void UnlockZone(int index, float textDelay = 0)
     {
-		dataRefs.playerData.unlockedZones[index] = true;
+		GameManager.Instance.dataRefs.playerData.unlockedZones[index] = true;
         StartCoroutine(ShowItemAquiredText());
 	}
 

@@ -60,6 +60,8 @@ namespace CodeMonkey {
         public AudioClip openLocker;
         public AudioClip openBackpack;
 
+        public AudioClip[] playeDamageSounds;
+
         public VoidEvent onPlayerDied;
 
         public CollectibleContainerData handsData;

@@ -8,7 +8,8 @@ public class AudioManager : Singleton<AudioManager>
 
     public void Play(AudioClip audioClip)
     {
-        audioSource.resource = audioClip;
-        audioSource.Play();
+        audioSource.PlayOneShot(audioClip);
+        //audioSource.resource = audioClip;
+        //audioSource.Play();
     }
 }

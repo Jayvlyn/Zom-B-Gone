@@ -696,7 +696,9 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DeathTimer()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
+        GameManager.Instance.circleAnimator.SetTrigger("CloseCircle");
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene("Unit");
     }
 }

@@ -61,15 +61,43 @@ public class PauseMenu : MonoBehaviour
 
     public void OnMainMenu()
     {
-        Time.timeScale = 1;
-        paused = false;
-        SceneManager.LoadScene("MainMenu");
+        Resume();
+
+        StartCoroutine(DelayedSceneChange("MainMenu", 2));
     }
+
+    public void OnAbandonRun()
+    {
+        Resume();
+
+        StartCoroutine(DelayedSceneChange("Unit", 2));
+    }
+
 
     public void OnQuit()
     {
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            Utils.ClearPlayerTemporaryContainers();
+        }
+        SaveManager.UpdateCurrentSave(GameManager.Instance.dataRefs);
+        OdinSaveSystem.Save(SaveManager.saves);
         Debug.Log("Quitting Game");
         Application.Quit();
     }
     #endregion
+
+
+    private IEnumerator DelayedSceneChange(string scene, float delay)
+    {
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            Utils.ClearPlayerTemporaryContainers();
+        }
+        SaveManager.UpdateCurrentSave(GameManager.Instance.dataRefs);
+        OdinSaveSystem.Save(SaveManager.saves);
+        GameManager.Instance.circleAnimator.SetTrigger("CloseCircle");
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(scene);
+    }
 }

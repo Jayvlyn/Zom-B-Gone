@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+	public static GameManager Instance;
+
 	private PlayerController player;
 	public static Light2D globalLight;
 	public static bool checkZoneUnlock;
@@ -22,8 +24,14 @@ public class GameManager : MonoBehaviour
 	public MarketData marketData;
 	public FloorContainerData floorData;
 	public PlayerData activePlayerData;
+	public LootrunnerDataRefs dataRefs;
 
-	private void Start()
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
 	{
 		globalLight = GameObject.FindGameObjectWithTag("GlobalLight").GetComponent<Light2D>();
 		player = FindFirstObjectByType<PlayerController>();
@@ -72,6 +80,8 @@ public class GameManager : MonoBehaviour
 
 	public IEnumerator sceneChangeDelay(string scene)
 	{
+		SaveManager.UpdateCurrentSave(dataRefs);
+		OdinSaveSystem.Save(SaveManager.saves);
 		yield return new WaitForSeconds(1f);
 		SceneManager.LoadScene(scene);
 	}

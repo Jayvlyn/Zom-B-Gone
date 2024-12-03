@@ -84,6 +84,9 @@ public class Health : MonoBehaviour
                 // Camera Shake
                 CameraShakeManager.instance.CameraShake(pc.impulseSource, CodeMonkey.Assets.i.playerDamagedSSP, popupVector.normalized);
 
+                // Damage Sound
+                AudioManager.Instance.Play(CodeMonkey.Assets.i.playeDamageSounds[UnityEngine.Random.Range(0, CodeMonkey.Assets.i.playeDamageSounds.Length)]);
+
                 // Blood Vignette
                 float damageEffectIntensity = Mathf.Clamp01((float)incomingDamage / 50);
 			    ScreenDamageEffectController.DamageEffect.DoDamageEffect(damageEffectIntensity);

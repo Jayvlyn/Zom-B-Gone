@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UnitNavigation : MonoBehaviour
 {
-    public LootrunnerDataRefs dataRefs;
     public Animator circleAnimator;
 
     public void OpenMainMenu()
@@ -17,7 +16,7 @@ public class UnitNavigation : MonoBehaviour
     public IEnumerator DelayedMainMenu()
     {
         yield return new WaitForSeconds(2.5f);
-		SaveManager.UpdateCurrentSave(dataRefs);
+		SaveManager.UpdateCurrentSave(GameManager.Instance.dataRefs);
 		OdinSaveSystem.Save(SaveManager.saves);
 		SceneManager.LoadScene("MainMenu");
 	}

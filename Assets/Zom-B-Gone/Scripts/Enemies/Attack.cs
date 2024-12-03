@@ -10,6 +10,15 @@ public class Attack : MonoBehaviour
     [NonSerialized] public float damageMultiplier = 1; // set by attacker, do not alter in this script
     private bool doDamage = false;
 
+    public AudioClip[] attackSounds;
+    public AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource.resource = attackSounds[UnityEngine.Random.Range(0, attackSounds.Length)];
+        audioSource.Play();
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(doDamage && collision.TryGetComponent(out Health collisionHealth))

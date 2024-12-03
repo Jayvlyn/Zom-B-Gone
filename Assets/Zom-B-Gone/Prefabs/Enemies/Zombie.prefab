@@ -1181,6 +1181,7 @@ MonoBehaviour:
   audioSource: {fileID: 3376768108525843708}
   spriteRenderer: {fileID: 190890871166965350}
   shadow: {fileID: 5311247383603001044}
+  mainMenu: 0
   rigidBody: {fileID: 7881680831849007001}
   head: {fileID: 8292835943818908013}
   health: {fileID: 0}
@@ -1216,13 +1217,13 @@ MonoBehaviour:
     m_Bits: 8389632
   WorldObstacleLm:
     serializedVersion: 2
-    m_Bits: 131200
+    m_Bits: 50462848
   SightBlockersLm:
     serializedVersion: 2
-    m_Bits: 32896
+    m_Bits: 128
   AttackableMovementBlockersLm:
     serializedVersion: 2
-    m_Bits: 1704000
+    m_Bits: 119144512
   activeEffect: {fileID: 0}
   targetChangeSpeed: 5.04
   fadeSpeed: 5

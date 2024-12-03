@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class GunMelee : MonoBehaviour
 {
+	public Weapon mainWeapon;
 	public int damage = 30;
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.CompareTag("Enemy"))
+		if(mainWeapon.currentState == Item.ItemState.HELD && collision.CompareTag("Enemy"))
 		{
 			if(collision.gameObject.TryGetComponent(out Health h))
 			{

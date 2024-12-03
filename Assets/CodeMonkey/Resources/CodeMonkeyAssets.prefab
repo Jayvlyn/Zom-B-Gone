@@ -60,6 +60,11 @@ MonoBehaviour:
   buttonUp: {fileID: 8300000, guid: 81f91b86cf4a1974785edfd57e5c1ef0, type: 3}
   openLocker: {fileID: 8300000, guid: d2e8cbb167b35a04d8b055ac966ad86c, type: 3}
   openBackpack: {fileID: 8300000, guid: 6f2e97f75ccef5845b992396739953a0, type: 3}
+  playeDamageSounds:
+  - {fileID: 8300000, guid: 58a358c37cb6990438281b06c96e7fb1, type: 3}
+  - {fileID: 8300000, guid: 2a23bae447c685b4ea162efe019b3c87, type: 3}
+  - {fileID: 8300000, guid: c078ace73efd91f4ab5815ffad4eb75a, type: 3}
+  - {fileID: 8300000, guid: ae5107028ee7458458b1219fe85b48df, type: 3}
   onPlayerDied: {fileID: 11400000, guid: 4899ce293ac01f740a19576b0a4cacbc, type: 2}
   handsData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
   headData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}

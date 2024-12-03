@@ -95,13 +95,23 @@ public class MarketData : ScriptableObject
 
             int chosenAmount = Random.Range(1, maxAmount + 1);
 
-            merchant.vals.inventory.Add(chosenCollectible.Name, chosenAmount);
-            dealingCollectibles.Remove(chosenCollectible); // no duplicate keys
+
+            if (!merchant.vals.buyOffers.ContainsKey(chosenCollectible.Name))
+            {
+                merchant.vals.inventory.Add(chosenCollectible.Name, chosenAmount);
+                dealingCollectibles.Remove(chosenCollectible); // no duplicate keys
+            }
+            else
+            {
+                i--;
+                continue;
+            }
 
             int price = DeterminePrice(chosenCollectible);
 			price = DiscountPriceWithRep(price, merchant);
 
-			merchant.vals.prices.Add(chosenCollectible.Name, price);
+            merchant.vals.prices.Add(chosenCollectible.Name, price);
+
 
         }
     }
@@ -129,7 +139,14 @@ public class MarketData : ScriptableObject
             int price = DeterminePrice(chosenCollectible);
             price = IncreaseOfferWithRep(price, merchant);
 
-            merchant.vals.buyOffers.Add(chosenCollectible.Name, price);
+            if(!merchant.vals.buyOffers.ContainsKey(chosenCollectible.Name))
+            {
+                merchant.vals.buyOffers.Add(chosenCollectible.Name, price);
+            }
+            else
+            {
+                i--;
+            }
         }
     }
 

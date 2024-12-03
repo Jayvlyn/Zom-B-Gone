@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d022a090737b2f24e99ce7ad1b3b91e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainWeapon: {fileID: 4903090408065523360}
   damage: 30
 --- !u!60 &6148634598828719601
 PolygonCollider2D:
@@ -289,7 +290,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -25
+  m_SortingLayer: -26
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 79d840def038ea34ab19f297cea4291b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

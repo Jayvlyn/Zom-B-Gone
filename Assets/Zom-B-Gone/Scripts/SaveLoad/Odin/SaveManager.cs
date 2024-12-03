@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
@@ -122,13 +123,16 @@ public class SaveManager : MonoBehaviour
         SaveableFloor vanFloor = new SaveableFloor();
         vanFloor.collectibleDict = dataRefs.vanFloor.floorContainer.collectibleDict;
         vanFloor.floorContainer = DeepCopyContainer(dataRefs.vanFloor.floorContainer.Container);
-
-        SaveableFloor unitFloor = new SaveableFloor();
-        unitFloor.collectibleDict = dataRefs.unitFloor.floorContainer.collectibleDict;
-        unitFloor.floorContainer = DeepCopyContainer(dataRefs.unitFloor.floorContainer.Container);
-
         currentSave.vanFloor = vanFloor;
-        currentSave.unitFloor = unitFloor;
+
+        if(SceneManager.GetActiveScene().name == "Unit")
+        {
+            SaveableFloor unitFloor = new SaveableFloor();
+            unitFloor.collectibleDict = dataRefs.unitFloor.floorContainer.collectibleDict;
+            unitFloor.floorContainer = DeepCopyContainer(dataRefs.unitFloor.floorContainer.Container);
+            currentSave.unitFloor = unitFloor;
+        }
+
 
         currentSave.marketDay = dataRefs.marketData.Day;
         currentSave.marketCycles = dataRefs.marketData.cycleCount;
