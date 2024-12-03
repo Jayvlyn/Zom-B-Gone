@@ -101,10 +101,10 @@ public class FootstepManager : MonoBehaviour
         footstepAudioSource.PlayOneShot(chosenAudioCollection[index]);
 
 
-        float footstepSoundRadius = 3;
+        float footstepSoundRadius = 9;
         if (PlayerController.currentState == PlayerController.PlayerState.RUNNING) 
         {
-            footstepSoundRadius *= 2;
+            footstepSoundRadius *= 1.7f;
             Utils.MakeSoundWave(playerController.transform.position, footstepSoundRadius);
         }
         else if(playerController.gameObject.layer == playerLayer) // not running, only alert zombies if not disguised on zombie layer

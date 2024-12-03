@@ -24,12 +24,12 @@ public class MusicManager : MonoBehaviour
 	bool gate3 = false;
 	bool gate4 = false;
 
-	private void Update()
-	{
-		//if (text) text.text = gate0 + " " + gate1 + " " + gate2 + " " + gate3 + " " + gate4;
-		Debug.Log(melody1Source.volume + " " + melody2Source.volume + " " + melody3Source.volume);
+	//private void Update()
+	//{
+	//	if (text) text.text = gate0 + " " + gate1 + " " + gate2 + " " + gate3 + " " + gate4;
+	//	Debug.Log(melody1Source.volume + " " + melody2Source.volume + " " + melody3Source.volume);
 
-	}
+	//}
 
 	public int currentIntensity = -1;
 	private int aggroEnemies = 0;

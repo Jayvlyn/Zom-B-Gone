@@ -34,7 +34,8 @@ public class LockerOpener : MonoBehaviour
 		targetRect.sizeDelta = new Vector2(oldSizeDelta.x, height);
 		targetRect.position = oldWorldPos;
 		StartCoroutine(PreSlideDown(30, .1f));
-	}
+        AudioManager.Instance.Play(CodeMonkey.Assets.i.openLocker);
+    }
 
 	public IEnumerator SlideDown(float duration)
 	{

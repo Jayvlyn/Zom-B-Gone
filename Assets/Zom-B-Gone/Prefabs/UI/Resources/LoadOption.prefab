@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 8857776610070752532}
   - component: {fileID: 1549552433511642811}
   - component: {fileID: 1291306177716144236}
+  - component: {fileID: 5088029331824506282}
   m_Layer: 5
   m_Name: LoadOption
   m_TagString: Untagged
@@ -611,3 +612,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameMesh: {fileID: 8340890228883250552}
   startGameEvent: {fileID: 11400000, guid: fa275d5d8c000224091af072cbb5f17c, type: 2}
+--- !u!114 &5088029331824506282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8620674492493115823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5337e4e82d170ed408bf8d706c999ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

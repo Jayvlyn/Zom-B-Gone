@@ -22,7 +22,7 @@ MonoBehaviour:
   weight: 200
   throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
-  noiseRadius: 0
+  noiseRadius: 10
   damage: 10
   attackSpeed: 0.4
   knockbackPower: 10
@@ -153,9 +153,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   swingSounds:
-  - {fileID: 8300000, guid: 953176f6d6d63e245b339526501e2ddf, type: 3}
-  - {fileID: 8300000, guid: fac418a8a85acef4d90752a850b073b0, type: 3}
-  - {fileID: 8300000, guid: 058bb92378d44904dbc570ef39dd8451, type: 3}
+  - {fileID: 8300000, guid: f2dc3af961015134086517a4eee3b70c, type: 3}
+  - {fileID: 8300000, guid: 23e49797a027acf4a87dcc565b05dc33, type: 3}
   hitSounds:
   - {fileID: 8300000, guid: 7998ae8ee1cadfa40a2694c75dec41df, type: 3}
   - {fileID: 8300000, guid: f8690dcdd9632c4459a587498741103c, type: 3}

@@ -27,6 +27,7 @@ public class BackpackOpener : MonoBehaviour
 
             StopAllCoroutines();
             StartCoroutine(PreSlideDown(30f,.1f));
+            AudioManager.Instance.Play(CodeMonkey.Assets.i.openBackpack);
         }
         else
         { // SLIDE OPEN
