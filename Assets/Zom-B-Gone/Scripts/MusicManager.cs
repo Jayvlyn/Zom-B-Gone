@@ -24,14 +24,19 @@ public class MusicManager : MonoBehaviour
 	bool gate3 = false;
 	bool gate4 = false;
 
-	//private void Update()
-	//{
-	//	if (text) text.text = gate0 + " " + gate1 + " " + gate2 + " " + gate3 + " " + gate4;
-	//	Debug.Log(melody1Source.volume + " " + melody2Source.volume + " " + melody3Source.volume);
+    //private void Update()
+    //{
+    //	if (text) text.text = gate0 + " " + gate1 + " " + gate2 + " " + gate3 + " " + gate4;
+    //	Debug.Log(melody1Source.volume + " " + melody2Source.volume + " " + melody3Source.volume);
 
-	//}
+    //}
 
-	public int currentIntensity = -1;
+    private void Update()
+    {
+		Debug.Log(melody1Source.volume);
+    }
+
+    public int currentIntensity = -1;
 	private int aggroEnemies = 0;
 	public int AggroEnemies
 	{
@@ -42,15 +47,15 @@ public class MusicManager : MonoBehaviour
 
 			if(aggroEnemies < 3)
 			{
-				ChangeIntensity(1, 3);
+				ChangeIntensity(1, 5);
 			}
-			else if (aggroEnemies < 10)
+			else if (aggroEnemies < 5)
 			{
-				ChangeIntensity(2, 3);
+				ChangeIntensity(2, 5);
 			}
 			else
 			{
-				ChangeIntensity(3, 3);
+				ChangeIntensity(3, 5);
 			}
 		}
 	}
@@ -223,8 +228,13 @@ public class MusicManager : MonoBehaviour
 			if(muting3Source != null) muting3Source.volume = Mathf.Lerp(muting3Source.volume, 0, elapsedTime / duration);
 			if(muting4Source != null) muting4Source.volume = Mathf.Lerp(muting4Source.volume, 0, elapsedTime / duration);
 
-			if(unmuting1Source != null) unmuting1Source.volume = Mathf.Lerp(unmuting1Source.volume, 1, elapsedTime / duration);
-			if(unmuting2Source != null) unmuting2Source.volume = Mathf.Lerp(unmuting2Source.volume, 1, elapsedTime / duration);
+			float volume = 0.5f;
+			if(level != 1 || SceneManager.GetActiveScene().name != "Game")
+			{
+				volume = 1;
+			}
+			if(unmuting1Source != null) unmuting1Source.volume = Mathf.Lerp(unmuting1Source.volume, volume, elapsedTime / duration);
+			if(unmuting2Source != null) unmuting2Source.volume = Mathf.Lerp(unmuting2Source.volume, volume, elapsedTime / duration);
 
 			elapsedTime += Time.deltaTime;
 			yield return null;
