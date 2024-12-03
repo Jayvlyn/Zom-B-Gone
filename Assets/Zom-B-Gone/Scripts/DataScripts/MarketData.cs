@@ -68,7 +68,7 @@ public class MarketData : ScriptableObject
 
         int countCalc = Random.Range(baseCount, Mathf.RoundToInt((baseCount) + (2 * repModifier)));
         int count = 0;
-        int halfCount = Mathf.RoundToInt(merchant.vals.inventory.Count * 0.5f);
+        int halfCount = Mathf.RoundToInt(dealingCollectibles.Count * 0.5f);
 
         if (countCalc > halfCount)
         {
@@ -142,7 +142,7 @@ public class MarketData : ScriptableObject
 
         int countCalc = Random.Range(baseCount, Mathf.RoundToInt((baseCount) + (3 * repModifier)));
         int count = 0;
-        int halfCount = Mathf.RoundToInt(merchant.vals.buyOffers.Count * 0.5f);
+        int halfCount = Mathf.RoundToInt(dealingCollectibles.Count * 0.5f);
 
         if (countCalc > halfCount)
         {
@@ -181,11 +181,11 @@ public class MarketData : ScriptableObject
         int price = 10;
         if(c is ItemData)
         {
-            price += 500;
+            price += 100;
         }
         else if (c is HatData)
         {
-            price += 100;
+            price += 50;
         }
         float preRandomMult = Random.Range(0.8f, 1.5f);
         price = Mathf.RoundToInt(price * preRandomMult);

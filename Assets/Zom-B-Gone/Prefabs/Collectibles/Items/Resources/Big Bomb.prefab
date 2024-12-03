@@ -56,11 +56,12 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 4ecdfb1db64201c4ebde9e730b4d2593, type: 2}
   pivotPoint: {fileID: 0}
   itemRenderer: {fileID: 0}
+  childrenRenderers: []
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
   groundedLinearDrag: 3
-  holdOffset: {x: 0.5, y: 0.5}
+  holdOffset: {x: 0.5, y: 0.35}
   spinThrow: 1
   aimAtMouse: 1
   gripRotation: 130
@@ -73,7 +74,7 @@ MonoBehaviour:
   quantity: 4
   weaponData: {fileID: 0}
   throwingWeaponData: {fileID: 0}
-  fuseTime: 3.5
+  fuseTime: 2.3
   explosionRadius: 8
   explosionForce: 900
   hasLitSprite: 1
@@ -121,7 +122,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -25
+  m_SortingLayer: -26
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae24f88d4a742b44aa41cadefb6ca58c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
