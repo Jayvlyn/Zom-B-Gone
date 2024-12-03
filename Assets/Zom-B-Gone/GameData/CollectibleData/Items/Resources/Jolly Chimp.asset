@@ -23,5 +23,7 @@ MonoBehaviour:
   throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 80
+  toolSound: {fileID: 8300000, guid: 907468ac4bb67cf48afabfdabdababf3, type: 3}
+  playToolSoundOnUse: 0
   activateDelay: 3
   timeActivated: 10

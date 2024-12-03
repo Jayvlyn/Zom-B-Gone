@@ -18,7 +18,7 @@ MonoBehaviour:
   rarity: {fileID: 11400000, guid: af45342d0d2536849b29082e696cfcff, type: 2}
   icon: {fileID: 21300000, guid: 1fdd4939b5ff9284fa8ff411f05020b0, type: 3}
   maxStack: 1
-  pickupSound: {fileID: 8300000, guid: c8206db393358144bab42eebc0c6e797, type: 3}
+  pickupSound: {fileID: 8300000, guid: f2dc3af961015134086517a4eee3b70c, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 18000
   throwForceMult: 1
@@ -36,10 +36,13 @@ MonoBehaviour:
   isAutomatic: 1
   bulletPrefab: {fileID: 2198095510141801857, guid: e805f6fbdd832ba458ff22ac1a8a48ea, type: 3}
   shootSounds:
-  - {fileID: 8300000, guid: 9be2f1855b10b9b428d72dccffc0cdc0, type: 3}
-  - {fileID: 8300000, guid: bcc8f042b7a16f24eb9b219765fa2cb3, type: 3}
-  - {fileID: 8300000, guid: 893d34440253d73419d5536003c9dbbc, type: 3}
-  reloadStart: {fileID: 8300000, guid: 8cb3964e2e85418439af0d0b8337c64e, type: 3}
+  - {fileID: 8300000, guid: d12dbec7d100d6a41855ff4d6270ab7e, type: 3}
+  - {fileID: 8300000, guid: ce91fc86971ad8449826684524ce6755, type: 3}
+  - {fileID: 8300000, guid: 0222b39f895f8cb48873a906b4c9cbd3, type: 3}
+  - {fileID: 8300000, guid: 95749ee1bffc9314b8c736aa30aeb291, type: 3}
+  - {fileID: 8300000, guid: 288fcf186d6fbc44499d4adc93d14eea, type: 3}
+  reloadStart: {fileID: 8300000, guid: 0e39d1dc4287b264eb4849429b1276a2, type: 3}
   reloadNoiseRadius: 0
   suppressed: 0
+  suppressionPercentage: 0
   ssp: {fileID: 11400000, guid: f6d5146b730cea6479e090dd7be01345, type: 2}

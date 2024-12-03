@@ -52,6 +52,7 @@ public class JollyChimp : Tool
 		{
 			itemRenderer.sprite = crashSprite;
 
+			audioSource.PlayOneShot(toolData.toolSound);
 			Utils.MakeSoundWave(transform.position, itemData.noiseRadius);
 
 			yield return new WaitForSeconds(0.2f);

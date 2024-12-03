@@ -35,10 +35,13 @@ MonoBehaviour:
   isAutomatic: 1
   bulletPrefab: {fileID: 2198095510141801857, guid: 2e7a305ef587f8d47b9b1ef0dfbaf8fd, type: 3}
   shootSounds:
-  - {fileID: 8300000, guid: 3fe96f748d33f274e84e63cf77de45f2, type: 3}
-  - {fileID: 8300000, guid: 2c723f93aa873ca4d92082e649316b98, type: 3}
-  - {fileID: 8300000, guid: c67f58101aa339a4f9fe68c8bb3e38ed, type: 3}
+  - {fileID: 8300000, guid: d12dbec7d100d6a41855ff4d6270ab7e, type: 3}
+  - {fileID: 8300000, guid: ce91fc86971ad8449826684524ce6755, type: 3}
+  - {fileID: 8300000, guid: 0222b39f895f8cb48873a906b4c9cbd3, type: 3}
+  - {fileID: 8300000, guid: 95749ee1bffc9314b8c736aa30aeb291, type: 3}
+  - {fileID: 8300000, guid: 288fcf186d6fbc44499d4adc93d14eea, type: 3}
   reloadStart: {fileID: 8300000, guid: 0fdd99ef88e810d4785e0f330b7b1828, type: 3}
   reloadNoiseRadius: 0
   suppressed: 0
+  suppressionPercentage: 0
   ssp: {fileID: 11400000, guid: f6d5146b730cea6479e090dd7be01345, type: 2}

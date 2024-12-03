@@ -8,7 +8,10 @@ public class Tool : Item
 
 	public override void Use()
 	{
-		
+		if(toolData.playToolSoundOnUse && toolData.toolSound != null)
+		{
+			audioSource.PlayOneShot(toolData.toolSound);
+		}
 	}
 
 	protected void Start()
