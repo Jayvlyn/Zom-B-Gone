@@ -1,6 +1,7 @@
 using CodeMonkey;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.PerformanceData;
 using System.Drawing.Text;
 using System.Security.AccessControl;
 using Unity.VisualScripting;
@@ -65,7 +66,18 @@ public class MarketData : ScriptableObject
 		if (repModifier <= 0) repModifier = 1;
 		else repModifier = Mathf.CeilToInt(Mathf.Sqrt(repModifier));
 
-		int count = Random.Range(baseCount, Mathf.RoundToInt((baseCount) + (2 * repModifier)));
+        int countCalc = Random.Range(baseCount, Mathf.RoundToInt((baseCount) + (2 * repModifier)));
+        int count = 0;
+        int halfCount = Mathf.RoundToInt(merchant.vals.inventory.Count * 0.5f);
+
+        if (countCalc > halfCount)
+        {
+            count = halfCount;
+        }
+        else
+        {
+            count = countCalc;
+        }
 
 		for (int i = 0; i < count; i++)
         {
@@ -127,7 +139,20 @@ public class MarketData : ScriptableObject
         if (repModifier <= 0) repModifier = 1;
         else repModifier = Mathf.CeilToInt(Mathf.Sqrt(repModifier));
 
-        int count = Random.Range(baseCount, Mathf.RoundToInt((baseCount) + (4*repModifier)));
+
+        int countCalc = Random.Range(baseCount, Mathf.RoundToInt((baseCount) + (3 * repModifier)));
+        int count = 0;
+        int halfCount = Mathf.RoundToInt(merchant.vals.buyOffers.Count * 0.5f);
+
+        if (countCalc > halfCount)
+        {
+            count = halfCount;
+        }
+        else
+        {
+            count = countCalc;
+        }
+
 
         for (int i = 0; i < count; i++)
         {
