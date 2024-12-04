@@ -31,10 +31,10 @@ public class MusicManager : MonoBehaviour
 
     //}
 
-    private void Update()
-    {
-		Debug.Log(melody1Source.volume);
-    }
+  //  private void Update()
+  //  {
+		//Debug.Log(melody1Source.volume);
+  //  }
 
     public int currentIntensity = -1;
 	private int aggroEnemies = 0;
