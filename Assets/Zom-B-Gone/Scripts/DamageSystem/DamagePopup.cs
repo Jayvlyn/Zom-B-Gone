@@ -212,7 +212,16 @@ public class DamagePopup : MonoBehaviour
     private void Disappearing()
     {
         textColor.a -= disappearSpeed * Time.deltaTime;
-        transform.localScale -= Vector3.one * decreaseScaleAmount * Time.deltaTime;
+        if(transform.localScale.x > 0)
+        {
+            transform.localScale -= Vector3.one * decreaseScaleAmount * Time.deltaTime;
+            if(transform.localScale.x < 0)
+            {
+                transform.localScale = Vector3.zero;
+            }
+        }
+
+
         transform.Rotate(new Vector3(0, 0, 1), disappearRotateAmount * Time.deltaTime);
         textMesh.color = textColor;
         if (textColor.a < 0)
