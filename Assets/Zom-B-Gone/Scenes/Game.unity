@@ -337,6 +337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water Pipe
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 3ec8a4fa9a78ea9438a8a15fb4b2fdea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 3ec8a4fa9a78ea9438a8a15fb4b2fdea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.178849
@@ -803,6 +807,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sledge Hammer
       objectReference: {fileID: 0}
+    - target: {fileID: 7821799925880587964, guid: 1ac7c4982a21146418f721eb5aa8a495, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -823,6 +831,10 @@ PrefabInstance:
     - target: {fileID: 3701516494607976735, guid: d9a385f568c5ff4488786e07be9db9ec, type: 3}
       propertyPath: m_Name
       value: Adrenaline Shot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701516494607976735, guid: d9a385f568c5ff4488786e07be9db9ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6152428090486580093, guid: d9a385f568c5ff4488786e07be9db9ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -880,6 +892,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: 0987151b78386b043881b4a6c55fe817, type: 3}
       propertyPath: m_Name
       value: Purple Beanie
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: 0987151b78386b043881b4a6c55fe817, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 0987151b78386b043881b4a6c55fe817, type: 3}
       propertyPath: m_LocalPosition.x
@@ -977,6 +993,10 @@ PrefabInstance:
     - target: {fileID: 8840871773145084805, guid: dd5ff99905fd0364b8fd451b6c373a73, type: 3}
       propertyPath: m_Name
       value: Minigun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: dd5ff99905fd0364b8fd451b6c373a73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1103,6 +1123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Racing Helmet
       objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: b0c36b408d603e245940b93bb30ccb15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: b0c36b408d603e245940b93bb30ccb15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.7596853
@@ -1159,6 +1183,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: dbbf9228b1d0595409c061179c24698c, type: 3}
       propertyPath: m_Name
       value: Shovel
+      objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: dbbf9228b1d0595409c061179c24698c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: dbbf9228b1d0595409c061179c24698c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1257,6 +1285,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zaptor
       objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: cd985ef7f4e76ac44a96106dc1ffb36e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1313,6 +1345,10 @@ PrefabInstance:
     - target: {fileID: 8840871773145084805, guid: f5da64e0e15820244ab122fda98dc5ce, type: 3}
       propertyPath: m_Name
       value: Suppressed Sniper
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: f5da64e0e15820244ab122fda98dc5ce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2478,6 +2514,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: The Bachete
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 111cf8a05de63074e9e188f91d191d73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 111cf8a05de63074e9e188f91d191d73, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.76
@@ -3292,6 +3332,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skull
       objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: 920fe5ca77f7e454fbf07df48603e015, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 920fe5ca77f7e454fbf07df48603e015, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.2877183
@@ -3490,6 +3534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sawed-Off Shotgun
       objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: c7e1bd88bed402c458200ad01397547a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3604,6 +3652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shovel Launcher
       objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: 0d8a6eb31940e8440b82a9909592c853, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3660,6 +3712,10 @@ PrefabInstance:
     - target: {fileID: 8840871773145084805, guid: da44acbcfc5ac76488b489502ece40bd, type: 3}
       propertyPath: m_Name
       value: Saw Launcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: da44acbcfc5ac76488b489502ece40bd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3718,6 +3774,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sniper
       objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: dc541321da5701246b9ee4c9965a9cb2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3774,6 +3834,10 @@ PrefabInstance:
     - target: {fileID: 8840871773145084805, guid: 3cb51c71383970642a1ca809dcbe294f, type: 3}
       propertyPath: m_Name
       value: Double Barrel Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: 3cb51c71383970642a1ca809dcbe294f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3832,6 +3896,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat Suppressed Assault Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: 990678b3d43a6c646a28fb3dd2617f85, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3848,6 +3916,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: 158911f32e5c6764d86385c989294902, type: 3}
       propertyPath: m_Name
       value: Mining Helmet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: 158911f32e5c6764d86385c989294902, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 158911f32e5c6764d86385c989294902, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3945,6 +4017,10 @@ PrefabInstance:
     - target: {fileID: 8840871773145084805, guid: 0cb3aacebe1410340b33ce8198068068, type: 3}
       propertyPath: m_Name
       value: Assault Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: 0cb3aacebe1410340b33ce8198068068, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4258,6 +4334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat Suppressed Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 7014221912730914281, guid: 7981af43189f8d64b9fe588b1ad06020, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4545,6 +4625,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Suppressed Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 7014221912730914281, guid: 507064953ad22d849baa431f9d76093c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4581,6 +4665,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: b1a0ca24720b02b46a77d7c34cdce082, type: 3}
       propertyPath: m_Name
       value: Taser
+      objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: b1a0ca24720b02b46a77d7c34cdce082, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: b1a0ca24720b02b46a77d7c34cdce082, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4638,6 +4726,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: 8c93ab9c626ac4d439323004e9928be2, type: 3}
       propertyPath: m_Name
       value: The Bachete Prime
+      objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 8c93ab9c626ac4d439323004e9928be2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 8c93ab9c626ac4d439323004e9928be2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4768,6 +4860,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 7014221912730914281, guid: 9d121cb8664c3dd4badd2ee00ad46488, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4799,6 +4895,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: 6b7ed10f4069bee4a9ba011faa87a81f, type: 3}
       propertyPath: m_Name
       value: Big Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 6b7ed10f4069bee4a9ba011faa87a81f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 6b7ed10f4069bee4a9ba011faa87a81f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4856,6 +4956,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: c2a632a418ead904c850474b174d0a2b, type: 3}
       propertyPath: m_Name
       value: Batting Helmet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: c2a632a418ead904c850474b174d0a2b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: c2a632a418ead904c850474b174d0a2b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4975,6 +5079,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jolly Chimp
       objectReference: {fileID: 0}
+    - target: {fileID: 3701516494607976735, guid: e4c17eb632b585046a40fce2e9abab97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6152428090486580093, guid: e4c17eb632b585046a40fce2e9abab97, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5525069
@@ -5031,6 +5139,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: 2d01757430d6e124eacd4a48dc1b698b, type: 3}
       propertyPath: m_Name
       value: Blue Beanie
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: 2d01757430d6e124eacd4a48dc1b698b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 2d01757430d6e124eacd4a48dc1b698b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5129,6 +5241,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Bomb
       objectReference: {fileID: 0}
+    - target: {fileID: 3148136501575650614, guid: 8f8722d4ed843fe4cac2bb591c3c60e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5145,6 +5261,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: 5d18d03c9060fee428303767c6a54f64, type: 3}
       propertyPath: m_Name
       value: Bat
+      objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 5d18d03c9060fee428303767c6a54f64, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 5d18d03c9060fee428303767c6a54f64, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5236,6 +5356,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: f18b418390e28fa4487d205850b65d4e, type: 3}
       propertyPath: m_Name
       value: Handsaw
+      objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: f18b418390e28fa4487d205850b65d4e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: f18b418390e28fa4487d205850b65d4e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5364,6 +5488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aluminum Sawbat
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 069ddd06b494aac4f903b2220e8fe979, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 069ddd06b494aac4f903b2220e8fe979, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.5939775
@@ -5420,6 +5548,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: 5e73c622633e684408003fd3496d708f, type: 3}
       propertyPath: m_Name
       value: Zombie Mask
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: 5e73c622633e684408003fd3496d708f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 5e73c622633e684408003fd3496d708f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5543,6 +5675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bandages
       objectReference: {fileID: 0}
+    - target: {fileID: 3701516494607976735, guid: 9b0cb74a68e448e45a5c953b65c5a83d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6152428090486580093, guid: 9b0cb74a68e448e45a5c953b65c5a83d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.7742809
@@ -5599,6 +5735,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: 7b3777a2fc590b14097f1ff0c92cd775, type: 3}
       propertyPath: m_Name
       value: Hermes Helmet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: 7b3777a2fc590b14097f1ff0c92cd775, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 7b3777a2fc590b14097f1ff0c92cd775, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5657,6 +5797,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Longsword
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 829148c3dda0220459920942c9c8bfea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.3827643
@@ -5713,6 +5857,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: 7c31a9e63aa48b4449b2e1f09a99b12e, type: 3}
       propertyPath: m_Name
       value: Stop Sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 7c31a9e63aa48b4449b2e1f09a99b12e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 7c31a9e63aa48b4449b2e1f09a99b12e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5810,6 +5958,10 @@ PrefabInstance:
     - target: {fileID: 3148136501575650614, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
       propertyPath: m_Name
       value: Javelin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148136501575650614, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5652609522370649260, guid: 80b1f8082dea911419d6b5f5d8ba95f6, type: 3}
       propertyPath: quantity
@@ -6303,6 +6455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zom-B-Gone
       objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: 0894464d0134f404a985b7db3e0298be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6359,6 +6515,10 @@ PrefabInstance:
     - target: {fileID: 8840871773145084805, guid: 711ac9015a2764c47a073a5fc17c0e6d, type: 3}
       propertyPath: m_Name
       value: Bat Suppressed Sniper
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: 711ac9015a2764c47a073a5fc17c0e6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6417,6 +6577,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket Launcher
       objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: 77459e63ee5882740b9e2047dafb914b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6433,6 +6597,10 @@ PrefabInstance:
     - target: {fileID: 2103091485974351441, guid: d4ebe280efea1514394d7bd5c718e9de, type: 3}
       propertyPath: m_Name
       value: Chainsaw
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103091485974351441, guid: d4ebe280efea1514394d7bd5c718e9de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7544031114392610082, guid: d4ebe280efea1514394d7bd5c718e9de, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6530,6 +6698,10 @@ PrefabInstance:
     - target: {fileID: 8840871773145084805, guid: eec19fed7c1d7d64c9595e3b6da19056, type: 3}
       propertyPath: m_Name
       value: Suppressed Assault Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: eec19fed7c1d7d64c9595e3b6da19056, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6711,6 +6883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armet
       objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: 7c16e35d970b981418f5b15bc5e7e602, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 7c16e35d970b981418f5b15bc5e7e602, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.9854944
@@ -6768,6 +6944,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sawbat
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 6746c1c6626b5194f813e3285e73d09d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 6746c1c6626b5194f813e3285e73d09d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.079768
@@ -6824,6 +7004,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: f7be2d677df87b242aad288bd9f6454c, type: 3}
       propertyPath: m_Name
       value: Baseball Cap
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: f7be2d677df87b242aad288bd9f6454c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: f7be2d677df87b242aad288bd9f6454c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6892,6 +7076,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stopaxe
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: e495c466eee366d49b1db89728f77463, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: e495c466eee366d49b1db89728f77463, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.6711655
@@ -6948,6 +7136,10 @@ PrefabInstance:
     - target: {fileID: 3701516494607976735, guid: 7d508097178378847add22c8b1b02274, type: 3}
       propertyPath: m_Name
       value: Flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701516494607976735, guid: 7d508097178378847add22c8b1b02274, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6152428090486580093, guid: 7d508097178378847add22c8b1b02274, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7015,6 +7207,10 @@ PrefabInstance:
     - target: {fileID: 3701516494607976735, guid: 0de6df03492cebb43bd50a4aeefb4f61, type: 3}
       propertyPath: m_Name
       value: Medkit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701516494607976735, guid: 0de6df03492cebb43bd50a4aeefb4f61, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6152428090486580093, guid: 0de6df03492cebb43bd50a4aeefb4f61, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7802,6 +7998,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saw Blade
       objectReference: {fileID: 0}
+    - target: {fileID: 3148136501575650614, guid: d2cf23637ba6f51469dd0a83fb25b2cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5652609522370649260, guid: d2cf23637ba6f51469dd0a83fb25b2cd, type: 3}
       propertyPath: quantity
       value: 4
@@ -7960,6 +8160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: The Sentinel
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: cc1f708c9ae80654e8be10c2136ce01b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: cc1f708c9ae80654e8be10c2136ce01b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.1569557
@@ -8057,6 +8261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mini Bomb
       objectReference: {fileID: 0}
+    - target: {fileID: 3148136501575650614, guid: f8a05cc82fa151f43b5b24e7b61c8ec8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8073,6 +8281,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: b9223f689bffd9349b115b413d777c61, type: 3}
       propertyPath: m_Name
       value: Red Beanie
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: b9223f689bffd9349b115b413d777c61, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: b9223f689bffd9349b115b413d777c61, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8277,6 +8489,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crossbow
       objectReference: {fileID: 0}
+    - target: {fileID: 8840871773145084805, guid: 0122a4bedc33e7748a2adfa4ff6c9d58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8469,6 +8685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Super Stopaxe
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: ee6b438e3fde6884cba0eb19c9a127d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: ee6b438e3fde6884cba0eb19c9a127d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.079768
@@ -8601,6 +8821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Baseball Cap
       objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: 4157afe9f5e63354ea65bfa629f34faa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: 4157afe9f5e63354ea65bfa629f34faa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.8827229
@@ -8657,6 +8881,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: fee07d93174f8b64d9577200f83b0349, type: 3}
       propertyPath: m_Name
       value: Propeller Hat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: fee07d93174f8b64d9577200f83b0349, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: fee07d93174f8b64d9577200f83b0349, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8715,6 +8943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Machete
       objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: 66f9a3eb00714ef47a62a9306415064e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: 66f9a3eb00714ef47a62a9306415064e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.421744
@@ -8772,6 +9004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Katana
       objectReference: {fileID: 0}
+    - target: {fileID: 2103091485974351441, guid: 98eba73095479304fa0244b6f760bc81, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7544031114392610082, guid: 98eba73095479304fa0244b6f760bc81, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.0342627
@@ -8828,6 +9064,10 @@ PrefabInstance:
     - target: {fileID: 490104715815667538, guid: a3e3be17d099f5a45841ff153953eed7, type: 3}
       propertyPath: m_Name
       value: Axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 490104715815667538, guid: a3e3be17d099f5a45841ff153953eed7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774193381391502917, guid: a3e3be17d099f5a45841ff153953eed7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8918,6 +9158,10 @@ PrefabInstance:
     - target: {fileID: 2492671934262699846, guid: d9bd0248986b69c4fb80ee35294f2b2e, type: 3}
       propertyPath: m_Name
       value: Orange Baseball Cap
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492671934262699846, guid: d9bd0248986b69c4fb80ee35294f2b2e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3839145645533338256, guid: d9bd0248986b69c4fb80ee35294f2b2e, type: 3}
       propertyPath: m_LocalPosition.x
