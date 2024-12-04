@@ -3,8 +3,9 @@ using UnityEngine;
 public class Sticky : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public Collider2D fullCollider;
 
-    private bool stick = true;
+    [HideInInspector] public bool stick = true;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -26,6 +27,7 @@ public class Sticky : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = 0;
             rb.bodyType = RigidbodyType2D.Kinematic;
+            fullCollider.isTrigger = true;   
         }
 
         stick = false;

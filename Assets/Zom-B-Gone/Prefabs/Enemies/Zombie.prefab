@@ -1211,7 +1211,7 @@ MonoBehaviour:
     m_Bits: 1572992
   MovementBlockersLm:
     serializedVersion: 2
-    m_Bits: 32896
+    m_Bits: 32960
   FellowEnemyLm:
     serializedVersion: 2
     m_Bits: 8389632
@@ -1344,7 +1344,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

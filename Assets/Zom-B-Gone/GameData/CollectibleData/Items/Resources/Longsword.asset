@@ -25,7 +25,7 @@ MonoBehaviour:
   noiseRadius: 0
   damage: 42
   attackSpeed: 1.1
-  knockbackPower: 300
+  knockbackPower: 400
   dismemberChance: 32
   staminaCost: 1
   prepSpeed: 0.6
@@ -205,3 +205,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c92de5028a3f74a4bb339fa25bc37b2f, type: 3}
   - {fileID: 8300000, guid: 9ce063efb30e9a74a9a9bf9084388fdb, type: 3}
   - {fileID: 8300000, guid: fead9bc58ddd3cd4cb3524e1638594b2, type: 3}
+  effect: {fileID: 0}

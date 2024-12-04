@@ -20,11 +20,12 @@ MonoBehaviour:
   pickupSound: {fileID: 8300000, guid: d2e8cbb167b35a04d8b055ac966ad86c, type: 3}
   dropSound: {fileID: 8300000, guid: 1fa0b6ac81aca6e4286662e588735cc9, type: 3}
   weight: 1
+  throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0
   damage: 88
   attackSpeed: 1.8
-  knockbackPower: 10
+  knockbackPower: 200
   dismemberChance: 95
   staminaCost: 1.5
   prepSpeed: 0.6
@@ -186,3 +187,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c92de5028a3f74a4bb339fa25bc37b2f, type: 3}
   - {fileID: 8300000, guid: 9ce063efb30e9a74a9a9bf9084388fdb, type: 3}
   - {fileID: 8300000, guid: fead9bc58ddd3cd4cb3524e1638594b2, type: 3}
+  effect: {fileID: 0}

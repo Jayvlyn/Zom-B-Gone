@@ -25,7 +25,7 @@ MonoBehaviour:
   noiseRadius: 70
   damage: 11
   attackSpeed: 0.1
-  knockbackPower: 700
+  knockbackPower: 400
   dismemberChance: 42
   range: 0.3
   maxAmmo: 2
@@ -41,4 +41,5 @@ MonoBehaviour:
   reloadStart: {fileID: 8300000, guid: 0fdd99ef88e810d4785e0f330b7b1828, type: 3}
   reloadNoiseRadius: 5
   suppressed: 0
+  suppressionPercentage: 0
   ssp: {fileID: 11400000, guid: 29b77d0764bf99e43bc502fa91c08711, type: 2}

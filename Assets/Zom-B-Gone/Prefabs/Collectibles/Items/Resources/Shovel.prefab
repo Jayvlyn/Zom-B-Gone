@@ -59,6 +59,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: b85baa7e1f85c714290c0f837dccec69, type: 2}
   pivotPoint: {fileID: 7922860649099438781}
   itemRenderer: {fileID: 0}
+  childrenRenderers: []
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -205,7 +206,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -25
+  m_SortingLayer: -26
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b97957b39bf376440b6ad30b9f6ad902, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

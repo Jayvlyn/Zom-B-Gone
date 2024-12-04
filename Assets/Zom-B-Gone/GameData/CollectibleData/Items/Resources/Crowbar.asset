@@ -23,9 +23,9 @@ MonoBehaviour:
   throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0
-  damage: 10
+  damage: 16
   attackSpeed: 0.6
-  knockbackPower: 10
+  knockbackPower: 450
   dismemberChance: 0
   staminaCost: 1
   prepSpeed: 0.2
@@ -187,3 +187,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7998ae8ee1cadfa40a2694c75dec41df, type: 3}
   - {fileID: 8300000, guid: f8690dcdd9632c4459a587498741103c, type: 3}
   - {fileID: 8300000, guid: 8a82ded4f7c8fe04ca056cd6b96afec2, type: 3}
+  effect: {fileID: 0}

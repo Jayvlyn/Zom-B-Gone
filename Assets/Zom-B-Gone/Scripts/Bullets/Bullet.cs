@@ -41,9 +41,9 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        if(rigidBody.linearVelocity.magnitude > 3)
+        if(rigidBody.linearVelocity.magnitude > 1)
         {
-			if (collision.CompareTag("Enemy"))
+		    if (collision.CompareTag("Enemy"))
             {
                 bulletData.enterEvent.Raise(transform);
                 if (currentPiercingPower > 0) bulletData.exitEvent.Raise(transform);
@@ -56,7 +56,7 @@ public class Bullet : MonoBehaviour
                     if(bulletData.effectData)
                     {
                         Utils.ApplyEffect(bulletData.effectData, enemy);
-					}
+				    }
                 }
                 
             }
@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviour
                 currentPiercingPower--;
                 DealDamage(targetHealth);
 				
-			}
+		    }
             else // hit surface
             {
                 if (bulletData.wallPiercing) currentPiercingPower--;
@@ -77,6 +77,7 @@ public class Bullet : MonoBehaviour
 
 
             if (currentPiercingPower < 0 && !bulletData.residual) Destroy(gameObject);
+        
         }
     }
 

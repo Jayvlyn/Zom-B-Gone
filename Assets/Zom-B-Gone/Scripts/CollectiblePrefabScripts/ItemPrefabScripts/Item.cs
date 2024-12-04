@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -18,6 +19,7 @@ public abstract class Item : Collectible
     [SerializeField] protected Transform pivotPoint;
     [HideInInspector] public SpriteRenderer itemRenderer;
     public SpriteRenderer[] childrenRenderers;
+    public Sticky optionalSticky;
     // Drag
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneAngularDrag = 0.4f;
     [SerializeField, Range(0.0f, 10.0f)] protected float airborneLinearDrag = 0.4f;
@@ -152,6 +154,7 @@ public abstract class Item : Collectible
                 break;
 
             case ItemState.HELD:
+                if (optionalSticky) optionalSticky.stick = true;
                 gameObject.layer = LayerMask.NameToLayer("AirborneItem");
 
                 ChangeSorting("ActiveItem");

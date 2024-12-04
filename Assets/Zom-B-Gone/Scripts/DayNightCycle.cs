@@ -35,6 +35,11 @@ public class DayNightCycle : MonoBehaviour
 		currentTime += Time.deltaTime;
 		if (CurrentHour > TotalHours) currentTime = 0;
 
+		if (Input.GetKeyDown(KeyCode.L))
+		{
+			currentTime = 0;
+		}
+
 		UpdateLightIntensity();
 	}
 

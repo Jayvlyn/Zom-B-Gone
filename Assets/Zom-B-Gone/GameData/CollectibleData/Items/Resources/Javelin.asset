@@ -23,7 +23,7 @@ MonoBehaviour:
   throwForceMult: 1
   throwSound: {fileID: 8300000, guid: 51e191e5a2c29074292bd00e0fc3d89d, type: 3}
   noiseRadius: 0
-  damage: 10
+  damage: 50
   attackSpeed: 0.15
-  knockbackPower: 500
+  knockbackPower: 400
   dismemberChance: 0

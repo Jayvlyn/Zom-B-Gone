@@ -34,6 +34,8 @@ MonoBehaviour:
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: 86eab9462e44c534b8914bd9a3662898, type: 2}
       requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: 559dcc5cd56bd854e9c1b76e18de813c, type: 2}
+      requiredAmount: 1
   - resultCollectible: {fileID: 11400000, guid: e6e954849ed41f94b8c8a0cb5e1004cb, type: 2}
     resultAmount: 1
     recipeItems:
@@ -54,6 +56,8 @@ MonoBehaviour:
     - collectible: {fileID: 11400000, guid: 2a4f6a5ed61757f418bd95998534a099, type: 2}
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: 1ecb4ee8e48767f499c598b1530d52b0, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: 5b0e176e8f61588469136e675aca5f24, type: 2}
       requiredAmount: 1
   - resultCollectible: {fileID: 11400000, guid: 095ded2a3efe11b4a8d2a81224ed4321, type: 2}
     resultAmount: 1
@@ -96,6 +100,8 @@ MonoBehaviour:
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: 1561274a96f853e439bc93867d6a9361, type: 2}
       requiredAmount: 0
+    - collectible: {fileID: 11400000, guid: 559dcc5cd56bd854e9c1b76e18de813c, type: 2}
+      requiredAmount: 1
   - resultCollectible: {fileID: 11400000, guid: eb63e57a614ad8a499e2fd82e9f02ee0, type: 2}
     resultAmount: 1
     recipeItems:
@@ -103,12 +109,16 @@ MonoBehaviour:
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: b8b25198ce861514a947be557a3c74a4, type: 2}
       requiredAmount: 0
+    - collectible: {fileID: 11400000, guid: 559dcc5cd56bd854e9c1b76e18de813c, type: 2}
+      requiredAmount: 1
   - resultCollectible: {fileID: 11400000, guid: eb63e57a614ad8a499e2fd82e9f02ee0, type: 2}
     resultAmount: 1
     recipeItems:
     - collectible: {fileID: 11400000, guid: 72cebd3efa1571647abd015753bb5e49, type: 2}
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: 6ddf5a9b7f0f1564287e32f82510541d, type: 2}
+      requiredAmount: 0
+    - collectible: {fileID: 11400000, guid: 559dcc5cd56bd854e9c1b76e18de813c, type: 2}
       requiredAmount: 0
   - resultCollectible: {fileID: 11400000, guid: eb63e57a614ad8a499e2fd82e9f02ee0, type: 2}
     resultAmount: 1
@@ -117,6 +127,8 @@ MonoBehaviour:
       requiredAmount: 1
     - collectible: {fileID: 11400000, guid: 33dbac28ed08d424d9ef06917a075fb0, type: 2}
       requiredAmount: 0
+    - collectible: {fileID: 11400000, guid: 559dcc5cd56bd854e9c1b76e18de813c, type: 2}
+      requiredAmount: 1
   - resultCollectible: {fileID: 11400000, guid: 4523a535d38f8534a927f25abb402f97, type: 2}
     resultAmount: 1
     recipeItems:
@@ -293,4 +305,13 @@ MonoBehaviour:
     - collectible: {fileID: 11400000, guid: b8b25198ce861514a947be557a3c74a4, type: 2}
       requiredAmount: 0
     - collectible: {fileID: 11400000, guid: 3fa6666eb782f1948bb4e0c759ca8df1, type: 2}
+      requiredAmount: 1
+  - resultCollectible: {fileID: 11400000, guid: eb63e57a614ad8a499e2fd82e9f02ee0, type: 2}
+    resultAmount: 1
+    recipeItems:
+    - collectible: {fileID: 11400000, guid: b7ac72a7a24abb94bb3de05fcc67e4fa, type: 2}
+      requiredAmount: 0
+    - collectible: {fileID: 11400000, guid: 72cebd3efa1571647abd015753bb5e49, type: 2}
+      requiredAmount: 1
+    - collectible: {fileID: 11400000, guid: 559dcc5cd56bd854e9c1b76e18de813c, type: 2}
       requiredAmount: 1

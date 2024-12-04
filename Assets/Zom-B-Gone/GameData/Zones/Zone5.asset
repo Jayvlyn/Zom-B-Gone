@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootTable: {fileID: 11400000, guid: e2a50d7cadb10d84db7af10692f3c0ec, type: 2}
   track: {fileID: 11400000, guid: 887b7af938302b64780dcf691fc665e6, type: 2}
-  globalLightColor: {r: 1, g: 0.38039216, b: 0.36862746, a: 1}
+  globalLightColor: {r: 1, g: 0.41997278, b: 0.34905648, a: 1}
+  middayIntensity: 1
+  midnightIntensity: 0.2
   spawnRate:
     serializedVersion: 2
     m_Curve:

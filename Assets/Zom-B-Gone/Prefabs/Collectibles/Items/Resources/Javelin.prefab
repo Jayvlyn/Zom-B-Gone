@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2656671740393021855}
   - component: {fileID: 1481152091677389883}
   - component: {fileID: 6534771815260290576}
+  - component: {fileID: -6564366064111418373}
   m_Layer: 12
   m_Name: Javelin
   m_TagString: Untagged
@@ -88,6 +89,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: f498e0bf147fc4d46b9d95f5260d25d4, type: 2}
   pivotPoint: {fileID: 5297676533218302105}
   itemRenderer: {fileID: 0}
+  childrenRenderers: []
+  optionalSticky: {fileID: -6564366064111418373}
   airborneAngularDrag: 0.4
   airborneLinearDrag: 0.4
   groundedAngularDrag: 3
@@ -193,7 +196,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -466657575
-  m_SortingLayer: -25
+  m_SortingLayer: -26
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2831bba074939c44f9e63c0d67a4bf0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -330,3 +333,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6564366064111418373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148136501575650614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0055472c00c70643afa55b1d85d1210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1481152091677389883}
+  fullCollider: {fileID: 1003892739874909723}
+  stick: 1
