@@ -468,8 +468,12 @@ public abstract class Enemy : MonoBehaviour
 			if (isInFOV(neighbor.transform.position))
 			{
 				Rigidbody2D neighborRb = neighbor.GetComponent<Rigidbody2D>();
-				alignVector += new Vector2(neighborRb.linearVelocity.x, neighborRb.linearVelocity.y);
-			}
+				alignVector += (Vector2)neighborRb.transform.up; 
+                if (neighbor.CompareTag("Player"))
+                {
+                    alignVector += (Vector2)neighborRb.transform.up * alignmentNeighbors.Count * 1.5f;
+                }
+            }
 		}
 
 		return alignVector.normalized;
@@ -927,7 +931,7 @@ public abstract class Enemy : MonoBehaviour
 		}
 		else if(collision.gameObject.CompareTag("Player") && playerTarget == null)
 		{
-			if(PlayerController.currentState != PlayerController.PlayerState.SNEAKING)
+			if(PlayerController.currentState != PlayerController.PlayerState.SNEAKING || !PlayerController.instance.head.wornHat.hatData.camo)
 			{
 				playerTarget = collision.gameObject;
 				ChangeState(State.AGGRO);

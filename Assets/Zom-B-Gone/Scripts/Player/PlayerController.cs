@@ -83,7 +83,14 @@ public class PlayerController : MonoBehaviour
                 playerCollider.isTrigger = false;
                 if (head.wornHat && head.wornHat.activateOnWear) head.wornHat.activateOnWear.SetActive(true);
                 rb.bodyType = RigidbodyType2D.Dynamic;
-                gameObject.layer = LayerMask.NameToLayer("Player");
+                if(head.wornHat && head.wornHat.hatData.camo)
+                {
+                    gameObject.layer = LayerMask.NameToLayer("DisguisedPlayer");
+                }
+                else
+                {
+                    gameObject.layer = LayerMask.NameToLayer("Player");
+                }
                 break;
         }
 
