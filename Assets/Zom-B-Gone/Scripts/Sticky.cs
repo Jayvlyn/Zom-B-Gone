@@ -10,12 +10,19 @@ public class Sticky : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(stick) Stick(collision.transform);
+        if(stick) 
+        { 
+            Stick(collision.transform);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(stick) Stick(collision.transform);
+        if (stick)
+        {
+            Stick(collision.transform);
+        }
     }
 
     private void Stick(Transform parent)
