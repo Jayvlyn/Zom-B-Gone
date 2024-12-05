@@ -462,6 +462,7 @@ public abstract class Enemy : MonoBehaviour
 	Vector2 Alignment()
 	{
 		Vector2 alignVector = new Vector2();
+		bool playerNeighbor = false;
 		if (alignmentNeighbors.Count == 0) return alignVector;
 		foreach (var neighbor in alignmentNeighbors)
 		{
@@ -472,11 +473,13 @@ public abstract class Enemy : MonoBehaviour
                 if (neighbor.CompareTag("Player"))
                 {
                     alignVector += (Vector2)neighborRb.transform.up * alignmentNeighbors.Count * 1.5f;
+					playerNeighbor = true;
                 }
             }
 		}
 
-		return alignVector.normalized;
+		if(playerNeighbor) return alignVector.normalized * 5;
+		else return alignVector.normalized;
 	}
 
 	List<GameObject> separationNeighbors;
@@ -931,7 +934,7 @@ public abstract class Enemy : MonoBehaviour
 		}
 		else if(collision.gameObject.CompareTag("Player") && playerTarget == null)
 		{
-			if(PlayerController.currentState != PlayerController.PlayerState.SNEAKING || !PlayerController.instance.head.wornHat.hatData.camo)
+			if(PlayerController.currentState != PlayerController.PlayerState.SNEAKING && !PlayerController.instance.head.wornHat.hatData.camo)
 			{
 				playerTarget = collision.gameObject;
 				ChangeState(State.AGGRO);
