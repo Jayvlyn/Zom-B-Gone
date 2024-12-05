@@ -687,7 +687,7 @@ public abstract class Enemy : MonoBehaviour
 		}
 
         RaycastHit2D sightHit = Physics2D.Raycast(transform.position, direction, playerDistance, SightBlockersLm);
-        if (sightHit.collider)
+        if (sightHit.collider && playerDistance > playerSpotDistance * 0.5f)
 		{
 			loseSightOfPlayer();
             return Vector2.zero;
@@ -696,22 +696,20 @@ public abstract class Enemy : MonoBehaviour
         RaycastHit2D movementHit = Physics2D.Raycast(transform.position, direction, playerDistance, MovementBlockersLm);
 		if(movementHit.collider)
 		{
-			
 			return (enemyData.blockedTargetPriority * direction + 
 					enemyData.blockedAvoidancePriority * Avoidance() + 
 					enemyData.blockedSeparationPriority * Separation()).normalized;
 		}
 		else // straight shot to player, go for them
 		{
+			return direction;
 			if(playerDistance < 1)
 			{
-				return direction;
 			}
 
-
 			return (enemyData.straightShotTargetPriority * direction +
-					enemyData.straightShotAvoidancePriority * Avoidance() +
-                    enemyData.straightShotSeparationPriority * Separation()).normalized;
+				enemyData.straightShotAvoidancePriority * Avoidance() + 
+					enemyData.straightShotSeparationPriority * Separation()).normalized;
         }
 
     }

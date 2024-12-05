@@ -1211,7 +1211,7 @@ MonoBehaviour:
     m_Bits: 1572992
   MovementBlockersLm:
     serializedVersion: 2
-    m_Bits: 32960
+    m_Bits: 32896
   FellowEnemyLm:
     serializedVersion: 2
     m_Bits: 8389632
