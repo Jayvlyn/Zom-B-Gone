@@ -27,7 +27,7 @@ public class DayNightCycle : MonoBehaviour
 
 	private void Start()
 	{
-        currentTime = 0;
+        currentTime = NoonHour * 60;
 	}
 
 	private void Update()
@@ -37,7 +37,7 @@ public class DayNightCycle : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.L))
 		{
-			currentTime = 0;
+			currentTime = NoonHour * 60;
 		}
 
 		UpdateLightIntensity();
