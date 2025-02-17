@@ -117,8 +117,12 @@ public class Interactor : MonoBehaviour
 
                 if (openedLootable)
                 {
+                    Debug.Log("Debug 1: there is opened lootable");
                     float lootableToInteractorDist = ((Vector2)transform.position - (Vector2)openedLootable.transform.position).magnitude;
-                    if (lootableToInteractorDist > _interactRange + .5f) CloseOpenedLootable();
+                    if (lootableToInteractorDist > _interactRange + .5f) {
+                        CloseOpenedLootable();
+                        Debug.Log("Debug 2: far away, Close opened lootable");
+                    }
                 }
             }
             else
@@ -265,9 +269,15 @@ public class Interactor : MonoBehaviour
 
         if(closestLootable != null)
         {
+            Debug.Log("Debug 3: Closest lootable not null");
             if (openedLootable == null || (openedLootable != closestLootable && !PlayerController.holdingSneak && !PlayerController.holdingLeft))
             {
-                if (openedLootable) CloseOpenedLootable();
+                if (openedLootable)
+                {
+                    Debug.Log("Debug 4: closing opened because opened");
+                    CloseOpenedLootable();
+
+                }
                 openedLootable = closestLootable;
 
                 if (openLootableRoutine != null) StopCoroutine(openLootableRoutine); 

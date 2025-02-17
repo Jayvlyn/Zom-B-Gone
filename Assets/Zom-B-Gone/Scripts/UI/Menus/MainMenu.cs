@@ -31,7 +31,8 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator TitleDelay()
     {
-        yield return new WaitForSeconds(0.2f);
+        //title.SetActive(false);
+        yield return new WaitForSeconds(0.8f);
         title.SetActive(true);
     }
 
