@@ -22,6 +22,9 @@ public class Interactor : MonoBehaviour
     [SerializeField] private float openContainerDistanceCheckInterval = 0.1f;
     private float distanceCheckTimer;
 
+    [SerializeField] private float swapLootableCooldown = 0.2f;
+    private bool canSwapLootable = true;
+
     [SerializeField] Material defaultSpriteMaterial;
     [SerializeField] Material outlineSpriteMaterial;
     [SerializeField] Material lootOutlineSpriteMaterial;
@@ -98,6 +101,7 @@ public class Interactor : MonoBehaviour
 
         if ((interactedContainer != null || interactedCrafting != null || openedLootable != null) && SceneManager.GetActiveScene().name != "Unit")
         {
+            // Distance Check
             if (distanceCheckTimer <= 0)
             {
                 distanceCheckTimer = openContainerDistanceCheckInterval;
@@ -269,23 +273,32 @@ public class Interactor : MonoBehaviour
 
         if(closestLootable != null)
         {
-            Debug.Log("Debug 3: Closest lootable not null");
-            if (openedLootable == null || (openedLootable != closestLootable && !PlayerController.holdingSneak && !PlayerController.holdingLeft))
+            if ((openedLootable == null || (openedLootable != closestLootable && !PlayerController.holdingSneak && !PlayerController.holdingLeft)) && canSwapLootable)
             {
                 if (openedLootable)
                 {
-                    Debug.Log("Debug 4: closing opened because opened");
                     CloseOpenedLootable();
-
                 }
                 openedLootable = closestLootable;
 
                 if (openLootableRoutine != null) StopCoroutine(openLootableRoutine); 
                 openLootableRoutine = StartCoroutine(OpenNewLootable());
+
+                if (swapCooldownRoutine != null) StopCoroutine(swapCooldownRoutine);
+                swapCooldownRoutine = StartCoroutine(SwapLootableCooldownTimer());
             }
         }
 
         return closestInteractable;
+    }
+
+    private Coroutine swapCooldownRoutine;
+    private IEnumerator SwapLootableCooldownTimer()
+    {
+        canSwapLootable = false;
+        yield return new WaitForSeconds(swapLootableCooldown);
+        canSwapLootable = true;
+        swapCooldownRoutine = null;
     }
 
     private Coroutine openLootableRoutine;

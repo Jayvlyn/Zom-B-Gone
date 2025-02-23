@@ -1,4 +1,5 @@
 using GameEvents;
+using System.Collections;
 using System.Runtime.ConstrainedExecution;
 using TMPro;
 using UnityEngine;
@@ -24,11 +25,21 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
 		rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, buttonPressedOffset);
 		AudioManager.Instance.Play(CodeMonkey.Assets.i.buttonDown);
+		if (onClickDownRoutine != null) StopCoroutine(onClickDownRoutine);
+		onClickDownRoutine = StartCoroutine(OnClickDownRoutine());
 	}
 
     public void OnPointerUp(PointerEventData eventData)
     {
-		ClickUp();
+		if(allowClickUp)
+		{
+			ClickUp();
+		}
+		else
+		{
+			if (onClickUpRoutine != null) StopCoroutine(onClickUpRoutine);
+			onClickUpRoutine = StartCoroutine(OnClickUpRoutine());
+		}
 	}
 
     public void ClickUp()
@@ -42,5 +53,31 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 		}
 		AudioManager.Instance.Play(CodeMonkey.Assets.i.buttonUp);
 	}
+
+	private bool allowClickUp = true;
+	private Coroutine onClickDownRoutine;
+	private IEnumerator OnClickDownRoutine()
+	{
+		allowClickUp = false;
+		yield return new WaitForSecondsRealtime(0.15f);
+		allowClickUp = true;
+
+		onClickDownRoutine = null;
+    }
+
+    private Coroutine onClickUpRoutine;
+    private IEnumerator OnClickUpRoutine()
+    {
+        yield return new WaitUntil(() => allowClickUp);
+		ClickUp();
+    }
+
+    private void OnDisable()
+    {
+		if (onClickUpRoutine != null)
+		{
+            AudioManager.Instance.Play(CodeMonkey.Assets.i.buttonUp);
+        }
+    }
 }
 
