@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633ab3c346ec2e4409dd381b6fa83d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectibleData: {fileID: 0}
   collectibleImage: {fileID: 6316431298187708340}
   onMouseStartHoverCollectible: {fileID: 11400000, guid: 4748cf1022d4a02459626e2debec913d, type: 2}
   onMouseEndHoverCollectible: {fileID: 11400000, guid: 8354cee0932d90c43aaeff1275d47b6e, type: 2}
@@ -1760,6 +1761,11 @@ MonoBehaviour:
   lootLocker: {fileID: 11400000, guid: 586d250204d4c45408bf05e6362d6fbf, type: 2}
   itemLocker: {fileID: 11400000, guid: d899c3825dac2214d8da6860657eba97, type: 2}
   hatLocker: {fileID: 11400000, guid: 5abd42d350350924298d165742e4ec72, type: 2}
+  hands: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  head: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
+  currentSave: {fileID: 11400000, guid: f55ec50488d6a194d8af1bb5a1a21097, type: 2}
+  sellLeftHand: {fileID: 11400000, guid: ac98054465aba4d408c0a9179dd45a7d, type: 2}
+  sellRightHand: {fileID: 11400000, guid: ff0bccc31783ba2439ea5600229b5b86, type: 2}
 --- !u!1001 &9053207527842478389
 PrefabInstance:
   m_ObjectHideFlags: 0

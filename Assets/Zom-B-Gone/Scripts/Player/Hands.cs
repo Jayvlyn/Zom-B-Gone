@@ -291,4 +291,18 @@ public class Hands : MonoBehaviour
 		}
 
 	}
+
+    public void OnSellLeft()
+    {
+		Destroy(leftObject);
+		LeftObject = null;
+		UsingLeft = false;
+	}
+
+    public void OnSellRight()
+    {
+        Destroy(rightObject);
+        RightObject = null;
+        UsingRight = false;
+    }
 }

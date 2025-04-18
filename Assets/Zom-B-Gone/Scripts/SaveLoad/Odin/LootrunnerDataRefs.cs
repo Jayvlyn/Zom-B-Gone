@@ -1,13 +1,10 @@
-using CodeMonkey;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LootrunnerDataRefs : MonoBehaviour
 {
-    public PlayerData playerData;
+	public PlayerData playerData;
 
     public CollectibleContainerData handsData;
     public CollectibleContainerData headData;

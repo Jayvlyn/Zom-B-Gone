@@ -45,6 +45,8 @@ public class MarketData : ScriptableObject
     public CollectibleContainerData lootLockerData;
     public CollectibleContainerData hatLockerData;
     public CollectibleContainerData itemLockerData;
+    public CollectibleContainerData handData;
+    public CollectibleContainerData headData;
 
     private List<CollectibleData> dealingCollectibles = new List<CollectibleData>();
 

@@ -28,6 +28,12 @@ public class MerchantBuyOptionRefs : MonoBehaviour
     public CollectibleContainerData lootLocker;
     public CollectibleContainerData itemLocker;
     public CollectibleContainerData hatLocker;
+    public CollectibleContainerData hands;
+    public CollectibleContainerData head;
+    public PlayerData currentSave;
+
+    public VoidEvent sellLeftHand;
+    public VoidEvent sellRightHand;
 
 	public void OnMinusClick()
     {
@@ -70,7 +76,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 		int unitCost = int.Parse(unitPrice.text);
 		int total = currentSelectedAmt * unitCost;
 
-        if(total > SaveManager.currentSave.playerData.gold)
+        if(total > currentSave.gold)
         {
             buyTotal.color = cannotAffordTotalPriceColor;
         }
@@ -82,7 +88,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 
 	public void UpdatePriceTotalTextColor(int total)
 	{
-		if (total > SaveManager.currentSave.playerData.gold)
+		if (total > currentSave.gold)
 		{
 			buyTotal.color = cannotAffordTotalPriceColor;
 		}
@@ -95,7 +101,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 	public void OnBuy()
     {
         int totalCost = int.Parse(buyTotal.text);
-        if(SaveManager.currentSave.playerData.gold >= totalCost)
+        if(currentSave.gold >= totalCost)
         { // CAN BUY
 			int currentSelectedAmt = int.Parse(selectedAmount.text);
 			int maxAmt = int.Parse(maxAmount.text);
@@ -118,7 +124,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
             }
 
 
-            SaveManager.currentSave.playerData.gold -= totalCost;
+            currentSave.gold -= totalCost;
             updatePlayerGold.Raise();
 
             loadedMerchant.vals.GainExp(Mathf.RoundToInt(totalCost * 1.5f));
@@ -157,34 +163,37 @@ public class MerchantBuyOptionRefs : MonoBehaviour
 
         int amountLeftToFind = currentSelectedAmt;
 
-		for (int i = 0; i < backpack.container.collectibleSlots.Length; i++) // search backpack
-		{
-			if (backpack.container.collectibleSlots[i].Collectible == hoverableCollectible.CollectibleData)
-			{
-				if (backpack.container.collectibleSlots[i].quantity > amountLeftToFind)
-				{
-					backpack.container.collectibleSlots[i].quantity -= amountLeftToFind;
-					amountLeftToFind = 0;
-					backpack.onContainerCollectibleUpdated.Raise();
-					break;
-				}
-				else if (backpack.container.collectibleSlots[i].quantity == amountLeftToFind)
-				{
-					backpack.container.collectibleSlots[i].quantity = 0;
-					amountLeftToFind = 0;
-					backpack.container.collectibleSlots[i].CollectibleName = null;
-					backpack.onContainerCollectibleUpdated.Raise();
-					break;
-				}
-				else if (backpack.container.collectibleSlots[i].quantity < amountLeftToFind)
-				{
-					amountLeftToFind -= backpack.container.collectibleSlots[i].quantity;
-					backpack.container.collectibleSlots[i].quantity = 0;
-					backpack.container.collectibleSlots[i].CollectibleName = null;
-					backpack.onContainerCollectibleUpdated.Raise();
-				}
-			}
-		}
+        if (hoverableCollectible.CollectibleData is LootData || hoverableCollectible.CollectibleData is HatData)
+        {
+            for (int i = 0; i < backpack.container.collectibleSlots.Length; i++) // search backpack
+            {
+                if (backpack.container.collectibleSlots[i].Collectible == hoverableCollectible.CollectibleData)
+                {
+                    if (backpack.container.collectibleSlots[i].quantity > amountLeftToFind)
+                    {
+                        backpack.container.collectibleSlots[i].quantity -= amountLeftToFind;
+                        amountLeftToFind = 0;
+                        backpack.onContainerCollectibleUpdated.Raise();
+                        break;
+                    }
+                    else if (backpack.container.collectibleSlots[i].quantity == amountLeftToFind)
+                    {
+                        backpack.container.collectibleSlots[i].quantity = 0;
+                        amountLeftToFind = 0;
+                        backpack.container.collectibleSlots[i].CollectibleName = null;
+                        backpack.onContainerCollectibleUpdated.Raise();
+                        break;
+                    }
+                    else if (backpack.container.collectibleSlots[i].quantity < amountLeftToFind)
+                    {
+                        amountLeftToFind -= backpack.container.collectibleSlots[i].quantity;
+                        backpack.container.collectibleSlots[i].quantity = 0;
+                        backpack.container.collectibleSlots[i].CollectibleName = null;
+                        backpack.onContainerCollectibleUpdated.Raise();
+                    }
+                }
+            }
+        }
 
         if (amountLeftToFind > 0)
         {
@@ -249,6 +258,16 @@ public class MerchantBuyOptionRefs : MonoBehaviour
                         }
                     }
                 }
+                if(amountLeftToFind > 0)
+                {
+                    if (head.container.collectibleSlots[0].Collectible == hoverableCollectible.collectibleData)
+                    {
+                        head.container.collectibleSlots[0].quantity = 0;
+                        amountLeftToFind = 0;
+                        head.container.collectibleSlots[0].CollectibleName = null;
+                        head.onContainerCollectibleUpdated.Raise();
+                    }
+                }
             }
             else if (hoverableCollectible.CollectibleData is ItemData)
             {
@@ -280,7 +299,29 @@ public class MerchantBuyOptionRefs : MonoBehaviour
                         }
                     }
                 }
-            }
+				if (amountLeftToFind > 0)
+				{
+					if (hands.container.collectibleSlots[0].Collectible == hoverableCollectible.collectibleData)
+					{
+						hands.container.collectibleSlots[0].quantity = 0;
+						amountLeftToFind = 0;
+						hands.container.collectibleSlots[0].CollectibleName = null;
+						hands.onContainerCollectibleUpdated.Raise();
+                        sellLeftHand.Raise();
+					}
+				}
+				if (amountLeftToFind > 0)
+				{
+					if (hands.container.collectibleSlots[1].Collectible == hoverableCollectible.collectibleData)
+					{
+						hands.container.collectibleSlots[1].quantity = 0;
+						amountLeftToFind = 0;
+						hands.container.collectibleSlots[1].CollectibleName = null;
+						hands.onContainerCollectibleUpdated.Raise();
+                        sellRightHand.Raise();
+					}
+				}
+			}
         }
 
         maxAmt -= currentSelectedAmt;
@@ -299,8 +340,7 @@ public class MerchantBuyOptionRefs : MonoBehaviour
             Destroy(gameObject);
         }
 
-
-        SaveManager.currentSave.playerData.gold += totalCost;
+        currentSave.gold += totalCost;
         updatePlayerGold.Raise();
 
         loadedMerchant.vals.GainExp(Mathf.RoundToInt(totalCost * 1.5f));

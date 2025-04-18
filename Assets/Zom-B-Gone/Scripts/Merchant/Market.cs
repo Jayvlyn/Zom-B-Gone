@@ -10,6 +10,7 @@ public class Market : MonoBehaviour
     [SerializeField] GameObject sellOptionPrefab;
     [SerializeField] GameObject merchantInterestPrefab;
     private MerchantBuyOptionRefs buyOptionRefs;
+    public PlayerData currentSave;
 
     [Header("UI Refs")]
     [SerializeField] Image merchantImage;
@@ -81,7 +82,7 @@ public class Market : MonoBehaviour
 
     public void UpdatePlayerGoldText()
     {
-		goldCount.text = SaveManager.currentSave.playerData.gold.ToString();
+		goldCount.text = currentSave.gold.ToString();
 	}
 
     public void MerchantSaySomething()
@@ -173,7 +174,14 @@ public class Market : MonoBehaviour
             }
             else if(collectible is ItemData)
             {
-                foreach (var slot in marketData.itemLockerData.container.collectibleSlots)
+				foreach (var slot in marketData.handData.container.collectibleSlots)
+				{
+					if (slot.Collectible == collectible)
+					{
+						maxAmt += slot.quantity;
+					}
+				}
+				foreach (var slot in marketData.itemLockerData.container.collectibleSlots)
                 {
                     if (slot.Collectible == collectible)
                     {
@@ -183,7 +191,16 @@ public class Market : MonoBehaviour
             }
             else if (collectible is HatData)
             {
-                foreach (var slot in marketData.hatLockerData.container.collectibleSlots)
+				if (marketData.headData.container.collectibleSlots[0].Collectible == collectible)
+				{
+                    maxAmt += 1;
+				}
+				if (marketData.backpackData.container.collectibleSlots[0].Collectible == collectible)
+				{
+					maxAmt += 1;
+				}
+
+				foreach (var slot in marketData.hatLockerData.container.collectibleSlots)
                 {
                     if (slot.Collectible == collectible)
                     {

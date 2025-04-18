@@ -64,6 +64,7 @@ public class SaveManager : MonoBehaviour
         PlayerData copy = new PlayerData();
 
 		copy.characterName = string.Copy(original.characterName); // Use string.Copy for strings
+        Debug.Log(original.gold);
 		copy.gold = original.gold;
 		copy.kills = original.kills;
 		copy.walkSpeed = original.walkSpeed;
@@ -89,6 +90,7 @@ public class SaveManager : MonoBehaviour
     {
 		writeTo.characterName = string.Copy(readFrom.characterName); // Use string.writeTo for strings
 		writeTo.gold = readFrom.gold;
+        Debug.Log(readFrom.gold);
 		writeTo.kills = readFrom.kills;
 		writeTo.walkSpeed = readFrom.walkSpeed;
 		writeTo.runSpeed = readFrom.runSpeed;

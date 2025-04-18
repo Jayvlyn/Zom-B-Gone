@@ -35,9 +35,7 @@ public class DayNightCycle : MonoBehaviour
 
 	private void Update()
     {
-        Debug.Log("Current Hour:" + CurrentHour);
-
-
+        //Debug.Log("Current Hour:" + CurrentHour);
         if (Input.GetKeyDown(KeyCode.Period))
         {
             clockPaused = !clockPaused;
@@ -60,7 +58,7 @@ public class DayNightCycle : MonoBehaviour
 		    currentTime += Time.deltaTime;
         }
 
-        Debug.Log(currentTime);
+        //Debug.Log(currentTime);
 
 
 		//if (CurrentHour > TotalHours) currentTime = 0;
@@ -122,26 +120,26 @@ public class DayNightCycle : MonoBehaviour
 
         if (CurrentHour >= sunriseEnd && CurrentHour < sunsetStart) // Full daylight period
         {
-            Debug.Log("1");
+            //Debug.Log("1");
             globalLight.intensity = middayIntensity;
             isNight = false;
         }
         else if (CurrentHour >= sunsetStart && CurrentHour < sunsetEnd) // Sunset transition
         {
-            Debug.Log("2");
+            //Debug.Log("2");
             t = (CurrentHour - sunsetStart) / (sunsetEnd - sunsetStart);
             globalLight.intensity = Mathf.Lerp(middayIntensity, midnightIntensity, t);
             isNight = t >= 0.5f;
         }
         else if (CurrentHour >= sunsetEnd || CurrentHour < sunriseStart) // Full nighttime period
         {
-            Debug.Log("3");
+            //Debug.Log("3");
             globalLight.intensity = midnightIntensity;
             isNight = true;
         }
         else if (CurrentHour >= sunriseStart && CurrentHour < sunriseEnd) // Sunrise transition
         {
-            Debug.Log("4");
+            //Debug.Log("4");
             t = (CurrentHour - sunriseStart) / (sunriseEnd - sunriseStart);
             globalLight.intensity = Mathf.Lerp(midnightIntensity, middayIntensity, t);
             isNight = false;

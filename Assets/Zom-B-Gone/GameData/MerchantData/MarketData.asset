@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4123f08d42f47946806b485fad4cbab, type: 3}
   m_Name: MarketData
   m_EditorClassIdentifier: 
+  cycleCount: 0
   daysPerCycle: 4
-  day: 1
+  day: 3
   OneDayLeftColor: {r: 0.84276724, g: 0.17226368, b: 0.17226368, a: 1}
   TwoDaysLeftColor: {r: 0.91194963, g: 0.52681714, b: 0.22081791, a: 1}
   ThreeDaysLeftColor: {r: 0.9559748, g: 0.8596378, b: 0.2014159, a: 1}
@@ -25,3 +26,5 @@ MonoBehaviour:
   lootLockerData: {fileID: 11400000, guid: 586d250204d4c45408bf05e6362d6fbf, type: 2}
   hatLockerData: {fileID: 11400000, guid: 5abd42d350350924298d165742e4ec72, type: 2}
   itemLockerData: {fileID: 11400000, guid: d899c3825dac2214d8da6860657eba97, type: 2}
+  handData: {fileID: 11400000, guid: 711171aa271cf384dab66d7bb9f973a2, type: 2}
+  headData: {fileID: 11400000, guid: 620b6b6cc94ecbb40b61f2e10a968551, type: 2}
